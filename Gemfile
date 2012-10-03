@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '1.9.3'
 
 gem 'rails', '3.2.8'
 
@@ -37,6 +38,9 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 #
+
+gem 'thin'
+gem 'heroku'
 
 group :test, :development do
   gem 'minitest-rails'

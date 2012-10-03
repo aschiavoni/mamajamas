@@ -5,6 +5,10 @@
 
 ### Development Environment
 
+#### Thin
+
+We are using the thin web server in development and production.
+
 #### Postgresql
 
 1. Install the postgresql database on your development machine.
