@@ -42,11 +42,19 @@ gem 'jquery-rails'
 gem 'thin'
 gem 'heroku'
 
+group :development do
+  gem 'guard'
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'terminal-notifier-guard', :require => false if RUBY_PLATFORM =~ /darwin/i
+end
+
 group :test, :development do
   gem 'minitest-rails'
 end
 
 group :test do
+  gem 'guard-minitest'
   gem 'minitest-rails-capybara'
   gem 'turn', :require => false
 end
