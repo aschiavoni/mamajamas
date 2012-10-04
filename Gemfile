@@ -8,7 +8,6 @@ gem 'rails', '3.2.8'
 
 gem 'pg'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -45,4 +44,8 @@ gem 'heroku'
 
 group :test, :development do
   gem 'minitest-rails'
+end
+
+group :test do
+  gem 'minitest-rails-capybara'
 end
