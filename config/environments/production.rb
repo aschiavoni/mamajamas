@@ -51,6 +51,9 @@ Mamajamas::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
+  # default url host for mailers
+  config.action_mailer.default_url_options = { :host => 'mamajamas.com' }
+
   # Enable threaded mode
   # config.threadsafe!
 

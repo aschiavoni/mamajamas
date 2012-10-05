@@ -64,5 +64,9 @@ module Mamajamas
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # don't access DB or load models when precompiling assets
+    # uncomment if needed to deploy to heroku
+    config.assets.initialize_on_precompile = false
   end
 end
