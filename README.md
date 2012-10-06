@@ -22,3 +22,12 @@ We are using the thin web server in development and production.
 
   > rake db:create
   > rake RAILS_ENV=test db:create
+
+#### Bundler
+
+On linux, you may have to install some dependencies before you can
+successfully run 'bundle install'.
+
+##### nokogiri requirements
+
+  > sudo apt-get install libxslt-dev libxml2-dev
