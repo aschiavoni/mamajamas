@@ -31,6 +31,10 @@ class MiniTest::Rails::ActiveSupport::TestCase
   fixtures :all
 end
 
+class MiniTest::Rails::ActionController::TestCase
+  include Devise::TestHelpers
+end
+
 # Do you want all existing Rails tests to use MiniTest::Rails?
 # Comment out the following and either:
 # A) Change the require on the existing tests to `require "minitest_helper"`
