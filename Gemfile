@@ -59,5 +59,4 @@ end
 group :test do
   gem 'guard-minitest'
   gem 'minitest-rails-capybara'
-  gem 'turn', :require => false
 end
