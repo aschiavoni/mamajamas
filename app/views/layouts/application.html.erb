@@ -23,7 +23,9 @@
       <div id="branding">
         <h1>Mamajamas</h1>
       </div>
-      <div id="search">[search]</div>
+      <div id="search">
+      	<input type="text" placeholder="Search">
+      </div>
       <div id="login">
         <ul>
         <% if user_signed_in? -%>
@@ -43,6 +45,13 @@
         <% end -%>
         </ul>
       </div>
+      <div id="progress">
+      	<ol>
+        	<li><strong>1</strong> Take the quiz.</li>
+            <li><strong>2</strong> Make your list and get advice.</li> 
+            <li><strong>3</strong> Share your list.</li>
+        </ol>
+      </div>
     </div>
   </div>
 </div>
@@ -54,7 +63,6 @@
       <h2>Your baby gear list</h2>
     </div>
     <div id="title-links">[buttons]</div>
-    <div id="progress">[progress]</div>
   </div>
   <div id="primary">
     <div class="content">[nav]</div>
