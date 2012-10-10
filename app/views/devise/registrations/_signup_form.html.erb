@@ -23,7 +23,7 @@
       <%= f.label :password %>
       <br />
       <%= f.password_field :password %>
-      <strong class="status-msg pw-strong">Strong</strong>
+      <strong id="password-strength" class="status-msg pw-weak"></strong>
       <%= field_error resource, :password %>
       </p>
       <p>

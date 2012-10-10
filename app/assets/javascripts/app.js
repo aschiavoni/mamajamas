@@ -1,5 +1,54 @@
+// see http://gazpo.com/2012/04/password-strength/
+function checkPasswordStrength(password) {
+  var strength = 0;
+  var result = $("#password-strength");
+
+  //if the password length is less than 6, return message.
+  if (password.length < 6) {
+    result.removeClass();
+    result.addClass("status-msg pw-weak");
+    return 'Too short';
+  }
+
+  //if length is 8 characters or more, increase strength value
+  if (password.length > 7)
+    strength += 1;
+  //if password contains both lower and uppercase characters, increase strength value
+  if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/))
+    strength += 1;
+  //if it has numbers and characters, increase strength value
+  if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/))
+    strength += 1;
+  //if it has one special character, increase strength value
+  if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/))
+    strength += 1;
+  //if it has two special characters, increase strength value
+  if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/))
+    strength += 1;
+
+  if (strength < 2 ) {
+    result.removeClass();
+    result.addClass('status-msg pw-weak');
+    return 'Weak';
+  } else if (strength == 2 ) {
+    result.removeClass();
+    result.addClass('status-msg pw-good');
+    return 'Good';
+  } else {
+    result.removeClass();
+    result.addClass('status-msg pw-strong');
+    return 'Strong';
+  }
+}
+
 $(document).ready(function(){
   $("label").inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+
+  $("#create-account").on("keyup", "#user_password", function() {
+    // remove error msg if present
+    $(this).siblings(".status-msg.error").remove();
+    $("#password-strength").html(checkPasswordStrength($(this).val()));
+  });
 
   $("#signup").click(function(event) {
     $("#signup-modal").show(0, function() {
@@ -8,9 +57,9 @@ $(document).ready(function(){
     return false;
   });
 
-  $("#bt-cancel").click(function(event) {
+  $("#create-account").on("click", "#bt-cancel", function(event) {
     $(".modal-wrap").hide();
-    return false;
+    return true;
   });
 
   $("#create-account").on("submit", "form", function(event) {
