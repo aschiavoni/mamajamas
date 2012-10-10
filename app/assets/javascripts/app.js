@@ -44,16 +44,8 @@ function checkPasswordStrength(password) {
 $(document).ready(function(){
   $("label").inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
 
-  $("#create-account").on("keyup", "#user_password", function() {
-    // remove error msg if present
-    $(this).siblings(".status-msg.error").remove();
-    $("#password-strength").html(checkPasswordStrength($(this).val()));
-  });
-
   $("#signup").click(function(event) {
-    $("#signup-modal").show(0, function() {
-      $("#user_username").focus();
-    });
+    $("#signup-modal").show();
     return false;
   });
 
@@ -62,7 +54,27 @@ $(document).ready(function(){
     return true;
   });
 
-  $("#create-account").on("submit", "form", function(event) {
+
+  $("#create-account").on("click", "#bt-account-email", function(event) {
+    $("#signup-modal").hide();
+    $("#email-signup-modal").show(0, function() {
+      $("#user_username").focus();
+    });
+    return false;
+  });
+
+  $("#create-account-email").on("click", "#bt-cancel", function(event) {
+    $(".modal-wrap").hide();
+    return true;
+  });
+
+  $("#create-account-email").on("keyup", "#user_password", function() {
+    // remove error msg if present
+    $(this).siblings(".status-msg.error").remove();
+    $("#password-strength").html(checkPasswordStrength($(this).val()));
+  });
+
+  $("#create-account-email").on("submit", "form", function(event) {
     var form = $(this);
     $("input[type=submit]", this).attr("disabled", "disabled");
     $.post(form.attr("action"), form.serialize(), function(data) {
