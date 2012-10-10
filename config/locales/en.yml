@@ -17,3 +17,4 @@ en:
               taken: "Sorry, but that email address is in use."
             password:
               blank: "Sorry, but you must provide a password."
+              too_short: "Password is too short. (minimum is 6 characters)"
