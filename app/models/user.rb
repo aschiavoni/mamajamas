@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me
   attr_accessible :login
 
-  validates :username, :presence => true
+  validates :username, presence: true, uniqueness: true
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
