@@ -47,8 +47,8 @@ gem 'heroku'
 group :development do
   gem 'guard'
   gem 'rb-inotify', :require => false
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
-  gem 'terminal-notifier-guard', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
+  gem 'terminal-notifier-guard', :require => false # if RUBY_PLATFORM =~ /darwin/i
   gem 'therubyracer'
 end
 
