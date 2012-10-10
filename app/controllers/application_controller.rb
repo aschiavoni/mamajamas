@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  # hide behind basic auth for now
+  unless Rails.env.development?
+    http_basic_authenticate_with :name => "mamajamas", :password => "mamab1rd"
+  end
+
   before_filter :prompt_to_confirm_email_maybe
 
   protected
