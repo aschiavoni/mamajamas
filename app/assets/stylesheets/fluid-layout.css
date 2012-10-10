@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* Simple fluid media
    Note: Fluid media requires that you remove the media's height and width attributes from the HTML
-   http://www.alistapart.com/articles/fluid-images/ 
+   http://www.alistapart.com/articles/fluid-images/
 */
 
 html,body {
@@ -22,10 +22,10 @@ img, object, embed, video {
 	dw-num-cols-tablet:		8;
 	dw-num-cols-desktop:	12;
 	dw-gutter-percentage:	25;
-	
-	Inspiration from "Responsive Web Design" by Ethan Marcotte 
+
+	Inspiration from "Responsive Web Design" by Ethan Marcotte
 	http://www.alistapart.com/articles/responsive-web-design
-	
+
 	and Golden Grid System by Joni Korpi
 	http://goldengridsystem.com/
 */
@@ -82,7 +82,7 @@ img, object, embed, video {
 	margin-left: 0;
 	width: 100%;
 	display: block;
-	padding:15px 0 10px;
+	padding:17px 0 8px;
 }
 #subhed {
 	clear: both;
@@ -172,14 +172,12 @@ img, object, embed, video {
 	width: 100%;
 	display: block;
 }
-
 #title {
 	clear: both;
 	float: left;
 	margin-left: 0;
 	width: 100%;
 	display: block;
-	padding:15px 0 10px;
 }
 #subhed {
 	clear: both;
@@ -229,7 +227,7 @@ img, object, embed, video {
 
 @media only screen and (min-width: 769px) {
 .gridContainer {
-	width: 88.5%;
+	width: 93.5%;
 	max-width: 960px;
 	padding-left: 0;
 	padding-right: 0;
@@ -305,6 +303,9 @@ img, object, embed, video {
 	margin-left: 1.6949%;
 	width: 70.6016%;
 	display: block;
+}
+#secondary .content {
+	padding:4px 0;
 }
 #tertiary {
 	clear: none;
