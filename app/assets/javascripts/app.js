@@ -15,6 +15,7 @@ $(document).ready(function(){
 
   $("#create-account").on("submit", "form", function(event) {
     var form = $(this);
+    $("input[type=submit]", this).attr("disabled", "disabled");
     $.post(form.attr("action"), form.serialize(), function(data) {
       $("#new_user").replaceWith(data);
       $("label").inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
