@@ -18,7 +18,7 @@ class RegistrationsController < Devise::RegistrationsController
       end
     else
       clean_up_passwords resource
-      render :partial => "signup_form", :layout => !request.xhr?
+      render :partial => "email_signup_form", :layout => !request.xhr?
     end
   end
 end
