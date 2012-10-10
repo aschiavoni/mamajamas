@@ -12,5 +12,6 @@ en:
               blank: "Sorry, but you must provide a username."
             email:
               blank: "Sorry, but you must provide a valid email address."
+              invalid: "Sorry, but you must provide a valid email address."
             password:
               blank: "Sorry, but you must provide a password."
