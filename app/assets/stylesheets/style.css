@@ -169,7 +169,7 @@ a:hover,
 a:hover,
 a:focus {
 	color:#000;
-	/*background:#eee;*/
+	text-decoration:underline;
 }
 
 /* form elements ------ */
@@ -322,7 +322,7 @@ button.bt-light:hover {
 #bt-create-account,
 #bt-log-in {
 	border-color:#5baa5d;
-	background-color:#5baa5d;
+	background:#5baa5d;
 }
 
 /* sub-columns ------ */
@@ -390,7 +390,7 @@ ul.follow-moms {
 	font-size:.916em;
 	color:#5BAA5D;
 }
-.follow-moms .ss-icon {
+.follow-moms .check {
 	position:absolute;
     top: -23px;
     right: 5px;
@@ -432,8 +432,8 @@ a.more-friends:focus {
 	border:solid 1px #c9c9c9;
 	background:#d8d8d8;
 }
-.option .ss-icon,
-.option a.ss-icon {
+.option .info,
+.option a.info {
 	font-size:1.17em;
 	color:#337BA3;
 }
@@ -546,4 +546,49 @@ a.more-friends:focus {
 }
 #login-window .helper {
 	margin:1em 0 0 .6em;
+}
+
+
+/* notifications ------ */
+.notification {
+	clear:both;
+	font-size:.846em;
+	width:460px;
+	margin: 0.5em auto;
+	padding:0.3em 10px 0.5em;
+	text-align:center;
+	background:#e0effd;
+	border:solid 1px #bbd9f7;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
+.notification strong.ss-icon {
+	position:relative;
+	top:3px;
+	font-size:1.36em;
+	margin-right:0.2em;
+	color:#337BA3; /* blue */
+	text-shadow:0 1px #fff;
+}
+.n-alert {
+	background:#fef3d2; /* yellow oranges */
+	border-color:#f8d363;
+}
+.n-alert strong.ss-icon {
+	color:#E49319; /* orange */
+}
+.n-success {
+	background:#E2F2E2; /* greens */
+	border-color:#AFD8AF;
+}
+.n-success strong.ss-icon {
+	color:#68C16B; /* green */
+}
+.n-error {
+	background:#ffeaea; /* reds */
+	border-color:#ed9b9b;
+}
+.n-error strong.ss-icon {
+	color:#c43434; /* red */
 }
