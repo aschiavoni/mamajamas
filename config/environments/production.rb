@@ -53,7 +53,8 @@ Mamajamas::Application.configure do
 
   # default url host for mailers
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { :host => 'mamajamas.com' }
+  # TODO: change this when going live to production
+  config.action_mailer.default_url_options = { :host => 'mamajamas.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address              => "smtp.mandrillapp.com",
