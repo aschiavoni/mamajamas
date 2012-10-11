@@ -52,7 +52,17 @@ Mamajamas::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # default url host for mailers
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { :host => 'mamajamas.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.mandrillapp.com",
+    :port                 => 587,
+    :domain               => "heroku.com",
+    :user_name            => ENV['MANDRILL_USERNAME'],
+    :password             => ENV['MANDRILL_APIKEY'],
+    :authentication       => "plain"
+  }
 
   # Enable threaded mode
   # config.threadsafe!
