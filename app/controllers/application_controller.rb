@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   # hide behind basic auth for now
-  unless Rails.env.development?
+  if Rails.env.production?
     http_basic_authenticate_with :name => "mamajamas", :password => "mamab1rd"
   end
 
