@@ -34,8 +34,26 @@ successfully run 'bundle install'.
 
 ##### Mailers
 
-We are currently using the Mandrill heroku add-on to send email. To use
-the same add-on in development mode, you need to configure two
+##### mailcatcher
+
+In development, we can use the [mailcatcher](http://mailcatcher.me/) gem
+to test email. First you need to make sure email delivery is enabled in
+config/environments/development.rb:
+
+> config.action_mailer.perform_deliveries = true
+
+Next, run the mailcatcher command to start the mailcatcher server:
+
+> mailcatcher
+
+You can view the delivered emails in the mailcatcher web server which is
+accessible (by default) at http://localhost:1080.
+
+##### Mandrill
+
+We are currently using the [Mandrill Heroku
+add-on](https://addons.heroku.com/mandrill) to send email in production.
+To use the same add-on in development mode, you need to configure two
 environment variables:
 
   > export MANDRILL_APIKEY=value
@@ -54,8 +72,6 @@ Then uncomment the following lines in
 config/environments/development.rb:
 
 ```ruby
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
     :address              => "smtp.mandrillapp.com",
     :port                 => 587,
@@ -66,5 +82,12 @@ config/environments/development.rb:
   }
 ```
 
+You also need to make sure email delivery is enabled:
+
+> config.action_mailer.perform_deliveries = true
+
 Be aware that that making the above changes will result in real email
 being sent so make sure you are working with appropriate test data.
+
+Remember, making any of the changes described above requires a restart
+of the rails server before they will take effect.

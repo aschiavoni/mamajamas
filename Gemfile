@@ -50,6 +50,7 @@ group :development do
   gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
   gem 'terminal-notifier-guard', :require => false # if RUBY_PLATFORM =~ /darwin/i
   gem 'therubyracer'
+  gem 'mailcatcher'
 end
 
 group :test, :development do
