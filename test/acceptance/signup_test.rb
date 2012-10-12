@@ -10,6 +10,6 @@ class SignUpTest < MiniTest::Rails::ActionDispatch::IntegrationTest
     fill_in "Confirm password", with: "really good password"
 
     click_button "Create Account"
-    assert page.has_content?("Welcome! You have signed up successfully.")
+    assert page.has_content?("Welcome to Mamajamas!")
   end
 end
