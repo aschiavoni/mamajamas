@@ -8,6 +8,8 @@ en:
       models:
         user:
           attributes:
+            login:
+              blank: "Sorry, but you must provide a username or email address."
             username:
               blank: "Sorry, but you must provide a username."
               taken: "Sorry, but %{value} is already taken."
