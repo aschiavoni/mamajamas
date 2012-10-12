@@ -20,9 +20,9 @@
       <%= f.text_field :login %>
       </p>
       <p>
-      <%= f.label :password %>
+      <%= f.label :login_password, "Password" %>
       <br />
-      <%= f.password_field :password %>
+      <%= f.password_field :password, :id => "user_login_password" %>
       </p>
     </fieldset>
     <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
