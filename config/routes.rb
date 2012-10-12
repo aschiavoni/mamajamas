@@ -6,7 +6,8 @@ Mamajamas::Application.routes.draw do
              },
              controllers:
              {
-               registrations: :registrations
+               registrations: :registrations,
+               sessions: :sessions
              })
 
   get '/robots.txt' => 'robots#show'

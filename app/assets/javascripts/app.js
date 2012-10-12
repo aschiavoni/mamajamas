@@ -44,7 +44,8 @@ function checkPasswordStrength(password) {
 $(document).ready(function(){
   $("label").inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
 
-  $("#signup").click(function(event) {
+  // signup stuff
+  $("#signup-link").click(function(event) {
     $("#signup-modal").show();
     return false;
   });
@@ -53,7 +54,6 @@ $(document).ready(function(){
     $(".modal-wrap").hide();
     return true;
   });
-
 
   $("#create-account").on("click", "#bt-account-email", function(event) {
     $("#signup-modal").hide();
@@ -80,6 +80,30 @@ $(document).ready(function(){
     $.post(form.attr("action"), form.serialize(), function(data) {
       $("#new_user").replaceWith(data);
       $("label").inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+    });
+    return false;
+  });
+
+  // login stuff
+  $("#login-link").click(function(event) {
+    $("#login-modal").show(0, function() {
+      $("#user_login").focus();
+    });
+    return false;
+  });
+
+  $("#login-window").on("click", "#bt-cancel", function(event) {
+    $(".modal-wrap").hide();
+    return true;
+  });
+
+  $("#login-window").on("submit", "form", function(event) {
+    var form = $(this);
+    $("input[type=submit]", this).attr("disabled", "disabled");
+    $.post(form.attr("action"), form.serialize(), function(data) {
+      $("#login-form").replaceWith(data);
+      $("label").inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+      $("#user_login").focus();
     });
     return false;
   });
