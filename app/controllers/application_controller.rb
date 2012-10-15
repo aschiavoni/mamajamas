@@ -1,3 +1,4 @@
+# TODO: refactor into concerns
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -7,6 +8,28 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter :prompt_to_confirm_email_maybe
+
+  # Convenience accessor for flash[:error]
+  def error
+    flash[:error]
+  end
+  helper_method :error
+
+  # Convenience accessor for flash[:error]=
+  def error=(message)
+    flash[:error] = message
+  end
+
+  # Convenience accessor for flash[:success]
+  def success
+    flash[:success]
+  end
+  helper_method :success
+
+  # Convenience accessor for flash[:success]=
+  def success=(message)
+    flash[:success] = message
+  end
 
   protected
 
