@@ -58,12 +58,18 @@ $(document).ready(function(){
   $("#create-account").on("click", "#bt-account-email", function(event) {
     $("#signup-modal").hide();
     $("#email-signup-modal").show(0, function() {
+      $("label").inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+      // TODO: remove this if we get rid of inFieldLabels
+      // it is necessary to refresh the placeholders
+      // when the modal is re-opened
+      $("input").blur();
       $("#user_username").focus();
     });
     return false;
   });
 
   $("#create-account-email").on("click", "#bt-cancel", function(event) {
+    $("#password-strength").html(null);
     $(".modal-wrap").hide();
     return true;
   });
@@ -71,7 +77,10 @@ $(document).ready(function(){
   $("#create-account-email").on("keyup", "#user_password", function() {
     // remove error msg if present
     $(this).siblings(".status-msg.error").remove();
-    $("#password-strength").html(checkPasswordStrength($(this).val()));
+    if ($(this).val().length > 0)
+      $("#password-strength").html(checkPasswordStrength($(this).val()));
+    else
+      $("#password-strength").html(null);
   });
 
   $("#create-account-email").on("submit", "form", function(event) {
