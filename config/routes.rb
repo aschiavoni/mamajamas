@@ -10,7 +10,9 @@ Mamajamas::Application.routes.draw do
                sessions: :sessions,
                passwords: :passwords,
                omniauth_callbacks: "users/omniauth_callbacks"
-             }) do
+             })
+
+  devise_scope :user do
     get "/users/facebook" => "registrations#facebook"
     put "/users/facebook" => "registrations#facebook"
   end
