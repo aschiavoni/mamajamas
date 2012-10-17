@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy, :facebook]
+
   def create
     build_resource
 
@@ -20,6 +22,19 @@ class RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       (render(:partial => "email_signup_form", :layout => false) && return) if request.xhr?
       respond_with resource
+    end
+  end
+
+  def facebook
+    if request.put?
+      self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+      if self.resource.update_attributes(resource_params)
+        # Sign in the user bypassing validation in case the password changed
+        sign_in self.resource, :bypass => true
+        redirect_to root_path
+      else
+        render "facebook"
+      end
     end
   end
 end
