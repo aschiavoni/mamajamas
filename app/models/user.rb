@@ -25,11 +25,19 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-    # TODO: look for a user with the same email and link
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
-    unless user
-      # not going to persist the user yet since we want to allow
-      # them to change their username and set a real password
+    # look for a user that has already auth'ed with facebook
+    user = User.where(provider: auth.provider, uid: auth.uid).first
+
+    # if we didn't find one, look for a user with the same email
+    if user.blank?
+      user = User.where(email: auth.info.email).first
+      unless user.blank?
+        # we found one, let's link it with facebook
+        user.update_attributes(provider: auth.provider, uid: auth.uid)
+      end
+    end
+
+    if user.blank?
       user = User.create(username: auth.extra.raw_info.username,
                          provider: auth.provider,
                          uid: auth.uid,
