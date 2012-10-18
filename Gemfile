@@ -27,7 +27,7 @@ gem 'devise'
 # for facebook auth
 gem 'omniauth'
 gem 'oauth2'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

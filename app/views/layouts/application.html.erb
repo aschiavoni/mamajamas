@@ -33,14 +33,14 @@
             Hello, <strong><%= link_to current_user.username, edit_user_registration_path %></strong>
           </li>
           <li>
-            <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "logout" %>
           </li>
         <% else -%>
           <li>
-          <%= link_to "Sign Up", new_user_registration_path, :id => "signup-link" %>
+          <%= link_to "Sign Up", new_user_registration_path, id: "signup-link" %>
           </li>
           <li>
-          <%= link_to "Login", new_user_session_path, :id => "login-link" %>
+          <%= link_to "Login", new_user_session_path, id: "login-link" %>
           </li>
         <% end -%>
         </ul>

@@ -38,12 +38,12 @@ class User < ActiveRecord::Base
     end
 
     if user.blank?
-      user = User.create(username: auth.extra.raw_info.username,
-                         provider: auth.provider,
-                         uid: auth.uid,
-                         email: auth.info.email,
-                         password: Devise.friendly_token[0,20]
-                        )
+      user = User.create!(username: auth.extra.raw_info.username,
+                          provider: auth.provider,
+                          uid: auth.uid,
+                          email: auth.info.email,
+                          password: Devise.friendly_token[0,20]
+                         )
     end
     user
   end

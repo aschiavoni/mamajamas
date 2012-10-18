@@ -55,11 +55,6 @@ $(document).ready(function(){
     return true;
   });
 
-  $("#create-account").on("click", "#bt-fb-connect", function(event) {
-    window.location = $("#bt-fb-connect-link").attr("href");
-    return false;
-  });
-
   $("#create-account").on("click", "#bt-account-email", function(event) {
     $("#signup-modal").hide();
     $("#email-signup-modal").show(0, function() {

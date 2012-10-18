@@ -212,10 +212,10 @@ Devise.setup do |config|
   if Rails.env.production?
     # ryanesc - MJs Staging
     # ssl client options are necessary on heroku
-    config.omniauth :facebook, FACEBOOK_CONFIG["app_id"], FACEBOOK_CONFIG["secret_key"], { :scope => 'email', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
+    config.omniauth :facebook, FACEBOOK_CONFIG["app_id"], FACEBOOK_CONFIG["secret_key"], { :scope => FACEBOOK_CONFIG["scope"], :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
   else
     # ryanesc - MJs Development
-    config.omniauth :facebook, FACEBOOK_CONFIG["app_id"], FACEBOOK_CONFIG["secret_key"], { :scope => 'email' }
+    config.omniauth :facebook, FACEBOOK_CONFIG["app_id"], FACEBOOK_CONFIG["secret_key"], { :scope => FACEBOOK_CONFIG["scope"] }
   end
 
   # ==> Warden configuration
