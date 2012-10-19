@@ -17,6 +17,8 @@ Mamajamas::Application.routes.draw do
     put "/users/facebook" => "registrations#facebook"
   end
 
+  resources :friends, only: [ :index ]
+
   get '/robots.txt' => 'robots#show'
   root :to => 'home#index'
 end

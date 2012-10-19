@@ -31,7 +31,7 @@ class RegistrationsController < Devise::RegistrationsController
       if self.resource.update_attributes(resource_params)
         # Sign in the user bypassing validation in case the password changed
         sign_in self.resource, :bypass => true
-        redirect_to root_path
+        redirect_to friends_path
       else
         render "facebook"
       end
