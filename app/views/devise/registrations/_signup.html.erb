@@ -7,8 +7,7 @@
     <h3>Account Registration</h3>
     <div class="grid clearfix">
       <div class="col50 float-l">
-        <button type="button" class="button" id="bt-fb-connect">Connect with Facebook</button>
-        <a href="<%= user_omniauth_authorize_path(:facebook) %>" id="bt-fb-connect-link" style="display: none;">Connect with Facebook</a>
+        <%= link_to "Connect with Facebook", user_omniauth_authorize_path(:facebook), class: "button", id: "bt-fb-connect" %>
         <p class="note">We will never post or email your friends without your express approval.</p>
         <p class="note light">By clicking Connect with Facebook, you accept the <a href="#">Terms of Service</a>. </p>
       </div>
@@ -16,7 +15,7 @@
         <p class="center">or</p>
       </div>
       <div class="col45 float-r">
-        <button type="button" class="button" id="bt-account-email">Create an account with your email address</button>
+        <%= link_to "Create an account with your email address", new_user_registration_path(), class: "button", id: "bt-account-email" %>
         <p class="note">But getting recommendations from your friends may be harder if you sign in this way. </p>
       </div>
     </div>
