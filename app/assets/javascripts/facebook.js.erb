@@ -12,13 +12,23 @@ window.fbAsyncInit = function() {
     appId: '<%= FACEBOOK_CONFIG["app_id"] %>',
     cookie: true
   });
-  $("#create-account").on("click", "#bt-fb-connect", (function(e) {
-    e.preventDefault();
+
+  var fbLogin = function(e) {
     return FB.login(function(response) {
       if (response.authResponse) {
         return window.location = "/users/auth/facebook/callback";
       }
     }, { scope: '<%= FACEBOOK_CONFIG["scope"] %>' });
+  };
+
+  $("#create-account").on("click", "#bt-fb-connect", (function(e) {
+    e.preventDefault();
+    return fbLogin(e);
+  }));
+
+  $("#login-window").on("click", "#bt-fb-connect-s", (function(e) {
+    e.preventDefault();
+    return fbLogin(e);
   }));
 
   return $("#logout").click(function(e) {
