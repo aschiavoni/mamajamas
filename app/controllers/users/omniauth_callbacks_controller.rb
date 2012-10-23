@@ -9,6 +9,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
       session["devise.fb_access_token"] = auth_info.credentials.token
       session["devise.fb_access_token_expiration"] = auth_info.credentials.expires_at
+
+      # TODO: background this...
+      @user.facebook.refresh_access_token
       redirect_to users_facebook_path
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]

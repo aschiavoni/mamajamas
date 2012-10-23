@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
     user = User.where(email: auth.info.email).first if user.blank?
 
     if user.blank?
-      user = User.create!(username: auth.extra.raw_info.username,
+      user = User.create!(username: FacebookGraph.extract_facebook_username(auth),
                           provider: auth.provider,
                           uid: auth.uid,
                           email: auth.info.email,
@@ -57,5 +57,9 @@ class User < ActiveRecord::Base
         user.username = data["username"] if user.username.blank?
       end
     end
+  end
+
+  def facebook
+    @facebook ||= FacebookGraph.new(self)
   end
 end

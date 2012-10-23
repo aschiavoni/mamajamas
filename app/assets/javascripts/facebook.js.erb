@@ -10,6 +10,7 @@ jQuery(function() {
 window.fbAsyncInit = function() {
   FB.init({
     appId: '<%= FACEBOOK_CONFIG["app_id"] %>',
+    status: true,
     cookie: true
   });
 
@@ -20,6 +21,25 @@ window.fbAsyncInit = function() {
       }
     }, { scope: '<%= FACEBOOK_CONFIG["scope"] %>' });
   };
+
+  var testApi = function() {
+    // get friends
+    console.log("looking up friends");
+    FB.api('/me/friends?fields=id,name,picture', function(response) {
+      console.log(response);
+      console.log('Your name is ' + response.name);
+    });
+  };
+
+  FB.getLoginStatus(function(response) {
+    if (response.status === 'connected') {
+      // connected
+    } else if (response.status === 'not_authorized') {
+      // not_authorized
+    } else {
+      // not_logged_in
+    }
+  });
 
   $("#create-account").on("click", "#bt-fb-connect", (function(e) {
     e.preventDefault();
