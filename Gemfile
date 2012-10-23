@@ -23,6 +23,7 @@ end
 
 gem 'jquery-rails'
 
+# authentication
 gem 'devise'
 # for facebook auth
 gem 'omniauth'
@@ -47,7 +48,11 @@ gem 'koala'
 # To use debugger
 # gem 'debugger'
 #
+#
 
+gem 'memoist'
+
+# infrastructure
 gem 'thin'
 gem 'heroku'
 
