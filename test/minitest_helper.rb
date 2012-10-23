@@ -10,9 +10,13 @@ require "minitest/rails/capybara"
 # Uncomment if you want awesome colorful output
 require "minitest/pride"
 
+# load up the factories
+require 'factories'
+
 class MiniTest::Rails::ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
-  fixtures :all
+  # fixtures :all
+  include FactoryGirl::Syntax::Methods
 end
 
 class MiniTest::Rails::ActionController::TestCase

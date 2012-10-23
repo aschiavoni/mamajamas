@@ -7,6 +7,7 @@ class FacebookGraph
   end
 
   def friends(limit = nil)
+    return {} if facebook.blank?
     my_friends = facebook.get_connection('me', 'friends',
                                          :fields => "id,name,first_name,last_name,picture",
                                          :type => "normal")
