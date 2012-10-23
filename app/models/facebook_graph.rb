@@ -1,29 +1,33 @@
 class FacebookGraph
+  extend Memoist
+
   def initialize(user)
     @user = user
     @facebook = user.access_token.blank? ? nil : Koala::Facebook::API.new(user.access_token)
   end
 
-  # TODO: fix memoization bug: change the limit, same results are returned
   def friends(limit = nil)
-    @friends ||= facebook.get_connection('me', 'friends', :fields => "id,name,first_name,last_name,picture", :type => "normal")
-    limit.blank? ? @friends : @friends.slice(0..(limit - 1))
+    my_friends = facebook.get_connection('me', 'friends',
+                                         :fields => "id,name,first_name,last_name,picture",
+                                         :type => "normal")
+    limit.blank? ? my_friends : my_friends.slice(0..(limit - 1))
   end
+  memoize :friends
 
-  # memoize?
   def mamajamas_friends(limit = nil)
     # get all the uids of fb friends
     uids = friends.map { |f| f["id"] }
     # get all the mamajamas users that have matching uids
     mjs_uids = User.where(uid: uids).pluck(:uid).to_set
 
-    # filter friends hash to only include uids that have 
+    # filter friends hash to only include uids that have
     # corresponding mamajamas accounts
     # TODO: this probably can be optimized
     friends.select do |friend|
       mjs_uids.include?(friend["id"])
     end
   end
+  memoize :mamajamas_friends
 
   def profile_pic_url(uid)
     "http://graph.facebook.com/#{uid}/picture?type=large"
@@ -33,6 +37,7 @@ class FacebookGraph
     oauth = Koala::Facebook::OAuth.new(FACEBOOK_CONFIG["app_id"], FACEBOOK_CONFIG["secret_key"])
     access_token = oauth.exchange_access_token(@user.access_token)
     @user.update_attributes(access_token: access_token)
+    @facebook = @user.access_token.blank? ? nil : Koala::Facebook::API.new(@user.access_token)
   end
 
   def self.extract_facebook_username(oauth_params)
@@ -43,11 +48,14 @@ class FacebookGraph
 
   private
 
+  # TODO: review if this is the best way to refresh a user's access token
   def facebook
     return nil if @facebook.blank?
     block_given? ? yield(@facebook) : @facebook
   rescue Koala::Facebook::APIError
-    logger.info e.to_s
+    Rails.logger.info e.to_s
+    self.refresh_access_token
+    block_given? ? yield(@facebook) : @facebook
     nil
   end
 end
