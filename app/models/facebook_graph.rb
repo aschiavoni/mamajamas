@@ -8,10 +8,12 @@ class FacebookGraph
 
   def friends(limit = nil)
     return {} if facebook.blank?
-    my_friends = facebook.get_connection('me', 'friends',
-                                         :fields => "id,name,first_name,last_name,picture",
-                                         :type => "normal")
-    limit.blank? ? my_friends : my_friends.slice(0..(limit - 1))
+    facebook do |fb|
+      my_friends = fb.get_connection('me', 'friends',
+                                     :fields => "id,name,first_name,last_name,picture",
+                                     :type => "normal")
+      limit.blank? ? my_friends : my_friends.slice(0..(limit - 1))
+    end
   end
   memoize :friends
 
@@ -35,10 +37,13 @@ class FacebookGraph
   end
 
   def refresh_access_token
+    puts "refreshing access token"
     oauth = Koala::Facebook::OAuth.new(FACEBOOK_CONFIG["app_id"], FACEBOOK_CONFIG["secret_key"])
-    access_token = oauth.exchange_access_token(@user.access_token)
+    access_token = oauth.exchange_access_token_info(@user.access_token)
     @user.update_attributes(access_token: access_token)
+    puts @user.inspect
     @facebook = @user.access_token.blank? ? nil : Koala::Facebook::API.new(@user.access_token)
+    puts @facebook.inspect
   end
 
   def self.extract_facebook_username(oauth_params)
@@ -51,12 +56,15 @@ class FacebookGraph
 
   # TODO: review if this is the best way to refresh a user's access token
   def facebook
+    puts "facebook"
     return nil if @facebook.blank?
     block_given? ? yield(@facebook) : @facebook
-  rescue Koala::Facebook::APIError
+  rescue Koala::Facebook::APIError => e
+    puts "error"
     Rails.logger.info e.to_s
+    puts e.to_s
     self.refresh_access_token
     block_given? ? yield(@facebook) : @facebook
-    nil
+    nil # or consider a custom null object
   end
 end
