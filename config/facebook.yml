@@ -7,6 +7,6 @@ test:
   secret_key: ce1b64ceab5e5a6dbf5fc02de8eedde5
   scope: "email"
 production:
-  app_id: 510063649006243
-  secret_key: c96eb80b8c01895660088bfb81d74bc1
+  app_id: 437830716277340
+  secret_key: 929561c463d82bf1e6556fffa267c56b
   scope: "email"
