@@ -19,7 +19,7 @@
     <% end -%>
     <% if @total_friends.size > 5 -%>
       <li>
-        <a href="#" class="more-friends">Show more friends<br><strong>8</strong></a>
+        <a href="#" class="more-friends">Show more friends<br><strong><%= @total_friends - 5 %></strong></a>
       </li>
     <% end -%>
   </ul>
