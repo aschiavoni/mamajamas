@@ -1,5 +1,5 @@
 <div id="follow-moms">
-  <% unless @friends.size == 0 -%>
+  <% unless @fb_friends.size == 0 -%>
   <h3>
     Your Friends
   </h3>
@@ -7,7 +7,7 @@
     We recommend you follow these friends that have Mamajamas lists <em>(you can unfollow them below)</em>:
   </p>
   <ul class="follow-moms clearfix">
-    <% @friends.each do |friend| -%>
+    <% @fb_friends.each do |friend| -%>
       <li class="following">
         <img src="<%= current_user.facebook.profile_pic_url(friend['id']) %>" alt="<%= friend['name'] %>">
         <p>
@@ -17,9 +17,9 @@
         </p><button type="submit" class="button bt-light" id="bt-unfollow01">Unfollow</button>
       </li>
     <% end -%>
-    <% if @total_friends.size > 5 -%>
+    <% if @total_fb_friends.size > 5 -%>
       <li>
-        <a href="#" class="more-friends">Show more friends<br><strong><%= @total_friends - 5 %></strong></a>
+        <a href="#" class="more-friends">Show more friends<br><strong><%= @total_fb_friends - 5 %></strong></a>
       </li>
     <% end -%>
   </ul>
@@ -31,27 +31,15 @@
     And here are some folks we think you might want to follow <em>(based on the answers to your quiz)</em>:
   </p>
   <ul class="follow-moms clearfix">
+    <% @recommended_friends.each do |friend| -%>
     <li>
-      <img src="/assets/profile_photo.jpg" alt="profile image">
+      <%= profile_image(friend) %>
       <p>
-        <strong class="mom">Jane Doe</strong><br>
+        <strong class="mom"><%= truncate(friend.username, :length => 15) %></strong><br>
         <span class="tags">Green, Rural</span>
       </p><button type="submit" class="button bt-color bt-favored" id="bt-follow06">Follow</button>
     </li>
-    <li>
-      <img src="/assets/profile_photo.jpg" alt="profile image">
-      <p>
-        <strong class="mom">Terry Hatch</strong><br>
-        <span class="tags">Thrifty, Green, ...</span>
-      </p><button type="submit" class="button bt-color bt-favored" id="bt-follow07">Follow</button>
-    </li>
-    <li>
-      <img src="/assets/profile_photo.jpg" alt="profile image">
-      <p>
-        <strong class="mom">Mary Marie</strong><br>
-        <span class="tags">Thrifty, Rural</span>
-      </p><button type="submit" class="button bt-color bt-favored" id="bt-follow08">Follow</button>
-    </li>
+  <% end -%>
   </ul>
   <p class="option right">
     <input type="checkbox" id="chk-let-friends-know"> <label for="chk-let-friends-know">Let friends know you are following them. <a class="ss-icon info" href="#">info</a></label>
