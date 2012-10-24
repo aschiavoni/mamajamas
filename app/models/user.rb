@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: true
 
+  # hook devise to support logging in by email or username
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
@@ -24,32 +25,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-    expires_at = auth.credentials.expires_at.blank? ? nil : Time.at(auth.credentials.expires_at).utc
-    # look for a user that has already auth'ed with facebook
-    user = User.where(provider: auth.provider, uid: auth.uid).first
-
-    # if we didn't find one, look for a user with the same email
-    user = User.where(email: auth.info.email).first if user.blank?
-
-    if user.blank?
-      user = User.create!(username: FacebookGraph.extract_facebook_username(auth),
-                          provider: auth.provider,
-                          uid: auth.uid,
-                          email: auth.info.email,
-                          access_token: auth.credentials.token,
-                          access_token_expires_at: expires_at,
-                          password: Devise.friendly_token[0,20])
-    else
-      # link or refresh fb user
-      user.update_attributes(provider: auth.provider,
-                             uid: auth.uid,
-                             access_token_expires_at: expires_at,
-                             access_token: auth.credentials.token)
-    end
-    user
-  end
-
+  # hook devise to login a facebook user from the session
+  # TODO: verify that this is actually used
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]

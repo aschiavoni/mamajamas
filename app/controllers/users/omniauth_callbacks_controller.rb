@@ -2,7 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     auth_info = request.env["omniauth.auth"]
     logger.debug auth_info.to_yaml
-    @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
+    @user = FacebookUserCreator.from_oauth(request.env["omniauth.auth"], current_user)
 
     if @user.persisted?
       sign_in @user, :event => :authentication #this will throw if @user is not activated
