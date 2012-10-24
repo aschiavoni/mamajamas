@@ -16,10 +16,12 @@
           <em class="ss-icon check">checked</em>
         </p><button type="submit" class="button bt-light" id="bt-unfollow01">Unfollow</button>
       </li>
-    <% end %>
-    <li>
-      <a href="#" class="more-friends">Show more friends<br><strong>8</strong></a>
-    </li>
+    <% end -%>
+    <% if @total_friends.size > 5 -%>
+      <li>
+        <a href="#" class="more-friends">Show more friends<br><strong>8</strong></a>
+      </li>
+    <% end -%>
   </ul>
   <% end -%>
   <h3>

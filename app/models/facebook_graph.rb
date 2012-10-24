@@ -7,29 +7,12 @@ class FacebookGraph
   end
 
   def friends(limit = nil)
-    return [] if facebook.blank?
-    facebook do |fb|
-      my_friends = fb.get_connection('me', 'friends',
-                                     :fields => "id,name,first_name,last_name,picture",
-                                     :type => "normal")
-      limit.blank? ? my_friends : my_friends.slice(0..(limit - 1))
-    end
+    limit.blank? ? all_friends : all_friends.slice(0..(limit - 1))
   end
   memoize :friends
 
   def mamajamas_friends(limit = nil)
-    return [] if friends.blank?
-    # get all the uids of fb friends
-    uids = friends.map { |f| f["id"] }
-    # get all the mamajamas users that have matching uids
-    mjs_uids = User.where(uid: uids).pluck(:uid).to_set
-
-    # filter friends hash to only include uids that have
-    # corresponding mamajamas accounts
-    # TODO: this probably can be optimized
-    friends.select do |friend|
-      mjs_uids.include?(friend["id"])
-    end
+    limit.blank? ? all_mamajamas_friends : all_mamajamas_friends.slice(0..(limit - 1))
   end
   memoize :mamajamas_friends
 
@@ -62,4 +45,30 @@ class FacebookGraph
     self.refresh_access_token
     block_given? ? yield(@facebook) : @facebook
   end
+
+  def all_friends
+    return [] if facebook.blank?
+    facebook do |fb|
+      fb.get_connection('me', 'friends',
+                        :fields => "id,name,first_name,last_name,picture",
+                        :type => "normal")
+    end
+  end
+  memoize :all_friends
+
+  def all_mamajamas_friends
+    return [] if all_friends.blank?
+    # get all the uids of fb friends
+    uids = all_friends.map { |f| f["id"] }
+    # get all the mamajamas users that have matching uids
+    mjs_uids = User.where(uid: uids).pluck(:uid).to_set
+
+    # filter friends hash to only include uids that have
+    # corresponding mamajamas accounts
+    # TODO: this probably can be optimized
+    all_friends.select do |friend|
+      mjs_uids.include?(friend["id"])
+    end
+  end
+  memoize :all_mamajamas_friends
 end
