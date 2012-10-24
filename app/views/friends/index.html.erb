@@ -17,7 +17,7 @@
         </p><button type="submit" class="button bt-light" id="bt-unfollow01">Unfollow</button>
       </li>
     <% end -%>
-    <% if @total_fb_friends.size > 5 -%>
+    <% if @total_fb_friends > 5 -%>
       <li>
         <a href="#" class="more-friends">Show more friends<br><strong><%= @total_fb_friends - 5 %></strong></a>
       </li>
