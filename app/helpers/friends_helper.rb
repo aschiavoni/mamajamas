@@ -3,6 +3,14 @@ module FriendsHelper
     user.uid.blank? ? user_profile_image(user) : facebook_profile_image(user)
   end
 
+  def display_name(user)
+    unless user.first_name.blank? || user.last_name.blank?
+      "#{user.first_name} #{user.last_name}"
+    else
+      user.username
+    end
+  end
+
   private
 
   def user_profile_image(user)

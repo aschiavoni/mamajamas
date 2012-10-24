@@ -35,7 +35,7 @@
     <li>
       <%= profile_image(friend) %>
       <p>
-        <strong class="mom"><%= truncate(friend.username, :length => 15) %></strong><br>
+        <strong class="mom"><%= truncate(display_name(friend), :length => 15) %></strong><br>
         <span class="tags">Green, Rural</span>
       </p><button type="submit" class="button bt-color bt-favored" id="bt-follow06">Follow</button>
     </li>

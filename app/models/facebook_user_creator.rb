@@ -13,6 +13,8 @@ class FacebookUserCreator
                           provider: auth.provider,
                           uid: auth.uid,
                           email: auth.info.email,
+                          first_name: auth.info.first_name,
+                          last_name: auth.info.last_name,
                           access_token: auth.credentials.token,
                           access_token_expires_at: expires_at,
                           password: Devise.friendly_token[0,20])
@@ -20,6 +22,8 @@ class FacebookUserCreator
       # link or refresh fb user
       user.update_attributes(provider: auth.provider,
                              uid: auth.uid,
+                             first_name: auth.info.first_name,
+                             last_name: auth.info.last_name,
                              access_token_expires_at: expires_at,
                              access_token: auth.credentials.token)
     end

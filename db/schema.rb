@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019193700) do
+ActiveRecord::Schema.define(:version => 20121024193404) do
 
   create_table "users", :force => true do |t|
     t.string   "username",                :default => "", :null => false
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20121019193700) do
     t.string   "uid"
     t.string   "access_token"
     t.datetime "access_token_expires_at"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
