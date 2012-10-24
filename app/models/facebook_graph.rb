@@ -7,7 +7,7 @@ class FacebookGraph
   end
 
   def friends(limit = nil)
-    return {} if facebook.blank?
+    return [] if facebook.blank?
     facebook do |fb|
       my_friends = fb.get_connection('me', 'friends',
                                      :fields => "id,name,first_name,last_name,picture",
@@ -18,6 +18,7 @@ class FacebookGraph
   memoize :friends
 
   def mamajamas_friends(limit = nil)
+    return [] if friends.blank?
     # get all the uids of fb friends
     uids = friends.map { |f| f["id"] }
     # get all the mamajamas users that have matching uids
@@ -37,13 +38,12 @@ class FacebookGraph
   end
 
   def refresh_access_token
-    puts "refreshing access token"
     oauth = Koala::Facebook::OAuth.new(FACEBOOK_CONFIG["app_id"], FACEBOOK_CONFIG["secret_key"])
-    access_token = oauth.exchange_access_token_info(@user.access_token)
-    @user.update_attributes(access_token: access_token)
-    puts @user.inspect
+    access_token_info = oauth.exchange_access_token_info(@user.access_token)
+    expires_at = (Time.now.utc + access_token_info['expires'].to_i.seconds)
+    @user.update_attributes(access_token: access_token_info['access_token'],
+                            access_token_expires_at: expires_at)
     @facebook = @user.access_token.blank? ? nil : Koala::Facebook::API.new(@user.access_token)
-    puts @facebook.inspect
   end
 
   def self.extract_facebook_username(oauth_params)
@@ -54,17 +54,12 @@ class FacebookGraph
 
   private
 
-  # TODO: review if this is the best way to refresh a user's access token
   def facebook
-    puts "facebook"
     return nil if @facebook.blank?
     block_given? ? yield(@facebook) : @facebook
   rescue Koala::Facebook::APIError => e
-    puts "error"
-    Rails.logger.info e.to_s
-    puts e.to_s
+    Rails.logger.error.to_s
     self.refresh_access_token
     block_given? ? yield(@facebook) : @facebook
-    nil # or consider a custom null object
   end
 end

@@ -11,7 +11,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.fb_access_token_expiration"] = auth_info.credentials.expires_at
 
       # TODO: background this...
-      @user.facebook.refresh_access_token
+      # get a longer lived access token
+      # commenting this for now so I can test the error scenario
+      # @user.facebook.refresh_access_token
       redirect_to users_facebook_path
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
