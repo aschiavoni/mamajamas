@@ -30,24 +30,10 @@ window.fbAsyncInit = function() {
     }, { scope: '<%= FACEBOOK_CONFIG["scope"] %>' });
   };
 
-  var loginProgress = function(show) {
-    var $signupProgress = $("#signup-modal .progress-container img");
-    var $loginProgress = $("#login-modal .progress-container img");
-    if (show) {
-      $signupProgress.show().siblings().hide();
-      $loginProgress.show().siblings().hide();
-    }
-    else {
-      $signupProgress.hide().siblings().show();
-      $loginProgress.hide().siblings().show();
-    }
-  };
-
   var postLogin = function() {
-    loginProgress(true);
+    $("#signup-modal, #login-modal").progressIndicator('show');
     $.get("/users/auth/facebook/callback", function(data) {
-      loginProgress(false);
-      $("#signup-modal, #login-modal").hide();
+      $("#signup-modal, #login-modal").progressIndicator('hide').hide();
       $("#facebook-username").val(data.username);
       $("#post-signup-modal").show(0, function() {
         $("label").inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
