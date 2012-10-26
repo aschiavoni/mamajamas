@@ -17,7 +17,7 @@ class FacebookGraph
   memoize :mamajamas_friends
 
   def profile_pic_url(uid)
-    "http://graph.facebook.com/#{uid}/picture?type=large"
+    "http://graph.facebook.com/#{uid}/picture?type=square"
   end
 
   def refresh_access_token
@@ -33,6 +33,27 @@ class FacebookGraph
     raw_info = oauth_params['extra']['raw_info']
     return raw_info['username'] unless raw_info['username'].blank?
     return "#{raw_info['first_name']}#{raw_info['last_name']}"
+  end
+
+  # TODO: unused for now... leaving for reference purposes
+  def albums
+    return [] if facebook.blank?
+
+    facebook do |fb|
+      fb.get_connection('me', 'photos')
+    end
+  end
+
+  def query(query)
+    return nil if facebook.blank?
+    facebook.fql_query(query)
+  end
+
+  def large_profile_pic_url
+    q = "select cover_object_id from album where type='profile' and owner = #{@user.uid}"
+    obj_id = query(q).first["cover_object_id"]
+
+    "https://graph.facebook.com/#{obj_id}/picture?type=normal&access_token=#{@user.access_token}"
   end
 
   private

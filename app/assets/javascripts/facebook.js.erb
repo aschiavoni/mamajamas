@@ -1,4 +1,5 @@
 jQuery(function() {
+  // load fb sdk async
   $("body").prepend('<div id="fb-root"></div>');
   return $.ajax({
     url: "" + window.location.protocol + "//connect.facebook.net/en_US/all.js",
@@ -10,16 +11,48 @@ jQuery(function() {
 window.fbAsyncInit = function() {
   FB.init({
     appId: '<%= FACEBOOK_CONFIG["app_id"] %>',
+    channelUrl: '//' + window.location.host + '/channel.html',
     status: true,
-    cookie: true
+    cookie: true,
+    xfbml: true
   });
 
   var fbLogin = function(e) {
     return FB.login(function(response) {
       if (response.authResponse) {
-        return window.location = "/users/auth/facebook/callback";
+        // return window.location = "/users/auth/facebook/callback";
+        postLogin();
+      }
+      else {
+        // cancelled
+        // TODO: what do we do here?
       }
     }, { scope: '<%= FACEBOOK_CONFIG["scope"] %>' });
+  };
+
+  var loginProgress = function(show) {
+    var $signupProgress = $("#signup-modal .progress-container img");
+    var $loginProgress = $("#login-modal .progress-container img");
+    if (show) {
+      $signupProgress.show().siblings().hide();
+      $loginProgress.show().siblings().hide();
+    }
+    else {
+      $signupProgress.hide().siblings().show();
+      $loginProgress.hide().siblings().show();
+    }
+  };
+
+  var postLogin = function() {
+    loginProgress(true);
+    $.get("/users/auth/facebook/callback", function(data) {
+      loginProgress(false);
+      $("#signup-modal, #login-modal").hide();
+      $("#facebook-username").val(data.username);
+      $("#post-signup-modal").show(0, function() {
+        $("label").inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+      });
+    });
   };
 
   var testApi = function() {
@@ -27,7 +60,6 @@ window.fbAsyncInit = function() {
     console.log("looking up friends");
     FB.api('/me/friends?fields=id,name,picture', function(response) {
       console.log(response);
-      console.log('Your name is ' + response.name);
     });
   };
 

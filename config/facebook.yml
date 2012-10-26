@@ -1,7 +1,7 @@
 development:
   app_id: 163971090409302
   secret_key: ce1b64ceab5e5a6dbf5fc02de8eedde5
-  scope: "email"
+  scope: "email, user_photos"
 test:
   app_id: 163971090409302
   secret_key: ce1b64ceab5e5a6dbf5fc02de8eedde5

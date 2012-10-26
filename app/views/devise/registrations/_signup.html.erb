@@ -23,7 +23,10 @@
   <!-- end modal window content --> 
   <!-- window bottom buttons -->
   <div class="button-row">
-    <button type="reset" class="button" id="bt-cancel">Cancel</button>
+    <div class="progress-container">
+      <button type="reset" class="button" id="bt-cancel">Cancel</button>
+      <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
+    </div>
   </div>
 </form>
 

@@ -14,9 +14,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # get a longer lived access token
       # commenting this for now so I can test the error scenario
       # @user.facebook.refresh_access_token
+
+      (render && return) if request.xhr?
       redirect_to users_facebook_path
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
+      (render && return) if request.xhr?
       redirect_to new_user_registration_url
     end
   end
