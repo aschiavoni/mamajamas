@@ -422,7 +422,7 @@ ul.follow-moms {
 	float:left;
 }
 .follow-moms img {
-	max-width:82px;
+	width:82px;
 	border:solid 1px #EEE;
 	margin-bottom:5px;
 	cursor:pointer;
