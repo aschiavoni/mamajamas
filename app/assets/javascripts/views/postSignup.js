@@ -6,10 +6,6 @@ window.Mamajamas.Views.PostSignup = Backbone.View.extend({
     return this;
   },
   show: function(event) {
-    // TODO: show progress
-    //   $("#signup-modal, #login-modal").progressIndicator('show');
-    // TODO: hide other modals
-    //   $("#signup-modal, #login-modal").progressIndicator('hide').hide();
     var $fbUsername = $("#facebook-username", this.$el);
     $fbUsername.val(this.model.get('username'));
     this.$el.show(0, function() {

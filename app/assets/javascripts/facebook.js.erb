@@ -17,28 +17,21 @@ window.fbAsyncInit = function() {
     xfbml: true
   });
 
-  // var testApi = function() {
-  //   // get friends
-  //   console.log("looking up friends");
-  //   FB.api('/me/friends?fields=id,name,picture', function(response) {
-  //     console.log(response);
-  //   });
-  // };
-
-  // FB.getLoginStatus(function(response) {
-  //   if (response.status === 'connected') {
-  //     // connected
-  //   } else if (response.status === 'not_authorized') {
-  //     // not_authorized
-  //   } else {
-  //     // not_logged_in
-  //   }
-  // });
-
   var session = new Mamajamas.Models.LoginSession();
+
   var postSignup = new Mamajamas.Views.PostSignup({
     model: session,
     el: '#post-signup-modal'
+  });
+
+  var signupModal = new Mamajamas.Views.SignupModal({
+    model: session,
+    el: '#signup-modal'
+  });
+
+  var loginModal = new Mamajamas.Views.LoginModal({
+    model: session,
+    el: '#login-modal'
   });
 
   $("#create-account, #login-window").on("click", "#bt-fb-connect, #bt-fb-connect-s", (function(e) {
