@@ -80,16 +80,4 @@ $(document).ready(function(){
     });
     return false;
   });
-
-  // login stuff
-  $("#login-window").on("submit", "form", function(event) {
-    var form = $(this);
-    $("input[type=submit]", this).attr("disabled", "disabled");
-    $.post(form.attr("action"), form.serialize(), function(data) {
-      $("#login-form").replaceWith(data);
-      $("label").inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-      $("#user_login").focus();
-    });
-    return false;
-  });
 });
