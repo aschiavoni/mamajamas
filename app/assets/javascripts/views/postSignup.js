@@ -1,5 +1,6 @@
 window.Mamajamas.Views.PostSignup = Backbone.View.extend({
   initialize: function() {
+    $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
     this.model.on("change", this.show, this);
   },
   render: function(event) {

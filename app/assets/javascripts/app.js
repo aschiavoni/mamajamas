@@ -42,14 +42,7 @@ function checkPasswordStrength(password) {
 }
 
 $(document).ready(function(){
-  $("label").inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-
   // signup stuff
-  $("#signup-link").click(function(event) {
-    $("#signup-modal").show();
-    return false;
-  });
-
   $("#create-account").on("click", "#bt-account-email", function(event) {
     $("#signup-modal").hide();
     $("#email-signup-modal").show(0, function() {
@@ -89,13 +82,6 @@ $(document).ready(function(){
   });
 
   // login stuff
-  $("#login-link").click(function(event) {
-    $("#login-modal").show(0, function() {
-      $("#user_login").focus();
-    });
-    return false;
-  });
-
   $("#login-window").on("submit", "form", function(event) {
     var form = $(this);
     $("input[type=submit]", this).attr("disabled", "disabled");

@@ -18,20 +18,9 @@ window.fbAsyncInit = function() {
   });
 
   var session = new Mamajamas.Models.LoginSession();
-
-  var postSignup = new Mamajamas.Views.PostSignup({
+  var appAuth = new Mamajamas.Views.AppAuth({
     model: session,
-    el: '#post-signup-modal'
-  });
-
-  var signupModal = new Mamajamas.Views.SignupModal({
-    model: session,
-    el: '#signup-modal'
-  });
-
-  var loginModal = new Mamajamas.Views.LoginModal({
-    model: session,
-    el: '#login-modal'
+    el: 'body'
   });
 
   $("#create-account, #login-window").on("click", "#bt-fb-connect, #bt-fb-connect-s", (function(e) {
