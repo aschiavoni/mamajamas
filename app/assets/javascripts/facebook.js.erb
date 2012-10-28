@@ -17,19 +17,12 @@ window.fbAsyncInit = function() {
     xfbml: true
   });
 
-  var session = new Mamajamas.Models.LoginSession();
+  var session = new Mamajamas.Models.LoginSession({
+    scope: '<%= FACEBOOK_CONFIG["scope"] %>'
+  });
+
   var appAuth = new Mamajamas.Views.AppAuth({
     model: session,
     el: 'body'
-  });
-
-  $("#create-account, #login-window").on("click", "#bt-fb-connect, #bt-fb-connect-s", (function(e) {
-    e.preventDefault();
-    session.login('<%= FACEBOOK_CONFIG["scope"] %>' );
-  }));
-
-  return $("#logout").click(function(e) {
-    session.logout();
-    return true;
   });
 };

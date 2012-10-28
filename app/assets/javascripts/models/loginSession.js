@@ -21,7 +21,7 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
   logout: function() {
     return FB.logout();
   },
-  login: function(scope) {
+  login: function() {
     return FB.login(function(response) {
       if (response.authResponse) {
         _session.saveSession();
@@ -30,7 +30,7 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
         // cancelled
         // TODO: what do we do here?
       }
-    }, { scope: scope });
+    }, { scope: this.get('scope') });
   },
   saveSession: function() {
     _session.trigger('serverAuthenticating');
