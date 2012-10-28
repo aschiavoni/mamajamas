@@ -17,64 +17,37 @@ window.fbAsyncInit = function() {
     xfbml: true
   });
 
-  var fbLogin = function(e) {
-    return FB.login(function(response) {
-      if (response.authResponse) {
-        // return window.location = "/users/auth/facebook/callback";
-        postLogin();
-      }
-      else {
-        // cancelled
-        // TODO: what do we do here?
-      }
-    }, { scope: '<%= FACEBOOK_CONFIG["scope"] %>' });
-  };
+  // var testApi = function() {
+  //   // get friends
+  //   console.log("looking up friends");
+  //   FB.api('/me/friends?fields=id,name,picture', function(response) {
+  //     console.log(response);
+  //   });
+  // };
 
-  var postLogin = function() {
-    $("#signup-modal, #login-modal").progressIndicator('show');
-    $.get("/users/auth/facebook/callback", function(data) {
-      $("#signup-modal, #login-modal").progressIndicator('hide').hide();
-      $("#facebook-username").val(data.username);
-      $("#post-signup-modal").show(0, function() {
-        $("label").inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-      });
-    });
-  };
+  // FB.getLoginStatus(function(response) {
+  //   if (response.status === 'connected') {
+  //     // connected
+  //   } else if (response.status === 'not_authorized') {
+  //     // not_authorized
+  //   } else {
+  //     // not_logged_in
+  //   }
+  // });
 
-  var testApi = function() {
-    // get friends
-    console.log("looking up friends");
-    FB.api('/me/friends?fields=id,name,picture', function(response) {
-      console.log(response);
-    });
-  };
-
-  FB.getLoginStatus(function(response) {
-    if (response.status === 'connected') {
-      // connected
-    } else if (response.status === 'not_authorized') {
-      // not_authorized
-    } else {
-      // not_logged_in
-    }
+  var session = new Mamajamas.Models.LoginSession();
+  var postSignup = new Mamajamas.Views.PostSignup({
+    model: session,
+    el: '#post-signup-modal'
   });
 
-  $("#create-account").on("click", "#bt-fb-connect", (function(e) {
+  $("#create-account, #login-window").on("click", "#bt-fb-connect, #bt-fb-connect-s", (function(e) {
     e.preventDefault();
-    return fbLogin(e);
-  }));
-
-  $("#login-window").on("click", "#bt-fb-connect-s", (function(e) {
-    e.preventDefault();
-    return fbLogin(e);
+    session.login('<%= FACEBOOK_CONFIG["scope"] %>' );
   }));
 
   return $("#logout").click(function(e) {
-    FB.getLoginStatus(function(response) {
-      if (response.authResponse) {
-        return FB.logout();
-      }
-    });
+    session.logout();
     return true;
   });
 };
