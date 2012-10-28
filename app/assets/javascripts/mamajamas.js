@@ -4,7 +4,6 @@ window.Mamajamas = {
   Views: {},
   Routers: {},
   initialize: function() {
-    return console.log('Hello from Backbone!');
   }
 };
 

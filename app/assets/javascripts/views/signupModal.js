@@ -4,6 +4,9 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
     this.model.on('serverAuthenticating', this.showProgress)
     this.model.on('serverAuthenticated', this.hide)
   },
+  events: {
+    "click #bt-cancel": "hide"
+  },
   render: function(event) {
     return this;
   },

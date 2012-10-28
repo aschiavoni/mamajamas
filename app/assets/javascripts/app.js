@@ -50,11 +50,6 @@ $(document).ready(function(){
     return false;
   });
 
-  $("#create-account").on("click", "#bt-cancel", function(event) {
-    $(".modal-wrap").hide();
-    return true;
-  });
-
   $("#create-account").on("click", "#bt-account-email", function(event) {
     $("#signup-modal").hide();
     $("#email-signup-modal").show(0, function() {
@@ -99,11 +94,6 @@ $(document).ready(function(){
       $("#user_login").focus();
     });
     return false;
-  });
-
-  $("#login-window").on("click", "#bt-cancel", function(event) {
-    $(".modal-wrap").hide();
-    return true;
   });
 
   $("#login-window").on("submit", "form", function(event) {
