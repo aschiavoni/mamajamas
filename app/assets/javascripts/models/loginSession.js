@@ -7,14 +7,18 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
   },
   initialize: function() {
     _session = this;
-    // can respond to facebookLoginStatus events if needed later
+    this.updateLoginStatus();
+  },
+  updateLoginStatus: function() {
+    // can respond to these events if needed later
     FB.getLoginStatus(function(response) {
+      _session.trigger('facebookLoginStatus', response);
       if (response.status === 'connected') {
-        _session.trigger('facebookLoginStatus', 'connected');
+        _session.trigger('facebookConnected', response);
       } else if (response.status === 'not_authorized') {
-        _session.trigger('facebookLoginStatus', 'not_authorized');
+        _session.trigger('facebookNotAuthorized', response);
       } else {
-        _session.trigger('facebookLoginStatus', 'not_logged_in');
+        _session.trigger('facebookNotLoggedIn', response);
       }
     });
   },
