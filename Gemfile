@@ -69,7 +69,7 @@ group :development do
 
   # use pry in development
   gem 'pry-rails'
-  gem 'pry-nav'
+  gem 'pry-debugger'
 end
 
 group :test, :development do
