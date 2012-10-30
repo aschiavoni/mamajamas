@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy, :facebook]
+  prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy, :facebook, :facebook_update]
 
   def create
     build_resource
@@ -36,5 +36,16 @@ class RegistrationsController < Devise::RegistrationsController
         render "facebook"
       end
     end
+  end
+
+  def facebook_update
+    # massage facebook params into user params
+    expires_in = params["expiresIn"].to_i
+    params[:user] = {}
+    params[:user][:access_token] = params["accessToken"]
+    params[:user][:access_token_expires_at] = (Time.now.utc + expires_in.seconds)
+
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    render json: { success: self.resource.update_attributes(resource_params) }
   end
 end

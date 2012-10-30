@@ -3,6 +3,7 @@ window.Mamajamas = {
   Collections: {},
   Views: {},
   Routers: {},
+  Context: {},
   initialize: function() {
   }
 };

@@ -15,6 +15,7 @@ Mamajamas::Application.routes.draw do
   devise_scope :user do
     get "/users/facebook" => "registrations#facebook"
     put "/users/facebook" => "registrations#facebook"
+    post "/users/facebook/update" => "registrations#facebook_update"
   end
 
   resources :friends, only: [ :index ]

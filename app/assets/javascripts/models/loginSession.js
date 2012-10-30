@@ -7,7 +7,10 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
   },
   initialize: function() {
     _session = this;
-    this.updateLoginStatus();
+    if (Mamajamas.Context.User && _session.refreshTokenRequired()) {
+      _session.on('facebookConnected', _session.refreshToken)
+    }
+    _session.updateLoginStatus();
   },
   updateLoginStatus: function() {
     // can respond to these events if needed later
@@ -35,6 +38,43 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
         // TODO: what do we do here?
       }
     }, { scope: this.get('scope') });
+  },
+  refreshTokenRequired: function() {
+    var lastRefresh = _session.refreshedTokenAt();
+    if (!lastRefresh) {
+      return true; // refresh if the cookie is not set
+    }
+    // refresh if it hasn't been refreshed in the last 20 minutes
+    return (((new Date() - lastRefresh) / 1000) > ( 60 * 20 ));
+  },
+  refreshedTokenAt: function(newdate) {
+    if (newdate) {
+      $.cookie('fbtokref', newdate.getTime());
+      return newdate;
+    } else {
+      var fbtokref = $.cookie('fbtokref');
+      if (fbtokref) {
+        var d = new Date();
+        d.setTime(fbtokref);
+        fbtokref = d;
+      }
+      return fbtokref;
+    }
+  },
+  refreshToken: function(response) {
+    // ideally this would exchange the token for a longer lived token
+    // as of now, it just updates the token stored on the server
+    _session.trigger('refreshingToken');
+    var authResponse = response.authResponse;
+
+    if (authResponse) {
+      $.post("/users/facebook/update", authResponse, function(response) {
+        if (response.success) {
+          _session.refreshedTokenAt(new Date());
+        }
+        _session.trigger('refreshedToken');
+      });
+    }
   },
   saveSession: function() {
     _session.trigger('serverAuthenticating');
