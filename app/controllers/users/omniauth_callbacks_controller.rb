@@ -1,7 +1,9 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_filter :require_basic_auth_maybe
+
   def facebook
     auth_info = request.env["omniauth.auth"]
-    logger.debug auth_info.to_yaml
+    logger.info auth_info.to_yaml
     @user = FacebookUserCreator.from_oauth(request.env["omniauth.auth"], current_user)
 
     if @user.persisted?

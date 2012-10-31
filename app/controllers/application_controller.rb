@@ -2,11 +2,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  # hide behind basic auth for now
-  if Rails.env.production?
-    http_basic_authenticate_with :name => "mamajamas", :password => "mamab1rd"
-  end
-
+  before_filter :require_basic_auth_maybe
   before_filter :prompt_to_confirm_email_maybe
 
   # Convenience accessor for flash[:error]
@@ -32,6 +28,13 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  # hide behind basic auth for now
+  def require_basic_auth_maybe
+    if Rails.env.production?
+      http_basic_authenticate_with :name => "mamajamas", :password => "mamab1rd"
+    end
+  end
 
   # show a confirmation message if the user is not confirmed and it has
   # been more than 48 hours since they signed up
