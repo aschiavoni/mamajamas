@@ -80,10 +80,10 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     }
   },
   updateFriendsRequired: function() {
-    // refresh friends every day
     if (!Mamajamas.Context.User)
       return true;
 
+    // refresh friends every day
     var lastUpdatedAt = Mamajamas.Context.User.get('friends_updated_at');
     return (((new Date() - lastUpdatedAt) / 1000) > ( 60 * 60 * 24 ))
   },
