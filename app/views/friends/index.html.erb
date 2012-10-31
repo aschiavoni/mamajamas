@@ -22,7 +22,7 @@
     Based on your quiz answers, here are some other moms we think you should follow:
   </p>
   <ul class="follow-moms clearfix">
-    <% @fb_friends.each do |friend| -%>
+    <% @recommended_friends.each do |friend| -%>
       <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
     <% end -%>
   </ul>
