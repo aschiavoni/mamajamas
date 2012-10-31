@@ -8,23 +8,23 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
   initialize: function() {
     _session = this;
     if (Mamajamas.Context.User && _session.refreshTokenRequired()) {
-      _session.on('facebookConnected', _session.refreshToken)
+      _session.on('facebook:connected', _session.refreshToken)
     }
-    if (Mamajamas.Context.User && _session.updateFriendsRequired()) {
-      _session.on('facebookConnected', _session.updateFriends);
+    if (_session.updateFriendsRequired()) {
+      _session.on('facebook:connected', _session.updateFriends);
     }
     _session.updateLoginStatus();
   },
   updateLoginStatus: function() {
     // can respond to these events if needed later
     FB.getLoginStatus(function(response) {
-      _session.trigger('facebookLoginStatus', response);
+      _session.trigger('facebook:loginstatus', response);
       if (response.status === 'connected') {
-        _session.trigger('facebookConnected', response);
+        _session.trigger('facebook:connected', response);
       } else if (response.status === 'not_authorized') {
-        _session.trigger('facebookNotAuthorized', response);
+        _session.trigger('facebook:notauthorized', response);
       } else {
-        _session.trigger('facebookNotLoggedIn', response);
+        _session.trigger('facebook:notloggedin', response);
       }
     });
   },
@@ -67,7 +67,7 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
   refreshToken: function(response) {
     // ideally this would exchange the token for a longer lived token
     // as of now, it just updates the token stored on the server
-    _session.trigger('refreshingToken');
+    _session.trigger('facebook:token:refreshing');
     var authResponse = response.authResponse;
 
     if (authResponse) {
@@ -75,26 +75,31 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
         if (response.success) {
           _session.refreshedTokenAt(new Date());
         }
-        _session.trigger('refreshedToken');
+        _session.trigger('facebook:token:refreshed');
       });
     }
   },
   updateFriendsRequired: function() {
     // refresh friends every day
+    if (!Mamajamas.Context.User)
+      return true;
+
     var lastUpdatedAt = Mamajamas.Context.User.get('friends_updated_at');
     return (((new Date() - lastUpdatedAt) / 1000) > ( 60 * 60 * 24 ))
   },
-  updateFriends: function() {
+  updateFriends: function(fbresponse) {
+    // fbresponse is the fb response from FB.login or Db.getLoginStatus
     var fields = "id,name,first_name,last_name,picture";
     var opts = { fields: fields, type: "square" };
     FB.api("/me/friends", opts, function(response) {
-      $.post("/users/facebook/friends", { friends: response.data }, function(response) {
+      var data = { uid: fbresponse.authResponse.userID, friends: response.data };
+      $.post("/users/facebook/friends", data, function(response) {
         // do nothing
       });
     });
   },
   saveSession: function() {
-    _session.trigger('serverAuthenticating');
+    _session.trigger('server:authenticating');
 
     $.get("/users/auth/facebook/callback", function(data) {
       _session.set({
@@ -102,7 +107,8 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
         first_name: data.first_name,
         last_name: data.last_name
       });
-      _session.trigger('serverAuthenticated');
+      _session.trigger('server:authenticated');
+      _session.updateLoginStatus();
     });
   }
 });

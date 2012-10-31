@@ -3,8 +3,8 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
     _loginModal = this;
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
 
-    this.model.on('serverAuthenticating', this.showProgress)
-    this.model.on('serverAuthenticated', this.hide)
+    this.model.on('server:authenticating', this.showProgress)
+    this.model.on('server:authenticated', this.hide)
   },
   events: {
     "click #bt-cancel": "hide",

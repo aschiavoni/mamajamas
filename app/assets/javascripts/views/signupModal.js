@@ -5,8 +5,8 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
       el: "#email-signup-modal"
     });
 
-    this.model.on('serverAuthenticating', this.showProgress)
-    this.model.on('serverAuthenticated', this.hide)
+    this.model.on('server:authenticating', this.showProgress)
+    this.model.on('server:authenticated', this.hide)
   },
   events: {
     "click #bt-cancel": "hide",
