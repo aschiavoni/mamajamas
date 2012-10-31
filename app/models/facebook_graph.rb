@@ -43,17 +43,9 @@ class FacebookGraph
 
   def all_mamajamas_friends
     return [] if all_friends.blank?
-    # get all the uids of fb friends
     uids = all_friends.map { |f| f["id"] }
     # get all the mamajamas users that have matching uids
-    mjs_uids = User.where(uid: uids).pluck(:uid).to_set
-
-    # filter friends hash to only include uids that have
-    # corresponding mamajamas accounts
-    # TODO: this probably can be optimized
-    all_friends.select do |friend|
-      mjs_uids.include?(friend["id"])
-    end
+    User.where(uid: uids)
   end
   memoize :all_mamajamas_friends
 end

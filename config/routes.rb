@@ -20,6 +20,7 @@ Mamajamas::Application.routes.draw do
   end
 
   resources :friends, only: [ :index ]
+  resources :relationships, only: [ :create, :destroy ]
 
   get '/robots.txt' => 'robots#show'
   root :to => 'home#index'

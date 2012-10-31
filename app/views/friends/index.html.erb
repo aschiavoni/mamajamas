@@ -8,14 +8,7 @@
   </p>
   <ul class="follow-moms clearfix">
     <% @fb_friends.each do |friend| -%>
-      <li class="following">
-        <img src="<%= current_user.facebook.profile_pic_url(friend['id']) %>" alt="<%= friend['name'] %>">
-        <p>
-        <strong class="mom"><%= truncate("#{friend['first_name']} #{friend['last_name']}", :length => 20) %></strong><br>
-          <span class="tags">Stylish, Crafty</span><br>
-          <em class="ss-icon check">checked</em>
-        </p><button type="submit" class="button bt-light" id="bt-unfollow01">Unfollow</button>
-      </li>
+      <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
     <% end -%>
     <% if @total_fb_friends > 5 -%>
       <li>
@@ -31,15 +24,9 @@
     And here are some folks we think you might want to follow <em>(based on the answers to your quiz)</em>:
   </p>
   <ul class="follow-moms clearfix">
-    <% @recommended_friends.each do |friend| -%>
-    <li>
-      <%= profile_image(friend) %>
-      <p>
-        <strong class="mom"><%= truncate(display_name(friend), :length => 15) %></strong><br>
-        <span class="tags">Green, Rural</span>
-      </p><button type="submit" class="button bt-color bt-favored" id="bt-follow06">Follow</button>
-    </li>
-  <% end -%>
+    <% @fb_friends.each do |friend| -%>
+      <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+    <% end -%>
   </ul>
   <p class="option right">
     <input type="checkbox" id="chk-let-friends-know"> <label for="chk-let-friends-know">Let friends know you are following them. <a class="ss-icon info" href="#">info</a></label>

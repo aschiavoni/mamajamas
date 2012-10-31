@@ -5,6 +5,11 @@ window.Mamajamas = {
   Routers: {},
   Context: {},
   initialize: function() {
+    if ($("#follow-moms")) {
+      new Mamajamas.Views.FriendPicker({
+        el: '#follow-moms'
+      });
+    }
   }
 };
 
