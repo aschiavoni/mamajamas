@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable,
     :confirmable, :omniauthable
 
+  # cache facebook friends in the database
+  serialize :facebook_friends, Array
+
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login
 
@@ -13,6 +16,7 @@ class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me
   attr_accessible :login, :provider, :uid, :access_token, :access_token_expires_at
   attr_accessible :first_name, :last_name
+  attr_accessible :facebook_friends, :facebook_friends_updated_at
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy

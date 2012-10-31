@@ -16,6 +16,7 @@ Mamajamas::Application.routes.draw do
     get "/users/facebook" => "registrations#facebook"
     put "/users/facebook" => "registrations#facebook"
     post "/users/facebook/update" => "registrations#facebook_update"
+    post "/users/facebook/friends" => "registrations#facebook_friends_update"
   end
 
   resources :friends, only: [ :index ]

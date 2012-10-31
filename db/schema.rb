@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121029220502) do
+ActiveRecord::Schema.define(:version => 20121030215922) do
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"
@@ -25,13 +25,13 @@ ActiveRecord::Schema.define(:version => 20121029220502) do
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
   create_table "users", :force => true do |t|
-    t.string   "username",                :default => "", :null => false
-    t.string   "email",                   :default => "", :null => false
-    t.string   "encrypted_password",      :default => "", :null => false
+    t.string   "username",                    :default => "", :null => false
+    t.string   "email",                       :default => "", :null => false
+    t.string   "encrypted_password",          :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",           :default => 0
+    t.integer  "sign_in_count",               :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -40,14 +40,16 @@ ActiveRecord::Schema.define(:version => 20121029220502) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.string   "provider"
     t.string   "uid"
     t.string   "access_token"
     t.datetime "access_token_expires_at"
     t.string   "first_name"
     t.string   "last_name"
+    t.text     "facebook_friends"
+    t.datetime "facebook_friends_updated_at"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

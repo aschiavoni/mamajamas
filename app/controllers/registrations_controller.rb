@@ -48,4 +48,14 @@ class RegistrationsController < Devise::RegistrationsController
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     render json: { success: self.resource.update_attributes(resource_params) }
   end
+
+  def facebook_friends_update
+    params[:user] = {
+      facebook_friends: params.delete(:friends).values,
+      facebook_friends_updated_at: Time.now.utc
+    }
+
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    render json: { success: self.resource.update_attributes(resource_params) }
+  end
 end

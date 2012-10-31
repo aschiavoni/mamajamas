@@ -20,40 +20,10 @@ class FacebookGraph
     "http://graph.facebook.com/#{uid}/picture?type=square"
   end
 
-  def refresh_access_token
-    oauth = Koala::Facebook::OAuth.new(FACEBOOK_CONFIG["app_id"], FACEBOOK_CONFIG["secret_key"])
-    access_token_info = oauth.exchange_access_token_info(@user.access_token)
-    expires_at = (Time.now.utc + access_token_info['expires'].to_i.seconds)
-    @user.update_attributes(access_token: access_token_info['access_token'],
-                            access_token_expires_at: expires_at)
-    @facebook = @user.access_token.blank? ? nil : Koala::Facebook::API.new(@user.access_token)
-  end
-
   def self.extract_facebook_username(oauth_params)
     raw_info = oauth_params['extra']['raw_info']
     return raw_info['username'] unless raw_info['username'].blank?
     return "#{raw_info['first_name']}#{raw_info['last_name']}"
-  end
-
-  # TODO: unused for now... leaving for reference purposes
-  def albums
-    return [] if facebook.blank?
-
-    facebook do |fb|
-      fb.get_connection('me', 'photos')
-    end
-  end
-
-  def query(query)
-    return nil if facebook.blank?
-    facebook.fql_query(query)
-  end
-
-  def large_profile_pic_url
-    q = "select cover_object_id from album where type='profile' and owner = #{@user.uid}"
-    obj_id = query(q).first["cover_object_id"]
-
-    "https://graph.facebook.com/#{obj_id}/picture?type=normal&access_token=#{@user.access_token}"
   end
 
   private
@@ -62,18 +32,12 @@ class FacebookGraph
     return nil if @facebook.blank?
     block_given? ? yield(@facebook) : @facebook
   rescue Koala::Facebook::APIError => e
-    Rails.logger.error.to_s
-    self.refresh_access_token
-    block_given? ? yield(@facebook) : @facebook
+    Rails.logger.error e.to_s
+    nil
   end
 
   def all_friends
-    return [] if facebook.blank?
-    facebook do |fb|
-      fb.get_connection('me', 'friends',
-                        :fields => "id,name,first_name,last_name,picture",
-                        :type => "normal")
-    end
+    @user.facebook_friends
   end
   memoize :all_friends
 

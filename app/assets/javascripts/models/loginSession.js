@@ -10,6 +10,9 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     if (Mamajamas.Context.User && _session.refreshTokenRequired()) {
       _session.on('facebookConnected', _session.refreshToken)
     }
+    if (Mamajamas.Context.User && _session.updateFriendsRequired()) {
+      _session.on('facebookConnected', _session.updateFriends);
+    }
     _session.updateLoginStatus();
   },
   updateLoginStatus: function() {
@@ -75,6 +78,20 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
         _session.trigger('refreshedToken');
       });
     }
+  },
+  updateFriendsRequired: function() {
+    // refresh friends every day
+    var lastUpdatedAt = Mamajamas.Context.User.get('friends_updated_at');
+    return (((new Date() - lastUpdatedAt) / 1000) > ( 60 * 60 * 24 ))
+  },
+  updateFriends: function() {
+    var fields = "id,name,first_name,last_name,picture";
+    var opts = { fields: fields, type: "square" };
+    FB.api("/me/friends", opts, function(response) {
+      $.post("/users/facebook/friends", { friends: response.data }, function(response) {
+        // do nothing
+      });
+    });
   },
   saveSession: function() {
     _session.trigger('serverAuthenticating');
