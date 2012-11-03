@@ -1,4 +1,5 @@
 Mamajamas::Application.routes.draw do
+  resources :users, only: [ :edit, :update ]
   devise_for(:users,
              path_names:
              {
