@@ -18,6 +18,8 @@ We are using the thin web server in development and production.
 
   > postgres=# create role mamajamas login createdb;
 
+  > postgres=# CREATE EXTENSION IF NOT EXISTS hstore;
+
   > postgres=# \q
 
 3. Create the databases.
@@ -25,6 +27,10 @@ We are using the thin web server in development and production.
   > rake db:create
 
   > rake RAILS_ENV=test db:create
+
+  > rake db:migrate
+
+  > rake db:test:prepare
 
 #### Bundler
 
