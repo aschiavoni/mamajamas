@@ -71,7 +71,7 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     var authResponse = response.authResponse;
 
     if (authResponse) {
-      $.post("/users/facebook/update", authResponse, function(response) {
+      $.post("/registrations/facebook/update", authResponse, function(response) {
         if (response.success) {
           _session.refreshedTokenAt(new Date());
         }
@@ -93,7 +93,7 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     var opts = { fields: fields, type: "square" };
     FB.api("/me/friends", opts, function(response) {
       var data = { uid: fbresponse.authResponse.userID, friends: response.data };
-      $.post("/users/facebook/friends", data, function(response) {
+      $.post("/registrations/facebook/friends", data, function(response) {
         // do nothing
       });
     });

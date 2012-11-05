@@ -13,7 +13,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.fb_access_token_expiration"] = auth_info.credentials.expires_at
 
       (render && return) if request.xhr?
-      redirect_to users_facebook_path
+      redirect_to registrations_facebook_path
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
       (render && return) if request.xhr?
