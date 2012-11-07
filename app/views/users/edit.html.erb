@@ -1,2 +1,10 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<h1>Create My Profile</h1>
+
+<%= form_for @user do |f| %>
+	User name: <%= f.text_field :username %><br>
+	First name: <%= f.text_field :first_name %><br>
+	Last name: <%= f.text_field :last_name %><br>
+	<%= f.submit "update" %>
+<% end %>
