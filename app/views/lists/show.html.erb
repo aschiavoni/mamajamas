@@ -1,0 +1,62 @@
+<%= content_for :title_links do %>
+<ul>
+  <li>
+    <a href="#" class="button bt-light">
+      <span class="ss-plus"></span>
+      New Item
+    </a>
+  </li>
+  <li>
+    <a href="#" class="button bt-light">Save</a>
+  </li>
+  <li>
+    <a href="#" class="button bt-light">Share</a>
+  </li>
+  <li id="print">
+    <a href="#" class="ss-icon" title="Print"><span>Print</span></a>
+  </li>
+</ul>
+<% end -%>
+<%= content_for :nav do %>
+<nav id="categories">
+  <ul>
+    <% @categories.each do |category| -%>
+      <li class="<%= "cat-selected" if category.id == @category.id %>">
+        <%= link_to category.name, "#" %>
+      </li>
+    <% end -%>
+  </ul>
+</nav>
+<% end -%>
+<%= content_for :tertiary do %>
+<div id="module-follow">
+  <div class="content">
+    <h3>Follow Mom Friends</h3>
+    <p>Log in to find your friends and see what they’ve got. Not a member? Sign up</p>
+  </div>
+</div>
+<div id="module-msg">
+  <div class="content">
+    <h3>Reach Out</h3>
+    <p>Send a message to ask for advice, or to share it.</p>
+  </div>
+</div>
+<% end -%>
+<form class="label-infield">
+  <!-- baby gear table ******* -->
+  <table width="100%" cellspacing="0" id="babygear">
+    <thead>
+      <tr>
+        <th scope="col" class="own">Own</th>
+        <th scope="col" class="item">Item</th>
+        <th scope="col" class="rating">Rating</th>
+        <th scope="col" class="when">When to Buy</th>
+        <th scope="col" class="priority">Priority</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%= render :partial => 'product_type', :collection => @category.product_types %>
+    </tbody>
+  </table>
+  <!-- end baby gear table ******* -->
+</form>
