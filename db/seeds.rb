@@ -25,7 +25,7 @@ product_types = {
     { name: "Bath Thermometer", buy_before: "Pre-birth", priority: 3 },
     { name: "Bath Rail or Handle", buy_before: "Pre-birth", priority: 3 }
   ],
-  "Birthing/Pregnancy" =>
+  "Birthing / Pregnancy" =>
   [
     { name: "Pregnancy Book", buy_before: "Pre-birth", priority: 2 },
     { name: "Anti-Nausea Remedy", buy_before: "Pre-birth", priority: 2 },
