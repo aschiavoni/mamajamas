@@ -32,6 +32,8 @@ We are using the thin web server in development and production.
 
   > rake db:test:prepare
 
+  > rake db:seed
+
 #### Bundler
 
 On linux, you may have to install some dependencies before you can
