@@ -57,15 +57,19 @@
 </div>
 <!-- end header area -->
 <!-- body area ***** -->
-<div class="gridContainer clearfix">
+<div class="gridContainer clearfix"<%= "id=#{page_id}" unless page_id.blank? %>>
   <div id="title">
     <div id="subhed">
       <h2>Your baby gear list</h2>
     </div>
-    <div id="title-links">[buttons]</div>
+    <div id="title-links">
+      <%= yield :title_links %>
+    </div>
   </div>
   <div id="primary">
-    <div class="content">[nav]</div>
+    <div class="content">
+      <%= yield :nav %>
+    </div>
   </div>
   <div id="secondary">
     <div class="content">
@@ -74,10 +78,8 @@
       <%= yield %>
     </div>
   </div>
-  <div id="tertiary">[tertiary]
-    <div id="module-name">
-      <div class="content">module content</div>
-    </div>
+  <div id="tertiary">
+    <%= yield :tertiary %>
   </div>
   <div id="footer">
     <div class="content">[footer]</div>

@@ -39,6 +39,10 @@ module ApplicationHelper
     notifications.html_safe
   end
 
+  def page_id
+    @page_id
+  end
+
   private
 
   def notification_config
