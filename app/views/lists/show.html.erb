@@ -22,7 +22,7 @@
   <ul>
     <% @categories.each do |category| -%>
       <li class="<%= "cat-selected" if category.id == @category.id %>">
-        <%= link_to category.name, "#" %>
+        <%= link_to category.name, list_category_path(category) %>
       </li>
     <% end -%>
   </ul>

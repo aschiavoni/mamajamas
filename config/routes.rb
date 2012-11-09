@@ -22,7 +22,9 @@ Mamajamas::Application.routes.draw do
 
   resources :friends, only: [ :index ]
   resources :relationships, only: [ :create, :destroy ]
+
   resource :list, only: [ :show ]
+  get "/list/:category" => "lists#show", as: :list_category
 
   get '/robots.txt' => 'robots#show'
   root :to => 'home#index'
