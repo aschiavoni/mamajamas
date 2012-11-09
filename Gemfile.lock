@@ -85,6 +85,7 @@ GEM
     faraday (0.8.4)
       multipart-post (~> 1.1)
     ffi (1.1.5)
+    friendly_id (4.0.0)
     guard (1.4.0)
       listen (>= 0.4.2)
       thor (>= 0.14.6)
@@ -264,6 +265,7 @@ DEPENDENCIES
   backbone-on-rails
   devise
   factory_girl
+  friendly_id
   guard
   guard-minitest
   heroku

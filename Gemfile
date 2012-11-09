@@ -43,6 +43,9 @@ gem 'backbone-on-rails'
 # To use Jbuilder templates for JSON
 gem 'jbuilder'
 
+# url slugs
+gem 'friendly_id'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
