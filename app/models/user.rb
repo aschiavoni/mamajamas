@@ -61,4 +61,8 @@ class User < ActiveRecord::Base
   def unfollow!(other_user)
     relationships.find_by_followed_id(other_user.id).destroy
   end
+
+  def list
+    List.where(user_id: self.id).first || ListBuilder.new(self).build!
+  end
 end

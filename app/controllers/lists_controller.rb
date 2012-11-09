@@ -3,7 +3,9 @@ class ListsController < ApplicationController
 
   def show
     @page_id = "buildlist"
-    @categories = Category.all
+    @list = current_user.list
+    @categories = @list.categories.for_list
     @category = @categories.first
+    @product_types = @list.product_types.where(category_id: @category.id)
   end
 end

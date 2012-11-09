@@ -11,13 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121107203814) do
+ActiveRecord::Schema.define(:version => 20121109172657) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "list_product_types", :force => true do |t|
+    t.integer  "list_id"
+    t.integer  "product_type_id"
+    t.integer  "category_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "list_product_types", ["category_id"], :name => "index_list_product_types_on_category_id"
+  add_index "list_product_types", ["list_id"], :name => "index_list_product_types_on_list_id"
+  add_index "list_product_types", ["product_type_id"], :name => "index_list_product_types_on_product_type_id"
+
+  create_table "lists", :force => true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "lists", ["user_id"], :name => "index_lists_on_user_id"
 
   create_table "product_types", :force => true do |t|
     t.integer  "category_id"
