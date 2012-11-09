@@ -63,12 +63,12 @@
       <h2>Your baby gear list</h2>
     </div>
     <div id="title-links">
-      <%= yield :title_links %>
+      <%= yield(:title_links) %>
     </div>
   </div>
   <div id="primary">
     <div class="content">
-      <%= yield :nav %>
+      <%= content_for?(:nav) ? yield(:nav) : raw("&nbsp;") -%>
     </div>
   </div>
   <div id="secondary">
@@ -79,7 +79,7 @@
     </div>
   </div>
   <div id="tertiary">
-    <%= yield :tertiary %>
+    <%= content_for?(:tertiary) ? yield(:tertiary) : raw("&nbsp;") -%>
   </div>
   <div id="footer">
     <div class="content">[footer]</div>
