@@ -8,6 +8,21 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
     return url;
   },
 
-  model: Mamajamas.Models.ListItem
+  model: function(attrs, options) {
+    var m = null;
+
+    switch(attrs.type) {
+      case "ListItem":
+        m = new Mamajamas.Models.ListItem(attrs, options);
+        break;
+      case "ProductType":
+        m = new Mamajamas.Models.ProductType(attrs, options);
+        break;
+      default:
+        m = new Mamajamas.Models.ListEntry(attrs, options);
+    }
+
+    return m;
+  }
 
 });

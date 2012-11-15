@@ -5,13 +5,13 @@ window.Mamajamas = {
   Routers: {},
   Context: {},
   initialize: function() {
-    if ($("#follow-moms")) {
+    if ($("#follow-moms").length > 0) {
       new Mamajamas.Views.FriendPicker({
         el: '#follow-moms'
       });
     }
 
-    if ($("#my-list")) {
+    if ($("#my-list").length > 0) {
       new Mamajamas.Routers.ListItems();
       Backbone.history.start();
     }

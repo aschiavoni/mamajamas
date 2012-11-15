@@ -1,2 +1,2 @@
-Mamajamas.Models.ListItem = Backbone.Model.extend({
+Mamajamas.Models.ListItem = Mamajamas.Models.ListEntry.extend({
 });

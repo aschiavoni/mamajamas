@@ -6,7 +6,7 @@ class ListItemsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @list_items = find_list_items
+    @list_items = find_list_items + find_product_types
     respond_to do |format|
       format.html
       format.json
@@ -38,5 +38,13 @@ class ListItemsController < ApplicationController
       list_items = list_items.where(category_id: @category.id)
     end
     list_items
+  end
+
+  def find_product_types
+    product_types = @list.product_types
+    unless @category.blank?
+      product_types = product_types.where(category_id: @category.id)
+    end
+    product_types
   end
 end

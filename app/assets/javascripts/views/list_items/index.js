@@ -12,10 +12,19 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     return this;
   },
 
-  appendItem: function(listItem) {
-    var view = new Mamajamas.Views.ListItemShow({
-      model: listItem
-    });
+  appendItem: function(item) {
+    var view = null;
+    if (item.get('type') == "ListItem") {
+       view = new Mamajamas.Views.ListItemShow({
+        model: item
+      });
+    } else {
+      // ProductType
+      view = new Mamajamas.Views.ProductTypeShow({
+        model: item
+      })
+    }
+
     $("#list-items").append(view.render().$el);
   }
 });
