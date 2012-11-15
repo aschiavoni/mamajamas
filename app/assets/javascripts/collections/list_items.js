@@ -2,9 +2,12 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
 
   url: function() {
     var url = "/list/list_items.json";
-    var category = $("#current-category").data("category");
-    if (category != null)
-      url = "/list/" + category + "/list_items.json";
+    var list = Mamajamas.Context.List;
+    if (list) {
+      var category = Mamajamas.Context.List.get("category");
+      if (category != null)
+        url = "/list/" + category + "/list_items.json";
+    }
     return url;
   },
 
