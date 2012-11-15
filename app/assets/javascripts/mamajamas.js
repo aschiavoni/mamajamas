@@ -10,6 +10,11 @@ window.Mamajamas = {
         el: '#follow-moms'
       });
     }
+
+    if ($("#my-list")) {
+      new Mamajamas.Routers.ListItems();
+      Backbone.history.start();
+    }
   }
 };
 

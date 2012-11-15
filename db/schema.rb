@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121114161425) do
+ActiveRecord::Schema.define(:version => 20121115182005) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -32,8 +32,10 @@ ActiveRecord::Schema.define(:version => 20121114161425) do
     t.integer  "priority"
     t.string   "notes"
     t.string   "image_url"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "product_type_id"
+    t.integer  "category_id"
   end
 
   add_index "list_items", ["list_id"], :name => "index_list_items_on_list_id"

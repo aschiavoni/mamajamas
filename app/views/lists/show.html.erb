@@ -42,21 +42,9 @@
   </div>
 </div>
 <% end -%>
-<form class="label-infield">
-  <!-- baby gear table ******* -->
-  <table width="100%" cellspacing="0" id="babygear">
-    <thead>
-      <tr>
-        <th scope="col" class="own">Own</th>
-        <th scope="col" class="item">Item</th>
-        <th scope="col" class="rating">Rating</th>
-        <th scope="col" class="when">When to Buy</th>
-        <th scope="col" class="priority">Priority</th>
-      </tr>
-    </thead>
-    <tbody>
-    <%= render :partial => 'product_type', :collection => @product_types %>
-    </tbody>
-  </table>
-  <!-- end baby gear table ******* -->
+<%= content_tag "div", "", id: "current-category", style: "display: none;", data: { category: @category.slug  } %>
+<form class="label-infield" id="my-list">
 </form>
+<script id="add-item-template" type="text/x-handlebars-template">
+<%= render partial: "list_items/item_form", locals: { list: @list, list_item: ListItem.new } %>
+</script>
