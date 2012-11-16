@@ -32,5 +32,10 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
     addItem.setup();
 
     return false;
+  },
+
+  moveToBottom: function() {
+    this.$el.appendTo("#list-items");
+    this.$el.show();
   }
 });

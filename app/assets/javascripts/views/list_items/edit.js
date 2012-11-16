@@ -47,6 +47,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       wait: true,
       success: function() {
         _edit.$el.remove();
+        _edit.options.productType.moveToBottom();
       },
       error: this.handleError
     });
