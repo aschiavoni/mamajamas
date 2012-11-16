@@ -18,8 +18,14 @@ class ListItemsController < ApplicationController
   end
 
   def create
-    logger.info params.inspect
-    render :json => { status: "ok" }
+    @list_item = ListItem.create(
+      params[:list_item].merge(list_id: @list.id)
+    )
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   private

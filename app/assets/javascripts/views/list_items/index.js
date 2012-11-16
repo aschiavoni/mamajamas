@@ -3,7 +3,9 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
   template: HandlebarsTemplates['list_items/index'],
 
   initialize: function() {
+    _index = this;
     this.collection.on("reset", this.render, this);
+    this.collection.on("add", this.insertItem, this);
   },
 
   render: function() {
@@ -12,9 +14,18 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     return this;
   },
 
+  insertItem: function(item) {
+    $("#list-items").prepend(_index.itemView(item).render().$el);
+  },
+
   appendItem: function(item) {
+    $("#list-items").append(_index.itemView(item).render().$el);
+  },
+
+  itemView: function(item) {
     var view = null;
     if (item.get('type') == "ListItem") {
+      // ListItem
        view = new Mamajamas.Views.ListItemShow({
         model: item
       });
@@ -24,7 +35,6 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
         model: item
       })
     }
-
-    $("#list-items").append(view.render().$el);
+    return view;
   }
 });

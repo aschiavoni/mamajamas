@@ -5,7 +5,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   className: "prod prod-filled edit-mode",
 
   events: {
-    "click .save-item.button": "save",
+    "submit #new_list_item": "add",
     "click .cancel-item.button": "cancel"
   },
 
@@ -21,11 +21,19 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     $("#list_item_name", this.$el).focus();
   },
 
-  save: function(event) {
-    var $form = $("form", this.$el);
-    $.post($form.attr("action"), $form.serialize(), function(data) {
-      console.log(data);
+  add: function(event) {
+    event.preventDefault();
+    Mamajamas.Context.ListItems.create({
+      type: "ListItem",
+      name: $("#list_item_name").val(),
+      link: $("#list_item_link").val(),
+      notes: $("#list_item_notes").val(),
+      product_type_id: $("#list_item_product_type_id").val(),
+      category_id: $("#list_item_category_id").val(),
+      priority: $("#list_item_priority").val(),
+      when_to_buy: $("#list_item_when_to_buy").val(),
     });
+    this.$el.remove();
     return false;
   },
 

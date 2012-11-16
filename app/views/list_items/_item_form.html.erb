@@ -5,9 +5,9 @@
   <div class="prod-thumb">
     <img src="/assets/products/thumb_nursing_bottle-sketch@2x.png" alt="{{product_type}}">
   </div>
-  <%= form_for [ list, list_item ], url: list_list_items_path do |f| -%>
-    <%= f.hidden_field :product_type, value: "{{product_type_id}}" %>
-    <%= f.hidden_field :category, value: "{{category_id}}" %>
+  <%= form_for [ list, list_item ], url: list_list_items_path(category: @category, format: :json) do |f| -%>
+    <%= f.hidden_field :product_type_id, value: "{{product_type_id}}" %>
+    <%= f.hidden_field :category_id, value: "{{category_id}}" %>
     <%= f.hidden_field :priority, value: "{{priority}}" %>
     <%= f.hidden_field :when_to_buy, value: "{{when_to_buy}}" %>
     <div class="prod-desc">

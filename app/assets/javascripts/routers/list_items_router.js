@@ -1,8 +1,9 @@
 Mamajamas.Routers.ListItems = Backbone.Router.extend({
 
   initialize: function() {
-    this.collection = new Mamajamas.Collections.ListItems();
-    this.collection.fetch();
+    // use a global to store the list items collection
+    Mamajamas.Context.ListItems = new Mamajamas.Collections.ListItems();
+    Mamajamas.Context.ListItems.fetch();
   },
 
   routes: {
@@ -11,7 +12,7 @@ Mamajamas.Routers.ListItems = Backbone.Router.extend({
 
   index: function() {
     var view = new Mamajamas.Views.ListItemsIndex({
-      collection: this.collection
+      collection: Mamajamas.Context.ListItems
     });
 
     $("#my-list").html(view.render().$el);
