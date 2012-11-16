@@ -9,7 +9,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     "click .cancel-item.button": "cancel"
   },
 
-  render: function(event) {
+  render: function() {
     var $template = Handlebars.compile($("#add-item-template").html());
     this.$el.html($template(this.model.toJSON()));
 

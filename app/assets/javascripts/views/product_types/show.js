@@ -17,7 +17,13 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
 
   addItem: function(event) {
     var addItem = new Mamajamas.Views.ListItemEdit({
-      model: new Mamajamas.Models.ListItem(),
+      model: new Mamajamas.Models.ListItem({
+        product_type: this.model.get("name"),
+        product_type_id: this.model.get("id"),
+        category_id: this.model.get("category_id"),
+        priority: this.model.get("priority"),
+        when_to_buy: this.model.get("buy_before")
+      }),
       productType: this
     });
 
