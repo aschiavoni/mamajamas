@@ -1,4 +1,4 @@
-// [2012-10-31 Wed 18:27]
+// have to rescue nil on FACEBOOK_CONFIG so that heroku can precompile assets
 jQuery(function() {
   // load fb sdk async
   $("body").prepend('<div id="fb-root"></div>');
@@ -11,7 +11,7 @@ jQuery(function() {
 
 window.fbAsyncInit = function() {
   FB.init({
-    appId: '<%= FACEBOOK_CONFIG["app_id"] %>',
+    appId: '<%= (FACEBOOK_CONFIG["app_id"] rescue nil) %>',
     channelUrl: '//' + window.location.host + '/channel.html',
     status: true,
     cookie: true,
@@ -19,7 +19,7 @@ window.fbAsyncInit = function() {
   });
 
   var session = new Mamajamas.Models.LoginSession({
-    scope: '<%= FACEBOOK_CONFIG["scope"] %>'
+    scope: '<%= (FACEBOOK_CONFIG["scope"] rescue nil) %>'
   });
 
   var appAuth = new Mamajamas.Views.AppAuth({
