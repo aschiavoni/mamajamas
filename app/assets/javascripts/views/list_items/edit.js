@@ -39,6 +39,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       category_id: $("#list_item_category_id").val(),
       priority: $("#list_item_priority").val(),
       when_to_buy: $("#list_item_when_to_buy").val(),
+      owned: $("input[name='list_item[owned]']:checked").val() == "1"
     };
 
     Mamajamas.Context.ListItems.create(attributes, {

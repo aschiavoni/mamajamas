@@ -29,10 +29,10 @@
           <legend><span>Need vs. Own</span></legend>
           <ul class="inline">
             <li>
-            <input type="radio" id="radio-need"> <label for="radio-need" name="need-own">Need</label>
+            <%= f.radio_button :owned, "0", checked: true %> <%= f.label :owned, "Need", value: "0" %>
             </li>
             <li>
-            <input type="radio" id="radio-own" checked> <label for="radio-own" name="need-own">Own</label>
+            <%= f.radio_button :owned, "1" %> <%= f.label :owned, "Own", value: "1" %>
             </li>
           </ul>
         </fieldset>

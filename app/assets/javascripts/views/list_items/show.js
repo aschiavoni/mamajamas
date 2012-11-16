@@ -4,8 +4,9 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
 
   template: HandlebarsTemplates['list_items/show'],
 
+  className: "prod prod-filled",
+
   initialize: function() {
-    this.$el.addClass("prod").addClass("prod-filled");
   },
 
   events: {
