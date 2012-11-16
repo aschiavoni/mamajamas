@@ -6,8 +6,8 @@ class ListItemsController < ApplicationController
   respond_to :json
 
   def index
-    @list_items = find_list_items + find_product_types
-    respond_with @list_items
+    @list_entries = @list.list_items.by_category(@category) + @list.product_types.by_category(@category)
+    respond_with @list_entries
   end
 
   def create
@@ -25,21 +25,5 @@ class ListItemsController < ApplicationController
 
   def find_category
     @category = params[:category].blank? ? nil : Category.find(params[:category])
-  end
-
-  def find_list_items
-    list_items = @list.list_items
-    unless @category.blank?
-      list_items = list_items.where(category_id: @category.id)
-    end
-    list_items
-  end
-
-  def find_product_types
-    product_types = @list.product_types
-    unless @category.blank?
-      product_types = product_types.where(category_id: @category.id)
-    end
-    product_types
   end
 end
