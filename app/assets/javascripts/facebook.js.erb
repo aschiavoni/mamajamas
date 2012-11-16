@@ -11,7 +11,7 @@ jQuery(function() {
 
 window.fbAsyncInit = function() {
   FB.init({
-    appId: '<%= (FACEBOOK_CONFIG["app_id"] rescue nil) %>',
+    appId: Mamajamas.Context.Facebook.appId,
     channelUrl: '//' + window.location.host + '/channel.html',
     status: true,
     cookie: true,
@@ -19,7 +19,7 @@ window.fbAsyncInit = function() {
   });
 
   var session = new Mamajamas.Models.LoginSession({
-    scope: '<%= (FACEBOOK_CONFIG["scope"] rescue nil) %>'
+    scope: Mamajamas.Context.Facebook.scope
   });
 
   var appAuth = new Mamajamas.Views.AppAuth({

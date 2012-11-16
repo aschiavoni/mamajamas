@@ -1,10 +1,15 @@
-<% if user_signed_in? -%>
 <script type="text/javascript">
+<% if user_signed_in? -%>
 Mamajamas.Context.User = new Mamajamas.Models.User({
   username: '<%= current_user.username%>',
   first_name: '<%= current_user.first_name %>',
   last_name: '<%= current_user.last_name %>',
   friends_updated_at: new Date(<%= current_user.facebook_friends_updated_at.to_i * 1000 %>)
-})
-</script>
+});
 <% end -%>
+
+Mamajamas.Context.Facebook = {
+  appId: '<%= FACEBOOK_CONFIG["app_id"] %>',
+  scope: '<%= FACEBOOK_CONFIG["scope"] %>'
+}
+</script>
