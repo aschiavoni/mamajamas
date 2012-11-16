@@ -67,7 +67,7 @@ module Mamajamas
 
     # don't access DB or load models when precompiling assets
     # uncomment if needed to deploy to heroku
-    config.assets.initialize_on_precompile = true
+    config.assets.initialize_on_precompile = false
 
     # handle error fields manually
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
