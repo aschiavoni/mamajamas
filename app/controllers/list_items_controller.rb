@@ -17,6 +17,11 @@ class ListItemsController < ApplicationController
     respond_with @list_item
   end
 
+  def update
+    @list_item = ListItem.update(params[:id], params[:list_item])
+    respond_with @list_item
+  end
+
   private
 
   def find_list
