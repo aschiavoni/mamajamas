@@ -17,6 +17,7 @@
 //= require handlebars
 //= require mamajamas
 //= require_tree ./plugins
+//= require_tree ./helpers
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections
