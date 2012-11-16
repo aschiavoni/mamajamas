@@ -3,29 +3,18 @@ class ListItemsController < ApplicationController
   before_filter :find_list
   before_filter :find_category
 
-  respond_to :html, :json
+  respond_to :json
 
   def index
     @list_items = find_list_items + find_product_types
-    respond_to do |format|
-      format.html
-      format.json
-    end
-  end
-
-  def edit
-    @list_item = ListItem.new
+    respond_with @list_items
   end
 
   def create
     @list_item = ListItem.create(
       params[:list_item].merge(list_id: @list.id)
     )
-
-    respond_to do |format|
-      format.html
-      format.json
-    end
+    respond_with @list_item
   end
 
   private

@@ -4,6 +4,11 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   className: "prod prod-filled edit-mode",
 
+  initialize: function() {
+    _edit = this;
+    _errMap = this.errorFieldMap();
+  },
+
   events: {
     "submit #new_list_item": "add",
     "click .cancel-item.button": "cancel"
@@ -23,7 +28,9 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   add: function(event) {
     event.preventDefault();
-    Mamajamas.Context.ListItems.create({
+    this.clearErrors();
+
+    attributes = {
       type: "ListItem",
       name: $("#list_item_name").val(),
       link: $("#list_item_link").val(),
@@ -32,8 +39,16 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       category_id: $("#list_item_category_id").val(),
       priority: $("#list_item_priority").val(),
       when_to_buy: $("#list_item_when_to_buy").val(),
+    };
+
+    Mamajamas.Context.ListItems.create(attributes, {
+      wait: true,
+      success: function() {
+        _edit.$el.remove();
+      },
+      error: this.handleError
     });
-    this.$el.remove();
+
     return false;
   },
 
@@ -41,5 +56,34 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     this.options.productType.$el.show();
     this.$el.remove();
     return true;
+  },
+
+  handleError: function(item, response) {
+    if (response.status == 422) {
+      var errors = $.parseJSON(response.responseText).errors;
+      for (var err in errors) {
+        _edit.showError(errors, err);
+      }
+    }
+  },
+
+  showError: function(errors, field) {
+    var $field = $(_errMap[field]);
+    var $errSpan = $("<span/>");
+    $errSpan.addClass("status-msg").addClass("error");
+    $errSpan.html(errors[field]);
+    $field.after($errSpan);
+    $field.focus();
+  },
+
+  clearErrors: function() {
+    $(".status-msg.error").remove();
+  },
+
+  errorFieldMap: function() {
+    return {
+      name: "#list_item_name",
+      link: "#list_item_link"
+    };
   }
 });
