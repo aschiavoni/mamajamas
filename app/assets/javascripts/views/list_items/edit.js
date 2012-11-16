@@ -36,6 +36,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       link: $("#list_item_link").val(),
       notes: $("#list_item_notes").val(),
       product_type_id: $("#list_item_product_type_id").val(),
+      product_type: this.model.get("product_type"),
       category_id: $("#list_item_category_id").val(),
       priority: $("#list_item_priority").val(),
       when_to_buy: $("#list_item_when_to_buy").val(),
