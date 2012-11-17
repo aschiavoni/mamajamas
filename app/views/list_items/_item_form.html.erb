@@ -10,6 +10,7 @@
     <%= f.hidden_field :category_id, value: "{{category_id}}" %>
     <%= f.hidden_field :priority, value: "{{priority}}" %>
     <%= f.hidden_field :when_to_buy, value: "{{when_to_buy}}" %>
+    <%= f.hidden_field :rating, value: "0" %>
     <div class="prod-desc">
       <div class="prod-category">
         {{product_type}}
@@ -62,13 +63,6 @@
   <% end -%>
 </td>
 <td class="rating">
-  <div class="eggs">
-    <div class="egg egg-full"></div>
-    <div class="egg egg-full"></div>
-    <div class="egg egg-full"></div>
-    <div class="egg egg-full"></div>
-    <div class="egg"></div>
-  </div>
 </td>
 <td class="when">
   Pre-birth

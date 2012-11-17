@@ -7,6 +7,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   initialize: function() {
     _edit = this;
     _errMap = this.errorFieldMap();
+    this.model.on("change:rating", this.updateRating);
   },
 
   events: {
@@ -18,12 +19,21 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     var $template = Handlebars.compile($("#add-item-template").html());
     this.$el.html($template(this.model.toJSON()));
 
+    var ratingView = new Mamajamas.Views.ListItemRating({
+      model: this.model
+    });
+    $("td.rating", this.$el).append(ratingView.render().$el);
+
     return this;
   },
 
   setup: function() {
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
     $("#list_item_name", this.$el).focus();
+  },
+
+  updateRating: function() {
+    $("#list_item_rating", this.$el).val(this.get("rating"));
   },
 
   add: function(event) {
@@ -40,6 +50,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       category_id: $("#list_item_category_id").val(),
       priority: $("#list_item_priority").val(),
       when_to_buy: $("#list_item_when_to_buy").val(),
+      rating: $("#list_item_rating").val(),
       owned: $("input[name='list_item[owned]']:checked").val() == "1"
     };
 

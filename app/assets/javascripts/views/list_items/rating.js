@@ -39,14 +39,16 @@ Mamajamas.Views.ListItemRating = Backbone.View.extend({
 
   restoreRating: function() {
     var rating = this.model.get("rating");
-    $(".egg", this.$el).each(function(idx, el) {
-      var $egg = $(el);
-      if ($egg.data("rating") === rating) {
-        $egg.prevAll().andSelf().addClass("egg-full");
-        $egg.nextAll().removeClass("egg-full");
-        return false;
-      }
-    });
+    if (rating) {
+      $(".egg", this.$el).each(function(idx, el) {
+        var $egg = $(el);
+        if ($egg.data("rating").toString() === rating.toString()) {
+          $egg.prevAll().andSelf().addClass("egg-full");
+          $egg.nextAll().removeClass("egg-full");
+          return false;
+        }
+      });
+    }
   },
 
   highlight: function(event) {
