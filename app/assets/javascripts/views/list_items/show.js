@@ -11,11 +11,18 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
   },
 
   events: {
+    "change .prod-owned": "updateOwned"
   },
 
   updateRating: function() {
     // this is the model
     this.save();
+  },
+
+  updateOwned: function(event) {
+    var $owned = $(event.target);
+    this.model.set("owned", $owned.is(":checked"));
+    this.model.save();
   },
 
   render: function() {
