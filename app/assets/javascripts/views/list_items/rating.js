@@ -26,7 +26,6 @@ Mamajamas.Views.ListItemRating = Backbone.View.extend({
     var $egg = $(event.target);
     var rating = parseInt($egg.data("rating"));
     this.model.set("rating", rating);
-    this.model.save();
   },
 
   enableRating: function(event) {

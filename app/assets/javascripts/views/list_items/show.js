@@ -7,9 +7,15 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
   className: "prod prod-filled",
 
   initialize: function() {
+    this.model.on("change:rating", this.updateRating);
   },
 
   events: {
+  },
+
+  updateRating: function() {
+    // this is the model
+    this.save();
   },
 
   render: function() {
