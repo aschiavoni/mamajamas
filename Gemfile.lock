@@ -217,6 +217,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
+    redis (2.2.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     ruby-hmac (0.4.0)
@@ -295,6 +296,7 @@ DEPENDENCIES
   rails (= 3.2.8)
   rb-fsevent
   rb-inotify
+  redis
   sass-rails (~> 3.2.3)
   terminal-notifier-guard
   therubyracer
