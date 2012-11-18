@@ -1,0 +1,12 @@
+development:
+  associate_tag: "momopsnet-20"
+  access_key_id: "1AVTJY9Q5DY1CFRB3FR2"
+  secret_key: "/aOQJPAFtAma7jB0a44escjgdPhXZby3FL9cRH3P"
+test:
+  associate_tag: "momopsnet-20"
+  access_key_id: "1AVTJY9Q5DY1CFRB3FR2"
+  secret_key: "/aOQJPAFtAma7jB0a44escjgdPhXZby3FL9cRH3P"
+production:
+  associate_tag: "momopsnet-20"
+  access_key_id: "1AVTJY9Q5DY1CFRB3FR2"
+  secret_key: "/aOQJPAFtAma7jB0a44escjgdPhXZby3FL9cRH3P"
