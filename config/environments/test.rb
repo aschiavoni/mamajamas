@@ -1,3 +1,5 @@
+ENV["REDISTOGO_URL"] = 'redis://localhost:6379'
+
 Mamajamas::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 

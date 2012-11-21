@@ -1,3 +1,5 @@
+ENV["REDISTOGO_URL"] = 'redis://localhost:6379'
+
 Mamajamas::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -12,6 +14,7 @@ Mamajamas::Application.configure do
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
+  config.cache_store = :redis_store, ENV["REDISTOGO_URL"]
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
@@ -51,5 +54,3 @@ Mamajamas::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 end
-
-ENV["REDISTOGO_URL"] = 'redis://localhost:6379'
