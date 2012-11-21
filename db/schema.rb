@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115182005) do
+ActiveRecord::Schema.define(:version => 20121119215834) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -68,7 +68,10 @@ ActiveRecord::Schema.define(:version => 20121115182005) do
     t.integer  "priority"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "slug"
   end
+
+  add_index "product_types", ["slug"], :name => "index_product_types_on_slug", :unique => true
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"
