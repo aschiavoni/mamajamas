@@ -14,14 +14,14 @@ class ProductSearcher
     end
   end
 
-  private
+  protected
 
   def build_product(product_type, attrs)
-    by_vendor = {
+    vendor_id = {
       vendor: attrs[:vendor],
       vendor_id: attrs[:vendor_id]
     }
-    product = Product.unscoped.where(by_vendor).first_or_initialize(by_vendor)
+    product = Product.unscoped.where(vendor_id).first_or_initialize(vendor_id)
     product.update_attributes(attrs.merge(product_type_id: product_type.id))
     product
   end
