@@ -1,23 +1,34 @@
 class ProductSearcher
-  attr_reader :providers, :finders
+  attr_reader :providers, :searchers
 
   def initialize(options = {})
     @providers = options[:providers] || [ :amazon ]
-    @finders = initialize_finders
-    initialize_finders
+    @searchers = providers.map do |provider|
+      ProductSearcherFactory.create(provider)
+    end
   end
 
-  def search(query, options = {})
-    finders.map do |finder|
-      finder.search(query)
-    end.flatten
+  def search(product_type, options = {})
+    query(product_type.name, options).map do |attrs|
+      build_product(product_type, attrs)
+    end
   end
 
   private
 
-  def initialize_finders
-    providers.map do |provider|
-      ProductSearcherFactory.create(provider)
-    end
+  def build_product(product_type, attrs)
+    by_vendor = {
+      vendor: attrs[:vendor],
+      vendor_id: attrs[:vendor_id]
+    }
+    product = Product.unscoped.where(by_vendor).first_or_initialize(by_vendor)
+    product.update_attributes(attrs.merge(product_type_id: product_type.id))
+    product
+  end
+
+  def query(query, options = {})
+    searchers.map do |finder|
+      finder.search(query, options)
+    end.flatten
   end
 end

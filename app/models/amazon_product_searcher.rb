@@ -7,7 +7,7 @@ class AmazonProductSearcher
     }
   end
 
-  def search(query)
+  def search(query, options = {})
     res = Amazon::Ecs.item_search(query, {
       :response_group => 'Large',
       :search_index => 'Baby'
@@ -16,12 +16,13 @@ class AmazonProductSearcher
     res.items.each_with_index.map do |item, idx|
       # return Amazon::Element instance
       item_attributes = item.get_element('ItemAttributes')
-      Product.new({
+      {
+        vendor_id: item.get('ASIN'),
+        vendor: "amazon",
         name: item_attributes.get('Title'),
-        id: item.get('ASIN'),
-        link: item.get('DetailPageURL'),
+        url: item.get('DetailPageURL'),
         rating: nil
-      })
+      }
     end
   end
 end

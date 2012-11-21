@@ -1,11 +1,10 @@
-class Product
-  include ActiveModel::Serialization
+class Product < ActiveRecord::Base
+  belongs_to :product_type
+  attr_accessible :name, :rating, :url, :vendor, :vendor_id, :product_type_id
 
-  attr_accessor :name, :link, :id, :rating
+  validates :name, :vendor, :url, :product_type_id, presence: true
+  validates :vendor_id, presence: true, uniqueness: { scope: :vendor }
 
-  def initialize(attributes = {})
-    attributes.each do |name, value|
-      send("#{name}=", value)
-    end
-  end
+  default_scope lambda { where("updated_at > ?", (Time.zone.now - 24.hours)) }
+  scope :expired, lambda { where("updated_at < ?", (Time.zone.now - 24.hours)) }
 end

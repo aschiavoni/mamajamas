@@ -5,6 +5,7 @@ class ProductType < ActiveRecord::Base
   attr_accessible :category_id, :name, :buy_before, :priority
 
   belongs_to :category
+  has_many :products, dependent: :destroy
 
   class << self
     def by_category(category)
