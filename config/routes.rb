@@ -32,6 +32,14 @@ Mamajamas::Application.routes.draw do
     resources :list_items
   end
 
+  scope "api" do
+    resources :categories, only: [ :index ] do
+      resources :product_types, only: [ :index ] do
+        resources :products, only: [ :index ]
+      end
+    end
+  end
+
   get '/robots.txt' => 'robots#show'
   root :to => 'home#index'
 end
