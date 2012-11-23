@@ -3,7 +3,7 @@ class CachedProductSearcher < ProductSearcher
 
   def query(query, options)
     cache_id = "product:searcher:#{query.parameterize}:#{options_sig(options)}"
-    json = Rails.cache.fetch(cache_id, expire_in: 1.minute) do
+    json = Rails.cache.fetch(cache_id, expire_in: 24.hours) do
       super(query, options).to_json
     end
 
