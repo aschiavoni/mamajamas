@@ -33,10 +33,10 @@ Mamajamas::Application.routes.draw do
   end
 
   scope "api" do
-    resources :categories, only: [ :index ] do
-      resources :product_types, only: [ :index ] do
-        resources :products, only: [ :index ]
-      end
+    defaults(format: "json") do
+      get "categories" => "categories#index"
+      get "categories/:category_id" => "product_types#index"
+      get "categories/:category_id/:product_type_id" => "products#index"
     end
   end
 
