@@ -44,9 +44,6 @@
 <% end -%>
 <form class="label-infield" id="my-list">
 </form>
-<script id="add-item-template" type="text/x-handlebars-template">
-<%= render partial: "list_items/item_form", locals: { list: @list, list_item: ListItem.new } %>
-</script>
 <script type="text/javascript">
 Mamajamas.Context.List = new Mamajamas.Models.List({
   title: '<%= @list.title %>',

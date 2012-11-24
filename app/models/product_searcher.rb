@@ -23,6 +23,10 @@ class ProductSearcher
     }
     product = Product.unscoped.where(vendor_id).first_or_initialize(vendor_id)
     product.update_attributes(attrs.merge(product_type_id: product_type.id))
+
+    # refresh updated_at regardless of whether it changed
+    product.touch
+
     product
   end
 

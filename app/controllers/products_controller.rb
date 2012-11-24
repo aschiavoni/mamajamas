@@ -6,6 +6,9 @@ class ProductsController < ApplicationController
 
   def index
     @products = @product_type.products
+    unless params[:filter].blank?
+      @products = @products.where("lower(name) LIKE ?", "%#{params[:filter].downcase}%")
+    end
   end
 
   private

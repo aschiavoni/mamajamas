@@ -2,12 +2,13 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   tagName: 'tr',
 
+  template: HandlebarsTemplates['list_items/edit'],
+
   className: "prod prod-filled edit-mode",
 
   initialize: function() {
-    _edit = this;
     _errMap = this.errorFieldMap();
-    this.model.on("change:rating", this.updateRating);
+    this.model.on("change:rating", this.updateRating, this);
   },
 
   events: {
@@ -16,13 +17,13 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   },
 
   render: function() {
-    var $template = Handlebars.compile($("#add-item-template").html());
-    this.$el.html($template(this.model.toJSON()));
+    this.$el.html(this.template(this.model.toJSON()));
 
     var ratingView = new Mamajamas.Views.ListItemRating({
       model: this.model
     });
     $("td.rating", this.$el).append(ratingView.render().$el);
+    this.initializeAutocomplete();
 
     return this;
   },
@@ -33,12 +34,40 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   },
 
   updateRating: function() {
-    $("#list_item_rating", this.$el).val(this.get("rating"));
+    $("#list_item_rating", this.$el).val(this.model.get("rating"));
+  },
+
+  initializeAutocomplete: function() {
+    var _view = this;
+    var url = "/api/categories/" + _view.model.get("category_id") + "/" + this.model.get("product_type_id");
+
+    $("#list_item_name", _view.$el).autocomplete({
+      source: function(request, response) {
+        $.getJSON(url, { filter: request.term }, function(data) {
+          response($.map(data, function(item) {
+            return {
+              label: item.name,
+              value: item
+            }
+          }))
+        });
+      },
+      focus: function(event, ui) {
+        return false;
+      },
+      select: function(event, ui) {
+        $(event.target).val(ui.item.value.name);
+        $("#list_item_link", _view.$el).val(ui.item.value.url);
+        return false;
+      }
+    });
   },
 
   add: function(event) {
+    var _view = this;
+
     event.preventDefault();
-    this.clearErrors();
+    _view.clearErrors();
 
     attributes = {
       type: "ListItem",
@@ -46,7 +75,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       link: $("#list_item_link").val(),
       notes: $("#list_item_notes").val(),
       product_type_id: $("#list_item_product_type_id").val(),
-      product_type: this.model.get("product_type"),
+      product_type: _view.model.get("product_type"),
       category_id: $("#list_item_category_id").val(),
       priority: $("#list_item_priority").val(),
       when_to_buy: $("#list_item_when_to_buy").val(),
@@ -57,10 +86,10 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     Mamajamas.Context.ListItems.create(attributes, {
       wait: true,
       success: function() {
-        _edit.$el.remove();
-        _edit.options.productType.moveToBottom();
+        _view.$el.remove();
+        _view.options.productType.moveToBottom();
       },
-      error: this.handleError
+      error: _view.handleError
     });
 
     return false;
@@ -73,10 +102,11 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   },
 
   handleError: function(item, response) {
+    var _view = this;
     if (response.status == 422) {
       var errors = $.parseJSON(response.responseText).errors;
       for (var err in errors) {
-        _edit.showError(errors, err);
+        _view.showError(errors, err);
       }
     }
   },
