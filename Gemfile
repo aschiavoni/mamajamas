@@ -54,6 +54,9 @@ gem 'jbuilder'
 # url slugs
 gem 'friendly_id'
 
+# html encoding/decoding
+gem 'htmlentities'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
