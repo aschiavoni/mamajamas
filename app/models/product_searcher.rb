@@ -20,7 +20,7 @@ class ProductSearcher
 
   def build_product(product_type, attrs)
     attrs.symbolize_keys!
-    attrs[:name] = truncate(attrs[:name], length: 250, omission: "", separator: " ")
+    attrs[:name] = sanitize_name(attrs[:name])
 
     vendor_id = {
       vendor: attrs[:vendor],
@@ -43,5 +43,12 @@ class ProductSearcher
     searchers.map do |finder|
       finder.search(query, options)
     end.flatten
+  end
+
+  private
+
+  def sanitize_name(name)
+    name = HTMLEntities.new.decode(name)
+    truncate(name, length: 250, omission: "", separator: " ")
   end
 end
