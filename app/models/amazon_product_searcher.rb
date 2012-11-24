@@ -1,4 +1,6 @@
 class AmazonProductSearcher
+  PAGES = 5
+
   def initialize(options = {})
     Amazon::Ecs.options = {
       associate_tag: options["associate_tag"],
@@ -8,21 +10,31 @@ class AmazonProductSearcher
   end
 
   def search(query, options = {})
-    res = Amazon::Ecs.item_search(query, {
-      :response_group => 'Large',
-      :search_index => 'Baby'
-    })
+    results = []
 
-    res.items.each_with_index.map do |item, idx|
-      # return Amazon::Element instance
-      item_attributes = item.get_element('ItemAttributes')
-      {
-        vendor_id: item.get('ASIN'),
-        vendor: "amazon",
-        name: item_attributes.get('Title'),
-        url: item.get('DetailPageURL'),
-        rating: nil
-      }
+    PAGES.times do |i|
+      # simple throttle so we don't abuse the api
+      sleep 1.1
+
+      res = Amazon::Ecs.item_search(query, {
+        :response_group => 'Large',
+        :search_index => 'Baby',
+        :item_page => i + 1
+      })
+
+      results << res.items.each_with_index.map do |item, idx|
+        # return Amazon::Element instance
+        item_attributes = item.get_element('ItemAttributes')
+        {
+          vendor_id: item.get('ASIN'),
+          vendor: "amazon",
+          name: item_attributes.get('Title'),
+          url: item.get('DetailPageURL'),
+          rating: nil
+        }
+      end
     end
+
+    results.flatten
   end
 end

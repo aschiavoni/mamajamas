@@ -1,4 +1,6 @@
 class ProductSearcher
+  include ActionView::Helpers::TextHelper
+
   attr_reader :providers, :searchers
 
   def initialize(options = {})
@@ -17,15 +19,23 @@ class ProductSearcher
   protected
 
   def build_product(product_type, attrs)
+    attrs.symbolize_keys!
+
     vendor_id = {
       vendor: attrs[:vendor],
       vendor_id: attrs[:vendor_id]
     }
     product = Product.unscoped.where(vendor_id).first_or_initialize(vendor_id)
-    product.update_attributes(attrs.merge(product_type_id: product_type.id))
 
-    # refresh updated_at regardless of whether it changed
-    product.touch
+    attrs[:name] = truncate(attrs[:name], length: 250, omission: "", separator: " ")
+    product.assign_attributes(attrs.merge(product_type_id: product_type.id))
+
+    if product.changed?
+      product.save!
+    else
+      # refresh updated_at regardless of whether it changed
+      product.touch
+    end
 
     product
   end
