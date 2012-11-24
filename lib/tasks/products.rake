@@ -4,7 +4,7 @@ namespace :mamajamas do
     task search: :environment do
       searcher = CachedProductSearcher.new
 
-      ProductType.all.each do |product_type|
+      ProductType.all.each_with_index do |product_type, i|
         puts "Searching for #{product_type.name}..."
         searcher.search(product_type)
       end
