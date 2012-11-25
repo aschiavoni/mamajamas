@@ -8,11 +8,13 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
 
   initialize: function() {
     this.model.on("change:rating", this.updateRating);
+    this.$el.attr("id", "list-item-" + this.model.get("id"));
   },
 
   events: {
     "change .prod-owned": "updateOwned",
-    "click .ss-write": "edit"
+    "click .ss-write": "edit",
+    "click .ss-delete": "delete"
   },
 
   render: function() {
@@ -34,6 +36,19 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     this.$el.hide();
     editView.setup();
 
+    return false;
+  },
+
+  delete: function() {
+    this.model.destroy({
+      wait: true,
+      success: function() {
+        Mamajamas.Context.ListItems.remove(this.model);
+      },
+      error: function(model, response, options) {
+        Mamajamas.Context.Notifications.error("We could not remove this list item at this time. Please try again later.");
+      }
+    })
     return false;
   },
 

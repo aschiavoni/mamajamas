@@ -87,7 +87,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       owned: $("input[name='list_item[owned]']:checked").val() == "1"
     };
 
-    if (_view.model.isNew() == null) {
+    if (_view.model.isNew()) {
       // creating a new list item
       Mamajamas.Context.ListItems.create(attributes, {
         wait: true,

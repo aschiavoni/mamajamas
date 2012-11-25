@@ -22,6 +22,11 @@ class ListItemsController < ApplicationController
     respond_with @list_item
   end
 
+  def destroy
+    @list_item = @list.list_items.find(params[:id]).destroy
+    respond_with @list_item
+  end
+
   private
 
   def find_list

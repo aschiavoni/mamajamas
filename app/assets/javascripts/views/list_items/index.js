@@ -6,6 +6,7 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     _index = this;
     this.collection.on("reset", this.render, this);
     this.collection.on("add", this.insertItem, this);
+    this.collection.on("remove", this.removeItem, this);
   },
 
   render: function() {
@@ -20,6 +21,13 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
 
   appendItem: function(item) {
     $("#list-items").append(_index.itemView(item).render().$el);
+  },
+
+  removeItem: function(item, items, options) {
+    var $listItem = $("#list-item-" + item.get("id"), "#list-items");
+    if ($listItem) {
+      $listItem.remove();
+    }
   },
 
   itemView: function(item) {
