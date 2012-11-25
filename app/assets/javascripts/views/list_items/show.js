@@ -15,6 +15,15 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     "click .ss-write": "edit"
   },
 
+  render: function() {
+    this.$el.html(this.template({ listItem: this.model.toJSON() }));
+    var ratingView = new Mamajamas.Views.ListItemRating({
+      model: this.model
+    });
+    $("td.rating", this.$el).append(ratingView.render().$el);
+    return this;
+  },
+
   edit: function() {
     var editView = new Mamajamas.Views.ListItemEdit({
       model: this.model,
@@ -37,14 +46,5 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     var $owned = $(event.target);
     this.model.set("owned", $owned.is(":checked"));
     this.model.save();
-  },
-
-  render: function() {
-    this.$el.html(this.template({ listItem: this.model.toJSON() }));
-    var ratingView = new Mamajamas.Views.ListItemRating({
-      model: this.model
-    });
-    $("td.rating", this.$el).append(ratingView.render().$el);
-    return this;
   }
 });
