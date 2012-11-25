@@ -11,7 +11,21 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
   },
 
   events: {
-    "change .prod-owned": "updateOwned"
+    "change .prod-owned": "updateOwned",
+    "click .ss-write": "edit"
+  },
+
+  edit: function() {
+    var editView = new Mamajamas.Views.ListItemEdit({
+      model: this.model,
+      parent: this
+    });
+
+    this.$el.after(editView.render().$el);
+    this.$el.hide();
+    editView.setup();
+
+    return false;
   },
 
   updateRating: function() {
@@ -34,4 +48,3 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     return this;
   }
 });
-

@@ -12,7 +12,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   },
 
   events: {
-    "submit #new_list_item": "add",
+    "submit #new_list_item": "save",
     "click .cancel-item.button": "cancel"
   },
 
@@ -67,10 +67,10 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     });
   },
 
-  add: function(event) {
-    var _view = this;
-
+  save: function(event) {
     event.preventDefault();
+
+    var _view = this;
     _view.clearErrors();
 
     attributes = {
@@ -87,20 +87,34 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       owned: $("input[name='list_item[owned]']:checked").val() == "1"
     };
 
-    Mamajamas.Context.ListItems.create(attributes, {
-      wait: true,
-      success: function() {
-        _view.$el.remove();
-        _view.options.productType.moveToBottom();
-      },
-      error: _view.handleError
-    });
+    if (_view.model.isNew() == null) {
+      // creating a new list item
+      Mamajamas.Context.ListItems.create(attributes, {
+        wait: true,
+        success: function() {
+          _view.$el.remove();
+          _view.options.parent.moveToBottom();
+        },
+        error: _view.handleError
+      });
+    } else {
+      _view.model.save(attributes, {
+        wait: true,
+        silent: true, // don't fire change events for this save
+        success: function() {
+          _view.$el.remove();
+          _view.options.parent.render();
+          _view.options.parent.$el.show();
+        },
+        error: _view.handleError
+      });
+    }
 
     return false;
   },
 
   cancel: function(event) {
-    this.options.productType.$el.show();
+    this.options.parent.$el.show();
     this.$el.remove();
     return true;
   },

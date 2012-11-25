@@ -24,7 +24,7 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
         priority: this.model.get("priority"),
         when_to_buy: this.model.get("buy_before")
       }),
-      productType: this
+      parent: this
     });
 
     this.$el.after(addItem.render().$el);

@@ -10,7 +10,7 @@
     <input id="list_item_category_id" name="list_item[category_id]" type="hidden" value="{{category_id}}">
     <input id="list_item_priority" name="list_item[priority]" type="hidden" value="{{priority}}">
     <input id="list_item_when_to_buy" name="list_item[when_to_buy]" type="hidden" value="{{when_to_buy}}">
-    <input id="list_item_rating" name="list_item[rating]" type="hidden" value="0">
+    <input id="list_item_rating" name="list_item[rating]" type="hidden" value="{{rating}}">
     <div class="prod-desc">
       <div class="prod-category">
         {{product_type}}
@@ -21,26 +21,26 @@
         <legend><span>Product Info</span></legend>
         <p>
           <label for="list_item_name">Product name / brand</label>
-          <input id="list_item_name" name="list_item[name]" size="30" type="text" autocomplete="off">
+          <input id="list_item_name" name="list_item[name]" size="30" type="text" autocomplete="off" value="{{name}}">
         </p>
         <fieldset>
           <legend><span>Need vs. Own</span></legend>
           <ul class="inline">
             <li>
-              <input checked="checked" id="list_item_owned_0" name="list_item[owned]" type="radio" value="0"> <label for="list_item_owned_0">Need</label>
+              <input {{#unless owned}}checked="checked"{{/unless}} id="list_item_owned_0" name="list_item[owned]" type="radio" value="0"> <label for="list_item_owned_0">Need</label>
             </li>
             <li>
-              <input id="list_item_owned_1" name="list_item[owned]" type="radio" value="1"> <label for="list_item_owned_1">Own</label>
+              <input {{#if owned}}checked="checked"{{/if}} id="list_item_owned_1" name="list_item[owned]" type="radio" value="1"> <label for="list_item_owned_1">Own</label>
             </li>
           </ul>
         </fieldset>
         <p>
           <label for="list_item_link">Link to buy</label>
-          <input id="list_item_link" name="list_item[link]" size="30" type="text">
+          <input id="list_item_link" name="list_item[link]" size="30" type="text" value="{{link}}">
         </p>
         <p>
           <label for="list_item_notes">Notes</label> 
-          <textarea cols="40" id="list_item_notes" name="list_item[notes]"></textarea>
+          <textarea cols="40" id="list_item_notes" name="list_item[notes]">{{notes}}</textarea>
         </p>
         <p class="label-norm">
           <input type="checkbox" id="chk-fb-share" checked> <label for="chk-fb-share" class="small">Share on Facebook</label>
