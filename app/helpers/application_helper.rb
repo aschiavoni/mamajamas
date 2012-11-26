@@ -42,6 +42,10 @@ module ApplicationHelper
   def page_id
     @page_id
   end
+  
+  def subheader
+    @subheader || "Your baby gear list"
+  end
 
   private
 
