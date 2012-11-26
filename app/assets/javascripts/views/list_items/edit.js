@@ -88,7 +88,6 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     };
 
     if (_view.model.isNew()) {
-      console.log("creating list item...");
       // creating a new list item
       Mamajamas.Context.ListItems.create(attributes, {
         wait: true,
@@ -99,7 +98,6 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
         error: _view.handleError
       });
     } else {
-      console.log("saving list item...");
       _view.model.save(attributes, {
         wait: true,
         silent: true, // don't fire change events for this save
