@@ -3,7 +3,6 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
   template: HandlebarsTemplates['list_items/index'],
 
   initialize: function() {
-    _index = this;
     this.collection.on("reset", this.render, this);
     this.collection.on("add", this.insertItem, this);
     this.collection.on("remove", this.removeItem, this);
@@ -11,18 +10,18 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template);
-    this.collection.each(this.appendItem);
+    this.collection.each(this.appendItem, this);
     return this;
   },
 
   insertItem: function(item) {
     console.log("inserting item...");
     console.log(item);
-    $("#list-items").prepend(_index.itemView(item).render().$el);
+    $("#list-items").prepend(this.itemView(item).render().$el);
   },
 
   appendItem: function(item) {
-    $("#list-items").append(_index.itemView(item).render().$el);
+    $("#list-items").append(this.itemView(item).render().$el);
   },
 
   removeItem: function(item, items, options) {
