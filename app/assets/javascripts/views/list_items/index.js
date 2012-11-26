@@ -16,6 +16,8 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
   },
 
   insertItem: function(item) {
+    console.log("inserting item...");
+    console.log(item);
     $("#list-items").prepend(_index.itemView(item).render().$el);
   },
 
