@@ -25,11 +25,13 @@ class AmazonProductSearcher
       results << res.items.each_with_index.map do |item, idx|
         # return Amazon::Element instance
         item_attributes = item.get_element('ItemAttributes')
+        small_image = item.get_element('SmallImage')
         {
           vendor_id: item.get('ASIN'),
           vendor: "amazon",
           name: item_attributes.get('Title'),
           url: item.get('DetailPageURL'),
+          image_url: small_image.blank? ? nil : small_image.get('URL'),
           rating: nil
         }
       end
