@@ -58,6 +58,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       select: function(event, ui) {
         $(event.target).val(ui.item.value.name);
         $("#list_item_link", _view.$el).val(ui.item.value.url);
+        $("#list_item_image_url", _view.$el).val(ui.item.value.image_url);
 
         // re-initialize the inFieldLabels plugin
         $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
@@ -84,6 +85,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       priority: $("#list_item_priority").val(),
       when_to_buy: $("#list_item_when_to_buy").val(),
       rating: $("#list_item_rating").val(),
+      image_url: $("#list_item_image_url").val(),
       owned: $("input[name='list_item[owned]']:checked").val() == "1"
     };
 
