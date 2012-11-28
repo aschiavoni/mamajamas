@@ -9,5 +9,12 @@ namespace :mamajamas do
         searcher.search(product_type)
       end
     end
+
+    desc "Clear product search cache"
+    task clear_cache: :environment do
+      REDIS.keys("product:searcher:*").each do |key|
+        REDIS.del(key)
+      end
+    end
   end
 end
