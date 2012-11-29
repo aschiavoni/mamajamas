@@ -57,6 +57,10 @@ gem 'friendly_id'
 # html encoding/decoding
 gem 'htmlentities'
 
+# file attachments
+gem 'paperclip'
+gem 'aws-sdk'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
