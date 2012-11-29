@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128181325) do
+ActiveRecord::Schema.define(:version => 20121129151932) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20121128181325) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "slug"
+    t.string   "image_name"
   end
 
   add_index "product_types", ["slug"], :name => "index_product_types_on_slug", :unique => true
