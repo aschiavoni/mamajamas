@@ -8,6 +8,10 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     this.collection.on("remove", this.removeItem, this);
   },
 
+  events: {
+    "click #babygear .priority": "sort"
+  },
+
   render: function() {
     this.$el.html(this.template);
     this.collection.each(this.appendItem, this);
@@ -27,6 +31,13 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     if ($listItem) {
       $listItem.remove();
     }
+  },
+
+  sort: function(event) {
+    var $target = $(event.target);
+    var sortBy = $target.data("sort");
+    this.collection.changeSort(sortBy);
+    this.collection.sort();
   },
 
   itemView: function(item) {
