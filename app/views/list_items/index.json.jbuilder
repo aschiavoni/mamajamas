@@ -22,5 +22,6 @@ json.array!(@list_entries) do |list_entry|
     json.name list_entry.name
     json.buy_before list_entry.buy_before
     json.priority list_entry.priority
+    json.image_name list_entry.image_name
   end
 end
