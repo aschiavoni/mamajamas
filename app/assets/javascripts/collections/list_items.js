@@ -35,23 +35,47 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
 
   sortStrategies: {
     name: function(listEntry, compareTo) {
-      return listEntry.get("name").localeCompare(compareTo.get("name"));
+      return this.sortByField(listEntry, compareTo, "name");
     },
     name_desc: function(listEntry, compareTo) {
-      return compareTo.get("name").localeCompare(listEntry.get("name"));
+      return this.reverseSortByField(listEntry, compareTo, "name");
     },
     when_to_buy: function(listEntry, compareTo) {
-      return listEntry.get("when_to_buy").localeCompare(compareTo.get("when_to_buy"));
+      return this.sortByField(listEntry, compareTo, "when_to_buy");
     },
     when_to_buy_desc: function(listEntry, compareTo) {
-      return compareTo.get("when_to_buy").localeCompare(listEntry.get("when_to_buy"));
+      return this.reverseSortByField(listEntry, compareTo, "when_to_buy");
     },
-    priority: function(listEntry) {
-      return listEntry.get("priority");
+    priority: function(listEntry, compareTo) {
+      return this.sortByField(listEntry, compareTo, "priority");
     },
-    priority_desc: function(listEntry) {
-      return listEntry.get("priority") * -1;
+    priority_desc: function(listEntry, compareTo) {
+      return this.reverseSortByField(listEntry, compareTo, "priority");
     }
+  },
+
+  sortByField: function(listEntry, compareTo, fieldName) {
+    var fieldVal = this.typeQualifiedModelField(listEntry, fieldName);
+    var compareToField = this.typeQualifiedModelField(compareTo, fieldName);
+    return fieldVal.localeCompare(compareToField);
+  },
+
+  reverseSortByField: function(listEntry, compareTo, fieldName) {
+    var fieldVal = this.typeQualifiedModelField(listEntry, fieldName);
+    var compareToField = this.typeQualifiedModelField(compareTo, fieldName);
+    return compareToField.localeCompare(fieldVal);
+  },
+
+  typeQualifiedModelField: function(listEntry, fieldName) {
+    var type = null;
+    var isListItem = listEntry.get("type") == "ListItem";
+    if (this.isAscending())
+      type = isListItem ? 0 : 1;
+    else
+      type = isListItem ? 1 : 0;
+
+    var val = listEntry.get(fieldName);
+    return type + "-" + val;
   },
 
   isAscending: function() {
