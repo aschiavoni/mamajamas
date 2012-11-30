@@ -34,8 +34,11 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
   },
 
   sortStrategies: {
-    name: function(listEntry) {
-      return listEntry.get("name");
+    name: function(listEntry, compareTo) {
+      return listEntry.get("name").localeCompare(compareTo.get("name"));
+    },
+    nameDesc: function(listEntry, compareTo) {
+      return compareTo.get("name").localeCompare(listEntry.get("name"));
     },
     priority: function(listEntry) {
       return listEntry.get("priority");

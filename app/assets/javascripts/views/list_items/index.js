@@ -9,7 +9,8 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
   },
 
   events: {
-    "click #babygear .priority": "sort"
+    "click #babygear th.item": "sort",
+    "click #babygear th.priority": "sort"
   },
 
   render: function() {
