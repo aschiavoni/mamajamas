@@ -22,7 +22,7 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
         product_type_id: this.model.get("id"),
         category_id: this.model.get("category_id"),
         priority: this.model.get("priority"),
-        when_to_buy: this.model.get("buy_before")
+        when_to_buy: this.model.get("when_to_buy")
       }),
       parent: this
     });

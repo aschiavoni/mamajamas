@@ -20,7 +20,7 @@ json.array!(@list_entries) do |list_entry|
     json.category_id list_entry.category.id
     json.category list_entry.category.name
     json.name list_entry.name
-    json.buy_before list_entry.buy_before
+    json.when_to_buy list_entry.when_to_buy
     json.priority list_entry.priority
     json.image_name list_entry.image_name
   end

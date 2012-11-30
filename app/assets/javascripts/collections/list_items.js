@@ -37,13 +37,19 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
     name: function(listEntry, compareTo) {
       return listEntry.get("name").localeCompare(compareTo.get("name"));
     },
-    nameDesc: function(listEntry, compareTo) {
+    name_desc: function(listEntry, compareTo) {
       return compareTo.get("name").localeCompare(listEntry.get("name"));
+    },
+    when_to_buy: function(listEntry, compareTo) {
+      return listEntry.get("when_to_buy").localeCompare(compareTo.get("when_to_buy"));
+    },
+    when_to_buy_desc: function(listEntry, compareTo) {
+      return compareTo.get("when_to_buy").localeCompare(listEntry.get("when_to_buy"));
     },
     priority: function(listEntry) {
       return listEntry.get("priority");
     },
-    priorityDesc: function(listEntry) {
+    priority_desc: function(listEntry) {
       return listEntry.get("priority") * -1;
     }
   },
@@ -62,7 +68,7 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
     }
     this.sortField = sortField;
 
-    var sortFunction = this.isAscending() ? sortField : (sortField + "Desc");
+    var sortFunction = this.isAscending() ? sortField : (sortField + "_desc");
     this.comparator = this.sortStrategies[sortFunction];
   }
 

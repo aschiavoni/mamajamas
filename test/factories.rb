@@ -13,7 +13,7 @@ FactoryGirl.define do
   factory :product_type do
     category
     sequence(:name) { |n| "Product Type #{n}" }
-    buy_before "Pre-birth"
+    when_to_buy "Pre-birth"
     priority 2
   end
 

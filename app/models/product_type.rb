@@ -2,7 +2,7 @@ class ProductType < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [ :slugged ]
 
-  attr_accessible :category_id, :name, :buy_before, :priority
+  attr_accessible :category_id, :name, :when_to_buy, :priority
 
   belongs_to :category
   has_many :products, dependent: :destroy
