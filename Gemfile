@@ -92,11 +92,10 @@ group :development do
 end
 
 group :test, :development do
-  gem 'minitest-rails'
-  gem 'factory_girl'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :test do
-  gem 'guard-minitest'
-  gem 'minitest-rails-capybara'
+  gem 'guard-rspec'
 end
