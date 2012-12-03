@@ -28,4 +28,12 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
   config.include Features::SessionHelpers, type: :feature
+
+  # can use this to instrument factory creation
+  # config.before(:suite) do
+  #   ActiveSupport::Notifications.subscribe("factory_girl.run_factory") do |name, start, finish, id, payload|
+  #     factory_name = payload[:name]
+  #     puts "Creating factory: #{factory_name}..."
+  #   end
+  # end
 end
