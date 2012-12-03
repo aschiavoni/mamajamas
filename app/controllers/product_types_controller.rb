@@ -6,6 +6,11 @@ class ProductTypesController < ApplicationController
 
   def index
     @product_types = @category.product_types
+
+    respond_to do |format|
+      format.html { not_found }
+      format.json
+    end
   end
 
   private

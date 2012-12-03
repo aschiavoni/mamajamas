@@ -9,6 +9,11 @@ class ProductsController < ApplicationController
     unless params[:filter].blank?
       @products = @products.where("lower(name) LIKE ?", "%#{params[:filter].downcase}%")
     end
+
+    respond_to do |format|
+      format.html { not_found }
+      format.json
+    end
   end
 
   private
