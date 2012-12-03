@@ -22,6 +22,20 @@ FactoryGirl.define do
     user
   end
 
+  factory :list_item do
+    list
+    product_type
+    category
+    sequence(:name) { |n| "List Item #{n}" }
+    owned false
+    link "http://somedomain.com/somelistitem"
+    rating 5
+    when_to_buy "Pre-birth"
+    priority 2
+    notes nil
+    image_url "http://somedomain.com/somelistitem"
+  end
+
   factory :product do
     vendor "fakeamazon"
     sequence(:vendor_id) { |n| "fakeamazon#{n}" }
