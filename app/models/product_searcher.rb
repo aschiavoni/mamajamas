@@ -26,7 +26,7 @@ class ProductSearcher
       vendor: attrs[:vendor],
       vendor_id: attrs[:vendor_id]
     }
-    product = Product.unscoped.where(vendor_id).first_or_initialize(vendor_id)
+    product = Product.where(vendor_id).first_or_initialize(vendor_id)
     product.assign_attributes(attrs.merge(product_type_id: product_type.id))
 
     if product.changed?

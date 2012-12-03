@@ -5,6 +5,6 @@ class Product < ActiveRecord::Base
   validates :name, :vendor, :url, :product_type_id, presence: true
   validates :vendor_id, presence: true, uniqueness: { scope: :vendor }
 
-  default_scope lambda { where("updated_at > ?", (Time.zone.now - 24.hours)) }
+  scope :active, lambda { where("updated_at > ?", (Time.zone.now - 24.hours)) }
   scope :expired, lambda { where("updated_at < ?", (Time.zone.now - 24.hours)) }
 end

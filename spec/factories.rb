@@ -21,4 +21,14 @@ FactoryGirl.define do
     sequence(:title) { |n| "List #{n}" }
     user
   end
+
+  factory :product do
+    vendor "fakeamazon"
+    sequence(:vendor_id) { |n| "fakeamazon#{n}" }
+    name "some product name"
+    product_type
+    url { |p| "http://#{p.vendor}.com/#{p.vendor_id}" }
+    rating nil
+    image_url { |p| "http://images.#{p.vendor}.com/#{p.vendor_id}" }
+  end
 end
