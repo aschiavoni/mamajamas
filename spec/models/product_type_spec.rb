@@ -73,7 +73,7 @@ describe ProductType do
       pt.when_to_buy.should == when_to_buy_suggestion.name
     end
 
-    it "should set when to buy suggesstion from name" do
+    it "should set when to buy suggestion from name" do
       pt = create(:product_type)
       pt.when_to_buy = when_to_buy_suggestion.name
       pt.when_to_buy_suggestion_id.should == when_to_buy_suggestion.id

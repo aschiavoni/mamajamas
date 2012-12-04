@@ -34,7 +34,7 @@ FactoryGirl.define do
     owned false
     link "http://somedomain.com/somelistitem"
     rating 5
-    when_to_buy "Pre-birth"
+    when_to_buy_suggestion
     priority 2
     notes nil
     image_url "http://somedomain.com/somelistitem"

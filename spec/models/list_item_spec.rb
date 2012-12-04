@@ -63,4 +63,29 @@ describe ListItem do
     end
 
   end
+
+  describe "when to buy" do
+
+    let(:when_to_buy_suggestion) { create(:when_to_buy_suggestion) }
+
+    it "should return when to buy suggestion name" do
+      li = create(:list_item, when_to_buy_suggestion: when_to_buy_suggestion)
+      li.when_to_buy.should == when_to_buy_suggestion.name
+    end
+
+    it "should set when to buy suggestion from name" do
+      li = create(:list_item)
+      li.when_to_buy = when_to_buy_suggestion.name
+      li.when_to_buy_suggestion_id.should == when_to_buy_suggestion.id
+    end
+
+    it "should not change when to buy suggestion with an unknown name" do
+      li = create(:list_item)
+      lambda do
+        li.when_to_buy = "unknown"
+      end.should_not change(li, :when_to_buy)
+    end
+
+  end
+
 end

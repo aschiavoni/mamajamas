@@ -1,4 +1,6 @@
 class ProductType < ActiveRecord::Base
+  include WhenToBuyAccessors
+
   extend FriendlyId
   friendly_id :name, use: [ :slugged ]
 
@@ -20,16 +22,5 @@ class ProductType < ActiveRecord::Base
   # temporary accessor for product types without image names
   def image_name
     read_attribute(:image_name) || "unknown.png"
-  end
-
-  def when_to_buy
-    when_to_buy_suggestion.name
-  end
-
-  def when_to_buy=(when_to_buy)
-    suggestion = WhenToBuySuggestion.find_by_name(when_to_buy)
-    unless suggestion.blank?
-      self.when_to_buy_suggestion = suggestion 
-    end
   end
 end
