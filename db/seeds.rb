@@ -80,14 +80,17 @@ product_types = {
 product_types.each do |category, product_types|
   category = Category.find_or_create_by_name!(category)
   product_types.each do |product_type_attrs|
+    when_to_buy_suggestion = WhenToBuySuggestion.find_by_name(product_type_attrs.delete(:when_to_buy))
     product_type = ProductType.find_by_name(product_type_attrs[:name])
     if product_type.blank?
       ProductType.create!(product_type_attrs.merge({
-        category_id: category.id
+        category_id: category.id,
+        when_to_buy_suggestion_id: when_to_buy_suggestion.id
       }), without_protection: true)
     else
       product_type.update_attributes!(product_type_attrs.merge({
-        category_id: category.id
+        category_id: category.id,
+        when_to_buy_suggestion_id: when_to_buy_suggestion.id
       }), without_protection: true)
     end
   end

@@ -64,4 +64,28 @@ describe ProductType do
 
   end
 
+  describe "when to buy" do
+
+    let(:when_to_buy_suggestion) { create(:when_to_buy_suggestion) }
+
+    it "should return when to buy suggestion name" do
+      pt = create(:product_type, when_to_buy_suggestion: when_to_buy_suggestion)
+      pt.when_to_buy.should == when_to_buy_suggestion.name
+    end
+
+    it "should set when to buy suggesstion from name" do
+      pt = create(:product_type)
+      pt.when_to_buy = when_to_buy_suggestion.name
+      pt.when_to_buy_suggestion_id.should == when_to_buy_suggestion.id
+    end
+
+    it "should not change when to buy suggestion with an unknown name" do
+      pt = create(:product_type)
+      lambda do
+        pt.when_to_buy = "unknown"
+      end.should_not change(pt, :when_to_buy)
+    end
+
+  end
+
 end
