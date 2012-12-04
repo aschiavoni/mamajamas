@@ -49,4 +49,9 @@ FactoryGirl.define do
     rating nil
     image_url { |p| "http://images.#{p.vendor}.com/#{p.vendor_id}" }
   end
+
+  factory :when_to_buy_suggestion do
+    sequence(:name) { |m| "#{n} mo" }
+    sequence(:position) { |n| n }
+  end
 end

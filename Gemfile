@@ -61,6 +61,9 @@ gem 'htmlentities'
 gem 'paperclip'
 gem 'aws-sdk'
 
+# lists
+gem 'acts_as_list'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

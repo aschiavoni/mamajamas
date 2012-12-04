@@ -7,6 +7,28 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #
 
+when_to_buy_suggestions = [
+  "Pre-birth",
+  "0-3 mo",
+  "4-6 mo",
+  "7-12 mo",
+  "13-18 mo",
+  "19-24 mo",
+  "2y",
+  "3y",
+  "4y",
+  "5y+"
+]
+
+when_to_buy_suggestions.each_with_index do |when_to_buy, position|
+  suggestion = WhenToBuySuggestion.find_by_name(when_to_buy)
+  if suggestion.blank?
+    WhenToBuySuggestion.create!(name: when_to_buy, position: position)
+  else
+    suggestion.update_attributes!(position: position)
+  end
+end
+
 product_types = {
   "Bathing" =>
   [
