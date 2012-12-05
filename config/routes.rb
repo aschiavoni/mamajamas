@@ -37,6 +37,7 @@ Mamajamas::Application.routes.draw do
       get "categories" => "categories#index"
       get "categories/:category_id" => "product_types#index"
       get "categories/:category_id/:product_type_id" => "products#index"
+      get "when_to_buy_suggestions" => "when_to_buy_suggestions#index"
     end
   end
 
