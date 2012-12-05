@@ -41,10 +41,10 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
       return this.reverseSortByField(listEntry, compareTo, "name");
     },
     when_to_buy: function(listEntry, compareTo) {
-      return this.sortByField(listEntry, compareTo, "when_to_buy");
+      return this.sortByField(listEntry, compareTo, "when_to_buy_position");
     },
     when_to_buy_desc: function(listEntry, compareTo) {
-      return this.reverseSortByField(listEntry, compareTo, "when_to_buy");
+      return this.reverseSortByField(listEntry, compareTo, "when_to_buy_position");
     },
     priority: function(listEntry, compareTo) {
       return this.sortByField(listEntry, compareTo, "priority");

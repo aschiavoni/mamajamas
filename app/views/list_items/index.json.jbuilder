@@ -11,6 +11,7 @@ json.array!(@list_entries) do |list_entry|
     json.link list_entry.link
     json.rating list_entry.rating
     json.when_to_buy list_entry.when_to_buy
+    json.when_to_buy_position list_entry.when_to_buy_suggestion.position
     json.priority list_entry.priority
     json.notes list_entry.notes
     json.image_url list_entry.image_url
@@ -21,6 +22,7 @@ json.array!(@list_entries) do |list_entry|
     json.category list_entry.category.name
     json.name list_entry.name
     json.when_to_buy list_entry.when_to_buy
+    json.when_to_buy_position list_entry.when_to_buy_suggestion.position
     json.priority list_entry.priority
     json.image_name list_entry.image_name
   end
