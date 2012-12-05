@@ -12,6 +12,6 @@ Handlebars.registerHelper('priorityIndicator', function(priority) {
       className = "priority-low";
   }
 
-  var div = "<div class=\"" + className + "\">" + priority + "</div>";
+  var div = "<div class=\"priority-display " + className + "\">" + priority + "</div>";
   return new Handlebars.SafeString(div);
 });

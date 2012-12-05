@@ -8,7 +8,8 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
 
   initialize: function() {
     this.model.on("change:rating", this.updateRating, this);
-    this.model.on("change:when_to_buy", this.updateWhenToBuy, this);
+    this.model.on("change:when_to_buy", this.saveAndRender, this);
+    this.model.on("change:priority", this.saveAndRender, this);
     this.$el.attr("id", "list-item-" + this.model.get("id"));
   },
 
@@ -16,8 +17,10 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     "change .prod-owned": "updateOwned",
     "click .ss-write": "edit",
     "click .ss-delete": "delete",
-    "click .prod-drop .prod-drop-arrow": "toggleWhenToBuyList",
-    "click .prod-drop ul li a": "selectWhenToBuy"
+    "click td.when .prod-drop .prod-drop-arrow": "toggleWhenToBuyList",
+    "click td.when .prod-drop ul li a": "selectWhenToBuy",
+    "click td.priority .priority-display": "togglePriorityList",
+    "click td.priority .prod-drop ul li a": "selectPriority"
   },
 
   render: function() {
@@ -59,7 +62,7 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     this.model.save();
   },
 
-  updateWhenToBuy: function() {
+  saveAndRender: function() {
     this.model.save();
     this.render();
   },
@@ -84,6 +87,19 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     return false;
   },
 
+  togglePriorityList: function(event) {
+    var $target = $(event.target);
+    var $prodDrop = $target.siblings(".prod-drop");
+
+    if ($prodDrop.hasClass("hidden")) {
+      $prodDrop.removeClass("hidden");
+    } else {
+      $prodDrop.addClass("hidden");
+    }
+
+    return false;
+  },
+
   selectWhenToBuy: function(event) {
     var $target = $(event.target);
     var $whenList = $target.parents("ul");
@@ -91,6 +107,32 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
 
     this.model.set("when_to_buy", whenToBuy);
     $whenList.addClass("visuallyhidden");
+
+    return false;
+  },
+
+  selectPriority: function(event) {
+    var $target = $(event.target);
+    var $prodDrop = $target.parents(".prod-drop");
+    var priorityClass = $target.parent("li").attr("class");
+
+    var newPriority = 3;
+    switch(priorityClass) {
+      case "priority-low":
+        newPriority = 3;
+        break;
+      case "priority-med":
+        newPriority = 2;
+        break;
+      case "priority-high":
+        newPriority = 1;
+        break;
+    }
+
+    this.model.set("priority", newPriority);
+    $prodDrop.addClass("hidden");
+
+    return false;
   }
 
 });
