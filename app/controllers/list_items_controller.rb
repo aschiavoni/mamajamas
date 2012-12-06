@@ -6,9 +6,7 @@ class ListItemsController < ApplicationController
   respond_to :json
 
   def index
-    @list_entries = @list.list_items.by_category(@category).order("name ASC") +
-      @list.product_types.by_category(@category).order("name ASC")
-
+    @list_entries = @list.list_entries(@category)
     respond_with @list_entries
   end
 

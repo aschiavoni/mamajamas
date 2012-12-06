@@ -15,7 +15,6 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template);
     this.collection.each(this.appendItem, this);
     return this;
   },
@@ -25,7 +24,8 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
   },
 
   appendItem: function(item) {
-    $("#list-items").append(this.itemView(item).render().$el);
+    var $itemView = this.itemView(item).render().$el;
+    $("#list-items").append($itemView);
   },
 
   removeItem: function(item, items, options) {

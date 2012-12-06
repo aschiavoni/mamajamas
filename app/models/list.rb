@@ -10,4 +10,9 @@ class List < ActiveRecord::Base
     end
   end
   has_many :list_items, dependent: :destroy
+
+  def list_entries(category = nil)
+    list_items.by_category(category).order("name ASC") +
+      product_types.by_category(category).order("name ASC")
+  end
 end

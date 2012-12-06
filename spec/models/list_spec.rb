@@ -38,4 +38,89 @@ describe List do
     end
   end
 
+  describe "list entries" do
+
+    let(:current_user) { create(:user) }
+    let(:category) { create(:category) }
+
+    before(:each) do
+      @product_types = [
+        create(:product_type, category_id: category.id),
+        create(:product_type),
+        create(:product_type)
+      ]
+
+      # create the list
+      # and add some list items
+      @list = current_user.list
+
+      @list_items = [
+        create(:list_item, list_id: @list.id, category_id: category.id),
+        create(:list_item, list_id: @list.id),
+        create(:list_item, list_id: @list.id)
+      ]
+    end
+
+    it "should include all list entries" do
+      @list.list_entries.size.should == @product_types.size + @list_items.size
+    end
+
+    it "should include all product types" do
+      @product_types.each do |product_type|
+        @list.list_entries.should include(product_type)
+      end
+    end
+
+    it "should include all list items" do
+      @list_items.each do |list_item|
+        @list.list_entries.should include(list_item)
+      end
+    end
+
+    describe "filtered by category" do
+
+      before(:each) do
+        @filtered_product_types = @product_types.select do |product_type|
+          product_type.category_id == category.id
+        end
+
+        @filtered_list_items = @list_items.select do |list_item|
+          list_item.category_id == category.id
+        end
+      end
+
+      it "should include only entries in category" do
+        @list.list_entries(category).size.should == @filtered_product_types.size + @filtered_list_items.size
+      end
+
+      it "should include only product types in category" do
+        @filtered_product_types.each do |product_type|
+          @list.list_entries(category).should include(product_type)
+        end
+      end
+
+      it "should include only list items in category" do
+        @filtered_list_items.each do |list_item|
+          @list.list_entries(category).should include(list_item)
+        end
+      end
+
+      it "should not include product types in other categories" do
+        excluded = @product_types - @filtered_product_types
+        excluded.each do |product_type|
+          @list.list_entries(category).should_not include(product_type)
+        end
+      end
+
+      it "should not include list items in other categories" do
+        excluded = @list_items - @filtered_list_items
+        excluded.each do |list_item|
+          @list.list_entries(category).should_not include(list_item)
+        end
+      end
+
+    end
+
+  end
+
 end
