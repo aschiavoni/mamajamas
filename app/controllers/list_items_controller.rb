@@ -18,12 +18,12 @@ class ListItemsController < ApplicationController
   end
 
   def update
-    @list_item = ListItem.update(params[:id], params[:list_item])
+    @list_item = ListItem.update(id_param, params[:list_item])
     respond_with @list_item
   end
 
   def destroy
-    @list_item = @list.list_items.find(params[:id]).destroy
+    @list_item = @list.list_items.find(id_param).destroy
     respond_with @list_item
   end
 
@@ -35,5 +35,10 @@ class ListItemsController < ApplicationController
 
   def find_category
     @category = params[:category].blank? ? nil : Category.find(params[:category])
+  end
+
+  def id_param
+    # id may be prefixed with list-item-
+    params[:id].gsub(/list-item-/, "")
   end
 end
