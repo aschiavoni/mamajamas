@@ -1,6 +1,4 @@
 class AmazonProductSearcher
-  PAGES = 5
-
   def initialize(options = {})
     Amazon::Ecs.options = {
       associate_tag: options["associate_tag"],
@@ -9,10 +7,10 @@ class AmazonProductSearcher
     }
   end
 
-  def search(query, options = {})
+  def search(query, options = { pages: 5 })
     results = []
 
-    PAGES.times do |i|
+    options[:pages].times do |i|
       # simple throttle so we don't abuse the api
       sleep 1.1
 

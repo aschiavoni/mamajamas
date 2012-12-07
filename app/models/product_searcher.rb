@@ -10,7 +10,7 @@ class ProductSearcher
     end
   end
 
-  def search(product_type, options = {})
+  def search(product_type, options = { pages: 5 })
     query(product_type.name, options).map do |attrs|
       build_product(product_type, attrs)
     end
