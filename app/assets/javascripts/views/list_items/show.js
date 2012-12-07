@@ -20,7 +20,8 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     "click td.when .prod-drop .prod-drop-arrow": "toggleWhenToBuyList",
     "click td.when .prod-drop ul li a": "selectWhenToBuy",
     "click td.priority .priority-display": "togglePriorityList",
-    "click td.priority .prod-drop ul li a": "selectPriority"
+    "click td.priority .prod-drop ul li a": "selectPriority",
+    "click .prod-note": "toggleNote"
   },
 
   render: function() {
@@ -71,6 +72,15 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     var $owned = $(event.target);
     this.model.set("owned", $owned.is(":checked"));
     this.model.save();
+  },
+
+  toggleNote: function(event) {
+    var $target = $(event.target);
+    if ($target.hasClass("closed")) {
+      $target.removeClass("closed").addClass("open");
+    } else {
+      $target.removeClass("open").addClass("closed");
+    }
   },
 
   toggleWhenToBuyList: function(event) {

@@ -12,11 +12,14 @@
     <h3>
       <a href="{{listItem.link}}">{{listItem.name}}</a>
     </h3>
+    {{#if listItem.notes}}
     <div class="prod-note closed">
       <div class="note-content">
         {{listItem.notes}}
       </div>
-    </div><!-- drop-down editing menu -->
+    </div>
+    {{/if}}
+    <!-- drop-down editing menu -->
     <div class="prod-edit-menu">
       <ul class="clearfix">
         <li>
