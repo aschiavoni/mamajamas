@@ -124,7 +124,7 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
   selectPriority: function(event) {
     var $target = $(event.target);
     var $prodDrop = $target.parents(".prod-drop");
-    var priorityClass = $target.parent("li").attr("class");
+    var priorityClass = $target.parents("li").attr("class");
 
     var newPriority = 3;
     switch(priorityClass) {
