@@ -16,6 +16,7 @@ Mamajamas.Views.ListShow = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template);
+    $("table#babygear", this.$el).append(this.indexView.render().$el);
     return this;
   },
 
