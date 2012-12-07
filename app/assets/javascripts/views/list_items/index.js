@@ -28,7 +28,7 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
   },
 
   removeItem: function(item, items, options) {
-    var $listItem = $("#list-item-" + item.get("id"), "#list-items");
+    var $listItem = $("#" + item.get("id"), "#list-items");
     if ($listItem) {
       $listItem.remove();
     }

@@ -47,15 +47,17 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
   },
 
   delete: function() {
-    this.model.destroy({
-      wait: true,
-      success: function() {
-        Mamajamas.Context.ListItems.remove(this.model);
-      },
-      error: function(model, response, options) {
-        Mamajamas.Context.Notifications.error("We could not remove this list item at this time. Please try again later.");
-      }
-    })
+    if (confirm("Are you sure you want to delete this item?")) {
+      this.model.destroy({
+        wait: true,
+        success: function() {
+          Mamajamas.Context.ListItems.remove(this.model);
+        },
+        error: function(model, response, options) {
+          Mamajamas.Context.Notifications.error("We could not remove this list item at this time. Please try again later.");
+        }
+      });
+    }
     return false;
   },
 
