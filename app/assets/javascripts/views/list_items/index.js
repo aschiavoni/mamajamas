@@ -8,12 +8,6 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     this.collection.on("remove", this.removeItem, this);
   },
 
-  events: {
-    "click #babygear th.item": "sort",
-    "click #babygear th.when": "sort",
-    "click #babygear th.priority": "sort"
-  },
-
   render: function() {
     this.collection.each(this.appendItem, this);
     return this;

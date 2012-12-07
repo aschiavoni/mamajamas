@@ -6,6 +6,10 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
 
   className: "prod",
 
+  initialize: function() {
+    this.$el.attr("id", this.model.get("id"));
+  },
+
   events: {
     "click .add-item.button": "addItem",
   },

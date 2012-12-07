@@ -10,7 +10,7 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:when_to_buy", this.saveAndRender, this);
     this.model.on("change:priority", this.saveAndRender, this);
-    this.$el.attr("id", "list-item-" + this.model.get("id"));
+    this.$el.attr("id", this.model.get("id"));
   },
 
   events: {

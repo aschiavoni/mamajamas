@@ -13,10 +13,6 @@ Mamajamas.Routers.ListItems = Backbone.Router.extend({
     var listView = new Mamajamas.Views.ListShow();
     $("#my-list").html(listView.render().$el);
 
-    var view = new Mamajamas.Views.ListItemsIndex({
-      collection: Mamajamas.Context.ListItems
-    });
-
     var listEntries = $("#my-list").data("list-entries");
     Mamajamas.Context.ListItems.reset(listEntries);
   }

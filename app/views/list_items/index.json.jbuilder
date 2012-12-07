@@ -1,7 +1,7 @@
 json.array!(@list_entries) do |list_entry|
   json.type list_entry.class.to_s
   if list_entry.is_a? ListItem
-    json.id list_entry.id
+    json.id "list-item-#{list_entry.id}"
     json.name list_entry.name
     json.category_id list_entry.category.id
     json.category list_entry.category.name
@@ -17,7 +17,7 @@ json.array!(@list_entries) do |list_entry|
     json.image_url list_entry.image_url
   else
     # ProductType
-    json.id list_entry.id
+    json.id "product-type-#{list_entry.id}"
     json.category_id list_entry.category.id
     json.category list_entry.category.name
     json.name list_entry.name
