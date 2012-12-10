@@ -7,7 +7,7 @@ class AmazonProductSearcher
     }
   end
 
-  def search(query, options = { pages: 5 })
+  def search(query, options = { pages: 1 })
     results = []
 
     options[:pages].times do |i|

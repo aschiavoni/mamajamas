@@ -6,7 +6,7 @@ namespace :mamajamas do
 
       ProductType.all.each_with_index do |product_type, i|
         puts "Searching for #{product_type.name}..."
-        searcher.search(product_type)
+        searcher.search(product_type, pages: 10)
       end
     end
 
