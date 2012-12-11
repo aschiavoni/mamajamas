@@ -124,4 +124,21 @@ describe ProductType do
 
   end
 
+  describe "has query" do
+
+    before(:each) do
+      @product_type = create(:product_type)
+      @included_query = create(:product_type_query, product_type: @product_type)
+      @excluded_query = create(:product_type_query)
+    end
+
+    it "has query" do
+      @product_type.has_query?(@included_query.query).should be_true
+    end
+
+    it "does not have query" do
+      @product_type.has_query?(@excluded_query.query).should be_false
+    end
+  end
+
 end

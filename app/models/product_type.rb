@@ -24,4 +24,8 @@ class ProductType < ActiveRecord::Base
   def image_name
     read_attribute(:image_name) || "unknown.png"
   end
+
+  def has_query?(query)
+    !queries.where(query: query).blank?
+  end
 end
