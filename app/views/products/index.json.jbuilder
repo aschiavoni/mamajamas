@@ -6,6 +6,6 @@ json.array! @products do |product|
   json.url product.url
   json.image_url product.image_url
   json.rating product.rating
-  json.product_type_id product.product_type_id
-  json.product_type product.product_type.name
+  json.product_type_id @product_type.id
+  json.product_type @product_type.name
 end
