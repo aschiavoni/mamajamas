@@ -14,11 +14,6 @@ describe Product do
       product.should_not be_valid
     end
 
-    it "must have a product type id" do
-      product = build(:product, product_type: nil)
-      product.should_not be_valid
-    end
-
     it "must have a vendor id" do
       product = build(:product, vendor_id: nil)
       product.should_not be_valid
@@ -70,6 +65,29 @@ describe Product do
         subject.class.expired.size.should == 2
       end
 
+    end
+
+  end
+
+  describe "product types" do
+
+    before(:each) do
+      @product_types = create_list(:product_type, 3)
+      @product = create(:product)
+
+      @product_types.each do |product_type|
+        @product.product_types << product_type
+      end
+    end
+
+    it "should return all product types" do
+      @product.product_types.size.should == @product_types.size
+    end
+
+    it "should include all product types" do
+      @product_types.each do |product_type|
+        @product.product_types.should include(product_type)
+      end
     end
 
   end

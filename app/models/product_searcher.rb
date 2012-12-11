@@ -27,13 +27,17 @@ class ProductSearcher
       vendor_id: attrs[:vendor_id]
     }
     product = Product.where(vendor_id).first_or_initialize(vendor_id)
-    product.assign_attributes(attrs.merge(product_type_id: product_type.id))
+    product.assign_attributes(attrs)
 
     if product.changed?
       product.save!
     else
       # refresh updated_at regardless of whether it changed
       product.touch
+    end
+
+    unless product.product_types.include?(product_type)
+      product.product_types << product_type
     end
 
     product

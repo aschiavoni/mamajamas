@@ -88,4 +88,26 @@ describe ProductType do
 
   end
 
+  describe "products" do
+
+    before(:each) do
+      @product_type = create(:product_type)
+      @products = create_list(:product, 3)
+
+      @products.each do |product|
+        @product_type.products << product
+      end
+    end
+
+    it "should return all products" do
+      @product_type.products.size.should == @products.size
+    end
+
+    it "should include all products" do
+      @products.each do |product|
+        @product_type.products.should include(product)
+      end
+    end
+  end
+
 end

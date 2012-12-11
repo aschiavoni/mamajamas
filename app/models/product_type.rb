@@ -8,7 +8,7 @@ class ProductType < ActiveRecord::Base
 
   belongs_to :category
   belongs_to :when_to_buy_suggestion
-  has_many :products, dependent: :destroy
+  has_and_belongs_to_many :products
 
   validates :name, presence: true, uniqueness: true
 

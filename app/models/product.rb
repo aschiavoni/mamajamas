@@ -1,8 +1,8 @@
 class Product < ActiveRecord::Base
-  belongs_to :product_type
-  attr_accessible :name, :rating, :url, :image_url, :vendor, :vendor_id, :product_type_id
+  has_and_belongs_to_many :product_types
+  attr_accessible :name, :rating, :url, :image_url, :vendor, :vendor_id
 
-  validates :name, :vendor, :url, :product_type_id, presence: true
+  validates :name, :vendor, :url, presence: true
   validates :vendor_id, presence: true, uniqueness: { scope: :vendor }
 
   scope :active, lambda { where("updated_at > ?", (Time.zone.now - 24.hours)) }
