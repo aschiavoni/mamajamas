@@ -108,6 +108,20 @@ describe ProductType do
         @product_type.products.should include(product)
       end
     end
+
+  end
+
+  describe "product type queries" do
+
+    before(:each) do
+      @product_type = create(:product_type)
+      @product_type_queries = create_list(:product_type_query, 3, product_type: @product_type)
+    end
+
+    it "should have many product type queries" do
+      @product_type.queries.size.should == @product_type_queries.size
+    end
+
   end
 
 end

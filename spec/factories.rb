@@ -21,6 +21,11 @@ FactoryGirl.define do
     priority 2
   end
 
+  factory :product_type_query do
+    product_type
+    sequence(:query) { |n| "query #{n}" }
+  end
+
   factory :list do
     sequence(:title) { |n| "List #{n}" }
     user
