@@ -11,9 +11,11 @@ class ProductSearcher
   end
 
   def search(product_type, options = { pages: 1 })
-    query(product_type.name, options).map do |attrs|
-      build_product(product_type, attrs)
-    end
+    product_type.queries.map do |query|
+      query(query.query, options).map do |attrs|
+        build_product(product_type, attrs)
+      end
+    end.flatten
   end
 
   protected
