@@ -1,5 +1,4 @@
 # mamajamas
-=========
 
 ## Welcome to Mama Jamas!
 
@@ -102,3 +101,20 @@ being sent so make sure you are working with appropriate test data.
 
 Remember, making any of the changes described above requires a restart
 of the rails server before they will take effect.
+
+### Testing Environment
+
+#### Stack
+
+* [Rspec](https://github.com/rspec/rspec-rails)
+* [Factory Girl](https://github.com/thoughtbot/factory_girl)
+* [Capybara](https://github.com/jnicklas/capybara)
+* [Poltergeist](https://github.com/jonleighton/poltergeist)
+
+#### External Dependencies
+
+##### PhantomJS
+
+###### Mac
+
+> brew install phantomjs

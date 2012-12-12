@@ -72,8 +72,6 @@ gem 'acts_as_list'
 
 # To use debugger
 # gem 'debugger'
-#
-#
 
 gem 'memoist'
 
@@ -102,7 +100,6 @@ end
 
 group :test do
   gem 'database_cleaner'
-  # gem 'capybara-webkit'
   gem 'poltergeist'
   gem 'guard-rspec'
   gem 'timecop'
