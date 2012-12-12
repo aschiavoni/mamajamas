@@ -9,10 +9,11 @@ describe RegistrationsController do
   describe "register user" do
 
     it "should create user" do
+      tempuser = build(:user)
       lambda {
         post :create, user: {
-          username: "testuser",
-          email: "testuser@domain.com",
+          username: tempuser.username,
+          email: tempuser.email,
           password: "p@ssw0rd!",
           password_confirmation: "p@ssw0rd!"
         }

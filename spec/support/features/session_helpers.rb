@@ -1,8 +1,15 @@
 module Features
   module SessionHelpers
     def sign_up_with(username, email, password)
-      visit new_user_registration_path
+      visit root_path
 
+      # signup dialog
+      click_link "signup-link"
+
+      # email signup
+      click_link "bt-account-email"
+
+      # fill out signup form
       fill_in "Username", with: username
       fill_in "Email", with: email
       fill_in "Password", with: password
