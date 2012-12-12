@@ -101,6 +101,7 @@ group :test, :development do
 end
 
 group :test do
+  gem 'database_cleaner'
   gem 'guard-rspec'
   gem 'timecop'
 end
