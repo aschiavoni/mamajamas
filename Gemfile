@@ -102,6 +102,8 @@ end
 
 group :test do
   gem 'database_cleaner'
+  # gem 'capybara-webkit'
+  gem 'poltergeist'
   gem 'guard-rspec'
   gem 'timecop'
 end
