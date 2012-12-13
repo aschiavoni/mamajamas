@@ -57,4 +57,26 @@ describe Relationship do
 
   end
 
+  describe "pending notifications" do
+
+    before(:each) do
+      @follower = create(:user)
+
+      @notified = @follower.relationships.create!(followed_id: create(:user).id)
+      @notified.delivered_notification_at = 3.days.ago
+      @notified.save!
+
+      @not_notified = @follower.relationships.create!(followed_id: create(:user).id)
+    end
+
+    it "should not return relationships that have already had a notification delivered" do
+      @follower.relationships.pending_notification.should_not include(@notified)
+    end
+
+    it "should not return relationships that have not already had a notification delivered" do
+      @follower.relationships.pending_notification.should include(@not_notified)
+    end
+
+  end
+
 end

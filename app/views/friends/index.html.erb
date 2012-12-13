@@ -1,35 +1,38 @@
 <div id="follow-moms">
-  <% unless @fb_friends.size == 0 -%>
-  <h3>
-    Your Friends
-  </h3>
-  <p class="instruction">
-    We recommend you follow these friends that have Mamajamas lists <em>(you can unfollow them below)</em>:
-  </p>
-  <ul class="follow-moms clearfix">
-    <% @fb_friends.each do |friend| -%>
-      <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+  <%= form_tag notify_friends_path do %>
+    <% unless @fb_friends.size == 0 -%>
+    <h3>
+      Your Friends
+    </h3>
+    <p class="instruction">
+      We recommend you follow these friends that have Mamajamas lists <em>(you can unfollow them below)</em>:
+    </p>
+    <ul class="follow-moms clearfix">
+      <% @fb_friends.each do |friend| -%>
+        <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+      <% end -%>
+      <% if @total_fb_friends > 5 -%>
+        <li>
+          <a href="#" class="more-friends">Show more friends<br><strong><%= @total_fb_friends - 5 %></strong></a>
+        </li>
+      <% end -%>
+    </ul>
     <% end -%>
-    <% if @total_fb_friends > 5 -%>
-      <li>
-        <a href="#" class="more-friends">Show more friends<br><strong><%= @total_fb_friends - 5 %></strong></a>
-      </li>
-    <% end -%>
-  </ul>
+    <h3>Follow Other Mamajamas Moms</h3>
+    <p class="instruction">
+      Based on your quiz answers, here are some other moms we think you should follow:
+    </p>
+    <ul class="follow-moms clearfix">
+      <% @recommended_friends.each do |friend| -%>
+        <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+      <% end -%>
+    </ul>
+    <p class="option right">
+      <%= check_box_tag "notify", 1, false, id: "chk-let-friends-know" %>
+      <label for="chk-let-friends-know">Let friends know you are following them. <a class="ss-icon info" href="#">info</a></label>
+    </p>
+    <div class="button-row">
+      <%= submit_tag "Save and Return to List", class: "button bt-color" %>
+    </div>
   <% end -%>
-  <h3>Follow Other Mamajamas Moms</h3>
-  <p class="instruction">
-    Based on your quiz answers, here are some other moms we think you should follow:
-  </p>
-  <ul class="follow-moms clearfix">
-    <% @recommended_friends.each do |friend| -%>
-      <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
-    <% end -%>
-  </ul>
-  <p class="option right">
-    <input type="checkbox" id="chk-let-friends-know"> <label for="chk-let-friends-know">Let friends know you are following them. <a class="ss-icon info" href="#">info</a></label>
-  </p>
-  <div class="button-row">
-    <%= link_to "Save and Return to List", list_path, class: "button bt-color" %>
-  </div>
 </div>
