@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "Visitor logs in", js: true do
+feature "Visitor logs in", js: true, driver: :selenium do
 
   before(:each) do
     @password = "test12345!"
