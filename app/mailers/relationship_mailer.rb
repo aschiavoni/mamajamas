@@ -8,7 +8,7 @@ class RelationshipMailer < ActionMailer::Base
     @follower_display_name = display_name(@follower)
 
     relationship.delivered_notification_at = Time.zone.now
-    relationship.save
+    relationship.save!
 
     mail(to: "#{@followed_display_name} <#{@followed.email}>",
          subject: "New follower")
