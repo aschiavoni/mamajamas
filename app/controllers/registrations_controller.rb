@@ -65,4 +65,9 @@ class RegistrationsController < Devise::RegistrationsController
     end
     render json: { success: self.resource.update_attributes(resource_params) }
   end
+
+  protected
+  def after_sign_up_path_for(resource)
+    friends_path
+  end
 end

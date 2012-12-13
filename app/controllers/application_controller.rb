@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_in_path_for(resource)
+    list_path
+  end
+
   # hide behind basic auth for now
   def require_basic_auth_maybe
     if Rails.env.production?

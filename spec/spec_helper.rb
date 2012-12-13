@@ -2,10 +2,14 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'capybara/poltergeist'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
+Capybara.javascript_driver = :selenium
+# Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
   # == Mock Framework
@@ -41,6 +45,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
+    load "#{Rails.root}/db/seeds.rb"
   end
 
   config.before(:each) do

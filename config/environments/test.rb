@@ -1,4 +1,5 @@
 ENV["REDISTOGO_URL"] = 'redis://localhost:6379'
+require 'rack/contrib/simple_endpoint'
 
 Mamajamas::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
@@ -39,4 +40,12 @@ Mamajamas::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # hack - don't serve TTF fonts in test env so that phantomjs
+  # won't crash
+  # https://github.com/jonleighton/poltergeist/issues/44
+  config.middleware.insert_after Rack::Runtime, Rack::SimpleEndpoint, /\.ttf$/ do |req, res, match|
+    res.status = '403'
+    "I will not serve TTF fonts in test mode."
+  end
 end

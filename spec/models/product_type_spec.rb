@@ -43,7 +43,7 @@ describe ProductType do
       end
 
       it "should include all product types" do
-        @results.size.should == @all_product_types.size
+        @results.size.should == ProductType.count
       end
 
     end

@@ -54,15 +54,19 @@ describe List do
       # and add some list items
       @list = current_user.list
 
+      list_item_params = {
+        list_id: @list.id,
+        product_type_id: @product_types.first.id
+      }
       @list_items = [
-        create(:list_item, list_id: @list.id, category_id: category.id),
-        create(:list_item, list_id: @list.id),
-        create(:list_item, list_id: @list.id)
+        create(:list_item, list_item_params.merge(category_id: category.id)),
+        create(:list_item, list_item_params),
+        create(:list_item, list_item_params)
       ]
     end
 
     it "should include all list entries" do
-      @list.list_entries.size.should == @product_types.size + @list_items.size
+      @list.list_entries.size.should == ProductType.count + @list_items.size
     end
 
     it "should include all product types" do

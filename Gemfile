@@ -103,4 +103,5 @@ group :test do
   gem 'poltergeist'
   gem 'guard-rspec'
   gem 'timecop'
+  gem 'rack-contrib'
 end

@@ -18,11 +18,28 @@ module Features
       click_button "Create Account"
     end
 
-    def sign_in
-      user = create(:user)
-      visit new_user_session_path
-      fill_in "Username or email", with: user.username
-      fill_in "Password", with: user.password
+    def sign_up_with_and_logout(username, email, password)
+      sign_up_with username, email, password
+      expect(page).to have_content("confirmation link")
+      click_link "logout"
+    end
+
+    def sign_in_with(username, email, password, with = :username)
+      # signup and logout
+      sign_up_with_and_logout username, email, password
+
+      # go to the home page
+      visit root_path
+      expect(page).to have_content("Mamajamas")
+
+      # login dialog
+      click_link "login-link"
+
+      # email login
+      login = with == :username ? username : email
+      fill_in "Username or email", with: login
+      fill_in "Password", with: password
+
       click_button "Log in"
     end
   end
