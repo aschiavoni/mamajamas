@@ -6,7 +6,8 @@ describe RelationshipMailer do
 
     let(:followed) { create(:user) }
     let(:follower) { create(:user) }
-    let(:mail) { RelationshipMailer.follower_notification(followed, follower) }
+    let(:relationship) { follower.follow!(followed) }
+    let(:mail) { RelationshipMailer.follower_notification(relationship) }
 
     it "renders the subject" do
       mail.subject.should == "New follower"
@@ -26,6 +27,12 @@ describe RelationshipMailer do
 
     it "includes follower username" do
       mail.body.encoded.should match(follower.username)
+    end
+
+    it "sets notification delivered at timestamp" do
+      expect { mail }.to change {
+        relationship.delivered_notification_at
+      }.from(NilClass).to(Time)
     end
 
     describe "follower has full name" do

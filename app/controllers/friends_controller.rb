@@ -11,8 +11,7 @@ class FriendsController < ApplicationController
   def notify
     if params[:notify] == "1"
       current_user.relationships.pending_notification.each do |relationship|
-        followed = relationship.followed
-        RelationshipMailer.follower_notification(followed, current_user).deliver
+        RelationshipMailer.follower_notification(relationship).deliver
       end
     end
     redirect_to list_path

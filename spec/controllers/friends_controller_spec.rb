@@ -35,7 +35,7 @@ describe FriendsController do
 
       it "should send notifications" do
         RelationshipMailer.should_receive(:follower_notification).
-          with(an_instance_of(User), @user).
+          with(an_instance_of(Relationship)).
           exactly(@following.size).times.
           and_return(double("mailer", deliver: true))
 
@@ -52,7 +52,7 @@ describe FriendsController do
         # it should only deliver notifications for the relationships
         # that do not have delivered_notification_at set
         RelationshipMailer.should_receive(:follower_notification).
-          with(an_instance_of(User), @user).
+          with(an_instance_of(Relationship)).
           exactly(@following.size).times.
           and_return(double("mailer", deliver: true))
 

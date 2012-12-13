@@ -1,11 +1,14 @@
 class RelationshipMailer < ActionMailer::Base
   default from: "no-reply@mamajamas.com"
 
-  def follower_notification(followed, follower)
-    @followed = followed
-    @follower = follower
+  def follower_notification(relationship)
+    @followed = relationship.followed
+    @follower = relationship.follower
     @followed_display_name = display_name(@followed)
     @follower_display_name = display_name(@follower)
+
+    relationship.delivered_notification_at = Time.zone.now
+    relationship.save
 
     mail(to: "#{@followed_display_name} <#{@followed.email}>",
          subject: "New follower")
