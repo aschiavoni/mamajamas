@@ -86,6 +86,7 @@ group :development do
   gem 'terminal-notifier-guard', :require => false # if RUBY_PLATFORM =~ /darwin/i
   gem 'therubyracer'
   gem 'mailcatcher'
+  gem 'quiet_assets'
 
   # use pry in development
   gem 'pry-rails'

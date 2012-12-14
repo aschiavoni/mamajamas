@@ -211,6 +211,8 @@ GEM
       pry (~> 0.9.9)
     pry-rails (0.2.2)
       pry (>= 0.9.10)
+    quiet_assets (1.0.1)
+      railties (~> 3.1)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -358,6 +360,7 @@ DEPENDENCIES
   poltergeist
   pry-debugger
   pry-rails
+  quiet_assets
   rack-contrib
   rails (= 3.2.8)
   rb-fsevent
