@@ -32,6 +32,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
   config.include Features::SessionHelpers, type: :feature
+  config.include Features::HeadlessHelpers, type: :feature
 
   # can use this to instrument factory creation
   # config.before(:suite) do

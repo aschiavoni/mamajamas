@@ -44,7 +44,7 @@ module ApplicationHelper
   end
   
   def subheader
-    @subheader || "Your baby gear list"
+    @subheader || "Welcome to Mamajamas!"
   end
 
   private

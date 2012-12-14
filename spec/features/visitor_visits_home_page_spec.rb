@@ -1,10 +1,28 @@
 require 'spec_helper'
 
-feature "Visitor visits home page" do
 
-  scenario "guest visits home page" do
+feature "guest visitor" do
+
+  scenario "visits home page" do
     visit root_path
     expect(page).to have_content("Mamajamas")
   end
 
 end
+
+feature "logged in visitor", js: true do
+
+  before(:each) do
+    @password = "test12345!"
+    @tempuser = build(:user, password: @password)
+  end
+
+  scenario "visits home page" do
+    sign_in_with @tempuser.username, @tempuser.email, @password, :username
+    visit root_path
+
+    expect(page).to have_content("Your baby gear list")
+  end
+
+end
+

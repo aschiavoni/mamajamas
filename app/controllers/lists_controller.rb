@@ -2,6 +2,7 @@ class ListsController < ApplicationController
   before_filter :authenticate_user!
 
   def show
+    @subheader = "Your baby gear list"
     @page_id = "buildlist"
     @list = current_user.list
     @categories = @list.categories.for_list

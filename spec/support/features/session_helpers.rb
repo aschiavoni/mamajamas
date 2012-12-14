@@ -22,6 +22,7 @@ module Features
       sign_up_with username, email, password
       expect(page).to have_content("confirmation link")
       click_link "logout"
+      expect(page).to have_content("Signed out")
     end
 
     def sign_in_with(username, email, password, with = :username)
@@ -41,6 +42,7 @@ module Features
       fill_in "Password", with: password
 
       click_button "Log in"
+      expect(page).to have_content("Signed in")
     end
   end
 end
