@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-feature "Visitor signs up" do
+feature "Visitor signs up", js: true do
 
-  scenario "with valid username, email and password", js: true do
+  scenario "with valid username, email and password" do
     @tempuser = build(:user)
     sign_up_with @tempuser.username, @tempuser.email, "really!good$password"
 
@@ -12,11 +12,25 @@ feature "Visitor signs up" do
     current_path.should == friends_path
   end
 
-end
+  scenario "with invalid username" do
+    @tempuser = build(:user)
+    sign_up_with nil, @tempuser.email, "really!good$password"
+    expect(page).to have_selector(".status-msg.error", text: "username")
+  end
 
-feature "Facebook visitor signs up" do
+  scenario "with invalid email" do
+    @tempuser = build(:user)
+    sign_up_with @tempuser.username, nil, "really!good$password"
+    expect(page).to have_selector(".status-msg.error", text: "email")
+  end
 
-  scenario "with valid facebook account", js: true do
+  scenario "with invalid password" do
+    @tempuser = build(:user)
+    sign_up_with @tempuser.username, @tempuser.email, nil
+    expect(page).to have_selector(".status-msg.error", text: "password")
+  end
+
+  scenario "with valid facebook account" do
     mock_omniauth
     visit root_path
     click_link "login-link"
