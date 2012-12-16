@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Users::OmniauthCallbacksController do
 
-  describe "facebook" do
+  describe "facebook", focus: true do
 
     before(:each) do
       mock_omniauth
@@ -36,6 +36,32 @@ describe Users::OmniauthCallbacksController do
       it "should render user json" do
         xhr :get, :facebook
         response.should render_template("facebook")
+      end
+
+    end
+
+    describe "user creation fails" do
+
+      before(:each) do
+        FacebookUserCreator.should_receive(:from_oauth).and_return(build(:user))
+      end
+
+      describe "html request" do
+
+        it "should redirect to new user registration url" do
+          get :facebook
+          response.should redirect_to(new_user_registration_url)
+        end
+
+      end
+
+      describe "ajax request" do
+
+        it "should render user json" do
+          xhr :get, :facebook
+          response.should render_template("facebook")
+        end
+
       end
 
     end
