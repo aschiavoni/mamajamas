@@ -13,3 +13,25 @@ feature "Visitor signs up" do
   end
 
 end
+
+feature "Facebook visitor signs up" do
+
+  scenario "with valid facebook account", js: true do
+    mock_omniauth
+    visit root_path
+    click_link "login-link"
+    page.has_selector?('#login-window', visible: true)
+
+    # simulate login
+    page.execute_script("Mamajamas.Context.LoginSession.saveSession();");
+
+    # set username
+    page.has_selector?("#post-signup", visible: true)
+    fill_in "Username", with: "username"
+    click_button "Continue"
+
+    # should be on the friends page
+    expect(page).to have_content("Follow Mom Friends")
+  end
+
+end

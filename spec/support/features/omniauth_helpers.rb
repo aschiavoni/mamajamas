@@ -1,4 +1,4 @@
-module Controllers
+module Features
   module OmniauthHelpers
     def mock_omniauth
       OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({

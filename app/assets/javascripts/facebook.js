@@ -18,12 +18,12 @@ window.fbAsyncInit = function() {
     xfbml: true
   });
 
-  var session = new Mamajamas.Models.LoginSession({
+  Mamajamas.Context.LoginSession = new Mamajamas.Models.LoginSession({
     scope: Mamajamas.Context.Facebook.scope
   });
 
-  var appAuth = new Mamajamas.Views.AppAuth({
-    model: session,
+  Mamajamas.Context.AppAuth = new Mamajamas.Views.AppAuth({
+    model: Mamajamas.Context.LoginSession,
     el: 'body'
   });
 };
