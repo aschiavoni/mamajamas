@@ -33,8 +33,8 @@ feature "Visitor signs up", js: true do
   scenario "with valid facebook account" do
     mock_omniauth
     visit root_path
-    click_link "login-link"
-    page.has_selector?('#login-window', visible: true)
+    click_link "signup-link"
+    page.has_selector?('#create-account', visible: true)
 
     # simulate login
     page.execute_script("Mamajamas.Context.LoginSession.saveSession();");

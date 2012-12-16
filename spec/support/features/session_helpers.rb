@@ -25,9 +25,9 @@ module Features
       expect(page).to have_content("Signed out")
     end
 
-    def sign_in_with(username, email, password, with = :username)
+    def sign_in_with(username, email, password, with = :username, skip_signup = false)
       # signup and logout
-      sign_up_with_and_logout username, email, password
+      sign_up_with_and_logout username, email, password unless skip_signup
 
       # go to the home page
       visit root_path
@@ -42,7 +42,6 @@ module Features
       fill_in "Password", with: password
 
       click_button "Log in"
-      expect(page).to have_content("Signed in")
     end
   end
 end

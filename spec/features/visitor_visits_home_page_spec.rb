@@ -19,10 +19,9 @@ feature "logged in visitor", js: true do
 
   scenario "visits home page" do
     sign_in_with @tempuser.username, @tempuser.email, @password, :username
-    visit root_path
 
+    expect(page).to have_content("Signed in")
     expect(page).to have_content("Your baby gear list")
   end
 
 end
-
