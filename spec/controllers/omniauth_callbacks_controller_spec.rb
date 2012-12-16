@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Users::OmniauthCallbacksController do
 
-  describe "facebook", focus: true do
+  describe "facebook" do
 
     before(:each) do
       mock_omniauth
