@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Users::OmniauthCallbacksController, super: true do
+describe Users::OmniauthCallbacksController do
 
   describe "facebook" do
 

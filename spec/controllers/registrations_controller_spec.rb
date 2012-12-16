@@ -23,7 +23,7 @@ describe RegistrationsController do
 
   end
 
-  describe "facebook", super: true do
+  describe "facebook" do
 
     before(:each) do
       sign_in create(:user)
