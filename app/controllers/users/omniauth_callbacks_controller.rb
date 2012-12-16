@@ -3,7 +3,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def facebook
     auth_info = request.env["omniauth.auth"]
-    logger.info auth_info.to_yaml
     @user = FacebookUserCreator.from_oauth(request.env["omniauth.auth"], current_user)
 
     if @user.persisted?

@@ -11,6 +11,9 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 # Capybara.javascript_driver = :selenium
 Capybara.javascript_driver = :poltergeist
 
+# turn on omniauth test mode
+OmniAuth.config.test_mode = true
+
 RSpec.configure do |config|
   # == Mock Framework
   #
@@ -31,6 +34,7 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
+  config.include Controllers::OmniauthHelpers, type: :controller
   config.include Features::SessionHelpers, type: :feature
   config.include Features::HeadlessHelpers, type: :feature
 
