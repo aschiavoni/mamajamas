@@ -3,8 +3,8 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
     _loginModal = this;
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
 
-    this.model.on('server:authenticating', this.showProgress)
-    this.model.on('server:authenticated', this.hide)
+    this.model.on('server:authenticating', this.showProgress, this);
+    this.model.on('server:authenticated', this.onAuthenticated, this);
   },
   events: {
     "click #bt-cancel": "hide",
@@ -26,6 +26,10 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   },
   hide: function() {
     _loginModal.$el.progressIndicator('hide').hide();
+  },
+  onAuthenticated: function() {
+    if (this.model.get("sign_in_count") <= 1)
+      this.hide();
   },
   submit: function() {
     var $form = $("#login-form", this.$el);

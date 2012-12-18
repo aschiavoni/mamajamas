@@ -31,7 +31,7 @@ feature "Visitor signs up", js: true do
   end
 
   scenario "with valid facebook account" do
-    mock_omniauth
+    mock_omniauth('54321')
     visit root_path
     click_link "signup-link"
     page.has_selector?('#create-account', visible: true)

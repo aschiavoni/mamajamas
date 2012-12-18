@@ -8,17 +8,28 @@ describe RegistrationsController do
 
   describe "register user" do
 
+    let(:user) { build(:user) }
+
+    let(:registration) do
+      {
+        username: user.username,
+        email: user.email,
+        password: "p@ssw0rd!",
+        password_confirmation: "p@ssw0rd!"
+      }
+    end
+
     it "should create user" do
-      tempuser = build(:user)
       lambda {
-        post :create, user: {
-          username: tempuser.username,
-          email: tempuser.email,
-          password: "p@ssw0rd!",
-          password_confirmation: "p@ssw0rd!"
-        }
+        post :create, user: registration
       }.should change(User, :count).by(1)
 
+    end
+
+    # this is testing devise functionality but I am dependent on it
+    it "should incremement sign in count" do
+      post :create, user: registration
+      assigns(:user).sign_in_count.should == 1
     end
 
   end

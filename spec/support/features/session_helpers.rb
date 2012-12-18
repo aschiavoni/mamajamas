@@ -31,10 +31,11 @@ module Features
 
       # go to the home page
       visit root_path
-      expect(page).to have_content("Mamajamas")
+      expect(page).to have_content("Welcome to Mamajamas")
 
       # login dialog
       click_link "login-link"
+      page.should have_selector("#login-window", visible: true)
 
       # email login
       login = with == :username ? username : email

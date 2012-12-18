@@ -105,7 +105,8 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
       _session.set({
         username: data.username,
         first_name: data.first_name,
-        last_name: data.last_name
+        last_name: data.last_name,
+        sign_in_count: data.sign_in_count
       });
       _session.trigger('server:authenticated');
       _session.updateLoginStatus();
