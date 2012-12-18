@@ -16,5 +16,15 @@ namespace :mamajamas do
         REDIS.del(key)
       end
     end
+
+    desc "Clear stale products"
+    task remove_stale: :environment do
+      stale_count = 0
+      Product.expired.each do |product|
+        product.destroy
+        stale_count += 1
+      end
+      puts "Removed #{stale_count} expired products."
+    end
   end
 end
