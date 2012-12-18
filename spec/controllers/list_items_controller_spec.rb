@@ -153,18 +153,26 @@ describe ListItemsController do
   describe "destroy" do
 
     before(:each) do
+      # this will be added to the list when it is created
+      @product_type = create(:product_type)
       @list_item = create(:list_item, list_id: current_user.list.id, owned: false, rating: 1)
     end
 
-    it "should assign list item" do
-      delete :destroy, id: @list_item.id
-      assigns(:list_item).should == @list_item
+    it "should assign list entry" do
+      delete :destroy, id: "list-item-#{@list_item.id}"
+      assigns(:list_entry).should == @list_item
     end
 
     it "should delete list item" do
       lambda do
-        delete :destroy, id: @list_item.id
+        delete :destroy, id: "list-item-#{@list_item.id}"
       end.should change(current_user.list.list_items, :count).by(-1)
+    end
+
+    it "should delete product type" do
+      lambda do
+        delete :destroy, id: "product-type-#{@product_type.id}"
+      end.should change(current_user.list.product_types, :count).by(-1)
     end
 
   end

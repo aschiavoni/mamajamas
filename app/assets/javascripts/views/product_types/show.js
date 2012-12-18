@@ -4,7 +4,7 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
 
   template: HandlebarsTemplates['product_types/show'],
 
-  className: "prod",
+  className: "prod prod-filled",
 
   initialize: function() {
     this.$el.attr("id", this.model.get("id"));
@@ -12,6 +12,7 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
 
   events: {
     "click .add-item.button": "addItem",
+    "click .ss-delete": "delete"
   },
 
   render: function(event) {
@@ -42,6 +43,21 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
   moveToBottom: function() {
     this.$el.appendTo("#list-items");
     this.$el.show();
+  },
+
+  delete: function() {
+    if (confirm("Are you sure you want to delete this item?")) {
+      this.model.destroy({
+        wait: true,
+        success: function() {
+          Mamajamas.Context.ListItems.remove(this.model);
+        },
+        error: function(model, response, options) {
+          Mamajamas.Context.Notifications.error("We could not remove this item at this time. Please try again later.");
+        }
+      });
+    }
+    return false;
   }
 
 });

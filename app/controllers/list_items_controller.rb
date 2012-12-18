@@ -23,8 +23,13 @@ class ListItemsController < ApplicationController
   end
 
   def destroy
-    @list_item = @list.list_items.find(id_param).destroy
-    respond_with @list_item
+    if params[:id] =~ /product-type/
+      @list_entry = @list.product_types.find(id_param).destroy
+    else
+      @list_entry = @list.list_items.find(id_param).destroy
+    end
+
+    respond_with @list_entry
   end
 
   private
@@ -38,7 +43,7 @@ class ListItemsController < ApplicationController
   end
 
   def id_param
-    # id may be prefixed with list-item-
-    params[:id].gsub(/list-item-/, "")
+    # id may be prefixed with list-item- or product-type-
+    params[:id].gsub(/(list-item-|product-type-)/, "")
   end
 end
