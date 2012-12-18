@@ -26,7 +26,8 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
         product_type_id: this.model.get("id").replace("product-type-", ""),
         category_id: this.model.get("category_id"),
         priority: this.model.get("priority"),
-        when_to_buy: this.model.get("when_to_buy")
+        when_to_buy: this.model.get("when_to_buy"),
+        image_url: "/assets/products/icons/" + this.model.get("image_name")
       }),
       parent: this
     });
@@ -42,4 +43,5 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
     this.$el.appendTo("#list-items");
     this.$el.show();
   }
+
 });
