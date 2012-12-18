@@ -16,6 +16,9 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     _session.updateLoginStatus();
   },
   updateLoginStatus: function() {
+    if(typeof FB == 'undefined')
+      return;
+
     // can respond to these events if needed later
     FB.getLoginStatus(function(response) {
       _session.trigger('facebook:loginstatus', response);
@@ -29,9 +32,13 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     });
   },
   logout: function() {
+    if(typeof FB == 'undefined')
+      return;
     return FB.logout();
   },
   login: function() {
+    if(typeof FB == 'undefined')
+      return;
     return FB.login(function(response) {
       if (response.authResponse) {
         _session.saveSession();
@@ -88,6 +95,8 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     return (((new Date() - lastUpdatedAt) / 1000) > ( 60 * 60 * 24 ))
   },
   updateFriends: function(fbresponse) {
+    if(typeof FB == 'undefined')
+      return;
     // fbresponse is the fb response from FB.login or Db.getLoginStatus
     var fields = "id,name,first_name,last_name,picture";
     var opts = { fields: fields, type: "square" };
