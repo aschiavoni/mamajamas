@@ -172,7 +172,7 @@ describe ListItemsController do
     it "should delete product type" do
       lambda do
         delete :destroy, id: "product-type-#{@product_type.id}"
-      end.should change(current_user.list.product_types, :count).by(-1)
+      end.should change(current_user.list.list_product_types, :count).by(-1)
     end
 
   end
