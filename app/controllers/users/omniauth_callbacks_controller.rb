@@ -7,7 +7,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
       sign_in @user, :event => :authentication #this will throw if @user is not activated
-      set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+      # set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
       session["devise.fb_access_token"] = auth_info.credentials.token
       session["devise.fb_access_token_expiration"] = auth_info.credentials.expires_at
 
