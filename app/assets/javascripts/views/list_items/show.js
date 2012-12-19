@@ -18,10 +18,18 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     "click .ss-write": "edit",
     "click .ss-delete": "delete",
     "click td.when .prod-drop .prod-drop-arrow": "toggleWhenToBuyList",
+    "click td.when .when-txt": "toggleWhenToBuyList",
     "click td.when .prod-drop ul li a": "selectWhenToBuy",
     "click td.priority .priority-display": "togglePriorityList",
     "click td.priority .prod-drop ul li a": "selectPriority",
-    "click .prod-note": "toggleNote"
+    "click .prod-note": "toggleNote",
+
+    // arrow appearance
+    "mouseenter td.when .when-txt": "showArrow",
+    "mouseleave td.when": "hideArrow",
+    "mouseleave td.when .prod-drop-arrow": "hideArrow",
+    "mouseenter td.priority .priority-display": "showArrow",
+    "mouseleave td.priority .priority-display": "hideArrow",
   },
 
   render: function() {
@@ -87,7 +95,7 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
 
   toggleWhenToBuyList: function(event) {
     var $target = $(event.target);
-    var $prodDrop = $target.parents(".prod-drop");
+    var $prodDrop = $target.parents("td").find(".prod-drop");
     var $whenList = $prodDrop.find("ul");
 
     if ($whenList.hasClass("visuallyhidden")) {
@@ -101,12 +109,13 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
 
   togglePriorityList: function(event) {
     var $target = $(event.target);
-    var $prodDrop = $target.siblings(".prod-drop");
+    var $prodDrop = $target.parents("td").find(".prod-drop");
+    var $priorityList = $prodDrop.find("ul");
 
-    if ($prodDrop.hasClass("hidden")) {
-      $prodDrop.removeClass("hidden");
+    if ($priorityList.hasClass("visuallyhidden")) {
+      $priorityList.removeClass("visuallyhidden");
     } else {
-      $prodDrop.addClass("hidden");
+      $priorityList.addClass("visuallyhidden");
     }
 
     return false;
@@ -145,6 +154,30 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     $prodDrop.addClass("hidden");
 
     return false;
+  },
+
+  showArrow: function(event) {
+    var $td = $(event.target);
+    if (!$td.is('td'))
+      $td = $(event.target).parents("td");
+
+    // check if the prod-drop is already open
+    // if it is do nothing
+    if ($td.find(".prod-drop ul").hasClass("visuallyhidden")) {
+      var $arrow = $td.find(".prod-drop .prod-drop-arrow");
+      $arrow.show();
+    }
+  },
+
+  hideArrow: function(event) {
+    var $td = $(event.target);
+    if (!$td.is('td'))
+      $td = $(event.target).parents("td");
+
+    if ($td.find(".prod-drop ul").hasClass("visuallyhidden")) {
+      var $arrow = $td.find(".prod-drop .prod-drop-arrow");
+      $arrow.hide();
+    }
   }
 
 });
