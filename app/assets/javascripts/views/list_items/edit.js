@@ -13,6 +13,8 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   events: {
     "submit #new_list_item": "save",
+    "change input[name='list_item[owned]']": "toggleOwnedCheckbox",
+    "change #owned-cb": "toggleOwnedRadioButtons",
     "click .cancel-item.button": "cancel"
   },
 
@@ -123,6 +125,17 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     this.options.parent.$el.show();
     this.$el.remove();
     return true;
+  },
+
+  toggleOwnedCheckbox: function(event) {
+    var owned = $("input[name='list_item[owned]']:checked", this.$el).val() == "1";
+    $("td.own input[type='checkbox']", this.$el).attr("checked", owned);
+  },
+
+  toggleOwnedRadioButtons: function(event) {
+    var owned = $(event.target).is(":checked");
+    var selector = owned ? "#list_item_owned_1" : "#list_item_owned_0"
+    $(selector).attr("checked", "checked");
   },
 
   handleError: function(item, response) {
