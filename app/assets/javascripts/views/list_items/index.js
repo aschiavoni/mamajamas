@@ -18,8 +18,13 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     return this;
   },
 
-  insertItem: function(item) {
-    $("#list-items").prepend(this.itemView(item).render().$el);
+  insertItem: function(item, collection, options) {
+    var insertAt = Mamajamas.Context.List.get("current_position");
+    if (insertAt == 0) {
+      $("#list-items").prepend(this.itemView(item).render().$el);
+    } else {
+      $("#list-items tr:nth-child(" + insertAt + ")").after(this.itemView(item).render().$el);
+    }
   },
 
   appendItem: function(item) {
