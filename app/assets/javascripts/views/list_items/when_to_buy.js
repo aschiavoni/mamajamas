@@ -43,6 +43,7 @@ Mamajamas.Views.ListItemWhenToBuy = Mamajamas.Views.ListItemDropdown.extend({
 
     this.model.set("when_to_buy", whenToBuy);
     $whenList.addClass("visuallyhidden");
+    this.render();
 
     return false;
   }

@@ -56,6 +56,7 @@ Mamajamas.Views.ListItemPriority = Mamajamas.Views.ListItemDropdown.extend({
 
     this.model.set("priority", newPriority);
     $prodDrop.addClass("hidden");
+    this.render();
 
     return false;
   }

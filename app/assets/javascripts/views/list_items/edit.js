@@ -9,6 +9,8 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   initialize: function() {
     _errMap = this.errorFieldMap();
     this.model.on("change:rating", this.updateRating, this);
+    this.model.on("change:when_to_buy", this.updateWhenToBuy, this);
+    this.model.on("change:priority", this.updatePriority, this);
   },
 
   events: {
@@ -21,10 +23,22 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
 
+    // subviews
     var ratingView = new Mamajamas.Views.ListItemRating({
       model: this.model
     });
     $("td.rating", this.$el).append(ratingView.render().$el);
+
+    var whenToBuyView = new Mamajamas.Views.ListItemWhenToBuy({
+      model: this.model
+    });
+    this.$el.append(whenToBuyView.render().$el);
+
+    var priorityView = new Mamajamas.Views.ListItemPriority({
+      model: this.model
+    });
+    this.$el.append(priorityView.render().$el);
+
     this.initializeAutocomplete();
 
     return this;
@@ -37,6 +51,14 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   updateRating: function() {
     $("#list_item_rating", this.$el).val(this.model.get("rating"));
+  },
+
+  updateWhenToBuy: function() {
+    $("#list_item_when_to_buy", this.$el).val(this.model.get("when_to_buy"));
+  },
+
+  updatePriority: function() {
+    $("#list_item_priority", this.$el).val(this.model.get("priority"));
   },
 
   initializeAutocomplete: function() {
@@ -110,6 +132,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
         success: function() {
           _view.$el.remove();
           _view.options.parent.render();
+          _view.options.parent.editing = false;
           _view.options.parent.$el.show();
         },
         error: function(model, response) {
@@ -123,6 +146,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   cancel: function(event) {
     this.options.parent.$el.show();
+    this.options.parent.editing = false;
     this.$el.remove();
     return true;
   },

@@ -7,6 +7,7 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
   className: "prod prod-filled",
 
   initialize: function() {
+    this.editing = false;
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:when_to_buy", this.saveAndRender, this);
     this.model.on("change:priority", this.saveAndRender, this);
@@ -43,6 +44,8 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
   },
 
   edit: function() {
+    this.editing = true;
+
     var editView = new Mamajamas.Views.ListItemEdit({
       model: this.model,
       parent: this
@@ -75,6 +78,8 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
   },
 
   saveAndRender: function() {
+    if (this.editing)
+      return;
     this.model.save();
     this.render();
   },
