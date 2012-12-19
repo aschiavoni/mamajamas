@@ -97,7 +97,9 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
           _view.$el.remove();
           _view.options.parent.moveToBottom();
         },
-        error: _view.handleError
+        error: function(model, response) {
+          _view.handleError(model, response);
+        }
       });
     } else {
       _view.model.save(attributes, {
@@ -108,7 +110,9 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
           _view.options.parent.render();
           _view.options.parent.$el.show();
         },
-        error: _view.handleError
+        error: function(model, response) {
+          _view.handleError(model, response);
+        }
       });
     }
 
