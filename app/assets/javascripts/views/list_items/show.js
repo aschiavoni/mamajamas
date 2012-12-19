@@ -17,19 +17,23 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     "change .prod-owned": "updateOwned",
     "click .ss-write": "edit",
     "click .ss-delete": "delete",
+    "click .prod-note": "toggleNote",
+
     "click td.when .prod-drop .prod-drop-arrow": "toggleWhenToBuyList",
     "click td.when .when-txt": "toggleWhenToBuyList",
     "click td.when .prod-drop ul li a": "selectWhenToBuy",
+
+    "click td.priority .prod-drop .prod-drop-arrow": "togglePriorityList",
     "click td.priority .priority-display": "togglePriorityList",
     "click td.priority .prod-drop ul li a": "selectPriority",
-    "click .prod-note": "toggleNote",
 
     // arrow appearance
     "mouseenter td.when .when-txt": "showArrow",
     "mouseleave td.when": "hideArrow",
     "mouseleave td.when .prod-drop-arrow": "hideArrow",
     "mouseenter td.priority .priority-display": "showArrow",
-    "mouseleave td.priority .priority-display": "hideArrow",
+    "mouseleave td.priority": "hideArrow",
+    "mouseleave td.priority .prod-drop-arrow": "hideArrow",
   },
 
   render: function() {

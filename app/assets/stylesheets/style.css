@@ -990,13 +990,10 @@ div.priority-med {
 div.priority-low {
 	background-position: 0 -76px;
 }
-.when-txt {
-  cursor:pointer;
-}
 .prod-drop-arrow {
 	color:#888;
 	text-shadow:0 1px 0 #fff;
-	display:none;
+	display:block;
 	float:left;
 	width:16px;
 	height:18px;

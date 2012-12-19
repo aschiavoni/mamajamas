@@ -1,3 +1,4 @@
+/* merge these into style.css when collaboration is fixed up */
 $autocomplete-height: 160px;
 
 .ui-autocomplete {
@@ -12,4 +13,11 @@ $autocomplete-height: 160px;
  */
 * html .ui-autocomplete {
   height: $autocomplete-height;
+}
+
+.when-txt {
+  cursor:pointer;
+}
+.prod-drop-arrow {
+  display:none;
 }
