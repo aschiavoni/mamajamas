@@ -32,20 +32,20 @@ end
 product_types = {
   "Bathing" =>
   [
-    { name: "Shampoo or Body Wash", when_to_buy: "0-3 mo", priority: 2, image_name: "shampoo.png", queries: [ "shampoo", "body wash" ] },
-    { name: "Bath Tub", when_to_buy: "Pre-birth", priority: 2, image_name: nil },
-    { name: "Wash Cloth", when_to_buy: "Pre-birth", priority: 2, image_name: "washcloth_1.png" },
-    { name: "Towel", when_to_buy: "Pre-birth", priority: 2, image_name: "towel_2.png" },
-    { name: "Bath Seat", when_to_buy: "7-12 mo", priority: 3, image_name: nil },
-    { name: "Bath Mat", when_to_buy: "4-6 mo", priority: 3, image_name: "bath_mat2.png" },
-    { name: "Bath Book", when_to_buy: "7-12 mo", priority: 2, image_name: nil },
-    { name: "Bath Stool or Kneeler", when_to_buy: "4-6 mo", priority: 3, image_name: nil, queries: [ "bath stool", "bath kneeler", "kneeler" ] },
-    { name: "Faucet Cover", when_to_buy: "7-12 mo", priority: 3, image_name: "faucet_cover.png" },
-    { name: "Rinse Cup or Visor", when_to_buy: "4-6 mo", priority: 2, image_name: "rinse_cup.png", queries: [ "rinse cup", "rinse visor" ]},
-    { name: "Bath Toy", when_to_buy: "4-6 mo", priority: 1, image_name: nil },
-    { name: "Bath Toy Storage", when_to_buy: "4-6 mo", priority: 2, image_name: nil },
-    { name: "Bath Thermometer", when_to_buy: "Pre-birth", priority: 3, image_name: nil },
-    { name: "Bath Rail or Handle", when_to_buy: "Pre-birth", priority: 3, image_name: nil, queries: [ "bath rail", "bath handle" ] }
+    { name: "Shampoo or Body Wash", when_to_buy: "0-3 mo", priority: 2, image_name: "shampoo.png", queries: [ "shampoo", "body wash", "baby wash" ] },
+    { name: "Bath Tub", when_to_buy: "Pre-birth", priority: 2, image_name: nil, queries: [ "tub", "bather", "bath pad", "bath center", "bathtub", "bath tub" ] },
+    { name: "Wash Cloth", when_to_buy: "Pre-birth", priority: 2, image_name: "washcloth_1.png", queries: [ "washcloth", "washcloths", "wash cloths", "wash cloth", ]},
+    { name: "Towel", when_to_buy: "Pre-birth", priority: 2, image_name: "towel_2.png", queries: [ "towel", "towels", "terry robe" ] },
+    { name: "Bath Seat", when_to_buy: "7-12 mo", priority: 3, image_name: nil, queries: [ "bath seat", "bath ring", "bathing seat", "seat" ] },
+    { name: "Bath Mat", when_to_buy: "4-6 mo", priority: 3, image_name: "bath_mat2.png", queries: [ "bath mat", "safety mat", "mat", "bath pad" ] },
+    { name: "Bath Book", when_to_buy: "7-12 mo", priority: 2, image_name: nil, queries: [ "bath book", "bath book", "bubble book" ] },
+    { name: "Bath Stool or Kneeler", when_to_buy: "4-6 mo", priority: 3, image_name: nil, queries: [ "bath stool", "kneeler", "bath seat", "bath pad" ] },
+    { name: "Faucet Cover", when_to_buy: "7-12 mo", priority: 3, image_name: "faucet_cover.png", queries: [ "faucet cover", "spout cover", "spout guard", "faucet guard", "faucet extender" ] },
+    { name: "Rinse Cup or Visor", when_to_buy: "4-6 mo", priority: 2, image_name: "rinse_cup.png", queries: [ "rinse cup", "shampoo rinser", "splashguard", "rinser", "bath visor" ]},
+    { name: "Bath Toy", when_to_buy: "4-6 mo", priority: 1, image_name: nil, queries: [ "bath toy", "bath toys", "squirters", "squirt toys", "bath letters", "bathtub toy", "bathtub toys" ] },
+    { name: "Bath Toy Storage", when_to_buy: "4-6 mo", priority: 2, image_name: nil, queries: [ "bath storage", "bath toy organizer", "bath toy bag", "toy hammock", "bath toy scoop", "bath toy holder" ] },
+    { name: "Bath Thermometer", when_to_buy: "Pre-birth", priority: 3, image_name: nil, queries: [ "bath thermometer" ] },
+    { name: "Bath Rail or Handle", when_to_buy: "Pre-birth", priority: 3, image_name: nil, queries: [ "bath rail", "bath handle", "bath safety", "safer grip" ] }
   ],
   "Birthing / Pregnancy" =>
   [
