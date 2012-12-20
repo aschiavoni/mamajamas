@@ -6,9 +6,12 @@
   <h2>Log in</h2>
   <!-- modal window content -->
   <div class="content">
+    <p></p>
+    <p class="center"><a class="button" id="bt-fb-connect"><span>Login with Facebook</span></a></p>
+    <p class="divider"><strong>or</strong></p>
     <p class="instruction<%= " error" unless resource.errors.empty? %>">
       <% if resource.errors.empty? -%>
-        Please enter your username or email address and your password.
+        Please enter your Mamajamas username or email address and password below:
       <% else -%>
         <%= resource.errors.full_messages.to_sentence %>
       <% end -%>
@@ -28,11 +31,6 @@
     <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
       <p class="helper"><%= link_to "Forgot your username or password?", new_password_path(resource_name) %></p>
     <% end -%>
-    <p>
-    <%= link_to user_omniauth_authorize_path(:facebook), id: "bt-fb-connect-s" do %>
-      <span>Connect with Facebook</span>
-    <% end -%>
-    </p>
   </div>
   <!-- end modal window content --> 
   <!-- window bottom buttons -->
