@@ -1,11 +1,11 @@
 module Features
   module OmniauthHelpers
-    def mock_omniauth(uid = '12345')
+    def mock_omniauth(uid = '12345', email = nil)
       OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
         "provider"  => "facebook",
         "uid"       => uid,
         "info" => {
-          "email" => "#{uid}@email.com",
+          "email" => (email.blank? ? "#{uid}@email.com" : email),
           "nickname" => "john",
           "first_name" => "John",
           "last_name"  => "Doe",

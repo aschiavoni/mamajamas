@@ -1,6 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
   prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy, :facebook, :facebook_update]
 
+  respond_to :json
+
   def create
     build_resource
 
@@ -20,8 +22,12 @@ class RegistrationsController < Devise::RegistrationsController
       end
     else
       clean_up_passwords resource
-      (render(:partial => "email_signup_form", :layout => false) && return) if request.xhr?
-      respond_with resource
+      # (render(:partial => "signup", :layout => false) && return) if request.xhr?
+      # respond_with resource
+      respond_to do |format|
+        format.html
+        format.json
+      end
     end
   end
 

@@ -1,17 +1,17 @@
 window.Mamajamas.Views.AppAuth = Backbone.View.extend({
   initialize: function() {
-    _session = this.model;
-    _postSignup = new Mamajamas.Views.PostSignup({
+    this._session = this.model;
+    this._postSignup = new Mamajamas.Views.PostSignup({
       model: this.model,
       el: '#post-signup-modal'
     });
 
-    _signupModal = new Mamajamas.Views.SignupModal({
+    this._signupModal = new Mamajamas.Views.SignupModal({
       model: this.model,
       el: '#signup-modal'
     });
 
-    _loginModal = new Mamajamas.Views.LoginModal({
+    this._loginModal = new Mamajamas.Views.LoginModal({
       model: this.model,
       el: '#login-modal'
     });
@@ -26,20 +26,20 @@ window.Mamajamas.Views.AppAuth = Backbone.View.extend({
     return this;
   },
   signup: function() {
-    _signupModal.show();
+    this._signupModal.show();
     return false;
   },
   login: function() {
-    _loginModal.show();
+    this._loginModal.show();
     return false;
   },
   facebookLogin: function(event) {
     event.preventDefault();
-    _session.login();
+    this._session.login();
     return false;
   },
   logout: function() {
-    _session.logout();
+    this._session.logout();
     return true; // server logout
   }
 });

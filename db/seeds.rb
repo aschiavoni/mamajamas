@@ -102,3 +102,13 @@ product_types.each do |category, product_types|
     end
   end
 end
+
+## test environment
+if Rails.env.test?
+  User.create!({
+    username: "test12345",
+    email: "test12345@test.com",
+    password: "test12345!",
+    password_confirmation: "test12345!",
+  })
+end

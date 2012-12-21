@@ -1,10 +1,24 @@
 window.Mamajamas.Views.SignupModal = Backbone.View.extend({
 
   initialize: function() {
-    _signupModal = this;
-    _pwStrength = $("#password-strength");
+    this.pwStrength = $("#password-strength");
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+    this.initializeCollapsible();
 
+    this.model.on('server:authenticating', this.showProgress, this)
+  },
+
+  events: {
+    "click #bt-cancel": "hide",
+    "click #bt-create-account": "submit",
+    "keyup #user_password": "validatePassword"
+  },
+
+  render: function(event) {
+    return this;
+  },
+
+  initializeCollapsible: function() {
     $(".collapsible", this.$el).collapsible({
       cssClose: "ss-directright",
       cssOpen: "ss-dropdown",
@@ -14,35 +28,23 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
       animateClose: this.openCollapsible,
       animateOpen: this.closeCollapsible
     });
-
-    this.model.on('server:authenticating', this.showProgress, this)
-  },
-
-  events: {
-    "click #bt-cancel": "hide",
-    "submit #new_user": "submit",
-    "keyup #user_password": "validatePassword"
-  },
-
-  render: function(event) {
-    return this;
   },
 
   showProgress: function() {
-    _signupModal.$el.progressIndicator('show');
+    this.$el.progressIndicator('show');
   },
 
   hideProgress: function() {
-    _signupModal.$el.progressIndicator('hide');
+    this.$el.progressIndicator('hide');
   },
 
   show: function() {
-    _signupModal.$el.show();
+    this.$el.show();
   },
 
   hide: function() {
-    _signupModal.$el.progressIndicator('hide').hide();
-    _pwStrength.html(null);
+    this.$el.progressIndicator('hide').hide();
+    this.pwStrength.html(null);
     return true; // reset button
   },
 
@@ -65,20 +67,33 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
   },
 
   submit: function() {
+    var _session = this.model;
+    var _view = this;
     var $form = $("#new_user", this.$el);
     $("button[type=submit]", this).attr("disabled", "disabled");
+    this.clearFormErrors();
 
     _session.trigger('server:authenticating');
     // post to the server
     // if the registration succeeds, it will return a window.location redirect.
     // if not, it returns the form markup and replaces the existing form.
-    $.post($form.attr("action"), $form.serialize(), function(data) {
-      _session.trigger('server:authenticated');
-      $form.replaceWith(data);
-      $form = $("#new_user", this.$el); // get a ref to the new element
-      $("label", $form).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+    $.post($form.attr("action") + ".json", $form.serialize(), function(data) {
+      _view.hideProgress();
+      if (data.errors) {
+        $("#password-strength", _view.$el).html(null);
+        for (var errorField in data.errors) {
+          var $field = $("#user_" + errorField, _view.$el);
+          var $errorTag = $("<strong>").addClass("status-msg").addClass("error");
+          $errorTag.html(data.errors[errorField][0]);
+          $field.after($errorTag);
+        }
+      }
     });
     return false;
+  },
+
+  clearFormErrors: function() {
+    $(".status-msg.error", this.$el).remove();
   },
 
   validatePassword: function() {
@@ -86,15 +101,15 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
     var $userPassword = $("#user_password", this.$el);
     $userPassword.siblings(".status-msg.error").remove();
     if ($userPassword.val().length > 0)
-      $("#password-strength").html(this.checkPasswordStrength($userPassword.val()));
+      $("#password-strength", this.$el).html(this.checkPasswordStrength($userPassword.val()));
     else
-      $("#password-strength").html(null);
+      $("#password-strength", this.$el).html(null);
   },
 
   // see http://gazpo.com/2012/04/password-strength/
   checkPasswordStrength: function(password) {
     var strength = 0;
-    var $result = $("#password-strength", _signupModal.$el);
+    var $result = $("#password-strength", this.$el);
 
     //if the password length is less than 6, return message.
     if (password.length < 6) {

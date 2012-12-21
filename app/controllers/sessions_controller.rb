@@ -10,7 +10,7 @@ class SessionsController < Devise::SessionsController
     end
 
     clean_up_passwords(resource)
-    (render(:partial => "email_login_form", :layout => false) && return) if request.xhr?
+    (render(:partial => "login", :layout => false) && return) if request.xhr?
     respond_with(resource, serialize_options(resource))
   end
 

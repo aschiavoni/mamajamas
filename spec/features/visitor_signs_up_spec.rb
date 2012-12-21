@@ -6,7 +6,7 @@ feature "Visitor signs up", js: true do
     @tempuser = build(:user)
     sign_up_with @tempuser.username, @tempuser.email, "really!good$password"
 
-    expect(page).to have_content("confirmation link")
+    expect(page).to have_selector("#logout")
     expect(page).to have_content("Hello, #{@tempuser.username}")
     expect(page).to have_content("Follow Mom Friends")
     current_path.should == friends_path
@@ -34,7 +34,7 @@ feature "Visitor signs up", js: true do
     mock_omniauth('54321')
     visit root_path
     click_link "signup-link"
-    page.has_selector?('#create-account', visible: true)
+    page.has_selector?('#create-account-email', visible: true)
 
     # simulate login
     page.execute_script("Mamajamas.Context.LoginSession.saveSession();");
