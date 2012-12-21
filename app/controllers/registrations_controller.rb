@@ -55,8 +55,9 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def facebook_friends_update
+    friends = params.delete(:friends)
     params[resource_name.to_sym] = {
-      facebook_friends: params.delete(:friends).values,
+      facebook_friends: friends ? friends.values : [],
       facebook_friends_updated_at: Time.now.utc
     }
 
