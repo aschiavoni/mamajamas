@@ -52,6 +52,7 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
     load "#{Rails.root}/db/seeds.rb"
+    Features::SessionHelpers.create_test_user
   end
 
   config.before(:each) do

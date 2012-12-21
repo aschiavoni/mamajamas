@@ -1,5 +1,23 @@
 module Features
   module SessionHelpers
+    TEST_USER_NAME = "test_user"
+    TEST_USER_PASSWORD = "test12345!"
+
+    def self.create_test_user
+      User.create!({
+        username: TEST_USER_NAME,
+        email: "#{TEST_USER_NAME}@test.com",
+        password: TEST_USER_PASSWORD,
+        password_confirmation: TEST_USER_PASSWORD
+      })
+    end
+
+    def test_user
+      user = User.find_by_username(TEST_USER_NAME)
+      user = create_test_user if user.blank?
+      user
+    end
+
     def sign_up_with(username, email, password)
       visit root_path
 
