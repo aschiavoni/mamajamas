@@ -35,10 +35,12 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
     var $form = $("#login-form", this.$el);
     $("button[type=submit]", $form).attr("disabled", "disabled");
 
+    _session.trigger('server:authenticating');
     // post to the server
     // if the login succeeds, it will return a window.location redirect.
     // if not, it returns the form markup and replaces the existing form.
     $.post($form.attr("action"), $form.serialize(), function(data) {
+      _session.trigger('server:authenticated');
       $form.replaceWith(data);
       $form = $("#login-form", this.$el); // get a ref to the new element
       $("label", $form).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });

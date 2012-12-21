@@ -1,6 +1,10 @@
 /* merge these into style.css when collaboration is fixed up */
 $autocomplete-height: 160px;
 
+.progress-container {
+  text-align: center;
+}
+
 .ui-autocomplete {
   max-height: $autocomplete-height;
   overflow-y: auto;

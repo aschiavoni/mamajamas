@@ -16,12 +16,14 @@
 (function($){
   var methods = {
     show: function() {
-      var $progress = $(".progress-container .progress", this);
+      var $progressContainer = $(".progress-container:not(.progress-disabled)");
+      var $progress = $(".progress", $progressContainer);
       $progress.show().siblings().hide();
       return this;
     },
     hide: function() {
-      var $progress = $(".progress-container .progress", this);
+      var $progressContainer = $(".progress-container:not(.progress-disabled)");
+      var $progress = $(".progress", $progressContainer);
       $progress.hide().siblings().show();
       return this;
     },
@@ -33,7 +35,7 @@
     } else if ( typeof method === 'object' || ! method ) {
       return methods.init.apply( this, arguments );
     } else {
-      $.error( 'Method ' +  method + ' does not exist on jQuery.tooltip' );
+      $.error( 'Method ' +  method + ' does not exist on jQuery.progressIndicator' );
     }
   };
 

@@ -1,43 +1,55 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "label-infield" }) do |f| %>
   <!-- modal window header -->
-  <h2>Create an account</h2>
+  <h2>Sign Up</h2>
   <!-- modal window content -->
   <div class="content">
-    <p class="instruction">Please choose a username, enter your email address and choose a password.</p>
-    <fieldset>
-      <p>
-      <%= f.label :username %>
-      <br />
-      <%= f.text_field :username %>
-      <%= field_error resource, :username %>
-      </p>
-      <p>
-      <%= f.label :email, "Email address" %>
-      <br />
-      <%= f.email_field :email %>
-      <%= field_error resource, :email %>
-      </p>
-    </fieldset>
-    <fieldset>
-      <p>
-      <%= f.label :password %>
-      <br />
-      <%= f.password_field :password %>
-      <strong id="password-strength" class="status-msg pw-weak"></strong>
-      <%= field_error resource, :password %>
-      </p>
-      <p>
-      <%= f.label :password_confirmation, "Confirm password" %>
-      <br />
-      <%= f.password_field :password_confirmation %>
-      <%= field_error resource, :password_confirmation %>
-      </p>
-    </fieldset>
+    <p></p>
+    <div class="progress-container fb-progress-container">
+      <p class="center"><a class="button" id="bt-fb-connect"><span>Login with Facebook</span></a></p>
+      <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
+    </div>
+    <p class="divider"><strong>or</strong></p>
+    <p class="collapsible center" id="collapsible1"><strong>Create an account using your email address.</strong></p>
+    <div class="collapsible-content">
+      <p class="instruction">Please choose a username, enter your email address and choose a password.</p>
+      <fieldset>
+        <p>
+        <%= f.label :username %>
+        <br />
+        <%= f.text_field :username %>
+        <%= field_error resource, :username %>
+        </p>
+        <p>
+        <%= f.label :email, "Email address" %>
+        <br />
+        <%= f.email_field :email %>
+        <%= field_error resource, :email %>
+        </p>
+      </fieldset>
+      <fieldset>
+        <p>
+        <%= f.label :password %>
+        <br />
+        <%= f.password_field :password %>
+        <strong id="password-strength" class="status-msg pw-weak"></strong>
+        <%= field_error resource, :password %>
+        </p>
+        <p>
+        <%= f.label :password_confirmation, "Confirm password" %>
+        <br />
+        <%= f.password_field :password_confirmation %>
+        <%= field_error resource, :password_confirmation %>
+        </p>
+      </fieldset>
+      <!-- button row -->
+      <div class="button-row">
+        <div class="progress-container">
+          <button type="reset" class="button" id="bt-cancel">Cancel</button>
+          <button type="submit" class="button" id="bt-create-account">Create Account</button>
+          <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
+        </div>
+      </div>
+    </div>
   </div>
   <!-- end modal window content --> 
-  <!-- window bottom buttons -->
-  <div class="button-row">
-    <button type="reset" class="button" id="bt-cancel">Cancel</button>
-    <button type="submit" class="button" id="bt-create-account">Create Account</button>
-  </div>
 <% end %>
