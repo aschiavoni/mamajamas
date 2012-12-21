@@ -21,7 +21,9 @@
   <div class="gridContainer clearfix">
     <div id="header">
       <div id="branding">
-        <h1>Mamajamas</h1>
+        <%= link_to (user_signed_in? ? list_path : root_path) do %>
+          <h1>Mamajamas</h1>
+        <% end -%>
       </div>
       <div id="search">
         <input type="text" placeholder="Search">
@@ -104,7 +106,7 @@
     <div class="vertical-offset"></div>
     <!-- modal window box -->
     <div class="modal-box" id="login-window">
-      <%= render :partial => "devise/sessions/email_login_form" %>
+      <%= render :partial => "devise/sessions/login" %>
     </div>
     <!-- end modal window box -->
   </div>
