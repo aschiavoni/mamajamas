@@ -5,11 +5,7 @@ class PasswordsController < Devise::PasswordsController
 
   def update
     self.resource = resource_class.reset_password_by_token(resource_params)
-    unless params[:user][:username].blank?
-      if self.resource.username != params[:user][:username]
-        self.resource.update_attributes!(username: params[:user][:username])
-      end
-    end
+    update_username(self.resource)
 
     if resource.errors.empty?
       flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
@@ -25,5 +21,15 @@ class PasswordsController < Devise::PasswordsController
 
   def after_sending_reset_password_instructions_path_for(resource_name)
     root_path
+  end
+
+  private
+
+  def update_username(resource)
+    unless params[:user][:username].blank?
+      if resource.username != params[:user][:username]
+        resource.update_attributes!(username: params[:user][:username])
+      end
+    end
   end
 end
