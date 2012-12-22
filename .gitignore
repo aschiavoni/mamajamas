@@ -19,3 +19,4 @@ tags
 .rbenv*
 Vagrantfile
 .vagrant
+doc/spec_info.txt
