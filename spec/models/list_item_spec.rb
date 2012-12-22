@@ -23,6 +23,7 @@ describe ListItem do
   describe "by category" do
 
     before(:all) do
+      ListItem.delete_all
       @b1 = create(:list_item, category_id: bathing_category.id)
       @b2 = create(:list_item, category_id: bathing_category.id)
       @c1 = create(:list_item, category_id: changing_category.id)
