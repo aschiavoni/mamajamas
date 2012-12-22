@@ -29,8 +29,9 @@ guard 'rspec', cli: "--drb --tag ~js" do
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
 
-group 'javascript specs' do
+group 'features' do
   guard 'rspec', all_after_pass: false, cli: "--drb --tag js" do
+    watch(%r{^spec/features/.+_spec\.rb$})
     # Capybara features specs
     watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/features/#{m[1]}_spec.rb" }
     watch(%r{^app/assets/javascripts/(.+)\.js$})        { |m| "spec/features" }
