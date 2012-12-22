@@ -105,4 +105,5 @@ group :test do
   gem 'guard-rspec'
   gem 'timecop'
   gem 'rack-contrib'
+  gem 'simplecov', require: false
 end
