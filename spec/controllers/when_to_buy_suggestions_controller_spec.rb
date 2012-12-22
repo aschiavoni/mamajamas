@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe WhenToBuySuggestionsController do
 
-  before(:each) do
+  before(:all) do
     3.times do
       create(:when_to_buy_suggestion)
     end

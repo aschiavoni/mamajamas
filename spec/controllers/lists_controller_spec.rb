@@ -4,14 +4,10 @@ describe ListsController do
 
   describe "show" do
 
-    before(:each) do
-      # create a few product types and categories
-      3.times do 
-        create(:product_type)
-      end
+    let(:user) { create(:user) }
 
-      # login
-      sign_in create(:user)
+    before(:each) do
+      sign_in user
     end
 
     it "should get list page" do

@@ -36,8 +36,10 @@ describe RegistrationsController do
 
   describe "facebook" do
 
+    let(:user) { create(:user) }
+
     before(:each) do
-      sign_in create(:user)
+      sign_in user
     end
 
     describe "path" do

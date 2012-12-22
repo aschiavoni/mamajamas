@@ -5,27 +5,28 @@ describe ListItemsController do
   let(:current_user) { create(:user) }
   let(:current_category) { create(:category) }
 
-  before(:each) do
-    sign_in current_user
-
+  before(:all) do
     2.times do
       create(:product_type)
     end
+  end
 
+  before(:each) do
+    sign_in current_user
   end
 
   describe "index" do
 
     describe "without category filter" do
 
-      before(:each) do
+      before(:all) do
         @list = current_user.list
         2.times do
           @list.list_items << create(:list_item, list_id: @list.id)
         end
-
-        get :index
       end
+
+      before(:each) { get :index }
 
       it "should assign list" do
         assigns(:list).should == @list
@@ -50,7 +51,7 @@ describe ListItemsController do
 
     describe "with category filter" do
 
-      before(:each) do
+      before(:all) do
         # create 2 new product types in current category
         2.times do
           create(:product_type, category_id: current_category.id)
@@ -60,7 +61,9 @@ describe ListItemsController do
         2.times do
           @list.list_items << create(:list_item, list_id: @list.id, category_id: current_category.id)
         end
+      end
 
+      before(:each) do
         get :index, category: current_category.id
       end
 
@@ -131,13 +134,16 @@ describe ListItemsController do
       }
     end
 
+    let(:list_item) do
+      create(:list_item, list_id: current_user.list.id, owned: false, rating: 1)
+    end
+
     before(:each) do
-      @list_item = create(:list_item, list_id: current_user.list.id, owned: false, rating: 1)
-      put :update, id: @list_item.id, list_item: update_params
+      put :update, id: list_item.id, list_item: update_params
     end
 
     it "should assign list item" do
-      assigns(:list_item).should == @list_item
+      assigns(:list_item).should == list_item
     end
 
     it "should update list item owned" do
@@ -152,7 +158,7 @@ describe ListItemsController do
 
   describe "destroy" do
 
-    before(:each) do
+    before(:all) do
       # this will be added to the list when it is created
       @product_type = create(:product_type)
       @list_item = create(:list_item, list_id: current_user.list.id, owned: false, rating: 1)

@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe FriendsController do
 
+  let(:user) { create(:user) }
+
   before(:each) do
-    @user = create(:user)
-    sign_in @user
+    sign_in user
   end
 
   describe "index" do
@@ -25,11 +26,11 @@ describe FriendsController do
 
     describe "notifications enabled" do
 
-      before(:each) do
+      before(:all) do
         # setup some relationships
         @following = create_list(:user, 2)
         @following.each do |following|
-          @user.follow!(following)
+          user.follow!(following)
         end
       end
 
@@ -43,9 +44,9 @@ describe FriendsController do
       end
 
       it "should not re-deliver notifications to followed users" do
-        # create new relationship but mark it as already having 
+        # create new relationship but mark it as already having
         # sent the notification
-        relationship = @user.follow!(create(:user))
+        relationship = user.follow!(create(:user))
         relationship.delivered_notification_at = 3.days.ago
         relationship.save!
 
