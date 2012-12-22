@@ -22,7 +22,7 @@ describe ListItem do
 
   describe "by category" do
 
-    before(:each) do
+    before(:all) do
       @b1 = create(:list_item, category_id: bathing_category.id)
       @b2 = create(:list_item, category_id: bathing_category.id)
       @c1 = create(:list_item, category_id: changing_category.id)
@@ -32,7 +32,7 @@ describe ListItem do
 
     describe "filtered by category" do
 
-      before(:each) do
+      before(:all) do
         @results = subject.class.by_category(bathing_category)
       end
 
@@ -52,7 +52,7 @@ describe ListItem do
 
     describe "filtered by nil category" do
 
-      before(:each) do
+      before(:all) do
         @results = subject.class.by_category(nil)
       end
 
@@ -66,21 +66,22 @@ describe ListItem do
 
   describe "when to buy" do
 
-    let(:when_to_buy_suggestion) { create(:when_to_buy_suggestion) }
+    let(:when_to_buy_suggestion) { build(:when_to_buy_suggestion) }
 
     it "should return when to buy suggestion name" do
-      li = create(:list_item, when_to_buy_suggestion: when_to_buy_suggestion)
+      li = build(:list_item, when_to_buy_suggestion: when_to_buy_suggestion)
       li.when_to_buy.should == when_to_buy_suggestion.name
     end
 
     it "should set when to buy suggestion from name" do
-      li = create(:list_item)
+      li = build(:list_item)
+      WhenToBuySuggestion.should_receive(:find_by_name).with(when_to_buy_suggestion.name).and_return(when_to_buy_suggestion)
       li.when_to_buy = when_to_buy_suggestion.name
-      li.when_to_buy_suggestion_id.should == when_to_buy_suggestion.id
+      li.when_to_buy.should == when_to_buy_suggestion.name
     end
 
     it "should not change when to buy suggestion with an unknown name" do
-      li = create(:list_item)
+      li = build(:list_item)
       lambda do
         li.when_to_buy = "unknown"
       end.should_not change(li, :when_to_buy)

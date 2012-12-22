@@ -8,7 +8,7 @@ describe ProductType do
 
   describe "by category" do
 
-    before(:each) do
+    before(:all) do
       @b1 = create(:product_type, category_id: bathing_category.id)
       @b2 = create(:product_type, category_id: bathing_category.id)
       @c1 = create(:product_type, category_id: changing_category.id)
@@ -18,7 +18,7 @@ describe ProductType do
 
     describe "filtered by category" do
 
-      before(:each) do
+      before(:all) do
         @results = subject.class.by_category(bathing_category)
       end
 
@@ -38,7 +38,7 @@ describe ProductType do
 
     describe "filtered by nil category" do
 
-      before(:each) do
+      before(:all) do
         @results = subject.class.by_category(nil)
       end
 
@@ -53,12 +53,12 @@ describe ProductType do
   describe "image name" do
 
     it "should return image name" do
-      pt = create(:product_type, image_name: "test.png")
+      pt = build(:product_type, image_name: "test.png")
       pt.image_name.should == "test.png"
     end
 
     it "should return unknown image name when image name is blank" do
-      pt = create(:product_type, image_name: nil)
+      pt = build(:product_type, image_name: nil)
       pt.image_name.should == "unknown.png"
     end
 
@@ -69,18 +69,19 @@ describe ProductType do
     let(:when_to_buy_suggestion) { create(:when_to_buy_suggestion) }
 
     it "should return when to buy suggestion name" do
-      pt = create(:product_type, when_to_buy_suggestion: when_to_buy_suggestion)
+      pt = build(:product_type, when_to_buy_suggestion: when_to_buy_suggestion)
       pt.when_to_buy.should == when_to_buy_suggestion.name
     end
 
     it "should set when to buy suggestion from name" do
-      pt = create(:product_type)
+      pt = build(:product_type)
+      WhenToBuySuggestion.should_receive(:find_by_name).with(when_to_buy_suggestion.name).and_return(when_to_buy_suggestion)
       pt.when_to_buy = when_to_buy_suggestion.name
-      pt.when_to_buy_suggestion_id.should == when_to_buy_suggestion.id
+      pt.when_to_buy.should == when_to_buy_suggestion.name
     end
 
     it "should not change when to buy suggestion with an unknown name" do
-      pt = create(:product_type)
+      pt = build(:product_type)
       lambda do
         pt.when_to_buy = "unknown"
       end.should_not change(pt, :when_to_buy)
@@ -90,7 +91,7 @@ describe ProductType do
 
   describe "products" do
 
-    before(:each) do
+    before(:all) do
       @product_type = create(:product_type)
       @products = create_list(:product, 3)
 
@@ -113,7 +114,7 @@ describe ProductType do
 
   describe "product type queries" do
 
-    before(:each) do
+    before(:all) do
       @product_type = create(:product_type)
       @product_type_queries = create_list(:product_type_query, 3, product_type: @product_type)
     end
@@ -126,7 +127,7 @@ describe ProductType do
 
   describe "has query" do
 
-    before(:each) do
+    before(:all) do
       @product_type = create(:product_type)
       @included_query = create(:product_type_query, product_type: @product_type)
       @excluded_query = create(:product_type_query)

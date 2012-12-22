@@ -13,7 +13,7 @@ describe List do
       ]
     end
 
-    before(:each) do
+    before(:all) do
       product_types.each do |product_type|
         list.list_product_types << ListProductType.new({
           product_type: product_type,
@@ -43,7 +43,7 @@ describe List do
     let(:current_user) { create(:user) }
     let(:category) { create(:category) }
 
-    before(:each) do
+    before(:all) do
       @product_types = [
         create(:product_type, category_id: category.id),
         create(:product_type),
@@ -83,7 +83,7 @@ describe List do
 
     describe "filtered by category" do
 
-      before(:each) do
+      before(:all) do
         @filtered_product_types = @product_types.select do |product_type|
           product_type.category_id == category.id
         end

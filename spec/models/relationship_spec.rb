@@ -36,12 +36,12 @@ describe Relationship do
 
     it "followed_id should be present" do
       relationship = Relationship.new
-      relationship.follower_id = create(:user).id
+      relationship.follower_id = 1
       relationship.should_not be_valid
     end
 
     it "follower_id should be present" do
-      relationship = Relationship.new(followed_id: create(:user).id)
+      relationship = Relationship.new(followed_id: 1)
       relationship.should_not be_valid
     end
 
@@ -51,7 +51,7 @@ describe Relationship do
 
     it "should prevent access to follower_id" do
       expect {
-        Relationship.new(follower_id: create(:user).id)
+        Relationship.new(follower_id: 1)
       }.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end
 
@@ -59,14 +59,14 @@ describe Relationship do
 
   describe "pending notifications" do
 
-    before(:each) do
+    before(:all) do
       @follower = create(:user)
 
-      @notified = @follower.relationships.create!(followed_id: create(:user).id)
+      @notified = @follower.relationships.create!(followed_id: 1)
       @notified.delivered_notification_at = 3.days.ago
       @notified.save!
 
-      @not_notified = @follower.relationships.create!(followed_id: create(:user).id)
+      @not_notified = @follower.relationships.create!(followed_id: 2)
     end
 
     it "should not return relationships that have already had a notification delivered" do

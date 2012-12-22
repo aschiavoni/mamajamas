@@ -30,8 +30,9 @@ describe Product do
 
   describe "expiration" do
 
+    before(:all) { 2.times { create(:product) } }
+
     before(:each) do
-      2.times { create(:product) }
       Timecop.travel(2.days.from_now)
     end
 
@@ -51,7 +52,7 @@ describe Product do
 
     describe "active products" do
 
-      before(:each) do
+      before(:all) do
         # at this point, we are in the future and are creating two
         # more "active products"
         2.times { create(:product) }
@@ -71,7 +72,7 @@ describe Product do
 
   describe "product types" do
 
-    before(:each) do
+    before(:all) do
       @product_types = create_list(:product_type, 3)
       @product = create(:product)
 
