@@ -77,9 +77,9 @@ product_types = {
   ]
 }
 
-product_types.each do |category, product_types|
+product_types.each do |category, product_type_hash|
   category = Category.find_or_create_by_name!(category)
-  product_types.each do |product_type_attrs|
+  product_type_hash.each do |product_type_attrs|
     when_to_buy_suggestion = WhenToBuySuggestion.find_by_name(product_type_attrs.delete(:when_to_buy))
     queries = product_type_attrs.delete(:queries) || [ product_type_attrs[:name].downcase ]
     product_type = ProductType.find_by_name(product_type_attrs[:name])

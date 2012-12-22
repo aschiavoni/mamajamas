@@ -37,7 +37,7 @@ feature "Visitor signs up", js: true do
     page.has_selector?('#create-account-email', visible: true)
 
     # simulate login
-    page.execute_script("Mamajamas.Context.LoginSession.saveSession();");
+    page.execute_script("Mamajamas.Context.LoginSession.saveSession();")
 
     # set username
     page.has_selector?("#post-signup", visible: true)

@@ -52,7 +52,7 @@ feature "Visitor logs in", js: true do
       page.has_css?("#login-window", visible: true)
 
       # simulate login
-      page.execute_script("Mamajamas.Context.LoginSession.saveSession();");
+      page.execute_script("Mamajamas.Context.LoginSession.saveSession();")
 
       # should be on the list page
       expect(page).to have_content("Your baby gear list")
