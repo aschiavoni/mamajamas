@@ -20,12 +20,6 @@ class FacebookGraph
     "http://graph.facebook.com/#{uid}/picture?type=square"
   end
 
-  def self.extract_facebook_username(oauth_params)
-    raw_info = oauth_params['extra']['raw_info']
-    return raw_info['username'] unless raw_info['username'].blank?
-    return "#{raw_info['first_name']}#{raw_info['last_name']}"
-  end
-
   private
 
   def facebook
