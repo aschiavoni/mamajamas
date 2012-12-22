@@ -20,6 +20,10 @@ class FacebookGraph
     "http://graph.facebook.com/#{uid}/picture?type=square"
   end
 
+  def post_to_wall(message, attachment = {})
+    @facebook.put_wall_post(message, attachment)
+  end
+
   private
 
   def facebook
