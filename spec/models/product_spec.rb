@@ -52,7 +52,7 @@ describe Product do
 
     describe "active products" do
 
-      before(:all) do
+      before(:each) do
         # at this point, we are in the future and are creating two
         # more "active products"
         2.times { create(:product) }
