@@ -21,3 +21,4 @@ Vagrantfile
 .vagrant
 doc/spec_info.txt
 .idea
+*.taskpaper
