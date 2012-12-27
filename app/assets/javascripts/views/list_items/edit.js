@@ -14,9 +14,9 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   },
 
   events: {
-    "submit #new_list_item": "save",
+    "submit .new-list-item": "save",
     "change input[name='list_item[owned]']": "toggleOwnedCheckbox",
-    "change #owned-cb": "toggleOwnedRadioButtons",
+    "change .owned-cb": "toggleOwnedRadioButtons",
     "click .cancel-item.button": "cancel"
   },
 
@@ -46,26 +46,26 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   setup: function() {
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-    $("#list_item_name", this.$el).focus();
+    this.scopedElement("list_item_name").focus();
   },
 
   updateRating: function() {
-    $("#list_item_rating", this.$el).val(this.model.get("rating"));
+    this.scopedElement("list_item_rating").val(this.model.get("rating"));
   },
 
   updateWhenToBuy: function() {
-    $("#list_item_when_to_buy", this.$el).val(this.model.get("when_to_buy"));
+    this.scopedElement("list_item_when_to_buy").val(this.model.get("when_to_buy"));
   },
 
   updatePriority: function() {
-    $("#list_item_priority", this.$el).val(this.model.get("priority"));
+    this.scopedElement("list_item_priority").val(this.model.get("priority"));
   },
 
   initializeAutocomplete: function() {
     var _view = this;
     var url = "/api/categories/" + _view.model.get("category_id") + "/" + this.model.get("product_type_id");
 
-    $("#list_item_name", _view.$el).autocomplete({
+    this.scopedElement("list_item_name").autocomplete({
       source: function(request, response) {
         $.getJSON(url, { filter: request.term }, function(data) {
           response($.map(data, function(item) {
@@ -81,8 +81,8 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       },
       select: function(event, ui) {
         $(event.target).val(ui.item.value.name);
-        $("#list_item_link", _view.$el).val(ui.item.value.url);
-        $("#list_item_image_url", _view.$el).val(ui.item.value.image_url);
+        _view.scopedElement("list_item_link").val(ui.item.value.url);
+        _view.scopedElement("list_item_image_url").val(ui.item.value.image_url);
 
         // re-initialize the inFieldLabels plugin
         $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
@@ -100,16 +100,16 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
     attributes = {
       type: "ListItem",
-      name: $("#list_item_name").val(),
-      link: $("#list_item_link").val(),
-      notes: $("#list_item_notes").val(),
-      product_type_id: $("#list_item_product_type_id").val(),
+      name: this.scopedElement("list_item_name").val(),
+      link: this.scopedElement("list_item_link").val(),
+      notes: this.scopedElement("list_item_notes").val(),
+      product_type_id: this.scopedElement("list_item_product_type_id").val(),
       product_type: _view.model.get("product_type"),
-      category_id: $("#list_item_category_id").val(),
-      priority: $("#list_item_priority").val(),
-      when_to_buy: $("#list_item_when_to_buy").val(),
-      rating: $("#list_item_rating").val(),
-      image_url: $("#list_item_image_url").val(),
+      category_id: this.scopedElement("list_item_category_id").val(),
+      priority: this.scopedElement("list_item_priority").val(),
+      when_to_buy: this.scopedElement("list_item_when_to_buy").val(),
+      rating: this.scopedElement("list_item_rating").val(),
+      image_url: this.scopedElement("list_item_image_url").val(),
       owned: $("input[name='list_item[owned]']:checked").val() == "1"
     };
 
@@ -158,7 +158,12 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   toggleOwnedRadioButtons: function(event) {
     var owned = $(event.target).is(":checked");
-    var selector = owned ? "#list_item_owned_1" : "#list_item_owned_0"
+    var selector;
+    if (owned)
+      selector = this.scopedSelector("list_item_owned_1");
+    else
+      selector = this.scopedSelector("list_item_owned_0");
+
     $(selector).attr("checked", "checked");
   },
 
@@ -187,8 +192,17 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   errorFieldMap: function() {
     return {
-      name: "#list_item_name",
-      link: "#list_item_link"
+      name: this.scopedSelector("list_item_name"),
+      link: this.scopedSelector("list_item_link")
     };
+  },
+
+  scopedSelector: function(id) {
+    return ("#" + id + "_" + this.model.get("product_type_id"));
+  },
+
+  scopedElement: function(id) {
+    return $(this.scopedSelector(id), this.$el);
   }
+
 });
