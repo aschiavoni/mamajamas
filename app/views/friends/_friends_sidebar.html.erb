@@ -1,0 +1,14 @@
+<h3>Follower’s Lists</h3>
+<p>
+<%= link_to "Find", friends_path %> more moms
+</p>
+<ul class="clearfix">
+  <% user.followed_users.each do |followed| -%>
+    <li>
+      <%= link_to "#" do %>
+        <%= profile_image(followed) %>
+        <%= display_first_name_or_username(followed) %> <%= display_last_name(followed) %>
+      <% end -%>
+    </li>
+  <% end -%>
+</ul>

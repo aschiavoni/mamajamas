@@ -1,13 +1,15 @@
 <%= content_for :title_links do %>
 <ul>
   <li>
-    <a href="#" class="button bt-light">
+    <a href="#" class="button">
       <span class="ss-plus"></span>
       New Item
     </a>
   </li>
   <li>
-    <a href="#" class="button bt-light">Share</a>
+  <a href="#" id="bt-share" class="button">
+    <span class="ss-action"></span>Share
+  </a>
   </li>
   <li id="print">
     <a href="#" class="ss-icon" title="Print"><span>Print</span></a>
@@ -28,8 +30,7 @@
 <%= content_for :tertiary do %>
 <div id="module-follow">
   <div class="content">
-    <h3>Follow Mom Friends</h3>
-    <p>Log in to find your friends and see what they’ve got. Not a member? Sign up</p>
+    <%= render partial: "friends/friends_sidebar", locals: { user: current_user } %>
   </div>
 </div>
 <div id="module-msg">

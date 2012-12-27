@@ -11,6 +11,16 @@ module FriendsHelper
     end
   end
 
+  def display_first_name_or_username(user)
+    content_tag :span, class: "firstname" do
+      user.first_name || user.username
+    end
+  end
+
+  def display_last_name(user)
+    user.last_name
+  end
+
   private
 
   def user_profile_image(user)
