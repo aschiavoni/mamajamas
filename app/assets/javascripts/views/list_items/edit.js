@@ -115,11 +115,13 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
     if (_view.model.isNew()) {
       // creating a new list item
-      Mamajamas.Context.ListItems.create(attributes, {
+      _view.model = Mamajamas.Context.ListItems.create(attributes, {
         wait: true,
         success: function() {
           _view.$el.remove();
           _view.options.parent.moveToBottom();
+          if (_view.shouldShareOnFacebook())
+            _view.shareOnFacebook();
         },
         error: function(model, response) {
           _view.handleError(model, response);
@@ -142,6 +144,21 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     }
 
     return false;
+  },
+
+  shouldShareOnFacebook: function() {
+    return $(".chk-fb-share", this.$el).is(":checked");
+  },
+
+  shareOnFacebook: function() {
+    FB.api('/me/feed', 'post', {
+      message: "I've added a new item to my Mamajamas list!",
+      link: this.model.get('link'),
+      picture: this.model.get('image_url'),
+      name: this.model.get('name')
+    },function(data) {
+      // do nothing
+    });
   },
 
   cancel: function(event) {
