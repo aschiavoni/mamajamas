@@ -23,6 +23,10 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
 
+    if (!Mamajamas.Context.User.is_facebook_connected || !this.model.isNew()) {
+      $(".facebook-sharing", this.$el).remove();
+    }
+
     // subviews
     var ratingView = new Mamajamas.Views.ListItemRating({
       model: this.model

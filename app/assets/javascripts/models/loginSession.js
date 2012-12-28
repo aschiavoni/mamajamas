@@ -26,13 +26,20 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     FB.getLoginStatus(function(response) {
       _session.trigger('facebook:loginstatus', response);
       if (response.status === 'connected') {
+        _session.setUserFacebookConnected(true);
         _session.trigger('facebook:connected', response);
       } else if (response.status === 'not_authorized') {
+        _session.setUserFacebookConnected(false);
         _session.trigger('facebook:notauthorized', response);
       } else {
+        _session.setUserFacebookConnected(false);
         _session.trigger('facebook:notloggedin', response);
       }
     });
+  },
+  setUserFacebookConnected: function(connected) {
+    if (Mamajamas.Context.User)
+      Mamajamas.Context.User.is_facebook_connected = connected;
   },
   logout: function() {
     if(typeof FB == 'undefined')

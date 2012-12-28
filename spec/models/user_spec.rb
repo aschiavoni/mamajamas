@@ -4,6 +4,19 @@ describe User do
 
   let(:user) { create(:user) }
 
+  describe "facebook connected" do
+
+    it "should be facebook connected" do
+      user.update_attributes!(provider: "facebook", uid: 12345)
+      user.should be_facebook_connected
+    end
+
+    it "should not be facebook connected" do
+      user.should_not be_facebook_connected
+    end
+
+  end
+
   describe "relationships" do
 
     describe "follow user" do

@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def facebook_connected?
+    provider == "facebook" && uid.present?
+  end
+
   def facebook
     @facebook ||= FacebookGraph.new(self)
   end
