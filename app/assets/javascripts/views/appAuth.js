@@ -1,6 +1,6 @@
 window.Mamajamas.Views.AppAuth = Backbone.View.extend({
   initialize: function() {
-    this._session = this.model;
+    this.model.on('facebook:disconnected', this.serverLogout, this);
     this._postSignup = new Mamajamas.Views.PostSignup({
       model: this.model,
       el: '#post-signup-modal'
@@ -35,11 +35,14 @@ window.Mamajamas.Views.AppAuth = Backbone.View.extend({
   },
   facebookLogin: function(event) {
     event.preventDefault();
-    this._session.login();
+    this.model.login();
     return false;
   },
   logout: function() {
-    this._session.logout();
-    return true; // server logout
+    this.model.logout();
+    return false;
+  },
+  serverLogout: function(fbresponse) {
+    $("#server-logout").click();
   }
 });

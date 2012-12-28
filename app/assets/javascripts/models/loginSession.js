@@ -6,7 +6,6 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     permissions: ''
   },
   initialize: function() {
-    this._session = this;
     if (Mamajamas.Context.User) {
       if (this.refreshTokenRequired()) {
         this.on('facebook:connected', this.refreshToken)
@@ -21,7 +20,7 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     if(typeof FB == 'undefined')
       return;
 
-    var _session = this._session;
+    var _session = this;
     // can respond to these events if needed later
     FB.getLoginStatus(function(response) {
       _session.trigger('facebook:loginstatus', response);
@@ -44,12 +43,20 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
   logout: function() {
     if(typeof FB == 'undefined')
       return;
-    return FB.logout();
+
+    var _session = this;
+    if (FB.getAuthResponse()) {
+      return FB.logout(function(response) {
+        _session.trigger('facebook:disconnected', response);
+      });
+    } else {
+      _session.trigger('facebook:disconnected', response);
+    }
   },
   login: function() {
     if(typeof FB == 'undefined')
       return;
-    var _session = this._session;
+    var _session = this;
     return FB.login(function(response) {
       if (response.authResponse) {
         _session.saveSession();
@@ -83,7 +90,7 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     }
   },
   refreshToken: function(response) {
-    var _session = this._session;
+    var _session = this;
     // ideally this would exchange the token for a longer lived token
     // as of now, it just updates the token stored on the server
     _session.trigger('facebook:token:refreshing');
@@ -120,7 +127,7 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     });
   },
   saveSession: function() {
-    var _session = this._session;
+    var _session = this;
     _session.trigger('server:authenticating');
 
     $.get("/users/auth/facebook/callback", function(data) {

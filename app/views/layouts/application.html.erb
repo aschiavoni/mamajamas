@@ -36,6 +36,7 @@
           </li>
           <li>
             <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "logout" %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "server-logout", style: "display: none;" %>
           </li>
         <% else -%>
           <li>
