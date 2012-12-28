@@ -77,7 +77,7 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
   },
   refreshedTokenAt: function(newdate) {
     if (newdate) {
-      $.cookies.set('fbtokref', newdate.getTime());
+      $.cookies.set('fbtokref', newdate.getTime(), { path: "/" });
       return newdate;
     } else {
       var fbtokref = $.cookies.get('fbtokref');
