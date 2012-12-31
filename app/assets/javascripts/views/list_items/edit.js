@@ -99,6 +99,9 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   save: function(event) {
     event.preventDefault();
 
+    var curPos = $("#list-items tr").index(this.$el);
+    Mamajamas.Context.List.set("current_position", curPos);
+
     var _view = this;
     _view.clearErrors();
 

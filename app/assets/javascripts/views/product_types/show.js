@@ -21,9 +21,6 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
   },
 
   addItem: function(event) {
-    var curPos = $("#list-items tr").index(this.$el);
-    Mamajamas.Context.List.set("current_position", curPos);
-
     var addItem = new Mamajamas.Views.ListItemEdit({
       model: new Mamajamas.Models.ListItem({
         product_type: this.model.get("name"),
