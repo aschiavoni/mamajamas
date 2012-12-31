@@ -36,6 +36,19 @@ describe List do
       # in the specs, each product_type has a unique category
       list.categories.size.should == product_types.size
     end
+
+  end
+
+  describe "add item" do
+
+    let(:list) { create(:list) }
+
+    it "should add a new list item" do
+      lambda do
+        list.add_item(build(:list_item, list_id: nil))
+      end.should change(list.list_items, :count).by(1)
+    end
+
   end
 
   describe "list entries" do

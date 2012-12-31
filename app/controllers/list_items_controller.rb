@@ -11,9 +11,7 @@ class ListItemsController < ApplicationController
   end
 
   def create
-    @list_item = ListItem.create(
-      params[:list_item].merge(list_id: @list.id)
-    )
+    @list_item = @list.add_item(ListItem.new(params[:list_item]))
     respond_with @list_item
   end
 
