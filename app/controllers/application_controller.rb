@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   # been more than 48 hours since they signed up
   def prompt_to_confirm_email_maybe
     if user_signed_in? && !current_user.confirmed?
-      if Time.now.utc - current_user.confirmation_sent_at > 48.hours
+      if UserConfirmationPolicy.new(current_user).requires_confirmation_prompt?
         if flash[:notice].blank?
           flash[:notice] = render_to_string(partial: "shared/confirmation_instructions").html_safe
         end
