@@ -4,6 +4,7 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
 
     this.model.on('server:authenticating', this.showProgress, this);
     this.model.on('server:authenticated', this.onAuthenticated, this);
+    this.model.on('server:unauthorized', this.onUnauthorized, this);
   },
   events: {
     "click #bt-cancel": "hide",
@@ -31,6 +32,10 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
     if (this.model.get("sign_in_count") <= 1)
       this.hide();
   },
+  onUnauthorized: function() {
+    this.hide();
+    Mamajamas.Context.Notifications.error("You cannot be logged in at this time. Please verify that you have confirmed your email address.");
+  },
   submit: function() {
     var _session = this.model;
     var _view = this;
@@ -42,11 +47,14 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
     // if the login succeeds, it will return a window.location redirect.
     // if not, it returns the form markup and replaces the existing form.
     $.post($form.attr("action"), $form.serialize(), function(data) {
-      _session.trigger('server:authenticated');
-      $form.replaceWith(data);
-      $form = $("#login-form", _view.$el); // get a ref to the new element
-      $("label", $form).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-      $("#user_login", $form).focus();
+      if (/^window\.location/.test(data)) {
+        _session.trigger('server:authenticated');
+      } else {
+        $form.replaceWith(data);
+        $form = $("#login-form", _view.$el); // get a ref to the new element
+        $("label", $form).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+        $("#user_login", $form).focus();
+      }
     });
     return false;
   }

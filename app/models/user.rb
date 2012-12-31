@@ -46,6 +46,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  # prompt for confirmation but don't require it
+  def confirmation_required?
+    false
+  end
+
   def facebook_connected?
     provider == "facebook" && uid.present?
   end

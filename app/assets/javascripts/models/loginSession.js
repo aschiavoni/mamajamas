@@ -50,7 +50,7 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
         _session.trigger('facebook:disconnected', response);
       });
     } else {
-      _session.trigger('facebook:disconnected', response);
+      _session.trigger('facebook:disconnected', null);
     }
   },
   login: function() {
@@ -130,15 +130,20 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     var _session = this;
     _session.trigger('server:authenticating');
 
-    $.get("/users/auth/facebook/callback", function(data) {
-      _session.set({
-        username: data.username,
-        first_name: data.first_name,
-        last_name: data.last_name,
-        sign_in_count: data.sign_in_count
-      });
-      _session.trigger('server:authenticated');
-      _session.updateLoginStatus();
+    $.get("/users/auth/facebook/callback", function(data, status) {
+      if (data.username) {
+        _session.set({
+          username: data.username,
+          first_name: data.first_name,
+          last_name: data.last_name,
+          sign_in_count: data.sign_in_count
+        });
+        _session.trigger('server:authenticated');
+        _session.updateLoginStatus();
+      }
+      else {
+        _session.trigger('server:unauthorized');
+      }
     });
   }
 });
