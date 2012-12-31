@@ -45,6 +45,13 @@ FactoryGirl.define do
     image_url "http://somedomain.com/somelistitem"
   end
 
+  factory :list_product_type do
+    list
+    product_type
+    category
+    hidden false
+  end
+
   factory :product do
     vendor "fakeamazon"
     sequence(:vendor_id) { |n| "fakeamazon#{n}" }
