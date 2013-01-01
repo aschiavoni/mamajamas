@@ -9,6 +9,7 @@ describe List do
     let(:product_types) do
       [
         create(:product_type),
+        create(:product_type),
         create(:product_type)
       ]
     end
@@ -54,6 +55,7 @@ describe List do
   describe "list entries" do
 
     let(:current_user) { create(:user) }
+
     let(:category) { create(:category) }
 
     before(:all) do
@@ -92,6 +94,16 @@ describe List do
       @list_items.each do |list_item|
         @list.list_entries.should include(list_item)
       end
+    end
+
+    it "should not include hidden list product types" do
+      product_type = create(:product_type)
+      list_product_type = create(:list_product_type,
+                                 list_id: @list.id,
+                                 product_type_id: product_type.id,
+                                 hidden: true)
+
+      @list.list_entries.should_not include(product_type)
     end
 
     describe "filtered by category" do
