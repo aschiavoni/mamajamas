@@ -5,6 +5,9 @@ class ListProductType < ActiveRecord::Base
 
   attr_accessible :product_type, :category, :hidden
 
+  scope :visible, where(hidden: false)
+  scope :hidden, where(hidden: true)
+
   def hide!
     update_attributes!(hidden: true)
   end
