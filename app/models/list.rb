@@ -24,5 +24,14 @@ class List < ActiveRecord::Base
 
   def add_item(list_item)
     list_items << list_item
+
+    # mark corresponding list product type as hidden
+    list_product_type = list_product_types.where(product_type_id: list_item.product_type.id).first
+
+    if list_product_type.present?
+      list_product_type.hide!
+    end
+
+    list_item
   end
 end
