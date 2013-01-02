@@ -8,7 +8,7 @@ class ListBuilder
     list.user = @user
 
     # for now, we are just adding all product types
-    ProductType.all.each do |product_type|
+    ProductType.global.each do |product_type|
       list.list_product_types << ListProductType.new({
         product_type: product_type,
         category: product_type.category

@@ -2,6 +2,15 @@ require 'spec_helper'
 
 describe ProductType do
 
+  describe "global" do
+
+    it "should only include global product types" do
+      user_product_type = create(:product_type, user: create(:user))
+      ProductType.global.should_not include(user_product_type)
+    end
+
+  end
+
   describe "by category" do
 
     it "should query by category if specified" do
