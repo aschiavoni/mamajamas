@@ -27,3 +27,8 @@ en:
               blank: "Sorry, but you must provide a name for your item."
             link:
               blank: "Sorry, but you must provide a link for your item."
+        product_type:
+          attributes:
+            name:
+              blank: "Sorry, but you must provide a name for your new item type."
+              taken: "Sorry, but you have already created a type with that name."

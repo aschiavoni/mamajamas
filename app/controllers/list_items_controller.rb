@@ -16,6 +16,7 @@ class ListItemsController < ApplicationController
   end
 
   def update
+    # TODO: security hole here? needs to be scoped by user?
     @list_item = ListItem.update(id_param, params[:list_item])
     respond_with @list_item
   end

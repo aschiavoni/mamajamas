@@ -1,0 +1,33 @@
+<td class="own"></td>
+<td class="item">
+  <div class="prod-thumb">
+    <img src="/assets/products/blank-mamabird.png" alt="new Mamajamas Item">
+  </div>
+  <form class="new-product-type">
+    <div class="prod-desc">
+      <input id="product_type_category_id" name="product_type[category_id]" type="hidden" value="{{productType.category_id}}">
+      <input id="product_type_priority" name="product_type[priority]" type="hidden" value="{{productType.priority}}">
+      <input id="product_type_when_to_buy" name="product_type[when_to_buy]" type="hidden" value="{{productType.when_to_buy}}">
+      <div class="prod-category">
+        <fieldset>
+          <p>
+          <label for="product_type_name">Unnamed item: Enter an item type</label>
+          <br />
+          <input type="text" name="product_type[name]" value="" id="product_type_name">
+          </p>
+        </fieldset>
+      </div>
+      <div class="prod-links">
+        <ul>
+          <li>
+            <a href="#" class="save-item button bt-color"><span class="ss-check"></span>Save</a>
+          </li>
+          <li>
+            <button type="reset" value="Cancel" class="cancel-item button bt-light">Cancel</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </form>
+</td>
+<td class="rating">&nbsp;</td>

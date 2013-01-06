@@ -10,7 +10,9 @@ Mamajamas.Routers.ListItems = Backbone.Router.extend({
   },
 
   index: function() {
-    var listView = new Mamajamas.Views.ListShow();
+    var listView = new Mamajamas.Views.ListShow({
+      model: Mamajamas.Context.List
+    });
     $("#my-list").html(listView.render().$el);
 
     var listEntries = $("#my-list").data("list-entries");

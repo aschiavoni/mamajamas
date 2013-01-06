@@ -12,7 +12,7 @@ class ProductType < ActiveRecord::Base
   has_many :queries, class_name: "ProductTypeQuery", dependent: :destroy
   has_and_belongs_to_many :products
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { scope: :user_id }
 
   scope :global, where(user_id: nil)
 

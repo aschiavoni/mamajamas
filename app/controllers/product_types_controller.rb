@@ -13,6 +13,12 @@ class ProductTypesController < ApplicationController
     end
   end
 
+  def create
+    @product_type = ProductType.new(params[:product_type])
+    current_user.product_types << @product_type
+    respond_with @product_type
+  end
+
   private
 
   def find_category

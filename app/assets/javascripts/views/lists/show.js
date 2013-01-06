@@ -6,6 +6,12 @@ Mamajamas.Views.ListShow = Backbone.View.extend({
     this.indexView = new Mamajamas.Views.ListItemsIndex({
       collection: Mamajamas.Context.ListItems
     });
+
+    // add-product-type is not contained in the view so we wire it up globally
+    var _view = this;
+    $("#add-product-type").click(function(event) {
+      return _view.addProductType(_view, event);
+    });
   },
 
   events: {
@@ -22,6 +28,20 @@ Mamajamas.Views.ListShow = Backbone.View.extend({
 
   sort: function(event) {
     return this.indexView.sort(event);
+  },
+
+  addProductType: function(view, event) {
+    var addItem = new Mamajamas.Views.ProductTypeNew({
+      model: new Mamajamas.Models.ProductType({
+        category_id: view.model.get("category_id"),
+        when_to_buy: "Pre-birth",
+        priority: 2
+      })
+    });
+
+    $("#list-items").prepend(addItem.render().$el);
+    addItem.setup();
+    return false;
   }
 
 });
