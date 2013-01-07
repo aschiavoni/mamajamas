@@ -47,18 +47,17 @@ Mamajamas.Views.ProductTypeNew = Backbone.View.extend({
     var _view = this;
     _view.clearErrors();
     var attributes = {
+      type: "ProductType",
       category_id: this.model.get("category_id"),
       priority: this.model.get("priority"),
       when_to_buy: this.model.get("when_to_buy"),
       name: $("#product_type_name", this.$el).val()
     };
 
-    var productType = new Mamajamas.Models.ProductType();
-    productType.save(attributes, {
+    _view.model = Mamajamas.Context.ListItems.create(attributes, {
       wait: true,
       success: function(model) {
         _view.remove();
-        Mamajamas.Context.ListItems.add(model);
       },
       error: function(model, response) {
         _view.handleError(model, response);

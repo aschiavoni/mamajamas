@@ -34,4 +34,15 @@ class List < ActiveRecord::Base
 
     list_item
   end
+
+  def add_product_type(product_type)
+    user.product_types << product_type
+
+    list_product_types << ListProductType.new({
+      product_type: product_type,
+      category: product_type.category
+    })
+
+    product_type
+  end
 end

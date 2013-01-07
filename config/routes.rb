@@ -29,7 +29,7 @@ Mamajamas::Application.routes.draw do
   resources :relationships, only: [ :create, :destroy ]
 
   resource :list, only: [ :show ] do
-    resources :list_items
+    resources :list_items, only: [ :index ]
   end
   get "/list/:category" => "lists#show", as: :list_category
 
@@ -43,7 +43,7 @@ Mamajamas::Application.routes.draw do
       get "categories/:category_id" => "product_types#index"
       get "categories/:category_id/:product_type_id" => "products#index"
       get "when_to_buy_suggestions" => "when_to_buy_suggestions#index"
-      post "product_types" => "product_types#create"
+      resources :list_entries
     end
   end
 
