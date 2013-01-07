@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   respond_to :json
 
   def index
-    @products = @product_type.products.active
+    @products = @product_type.available_products
     unless params[:filter].blank?
       @products = @products.where("lower(name) LIKE ?", "%#{params[:filter].downcase}%")
     end
