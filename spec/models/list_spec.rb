@@ -40,7 +40,7 @@ describe List do
 
   end
 
-  describe "add item" do
+  describe "add list item" do
 
     let(:product_type) { create(:product_type) }
 
@@ -63,6 +63,26 @@ describe List do
       list_product_type = list.list_product_types.where(product_type_id: product_type.id).first
 
       list_product_type.should be_hidden
+    end
+
+  end
+
+  describe "add product type" do
+
+    let(:user) { create(:user) }
+
+    let(:list) { create(:list, user: user) }
+
+    it "should add a new list product type" do
+      lambda do
+        list.add_product_type(build(:product_type))
+      end.should change(list.product_types, :count).by(1)
+    end
+
+    it "should add a new user product type" do
+      lambda do
+        list.add_product_type(build(:product_type))
+      end.should change(user.product_types, :count).by(1)
     end
 
   end
