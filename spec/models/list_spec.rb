@@ -48,7 +48,7 @@ describe List do
 
     it "should add a new list item" do
       lambda do
-        list.add_item(build(:list_item, list_id: nil))
+        list.add_list_item(build(:list_item, list_id: nil))
       end.should change(list.list_items, :count).by(1)
     end
 
@@ -59,7 +59,7 @@ describe List do
       })
 
       list_item = build(:list_item, product_type: product_type, list_id: nil)
-      list.add_item(list_item)
+      list.add_list_item(list_item)
       list_product_type = list.list_product_types.where(product_type_id: product_type.id).first
 
       list_product_type.should be_hidden

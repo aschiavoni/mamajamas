@@ -22,7 +22,7 @@ class List < ActiveRecord::Base
       product_types.visible.by_category(category).order("name ASC")
   end
 
-  def add_item(list_item)
+  def add_list_item(list_item)
     list_items << list_item
 
     # mark corresponding list product type as hidden
