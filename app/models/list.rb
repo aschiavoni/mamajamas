@@ -45,4 +45,10 @@ class List < ActiveRecord::Base
 
     product_type
   end
+
+  def available_product_types
+    hidden_list_product_types =
+      product_types.where("list_product_types.hidden = ?", true)
+    (ProductType.global + user.product_types) - product_types + hidden_list_product_types
+  end
 end

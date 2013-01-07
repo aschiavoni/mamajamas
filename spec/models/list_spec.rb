@@ -87,6 +87,53 @@ describe List do
 
   end
 
+  describe "available product types" do
+
+    let(:user) { create(:user) }
+
+    let(:list) { create(:list, user: user) }
+
+    before(:all) do
+      ProductType.destroy_all
+      @product_types = create_list(:product_type, 3)
+
+      @list_product_type = create(:product_type)
+      list.list_product_types << ListProductType.new({
+        product_type: @list_product_type,
+        category: @list_product_type.category
+      })
+
+      @hidden_list_product_type = create(:product_type)
+      list.list_product_types << ListProductType.new({
+        product_type: @hidden_list_product_type,
+        category: @hidden_list_product_type.category,
+        hidden: true
+      })
+    end
+
+    it "should include global product types" do
+      @product_types.each do |product_type|
+        list.available_product_types.should include(product_type)
+      end
+    end
+
+    it "should include owned product types" do
+      user_product_type = create(:product_type)
+      user.product_types << user_product_type
+
+      list.available_product_types.should include(user_product_type)
+    end
+
+    it "should include hidden product types" do
+      list.available_product_types.should include(@hidden_list_product_type)
+    end
+
+    it "should exclude product types in list" do
+      list.available_product_types.should_not include(@list_product_type)
+    end
+
+  end
+
   describe "list entries" do
 
     let(:current_user) { create(:user) }
