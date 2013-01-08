@@ -8,6 +8,10 @@ class List < ActiveRecord::Base
     def visible
       where("list_product_types.hidden = ?", false)
     end
+
+    def in_category(category)
+      where("list_product_types.category_id = ?", category.id)
+    end
   end
 
   has_many :categories, through: :list_product_types, uniq: true do
@@ -19,7 +23,7 @@ class List < ActiveRecord::Base
 
   def list_entries(category = nil)
     list_items.by_category(category).order("name ASC") +
-      product_types.visible.by_category(category).order("name ASC")
+      product_types.visible.in_category(category).order("name ASC")
   end
 
   def add_list_item(list_item)
