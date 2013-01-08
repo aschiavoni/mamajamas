@@ -4,9 +4,28 @@ describe ProductType do
 
   describe "global" do
 
+    it "should include global product types" do
+      global_product_type = create(:product_type)
+      ProductType.global.should include(global_product_type)
+    end
+
     it "should only include global product types" do
       user_product_type = create(:product_type, user: create(:user))
       ProductType.global.should_not include(user_product_type)
+    end
+
+  end
+
+  describe "user" do
+
+    it "should include user product types" do
+      user_product_type = create(:product_type, user: create(:user))
+      ProductType.user.should include(user_product_type)
+    end
+
+    it "should only include user product types" do
+      global_product_type = create(:product_type)
+      ProductType.user.should_not include(global_product_type)
     end
 
   end

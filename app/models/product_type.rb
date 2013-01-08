@@ -15,6 +15,7 @@ class ProductType < ActiveRecord::Base
   validates :name, presence: true, uniqueness: { scope: :user_id }
 
   scope :global, where(user_id: nil)
+  scope :user, where("user_id IS NOT NULL")
 
   # TODO: remove this when we have all product images available
   # temporary accessor for product types without image names
