@@ -76,13 +76,49 @@ describe List do
     it "should add a new list product type" do
       lambda do
         list.add_product_type(build(:product_type))
-      end.should change(list.product_types, :count).by(1)
+      end.should change(list.list_product_types, :count).by(1)
     end
 
     it "should add a new user product type" do
       lambda do
         list.add_product_type(build(:product_type))
       end.should change(user.product_types, :count).by(1)
+    end
+
+    it "should not add a user product type if a global product type exists" do
+      product_type = create(:product_type)
+
+      lambda do
+        list.add_product_type(build(:product_type, name: product_type.name))
+      end.should_not change(user.product_types, :count)
+    end
+
+    it "should not add a new list product type if the product type is in list" do
+      product_type = create(:product_type)
+      list.list_product_types << ListProductType.new({
+        product_type: product_type,
+        category: product_type.category
+      })
+
+      lambda do
+        list.add_product_type(build(:product_type, name: product_type.name))
+      end.should_not change(list.list_product_types, :count)
+    end
+
+    it "should unhide an existing product type" do
+      product_type = create(:product_type)
+      list.list_product_types << ListProductType.new({
+        product_type: product_type,
+        category: product_type.category,
+        hidden: true
+      })
+
+      pt = list.add_product_type(build(:product_type, name: product_type.name))
+
+      list_product_type = list.list_product_types.
+        where(product_type_id: pt.id).first
+
+      list_product_type.hidden.should be_false
     end
 
   end

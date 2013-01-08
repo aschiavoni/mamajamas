@@ -36,12 +36,19 @@ class List < ActiveRecord::Base
   end
 
   def add_product_type(product_type)
-    user.product_types << product_type
+    existing_product_type = ProductType.global.where(name: product_type.name).first
+    if existing_product_type.blank?
+      user.product_types << product_type
+    else
+      product_type = existing_product_type
+    end
 
-    list_product_types << ListProductType.new({
-      product_type: product_type,
-      category: product_type.category
-    })
+    existing_list_product_type = list_product_types.where(product_type_id: product_type.id).first
+    if existing_list_product_type.present?
+      existing_list_product_type.unhide! if existing_list_product_type.hidden?
+    else
+      add_list_product_type(product_type)
+    end
 
     product_type
   end
@@ -50,5 +57,16 @@ class List < ActiveRecord::Base
     hidden_list_product_types =
       product_types.where("list_product_types.hidden = ?", true)
     (ProductType.global + user.product_types) - product_types + hidden_list_product_types
+  end
+
+  private
+
+  def add_list_product_type(product_type)
+    list_product_type = ListProductType.new({
+      product_type: product_type,
+      category: product_type.category
+    })
+    list_product_type.list_id = self.id
+    list_product_type.save!
   end
 end

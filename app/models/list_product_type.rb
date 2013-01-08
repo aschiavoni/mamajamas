@@ -11,4 +11,8 @@ class ListProductType < ActiveRecord::Base
   def hide!
     update_attributes!(hidden: true)
   end
+
+  def unhide!
+    update_attributes!(hidden: false)
+  end
 end
