@@ -85,8 +85,24 @@ describe List do
       end.should change(user.product_types, :count).by(1)
     end
 
+    it "new list product type should have a valid product type id" do
+      new_product_type = list.add_product_type(build(:product_type))
+      list_product_type = list.list_product_types.where(product_type_id: new_product_type.id).first
+      list_product_type.should_not be_nil
+    end
+
+    it "should return existing user product type when creating a user product with same name" do
+      product_type = list.add_product_type(build(:product_type))
+      added_product_type = list.add_product_type(build(:product_type, name: product_type.name))
+      added_product_type.should == product_type
+    end
+
     it "should not add a user product type if a global product type exists" do
       product_type = create(:product_type)
+      list.list_product_types << ListProductType.new({
+        product_type: product_type,
+        category: product_type.category
+      })
 
       lambda do
         list.add_product_type(build(:product_type, name: product_type.name))

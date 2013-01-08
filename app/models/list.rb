@@ -36,7 +36,7 @@ class List < ActiveRecord::Base
   end
 
   def add_product_type(product_type)
-    existing_product_type = ProductType.global.where(name: product_type.name).first
+    existing_product_type = product_types.where(name: product_type.name).first
     if existing_product_type.blank?
       user.product_types << product_type
     else
