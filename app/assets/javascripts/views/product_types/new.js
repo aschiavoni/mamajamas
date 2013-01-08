@@ -29,6 +29,8 @@ Mamajamas.Views.ProductTypeNew = Backbone.View.extend({
     });
     this.$el.append(priorityView.render().$el);
 
+    this.initializeAutocomplete();
+
     return this;
   },
 
@@ -102,5 +104,34 @@ Mamajamas.Views.ProductTypeNew = Backbone.View.extend({
       name: "#product_type_name"
     };
   },
+
+  initializeAutocomplete: function() {
+    var _view = this;
+    var url = "/api/list/product_types/";
+
+    $("#product_type_name", this.$el).autocomplete({
+      source: function(request, response) {
+        $.getJSON(url, { filter: request.term }, function(data) {
+          response($.map(data, function(item) {
+            return {
+              label: item.name,
+              value: item
+            }
+          }))
+        });
+      },
+      focus: function(event, ui) {
+        return false;
+      },
+      select: function(event, ui) {
+        $(event.target).val(ui.item.value.name);
+
+        // re-initialize the inFieldLabels plugin
+        $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+
+        return false;
+      }
+    });
+  }
 
 });

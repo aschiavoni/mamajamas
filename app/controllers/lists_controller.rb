@@ -1,6 +1,8 @@
 class ListsController < ApplicationController
   before_filter :authenticate_user!
 
+  respond_to :html, :json
+
   def show
     @subheader = "Your baby gear list"
     @page_id = "buildlist"
@@ -14,6 +16,21 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       format.html
+    end
+  end
+
+  def product_types
+    @list = current_user.list
+    @available_product_types = @list.available_product_types
+    if params[:filter].present?
+      @available_product_types = @available_product_types.select do |product_type|
+        product_type.name.downcase =~ /#{params[:filter].downcase}/
+      end
+    end
+
+    respond_to do |format|
+      format.html { not_found }
+      format.json
     end
   end
 end
