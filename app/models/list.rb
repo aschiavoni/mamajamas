@@ -40,10 +40,12 @@ class List < ActiveRecord::Base
     if existing_product_type.blank?
       user.product_types << product_type
     else
+      # preserve the submitted category
+      existing_product_type.category_id = product_type.category_id
       product_type = existing_product_type
     end
 
-    existing_list_product_type = list_product_types.where(product_type_id: product_type.id).first
+    existing_list_product_type = list_product_types.where(product_type_id: product_type.id, category_id: product_type.category.id).first
     if existing_list_product_type.present?
       existing_list_product_type.unhide! if existing_list_product_type.hidden?
     else

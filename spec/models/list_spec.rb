@@ -91,6 +91,20 @@ describe List do
       list_product_type.should_not be_nil
     end
 
+    it "should add a new list product type in a different category when product type exists" do
+      product_type = create(:product_type)
+      list.list_product_types << ListProductType.new({
+        product_type: product_type,
+        category: product_type.category
+      })
+
+      lambda do
+        new_product_type = build(:product_type, name: product_type.name,
+                                 category: create(:category))
+        list.add_product_type(new_product_type)
+      end.should change(list.list_product_types, :count).by(1)
+    end
+
     it "should return existing user product type when creating a user product with same name" do
       product_type = list.add_product_type(build(:product_type))
       added_product_type = list.add_product_type(build(:product_type, name: product_type.name))
@@ -117,7 +131,8 @@ describe List do
       })
 
       lambda do
-        list.add_product_type(build(:product_type, name: product_type.name))
+        new_product_type = build(:product_type, name: product_type.name, category: product_type.category)
+        list.add_product_type(new_product_type)
       end.should_not change(list.list_product_types, :count)
     end
 
