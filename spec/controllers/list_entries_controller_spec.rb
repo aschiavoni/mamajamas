@@ -139,10 +139,9 @@ describe ListEntriesController do
       end.should change(current_user.list.list_items, :count).by(-1)
     end
 
-    it "should delete product type" do
-      lambda do
-        delete :destroy, id: "product-type-#{@product_type.id}"
-      end.should change(current_user.list.list_product_types, :count).by(-1)
+    it "should hide product type" do
+      delete :destroy, id: "product-type-#{@product_type.id}"
+      assigns(:list_entry).hidden.should be_true
     end
 
   end

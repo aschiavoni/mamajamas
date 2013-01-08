@@ -26,7 +26,7 @@ class ListEntriesController < ApplicationController
   def destroy
     if params[:id] =~ /product-type/
       @list_entry = @list.list_product_types.where(product_type_id: id_param).first
-      @list_entry.destroy unless @list_entry.blank?
+      @list_entry.hide! unless @list_entry.blank?
     else
       @list_entry = @list.list_items.find(id_param).destroy
     end
