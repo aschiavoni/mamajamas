@@ -72,6 +72,10 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(other_user.id).destroy
   end
 
+  def auto_created_relationships?
+    relationships_created_at.present?
+  end
+
   def list
     List.where(user_id: self.id).first || ListBuilder.new(self).build!
   end

@@ -19,6 +19,21 @@ describe User do
 
   describe "relationships" do
 
+    describe "created at" do
+
+      it "return true if relationships have been created" do
+        user.relationships_created_at = Time.now.utc
+        user.save!
+
+        user.auto_created_relationships?.should be_true
+      end
+
+      it "return false if relationships have been created" do
+        user.auto_created_relationships?.should be_false
+      end
+
+    end
+
     describe "follow user" do
 
       let(:other_user) { create(:user) }
