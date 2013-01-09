@@ -15,4 +15,10 @@ describe RelationshipBuilder do
     builder.build_relationships(friends)
   end
 
+  it "should set relationships created at timestamp" do
+    friend = stub(:id => 1)
+    builder.build_relationships([ friend ])
+    user.relationships_created_at.should be_present
+  end
+
 end

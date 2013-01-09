@@ -9,5 +9,6 @@ class RelationshipBuilder
     friends.each do |friend|
       user.follow!(friend)
     end
+    user.update_attributes!(relationships_created_at: Time.now.utc)
   end
 end

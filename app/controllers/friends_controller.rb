@@ -6,6 +6,10 @@ class FriendsController < ApplicationController
     @fb_friends = current_user.facebook.mamajamas_friends(5)
     @total_fb_friends = current_user.facebook.mamajamas_friends.size
     @recommended_friends = RecommendedFriend.new(current_user).all(5)
+
+    if current_user.relationships_created_at.blank?
+      RelationshipBuilder.new(current_user).build_relationships(@fb_friends)
+    end
   end
 
   def notify
