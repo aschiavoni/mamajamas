@@ -92,6 +92,7 @@ group :development do
   # use pry in development
   gem 'pry-rails'
   gem 'pry-debugger'
+  gem 'interactive_editor'
 end
 
 group :test, :development do
