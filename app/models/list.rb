@@ -10,7 +10,11 @@ class List < ActiveRecord::Base
     end
 
     def in_category(category)
-      where("list_product_types.category_id = ?", category.id)
+      if category.present?
+        where("list_product_types.category_id = ?", category.id)
+      else
+        scoped
+      end
     end
   end
 
