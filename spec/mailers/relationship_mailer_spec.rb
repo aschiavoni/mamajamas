@@ -10,7 +10,7 @@ describe RelationshipMailer do
     let(:mail) { RelationshipMailer.follower_notification(relationship) }
 
     it "renders the subject" do
-      mail.subject.should == "New follower"
+      mail.subject.should =~ /#{follower.username}/
     end
 
     it "sends to the followed user" do

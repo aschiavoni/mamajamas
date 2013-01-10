@@ -10,8 +10,10 @@ class RelationshipMailer < ActionMailer::Base
     relationship.delivered_notification_at = Time.zone.now
     relationship.save!
 
+    subject = "#{@follower_display_name} is now following your Mamajamas List!"
+
     mail(to: "#{@followed_display_name} <#{@followed.email}>",
-         subject: "New follower")
+         subject: subject)
   end
 
   private
