@@ -1,10 +1,147 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Create My Profile</h1>
-
-<%= form_for @user do |f| %>
-	User name: <%= f.text_field :username %><br>
-	First name: <%= f.text_field :first_name %><br>
-	Last name: <%= f.text_field :last_name %><br>
-	<%= f.submit "update" %>
+<%= content_for :subheader_instructions do %>
+  <p class="instruction">
+  <strong>Before you share your list, why not tell folks a little more about yourself?</strong><br>
+  Or, go <%= link_to "back", list_path %> to your list
+  </p>
+<% end -%>
+<%= content_for :nav do %>
+  <div id="profile-photo">
+    <%= image_tag "profile_photo-default-l.png", alt: "Upload a profile photo" %>
+    <a class="button bt-light" id="bt-upload">
+      <span class="ss-upload"></span>Upload
+    </a>
+    <!-- instructions -->
+    <p class="instruction">Upload a photo, or drag one into the box.</p>
+  </div>
+<% end -%>
+<%= form_for @user, html: { class: "label-infield", id: "frm-create-profile" } do |f| %>
+  <h3>My Basics</h3>
+  <dl class="clearfix">
+    <fieldset>
+      <!-- username -->
+      <dt>User name<strong class="required">*</strong></dt>
+      <dd>
+        <p>
+          <%= f.label :username do %>
+            <strong>[default username]</strong>
+          <% end -%>
+          <br />
+          <%= f.text_field :username %>
+        </p>
+      </dd>
+      <!-- URL -->
+      <dt>URL<strong class="required">*</strong></dt>
+      <dd class="pad">
+        <p>mamamaggie.mamjamas.com <em class="light">(generated from your username)</em></p>
+      </dd>
+      <!-- list title -->
+      <dt>List title<strong class="required">*</strong></dt>
+      <dd>
+        <p>
+          <label for="field-list-title"><strong>MamaMaggie's List</strong> (click to edit)</label>
+          <br />
+          <input name="field-list-title" type="text" id="field-list-title" value="">
+        </p>
+      </dd>
+    </fieldset>
+  </dl>
+  <h3>My Details</h3>
+  <dl class="clearfix">
+    <fieldset>
+      <!-- name -->
+      <dt>Name</dt>
+      <dd class="half">
+        <p>
+          <label for="field-firstname">First</label>
+          <br />
+          <input name="field-firstname" type="text" id="field-firstname" value="">
+        </p>
+      </dd>
+      <dd class="half">
+        <p>
+          <label for="field-surname">Last</label>
+          <br />
+          <input name="field-surname" type="text" id="field-surname" value="">
+        </p>
+      </dd>
+    </fieldset>
+    <fieldset>
+      <!-- birthday -->
+      <dt>Birthday</dt>
+      <dd class="half">
+        <p>
+          <label for="field-bdate">mm/dd/yy</label>
+          <br />
+          <input name="field-bdate" type="text" id="field-bdate" value="">
+          <%= image_tag "icon_calendar@2x.png", class: "date-picker", alt: "calendar" %>
+      </dd>
+    </fieldset>
+    <fieldset>
+      <!-- more (comments) -->
+      <dt>More</dt>
+      <dd>
+        <p>
+          <label for="field-profile-notes">For example, what do you love about being a mom?</label>
+          <br />
+          <textarea name="field-profile-notes" value="" id="field-profile-notes" rows="5"></textarea>
+        </p>
+      </dd>
+      <!-- tags -->
+      <dt><span class="ss-icon" title="tags">Tags</span></dt>
+      <dd>
+        <p>
+          <label for="field-profile-tags">Enter keywords that help describe you.</label>
+          <br />
+          <input name="field-profile-tags" type="text" id="field-profile-tags" value="">
+          <br>
+          <span id="top-tags">top tags: <a href="#">green</a>, <a href="#">working mom</a>, <a href="#">stay-at-home-mom</a>, <a href="#">artsy</a></span> </p>
+      </dd>
+    </fieldset>
+  </dl>
+  <h3>My Kids</h3>
+  <dl id="mykids">
+    <!-- first child -->
+    <dt>First Child</dt>
+    <dd>
+      <fieldset>
+        <div class="baby-gender clearfix">
+          <p>Gender:</p>
+          <fieldset>
+            <div>
+              <input name="babygender01" type="radio" class="gender-f" id="babygender01-f" value="female">
+              <label for="babygender01-f" title="girl">Girl</label>
+            </div>
+            <div>
+              <input name="babygender01" type="radio" class="gender-m" id="babygender01-m" value="male">
+              <label for="babygender01-m" title="boy">Boy</label>
+            </div>
+            <div>
+              <input name="babygender01" type="radio" class="gender-na" id="babygender01-na" value="not-sure" checked>
+              <label for="babygender01-na" title="not sure?">Not sure</label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="baby-name">
+          <p>
+            <label for="field-baby01-name">Name</label>
+            <br />
+            <input name="field-baby01-name" type="text" id="field-baby01-name" value="">
+          </p>
+        </div>
+        <div class="baby-bdate">
+          <p>
+            <label for="field-baby01-bdate">Born / Due</label>
+            <br />
+            <input name="field-baby01-bdate" type="text" id="field-baby01-bdate" class="baby-bdate" value="">
+            <%= image_tag "icon_calendar@2x.png", class: "date-picker", alt: "calendar" %>
+        </div>
+      </fieldset>
+    </dd>
+    <!-- end first chid -->
+    <!-- (more children here) -->
+    <div class="add-more"> <a href="#"><span class="ss-plus"></span>Add more</a> </div>
+  </dl>
+  <div class="button-row">
+    <button type="submit" class="button bt-color" id="bt-save"><span class="ss-check"></span>Save and Preview</button>
+  </div>
 <% end %>

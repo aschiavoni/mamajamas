@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :init_view
+
   def edit
     @user = User.find(params[:id])
   end
@@ -23,5 +25,12 @@ class UsersController < ApplicationController
         end
       end
     end
+  end
+
+  private
+
+  def init_view
+    @page_id = "create-profile"
+    @subheader = "Create my profile"
   end
 end
