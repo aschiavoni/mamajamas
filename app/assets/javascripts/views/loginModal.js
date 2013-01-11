@@ -30,7 +30,9 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   },
   onAuthenticated: function() {
     if (this.model.get("sign_in_count") <= 1)
-      this.hide();
+      window.location = "/friends";
+    else
+      window.location = "/list";
   },
   onUnauthorized: function() {
     this.hide();

@@ -29,19 +29,6 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def facebook
-    if request.put?
-      self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
-      if self.resource.update_attributes(resource_params)
-        # Sign in the user bypassing validation in case the password changed
-        sign_in self.resource, :bypass => true
-        redirect_to friends_path
-      else
-        render "facebook"
-      end
-    end
-  end
-
   def facebook_update
     # massage facebook params into user params
     resource_sym = resource_name.to_sym

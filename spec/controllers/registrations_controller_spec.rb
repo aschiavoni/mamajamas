@@ -34,48 +34,4 @@ describe RegistrationsController do
 
   end
 
-  describe "facebook" do
-
-    let(:user) { create(:user) }
-
-    before(:each) do
-      sign_in user
-    end
-
-    describe "path" do
-
-      before(:each) { get :facebook }
-
-      it "should render view" do
-        response.should be_success
-      end
-
-      it "should render view" do
-        response.should render_template("facebook")
-      end
-
-    end
-
-    describe "updating username" do
-
-      it "should redirect to friends path" do
-        put :facebook, user: {
-          username: "facebookusername"
-        }
-
-        response.should redirect_to(friends_path)
-      end
-
-      it "should render view when username is invalid" do
-        put :facebook, user: {
-          username: nil
-        }
-
-        response.should render_template("facebook")
-      end
-
-    end
-
-  end
-
 end

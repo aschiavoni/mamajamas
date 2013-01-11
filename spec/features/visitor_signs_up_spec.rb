@@ -39,11 +39,6 @@ feature "Visitor signs up", js: true do
     # simulate login
     page.execute_script("Mamajamas.Context.LoginSession.saveSession();")
 
-    # set username
-    page.has_selector?("#post-signup", visible: true)
-    fill_in "Username", with: "username"
-    click_button "Continue"
-
     # should be on the friends page
     expect(page).to have_content("Follow Mom Friends")
   end
