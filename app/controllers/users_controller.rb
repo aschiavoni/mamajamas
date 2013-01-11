@@ -3,16 +3,24 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
- def update
+  def update
     @user = User.find(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { render action: "edit", notice: 'User was successfully updated.' }
-        format.json { head :no_content }
+        format.html do
+          render action: "edit", notice: 'User was successfully updated.'
+        end
+        format.json do
+          head :no_content
+        end
       else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html do
+          render action: "edit"
+        end
+        format.json do
+          render json: @user.errors, status: :unprocessable_entity
+        end
       end
     end
   end
