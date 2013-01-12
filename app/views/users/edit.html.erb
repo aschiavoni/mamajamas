@@ -14,7 +14,7 @@
     <p class="instruction">Upload a photo, or drag one into the box.</p>
   </div>
 <% end -%>
-<%= form_for @user, html: { class: "label-infield", id: "frm-create-profile" } do |f| %>
+<%= form_for @user, url: profile_path, html: { class: "label-infield", id: "frm-create-profile" } do |f| %>
   <h3>My Basics</h3>
   <dl class="clearfix">
     <fieldset>
@@ -27,12 +27,13 @@
           <% end -%>
           <br />
           <%= f.text_field :username %>
+          <%= field_error @user, :username %>
         </p>
       </dd>
       <!-- URL -->
       <dt>URL<strong class="required">*</strong></dt>
       <dd class="pad">
-        <p>mamamaggie.mamjamas.com <em class="light">(generated from your username)</em></p>
+        <p>www.mamjamas.com/<%= @user.username.downcase %> <em class="light">(generated from your username)</em></p>
       </dd>
       <!-- list title -->
       <dt>List title<strong class="required">*</strong></dt>
