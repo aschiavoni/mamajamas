@@ -20,6 +20,8 @@ Mamajamas::Application.routes.draw do
     post "/registrations/facebook/friends" => "registrations#facebook_friends_update"
   end
 
+  get "/profile" => "users#edit"
+
   resources :friends, only: [ :index ] do
     collection do
       post 'notify'
