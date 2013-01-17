@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def update
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(params[:user]) && @user.list.update_attributes(params[:list])
         format.html do
           redirect_to profile_path, notice: "Your profile has been updated."
         end

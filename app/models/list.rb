@@ -25,6 +25,15 @@ class List < ActiveRecord::Base
   end
   has_many :list_items, dependent: :destroy
 
+  def title
+    read_attribute(:title) || default_title
+  end
+
+  def title=(new_title)
+    new_title = nil if new_title.blank?
+    write_attribute(:title, new_title) unless new_title == default_title
+  end
+
   def list_entries(category = nil)
     list_items.by_category(category).order("name ASC") +
       product_types.visible.in_category(category).order("name ASC")
@@ -70,6 +79,10 @@ class List < ActiveRecord::Base
   end
 
   private
+
+  def default_title
+    user.present? ? "#{user.username.possessive} List" : "List"
+  end
 
   def add_list_product_type(product_type)
     list_product_type = ListProductType.new({

@@ -2,6 +2,34 @@ require 'spec_helper'
 
 describe List do
 
+  describe "title" do
+
+    let(:list) { build(:list, title: nil) }
+
+    let(:default_title) do
+      "#{list.user.username.possessive} List"
+    end
+
+    it "should have a default title" do
+      list.title.should == default_title
+    end
+
+    it "should not overwrite title if it matches the default title" do
+      list.title = default_title
+      list.read_attribute(:title).should be_nil
+    end
+
+    it "should overwrite title" do
+      list.title = "new title"
+      list.title.should == "new title"
+    end
+
+    it "should default a blank title to the default title" do
+      list.title = ""
+      list.title.should == default_title
+    end
+
+  end
   describe "list with populated product types" do
 
     let(:list) { create(:list) }

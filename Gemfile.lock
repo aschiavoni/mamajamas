@@ -208,6 +208,7 @@ GEM
       http_parser.rb (~> 0.5.3)
       multi_json (~> 1.0)
     polyglot (0.3.3)
+    possessive (1.0.1)
     pry (0.9.10)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -373,6 +374,7 @@ DEPENDENCIES
   paperclip
   pg
   poltergeist
+  possessive
   pry-debugger
   pry-rails
   quiet_assets

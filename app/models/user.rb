@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
   has_many :product_types, dependent: :destroy
+  has_one :list
 
   validates :username, presence: true, uniqueness: true
 

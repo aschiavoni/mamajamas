@@ -64,6 +64,9 @@ gem 'aws-sdk'
 # lists
 gem 'acts_as_list'
 
+# handy things
+gem 'possessive'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
