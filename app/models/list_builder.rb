@@ -4,7 +4,7 @@ class ListBuilder
   end
 
   def build!
-    list = List.new(title: "#{@user.username}'s List'")
+    list = List.new
     list.user = @user
 
     # for now, we are just adding all product types
