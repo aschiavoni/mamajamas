@@ -26,7 +26,8 @@ class User < ActiveRecord::Base
   has_many :product_types, dependent: :destroy
   has_one :list
 
-  validates :username, presence: true, uniqueness: true
+  validates(:username, presence: true,
+            uniqueness: true, format: { :with => /^[A-Za-z\d_]+$/ })
 
   # hook devise to support logging in by email or username
   def self.find_first_by_auth_conditions(warden_conditions)
