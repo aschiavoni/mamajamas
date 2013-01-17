@@ -58,16 +58,16 @@
       <dt>Name</dt>
       <dd class="half">
         <p>
-          <label for="field-firstname">First</label>
+          <%= f.label :first_name %>
           <br />
-          <input name="field-firstname" type="text" id="field-firstname" value="">
+          <%= f.text_field :first_name %>
         </p>
       </dd>
       <dd class="half">
         <p>
-          <label for="field-surname">Last</label>
+          <%= f.label :last_name %>
           <br />
-          <input name="field-surname" type="text" id="field-surname" value="">
+          <%= f.text_field :last_name %>
         </p>
       </dd>
     </fieldset>
