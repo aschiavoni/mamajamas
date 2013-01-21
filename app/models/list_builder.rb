@@ -1,18 +1,17 @@
 class ListBuilder
+  attr_reader :user
+
   def initialize(user)
     @user = user
   end
 
-  def build!
+  def build!(product_types = ProductType.global)
     list = List.new
-    list.user = @user
+    list.user = user
 
     # for now, we are just adding all product types
-    ProductType.global.each do |product_type|
-      list.list_product_types << ListProductType.new({
-        product_type: product_type,
-        category: product_type.category
-      })
+    product_types.each do |product_type|
+      list.add_list_item_placeholder(product_type)
     end
 
     list.save!

@@ -38,6 +38,21 @@ class List < ActiveRecord::Base
     list_items.by_category(category).order("name ASC")
   end
 
+  def add_list_item_placeholder(product_type)
+    list_item = ListItem.new.tap do |list_item|
+      list_item.placeholder = true
+      list_item.product_type = product_type
+      list_item.category = product_type.category
+      list_item.priority = product_type.priority
+      list_item.image_url = product_type.image_name
+      list_item.when_to_buy_suggestion = product_type.when_to_buy_suggestion
+    end
+
+    list_items << list_item
+
+    list_item
+  end
+
   def add_list_item(list_item)
     list_items << list_item
 

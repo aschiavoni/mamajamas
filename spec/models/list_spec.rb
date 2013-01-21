@@ -30,6 +30,7 @@ describe List do
     end
 
   end
+
   describe "list with populated product types" do
 
     let(:list) { create(:list) }
@@ -64,6 +65,55 @@ describe List do
     it "should have categories" do
       # in the specs, each product_type has a unique category
       list.categories.size.should == product_types.size
+    end
+
+  end
+
+  describe "add list item placeholder" do
+
+    let(:list) { create(:list) }
+
+    let(:product_type) { build(:product_type) }
+
+    it "should return a new list item" do
+      list_item = list.add_list_item_placeholder(product_type)
+      list_item.should be_an_instance_of(ListItem)
+    end
+
+    it "should return a placeholder list item" do
+      list_item = list.add_list_item_placeholder(product_type)
+      list_item.placeholder?.should be_true
+    end
+
+    it "should add the list item to the list" do
+      lambda do
+        list.add_list_item_placeholder(product_type)
+      end.should change(list.list_items, :count).by(1)
+    end
+
+    it "should have a list item with the correct product type" do
+      list_item = list.add_list_item_placeholder(product_type)
+      list_item.product_type.should == product_type
+    end
+
+    it "should have a list item with the correct category" do
+      list_item = list.add_list_item_placeholder(product_type)
+      list_item.category.should == product_type.category
+    end
+
+    it "should have a list item with the correct priority" do
+      list_item = list.add_list_item_placeholder(product_type)
+      list_item.priority.should == product_type.priority
+    end
+
+    it "should have a list item with the correct image url" do
+      list_item = list.add_list_item_placeholder(product_type)
+      list_item.image_url.should == product_type.image_name
+    end
+
+    it "should have a list item with the correct when to buy suggestion" do
+      list_item = list.add_list_item_placeholder(product_type)
+      list_item.when_to_buy_suggestion.should == product_type.when_to_buy_suggestion
     end
 
   end
@@ -236,8 +286,9 @@ describe List do
     let(:category) { create(:category) }
 
     before(:all) do
+      ProductType.destroy_all
       @product_types = [
-        create(:product_type, category_id: category.id),
+        create(:product_type),
         create(:product_type),
         create(:product_type)
       ]
@@ -255,10 +306,11 @@ describe List do
         create(:list_item, list_item_params),
         create(:list_item, list_item_params)
       ]
+      @list.reload
     end
 
     it "should include all list entries" do
-      @list.list_entries.size.should == @list_items.size
+      @list.list_entries.size.should == @list_items.size + @product_types.size
     end
 
     it "should include all list items" do
@@ -267,23 +319,9 @@ describe List do
       end
     end
 
-    it "should not include hidden list product types" do
-      product_type = create(:product_type)
-      list_product_type = create(:list_product_type,
-                                 list_id: @list.id,
-                                 product_type_id: product_type.id,
-                                 hidden: true)
-
-      @list.list_entries.should_not include(product_type)
-    end
-
     describe "filtered by category" do
 
       before(:all) do
-        @filtered_product_types = @product_types.select do |product_type|
-          product_type.category_id == category.id
-        end
-
         @filtered_list_items = @list_items.select do |list_item|
           list_item.category_id == category.id
         end
@@ -296,13 +334,6 @@ describe List do
       it "should include only list items in category" do
         @filtered_list_items.each do |list_item|
           @list.list_entries(category).should include(list_item)
-        end
-      end
-
-      it "should not include product types in other categories" do
-        excluded = @product_types - @filtered_product_types
-        excluded.each do |product_type|
-          @list.list_entries(category).should_not include(product_type)
         end
       end
 
