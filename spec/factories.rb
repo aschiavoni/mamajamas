@@ -43,6 +43,7 @@ FactoryGirl.define do
     priority 2
     notes nil
     image_url "http://somedomain.com/somelistitem"
+    placeholder false
   end
 
   factory :list_product_type do

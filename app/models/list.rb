@@ -35,8 +35,7 @@ class List < ActiveRecord::Base
   end
 
   def list_entries(category = nil)
-    list_items.by_category(category).order("name ASC") +
-      product_types.visible.in_category(category).order("name ASC")
+    list_items.by_category(category).order("name ASC")
   end
 
   def add_list_item(list_item)

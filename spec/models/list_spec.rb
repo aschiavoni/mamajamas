@@ -258,13 +258,7 @@ describe List do
     end
 
     it "should include all list entries" do
-      @list.list_entries.size.should == ProductType.count + @list_items.size
-    end
-
-    it "should include all product types" do
-      @product_types.each do |product_type|
-        @list.list_entries.should include(product_type)
-      end
+      @list.list_entries.size.should == @list_items.size
     end
 
     it "should include all list items" do
@@ -296,13 +290,7 @@ describe List do
       end
 
       it "should include only entries in category" do
-        @list.list_entries(category).size.should == @filtered_product_types.size + @filtered_list_items.size
-      end
-
-      it "should include only product types in category" do
-        @filtered_product_types.each do |product_type|
-          @list.list_entries(category).should include(product_type)
-        end
+        @list.list_entries(category).size.should == @filtered_list_items.size
       end
 
       it "should include only list items in category" do

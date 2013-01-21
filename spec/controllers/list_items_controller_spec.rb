@@ -41,10 +41,9 @@ describe ListItemsController do
       end
 
       it "should create list entries for all list items and product types" do
-        product_type_size = @list.product_types.size
         list_items_size = @list.list_items.size
 
-        assigns(:list_entries).size.should == product_type_size + list_items_size
+        assigns(:list_entries).size.should == list_items_size
       end
 
     end
@@ -80,10 +79,9 @@ describe ListItemsController do
       end
 
       it "should create list entries for list items and product types in current category" do
-        product_type_size = ProductType.where(category_id: current_category.id).size
         list_items_size = @list.list_items.where(category_id: current_category.id).size
 
-        assigns(:list_entries).size.should == product_type_size + list_items_size
+        assigns(:list_entries).size.should == list_items_size
       end
 
     end
