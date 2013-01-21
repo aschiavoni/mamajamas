@@ -6,8 +6,9 @@ class ListItem < ActiveRecord::Base
   belongs_to :product_type
   belongs_to :when_to_buy_suggestion
 
-  attr_accessible :link, :name, :notes, :owned, :priority, :rating, :when_to_buy, :image_url
+  attr_accessible :link, :name, :notes, :owned
+  attr_accessible :priority, :rating, :when_to_buy, :image_url
   attr_accessible :list_id, :product_type_id
 
-  validates :name, :link, presence: true
+  validates :name, :link, presence: true, unless: :placeholder?
 end

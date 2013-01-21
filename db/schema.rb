@@ -31,11 +31,12 @@ ActiveRecord::Schema.define(:version => 20130125162246) do
     t.integer  "priority"
     t.string   "notes"
     t.string   "image_url"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.integer  "product_type_id"
     t.integer  "category_id"
     t.integer  "when_to_buy_suggestion_id"
+    t.boolean  "placeholder",               :default => false, :null => false
   end
 
   add_index "list_items", ["category_id"], :name => "index_list_items_on_category_id"

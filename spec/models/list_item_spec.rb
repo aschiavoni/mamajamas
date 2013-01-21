@@ -14,6 +14,16 @@ describe ListItem do
       list_item.should_not be_valid
     end
 
+    it "does not need a name if it is a placeholder" do
+      list_item = build(:list_item, placeholder: true, name: nil)
+      list_item.should be_valid
+    end
+
+    it "does not need a link if it is a placeholder" do
+      list_item = build(:list_item, placeholder: true, link: nil)
+      list_item.should be_valid
+    end
+
   end
 
   describe "by category" do
