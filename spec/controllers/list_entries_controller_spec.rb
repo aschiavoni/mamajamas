@@ -15,7 +15,6 @@ describe ListEntriesController do
 
       let(:create_params) do
         {
-          type: "ListItem",
           name: "some new product",
           owned: false,
           link: "http://domain.com/newproduct",
@@ -46,41 +45,6 @@ describe ListEntriesController do
       end
 
       it "should render json list item" do
-        post :create, list_entry: create_params, format: :json
-        response.should render_template("create")
-      end
-
-    end
-
-    context "product type" do
-
-      let(:create_params) do
-        {
-          type: "ProductType",
-          name: "some new product type",
-          when_to_buy: "Pre-Birth",
-          priority: 2,
-          category_id: current_category.id
-        }
-      end
-
-      it "should create list product type" do
-        lambda do
-          post :create, list_entry: create_params
-        end.should change(current_user.list.product_types, :count).by(1)
-      end
-
-      it "should assign list entry" do
-        post :create, list_entry: create_params
-        assigns(:list_entry).should_not be_blank
-      end
-
-      it "list entry should be a product type" do
-        post :create, list_entry: create_params
-        assigns(:list_entry).should be_kind_of(ProductType)
-      end
-
-      it "should render json product type" do
         post :create, list_entry: create_params, format: :json
         response.should render_template("create")
       end

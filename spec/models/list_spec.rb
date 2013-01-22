@@ -31,7 +31,7 @@ describe List do
 
   end
 
-  describe "list with populated product types" do
+  describe "list with populated list item placeholders" do
 
     let(:list) { create(:list) }
 
@@ -45,26 +45,23 @@ describe List do
 
     before(:all) do
       product_types.each do |product_type|
-        list.list_product_types << ListProductType.new({
-          product_type: product_type,
-          category: product_type.category
-        })
+        list.add_list_item_placeholder(product_type)
       end
     end
 
     it "should have many product types" do
-      product_types.size.should == list.product_types.size
+      list.list_items.size.should == product_types.size
     end
 
     it "should include all product types" do
       product_types.each do |product_type|
-        list.product_types.should include(product_type)
+        list.list_items.map(&:product_type).should include(product_type)
       end
     end
 
     it "should have categories" do
       # in the specs, each product_type has a unique category
-      list.categories.size.should == product_types.size
+      list.categories.size.should == list.list_items.size
     end
 
   end
@@ -108,7 +105,7 @@ describe List do
 
     it "should have a list item with the correct image url" do
       list_item = list.add_list_item_placeholder(product_type)
-      list_item.image_url.should == product_type.image_name
+      list_item.image_url.should == "/assets/products/icons/#{product_type.image_name}"
     end
 
     it "should have a list item with the correct when to buy suggestion" do
@@ -141,93 +138,6 @@ describe List do
       list_product_type = list.list_product_types.where(product_type_id: product_type.id).first
 
       list_product_type.should be_hidden
-    end
-
-  end
-
-  describe "add product type" do
-
-    let(:user) { create(:user) }
-
-    let(:list) { create(:list, user: user) }
-
-    it "should add a new list product type" do
-      lambda do
-        list.add_product_type(build(:product_type))
-      end.should change(list.list_product_types, :count).by(1)
-    end
-
-    it "should add a new user product type" do
-      lambda do
-        list.add_product_type(build(:product_type))
-      end.should change(user.product_types, :count).by(1)
-    end
-
-    it "new list product type should have a valid product type id" do
-      new_product_type = list.add_product_type(build(:product_type))
-      list_product_type = list.list_product_types.where(product_type_id: new_product_type.id).first
-      list_product_type.should_not be_nil
-    end
-
-    it "should add a new list product type in a different category when product type exists" do
-      product_type = create(:product_type)
-      list.list_product_types << ListProductType.new({
-        product_type: product_type,
-        category: product_type.category
-      })
-
-      lambda do
-        new_product_type = build(:product_type, name: product_type.name,
-                                 category: create(:category))
-        list.add_product_type(new_product_type)
-      end.should change(list.list_product_types, :count).by(1)
-    end
-
-    it "should return existing user product type when creating a user product with same name" do
-      product_type = list.add_product_type(build(:product_type))
-      added_product_type = list.add_product_type(build(:product_type, name: product_type.name))
-      added_product_type.should == product_type
-    end
-
-    it "should not add a user product type if a global product type exists" do
-      product_type = create(:product_type)
-      list.list_product_types << ListProductType.new({
-        product_type: product_type,
-        category: product_type.category
-      })
-
-      lambda do
-        list.add_product_type(build(:product_type, name: product_type.name))
-      end.should_not change(user.product_types, :count)
-    end
-
-    it "should not add a new list product type if the product type is in list" do
-      product_type = create(:product_type)
-      list.list_product_types << ListProductType.new({
-        product_type: product_type,
-        category: product_type.category
-      })
-
-      lambda do
-        new_product_type = build(:product_type, name: product_type.name, category: product_type.category)
-        list.add_product_type(new_product_type)
-      end.should_not change(list.list_product_types, :count)
-    end
-
-    it "should unhide an existing product type" do
-      product_type = create(:product_type)
-      list.list_product_types << ListProductType.new({
-        product_type: product_type,
-        category: product_type.category,
-        hidden: true
-      })
-
-      pt = list.add_product_type(build(:product_type, name: product_type.name))
-
-      list_product_type = list.list_product_types.
-        where(product_type_id: pt.id).first
-
-      list_product_type.hidden.should be_false
     end
 
   end

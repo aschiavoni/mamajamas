@@ -5,14 +5,7 @@ class ListEntriesController < ApplicationController
   respond_to :json
 
   def create
-    entry_params = params[:list_entry]
-    entry_type = entry_params.delete(:type)
-    if entry_type == "ListItem"
-      entry_params.delete(:product_type)
-      @list_entry = @list.add_list_item(ListItem.new(entry_params))
-    elsif entry_type == "ProductType"
-      @list_entry = @list.add_product_type(ProductType.new(entry_params))
-    end
+    @list_entry = @list.add_list_item(ListItem.new(params[:list_entry]))
     respond_with @list_entry
   end
 

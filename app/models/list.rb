@@ -18,7 +18,7 @@ class List < ActiveRecord::Base
     end
   end
 
-  has_many :categories, through: :list_product_types, uniq: true do
+  has_many :categories, through: :list_items, uniq: true do
     def for_list
       order(:name)
     end
@@ -44,7 +44,8 @@ class List < ActiveRecord::Base
       list_item.product_type = product_type
       list_item.category = product_type.category
       list_item.priority = product_type.priority
-      list_item.image_url = product_type.image_name
+      # TODO: don't hardcode image path
+      list_item.image_url = "/assets/products/icons/#{product_type.image_name}"
       list_item.when_to_buy_suggestion = product_type.when_to_buy_suggestion
     end
 
@@ -64,26 +65,6 @@ class List < ActiveRecord::Base
     end
 
     list_item
-  end
-
-  def add_product_type(product_type)
-    existing_product_type = product_types.where(name: product_type.name).first
-    if existing_product_type.blank?
-      user.product_types << product_type
-    else
-      # preserve the submitted category
-      existing_product_type.category_id = product_type.category_id
-      product_type = existing_product_type
-    end
-
-    existing_list_product_type = list_product_types.where(product_type_id: product_type.id, category_id: product_type.category.id).first
-    if existing_list_product_type.present?
-      existing_list_product_type.unhide! if existing_list_product_type.hidden?
-    else
-      add_list_product_type(product_type)
-    end
-
-    product_type
   end
 
   def available_product_types
