@@ -4,10 +4,10 @@
 </td>
 <td class="item">
   <div class="prod-thumb">
-    <img src="/assets/products/icons/{{productType.image_name}}" alt="bottle">
+    <img src="{{listItem.image_url}}" alt="bottle">
   </div>
   <div class="prod-desc">
-    <div class="prod-category">{{productType.name}}</div>
+    <div class="prod-category">{{listItem.product_type}}</div>
     <!-- drop-down editing menu -->
     <div class="prod-edit-menu">
       <ul class="clearfix">
@@ -26,8 +26,8 @@
 </td>
 <td class="rating">&nbsp;</td>
 <td class="when">
-  <div class="when-txt">{{productType.when_to_buy}}</div>
+  <div class="when-txt">{{listItem.when_to_buy}}</div>
 </td>
 <td class="priority">
-  {{priorityIndicator productType.priority}}
+  {{priorityIndicator listItem.priority}}
 </td>

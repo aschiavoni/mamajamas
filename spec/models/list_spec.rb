@@ -127,19 +127,6 @@ describe List do
       end.should change(list.list_items, :count).by(1)
     end
 
-    it "should hide a product type when an item of that type is added" do
-      list.list_product_types << ListProductType.new({
-        product_type: product_type,
-        category: product_type.category
-      })
-
-      list_item = build(:list_item, product_type: product_type, list_id: nil)
-      list.add_list_item(list_item)
-      list_product_type = list.list_product_types.where(product_type_id: product_type.id).first
-
-      list_product_type.should be_hidden
-    end
-
   end
 
   describe "available product types" do

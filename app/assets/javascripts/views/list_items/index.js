@@ -48,15 +48,15 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
 
   itemView: function(item) {
     var view = null;
-    if (item.get('type') == "ListItem") {
-      // ListItem
-       view = new Mamajamas.Views.ListItemShow({
+    if (item.get('placeholder')) {
+      // Placeholder
+      view = new Mamajamas.Views.ListItemPlaceholder({
         model: item
       });
     } else {
-      // ProductType
-      view = new Mamajamas.Views.ProductTypeShow({
-        model: item
+      // ListItem
+       view = new Mamajamas.Views.ListItemShow({
+         model: item
       });
     }
     return view;

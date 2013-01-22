@@ -93,13 +93,13 @@ describe ListEntriesController do
     end
 
     it "should assign list entry" do
-      delete :destroy, id: "list-item-#{@list_item.id}"
+      delete :destroy, id: @list_item.id
       assigns(:list_entry).should == @list_item
     end
 
     it "should delete list item" do
       lambda do
-        delete :destroy, id: "list-item-#{@list_item.id}"
+        delete :destroy, id: @list_item.id
       end.should change(current_user.list.list_items, :count).by(-1)
     end
 

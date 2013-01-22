@@ -106,7 +106,6 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     _view.clearErrors();
 
     attributes = {
-      type: "ListItem",
       name: this.scopedElement("list_item_name").val(),
       link: this.scopedElement("list_item_link").val(),
       notes: this.scopedElement("list_item_notes").val(),
@@ -222,7 +221,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   },
 
   scopedSelector: function(id) {
-    return ("#" + id + "_" + this.model.get("product_type_id"));
+    return ("#" + id);
   },
 
   scopedElement: function(id) {

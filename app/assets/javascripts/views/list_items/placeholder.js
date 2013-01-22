@@ -1,8 +1,8 @@
-Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
+Mamajamas.Views.ListItemPlaceholder = Backbone.View.extend({
 
   tagName: 'tr',
 
-  template: HandlebarsTemplates['product_types/show'],
+  template: HandlebarsTemplates['list_items/placeholder'],
 
   className: "prod prod-filled",
 
@@ -16,20 +16,16 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
   },
 
   render: function(event) {
-    this.$el.html(this.template({ productType: this.model.toJSON() }));
+    this.$el.html(this.template({ listItem: this.model.toJSON() }));
     return this;
   },
 
   addItem: function(event) {
+    var newItem = this.model.clone();
+    newItem.id = null;
+    newItem.set("name", null);
     var addItem = new Mamajamas.Views.ListItemEdit({
-      model: new Mamajamas.Models.ListItem({
-        product_type: this.model.get("name"),
-        product_type_id: this.modelId(),
-        category_id: this.model.get("category_id"),
-        priority: this.model.get("priority"),
-        when_to_buy: this.model.get("when_to_buy"),
-        image_url: "/assets/products/icons/" + this.model.get("image_name")
-      }),
+      model: newItem,
       parent: this
     });
 
@@ -38,15 +34,6 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
     addItem.setup();
 
     return false;
-  },
-
-  modelId: function() {
-    // id might come in as a string or a number
-    var id = this.model.get("id");
-    if (_.isString(id)) {
-      id = id.replace("product-type-", "");
-    }
-    return id;
   },
 
   moveToBottom: function() {
@@ -70,3 +57,4 @@ Mamajamas.Views.ProductTypeShow = Backbone.View.extend({
   }
 
 });
+

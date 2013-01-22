@@ -1,8 +1,8 @@
-Mamajamas.Views.ProductTypeNew = Backbone.View.extend({
+Mamajamas.Views.ListItemNew = Backbone.View.extend({
 
   tagName: 'tr',
 
-  template: HandlebarsTemplates['product_types/new'],
+  template: HandlebarsTemplates['list_items/new'],
 
   className: "prod new-mode",
 
@@ -16,7 +16,7 @@ Mamajamas.Views.ProductTypeNew = Backbone.View.extend({
   },
 
   render: function(event) {
-    this.$el.html(this.template({ productType: this.model.toJSON() }));
+    this.$el.html(this.template({ listItem: this.model.toJSON() }));
 
     // subviews
     var whenToBuyView = new Mamajamas.Views.ListItemWhenToBuy({

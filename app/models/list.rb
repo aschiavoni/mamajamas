@@ -35,12 +35,13 @@ class List < ActiveRecord::Base
   end
 
   def list_entries(category = nil)
-    list_items.by_category(category).order("name ASC")
+    list_items.by_category(category).order("placeholder, name ASC")
   end
 
   def add_list_item_placeholder(product_type)
     list_item = ListItem.new.tap do |list_item|
       list_item.placeholder = true
+      list_item.name = product_type.name
       list_item.product_type = product_type
       list_item.category = product_type.category
       list_item.priority = product_type.priority
@@ -55,15 +56,8 @@ class List < ActiveRecord::Base
   end
 
   def add_list_item(list_item)
+    list_item.placeholder = false
     list_items << list_item
-
-    # mark corresponding list product type as hidden
-    list_product_type = list_product_types.where(product_type_id: list_item.product_type.id).first
-
-    if list_product_type.present?
-      list_product_type.hide!
-    end
-
     list_item
   end
 

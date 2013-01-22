@@ -7,22 +7,7 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
 
   url: "/api/list_entries",
 
-  model: function(attrs, options) {
-    var m = null;
-
-    switch(attrs.type) {
-      case "ListItem":
-        m = new Mamajamas.Models.ListItem(attrs, options);
-        break;
-      case "ProductType":
-        m = new Mamajamas.Models.ProductType(attrs, options);
-        break;
-      default:
-        m = new Mamajamas.Models.ListEntry(attrs, options);
-    }
-
-    return m;
-  },
+  model: Mamajamas.Models.ListItem,
 
   sortStrategies: {
     name: function(listEntry, compareTo) {
