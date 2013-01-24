@@ -50,19 +50,19 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   setup: function() {
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-    this.scopedElement("list_item_name").focus();
+    $("#list_item_name", this.$el).focus();
   },
 
   updateRating: function() {
-    this.scopedElement("list_item_rating").val(this.model.get("rating"));
+    $("#list_item_rating", this.$el).val(this.model.get("rating"));
   },
 
   updateWhenToBuy: function() {
-    this.scopedElement("list_item_when_to_buy").val(this.model.get("when_to_buy"));
+    $("#list_item_when_to_buy", this.$el).val(this.model.get("when_to_buy"));
   },
 
   updatePriority: function() {
-    this.scopedElement("list_item_priority").val(this.model.get("priority"));
+    $("#list_item_priority", this.$el).val(this.model.get("priority"));
   },
 
   initializeAutocomplete: function() {
@@ -72,7 +72,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       productTypeId = 0; // ugh, magic number
     var url = "/api/categories/" + _view.model.get("category_id") + "/" + productTypeId;
 
-    this.scopedElement("list_item_name").autocomplete({
+    $("#list_item_name", this.$el).autocomplete({
       source: function(request, response) {
         $.getJSON(url, { filter: request.term }, function(data) {
           response($.map(data, function(item) {
@@ -88,8 +88,8 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       },
       select: function(event, ui) {
         $(event.target).val(ui.item.value.name);
-        _view.scopedElement("list_item_link").val(ui.item.value.url);
-        _view.scopedElement("list_item_image_url").val(ui.item.value.image_url);
+        $("#list_item_link", _view.$el).val(ui.item.value.url);
+        $("#list_item_image_url", _view.$el).val(ui.item.value.image_url);
 
         // re-initialize the inFieldLabels plugin
         $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
@@ -109,17 +109,17 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     _view.clearErrors();
 
     attributes = {
-      name: this.scopedElement("list_item_name").val(),
-      link: this.scopedElement("list_item_link").val(),
-      notes: this.scopedElement("list_item_notes").val(),
-      product_type_id: this.scopedElement("list_item_product_type_id").val(),
+      name: $("#list_item_name", this.$el).val(),
+      link: $("#list_item_link", this.$el).val(),
+      notes: $("#list_item_notes", this.$el).val(),
+      product_type_id: $("#list_item_product_type_id", this.$el).val(),
       product_type: _view.model.get("product_type"),
       product_type_name: _view.model.get("product_type_name"),
-      category_id: this.scopedElement("list_item_category_id").val(),
-      priority: this.scopedElement("list_item_priority").val(),
-      when_to_buy: this.scopedElement("list_item_when_to_buy").val(),
-      rating: this.scopedElement("list_item_rating").val(),
-      image_url: this.scopedElement("list_item_image_url").val(),
+      category_id: $("#list_item_category_id", this.$el).val(),
+      priority: $("#list_item_priority", this.$el).val(),
+      when_to_buy: $("#list_item_when_to_buy", this.$el).val(),
+      rating: $("#list_item_rating", this.$el).val(),
+      image_url: $("#list_item_image_url", this.$el).val(),
       owned: $("input[name='list_item[owned]']:checked").val() == "1",
       placeholder: false
     };
@@ -188,11 +188,11 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     var owned = $(event.target).is(":checked");
     var selector;
     if (owned)
-      selector = this.scopedSelector("list_item_owned_1");
+      selector = $("#list_item_owned_1");
     else
-      selector = this.scopedSelector("list_item_owned_0");
+      selector = $("#list_item_owned_0");
 
-    $(selector).attr("checked", "checked");
+    $(selector, this.$el).attr("checked", "checked");
   },
 
   handleError: function(item, response) {
@@ -220,17 +220,9 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   errorFieldMap: function() {
     return {
-      name: this.scopedSelector("list_item_name"),
-      link: this.scopedSelector("list_item_link")
+      name: $("#list_item_name"),
+      link: $("#list_item_link")
     };
-  },
-
-  scopedSelector: function(id) {
-    return ("#" + id);
-  },
-
-  scopedElement: function(id) {
-    return $(this.scopedSelector(id), this.$el);
   }
 
 });
