@@ -5,7 +5,7 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
     this.sortDirection = "ASC";
   },
 
-  url: "/api/list_entries",
+  url: "/list/list_items",
 
   model: Mamajamas.Models.ListItem,
 
