@@ -24,7 +24,8 @@ describe ListEntriesController do
           notes: "these are notes",
           image_url: "http://domain.com/newproduct.png",
           category_id: current_category.id,
-          product_type_id: create(:product_type).id
+          product_type_id: create(:product_type).id,
+          placeholder: false
         }
       end
 
@@ -42,6 +43,11 @@ describe ListEntriesController do
       it "list entry should be a list item" do
         post :create, list_entry: create_params
         assigns(:list_entry).should be_kind_of(ListItem)
+      end
+
+      it "should create a list item placeholder" do
+        post :create, list_entry: create_params.merge(placeholder: true)
+        assigns(:list_entry).should be_placeholder
       end
 
       it "should render json list item" do

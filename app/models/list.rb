@@ -35,13 +35,13 @@ class List < ActiveRecord::Base
   end
 
   def list_entries(category = nil)
-    list_items.by_category(category).order("placeholder, name ASC")
+    list_items.by_category(category).order("placeholder ASC, product_type_name ASC")
   end
 
   def add_list_item_placeholder(product_type)
-    list_item = ListItem.new.tap do |list_item|
+    list_item = ListItem.new do |list_item|
       list_item.placeholder = true
-      list_item.name = product_type.name
+      list_item.product_type_name = product_type.name
       list_item.product_type = product_type
       list_item.category = product_type.category
       list_item.priority = product_type.priority
@@ -55,16 +55,14 @@ class List < ActiveRecord::Base
     list_item
   end
 
-  def add_list_item(list_item)
-    list_item.placeholder = false
+  def add_list_item(list_item, placeholder = false)
+    list_item.placeholder = placeholder
     list_items << list_item
     list_item
   end
 
   def available_product_types
-    hidden_list_product_types =
-      product_types.where("list_product_types.hidden = ?", true)
-    (ProductType.global + user.product_types) - product_types + hidden_list_product_types
+    ProductType.global.order("name ASC")
   end
 
   private

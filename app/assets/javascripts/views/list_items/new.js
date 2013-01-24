@@ -36,7 +36,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
 
   setup: function() {
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-    $("#product_type_name", this.$el).focus();
+    $("#list_item_name", this.$el).focus();
   },
 
   cancel: function(event) {
@@ -48,12 +48,15 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
 
     var _view = this;
     _view.clearErrors();
+    var itemName = $("#list_item_name", this.$el).val();
     var attributes = {
-      type: "ProductType",
       category_id: this.model.get("category_id"),
       priority: this.model.get("priority"),
       when_to_buy: this.model.get("when_to_buy"),
-      name: $("#product_type_name", this.$el).val()
+      image_url: this.model.get("image_url"),
+      product_type_id: this.model.get("product_type_id"),
+      product_type_name: itemName,
+      placeholder: true
     };
 
     _view.model = Mamajamas.Context.ListItems.create(attributes, {
@@ -69,11 +72,11 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
   },
 
   updateWhenToBuy: function() {
-    $("#product_type_when_to_buy", this.$el).val(this.model.get("when_to_buy"));
+    $("#list_item_when_to_buy", this.$el).val(this.model.get("when_to_buy"));
   },
 
   updatePriority: function() {
-    $("#product_type_priority", this.$el).val(this.model.get("priority"));
+    $("#list_item_priority", this.$el).val(this.model.get("priority"));
   },
 
   handleError: function(item, response) {
@@ -101,7 +104,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
 
   errorFieldMap: function() {
     return {
-      name: "#product_type_name"
+      name: "#list_item_name"
     };
   },
 
@@ -109,7 +112,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
     var _view = this;
     var url = "/api/list/product_types/";
 
-    $("#product_type_name", this.$el).autocomplete({
+    $("#list_item_name", this.$el).autocomplete({
       source: function(request, response) {
         $.getJSON(url, { filter: request.term }, function(data) {
           response($.map(data, function(item) {
@@ -125,6 +128,8 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
       },
       select: function(event, ui) {
         $(event.target).val(ui.item.value.name);
+        _view.model.set("product_type_id", ui.item.value.id);
+        _view.model.set("image_url", ui.item.value.image_url);
 
         // re-initialize the inFieldLabels plugin
         $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });

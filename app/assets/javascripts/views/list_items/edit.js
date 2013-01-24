@@ -67,7 +67,10 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   initializeAutocomplete: function() {
     var _view = this;
-    var url = "/api/categories/" + _view.model.get("category_id") + "/" + this.model.get("product_type_id");
+    var productTypeId = this.model.get("product_type_id");
+    if (!productTypeId)
+      productTypeId = 0; // ugh, magic number
+    var url = "/api/categories/" + _view.model.get("category_id") + "/" + productTypeId;
 
     this.scopedElement("list_item_name").autocomplete({
       source: function(request, response) {
@@ -111,12 +114,14 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       notes: this.scopedElement("list_item_notes").val(),
       product_type_id: this.scopedElement("list_item_product_type_id").val(),
       product_type: _view.model.get("product_type"),
+      product_type_name: _view.model.get("product_type_name"),
       category_id: this.scopedElement("list_item_category_id").val(),
       priority: this.scopedElement("list_item_priority").val(),
       when_to_buy: this.scopedElement("list_item_when_to_buy").val(),
       rating: this.scopedElement("list_item_rating").val(),
       image_url: this.scopedElement("list_item_image_url").val(),
-      owned: $("input[name='list_item[owned]']:checked").val() == "1"
+      owned: $("input[name='list_item[owned]']:checked").val() == "1",
+      placeholder: false
     };
 
     if (_view.model.isNew()) {

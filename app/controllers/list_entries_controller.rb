@@ -5,7 +5,9 @@ class ListEntriesController < ApplicationController
   respond_to :json
 
   def create
-    @list_entry = @list.add_list_item(ListItem.new(clean_params(params[:list_entry])))
+    placeholder = params[:list_entry].delete(:placeholder)
+    item_params = clean_params(params[:list_entry])
+    @list_entry = @list.add_list_item(ListItem.new(item_params), placeholder)
     respond_with @list_entry
   end
 
@@ -27,7 +29,7 @@ class ListEntriesController < ApplicationController
   end
 
   def clean_params(params_to_clean)
-    [ :id, :placeholder, :category, :product_type, :when_to_buy_position ].each do |key|
+    [ :id, :category, :product_type, :when_to_buy_position ].each do |key|
       params_to_clean.delete(key)
     end
     params_to_clean

@@ -10,6 +10,7 @@ Mamajamas.Views.ListShow = Backbone.View.extend({
     // add-product-type is not contained in the view so we wire it up globally
     var _view = this;
     $("#add-product-type").click(function(event) {
+      event.preventDefault();
       return _view.addProductType(_view, event);
     });
   },
@@ -31,11 +32,12 @@ Mamajamas.Views.ListShow = Backbone.View.extend({
   },
 
   addProductType: function(view, event) {
-    var addItem = new Mamajamas.Views.ProductTypeNew({
-      model: new Mamajamas.Models.ProductType({
+    var addItem = new Mamajamas.Views.ListItemNew({
+      model: new Mamajamas.Models.ListItem({
         category_id: view.model.get("category_id"),
         when_to_buy: "Pre-birth",
-        priority: 2
+        priority: 2,
+        image_url: "/assets/products/icons/unknown.png"
       })
     });
 

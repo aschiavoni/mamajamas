@@ -8,7 +8,8 @@ class ListItem < ActiveRecord::Base
 
   attr_accessible :link, :name, :notes, :owned
   attr_accessible :priority, :rating, :when_to_buy, :image_url
-  attr_accessible :list_id, :product_type_id
+  attr_accessible :category_id, :product_type_id, :product_type_name
+  attr_accessible :placeholder
 
   validates :name, :link, presence: true, unless: :placeholder?
 end

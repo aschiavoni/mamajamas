@@ -1,19 +1,19 @@
 <td class="own"></td>
 <td class="item">
   <div class="prod-thumb">
-    <img src="{{listItem.image_url}}" alt="new Mamajamas Item">
+    <img id="list_item_image" src="{{listItem.image_url}}" alt="new Mamajamas Item">
   </div>
-  <form class="new-product-type">
+  <form class="new-placeholder">
     <div class="prod-desc">
-      <input id="product_type_category_id" name="product_type[category_id]" type="hidden" value="{{listItem.category_id}}">
-      <input id="product_type_priority" name="product_type[priority]" type="hidden" value="{{listItem.priority}}">
-      <input id="product_type_when_to_buy" name="product_type[when_to_buy]" type="hidden" value="{{listItem.when_to_buy}}">
+      <input id="list_item_category_id" name="list_item[category_id]" type="hidden" value="{{listItem.category_id}}">
+      <input id="list_item_priority" name="list_item[priority]" type="hidden" value="{{listItem.priority}}">
+      <input id="list_item_when_to_buy" name="list_item[when_to_buy]" type="hidden" value="{{listItem.when_to_buy}}">
       <div class="prod-category">
         <fieldset>
           <p>
-          <label for="product_type_name">Unnamed item: Enter an item type</label>
+          <label for="list_item_name">Unnamed item: Enter an item type</label>
           <br />
-          <input type="text" name="product_type[name]" value="" id="product_type_name">
+          <input type="text" name="list_item[name]" value="" id="list_item_name">
           </p>
         </fieldset>
       </div>
