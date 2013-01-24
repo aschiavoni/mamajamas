@@ -71,12 +71,4 @@ class List < ActiveRecord::Base
     user.present? ? "#{user.username.possessive} List" : "List"
   end
 
-  def add_list_product_type(product_type)
-    list_product_type = ListProductType.new({
-      product_type: product_type,
-      category: product_type.category
-    })
-    list_product_type.list_id = self.id
-    list_product_type.save!
-  end
 end
