@@ -43,19 +43,6 @@ ActiveRecord::Schema.define(:version => 20130125162246) do
   add_index "list_items", ["category_id"], :name => "index_list_items_on_category_id"
   add_index "list_items", ["list_id"], :name => "index_list_items_on_list_id"
 
-  create_table "list_product_types", :force => true do |t|
-    t.integer  "list_id"
-    t.integer  "product_type_id"
-    t.integer  "category_id"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.boolean  "hidden",          :default => false
-  end
-
-  add_index "list_product_types", ["category_id"], :name => "index_list_product_types_on_category_id"
-  add_index "list_product_types", ["list_id"], :name => "index_list_product_types_on_list_id"
-  add_index "list_product_types", ["product_type_id"], :name => "index_list_product_types_on_product_type_id"
-
   create_table "lists", :force => true do |t|
     t.string   "title"
     t.integer  "user_id"

@@ -2,22 +2,6 @@ class List < ActiveRecord::Base
   attr_accessible :title
 
   belongs_to :user
-  has_many :list_product_types
-
-  has_many :product_types, through: :list_product_types do
-    def visible
-      where("list_product_types.hidden = ?", false)
-    end
-
-    def in_category(category)
-      if category.present?
-        where("list_product_types.category_id = ?", category.id)
-      else
-        scoped
-      end
-    end
-  end
-
   has_many :categories, through: :list_items, uniq: true do
     def for_list
       order(:name)
