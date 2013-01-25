@@ -7,6 +7,8 @@ Mamajamas.Views.ListItemPlaceholder = Backbone.View.extend({
   className: "prod prod-filled",
 
   initialize: function() {
+    this.model.on("change:when_to_buy", this.saveAndRender, this);
+    this.model.on("change:priority", this.saveAndRender, this);
     this.$el.attr("id", this.model.get("id"));
   },
 
@@ -17,7 +19,23 @@ Mamajamas.Views.ListItemPlaceholder = Backbone.View.extend({
 
   render: function(event) {
     this.$el.html(this.template({ listItem: this.model.toJSON() }));
+
+    var whenToBuyView = new Mamajamas.Views.ListItemWhenToBuy({
+      model: this.model
+    });
+    this.$el.append(whenToBuyView.render().$el);
+
+    var priorityView = new Mamajamas.Views.ListItemPriority({
+      model: this.model
+    });
+    this.$el.append(priorityView.render().$el);
+
     return this;
+  },
+
+  saveAndRender: function() {
+    this.model.save();
+    this.render();
   },
 
   addItem: function(event) {
