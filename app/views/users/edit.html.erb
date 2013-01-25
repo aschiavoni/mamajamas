@@ -39,7 +39,7 @@
       <dt>List title<strong class="required">*</strong></dt>
       <dd>
         <p>
-          <%= fields_for :list do |lf| %>
+          <%= fields_for @user.list do |lf| %>
             <%= lf.label :title do %>
               <strong><%= @user.list.title %></strong> (click to edit)
             <% end -%>

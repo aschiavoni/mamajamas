@@ -30,7 +30,7 @@ class List < ActiveRecord::Base
   end
 
   def title=(new_title)
-    new_title = nil if new_title.blank?
+    new_title = nil if new_title.blank? # don't allow "" as a title
     write_attribute(:title, new_title) unless new_title == default_title
   end
 
