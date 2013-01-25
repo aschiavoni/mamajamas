@@ -5,4 +5,8 @@ class Category < ActiveRecord::Base
   attr_accessible :name
 
   has_many :product_types, dependent: :destroy
+
+  def self.by_slug(slug)
+    where(slug: slug)
+  end
 end

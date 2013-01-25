@@ -45,8 +45,13 @@ class List < ActiveRecord::Base
     list_item
   end
 
-  def available_product_types
-    ProductType.global.order("name ASC")
+  def available_product_types(filter = nil, limit = nil)
+    product_types = ProductType.global.order("name ASC")
+    if filter.present?
+      product_types = product_types.where("lower(name) LIKE ?", "%#{filter.downcase}%")
+    end
+    product_types = product_types.limit(limit) if limit.present?
+    product_types
   end
 
   private

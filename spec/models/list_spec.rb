@@ -155,6 +155,21 @@ describe List do
       end
     end
 
+    it "should only include product types with names matching filter" do
+      name = "asdfg"
+      product_type = create(:product_type, name: name)
+      list.available_product_types(name).should include(product_type)
+    end
+
+    it "should not include product types with names not matching filter" do
+      name = "asdfg"
+      list.available_product_types(name).should be_empty
+    end
+
+    it "should limit the number of product types returned" do
+      list.available_product_types(nil, 1).size.should == 1
+    end
+
   end
 
   describe "list entries" do
