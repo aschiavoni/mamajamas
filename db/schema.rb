@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20130125162246) do
 
   create_table "when_to_buy_suggestions", :force => true do |t|
     t.string   "name"
+    t.integer  "position"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
