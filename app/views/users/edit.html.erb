@@ -78,7 +78,7 @@
         <p>
           <label for="field-bdate">mm/dd/yy</label>
           <br />
-          <input name="field-bdate" type="text" id="field-bdate" value="">
+          <%= f.text_field :birthday, id: "field-bdate", value: birthday_value(@user) %>
           <%= image_tag "icon_calendar@2x.png", class: "date-picker", alt: "calendar" %>
       </dd>
     </fieldset>
