@@ -2,9 +2,9 @@ require 'spec_helper'
 
 feature "Visitor signs up", js: true do
 
-  scenario "with valid username, email and password" do
+  scenario "with valid email and password" do
     @tempuser = build(:user)
-    sign_up_with @tempuser.username, @tempuser.email, "really!good$password"
+    sign_up_with @tempuser.email, "really!good$password"
 
     expect(page).to have_selector("#logout")
     expect(page).to have_content("Hello, #{@tempuser.username}")
@@ -12,21 +12,15 @@ feature "Visitor signs up", js: true do
     current_path.should == friends_path
   end
 
-  scenario "with invalid username" do
-    @tempuser = build(:user)
-    sign_up_with nil, @tempuser.email, "really!good$password"
-    expect(page).to have_selector(".status-msg.error", text: "username")
-  end
-
   scenario "with invalid email" do
     @tempuser = build(:user)
-    sign_up_with @tempuser.username, nil, "really!good$password"
+    sign_up_with nil, "really!good$password"
     expect(page).to have_selector(".status-msg.error", text: "email")
   end
 
   scenario "with invalid password" do
     @tempuser = build(:user)
-    sign_up_with @tempuser.username, @tempuser.email, nil
+    sign_up_with @tempuser.email, nil
     expect(page).to have_selector(".status-msg.error", text: "password")
   end
 

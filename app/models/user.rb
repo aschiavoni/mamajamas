@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
   validates(:username, presence: true,
             uniqueness: true, format: { :with => /^[A-Za-z\d_]+$/ })
 
+  before_validation :set_username
+
   # hook devise to support logging in by email or username
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -47,6 +49,12 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
         user.username = data["username"] if user.username.blank?
       end
+    end
+  end
+
+  def set_username
+    if email.present? && username.blank?
+      self.username = UsernameGenerator.from_email(email)
     end
   end
 
