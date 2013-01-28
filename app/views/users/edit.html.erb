@@ -14,7 +14,7 @@
     <p class="instruction">Upload a photo, or drag one into the box.</p>
   </div>
 <% end -%>
-<%= form_for @user, url: profile_path, html: { class: "label-infield", id: "frm-create-profile" } do |f| %>
+<%= form_for @profile, url: profile_path, as: :profile, method: :put, html: { class: "label-infield", id: "frm-create-profile" } do |f| %>
   <h3>My Basics</h3>
   <dl class="clearfix">
     <fieldset>
@@ -27,26 +27,24 @@
           <% end -%>
           <br />
           <%= f.text_field :username %>
-          <%= field_error @user, :username %>
+          <%= field_error @profile, :username %>
         </p>
       </dd>
       <!-- URL -->
       <dt>URL<strong class="required">*</strong></dt>
       <dd class="pad">
-        <p>www.mamjamas.com/<span class="list-url-suffix"><%= @user.username.downcase %></span> <em class="light">(generated from your username)</em></p>
+        <p>www.mamjamas.com/<span class="list-url-suffix"><%= @profile.list_url %></span> <em class="light">(generated from your username)</em></p>
       </dd>
       <!-- list title -->
       <dt>List title<strong class="required">*</strong></dt>
       <dd>
         <p>
-          <%= fields_for @user.list do |lf| %>
-            <%= lf.label :title do %>
-              <strong><%= @user.list.title %></strong> (click to edit)
-            <% end -%>
-            <br />
-            <%= lf.text_field :title %>
-            <%= field_error @user.list, :title %>
+          <%= f.label :list_title do %>
+            <strong><%= @profile.list_title %></strong> (click to edit)
           <% end -%>
+          <br />
+          <%= f.text_field :list_title %>
+          <%= field_error @profile, :list_title %>
         </p>
       </dd>
     </fieldset>
@@ -78,7 +76,7 @@
         <p>
           <label for="field-bdate">mm/dd/yy</label>
           <br />
-          <%= f.text_field :birthday, id: "field-bdate", value: birthday_value(@user) %>
+          <%= f.text_field :birthday, id: "field-bdate", value: @profile.formatted_birthday %>
           <%= image_tag "icon_calendar@2x.png", class: "date-picker", alt: "calendar" %>
       </dd>
     </fieldset>

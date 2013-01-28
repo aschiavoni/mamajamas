@@ -15,9 +15,14 @@ describe UsersController do
       response.should be_success
     end
 
-    it "should find user" do
+    it "should create a UserProfile form object" do
       get :edit
-      assigns(:user).should == user
+      assigns(:profile).should be_an_instance_of(Forms::UserProfile)
+    end
+
+    it "should assign user" do
+      get :edit
+      assigns(:profile).user.should == user
     end
 
   end
@@ -25,13 +30,13 @@ describe UsersController do
   describe "update" do
 
     it "should redirect to profile after update" do
-      UserProfileUpdater.any_instance.should_receive(:update).and_return(true)
+      Forms::UserProfile.any_instance.should_receive(:update!).and_return(true)
       put :update, user: { username: "test123" }
       response.should redirect_to(profile_path)
     end
 
     it "should render edit view if update fails" do
-      UserProfileUpdater.any_instance.should_receive(:update).and_return(false)
+      Forms::UserProfile.any_instance.should_receive(:update!).and_return(false)
       put :update
       response.should render_template("edit")
     end

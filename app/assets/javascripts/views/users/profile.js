@@ -11,13 +11,13 @@ Mamajamas.Views.UserProfile = Backbone.View.extend({
   },
 
   events: {
-    "keyup #user_username": "updateUrl",
+    "keyup #profile_username": "updateUrl",
     "click img.date-picker": "showBirthdayCalendar"
   },
 
   updateUrl: function(event) {
     var $listUrlSuffix = $(".list-url-suffix", this.$el);
-    var $userName = $("#user_username", this.$el);
+    var $userName = $("#profile_username", this.$el);
     $listUrlSuffix.html($userName.val().toLowerCase());
   },
 

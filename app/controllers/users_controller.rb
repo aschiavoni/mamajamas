@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def update
     respond_to do |format|
-      if UserProfileUpdater.new(@user).update(params[:user], params[:list])
+      if @profile.update!(params[:profile])
         format.html do
           redirect_to profile_path, notice: "Your profile has been updated."
         end
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   private
 
   def init_view
-    @user = current_user
+    @profile = Forms::UserProfile.new(current_user, current_user.list)
     @page_id = "create-profile"
     @subheader = "Create my profile"
   end
