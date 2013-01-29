@@ -7,7 +7,7 @@ feature "Visitor signs up", js: true do
     sign_up_with @tempuser.email, "really!good$password"
 
     expect(page).to have_selector("#logout")
-    expect(page).to have_content("Hello, #{@tempuser.username}")
+    expect(page).to have_content("My Account")
     expect(page).to have_content("Follow Mom Friends")
     current_path.should == friends_path
   end
