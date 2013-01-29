@@ -58,8 +58,8 @@ gem 'friendly_id'
 gem 'htmlentities'
 
 # file attachments
-gem 'paperclip'
-gem 'aws-sdk'
+gem 'carrierwave'
+gem 'fog'
 
 # lists
 gem 'acts_as_list'
