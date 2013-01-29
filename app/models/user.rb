@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
   has_many :product_types, dependent: :destroy
   has_one :list
 
+  mount_uploader :profile_picture, ProfilePictureUploader
+
   validates(:username, presence: true,
             uniqueness: true, format: { :with => /^[A-Za-z\d_]+$/ })
 
