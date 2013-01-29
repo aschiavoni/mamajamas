@@ -33,7 +33,7 @@
         <% if user_signed_in? -%>
           <li id="myaccount">
             <a href="#" id="myaccount-dd">
-              <%= image_tag current_user.facebook.profile_pic_url(current_user.uid) %>
+              <%= image_tag current_user.facebook.profile_pic_url %>
               My Account
               <span class="ss-dropdown"></span>
             </a>

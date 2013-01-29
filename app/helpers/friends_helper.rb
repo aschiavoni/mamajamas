@@ -28,6 +28,6 @@ module FriendsHelper
   end
 
   def facebook_profile_image(user)
-    image_tag(user.facebook.profile_pic_url(user.uid), :alt => user.username)
+    image_tag(user.facebook.profile_pic_url, :alt => user.username)
   end
 end

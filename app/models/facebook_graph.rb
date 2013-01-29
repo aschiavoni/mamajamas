@@ -1,9 +1,10 @@
 class FacebookGraph
   extend Memoist
 
-  def initialize(user)
+  def initialize(user, profile_pic_provider = FacebookProfilePicture)
     @user = user
     @facebook = user.access_token.blank? ? nil : Koala::Facebook::API.new(user.access_token)
+    @profile_pic_provider = profile_pic_provider
   end
 
   def friends(limit = nil)
@@ -16,8 +17,8 @@ class FacebookGraph
   end
   memoize :mamajamas_friends
 
-  def profile_pic_url(uid)
-    "http://graph.facebook.com/#{uid}/picture?type=square"
+  def profile_pic_url(type = :square)
+    profile_pic_provider.new(user.uid, type: type).url
   end
 
   def post_to_wall(message, attachment = {})
@@ -25,6 +26,14 @@ class FacebookGraph
   end
 
   private
+
+  def user
+    @user
+  end
+
+  def profile_pic_provider
+    @profile_pic_provider
+  end
 
   def facebook
     return nil if @facebook.blank?
@@ -35,7 +44,7 @@ class FacebookGraph
   end
 
   def all_friends
-    @user.facebook_friends
+    user.facebook_friends
   end
   memoize :all_friends
 
