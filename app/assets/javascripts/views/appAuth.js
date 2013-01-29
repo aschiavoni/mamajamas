@@ -16,7 +16,8 @@ window.Mamajamas.Views.AppAuth = Backbone.View.extend({
     "click #signup-link": "signup",
     "click #login-link": "login",
     "click #bt-fb-connect, #bt-fb-connect-s": "facebookLogin",
-    "click #logout": "logout"
+    "click #logout": "logout",
+    "click #myaccount-dd": "doNothing"
   },
   render: function(event) {
     return this;
@@ -40,5 +41,10 @@ window.Mamajamas.Views.AppAuth = Backbone.View.extend({
   },
   serverLogout: function(fbresponse) {
     $("#server-logout").click();
+  },
+
+  doNothing: function(event) {
+    event.preventDefault();
+    return false;
   }
 });

@@ -31,12 +31,21 @@
       <div id="login">
         <ul>
         <% if user_signed_in? -%>
-          <li>
-          Hello, <strong><%= link_to current_user.username, profile_path %></strong>
-          </li>
-          <li>
-            <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "logout" %>
-            <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "server-logout", style: "display: none;" %>
+          <li id="myaccount">
+            <a href="#" id="myaccount-dd">
+              <%= image_tag current_user.facebook.profile_pic_url(current_user.uid) %>
+              My Account
+              <span class="ss-dropdown"></span>
+            </a>
+            <ul class="nav-drop">
+              <li><%= mail_to current_user.email %></li>
+              <li><%= link_to "My List", list_path %></li>
+              <li><%= link_to "My Profile", profile_path %></li>
+              <li class="last">
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "logout" %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "server-logout", style: "display: none;" %>
+              </li>
+            </ul>
           </li>
         <% else -%>
           <li>
