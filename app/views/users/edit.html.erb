@@ -6,7 +6,7 @@
 <% end -%>
 <%= content_for :nav do %>
   <div id="profile-photo">
-    <%= image_tag "profile_photo-default-l.png", alt: "Upload a profile photo" %>
+    <%= profile_picture(@profile) %>
     <a class="button bt-light" id="bt-upload">
       <span class="ss-upload"></span>Upload
     </a>
@@ -15,6 +15,10 @@
   </div>
 <% end -%>
 <%= form_for @profile, url: profile_path, as: :profile, method: :put, html: { class: "label-infield", id: "frm-create-profile" } do |f| %>
+  <div style="display: none;">
+    <%= f.file_field :profile_picture %>
+    <%= f.hidden_field :profile_picture_cache %>
+  </div>
   <h3>My Basics</h3>
   <dl class="clearfix">
     <fieldset>

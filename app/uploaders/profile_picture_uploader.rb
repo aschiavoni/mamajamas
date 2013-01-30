@@ -29,8 +29,6 @@ class ProfilePictureUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  process :set_content_type
-
   # process :scale => [200, 300]
   #
   # def scale(width, height)

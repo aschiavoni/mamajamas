@@ -7,12 +7,19 @@ Mamajamas.Views.UserProfile = Backbone.View.extend({
       changeYear: true,
       defaultDate: "-25y"
     });
+
+    var _view = this;
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+    $("#bt-upload", "#profile-photo").click(function(event) {
+      event.preventDefault();
+      _view.showFilePicker(_view);
+    });
   },
 
   events: {
     "keyup #profile_username": "updateUrl",
-    "click img.date-picker": "showBirthdayCalendar"
+    "click img.date-picker": "showBirthdayCalendar",
+    "click #bt-upload": "showFilePicker"
   },
 
   updateUrl: function(event) {
@@ -24,6 +31,10 @@ Mamajamas.Views.UserProfile = Backbone.View.extend({
   showBirthdayCalendar: function(event) {
     this.birthdayField.focus();
     return false;
+  },
+
+  showFilePicker: function(view) {
+    $("#profile_profile_picture", view.$el).trigger("click");
   }
 
 });

@@ -5,6 +5,14 @@ en:
   date:
     formats:
       default: "%m/%d/%Y"
+  activemodel:
+    errors:
+      models:
+        forms/user_profile:
+          attributes:
+            username:
+              blank: "Sorry, but you must provide a username."
+              invalid: "Sorry, but your username must be alphanumeric and cannot contain any spaces."
   activerecord:
     errors:
       models:

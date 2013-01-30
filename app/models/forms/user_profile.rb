@@ -3,6 +3,7 @@ class Forms::UserProfile
   extend ActiveModel::Naming
   include ActiveModel::Conversion
   include ActiveModel::Validations
+  extend ActiveModel::Translation
 
   def persisted?
     false
@@ -14,7 +15,21 @@ class Forms::UserProfile
 
   delegate :username, :first_name, :last_name, :birthday, :to => :user
   delegate :username=, :first_name=, :last_name=, :birthday=, :to => :user
+  delegate :profile_picture, :profile_picture=, :to => :user
+  delegate :profile_picture_cache, :profile_picture_cache=, :to => :user
   delegate :title, :title=, :to => :list, :prefix => true
+
+  validates(:username, presence: true, format: { :with => /^[A-Za-z\d_]+$/ })
+
+  validate do
+    [user, list].each do |object|
+      unless object.valid?
+        object.errors.each do |key, values|
+          errors[key] = values
+        end
+      end
+    end
+  end
 
   def initialize(user, list)
     @user = user
@@ -23,6 +38,7 @@ class Forms::UserProfile
 
   def update!(attributes = {})
     update_attributes(attributes)
+    return false unless valid?
     save
   end
 
