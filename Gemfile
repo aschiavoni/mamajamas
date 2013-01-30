@@ -58,6 +58,7 @@ gem 'friendly_id'
 gem 'htmlentities'
 
 # file attachments
+gem 'jquery-fileupload-rails'
 gem 'carrierwave'
 gem 'fog'
 

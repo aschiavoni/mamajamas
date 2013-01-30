@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.autocomplete
 //= require jquery.ui.datepicker
+//= require jquery-fileupload/basic
 //= require underscore
 //= require backbone
 //= require handlebars

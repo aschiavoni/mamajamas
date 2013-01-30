@@ -11,10 +11,12 @@ class UsersController < ApplicationController
         format.html do
           redirect_to profile_path, notice: "Your profile has been updated."
         end
+        format.json
       else
         format.html do
           render action: "edit"
         end
+        format.json
       end
     end
   end
