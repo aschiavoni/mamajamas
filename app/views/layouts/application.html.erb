@@ -33,7 +33,7 @@
         <% if user_signed_in? -%>
           <li id="myaccount">
             <%= link_to profile_path do %>
-              <%= image_tag current_user.facebook.profile_pic_url %>
+              <%= image_tag current_user.profile_picture.account %>
               My Account
               <span class="ss-dropdown"></span>
             <% end -%>

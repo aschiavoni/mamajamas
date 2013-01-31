@@ -27,6 +27,9 @@ class ProfilePictureUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
+  def default_url
+    "/assets/profile_photo-default-l.png"
+  end
 
   # Process files as they are uploaded:
   # process :scale => [200, 300]
@@ -37,15 +40,15 @@ class ProfilePictureUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :account do
-    process :resize_to_limit => [24, 24]
+    process :resize_to_fill => [24, 24]
   end
 
   version :profile do
-    process :resize_to_limit => [142, 142]
+    process :resize_to_fill => [142, 142]
   end
 
   version :friend do
-    process :resize_to_limit => [84, 84]
+    process :resize_to_fill => [84, 84]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

@@ -6,7 +6,7 @@
 <% end -%>
 <%= content_for :nav do %>
   <div id="profile-photo">
-    <%= profile_picture(@profile) %>
+    <%= image_tag @profile.profile_picture.profile %>
     <div class="progress-container">
       <a class="button bt-light" id="bt-upload">
         <span class="ss-upload"></span>Upload

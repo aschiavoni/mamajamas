@@ -1,39 +1,6 @@
 require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the FriendsHelper. For example:
-#
-# describe FriendsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       helper.concat_strings("this","that").should == "this that"
-#     end
-#   end
-# end
 describe FriendsHelper do
-
-  describe "profile image" do
-
-    let(:user) { build(:user) }
-    let(:facebook_user) { build(:user, uid: "12345") }
-
-    describe "mamajamas user" do
-
-      it "should return local profile photo" do
-        helper.profile_image(user).should =~ /profile_photo\.jpg/
-      end
-
-    end
-
-    describe "facebook user" do
-
-      it "should return facebook profile photo" do
-        helper.profile_image(facebook_user).should =~ /graph\.facebook\.com\/#{facebook_user.uid}\/picture\?type=square/
-      end
-
-    end
-
-  end
 
   describe "display name" do
 
