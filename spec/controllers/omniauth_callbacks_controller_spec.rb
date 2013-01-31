@@ -18,6 +18,11 @@ describe Users::OmniauthCallbacksController do
         }.to change(User, :count).by(1)
       end
 
+      it "should update facebook profile picture" do
+        FacebookProfilePictureUpdater.any_instance.should_receive(:update!)
+        get :facebook
+      end
+
       it "should redirect to registrations facebook path" do
         get :facebook
         response.should redirect_to registrations_facebook_path
@@ -31,6 +36,11 @@ describe Users::OmniauthCallbacksController do
         expect {
           xhr :get, :facebook
         }.to change(User, :count).by(1)
+      end
+
+      it "should update facebook profile picture" do
+        FacebookProfilePictureUpdater.any_instance.should_receive(:update!)
+        get :facebook
       end
 
       it "should render user json" do

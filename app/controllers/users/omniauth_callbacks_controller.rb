@@ -6,6 +6,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = FacebookUserCreator.from_oauth(request.env["omniauth.auth"])
 
     if @user.persisted?
+      # TODO: background this?
+      FacebookProfilePictureUpdater.new(@user).update!
+
       sign_in @user, :event => :authentication #this will throw if @user is not activated
       # set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
       session["devise.fb_access_token"] = auth_info.credentials.token
