@@ -61,6 +61,7 @@ gem 'htmlentities'
 gem 'jquery-fileupload-rails'
 gem 'carrierwave'
 gem 'fog'
+gem 'mini_magick'
 
 # lists
 gem 'acts_as_list'

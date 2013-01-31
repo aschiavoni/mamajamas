@@ -4,6 +4,10 @@ describe Users::OmniauthCallbacksController do
 
   describe "facebook" do
 
+    before do
+      ProfilePictureUploader.any_instance.stub(:download! => false)
+    end
+
     before(:each) do
       mock_omniauth
       request.env["devise.mapping"] = Devise.mappings[:user]
