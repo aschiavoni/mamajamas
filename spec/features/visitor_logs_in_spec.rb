@@ -43,10 +43,6 @@ feature "Visitor logs in", js: true do
       # in an already exiting mamajamas user
       mock_omniauth('99999', @testuser.email)
 
-      # user = build(:user,
-      #              email: OmniAuth.config.mock_auth[:facebook]["info"]["email"])
-      # sign_up_with_and_logout user.username, user.email, "realgood!password"
-
       visit root_path
       click_link "login-link"
       page.has_css?("#login-window", visible: true)

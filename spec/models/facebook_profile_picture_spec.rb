@@ -6,6 +6,12 @@ describe FacebookProfilePicture do
     FacebookProfilePicture.new(uid).uid.should == uid
   end
 
+  it "should raise if passed a nil uid" do
+    lambda {
+      FacebookProfilePicture.new(nil)
+    }.should raise_error(FacebookUidNilException)
+  end
+
   it "should expose type" do
     FacebookProfilePicture.new(uid, type: :small).type.should == :small
   end
@@ -31,7 +37,7 @@ describe FacebookProfilePicture do
   it "should only allow certain types" do
     lambda {
       FacebookProfilePicture.new(uid, type: :unknown)
-    }.should raise_error(UnknownFacebookProfilePictureTypeException)
+    }.should raise_error(FacebookUnknownProfilePictureTypeException)
   end
 
   it "should default to type if width is specified but not height" do

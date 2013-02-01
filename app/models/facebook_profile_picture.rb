@@ -1,4 +1,5 @@
-class UnknownFacebookProfilePictureTypeException < Exception; end
+class FacebookUnknownProfilePictureTypeException < Exception; end
+class FacebookUidNilException < Exception; end
 
 class FacebookProfilePicture
   attr_reader :uid
@@ -6,11 +7,13 @@ class FacebookProfilePicture
   ALLOWED_TYPES = [ :square, :small, :normal, :large ]
 
   def initialize(uid, options = {})
+    raise FacebookUidNilException if uid.blank?
+
     @uid = uid
     @options = default_options.merge(options)
 
     unless ALLOWED_TYPES.include?(@options[:type])
-      raise UnknownFacebookProfilePictureTypeException
+      raise FacebookUnknownProfilePictureTypeException
     end
   end
 
