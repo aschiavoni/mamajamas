@@ -2,11 +2,14 @@ development:
   associate_tag: "mamajamas-20"
   access_key_id: "AKIAIXAEIBVZBZEU56MQ"
   secret_key: "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"
+  bucket: "mamajamas-dev"
 test:
   associate_tag: "mamajamas-20"
   access_key_id: "AKIAIXAEIBVZBZEU56MQ"
   secret_key: "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"
+  bucket: "mamajamas-test"
 production:
   associate_tag: "mamajamas-20"
   access_key_id: "AKIAIXAEIBVZBZEU56MQ"
   secret_key: "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"
+  bucket: "mamajamas"

@@ -5,6 +5,7 @@ describe ProfilePictureUploader do
 
   before do
     ProfilePictureUploader.enable_processing = true
+    ProfilePictureUploader.storage = CarrierWave::Storage::File
   end
 
   after do
