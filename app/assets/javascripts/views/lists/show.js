@@ -28,6 +28,9 @@ Mamajamas.Views.ListShow = Backbone.View.extend({
   },
 
   sort: function(event) {
+    $("#babygear th").removeClass("sorting");
+    var $header = $(event.target);
+    $header.addClass("sorting");
     return this.indexView.sort(event);
   },
 

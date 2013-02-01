@@ -31,24 +31,27 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
   },
 
   sortByField: function(listEntry, compareTo, fieldName) {
-    var fieldVal = this.typeQualifiedModelField(listEntry, fieldName);
-    var compareToField = this.typeQualifiedModelField(compareTo, fieldName);
+    var fieldVal = this.calculateSortField(listEntry, fieldName);
+    var compareToField = this.calculateSortField(compareTo, fieldName);
     return fieldVal.localeCompare(compareToField);
   },
 
   reverseSortByField: function(listEntry, compareTo, fieldName) {
-    var fieldVal = this.typeQualifiedModelField(listEntry, fieldName);
-    var compareToField = this.typeQualifiedModelField(compareTo, fieldName);
+    var fieldVal = this.calculateSortField(listEntry, fieldName);
+    var compareToField = this.calculateSortField(compareTo, fieldName);
     return compareToField.localeCompare(fieldVal);
   },
 
-  typeQualifiedModelField: function(listEntry, fieldName) {
+  calculateSortField: function(listEntry, fieldName) {
     var type = null;
-    var isListItem = listEntry.get("type") == "ListItem";
+    var isPlaceholder = listEntry.get("placeholder");
     if (this.isAscending())
-      type = isListItem ? 0 : 1;
+      type = isPlaceholder ? 0 : 1;
     else
-      type = isListItem ? 1 : 0;
+      type = isPlaceholder ? 1 : 0;
+
+    if (isPlaceholder && fieldName == "name")
+      fieldName = "product_type_name";
 
     var val = listEntry.get(fieldName);
     return type + "-" + val;
