@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130129181649) do
+ActiveRecord::Schema.define(:version => 20130201223038) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -46,8 +46,9 @@ ActiveRecord::Schema.define(:version => 20130129181649) do
   create_table "lists", :force => true do |t|
     t.string   "title"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "public",     :default => false, :null => false
   end
 
   add_index "lists", ["user_id"], :name => "index_lists_on_user_id"

@@ -40,6 +40,8 @@ Mamajamas::Application.routes.draw do
     resources :list_items
   end
 
+  get ":username" => "public_lists#show"
+
   scope "api" do
     defaults(format: "json") do
       get "categories" => "categories#index"

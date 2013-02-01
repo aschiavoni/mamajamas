@@ -22,6 +22,14 @@ class List < ActiveRecord::Base
     list_items.by_category(category).order("placeholder ASC, product_type_name ASC")
   end
 
+  def make_public!
+    set_public(true)
+  end
+
+  def make_nonpublic!
+    set_public(false)
+  end
+
   def add_list_item_placeholder(product_type)
     list_item = ListItem.new do |list_item|
       list_item.placeholder = true
@@ -58,6 +66,11 @@ class List < ActiveRecord::Base
 
   def default_title
     user.present? ? "#{user.username.possessive} List" : "List"
+  end
+
+  def set_public(public)
+    self.public = public
+    self.save!
   end
 
 end

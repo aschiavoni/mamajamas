@@ -242,4 +242,27 @@ describe List do
 
   end
 
+  describe "visibility" do
+
+    let(:list) { create(:list) }
+
+    it "should not be public by default" do
+      list.should_not be_public
+    end
+
+    it "should make list public" do
+      list.make_public!
+      list.reload
+      list.should be_public
+    end
+
+    it "should make list non-public" do
+      list.make_public!
+      list.reload
+      list.make_nonpublic!
+      list.reload
+      list.should_not be_public
+    end
+  end
+
 end

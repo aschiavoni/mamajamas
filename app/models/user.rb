@@ -89,11 +89,7 @@ class User < ActiveRecord::Base
     relationships_created_at.present?
   end
 
-  def list
-    List.where(user_id: self.id).first # || ListBuilder.new(self).build!
-  end
-
   def build_list!
-    ListBuilder.new(self).build!
+    ListBuilder.new(self).build! if list.blank?
   end
 end
