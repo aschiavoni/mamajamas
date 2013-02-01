@@ -24,6 +24,7 @@ en:
               blank: "Sorry, but you must provide a username."
               taken: "Sorry, but %{value} is already taken."
               invalid: "Sorry, but your username must be alphanumeric and cannot contain any spaces."
+              reserved_name: "Sorry, but that is not a valid username. Please try again with a different name."
             email:
               blank: "Sorry, but you must provide a valid email address."
               invalid: "Sorry, but you must provide a valid email address."

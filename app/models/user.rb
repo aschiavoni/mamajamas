@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :profile_picture, ProfilePictureUploader
 
-  validates(:username, presence: true,
+  validates(:username, presence: true, reserved_name: true,
             uniqueness: true, format: { :with => /^[A-Za-z\d_]+$/ })
 
   before_validation :set_username
