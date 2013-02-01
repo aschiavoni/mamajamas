@@ -4,6 +4,10 @@ describe ListsController do
 
   let(:user) { create(:user) }
 
+  before(:all) do
+    user.build_list!
+  end
+
   before(:each) do
     sign_in user
   end

@@ -5,6 +5,10 @@ describe ListItemsController do
   let(:current_user) { create(:user) }
   let(:current_category) { create(:category) }
 
+  before(:all) do
+    current_user.build_list!
+  end
+
   before(:each) do
     sign_in current_user
   end
@@ -148,7 +152,9 @@ describe ListItemsController do
     end
 
     let(:list_item) do
-      create(:list_item, list_id: current_user.list.id, owned: false, rating: 1)
+      list_item = current_user.list.list_items.first
+      list_item.update_attributes!(owned: false, rating: 1)
+      list_item
     end
 
     before(:each) do

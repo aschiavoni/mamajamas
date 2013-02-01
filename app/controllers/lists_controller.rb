@@ -36,5 +36,6 @@ class ListsController < ApplicationController
 
   def find_list
     @list = current_user.list
+    @list = current_user.build_list! if @list.blank?
   end
 end

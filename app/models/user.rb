@@ -90,6 +90,10 @@ class User < ActiveRecord::Base
   end
 
   def list
-    List.where(user_id: self.id).first || ListBuilder.new(self).build!
+    List.where(user_id: self.id).first # || ListBuilder.new(self).build!
+  end
+
+  def build_list!
+    ListBuilder.new(self).build!
   end
 end
