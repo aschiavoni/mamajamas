@@ -1,2 +1,130 @@
-<h1>PublicLists#show</h1>
-<p>Find me in app/views/public_lists/show.html.erb</p>
+<%= content_for :title_links do %>
+  <ul>
+  <li id="bt-follow"><a href="#" class="button">Follow</a></li>
+  <li id="print"><a href="#" class="ss-icon" title="Print"><span>Print</span></a></li>
+  <li id="pinterest"><a href="#" class="social" title="Pinterest">Pinterest</a></li>
+  <li id="twitter"><a href="#" class="social" title="Twitter">Twitter</a></li>
+  <li id="facebook"><a href="#" class="social" title="Facebook">Facebook</a></li>
+</ul>
+<% end -%>
+<%= content_for :nav do %>
+  <nav id="categories">
+  <ul>
+    <li><a href="#">Bathing</a></li>
+    <li><a href="#">Birthing/ Pregnancy</a></li>
+    <li><a href="#">Changing</a></li>
+    <li><a href="#">Clothing</a></li>
+    <li><a href="#">Decorating</a></li>
+    <li><a href="#">Feeding</a></li>
+    <li><a href="#">Getting Around</a></li>
+    <li><a href="#">Playing</a></li>
+    <li class="cat-selected"><a href="#">Nursing</a></li>
+    <li><a href="#">PottyTraining</a></li>
+    <li><a href="#">Reading</a></li>
+    <li><a href="#">Traveling</a></li>
+    <li><a href="#">Sleeping</a></li>
+    <li><a href="#">Staying Healthy</a></li>
+  </ul>
+</nav>
+<% end -%>
+<%= content_for :tertiary do %>
+  <div id="module-profile">
+  <div class="content">
+    <img src="/assets/profile_photo-default-l.png" alt="Profile photo">
+    <h3>Margaret Anderson</h3>
+    <h4>Eco Mom</h4>
+    <p>
+    Age 40<br>
+    Mom to Xander, 18 mos.<br>
+    Value shopper<br>
+    <em><span class="ss-tag"></span> Tags:</em> <a href="#">Urban</a></p>
+    <p class="right"><a href="#">Full profile</a></p>
+  </div>
+</div>
+<div id="module-friends">
+  <div class="content">
+    <h3>Margaret’s Friends</h3>
+    <ul class="clearfix">
+      <li><a href="#"><img src="/assets/follow-mom.jpg" alt="profile image"><div><span class="firstname">Christina</span> Anderson</a></div></li>
+      <li><a href="#"><img src="/assets/follow-mom.jpg" alt="profile image"><div><span class="firstname">Andrea</span> Bhosle-Morimoto</a></div></li>
+      <li><a href="#"><img src="/assets/follow-mom.jpg" alt="profile image"><div><span class="firstname">Kathleen</span> Bowers</a></div></li>
+      <li><a href="#"><img src="/assets/follow-mom.jpg" alt="profile image"><div><span class="firstname">Sally</span> Duarte</a></div></li>
+      <li><a href="#"><img src="/assets/follow-mom.jpg" alt="profile image"><div><span class="firstname">Kim</span> Edwards</a></div></li>
+    </ul>
+    <p class="right"><a href="#">See all</a></p>
+  </div>
+</div>
+<% end -%>
+<form class="label-infield">
+  <!-- baby gear table ******* -->
+  <table width="100%" cellspacing="0" id="babygear">
+    <thead>
+      <tr>
+        <th scope="col" class="own">Own</th>
+        <th scope="col" class="item">Item</th>
+        <th scope="col" class="rating">Rating</th>
+        <th scope="col" class="when">When to Buy</th>
+        <th scope="col" class="priority sorting">Priority</th>
+      </tr>
+    </thead>
+    <tbody>
+    <!-- Item 1 ****** -->
+    <tr class="prod prod-filled">
+      <td class="own"><input type="checkbox" id="own01" title="Do you own this item?" checked>
+        <label for="own01">I own this item.</label></td>
+      <td class="item"><div class="prod-thumb"><img src="/assets/products/thumb_nursing-bottle.jpg" alt="bottle"></div>
+        <div class="prod-desc">
+          <div class="prod-category">Bottle</div>
+          <h3><a href="#">Comotomo Natural Feel Baby Bottle Single Pack, Green, 150ml</a></h3>
+          <!-- add to my list button -->
+          <a href="#" class="button bt-color bt-add" title="Add to my list"><span class="ss-plus"></span><strong>Add</strong></a>
+          <!-- / end add to my list button -->
+          <!-- note -->
+          <div class="prod-note closed">
+            <div class="note-content">Morbi erat sem, luctus at porttitor ac, cursus luctus mauris. Sed eget orci orci. Sed eu ipsum velit, id elementum metus. Integer interdum sapien bibendum est iaculis quis adipiscing turpis cursus. Nunc aliquet adipiscing neque vel convallis. Sed mattis lacinia lacus a gravida. </div>
+          </div>
+          <!-- / end note --> 
+      </div></td>
+      <td class="rating"><div class="eggs">
+          <div class="egg egg-full"></div>
+          <div class="egg egg-full"></div>
+          <div class="egg egg-full"></div>
+          <div class="egg egg-full"></div>
+          <div class="egg"></div>
+      </div></td>
+      <td class="when">Pre-birth</td>
+      <td class="priority"><div class="priority-high">high</div></td>
+    </tr>
+    <!-- / Item 1 ****** --> 
+    <!-- Item 2 ****** -->
+    <tr class="prod prod-filled">
+      <td class="own"><input id="own05" type="checkbox" title="Do you own this item?">
+        <label for="own05">I own this item.</label></td>
+      <td class="item"><div class="prod-thumb"><img src="/assets/products/thumb_nursing-pump@2x.jpg" alt="bottle"></div>
+        <div class="prod-desc">
+          <div class="prod-category">Breast Pump</div>
+          <h3><a href="#">Philips AVENT BPA-free Manual Breast Pump</a></h3>
+          <!-- add to my list button -->
+          <a href="#" class="button bt-color bt-add" title="Add to my list"><span class="ss-plus"></span><strong>Add</strong></a>
+          <!-- / end add to my list button -->
+          <!-- note -->
+          <div class="prod-note closed">
+            <div class="note-content">Nunc aliquet adipiscing neque vel convallis. Sed mattis lacinia lacus a gravida. Morbi erat sem, luctus at porttitor ac, cursus luctus mauris. Sed eget orci orci. Sed eu ipsum velit, id elementum metus. Integer interdum sapien bibendum est iaculis quis adipiscing turpis cursus.</div>
+          </div>
+          <!-- / end note --> 
+      </div></td>
+      <td class="rating"><div class="eggs">
+          <div class="egg egg-full"></div>
+          <div class="egg egg-full"></div>
+          <div class="egg egg-full"></div>
+          <div class="egg egg-full"></div>
+          <div class="egg"></div>
+      </div></td>
+      <td class="when">Pre-birth</td>
+      <td class="priority"><div class="priority-med">medium</div></td>
+    </tr>
+    <!-- / Item 2 ****** -->
+    </tbody>
+  </table>
+  <!-- end baby gear table ******* -->
+</form>

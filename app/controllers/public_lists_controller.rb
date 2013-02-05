@@ -2,6 +2,7 @@ class PublicListsController < ApplicationController
   before_filter :find_public_list
 
   def show
+    @page_id = "publist"
   end
 
   private
