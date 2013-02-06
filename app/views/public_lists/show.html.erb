@@ -9,23 +9,14 @@
 <% end -%>
 <%= content_for :nav do %>
   <nav id="categories">
-  <ul>
-    <li><a href="#">Bathing</a></li>
-    <li><a href="#">Birthing/ Pregnancy</a></li>
-    <li><a href="#">Changing</a></li>
-    <li><a href="#">Clothing</a></li>
-    <li><a href="#">Decorating</a></li>
-    <li><a href="#">Feeding</a></li>
-    <li><a href="#">Getting Around</a></li>
-    <li><a href="#">Playing</a></li>
-    <li class="cat-selected"><a href="#">Nursing</a></li>
-    <li><a href="#">PottyTraining</a></li>
-    <li><a href="#">Reading</a></li>
-    <li><a href="#">Traveling</a></li>
-    <li><a href="#">Sleeping</a></li>
-    <li><a href="#">Staying Healthy</a></li>
-  </ul>
-</nav>
+    <ul>
+      <% @categories.each do |category| -%>
+        <li class="<%= "cat-selected" if category.id == @category.id %>">
+          <%= link_to category.name, list_category_path(category.slug) %>
+        </li>
+      <% end -%>
+    </ul>
+  </nav>
 <% end -%>
 <%= content_for :tertiary do %>
   <div id="module-profile">
