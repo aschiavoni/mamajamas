@@ -10,6 +10,8 @@ class PublicListsController < ApplicationController
     else
       @category = @categories.first
     end
+
+    @list_entries = @list.public_list_entries(@category)
   end
 
   private

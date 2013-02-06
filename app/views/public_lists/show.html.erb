@@ -59,62 +59,7 @@
       </tr>
     </thead>
     <tbody>
-    <!-- Item 1 ****** -->
-    <tr class="prod prod-filled">
-      <td class="own"><input type="checkbox" id="own01" title="Do you own this item?" checked>
-        <label for="own01">I own this item.</label></td>
-      <td class="item"><div class="prod-thumb"><img src="/assets/products/thumb_nursing-bottle.jpg" alt="bottle"></div>
-        <div class="prod-desc">
-          <div class="prod-category">Bottle</div>
-          <h3><a href="#">Comotomo Natural Feel Baby Bottle Single Pack, Green, 150ml</a></h3>
-          <!-- add to my list button -->
-          <a href="#" class="button bt-color bt-add" title="Add to my list"><span class="ss-plus"></span><strong>Add</strong></a>
-          <!-- / end add to my list button -->
-          <!-- note -->
-          <div class="prod-note closed">
-            <div class="note-content">Morbi erat sem, luctus at porttitor ac, cursus luctus mauris. Sed eget orci orci. Sed eu ipsum velit, id elementum metus. Integer interdum sapien bibendum est iaculis quis adipiscing turpis cursus. Nunc aliquet adipiscing neque vel convallis. Sed mattis lacinia lacus a gravida. </div>
-          </div>
-          <!-- / end note --> 
-      </div></td>
-      <td class="rating"><div class="eggs">
-          <div class="egg egg-full"></div>
-          <div class="egg egg-full"></div>
-          <div class="egg egg-full"></div>
-          <div class="egg egg-full"></div>
-          <div class="egg"></div>
-      </div></td>
-      <td class="when">Pre-birth</td>
-      <td class="priority"><div class="priority-high">high</div></td>
-    </tr>
-    <!-- / Item 1 ****** --> 
-    <!-- Item 2 ****** -->
-    <tr class="prod prod-filled">
-      <td class="own"><input id="own05" type="checkbox" title="Do you own this item?">
-        <label for="own05">I own this item.</label></td>
-      <td class="item"><div class="prod-thumb"><img src="/assets/products/thumb_nursing-pump@2x.jpg" alt="bottle"></div>
-        <div class="prod-desc">
-          <div class="prod-category">Breast Pump</div>
-          <h3><a href="#">Philips AVENT BPA-free Manual Breast Pump</a></h3>
-          <!-- add to my list button -->
-          <a href="#" class="button bt-color bt-add" title="Add to my list"><span class="ss-plus"></span><strong>Add</strong></a>
-          <!-- / end add to my list button -->
-          <!-- note -->
-          <div class="prod-note closed">
-            <div class="note-content">Nunc aliquet adipiscing neque vel convallis. Sed mattis lacinia lacus a gravida. Morbi erat sem, luctus at porttitor ac, cursus luctus mauris. Sed eget orci orci. Sed eu ipsum velit, id elementum metus. Integer interdum sapien bibendum est iaculis quis adipiscing turpis cursus.</div>
-          </div>
-          <!-- / end note --> 
-      </div></td>
-      <td class="rating"><div class="eggs">
-          <div class="egg egg-full"></div>
-          <div class="egg egg-full"></div>
-          <div class="egg egg-full"></div>
-          <div class="egg egg-full"></div>
-          <div class="egg"></div>
-      </div></td>
-      <td class="when">Pre-birth</td>
-      <td class="priority"><div class="priority-med">medium</div></td>
-    </tr>
-    <!-- / Item 2 ****** -->
+      <%= render partial: "list_item", collection: @list_entries %>
     </tbody>
   </table>
   <!-- end baby gear table ******* -->

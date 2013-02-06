@@ -19,7 +19,16 @@ class List < ActiveRecord::Base
   end
 
   def list_entries(category = nil)
-    list_items.by_category(category).order("placeholder ASC, product_type_name ASC")
+    list_items.
+      by_category(category).
+      order("placeholder ASC, product_type_name ASC")
+  end
+
+  def public_list_entries(category = nil)
+    list_items.
+      where(placeholder: false).
+      by_category(category).
+      order("placeholder ASC, product_type_name ASC")
   end
 
   def make_public!
