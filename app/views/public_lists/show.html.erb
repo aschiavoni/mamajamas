@@ -12,7 +12,8 @@
     <ul>
       <% @categories.each do |category| -%>
         <li class="<%= "cat-selected" if category.id == @category.id %>">
-          <%= link_to category.name, list_category_path(category.slug) %>
+          <%= link_to category.name,
+            public_list_category_path(current_user.username, category.slug) %>
         </li>
       <% end -%>
     </ul>
