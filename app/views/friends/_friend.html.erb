@@ -1,7 +1,7 @@
 <li class="<%= "following" if following %>" id="<%= "friend_#{friend.id}" %>" data-friend-id="<%= friend.id %>" data-relationship-id="<%= following.id unless following.blank? %>">
-  <%= image_tag friend.profile_picture.friend, alt: display_name(friend) %>
+  <%= image_tag friend.profile_picture.friend, alt: friend.display_name %>
   <p>
-    <strong class="mom"><%= truncate(display_name(friend), :length => 15) %></strong>
+    <strong class="mom"><%= truncate(friend.display_name, :length => 15) %></strong>
     <% if following -%>
       <em class="ss-icon check">checked</em>
     <% end -%>

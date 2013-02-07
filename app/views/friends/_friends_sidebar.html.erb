@@ -3,12 +3,5 @@
 <%= link_to "Find", friends_path %> more moms
 </p>
 <ul class="clearfix">
-  <% user.followed_users.each do |followed| -%>
-    <li>
-      <%= link_to "#" do %>
-        <%= image_tag followed.profile_picture.friend, alt: display_name(followed) %>
-        <%= display_first_name_or_username(followed) %> <%= display_last_name(followed) %>
-      <% end -%>
-    </li>
-  <% end -%>
+  <%= render partial: "friends/sidebar_friend", collection: user.followed_users %>
 </ul>
