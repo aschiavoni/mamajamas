@@ -1,6 +1,12 @@
+<% show_names = true if show_names.nil? -%>
 <li>
   <%= link_to "#" do %>
     <%= image_tag sidebar_friend.profile_picture.friend, alt: sidebar_friend.display_name %>
-    <%= sidebar_friend.display_first_name_or_username %> <%= sidebar_friend.display_last_name %>
+    <% if show_names -%>
+      <span class="firstname">
+        <%= sidebar_friend.display_first_name_or_username %>
+      </span>
+      <%= sidebar_friend.display_last_name %>
+    <% end -%>
   <% end -%>
 </li>

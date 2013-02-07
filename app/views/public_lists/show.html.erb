@@ -23,27 +23,23 @@
   <div id="module-profile">
   <div class="content">
     <%= image_tag current_user.profile_picture.public_list, alt: "#{current_user.username} profile photo" %>
-    <h3>Margaret Anderson</h3>
-    <h4>Eco Mom</h4>
+    <h3><%= current_user.display_name %></h3>
     <p>
-    Age 40<br>
-    Mom to Xander, 18 mos.<br>
-    Value shopper<br>
-    <em><span class="ss-tag"></span> Tags:</em> <a href="#">Urban</a></p>
-    <p class="right"><a href="#">Full profile</a></p>
+    Age <%= current_user.age %><br>
+    <p class="right">
+      <%= link_to "Full profile", profile_path %>
+    </p>
   </div>
 </div>
 <div id="module-friends">
   <div class="content">
-    <h3>Margaret’s Friends</h3>
+    <h3><%= "#{current_user.possessive_name} Friends" %></h3>
     <ul class="clearfix">
-      <li><a href="#"><img src="/assets/follow-mom.jpg" alt="profile image"><div><span class="firstname">Christina</span> Anderson</a></div></li>
-      <li><a href="#"><img src="/assets/follow-mom.jpg" alt="profile image"><div><span class="firstname">Andrea</span> Bhosle-Morimoto</a></div></li>
-      <li><a href="#"><img src="/assets/follow-mom.jpg" alt="profile image"><div><span class="firstname">Kathleen</span> Bowers</a></div></li>
-      <li><a href="#"><img src="/assets/follow-mom.jpg" alt="profile image"><div><span class="firstname">Sally</span> Duarte</a></div></li>
-      <li><a href="#"><img src="/assets/follow-mom.jpg" alt="profile image"><div><span class="firstname">Kim</span> Edwards</a></div></li>
+      <%= render partial: "friends/sidebar_friend", collection: current_user.followed_users, locals: { show_names: false } %>
     </ul>
-    <p class="right"><a href="#">See all</a></p>
+    <p class="right">
+      <%= link_to "See all", friends_path %>
+    </p>
   </div>
 </div>
 <% end -%>

@@ -92,4 +92,11 @@ class User < ActiveRecord::Base
   def build_list!
     ListBuilder.new(self).build! if list.blank?
   end
+
+  def age(now = Time.now.utc.to_date)
+    return nil if birthday.blank?
+    dob = birthday
+    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  end
+
 end

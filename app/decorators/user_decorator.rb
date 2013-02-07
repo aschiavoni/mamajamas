@@ -15,4 +15,8 @@ module UserDecorator
   def display_last_name
     last_name
   end
+
+  def possessive_name
+    display_first_name_or_username.possessive
+  end
 end

@@ -102,4 +102,19 @@ describe User do
 
   end
 
+  describe "age" do
+
+    it "should return nil if no birthday specified" do
+      user.birthday = nil
+      user.age.should be_nil
+    end
+
+    it "should return a user's age" do
+      now = Date.new(2013, 2, 7)
+      user.birthday = Date.new(1977, 5, 11)
+      user.age(now).should == 35
+    end
+
+  end
+
 end
