@@ -68,6 +68,7 @@ gem 'acts_as_list'
 
 # handy things
 gem 'possessive'
+gem 'active_decorator'
 
 # Use unicorn as the app server
 # gem 'unicorn'
