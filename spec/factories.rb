@@ -29,6 +29,7 @@ FactoryGirl.define do
   factory :list do
     sequence(:title) { |n| "List #{n}" }
     user
+    public false
   end
 
   factory :list_item do

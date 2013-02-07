@@ -21,27 +21,29 @@
 <% end -%>
 <%= content_for :tertiary do %>
   <div id="module-profile">
-  <div class="content">
-    <%= image_tag current_user.profile_picture.public_list, alt: "#{current_user.username} profile photo" %>
-    <h3><%= current_user.display_name %></h3>
-    <p>
-    Age <%= current_user.age %><br>
-    <p class="right">
-      <%= link_to "Full profile", profile_path %>
-    </p>
+    <div class="content">
+      <%= image_tag current_user.profile_picture.public_list, alt: "#{current_user.username} profile photo" %>
+      <h3><%= current_user.display_name %></h3>
+      <p>
+      Age <%= current_user.age %><br>
+      <p class="right">
+        <%= link_to "Full profile", profile_path %>
+      </p>
+    </div>
   </div>
-</div>
-<div id="module-friends">
-  <div class="content">
-    <h3><%= "#{current_user.possessive_name} Friends" %></h3>
-    <ul class="clearfix">
-      <%= render partial: "friends/sidebar_friend", collection: current_user.followed_users, locals: { show_names: false } %>
-    </ul>
-    <p class="right">
-      <%= link_to "See all", friends_path %>
-    </p>
-  </div>
-</div>
+  <% if current_user.followed_users_with_public_lists.any? -%>
+    <div id="module-friends">
+      <div class="content">
+        <h3><%= "#{current_user.possessive_name} Friends" %></h3>
+        <ul class="clearfix">
+          <%= render partial: "friends/sidebar_friend", collection: current_user.followed_users_with_public_lists, locals: { show_names: false } %>
+        </ul>
+        <p class="right">
+          <%= link_to "See all", friends_path %>
+        </p>
+      </div>
+    </div>
+  <% end -%>
 <% end -%>
 <form class="label-infield">
   <!-- baby gear table ******* -->

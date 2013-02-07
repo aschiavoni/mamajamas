@@ -64,4 +64,22 @@ describe UserDecorator do
 
   end
 
+  describe "followed users with public lists" do
+
+    it "should return only followed users who have public lists" do
+      user.save!
+
+      user1 = create(:list).user
+      user2 = create(:list, public: true).user
+      user3 = create(:list).user
+
+      user.follow!(user1)
+      user.follow!(user2)
+      user.follow!(user3)
+
+      user.followed_users_with_public_lists.should == [ user2 ]
+    end
+
+  end
+
 end
