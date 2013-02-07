@@ -5,8 +5,8 @@ describe PublicListsController do
   let(:user) { create(:user) }
 
   before(:all) do
-    user.build_list!
-    user.list.make_public!
+    @list = user.build_list!
+    @list.make_public!
   end
 
   describe "show" do
@@ -18,18 +18,15 @@ describe PublicListsController do
     end
 
     it "returns a 404 if the list is not found" do
-      # clear the list owner
-      list = user.list
-      list.user_id = nil
-      list.save!
+      new_user = create(:user) # user does not have a list
 
       lambda {
-        get 'show', username: user.username
+        get 'show', username: new_user.username
       }.should raise_error(ActionController::RoutingError)
     end
 
     it "returns a 404 if the list is not public" do
-      user.list.make_nonpublic!
+      @list.make_nonpublic!
 
       lambda {
         get 'show', username: user.username
@@ -48,7 +45,7 @@ describe PublicListsController do
 
     it "should assign list" do
       get 'show', username: user.username
-      assigns(:list).should == user.list
+      assigns(:list).should == @list
     end
 
   end

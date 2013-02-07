@@ -6,7 +6,7 @@ describe ListItemsController do
   let(:current_category) { create(:category) }
 
   before(:all) do
-    current_user.build_list!
+    @list = current_user.build_list!
   end
 
   before(:each) do
@@ -24,7 +24,6 @@ describe ListItemsController do
     describe "without category filter" do
 
       before(:all) do
-        @list = current_user.list
         2.times do
           @list.list_items << create(:list_item, list_id: @list.id)
         end
@@ -60,7 +59,6 @@ describe ListItemsController do
           create(:product_type, category_id: current_category.id)
         end
 
-        @list = current_user.list
         2.times do
           @list.list_items << create(:list_item, list_id: @list.id, category_id: current_category.id)
         end
@@ -115,7 +113,7 @@ describe ListItemsController do
       it "should create list item" do
         lambda do
           post :create, list_item: create_params
-        end.should change(current_user.list.list_items, :count).by(1)
+        end.should change(@list.list_items, :count).by(1)
       end
 
       it "should assign list entry" do
@@ -152,7 +150,7 @@ describe ListItemsController do
     end
 
     let(:list_item) do
-      list_item = current_user.list.list_items.first
+      list_item = @list.list_items.first
       list_item.update_attributes!(owned: false, rating: 1)
       list_item
     end
@@ -180,7 +178,7 @@ describe ListItemsController do
     before(:all) do
       # this will be added to the list when it is created
       @product_type = create(:product_type)
-      @list_item = create(:list_item, list_id: current_user.list.id, owned: false, rating: 1)
+      @list_item = create(:list_item, list_id: @list.id, owned: false, rating: 1)
     end
 
     it "should assign list entry" do
@@ -191,7 +189,7 @@ describe ListItemsController do
     it "should delete list item" do
       lambda do
         delete :destroy, id: @list_item.id
-      end.should change(current_user.list.list_items, :count).by(-1)
+      end.should change(@list.list_items, :count).by(-1)
     end
 
   end

@@ -188,8 +188,7 @@ describe List do
 
       # create the list
       # and add some list items
-      current_user.build_list!
-      @list = current_user.list
+      @list = current_user.build_list!
 
       list_item_params = {
         list_id: @list.id,

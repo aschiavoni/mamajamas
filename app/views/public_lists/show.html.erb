@@ -22,7 +22,7 @@
 <%= content_for :tertiary do %>
   <div id="module-profile">
   <div class="content">
-    <img src="/assets/profile_photo-default-l.png" alt="Profile photo">
+    <%= image_tag current_user.profile_picture.public_list, alt: "#{current_user.username} profile photo" %>
     <h3>Margaret Anderson</h3>
     <h4>Eco Mom</h4>
     <p>
