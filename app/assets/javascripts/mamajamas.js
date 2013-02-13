@@ -14,23 +14,30 @@ window.Mamajamas = {
     notifications.render();
 
     // follow page
-    if ($("#follow-moms").length > 0) {
+    if ($('#follow-moms').length > 0) {
       new Mamajamas.Views.FriendPicker({
         el: '#follow-moms'
       });
     }
 
     // user profile
-    if ($("#frm-create-profile").length > 0) {
+    if ($('#frm-create-profile').length > 0) {
       new Mamajamas.Views.UserProfile({
         el: '#frm-create-profile'
       });
     }
 
     // list
-    if ($("#my-list").length > 0) {
+    if ($('#my-list').length > 0) {
       new Mamajamas.Routers.ListItems();
       Backbone.history.start();
+    }
+
+    // public list
+    if ($('#publist').length > 0) {
+      new Mamajamas.Views.PublicListShow({
+        el: '#public-list'
+      });
     }
   }
 };
