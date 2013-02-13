@@ -1,23 +1,15 @@
 class ListsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :init_view, only: [ :show ]
   before_filter :find_list
 
   respond_to :html, :json
 
   def show
-    @subheader = "Your baby gear list"
-    @page_id = "buildlist"
-    @categories = @list.categories.for_list
-
-    if params[:category].present?
-      @category = @categories.by_slug(params[:category]).first
-    else
-      @category = @categories.first
-    end
-
-    @list_entries = @list.list_entries(@category)
-    @list_entries_json = render_to_string(template: 'list_items/index', formats: :json)
-
+    @view = ListView.new(@list, params[:category])
+    @list_entries = @view.list_entries
+    @list_entries_json = render_to_string(template: 'list_items/index',
+                                          formats: :json)
     respond_to do |format|
       format.html
     end
@@ -33,6 +25,11 @@ class ListsController < ApplicationController
   end
 
   private
+
+  def init_view
+    @subheader = "Your baby gear list"
+    @page_id = "buildlist"
+  end
 
   def find_list
     @list = current_user.list
