@@ -48,6 +48,10 @@ describe PublicListsController do
       assigns(:list).should == @list
     end
 
+    it "should assign public list view" do
+      get 'show', username: user.username
+      assigns(:view).should be_instance_of(PublicListView)
+    end
   end
 
 end

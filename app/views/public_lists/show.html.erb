@@ -10,8 +10,8 @@
 <%= content_for :nav do %>
   <nav id="categories">
     <ul>
-      <% @categories.each do |category| -%>
-        <li class="<%= "cat-selected" if category.id == @category.id %>">
+      <% @view.categories.each do |category| -%>
+        <li class="<%= "cat-selected" if category.id == @view.category.id %>">
           <%= link_to category.name,
             public_list_category_path(current_user.username, category.slug) %>
         </li>
@@ -58,7 +58,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= render partial: "list_item", collection: @list_entries %>
+      <%= render partial: "list_item", collection: @view.list_entries %>
     </tbody>
   </table>
   <!-- end baby gear table ******* -->

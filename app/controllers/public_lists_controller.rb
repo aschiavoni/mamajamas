@@ -3,15 +3,7 @@ class PublicListsController < ApplicationController
   before_filter :init_view
 
   def show
-    @categories = @list.categories.for_list
-
-    if params[:category].present?
-      @category = @categories.by_slug(params[:category]).first
-    else
-      @category = @categories.first
-    end
-
-    @list_entries = @list.public_list_entries(@category)
+    @view = PublicListView.new(@list, params[:category])
   end
 
   private
