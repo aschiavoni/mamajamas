@@ -29,10 +29,10 @@ describe UsersController do
 
   describe "update" do
 
-    it "should redirect to profile after update" do
+    it "should redirect to public list after update" do
       Forms::UserProfile.any_instance.should_receive(:update!).and_return(true)
       put :update, user: { username: "test123" }
-      response.should redirect_to(profile_path)
+      response.should redirect_to(public_list_path(user.username))
     end
 
     it "should render edit view if update fails" do
