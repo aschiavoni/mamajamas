@@ -11,8 +11,12 @@
         <div class="col2">
           <%= form_tag public_list_publish_list_path do %>
             <p>
-              <input type="checkbox" id="chk-fb-share">
-              <label for="chk-fb-share">Share on Facebook</label>
+              <% if current_user.present? && current_user.facebook_connected? -%>
+                <%= check_box_tag 'facebook_share', '1', true %>
+                <%= label_tag 'facebook_share', 'Share on Facebook' %>
+              <% else -%>
+                &nbsp;
+              <% end -%>
             </p>
             <p>
               <button type="submit" class="button" id="bt-cancel" name="cancel" value="1">Cancel</button>
