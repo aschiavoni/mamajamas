@@ -17,6 +17,7 @@
 </head>
 <body>
 <!-- header area ***** -->
+<%= content_for?(:header_overlay) ? yield(:header_overlay) : "" %>
 <div id="hed-wrap" class="progressbar">
   <div class="gridContainer clearfix">
     <div id="header">

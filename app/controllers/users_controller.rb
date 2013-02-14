@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @profile.update!(params[:profile])
         format.html do
-          redirect_to public_list_path(current_user.username), notice: "Your profile has been updated."
+          redirect_to public_list_preview_list_path, notice: "Your profile has been updated."
         end
         format.json
       else

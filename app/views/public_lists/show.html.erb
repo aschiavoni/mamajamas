@@ -1,3 +1,30 @@
+<% if @view.preview? -%>
+  <%= content_for :header_overlay do %>
+    <!-- message overlay -->
+    <div class="msg-overlay preview-msg">
+      <div class="overlay-bg">&nbsp;</div>
+      <div class="gridContainer clearfix">
+        <div class="col1">
+          <h1>Preview</h1>
+          <p>This is what your published list will look like to other users.</p>
+        </div>
+        <div class="col2">
+          <%= form_tag public_list_publish_list_path do %>
+            <p>
+              <input type="checkbox" id="chk-fb-share">
+              <label for="chk-fb-share">Share on Facebook</label>
+            </p>
+            <p>
+              <button type="submit" class="button" id="bt-cancel" name="cancel" value="1">Cancel</button>
+              <button type="submit" class="button bt-color" id="bt-publish" name="publish" value="1">Publish</button>
+            </p>
+          <% end -%>
+        </div>
+      </div>
+    </div>
+    <!-- / end message overlay -->
+  <% end -%>
+<% end -%>
 <%= content_for :title_links do %>
   <ul>
   <li id="bt-follow"><a href="#" class="button">Follow</a></li>
@@ -12,8 +39,13 @@
     <ul>
       <% @view.categories.each do |category| -%>
         <li class="<%= "cat-selected" if category.id == @view.category.id %>">
-          <%= link_to category.name,
-            public_list_category_path(current_user.username, category.slug) %>
+          <% if @view.preview? -%>
+            <%= link_to category.name,
+              public_list_preview_category_list_path(category.slug) %>
+          <% else -%>
+            <%= link_to category.name,
+              public_list_category_path(current_user.username, category.slug) %>
+          <% end -%>
         </li>
       <% end -%>
     </ul>

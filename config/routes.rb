@@ -33,6 +33,9 @@ Mamajamas::Application.routes.draw do
 
   resource :list, only: [ :show ] do
     resources :list_items, only: [ :index, :create, :update, :destroy ]
+    get 'preview' => "public_lists#preview", as: :public_list_preview
+    get 'preview/:category' => "public_lists#preview", as: :public_list_preview_category
+    post 'publish' => "public_lists#publish", as: :public_list_publish
   end
   get "/list/:category" => "lists#show", as: :list_category
 
