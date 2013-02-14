@@ -15,11 +15,7 @@ class PublicListsController < ApplicationController
 
   def publish
     if params[:publish] == '1'
-      logger.info "Making list public"
-      logger.info @list.inspect
       @list.make_public!
-      logger.info "list should now be public"
-      logger.info @list.inspect
       redirect_to public_list_path(current_user.username)
     else
       redirect_to list_path
