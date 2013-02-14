@@ -5,12 +5,12 @@ class PublicListsController < ApplicationController
   before_filter :init_view
 
   def show
-    # redirect if using an old slug
-    if request.path != public_list_path(@list.user.slug)
-      redirect_to public_list_path(@list.user.slug), status: :moved_permanently
-    end
-
     @view = PublicListView.new(@list, params[:category])
+
+    # redirect if using an old slug
+    if redirect_needed?(@view)
+      redirect_to redirect_destination(@view)
+    end
   end
 
   def preview
@@ -28,6 +28,21 @@ class PublicListsController < ApplicationController
   end
 
   private
+
+  def redirect_needed?(list_view)
+    ![
+      public_list_path(list_view.owner.slug),
+      public_list_category_path(list_view.owner.slug, list_view.category.slug)
+    ].include?(request.path)
+  end
+
+  def redirect_destination(list_view)
+    if list_view.default_category?
+      public_list_path(list_view.owner)
+    else
+      public_list_category_path(list_view.owner, list_view.category)
+    end
+  end
 
   def init_view
     @page_id = "publist"
