@@ -157,6 +157,14 @@ body {
 }
 #myaccount .nav-drop a {
 	color:#444; /* overrides link color of parent menu */
+  font-weight:bold;
+}
+#myaccount .nav-drop .user-email a {
+	color:#737373; /* overrides link color of user email address */
+  font-weight:normal;
+}
+#myaccount .nav-drop .user-email a:hover {
+	color:#737373; /* overrides link color of user email address */
 }
 #myaccount .nav-drop a:hover, #login .nav-drop a:focus, #login .nav-drop a:active { /* link hover colors */
 	color: #000;
