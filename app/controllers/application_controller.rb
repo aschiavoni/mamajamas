@@ -27,6 +27,31 @@ class ApplicationController < ActionController::Base
     flash[:success] = message
   end
 
+  def page_context
+    @page_context ||= PageContext.new do
+      page_id = nil
+      subheader = "Welcome to Mamajamas!"
+      progress_id = 1
+    end
+  end
+  helper_method :page_context
+
+  def set_page_id(page_id)
+    page_context.page_id = page_id
+  end
+
+  def set_subheader(subheader)
+    page_context.subheader = subheader
+  end
+
+  def set_progress_id(progress_id)
+    page_context.progress_id = progress_id
+  end
+
+  def hide_progress_bar
+    page_context.show_progress = false
+  end
+
   protected
 
   def after_sign_in_path_for(resource)

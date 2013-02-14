@@ -40,11 +40,19 @@ module ApplicationHelper
   end
 
   def page_id
-    @page_id
+    page_context.page_id
   end
 
   def subheader
-    @subheader || "Welcome to Mamajamas!"
+    page_context.subheader
+  end
+
+  def progress_id
+    page_context.progress_id
+  end
+
+  def show_progress
+    page_context.show_progress
   end
 
   private

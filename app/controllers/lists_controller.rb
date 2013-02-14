@@ -27,8 +27,9 @@ class ListsController < ApplicationController
   private
 
   def init_view
-    @subheader = "Your baby gear list"
-    @page_id = "buildlist"
+    set_subheader "Your baby gear list"
+    set_page_id "buildlist"
+    set_progress_id 2
   end
 
   def find_list

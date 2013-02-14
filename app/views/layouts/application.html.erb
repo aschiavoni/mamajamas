@@ -18,7 +18,7 @@
 <body>
 <!-- header area ***** -->
 <%= content_for?(:header_overlay) ? yield(:header_overlay) : "" %>
-<div id="hed-wrap" class="progressbar">
+<div id="hed-wrap" class="<%= show_progress ? "progressbar" : "" %>">
   <div class="gridContainer clearfix">
     <div id="header">
       <div id="branding">
@@ -58,13 +58,15 @@
         <% end -%>
         </ul>
       </div>
-      <div id="progress">
-      	<ol class="prog2"><!-- comments between list items prevent whitespace insertion when displayed inline -->
-        	<li class="prog1"><strong>1</strong> Take the quiz</li><!--
-          --><li class="prog2"><strong>2</strong> Make your list and get advice</li><!--
-          --><li class="prog3"><strong>3</strong> Share your list</li>
-        </ol>
-      </div>
+      <% if show_progress -%>
+        <div id="progress">
+          <ol class="prog<%= progress_id %>"><!-- comments between list items prevent whitespace insertion when displayed inline -->
+            <li class="prog1"><strong>1</strong> Take the quiz</li><!--
+            --><li class="prog2"><strong>2</strong> Make your list and get advice</li><!--
+            --><li class="prog3"><strong>3</strong> Share your list</li>
+          </ol>
+        </div>
+      <% end -%>
     </div>
   </div>
 </div>

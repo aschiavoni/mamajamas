@@ -25,7 +25,8 @@ class UsersController < ApplicationController
 
   def init_view
     @profile = Forms::UserProfile.new(current_user, current_user.list)
-    @page_id = "create-profile"
-    @subheader = "Create my profile"
+    set_page_id "create-profile"
+    set_subheader "Create my profile"
+    set_progress_id 3
   end
 end

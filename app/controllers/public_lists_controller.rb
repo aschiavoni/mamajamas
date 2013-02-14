@@ -5,6 +5,7 @@ class PublicListsController < ApplicationController
   before_filter :init_view
 
   def show
+    hide_progress_bar
     @view = PublicListView.new(@list, params[:category])
 
     # redirect if using an old slug
@@ -45,8 +46,9 @@ class PublicListsController < ApplicationController
   end
 
   def init_view
-    @page_id = "publist"
-    @subheader = @list.title
+    set_page_id "publist"
+    set_subheader @list.title
+    set_progress_id 3
   end
 
   def find_list
