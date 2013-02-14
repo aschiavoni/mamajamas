@@ -31,7 +31,7 @@ describe Forms::UserProfile do
   end
 
   it "should return list url" do
-    user = stub(:username => "TestUser")
+    user = stub(:username => "TestUser", :slug => "testuser")
     subject.new(user, stub).list_url.should == "testuser"
   end
 

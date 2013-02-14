@@ -4,6 +4,20 @@ describe User do
 
   let(:user) { create(:user) }
 
+  describe "slugs" do
+
+    it "should have slugged value" do
+      new_user = create(:user)
+      new_user.slug.should == new_user.username
+    end
+
+    it "should update slug when username changes" do
+      new_user = create(:user)
+      new_user.update_attributes!(username: "testxxx1199")
+      new_user.slug.should == "testxxx1199"
+    end
+  end
+
   describe "facebook connected" do
 
     it "should be facebook connected" do

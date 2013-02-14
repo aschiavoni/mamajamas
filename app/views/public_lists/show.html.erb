@@ -55,7 +55,7 @@
               public_list_preview_category_list_path(category.slug) %>
           <% else -%>
             <%= link_to category.name,
-              public_list_category_path(current_user.username, category.slug) %>
+              public_list_category_path(current_user.slug, category.slug) %>
           <% end -%>
         </li>
       <% end -%>

@@ -16,7 +16,7 @@ class PublicListsController < ApplicationController
   def publish
     if params[:publish] == '1'
       @list.make_public!
-      redirect_to public_list_path(current_user.username)
+      redirect_to public_list_path(current_user.slug)
     else
       redirect_to list_path
     end
@@ -35,7 +35,7 @@ class PublicListsController < ApplicationController
   end
 
   def find_public_list
-    owner = User.find_by_username(params[:username])
+    owner = User.find_by_slug(params[:slug])
     @list = owner.list if owner.present?
     not_found if @list.blank? || !@list.public?
   end

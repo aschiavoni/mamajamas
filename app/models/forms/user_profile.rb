@@ -15,6 +15,7 @@ class Forms::UserProfile
 
   delegate :username, :first_name, :last_name, :birthday, :to => :user
   delegate :username=, :first_name=, :last_name=, :birthday=, :to => :user
+  delegate :slug, :to => :user
   delegate :profile_picture, :profile_picture=, :to => :user
   delegate :profile_picture_cache, :profile_picture_cache=, :to => :user
   delegate :title, :title=, :to => :list, :prefix => true
@@ -43,7 +44,7 @@ class Forms::UserProfile
   end
 
   def list_url
-    username.downcase
+    slug
   end
 
   def formatted_birthday

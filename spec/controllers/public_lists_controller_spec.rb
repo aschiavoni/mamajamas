@@ -14,7 +14,7 @@ describe PublicListsController do
 
     it "returns a 404 if the user is not found" do
       lambda {
-        get 'show', username: "unknownuser"
+        get 'show', slug: "unknownuser"
       }.should raise_error(ActionController::RoutingError)
     end
 
@@ -22,7 +22,7 @@ describe PublicListsController do
       new_user = create(:user) # user does not have a list
 
       lambda {
-        get 'show', username: new_user.username
+        get 'show', slug: new_user.username
       }.should raise_error(ActionController::RoutingError)
     end
 
@@ -30,27 +30,27 @@ describe PublicListsController do
       @list.make_nonpublic!
 
       lambda {
-        get 'show', username: user.username
+        get 'show', slug: user.username
       }.should raise_error(ActionController::RoutingError)
     end
 
     it "returns http success" do
-      get 'show', username: user.username
+      get 'show', slug: user.username
       response.should be_success
     end
 
     it "renders show template" do
-      get 'show', username: user.username
+      get 'show', slug: user.username
       response.should render_template("show")
     end
 
     it "should assign list" do
-      get 'show', username: user.username
+      get 'show', slug: user.username
       assigns(:list).should == @list
     end
 
     it "should assign public list view" do
-      get 'show', username: user.username
+      get 'show', slug: user.username
       assigns(:view).should be_instance_of(PublicListView)
     end
 
@@ -102,7 +102,7 @@ describe PublicListsController do
 
     it 'should redirect to public list path on publish' do
       post 'publish', publish: '1'
-      response.should redirect_to(public_list_path(user.username))
+      response.should redirect_to(public_list_path(user.slug))
     end
 
     it 'should make list public on publish' do

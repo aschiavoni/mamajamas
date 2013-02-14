@@ -43,8 +43,8 @@ Mamajamas::Application.routes.draw do
     resources :list_items
   end
 
-  get ":username" => "public_lists#show", as: :public_list
-  get ":username/:category" => "public_lists#show", as: :public_list_category
+  get ":slug" => "public_lists#show", as: :public_list
+  get ":slug/:category" => "public_lists#show", as: :public_list_category
 
   scope "api" do
     defaults(format: "json") do
