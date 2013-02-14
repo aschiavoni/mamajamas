@@ -6,15 +6,15 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     permissions: ''
   },
   initialize: function() {
-    if (Mamajamas.Context.User) {
+    if (Mamajamas.Context.User && Mamajamas.Context.User.get('is_facebook_connected')) {
       if (this.refreshTokenRequired()) {
         this.on('facebook:connected', this.refreshToken)
       }
       if (this.updateFriendsRequired()) {
         this.on('facebook:connected', this.updateFriends);
       }
+      this.updateLoginStatus();
     }
-    this.updateLoginStatus();
   },
   updateLoginStatus: function() {
     if(typeof FB == 'undefined')
