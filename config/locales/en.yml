@@ -5,6 +5,10 @@ en:
   date:
     formats:
       default: "%m/%d/%Y"
+      friendly: "%b. %d, %Y"
+  time:
+    formats:
+      friendly: "%b. %d, %Y"
   activemodel:
     errors:
       models:

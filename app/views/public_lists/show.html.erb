@@ -34,6 +34,13 @@
   <li id="facebook"><a href="#" class="social" title="Facebook">Facebook</a></li>
 </ul>
 <% end -%>
+<%= content_for :subheader_content do %>
+  <p class="pubdate">
+    Created <%= l @view.list.created_at, format: :friendly %>
+    <br>
+    Updated <%= l @view.list.updated_at, format: :friendly %>
+  </p>
+<% end -%>
 <%= content_for :nav do %>
   <nav id="categories">
     <ul>

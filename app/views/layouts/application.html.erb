@@ -75,7 +75,7 @@
     <div id="subhed">
       <h2><%= subheader %></h2>
     </div>
-    <%= content_for?(:subheader_instructions) ? yield(:subheader_instructions) : "" %>
+    <%= content_for?(:subheader_content) ? yield(:subheader_content) : "" %>
     <div id="title-links">
       <%= yield(:title_links) %>
     </div>
