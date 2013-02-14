@@ -5,6 +5,11 @@ class PublicListsController < ApplicationController
   before_filter :init_view
 
   def show
+    # redirect if using an old slug
+    if request.path != public_list_path(@list.user.slug)
+      redirect_to public_list_path(@list.user.slug), status: :moved_permanently
+    end
+
     @view = PublicListView.new(@list, params[:category])
   end
 
@@ -35,7 +40,7 @@ class PublicListsController < ApplicationController
   end
 
   def find_public_list
-    owner = User.find_by_slug(params[:slug])
+    owner = User.find(params[:slug])
     @list = owner.list if owner.present?
     not_found if @list.blank? || !@list.public?
   end
