@@ -10,6 +10,7 @@ Mamajamas.Views.UserProfile = Backbone.View.extend({
 
     this.$profilePicture = $("#profile-photo > img");
     this.$profilePictureProgress = $("#profile-photo .progress-container img.progress");
+    this.$profilePictureUploadText = $('#profile-photo p.instruction');
 
     this.initializeProfilePictureUploads();
 
@@ -47,11 +48,13 @@ Mamajamas.Views.UserProfile = Backbone.View.extend({
       pasteZone: _view.$profilePicture,
       maxNumberOfFiles: 1,
       start: function(e) {
+        _view.$profilePictureUploadText.hide();
         _view.$profilePictureProgress.progressIndicator("show");
       },
       stop: function(e) {
         setTimeout(function() {
           _view.$profilePictureProgress.progressIndicator("hide");
+        _view.$profilePictureUploadText.show();
         }, 600);
       },
       add: function(e, data) {
