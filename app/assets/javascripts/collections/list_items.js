@@ -46,9 +46,9 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
     var type = null;
     var isPlaceholder = listEntry.get("placeholder");
     if (this.isAscending())
-      type = isPlaceholder ? 0 : 1;
-    else
       type = isPlaceholder ? 1 : 0;
+    else
+      type = isPlaceholder ? 0 : 1;
 
     if (isPlaceholder && fieldName == "name")
       fieldName = "product_type_name";
