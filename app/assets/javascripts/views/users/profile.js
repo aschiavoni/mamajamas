@@ -5,7 +5,13 @@ Mamajamas.Views.UserProfile = Backbone.View.extend({
     this.birthdayField.datepicker({
       changeMonth: true,
       changeYear: true,
-      defaultDate: "-25y"
+      defaultDate: "-25y",
+      onChangeMonthYear: function(year, month, inst) {
+        var date = $(this).datepicker('getDate');
+        date.setFullYear(year);
+        date.setMonth(month - 1);
+        $(this).datepicker('setDate', date);
+      }
     });
 
     this.$profilePicture = $("#profile-photo > img");
