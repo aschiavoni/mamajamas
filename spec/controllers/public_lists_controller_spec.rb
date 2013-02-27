@@ -15,7 +15,7 @@ describe PublicListsController do
     it "returns a 404 if the user is not found" do
       lambda {
         get 'show', slug: "unknownuser"
-      }.should raise_error(ActionController::RoutingError)
+      }.should raise_error(ActiveRecord::RecordNotFound)
     end
 
     it "returns a 404 if the list is not found" do
