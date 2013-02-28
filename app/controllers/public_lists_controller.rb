@@ -5,12 +5,22 @@ class PublicListsController < ApplicationController
   before_filter :init_view
 
   def show
-    hide_progress_bar
     @view = PublicListView.new(@list, params[:category])
 
     # redirect if using an old slug
     if redirect_needed?(@view)
-      redirect_to redirect_destination(@view)
+      redirect_to redirect_destination(@view) and return
+    end
+
+    @list_entries_json = render_to_string(
+      template: 'list_items/index',
+      formats: :json,
+      locals: { list_entries: @view.list_entries })
+
+    hide_progress_bar
+
+    respond_to do |format|
+      format.html
     end
   end
 

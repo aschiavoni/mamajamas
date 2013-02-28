@@ -1,4 +1,4 @@
-json.array!(@list_entries) do |list_entry|
+json.array!(list_entries) do |list_entry|
   json.id list_entry.id
   json.name list_entry.name
   json.category_id list_entry.category.id

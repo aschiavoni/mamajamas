@@ -4,6 +4,8 @@ Mamajamas.Views.ListItemRating = Backbone.View.extend({
 
   template: HandlebarsTemplates['list_items/rating'],
 
+  readOnly: false,
+
   initialize: function() {
     this._ratingEnabled = false;
   },
@@ -23,6 +25,8 @@ Mamajamas.Views.ListItemRating = Backbone.View.extend({
   },
 
   rate: function(event) {
+    if (this.readOnly)
+      return true;
     var $egg = $(event.target);
     var rating = parseInt($egg.data("rating"));
     this.model.set("rating", rating);
@@ -52,7 +56,7 @@ Mamajamas.Views.ListItemRating = Backbone.View.extend({
   },
 
   highlight: function(event) {
-    if (!this._ratingEnabled)
+    if (!this._ratingEnabled || this.readOnly)
       return true;
     var $egg = $(event.target);
     $egg.prevAll().andSelf().addClass("egg-full");
@@ -60,7 +64,7 @@ Mamajamas.Views.ListItemRating = Backbone.View.extend({
   },
 
   unhighlight: function(event) {
-    if (!this._ratingEnabled)
+    if (!this._ratingEnabled || this.readOnly)
       return true;
     var $egg = $(event.target);
     $egg.prevAll().andSelf().removeClass("egg-full");

@@ -35,9 +35,8 @@ window.Mamajamas = {
 
     // public list
     if ($('#publist').length > 0) {
-      new Mamajamas.Views.PublicListShow({
-        el: '#public-list'
-      });
+      new Mamajamas.Routers.PublicListItems();
+      Backbone.history.start();
     }
   }
 };

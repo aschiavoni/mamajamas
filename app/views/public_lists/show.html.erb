@@ -88,21 +88,29 @@
     </div>
   <% end -%>
 <% end -%>
-<form id="public-list" class="label-infield">
+<form id="public-list" class="label-infield" data-list-entries="<%= @list_entries_json %>">
   <!-- baby gear table ******* -->
   <table width="100%" cellspacing="0" id="babygear">
     <thead>
       <tr>
         <th scope="col" class="own">Own</th>
-        <th scope="col" class="item">Item</th>
+        <th scope="col" class="item" data-sort="name">Item</th>
         <th scope="col" class="rating">Rating</th>
-        <th scope="col" class="when">When to Buy</th>
-        <th scope="col" class="priority sorting">Priority</th>
+        <th scope="col" class="when" data-sort="when_to_buy">When to Buy</th>
+        <th scope="col" class="priority sorting" data-sort="priority">Priority</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="list-items">
       <%= render partial: "list_item", collection: @view.list_entries %>
     </tbody>
   </table>
   <!-- end baby gear table ******* -->
 </form>
+<script type="text/javascript">
+Mamajamas.Context.List = new Mamajamas.Models.List({
+  title: '<%= @view.list.title %>',
+  category_id: '<%= @view.category.id %>',
+  category: '<%= @view.category.slug %>',
+  current_position: 0
+})
+</script>

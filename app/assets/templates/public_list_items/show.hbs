@@ -1,0 +1,34 @@
+<td class="own">
+  <input id="own{{listItem.id}}" class="prod-owned" type="checkbox" title="Do you own this item?" {{#if listItem.owned}}checked="checked"{{/if}}> <label for="own{{listItem.id}}">I own this item.</label>
+</td>
+<td class="item">
+  <div class="prod-thumb">
+    <img src="{{listItem.image_url}}" alt="{{listItem.name}}">
+  </div>
+  <div class="prod-desc">
+    <div class="prod-category">
+      {{listItem.product_type_name}}
+    </div>
+    <h3>
+      <a href="{{listItem.link}}" target="_blank">{{listItem.name}}</a>
+    </h3>
+    <a href="#" class="button bt-color bt-add" title="Add to my list">
+      <span class="ss-plus"></span><strong>Add</strong>
+    </a>
+    {{#if listItem.notes}}
+    <div class="prod-note closed">
+      <div class="note-content">
+        {{listItem.notes}}
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</td>
+<td class="rating">
+</td>
+<td class="when">
+  {{listItem.when_to_buy}}
+</td>
+<td class="priority">
+  {{priorityIndicator listItem.priority}}
+</td>

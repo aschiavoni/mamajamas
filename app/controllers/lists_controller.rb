@@ -7,9 +7,11 @@ class ListsController < ApplicationController
 
   def show
     @view = ListView.new(@list, params[:category])
-    @list_entries = @view.list_entries
-    @list_entries_json = render_to_string(template: 'list_items/index',
-                                          formats: :json)
+    @list_entries_json = render_to_string(
+      template: 'list_items/index',
+      formats: :json,
+      locals: { list_entries: @view.list_entries })
+
     respond_to do |format|
       format.html
     end
