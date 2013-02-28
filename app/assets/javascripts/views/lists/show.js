@@ -16,7 +16,9 @@ Mamajamas.Views.ListShow = Backbone.View.extend({
   },
 
   events: {
+    "click #babygear th.own": "sort",
     "click #babygear th.item": "sort",
+    "click #babygear th.rating": "sort",
     "click #babygear th.when": "sort",
     "click #babygear th.priority": "sort"
   },
