@@ -11,7 +11,8 @@ Mamajamas.Views.PublicListItemShow = Backbone.View.extend({
   },
 
   events: {
-    'click input.prod-owned': 'doNothing'
+    'click input.prod-owned': 'doNothing',
+    'click .prod-note': 'toggleNote'
   },
 
   render: function() {
@@ -29,6 +30,15 @@ Mamajamas.Views.PublicListItemShow = Backbone.View.extend({
 
   doNothing: function() {
     return false;
+  },
+
+  toggleNote: function(event) {
+    var $target = $(event.target);
+    if ($target.hasClass("closed")) {
+      $target.removeClass("closed").addClass("open");
+    } else {
+      $target.removeClass("open").addClass("closed");
+    }
   },
 
 });
