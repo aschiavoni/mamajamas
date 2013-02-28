@@ -69,6 +69,10 @@
       <h3><%= current_user.display_name %></h3>
       <p>
       Age <%= current_user.age %><br>
+      </p>
+      <% if current_user.notes.present? -%>
+        <p><%= current_user.notes %></p>
+      <% end -%>
       <p class="right">
         <%= link_to "Full profile", profile_path %>
       </p>
