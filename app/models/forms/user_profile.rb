@@ -17,6 +17,7 @@ class Forms::UserProfile
   delegate :username=, :first_name=, :last_name=, :birthday=, :to => :user
   delegate :slug, :to => :user
   delegate :profile_picture, :profile_picture=, :to => :user
+  delegate :notes, :notes=, :to => :user
   delegate :profile_picture_cache, :profile_picture_cache=, :to => :user
   delegate :title, :title=, :to => :list, :prefix => true
 

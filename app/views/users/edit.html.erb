@@ -92,9 +92,9 @@
       <dt>More</dt>
       <dd>
         <p>
-          <label for="field-profile-notes">For example, what do you love about being a mom?</label>
+          <%= f.label :notes, "For example, what do you love about being a mom?" %>
           <br />
-          <textarea name="field-profile-notes" value="" id="field-profile-notes" rows="5"></textarea>
+          <%= f.text_area :notes, rows: 5 %>
         </p>
       </dd>
     </fieldset>
