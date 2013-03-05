@@ -10,8 +10,8 @@ json.array!(list_entries) do |list_entry|
   json.owned list_entry.owned
   json.link list_entry.link
   json.rating list_entry.rating
-  json.when_to_buy list_entry.when_to_buy
-  json.when_to_buy_position list_entry.when_to_buy_suggestion.position
+  json.age list_entry.age
+  json.age_position list_entry.age_range.position
   json.priority list_entry.priority
   json.notes list_entry.notes
   json.image_url list_entry.image_url

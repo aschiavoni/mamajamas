@@ -9,7 +9,7 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
   initialize: function() {
     this.editing = false;
     this.model.on("change:rating", this.updateRating, this);
-    this.model.on("change:when_to_buy", this.saveAndRender, this);
+    this.model.on("change:age", this.saveAndRender, this);
     this.model.on("change:priority", this.saveAndRender, this);
     this.$el.attr("id", this.model.get("id"));
   },
@@ -30,10 +30,10 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
     });
     $("td.rating", this.$el).append(ratingView.render().$el);
 
-    var whenToBuyView = new Mamajamas.Views.ListItemWhenToBuy({
+    var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
       model: this.model
     });
-    this.$el.append(whenToBuyView.render().$el);
+    this.$el.append(ageRangeView.render().$el);
 
     var priorityView = new Mamajamas.Views.ListItemPriority({
       model: this.model

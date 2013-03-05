@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228204357) do
+ActiveRecord::Schema.define(:version => 20130305144407) do
+
+  create_table "age_ranges", :force => true do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -42,12 +49,12 @@ ActiveRecord::Schema.define(:version => 20130228204357) do
     t.integer  "priority"
     t.string   "notes"
     t.string   "image_url"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "product_type_id"
     t.integer  "category_id"
-    t.integer  "when_to_buy_suggestion_id"
-    t.boolean  "placeholder",               :default => false, :null => false
+    t.integer  "age_range_id"
+    t.boolean  "placeholder",       :default => false, :null => false
     t.string   "product_type_name"
   end
 
@@ -77,11 +84,11 @@ ActiveRecord::Schema.define(:version => 20130228204357) do
     t.integer  "category_id"
     t.string   "name"
     t.integer  "priority"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "slug"
     t.string   "image_name"
-    t.integer  "when_to_buy_suggestion_id"
+    t.integer  "age_range_id"
     t.integer  "user_id"
   end
 
@@ -154,12 +161,5 @@ ActiveRecord::Schema.define(:version => 20130228204357) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
-
-  create_table "when_to_buy_suggestions", :force => true do |t|
-    t.string   "name"
-    t.integer  "position"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
 end

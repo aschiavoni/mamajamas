@@ -17,7 +17,7 @@ FactoryGirl.define do
   factory :product_type do
     category
     sequence(:name) { |n| "Product Type #{n}" }
-    when_to_buy_suggestion
+    age_range
     priority 2
   end
 
@@ -40,7 +40,7 @@ FactoryGirl.define do
     owned false
     link "http://somedomain.com/somelistitem"
     rating 5
-    when_to_buy_suggestion
+    age_range
     priority 2
     notes nil
     image_url "http://somedomain.com/somelistitem"
@@ -56,7 +56,7 @@ FactoryGirl.define do
     image_url { |p| "http://images.#{p.vendor}.com/#{p.vendor_id}" }
   end
 
-  factory :when_to_buy_suggestion do
+  factory :age_range do
     sequence(:name) { |m| "#{n} mo" }
     sequence(:position) { |n| n }
   end

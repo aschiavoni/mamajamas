@@ -100,7 +100,7 @@ describe ListItemsController do
           owned: false,
           link: "http://domain.com/newproduct",
           rating: 3,
-          when_to_buy: "Pre-Birth",
+          age: "Pre-Birth",
           priority: 2,
           notes: "these are notes",
           image_url: "http://domain.com/newproduct.png",

@@ -1,14 +1,14 @@
 class ProductType < ActiveRecord::Base
   include Categorizable
-  include WhenToBuyAccessors
+  include AgeRangeAccessors
 
   extend FriendlyId
   friendly_id :name, use: [ :slugged ]
 
-  attr_accessible :name, :when_to_buy, :priority
+  attr_accessible :name, :age, :priority
 
   belongs_to :user
-  belongs_to :when_to_buy_suggestion
+  belongs_to :age_range
   has_many :queries, class_name: "ProductTypeQuery", dependent: :destroy
   has_and_belongs_to_many :products
 

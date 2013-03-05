@@ -1,4 +1,4 @@
-class WhenToBuySuggestion < ActiveRecord::Base
+class AgeRange < ActiveRecord::Base
   acts_as_list
 
   attr_accessible :name, :position

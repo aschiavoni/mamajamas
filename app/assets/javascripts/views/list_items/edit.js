@@ -9,7 +9,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   initialize: function() {
     _errMap = this.errorFieldMap();
     this.model.on("change:rating", this.updateRating, this);
-    this.model.on("change:when_to_buy", this.updateWhenToBuy, this);
+    this.model.on("change:age", this.updateAgeRange, this);
     this.model.on("change:priority", this.updatePriority, this);
   },
 
@@ -33,10 +33,10 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     });
     $("td.rating", this.$el).append(ratingView.render().$el);
 
-    var whenToBuyView = new Mamajamas.Views.ListItemWhenToBuy({
+    var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
       model: this.model
     });
-    this.$el.append(whenToBuyView.render().$el);
+    this.$el.append(ageRangeView.render().$el);
 
     var priorityView = new Mamajamas.Views.ListItemPriority({
       model: this.model
@@ -57,8 +57,8 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     $("#list_item_rating", this.$el).val(this.model.get("rating"));
   },
 
-  updateWhenToBuy: function() {
-    $("#list_item_when_to_buy", this.$el).val(this.model.get("when_to_buy"));
+  updateAgeRange: function() {
+    $("#list_item_age", this.$el).val(this.model.get("age"));
   },
 
   updatePriority: function() {
@@ -117,7 +117,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       product_type_name: _view.model.get("product_type_name"),
       category_id: $("#list_item_category_id", this.$el).val(),
       priority: $("#list_item_priority", this.$el).val(),
-      when_to_buy: $("#list_item_when_to_buy", this.$el).val(),
+      age: $("#list_item_age", this.$el).val(),
       rating: $("#list_item_rating", this.$el).val(),
       image_url: $("#list_item_image_url", this.$el).val(),
       owned: $("input[name='list_item[owned]']:checked").val() == "1",

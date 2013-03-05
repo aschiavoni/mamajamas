@@ -40,7 +40,7 @@ Mamajamas.Views.ListShow = Backbone.View.extend({
     var addItem = new Mamajamas.Views.ListItemNew({
       model: new Mamajamas.Models.ListItem({
         category_id: view.model.get("category_id"),
-        when_to_buy: "Pre-birth",
+        age: "Pre-birth",
         priority: 2,
         image_url: "/assets/products/icons/unknown.png"
       })

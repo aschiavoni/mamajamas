@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe WhenToBuySuggestionsController do
+describe AgeRangesController do
 
   before(:all) do
     3.times do
-      create(:when_to_buy_suggestion)
+      create(:age_range)
     end
   end
 
@@ -19,8 +19,8 @@ describe WhenToBuySuggestionsController do
       response.should be_success
     end
 
-    it "assigns suggestions" do
-      assigns(:suggestions).should_not be_blank
+    it "assigns age ranges" do
+      assigns(:age_ranges).should_not be_blank
     end
   end
 

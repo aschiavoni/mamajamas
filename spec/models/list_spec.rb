@@ -108,9 +108,9 @@ describe List do
       list_item.image_url.should == "/assets/products/icons/#{product_type.image_name}"
     end
 
-    it "should have a list item with the correct when to buy suggestion" do
+    it "should have a list item with the correct age range" do
       list_item = list.add_list_item_placeholder(product_type)
-      list_item.when_to_buy_suggestion.should == product_type.when_to_buy_suggestion
+      list_item.age_range.should == product_type.age_range
     end
 
   end

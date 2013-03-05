@@ -41,27 +41,27 @@ describe ListItem do
 
   end
 
-  describe "when to buy" do
+  describe "age range" do
 
-    let(:when_to_buy_suggestion) { build(:when_to_buy_suggestion) }
+    let(:age_range) { build(:age_range) }
 
-    it "should return when to buy suggestion name" do
-      li = build(:list_item, when_to_buy_suggestion: when_to_buy_suggestion)
-      li.when_to_buy.should == when_to_buy_suggestion.name
+    it "should return age range name" do
+      li = build(:list_item, age_range: age_range)
+      li.age.should == age_range.name
     end
 
-    it "should set when to buy suggestion from name" do
+    it "should set age range from name" do
       li = build(:list_item)
-      WhenToBuySuggestion.should_receive(:find_by_name).with(when_to_buy_suggestion.name).and_return(when_to_buy_suggestion)
-      li.when_to_buy = when_to_buy_suggestion.name
-      li.when_to_buy.should == when_to_buy_suggestion.name
+      AgeRange.should_receive(:find_by_name).with(age_range.name).and_return(age_range)
+      li.age = age_range.name
+      li.age.should == age_range.name
     end
 
-    it "should not change when to buy suggestion with an unknown name" do
+    it "should not change age range with an unknown name" do
       li = build(:list_item)
       lambda do
-        li.when_to_buy = "unknown"
-      end.should_not change(li, :when_to_buy)
+        li.age = "unknown"
+      end.should_not change(li, :age)
     end
 
   end

@@ -39,7 +39,7 @@ class ListItemsController < ApplicationController
   end
 
   def clean_params(params_to_clean)
-    [ :id, :category, :product_type, :when_to_buy_position  ].each do |key|
+    [ :id, :category, :product_type, :age_position  ].each do |key|
       params_to_clean.delete(key)
     end
     params_to_clean

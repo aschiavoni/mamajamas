@@ -19,10 +19,10 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
     this.$el.html(this.template({ listItem: this.model.toJSON() }));
 
     // subviews
-    var whenToBuyView = new Mamajamas.Views.ListItemWhenToBuy({
+    var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
       model: this.model
     });
-    this.$el.append(whenToBuyView.render().$el);
+    this.$el.append(ageRangeView.render().$el);
 
     var priorityView = new Mamajamas.Views.ListItemPriority({
       model: this.model
@@ -52,7 +52,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
     var attributes = {
       category_id: this.model.get("category_id"),
       priority: this.model.get("priority"),
-      when_to_buy: this.model.get("when_to_buy"),
+      age: this.model.get("age"),
       image_url: this.model.get("image_url"),
       product_type_id: this.model.get("product_type_id"),
       product_type_name: itemName,
@@ -71,8 +71,8 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
     return false;
   },
 
-  updateWhenToBuy: function() {
-    $("#list_item_when_to_buy", this.$el).val(this.model.get("when_to_buy"));
+  updateAgeRange: function() {
+    $("#list_item_age", this.$el).val(this.model.get("age"));
   },
 
   updatePriority: function() {
