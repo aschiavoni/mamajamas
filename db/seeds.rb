@@ -47,6 +47,7 @@ product_types = {
     { name: "Bath Thermometer", when_to_buy: "Pre-birth", priority: 3, image_name: nil, queries: [ "bath thermometer" ] },
     { name: "Bath Rail or Handle", when_to_buy: "Pre-birth", priority: 3, image_name: nil, queries: [ "bath rail", "bath handle", "bath safety", "safer grip" ] }
   ],
+
   "Birthing / Pregnancy" =>
   [
     { name: "Pregnancy Book", when_to_buy: "Pre-birth", priority: 2, image_name: "pregnancy_book.png" },
@@ -61,6 +62,7 @@ product_types = {
     { name: "Maternity Pillow", when_to_buy: "Pre-birth", priority: 2, image_name: "maternity_pillow.png" },
     { name: "Belly Cast Kit", when_to_buy: "Pre-birth", priority: 3, image_name: "belly_cast_kit.png", queries: [ "belly cast", "belly cast kit" ] }
   ],
+
   "Changing" =>
   [
     { name: "Disposable Diapers", when_to_buy: "Pre-birth", priority: 1, image_name: nil },
@@ -74,7 +76,9 @@ product_types = {
     { name: "Changing Table", when_to_buy: "Pre-birth", priority: 2, image_name: nil },
     { name: "Changing Table Pad", when_to_buy: "Pre-birth", priority: 1, image_name: nil },
     { name: "Changing Table Pad Cover", when_to_buy: "Pre-birth", priority: 1, image_name: nil }
-  ]
+  ],
+
+  "Potty Training" => []
 }
 
 product_types.each do |category, product_type_hash|
