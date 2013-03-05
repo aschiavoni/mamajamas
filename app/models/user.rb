@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   has_many :followers, through: :reverse_relationships, source: :follower
   has_many :product_types, dependent: :destroy
   has_one :list, dependent: :destroy
+  has_many :kids, dependent: :destroy
 
   mount_uploader :profile_picture, ProfilePictureUploader
 
@@ -101,5 +102,4 @@ class User < ActiveRecord::Base
     dob = birthday
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
-
 end

@@ -60,4 +60,10 @@ FactoryGirl.define do
     sequence(:name) { |m| "#{n} mo" }
     sequence(:position) { |n| n }
   end
+
+  factory :kid do
+    sequence(:name) { |n| "kid#{n}" }
+    gender "m"
+    age_range age_range
+  end
 end
