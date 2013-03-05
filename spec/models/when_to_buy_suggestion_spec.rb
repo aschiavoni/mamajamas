@@ -15,4 +15,17 @@ describe WhenToBuySuggestion do
     end
 
   end
+
+  it "returns suggestions for younger ages" do
+    when_to_buy = WhenToBuySuggestion.where(position: 2).first
+    younger = when_to_buy.younger.pluck(:position).should == [0, 1]
+  end
+
+  it "returns suggestions for older ages" do
+    when_to_buy = WhenToBuySuggestion.where(position: 2).first
+    older = when_to_buy.older.each do |w|
+      w.position.should > when_to_buy.position
+    end
+  end
+
 end
