@@ -28,4 +28,43 @@ describe AgeRange do
     end
   end
 
+  context "Pre-defined ages" do
+
+    subject { AgeRange }
+
+    it "returns a pre-birth age" do
+      subject.pre_birth.should_not be_nil
+    end
+
+    it "returns a age for 0-3 mos" do
+      subject.zero_to_three_months.should_not be_nil
+    end
+
+    it "returns a age for 13-18 mos" do
+      subject.thirteen_to_eighteen_months.should_not be_nil
+    end
+
+    it "returns a age for 2y" do
+      subject.two_years.should_not be_nil
+    end
+
+    it "identifies a newborn" do
+      age = subject.zero_to_three_months
+      age.should be_newborn
+    end
+
+    it "identifies a kid who is not a newborn" do
+      subject.pre_birth.should_not be_newborn
+    end
+
+    it "identifies an infant" do
+      subject.thirteen_to_eighteen_months.should be_infant
+    end
+
+    it "identifies a kid who is not an infant" do
+      subject.two_years.should_not be_infant
+    end
+
+  end
+
 end
