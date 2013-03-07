@@ -78,6 +78,33 @@ product_types = {
     { name: "Changing Table Pad Cover", age_range: "Pre-birth", priority: 1, image_name: nil }
   ],
 
+  "Feeding" =>
+  [
+    { name: "Wipeable Bib", age_range: "7-12 mo", priority: 1, image_name: "wipeable_bib.png" },
+    { name: "Bottle", age_range: "Pre-birth", priority: 1, image_name: "rick" },
+    { name: "Bowl", age_range: "7-12 mo", priority: 1, image_name: "bowl.png" },
+    { name: "Baby food maker", age_range: "7-12 mo", priority: 2, image_name: nil },
+    { name: "Plate", age_range: "7-12 mo", priority: 1, image_name: "plate.png" },
+    { name: "Baby Spoon", age_range: "4-6 mo", priority: 1, image_name: "spoon.png" },
+    { name: "Toddler Spoon", age_range: "13-18 mo", priority: 1, image_name: "toddler_spoon.png" },
+    { name: "High Chair", age_range: "4-6 mo", priority: 1, image_name: "high_chair.png" },
+    { name: "Snack Storage", age_range: "7-12 mo", priority: 2, image_name: "snack_storage.png" },
+    { name: "Burp Cloth", age_range: "Pre-birth", priority: 2, image_name: "burp_cloth.png" },
+    { name: "Cloth Bib", age_range: "4-6 mo", priority: 2, image_name: "cloth_bib.png" },
+    { name: "Bottle Bag", age_range: "Pre-birth", priority: 2, image_name: "bottle_bag.png" },
+    { name: "Bottle Brush", age_range: "Pre-birth", priority: 2, image_name: "bottle_brush.png" },
+    { name: "Bottle Warmer", age_range: "Pre-birth", priority: 2, image_name: "bottle_warmer.png" },
+    { name: "Booster Seat", age_range: "13-18 mo", priority: 2, image_name: "booster_seat.png" },
+    { name: "Lunch Box", age_range: "7-12 mo", priority: 3, image_name: "lunch_box.png" },
+    { name: "Bottle Sterilizer", age_range: "Pre-birth", priority: 3, image_name: "bottle_sterilizer.png" },
+    { name: "Bottle Drying Rack", age_range: "Pre-birth", priority: 2, image_name: "bottle_drying_rack.png" },
+    { name: "Feeding Set", age_range: "7-12 mo", priority: 3, image_name: "feeding_set.png" },
+    { name: "Sandwich Cutter", age_range: "2y", priority: 3, image_name: "sandwich_cutter.png" },
+    { name: "Teething Feeder", age_range: "4-6 mo", priority: 3, image_name: "teething_feeder.png" },
+    { name: "Little Table", age_range: "13-18 mo", priority: 3, image_name: "table.png" },
+    { name: "Little Chair", age_range: "13-18 mo", priority: 3, image_name: "chair.png" }
+  ],
+
   "Potty Training" => []
 }
 
