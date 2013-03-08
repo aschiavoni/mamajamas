@@ -64,6 +64,6 @@ FactoryGirl.define do
   factory :kid do
     sequence(:name) { |n| "kid#{n}" }
     gender "m"
-    age_range age_range
+    age_range
   end
 end

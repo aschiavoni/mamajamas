@@ -34,11 +34,27 @@ class AgeRange < ActiveRecord::Base
     where(name: "0-3 mo").first
   end
 
+  def self.four_to_six_months
+    where(name: "4-6 mo").first
+  end
+
+  def self.seven_to_twelve_months
+    where(name: "7-12 mo").first
+  end
+
   def self.thirteen_to_eighteen_months
     where(name: "13-18 mo").first
   end
 
   def self.two_years
     where(name: "2y").first
+  end
+
+  def self.three_years
+    where(name: "3y").first
+  end
+
+  def self.four_years
+    where(name: "4y").first
   end
 end
