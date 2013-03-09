@@ -15,6 +15,7 @@ class ReservedNameValidator < ActiveModel::EachValidator
     oauth oauth_clients omniauth omniauth_callbacks openid
     password passwords
     privacy product_type product_types profile profiles
+    quiz quizes
     register registrations relationship relationships remove replies robots rss
     save search session sessions settings sign-in sign-out sign-up sign_in
     sign_out sign_up signin signout signup sitemap ssl subscribe
