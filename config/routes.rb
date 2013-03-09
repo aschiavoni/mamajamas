@@ -31,6 +31,7 @@ Mamajamas::Application.routes.draw do
 
   resources :relationships, only: [ :create, :destroy ]
 
+  resource :quiz, only: [ :show ], controller: "quiz"
   resource :list, only: [ :show ] do
     resources :list_items, only: [ :index, :create, :update, :destroy ]
     get 'preview' => "public_lists#preview", as: :public_list_preview

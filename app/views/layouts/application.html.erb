@@ -104,6 +104,7 @@
   </div>
 </div>
 <!-- end body area -->
+<%= yield(:modal) %>
 <!-- modal window ************ -->
 <% unless user_signed_in? -%>
   <div class="modal-wrap" style="display:none;" id="signup-modal">
