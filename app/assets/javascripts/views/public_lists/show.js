@@ -15,6 +15,7 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
   render: function() {
     $("#list-items").empty();
     this.collection.each(this.appendItem, this);
+    return this;
   },
 
   appendItem: function(item) {

@@ -38,6 +38,12 @@ window.Mamajamas = {
       new Mamajamas.Routers.PublicListItems();
       Backbone.history.start();
     }
+
+    // quiz
+    if ($('#quiz').length > 0) {
+      new Mamajamas.Routers.Quiz();
+      Backbone.history.start();
+    }
   }
 };
 
