@@ -1,12 +1,16 @@
 Mamajamas.Views.QuizShow = Backbone.View.extend({
 
   initialize: function() {
-    var introQuestion = new Mamajamas.Views.QuizQuestion();
-    this.$el.html(introQuestion.render().$el);
+    var question = new this.questions[0]();
+    this.$el.html(question.render().$el);
   },
 
   events: {
   },
+
+  questions: [
+    Mamajamas.Views.QuizIntro
+  ],
 
   render: function() {
     return this;

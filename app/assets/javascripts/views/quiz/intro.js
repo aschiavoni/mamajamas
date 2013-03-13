@@ -1,8 +1,6 @@
-Mamajamas.Views.QuizQuestion = Backbone.View.extend({
+Mamajamas.Views.QuizIntro = Mamajamas.Views.QuizQuestion.extend({
 
   template: HandlebarsTemplates['quiz/intro'],
-
-  className: 'quiz-box large',
 
   initialize: function() {
     this.$el.attr("id", "quiz01");
@@ -12,14 +10,9 @@ Mamajamas.Views.QuizQuestion = Backbone.View.extend({
     'click #bt-start': 'start'
   },
 
-  render: function() {
-    this.$el.html(this.template());
-    return this;
-  },
-
   start: function(event) {
     event.preventDefault();
     return false;
   },
 
-})
+});
