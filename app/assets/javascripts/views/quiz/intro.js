@@ -2,6 +2,8 @@ Mamajamas.Views.QuizIntro = Mamajamas.Views.QuizQuestion.extend({
 
   template: HandlebarsTemplates['quiz/intro'],
 
+  quizView: null,
+
   initialize: function() {
     this.$el.attr("id", "quiz01");
   },
@@ -12,6 +14,7 @@ Mamajamas.Views.QuizIntro = Mamajamas.Views.QuizQuestion.extend({
 
   start: function(event) {
     event.preventDefault();
+    this.quizView.next();
     return false;
   },
 
