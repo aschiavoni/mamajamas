@@ -11,7 +11,8 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
 
   questions: [
     Mamajamas.Views.QuizIntro,
-    Mamajamas.Views.QuizBabyAge
+    Mamajamas.Views.QuizBabyAge,
+    Mamajamas.Views.QuizFeeding,
   ],
 
   render: function() {
@@ -30,7 +31,7 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
 
   previous: function() {
     this.currentQuestion--;
-    if (this.currentQuestion < 0) currentQuestion = 0;
+    if (this.currentQuestion < 0) this.currentQuestion = 0;
     this.renderCurrentQuestion();
   },
 

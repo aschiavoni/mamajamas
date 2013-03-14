@@ -6,6 +6,7 @@ Mamajamas.Views.QuizIntro = Mamajamas.Views.QuizQuestion.extend({
 
   initialize: function() {
     this.$el.attr("id", "quiz01");
+    this.$el.addClass("large");
   },
 
   events: {

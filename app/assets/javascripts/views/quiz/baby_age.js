@@ -5,6 +5,8 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
   quizView: null,
 
   initialize: function() {
+    this.$el.attr("id", "quiz02");
+    this.$el.addClass("large");
   },
 
   events: {
