@@ -95,7 +95,7 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
 
     var answerText = answer.html();
     $('#baby-age-desc', this.$el).html(answerText);
-    this.model.set('age_range', answerText);
+    this.model.set('age_range', answerText.replace('.', ''));
 
     return false;
   },
