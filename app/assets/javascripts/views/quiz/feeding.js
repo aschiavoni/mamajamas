@@ -38,7 +38,17 @@ Mamajamas.Views.QuizFeeding = Mamajamas.Views.QuizQuestion.extend({
     else
       answer.addClass(this.selectedClass);
 
+    this.highlightNext();
+
     return false;
+  },
+
+  highlightNext: function() {
+    if ($('ol.q-multi li.' + this.selectedClass, this.$el).length > 0) {
+      $('#bt-next', this.$el).addClass('bt-color');
+    } else {
+      $('#bt-next', this.$el).removeClass('bt-color');
+    }
   }
 
 });
