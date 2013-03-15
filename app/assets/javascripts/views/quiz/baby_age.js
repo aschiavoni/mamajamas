@@ -5,13 +5,16 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
   quizView: null,
 
   initialize: function() {
-    this.$el.attr("id", "quiz02");
-    this.$el.addClass("large");
+    this.$el.attr('id', 'quiz02');
+    this.$el.addClass('large');
+    this.model = new Mamajamas.Models.Kid();
+    this.model.set('age_range', 'Pre-birth');
+    this.on('quiz:baby_age:saved', this.next);
   },
 
   events: {
     'click #bt-prev': 'previous',
-    'click #bt-next': 'next',
+    'click #bt-next': 'save',
     'click #mom-type': 'showMomTypes',
     'click .mom-type': 'selectMomType',
     'click #baby-age': 'showBabyAges',
@@ -24,10 +27,8 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
     return false;
   },
 
-  next: function(event) {
-    event.preventDefault();
+  next: function() {
     this.quizView.next();
-    return false;
   },
 
   showMomTypes: function(event) {
@@ -51,10 +52,13 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
     var answerText = answer.html();
     $('#mom-type-desc', this.$el).html(answerText);
 
-    if (answerText == "a mom to be")
+    if (answerText == 'a mom to be') {
+      this.model.set('age_range', 'Pre-birth');
       this.hideBabyAgeQuestion();
-    else
+    } else {
+      this.model.set('age_range', '0-3 mo');
       this.showBabyAgeQuestion();
+    }
 
     return false;
   },
@@ -71,9 +75,9 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
     event.preventDefault();
 
     var answers = $(event.target, this.$el).parents('a').siblings('ol');
-    answers.css("width", "5.5em");
-    answers.css("max-height", "4.5em");
-    answers.css("overflow", "auto");
+    answers.css('width', '5.5em');
+    answers.css('max-height', '4.5em');
+    answers.css('overflow', 'auto');
     answers.show();
 
     return false;
@@ -84,11 +88,35 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
 
     var answer = $(event.target, this.$el);
     var answers = answer.parents('ol');
-    answers.css("width", null);
-    answers.css("max-height", null);
-    answers.css("overflow", null);
+    answers.css('width', null);
+    answers.css('max-height', null);
+    answers.css('overflow', null);
     answers.hide();
-    $('#baby-age-desc', this.$el).html(answer.html());
+
+    var answerText = answer.html();
+    $('#baby-age-desc', this.$el).html(answerText);
+    this.model.set('age_range', answerText);
+
+    return false;
+  },
+
+  save: function(event) {
+    event.preventDefault();
+
+    var _view = this;
+    Mamajamas.Context.Kids.create({
+      kid: {
+        age_range_name: this.model.get('age_range')
+      }
+    }, {
+      wait: true,
+      success: function(model) {
+        _view.trigger('quiz:baby_age:saved');
+      },
+      error: function(model, response) {
+        Mamajamas.Context.Notifications.error('Please try again later.');
+      }
+    });
 
     return false;
   },
