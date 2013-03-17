@@ -10,9 +10,14 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
   },
 
   questions: [
-    Mamajamas.Views.QuizIntro,
-    Mamajamas.Views.QuizBabyAge,
-    Mamajamas.Views.QuizFeeding,
+    [
+      Mamajamas.Views.QuizIntro, new Mamajamas.Models.QuizQuestion()
+    ],
+    [ Mamajamas.Views.QuizBabyAge, new Mamajamas.Models.QuizQuestion({
+        answers: [ 'a mom to be.', '0-3 mo' ]
+      })
+    ],
+    [ Mamajamas.Views.QuizFeeding, new Mamajamas.Models.QuizQuestion() ],
   ],
 
   render: function() {
@@ -40,9 +45,12 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
   },
 
   getQuestion: function(index) {
-    var q = new this.questions[index]();
-    q.quizView = this;
-    return q;
+    var q = this.questions[index];
+    var question = new q[0]({
+      model: q[1]
+    });
+    question.quizView = this;
+    return question;
   },
 
   renderCurrentQuestion: function() {
