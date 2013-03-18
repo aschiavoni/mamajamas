@@ -6,6 +6,10 @@ class ListsController < ApplicationController
   respond_to :html, :json
 
   def show
+    if @list.blank?
+      redirect_to(quiz_path) and return
+    end
+
     @view = ListView.new(@list, params[:category])
     @list_entries_json = render_to_string(
       template: 'list_items/index',
@@ -36,6 +40,5 @@ class ListsController < ApplicationController
 
   def find_list
     @list = current_user.list
-    @list = current_user.build_list! if @list.blank?
   end
 end

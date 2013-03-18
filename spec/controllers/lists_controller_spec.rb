@@ -4,24 +4,47 @@ describe ListsController do
 
   let(:user) { create(:user) }
 
-  before(:all) do
-    user.build_list!
-  end
-
-  before(:each) do
-    sign_in user
-  end
-
   describe "show" do
 
-    it "should get list page" do
-      get :show
-      response.should be_success
+    context "with list" do
+
+      before(:each) do
+        user.build_list!
+      end
+
+      before(:each) do
+        sign_in user
+      end
+
+      it "should get list page" do
+        get :show
+        response.should be_success
+      end
+
+    end
+
+    context "without list" do
+
+      it "should redirect to quiz if list doesn't exist" do
+        u = create(:user)
+        sign_in u
+        get :show
+        response.should redirect_to(quiz_path)
+      end
+
     end
 
   end
 
   describe "product types" do
+
+    before(:each) do
+      sign_in user
+    end
+
+    before(:each) do
+      user.build_list!
+    end
 
     it "should call available product types" do
       List.any_instance.
