@@ -17,6 +17,7 @@ class QuizController < ApplicationController
       end
     end
 
+    current_user.build_list! if current_user.list.blank?
     respond_with @kid
   end
 

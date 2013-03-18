@@ -94,7 +94,8 @@ class User < ActiveRecord::Base
   end
 
   def build_list!
-    ListBuilder.new(self).build! if list.blank?
+    kid = self.kids.order('created_at ASC').first
+    ListBuilder.new(self, kid).build! if list.blank?
   end
 
   def age(now = Time.now.utc.to_date)

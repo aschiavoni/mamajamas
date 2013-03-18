@@ -81,7 +81,7 @@ product_types = {
   "Feeding" =>
   [
     { name: "Wipeable Bib", age_range: "7-12 mo", priority: 1, image_name: "wipeable_bib.png" },
-    { name: "Bottle", age_range: "Pre-birth", priority: 1, image_name: "rick" },
+    { name: "Bottle", age_range: "Pre-birth", priority: 1, image_name: "bottle.png" },
     { name: "Bowl", age_range: "7-12 mo", priority: 1, image_name: "bowl.png" },
     { name: "Baby food maker", age_range: "7-12 mo", priority: 2, image_name: nil },
     { name: "Plate", age_range: "7-12 mo", priority: 1, image_name: "plate.png" },
