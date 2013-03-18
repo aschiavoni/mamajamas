@@ -17,6 +17,26 @@ Mamajamas.Views.QuizFeeding = Mamajamas.Views.QuizQuestion.extend({
     'click .q-multi a': 'toggleSelected'
   },
 
+  render: function() {
+    var $questionView = $(this.template(this.model.toJSON()));
+
+    var answers = this.model.get('answers');
+
+    var _view = this;
+    $('ol.q-multi li', $questionView).each(function(idx) {
+      var $answerLi = $(this);
+      var answerText = $('strong', $answerLi).html();
+      if (answers.indexOf(answerText) > -1) {
+        $answerLi.addClass(_view.selectedClass);
+      }
+    });
+
+    this.$el.html($questionView);
+    this.highlightNextMaybe();
+
+    return this;
+  },
+
   previous: function(event) {
     event.preventDefault();
     this.quizView.previous();
@@ -32,18 +52,30 @@ Mamajamas.Views.QuizFeeding = Mamajamas.Views.QuizQuestion.extend({
   toggleSelected: function(event) {
     event.preventDefault();
 
-    var answer = $(event.target, this.$el).parents('li');
-    if (answer.hasClass(this.selectedClass))
-      answer.removeClass(this.selectedClass);
+    var $answer = $(event.target, this.$el).parents('li');
+    if ($answer.hasClass(this.selectedClass))
+      $answer.removeClass(this.selectedClass);
     else
-      answer.addClass(this.selectedClass);
+      $answer.addClass(this.selectedClass);
 
-    this.highlightNext();
+    this.highlightNextMaybe();
+    this.setAnswers();
 
     return false;
   },
 
-  highlightNext: function() {
+  setAnswers: function() {
+    var answers = [];
+    $('ol.q-multi li.' + this.selectedClass, this.$el).each(function(idx) {
+      var $answerLi = $(this);
+      var answerText = $('strong', $answerLi).html();
+      answers.push(answerText);
+    });
+
+    this.model.set('answers', answers);
+  },
+
+  highlightNextMaybe: function() {
     if ($('ol.q-multi li.' + this.selectedClass, this.$el).length > 0) {
       $('#bt-next', this.$el).addClass('bt-color');
     } else {
