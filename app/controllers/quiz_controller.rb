@@ -7,6 +7,14 @@ class QuizController < ApplicationController
   def show
   end
 
+  def update
+    question = Quiz::Question.by_name(params[:question], current_user.list)
+    answers = params[:answers] || []
+    question.answer(*answers)
+
+    render json: { status: "ok" }
+  end
+
   def update_kid
     @kid = current_user.kids.first
     if @kid.present?

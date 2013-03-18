@@ -1,6 +1,7 @@
 module Features
   module SessionHelpers
     TEST_USER_NAME = "test_user"
+    TEST_USER_NAME_WITH_LIST = "test_user_list"
     TEST_USER_PASSWORD = "test12345!"
 
     def self.create_test_user
@@ -12,9 +13,25 @@ module Features
       })
     end
 
+    def self.create_test_user_with_list
+      user = User.create!({
+        username: TEST_USER_NAME_WITH_LIST,
+        email: "#{TEST_USER_NAME_WITH_LIST}@test.com",
+        password: TEST_USER_PASSWORD,
+        password_confirmation: TEST_USER_PASSWORD
+      })
+      user.build_list!
+    end
+
     def test_user
       user = User.find_by_username(TEST_USER_NAME)
       user = create_test_user if user.blank?
+      user
+    end
+
+    def test_user_with_list
+      user = User.find_by_username(TEST_USER_NAME_WITH_LIST)
+      user = create_test_user_with_list if user.blank?
       user
     end
 

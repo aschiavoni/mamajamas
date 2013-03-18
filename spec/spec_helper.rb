@@ -70,6 +70,7 @@ Spork.prefork do
       DatabaseCleaner.clean_with(:truncation)
       load "#{Rails.root}/db/seeds.rb"
       Features::SessionHelpers.create_test_user
+      Features::SessionHelpers.create_test_user_with_list
     end
 
     config.before(:each) do

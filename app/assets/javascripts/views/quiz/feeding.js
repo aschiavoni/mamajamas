@@ -6,14 +6,17 @@ Mamajamas.Views.QuizFeeding = Mamajamas.Views.QuizQuestion.extend({
 
   selectedClass: 'q-selected',
 
+  questionName: 'Feeding',
+
   initialize: function() {
     this.$el.attr("id", "quiz03");
+    this.on('quiz:feeding:saved', this.next);
   },
 
   events: {
     'click #bt-prev': 'previous',
-    'click #bt-next': 'next',
-    'click .skip': 'next',
+    'click #bt-next': 'save',
+    'click .skip': 'skip',
     'click .q-multi a': 'toggleSelected'
   },
 
@@ -43,9 +46,36 @@ Mamajamas.Views.QuizFeeding = Mamajamas.Views.QuizQuestion.extend({
     return false;
   },
 
-  next: function(event) {
-    event.preventDefault();
+  next: function() {
     this.quizView.next();
+  },
+
+  skip: function(event) {
+    event.preventDefault();
+    this.next();
+    return false;
+  },
+
+  save: function(event) {
+    event.preventDefault();
+
+    var _view = this;
+
+    $.ajax({
+      url: '/quiz',
+      type: 'PUT',
+      data: {
+        question: _view.questionName,
+        answers: _view.model.get('answers')
+      },
+      success: function(data, status, xhr) {
+        _view.trigger('quiz:feeding:saved');
+      },
+      error: function(xhr, status, error) {
+        Mamajamas.Context.Notifications.error('Please try again later.');
+      }
+    });
+
     return false;
   },
 
