@@ -10,7 +10,7 @@ Mamajamas.Views.QuizFeeding = Mamajamas.Views.QuizQuestion.extend({
 
   initialize: function() {
     this.$el.attr("id", "quiz03");
-    this.on('quiz:feeding:saved', this.next);
+    this.on('quiz:question:saved', this.next);
   },
 
   events: {
@@ -69,7 +69,7 @@ Mamajamas.Views.QuizFeeding = Mamajamas.Views.QuizQuestion.extend({
         answers: _view.model.get('answers')
       },
       success: function(data, status, xhr) {
-        _view.trigger('quiz:feeding:saved');
+        _view.trigger('quiz:question:saved');
       },
       error: function(xhr, status, error) {
         Mamajamas.Context.Notifications.error('Please try again later.');

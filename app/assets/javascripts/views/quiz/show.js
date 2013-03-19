@@ -14,13 +14,18 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
       Mamajamas.Views.QuizIntro, new Mamajamas.Models.QuizQuestion()
     ],
 
-    [ Mamajamas.Views.QuizBabyAge, new Mamajamas.Models.QuizQuestion({
+    [
+      Mamajamas.Views.QuizBabyAge, new Mamajamas.Models.QuizQuestion({
         answers: [ 'a mom to be.', '0-3 mo' ]
       })
     ],
 
     [
       Mamajamas.Views.QuizFeeding, new Mamajamas.Models.QuizQuestion()
+    ],
+
+    [
+      Mamajamas.Views.QuizSleeping, new Mamajamas.Models.QuizQuestion()
     ],
   ],
 
