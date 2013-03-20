@@ -137,7 +137,7 @@ describe ProductType do
 
   end
 
-  describe "has query" do
+  describe "queries" do
 
     before(:all) do
       @product_type = create(:product_type)
@@ -152,6 +152,20 @@ describe ProductType do
     it "does not have query" do
       @product_type.has_query?(@excluded_query.query).should be_false
     end
+
+    it "adds a query that does not already exist" do
+      lambda do
+        @product_type.add_query('some stuff')
+      end.should change(@product_type.queries, :count).by(1)
+    end
+
+    it "doesn't add a query that exist" do
+      query_name = @included_query.query
+      lambda do
+        @product_type.add_query(query_name)
+      end.should_not change(@product_type.queries, :count)
+    end
+
   end
 
 end

@@ -27,6 +27,10 @@ class ProductType < ActiveRecord::Base
     !queries.where(query: query).blank?
   end
 
+  def add_query(query)
+    queries.create!(query: query) unless has_query?(query)
+  end
+
   def available_products
     available_products = products.active
     if available_products.size == 0
