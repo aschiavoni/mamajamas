@@ -1,0 +1,20 @@
+Traveling (Hidden - if d - not much travel at all is selected on quiz),Default Priority,Default When to Buy,Image Name,High Res Image,Contingencies,Image Pulled,Icon Created,,,
+Luggage,3,4-6 mo,luggage.png,luggage@2x.png,-moves to 2 for jetsetter,x,x,,,
+Disposable Bib,3,7-12 mo,disposable_bib.png,disposable_bib@2x.png,,x,x,,,
+Travel Crib,3,4-6 mo,travel_crib.png,travel_crib@2x.png,-moves to 2 for jetsetter,x,x,Age Ranges,Public Tags,Other Quiz Dependencies
+Travel Booster Seat,3,7-12 mo,travel_booster_seat.png,travel_booster@2x.png,-moves to 2 for jetsetter,x,x,0-3 mo,First-Timer,Bottlefeeding
+Travel Game,3,2y,tavel_game.png,travel_game@2x.png,-moves to 2 for jetsetter,x,x,4-6 mo,Eco,Both bf/bottle
+Harness,3,13-18 mo,harness.png,harness@2x.png,,x,x,7-12 mo,Thrifty,Carrier
+Travel Potty,3,19-24 mo,travel_potty.png,travel_potty@2x.png,,x,x,13-18 mo,Jetsetter,Stroller
+Travel Bag,3,0-3 mo,travel_bag.png,travel_bag@2x.png,-moves to 2 for jetsetter,x,x,19-24 mo,Homebody,Both Carrier/Stroller
+Car Seat Bag,3,Pre-birth,car_seat_bag.png,car_seat_bag@2x.png,-moves to 2 for jetsetter,x,x,2y,Rural,Cloth Diapers
+Car Mirror,3,pre-birth,car_mirror.png,car_mirror@2x.png,-moves to 2 for cautious mama,x,x,3y,Suburban,Paper Diapers
+Car Sunshade,2,pre-birth,sunshade.png,sunshade@2x.png,-moves to 2 for cautious mama,x,x,4y,Urban,Baby Food Chef
+Travel Tray,3,19-24 mo,travel_tray.png,travel_tray@2x.png,,x,x,5y+,Very Urban,Baby Food Jars
+Car Seat Head Support,3,0-3 mo,carseat_head_support.png,carseat_head_support@2x,-moves to 2 for cautious mama,x,x,,Sheek,Cosleeper
+Travel Pillow,3,13-18 mo,travel_pillow.png,travel_pillow@2x.png,,x,x,,,Crib
+,,,,,,,,,,Bassinet
+,,,,,,,,,,Some combination of sleeping options
+,,,,,,,,,,Cautious
+,,,,,,,,,,Mellow
+,,,,,,,,,,Zip Code

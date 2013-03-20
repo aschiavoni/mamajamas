@@ -1,0 +1,15 @@
+Changing (default pre-birth),Default When to Buy,Default Priority,Image Name,High Res Image,Queries,Contingencies,Image Pulled,Icon Created
+Disposable Diapers,Pre-birth,1,disposable_diapers.png,disposable_diapers@2x.png,disposable diapers; pampers; diapers; luvs; huggies ,-moves to 3 if disposables not chosen ,x,x
+Cloth Diapers,Pre-birth,2,cloth_diapers.png,cloth_diapers@2x.png,cloth diapers; bumgenius; thirsties; fuzzibunz; cloth diaper; kushies; gdiapers; gdiaper,-moves to 1 if cloth diapers chosen and 3 if not chosen,x,x
+Wipes,Pre-birth,1,wipes.png,wipes@2x.png,baby wipes; baby wipe; wipes; ,,x,x
+Changing Pad,Pre-birth,2,changing_pad.png,changing_pad@2x.png,changing pad,,x,x
+Diaper Cream or Ointment,Pre-birth,1,diaper_cream.png,diaper_cream@2x.png,diaper cream; rash cream; diaper care; desitin; bottom balm; diaper ointment; butt paste; disper rash,,x,x
+Diaper Pail,Pre-birth,1,diaper_pail.png,diaper_pail@2x.png,diaper pail; diaper genie; dekor; diaper disposal; ,,x,x
+Wet Bag,Pre-birth,3,wet_bag.png,wet_bag@2x.png,wet bag; wet dry bag,-moves to 2 if cloth diapers chosen,x,x
+Wipes Warmer,Pre-birth,3,wipes_warmer.png,wipes_warmer@2x.png,wipes warmer; wipes warmer; wipes dispenser; wipe dispenser,-moves to 2 for cautious mom,x,x
+Changing Table,Pre-birth,2,changing_table.png,changing_table@2x.png,changing table; baby care cart; dressing table; ,,x,x
+Changing Table Pad,Pre-birth,1,changing_table_pad.png,changing_table_pad@2x.png,,,x,x
+Changing Table Pad Cover,Pre-birth,1,changing_table_cover.png,changing_table_cover@2x.png,,,x,
+Nursery Organizer,Pre-birth,2,nursery_organizer.png,nursery_organizer@2x.png,,,,
+,,,,,,,,
+11,,,,,,,,

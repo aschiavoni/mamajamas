@@ -1,0 +1,25 @@
+Clothing (Default - On),Default Priority,Default When to Buy,Image Name,High Res Image,Queries,Contingencies,Image Pulled,Icon Created,,,
+Bodysuit,1,Pre-birth,bodysuit.png,bodysuit@2x.png,,,x,x,,,
+Dress,2,Pre-birth,dress.png,dress@2x.png,,,x,x,,,
+Outerwear,2,Pre-birth,outerwear.png,outerwear@2x.png,,,x,x,,,
+Sweater,2,Pre-birth,sweater.png,sweater@2x.png,,,x,x,,,
+Romper,2,Pre-birth,romper.png,romper@2x.png,,,x,x,,,
+Pants,2,Pre-birth,pants.png,pants@2x.png,,,x,x,,,
+Shirt,2,Pre-birth,shirt.png,shirt@2x.png,,,x,x,Age Ranges,Public Tags,Other Quiz Dependencies
+Booties,2,Pre-birth,booties.png,booties@2x.png,,,x,x,Pre-birth,Veteran,Breastfeeding
+Socks,1,Pre-birth,socks.png,socks@2x.png,,,x,x,0-3 mo,First-Timer,Bottlefeeding
+Shoes,2,7-12 mo,shoes.png,shoes@2x.png,,,x,x,4-6 mo,Eco,Both bf/bottle
+Sleapwear,1,Pre-birth,sleepwear.png,swleepwear@2x.png,,,x,x,7-12 mo,Thrifty,Carrier
+Leggings,2,Pre-birth,leggings.png,leggings@2x.png,,,x,x,13-18 mo,Jetsetter,Stroller
+Skirt,2,Pre-birth,skirt.png,skirt@2x.png,,,x,x,19-24 mo,Homebody,Both Carrier/Stroller
+Accessory,3,Pre-birth,accessory.png,accessory@2x.png,,,x,x,2y,Rural,Cloth Diapers
+Hat,2,7-12 mo,hat.png,hat@2x.png,,,x,x,3y,Suburban,Paper Diapers
+Infant Cap,1,Pre-birth,infant_cap.png,infant_cap@2x.png,,,x,x,4y,Urban,Baby Food Chef
+Sunglasses,3,13-18 mo,sunglasses.png,sunglasses@2x.png,,,x,x,5y+,Very Urban,Baby Food Jars
+Infant Gown,3,Pre-birth,infant_gown.png,infant_gown@2x.png,,,x,x,,Sheek,Cosleeper
+Shorts,2,Pre-birth,shorts.png,shorts@2x.png,,,x,x,,,Crib
+Underwear,2,19-24 mo,underwear.png,underwear@2x.png,,,x,x,,,Bassinet
+Headband,3,Pre-birth,headband.png,headband@2x.png,,,x,x,,,Some combination of sleeping options
+,,,,,,,,,,,Cautious
+,,,,,,,,,,,Mellow
+,,,,,,,,,,,Zip Code

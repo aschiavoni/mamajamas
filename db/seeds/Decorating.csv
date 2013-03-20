@@ -1,0 +1,28 @@
+Decorating (default pre-birth) ,Default Priority,Default When to Buy,Image Name,High Res Image,Contingencies,Image Pulled,Icon Created,,,
+Mobile,2,Pre-birth,mobile.png,mobile@2x.png,,x,x,,,
+Decorative Pillow,3,Pre-birth,decorative_pillow.png,decorative_pillow@2x.png,,x,x,,,
+Decal/Sticker,3,Pre-birth,decal.png,decal@2x.png,,x,x,,,
+Clock,3,Pre-birth,clock.png,clock@2x.png,,x,x,,,
+Wastebasket,3,Pre-birth,wastebasket.png,wastebasket@2x.png,,x,x,,,
+Hamper,2,Pre-birth,hamper.png,hamper@2x.png,,x,x,,,
+Night Light,2,Pre-birth,night_light.png,night_light@2x.png,,x,x,,,
+Lamp,3,Pre-birth,lamp.png,lamp@2x.png,,x,x,,,
+Chandelier,3,Pre-birth,chandelier.png,chandelier@2x.png,,x,x,,,
+Curtains/Window Treatments,3,Pre-birth,curtains.png,curtains2x.png,,x,x,Age Ranges,Public Tags,Other Quiz Dependencies
+Rug,3,Pre-birth,rug.png,rug@2x.png,,x,x,Pre-birth,Veteran,Breastfeeding
+Keepsake,3,Pre-birth,keepsake.png,keepsake@2x.png,,x,x,0-3 mo,First-Timer,Bottlefeeding
+Valance,3,Pre-birth,valance.png,valance@2x.png,,x,x,4-6 mo,Eco,Both bf/bottle
+Floor Mat,2,Pre-birth,floor_mat.png,floor_mat@2x.png,,x,x,7-12 mo,Thrifty,Carrier
+Kids Reading Chair,2,13-18 mo,reading_chair.png,reading_chair@2x.png,,,,13-18 mo,Jetsetter,Stroller
+,,,,,,,,19-24 mo,Homebody,Both Carrier/Stroller
+,,,,,,,,2y,Rural,Cloth Diapers
+14,,,,,,,,3y,Suburban,Paper Diapers
+,,,,,,,,4y,Urban,Baby Food Chef
+,,,,,,,,5y+,Very Urban,Baby Food Jars
+,,,,,,,,,Sheek,Cosleeper
+,,,,,,,,,,Crib
+,,,,,,,,,,Bassinet
+,,,,,,,,,,Some combination of sleeping options
+,,,,,,,,,,Cautious
+,,,,,,,,,,Mellow
+,,,,,,,,,,Zip Code
