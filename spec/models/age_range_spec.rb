@@ -28,6 +28,16 @@ describe AgeRange do
     end
   end
 
+  it "finds age range by normalized name" do
+    AgeRange.find_by_normalized_name!("Pre-Birth").should == AgeRange.pre_birth
+  end
+
+  it "raise RecordNotFound if age range can't be found via normalized name" do
+    lambda {
+      AgeRange.find_by_normalized_name!("whatever")
+    }.should raise_error(ActiveRecord::RecordNotFound)
+  end
+
   context "Pre-defined ages" do
 
     subject { AgeRange }

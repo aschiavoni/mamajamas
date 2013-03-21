@@ -5,8 +5,24 @@ describe ProductTypeRow do
 
   let(:category) { create(:category) }
 
-  def row_csv(name = "Shampoo or Body Wash")
-    CSV.parse("#{name},0-3 mo,2,shampoo.png,shampoo@2x.png,shampoo;body wash; baby wash,,x,x", headers: false).flatten
+  def row_csv(name = "Bodysuit")
+    CSV.parse("#{name},1,Pre-birth,bodysuit.png,bodysuit@2x.png,bodysuit; body suit;body suits,,x,x,,,").flatten
+  end
+
+  def row_csv_no_queries(name = "Bodysuit")
+    CSV.parse("#{name},1,Pre-birth,bodysuit.png,bodysuit@2x.png,,,x,x,,,").flatten
+  end
+
+  def row_csv_no_name
+   CSV.parse(',,,,,,,,').flatten
+  end
+
+  def row_csv_no_age_range
+   CSV.parse('11,,,,,,,,').flatten
+  end
+
+  def row_csv_no_priority
+   CSV.parse('11,12,,,,,,,').flatten
   end
 
   def product_type_row
@@ -22,23 +38,23 @@ describe ProductTypeRow do
   end
 
   it "finds product type name" do
-    product_type_row.name == 'Shampoo or Body Wash'
+    product_type_row.name == 'Bodysuit'
   end
 
   it "finds age range name" do
-    product_type_row.age_range_name.should == '0-3 mo'
+    product_type_row.age_range_name.should == 'Pre-birth'
   end
 
   it "finds priority" do
-    product_type_row.priority.should == 2
+    product_type_row.priority.should == 1
   end
 
   it "finds image name" do
-    product_type_row.image_name.should == 'shampoo@2x.png'
+    product_type_row.image_name.should == 'bodysuit@2x.png'
   end
 
   it "finds queries" do
-    product_type_row.queries.should == [ 'shampoo', 'body wash', 'baby wash' ]
+    product_type_row.queries.should == [ 'bodysuit', 'body suit', 'body suits' ]
   end
 
   it "finds age range" do
@@ -56,7 +72,7 @@ describe ProductTypeRow do
     ptrow.product_type.should_not be_nil
   end
 
-  it "sets product type queries" do
+  it "saves product types" do
     ptrow = ProductTypeRow.new(category, row_csv('whatever'))
     product_type = ptrow.product_type
 
@@ -65,6 +81,31 @@ describe ProductTypeRow do
     end
 
     ptrow.save!
+  end
+
+  it "handles rows without queries" do
+    ptrow = ProductTypeRow.new(category, row_csv_no_queries)
+    ptrow.queries.should == [ ptrow.name ]
+  end
+
+  it "should be a valid row" do
+    ptrow = ProductTypeRow.new(category, row_csv)
+    ptrow.should be_valid
+  end
+
+  it "is invalid if row does not contain a name" do
+    ptrow = ProductTypeRow.new(category, row_csv_no_name)
+    ptrow.should_not be_valid
+  end
+
+  it "is invalid if row does not contain an age range" do
+    ptrow = ProductTypeRow.new(category, row_csv_no_age_range)
+    ptrow.should_not be_valid
+  end
+
+  it "is invalid if row does not contain a priority" do
+    ptrow = ProductTypeRow.new(category, row_csv_no_priority)
+    ptrow.should_not be_valid
   end
 
 end

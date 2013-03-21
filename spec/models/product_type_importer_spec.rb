@@ -3,7 +3,7 @@
 describe ProductTypeImporter do
 
   let(:csv_file) do
-    File.join(Dir.pwd, 'db', 'seeds', 'Bathing.csv')
+    File.join(Dir.pwd, 'db', 'seeds', 'Clothing.csv')
   end
 
   def importer
@@ -15,7 +15,7 @@ describe ProductTypeImporter do
   end
 
   it "finds category name" do
-    importer.category_name.should == 'Bathing'
+    importer.category_name.should == 'Clothing'
   end
 
   it "finds category" do

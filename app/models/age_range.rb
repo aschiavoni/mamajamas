@@ -26,6 +26,12 @@ class AgeRange < ActiveRecord::Base
       position <= self.class.thirteen_to_eighteen_months.position
   end
 
+  def self.find_by_normalized_name!(name)
+    age_range = where("lower(name) = ?", name.downcase).first
+    raise ActiveRecord::RecordNotFound if age_range.blank?
+    age_range
+  end
+
   def self.pre_birth
     where(name: "Pre-birth").first
   end

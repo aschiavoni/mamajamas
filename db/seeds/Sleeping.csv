@@ -12,7 +12,7 @@ Portable Crib,3,4-6 mo,portable_crib.png,portable_crib@2x.png,-moves to 2 for je
 Toddler Bed,2,2y,toddler_bed.png,toddler_bed@2x.png,,x,
 Toddler Bed Sheets,2,2y,toddler_bed_sheets.png,toddler_bed_sheets@2x.png,,x,
 Portable Crib Sheets,3,4-6 mo,portable_crib_sheets.png,portable_crib_sheets@2x.png,-moves to 2 for jetsetter,x,
-Twin Bed,3,5y,twin_bed.png,twin_bed@2x.png,,x,
+Twin Bed,3,5y+,twin_bed.png,twin_bed@2x.png,,x,
 Toddler Pillow,3,2y,toddler_pillow.png,toddler_pillow@2x.png,,x,
 Mobile,2,Pre-birth,mobile.png,mobile@2x.png,,x,
 Blanket,3,2y,blanket.png,receiving_blanket@2x.png,,x,

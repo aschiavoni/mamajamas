@@ -6,20 +6,24 @@ class ProductTypeRow
     @category = category
   end
 
+  def valid?
+    name.present? && age_range_name.present? && priority.present?
+  end
+
   def name
     row[0]
   end
 
   def age_range
-    @age_range ||= AgeRange.find_by_name!(age_range_name)
+    @age_range ||= AgeRange.find_by_normalized_name!(age_range_name)
   end
 
   def age_range_name
-    row[1]
+    row[2]
   end
 
   def priority
-    row[2].to_i
+    row[1].present? ? row[1].to_i : nil
   end
 
   def image_name
@@ -27,8 +31,8 @@ class ProductTypeRow
   end
 
   def queries
-    queries = row[5].split(/;\s*/)
-    queries = name if queries.empty?
+    queries = row[5].present? ? row[5].split(/;\s*/) : []
+    queries = [ name ] if queries.empty?
     queries
   end
 
@@ -37,8 +41,10 @@ class ProductTypeRow
   end
 
   def save!
-    product_type.save!
-    queries.each { |query| product_type.add_query(query) }
+    if valid?
+      product_type.save!
+      queries.each { |query| product_type.add_query(query) }
+    end
   end
 
   private
