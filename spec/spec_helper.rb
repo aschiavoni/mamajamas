@@ -68,7 +68,7 @@ Spork.prefork do
     config.before(:suite) do
       DatabaseCleaner.strategy = :transaction
       DatabaseCleaner.clean_with(:truncation)
-      load "#{Rails.root}/db/seeds.rb"
+      load "#{Rails.root}/db/test_seeds.rb"
       Features::SessionHelpers.create_test_user
       Features::SessionHelpers.create_test_user_with_list
     end

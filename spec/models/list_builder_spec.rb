@@ -6,6 +6,11 @@ describe ListBuilder do
 
   let(:builder) { ListBuilder.new(user) }
 
+  before(:all) do
+    c = Category.find("potty-training") rescue nil
+    create(:category, name: "Potty Training") if c.blank?
+  end
+
   it "should build list" do
     builder.build!.should be_an_instance_of(List)
   end
@@ -23,9 +28,7 @@ describe ListBuilder do
   describe "with kid" do
 
     let(:potty_training) do
-      c = Category.find("potty-training")
-      c = create(:category, name: "Potty Training") if c.blank?
-      c
+      Category.find("potty-training")
     end
 
     let(:product_types) do
