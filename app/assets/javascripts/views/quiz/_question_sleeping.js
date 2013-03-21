@@ -10,4 +10,3 @@ Mamajamas.Views.QuizSleeping = Mamajamas.Views.QuizMultiChoiceImageQuestion.exte
   }
 
 });
-
