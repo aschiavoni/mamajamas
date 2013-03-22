@@ -2,7 +2,8 @@ namespace :mamajamas do
   namespace :products do
     desc "Search amazon for all active product types"
     task search: :environment do
-      searcher = CachedProductSearcher.new
+      cache_hours = Rails.env.development? ? 96 : 24
+      searcher = CachedProductSearcher.new cache_hours
 
       ProductType.global.each_with_index do |product_type, i|
         puts "Searching for #{product_type.name}..."
