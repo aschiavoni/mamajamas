@@ -6,6 +6,10 @@
     <img src="{{image_url}}" alt="Shampoo or Body Wash">
   </div>
   <form class="new-list-item">
+    <div style="display: none;">
+      <input id="list_item_picture" name="list_item_picture" type="file">
+      <input id="list_item_picture_cache" name="list_item_picture_cache" type="hidden">
+    </div>
     <input id="list_item_product_type_id" name="list_item[product_type_id]" type="hidden" value="{{product_type_id}}">
     <input id="list_item_category_id" name="list_item[category_id]" type="hidden" value="{{category_id}}">
     <input id="list_item_priority" name="list_item[priority]" type="hidden" value="{{priority}}">
@@ -47,6 +51,10 @@
         <input type="checkbox" class="chk-fb-share" id="chk-fb-share-{{product_type_id}}" checked> <label for="chk-fb-share-{{product_type_id}}" class="small">Share on Facebook</label>
         </p>
       </fieldset>
+      <div class="progress-container">
+        <a class="button bt-light bt-thumb-upload"><span class="ss-upload"></span>Upload</a>
+        <img alt="Progress-bar" class="progress bt-thumb-upload" src="/assets/progress-bar.gif" style="display: none;">
+      </div>
       <div class="prod-links">
         <ul>
           <li>

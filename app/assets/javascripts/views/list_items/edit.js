@@ -8,6 +8,7 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   initialize: function() {
     _errMap = this.errorFieldMap();
+
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:age", this.updateAgeRange, this);
     this.model.on("change:priority", this.updatePriority, this);
@@ -44,6 +45,10 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     this.$el.append(priorityView.render().$el);
 
     this.initializeAutocomplete();
+
+    this.$itemPicture = $(".prod-thumb > img", this.$el);
+    this.$itemPictureProgress = $(".progress-container img.progress", this.$el);
+    this.initializeItemPictureUploads();
 
     return this;
   },
@@ -223,6 +228,45 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       name: "#list_item_name",
       link: "#list_item_link"
     };
+  },
+
+  initializeItemPictureUploads: function() {
+    var _view = this;
+
+    $(".bt-thumb-upload, .prod-thumb", this.$el).click(function(event) {
+      event.preventDefault();
+      $("#list_item_picture", _view.$el).trigger("click");
+    });
+
+    $("#list_item_picture", this.$el).fileupload({
+      url: '/list/list_items/' + _view.model.id,
+      type: 'PUT',
+      dataType: "json",
+      dropZone: _view.$itemPicture,
+      pasteZone: _view.$itemPicture,
+      maxNumberOfFiles: 1,
+      start: function(e) {
+        _view.$itemPictureProgress.progressIndicator("show");
+      },
+      stop: function(e) {
+        setTimeout(function() {
+          _view.$itemPictureProgress.progressIndicator("hide");
+        }, 600);
+      },
+      add: function(e, data) {
+        var types = /(\.|\/)(gif|jpe?g|png)$/i;
+        var file = data.files[0];
+        if (types.test(file.type) || types.test(file.name)) {
+          data.submit();
+        } else {
+          Mamajamas.Context.Notifications.error(file.name + " does not appear to be an image file.");
+        }
+      },
+      done: function(e, data) {
+        var listItem = data.result;
+        _view.$itemPicture.attr("src", listItem.image_url);
+      }
+    });
   }
 
 });
