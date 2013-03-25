@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325154823) do
+ActiveRecord::Schema.define(:version => 20130325171327) do
 
   create_table "age_ranges", :force => true do |t|
     t.string   "name"
@@ -71,13 +71,14 @@ ActiveRecord::Schema.define(:version => 20130325154823) do
     t.integer  "priority"
     t.string   "notes"
     t.string   "image_url"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "product_type_id"
     t.integer  "category_id"
     t.integer  "age_range_id"
-    t.boolean  "placeholder",       :default => false, :null => false
+    t.boolean  "placeholder",        :default => false, :null => false
     t.string   "product_type_name"
+    t.integer  "list_item_image_id"
   end
 
   add_index "list_items", ["category_id"], :name => "index_list_items_on_category_id"

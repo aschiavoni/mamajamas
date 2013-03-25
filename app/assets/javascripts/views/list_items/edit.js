@@ -126,7 +126,8 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       rating: $("#list_item_rating", this.$el).val(),
       image_url: $("#list_item_image_url", this.$el).val(),
       owned: $("input[name='list_item[owned]']:checked").val() == "1",
-      placeholder: false
+      placeholder: false,
+      list_item_image_id: $('#list_item_list_item_image_id', this.$el).val()
     };
 
     if (_view.model.isNew()) {
@@ -264,7 +265,9 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
       },
       done: function(e, data) {
         var listItem = data.result;
-        _view.$itemPicture.attr("src", listItem.image_url);
+        $('#list_item_list_item_image_id', _view.$el).val(listItem.id)
+        $('#list_item_image_url', _view.$el).val(listItem.image.url);
+        _view.$itemPicture.attr("src", listItem.image.url);
       }
     });
   }
