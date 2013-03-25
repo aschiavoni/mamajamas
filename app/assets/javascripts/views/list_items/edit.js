@@ -235,12 +235,12 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
     $(".bt-thumb-upload, .prod-thumb", this.$el).click(function(event) {
       event.preventDefault();
-      $("#list_item_picture", _view.$el).trigger("click");
+      $("#list_item_image_image", _view.$el).trigger("click");
     });
 
-    $("#list_item_picture", this.$el).fileupload({
-      url: '/list/list_items/' + _view.model.id,
-      type: 'PUT',
+    $("#list_item_image_image", this.$el).fileupload({
+      url: '/api/list_item_images',
+      type: 'POST',
       dataType: "json",
       dropZone: _view.$itemPicture,
       pasteZone: _view.$itemPicture,

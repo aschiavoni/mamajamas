@@ -66,4 +66,9 @@ FactoryGirl.define do
     gender "m"
     age_range
   end
+
+  factory :list_item_image do
+    user user
+    image "/assets/some_image.png"
+  end
 end

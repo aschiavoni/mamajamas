@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :product_types, dependent: :destroy
   has_one :list, dependent: :destroy
   has_many :kids, dependent: :destroy
+  has_many :list_item_images, dependent: :destroy
 
   mount_uploader :profile_picture, ProfilePictureUploader
 
