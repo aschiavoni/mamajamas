@@ -31,6 +31,11 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
     [
       Mamajamas.Views.QuizSleeping, new Mamajamas.Models.QuizQuestion()
     ],
+
+    [
+      Mamajamas.Views.QuizTravel, new Mamajamas.Models.QuizQuestion()
+    ],
+
   ],
 
   render: function() {

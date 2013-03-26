@@ -7,6 +7,7 @@ Mamajamas.Views.QuizQuestion = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
+    this.trigger('quiz:question:rendered');
     return this;
   },
 
@@ -44,6 +45,7 @@ Mamajamas.Views.QuizMultiChoiceImageQuestion = Mamajamas.Views.QuizQuestion.exte
     this.$el.html($questionView);
     this.highlightNextMaybe();
 
+    this.trigger('quiz:question:rendered');
     return this;
   },
 
@@ -65,6 +67,7 @@ Mamajamas.Views.QuizMultiChoiceImageQuestion = Mamajamas.Views.QuizQuestion.exte
 
   save: function(event) {
     event.preventDefault();
+    this.trigger('quiz:question:saving');
 
     var _view = this;
 
