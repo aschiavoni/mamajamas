@@ -4,10 +4,7 @@ Mamajamas.Views.QuizFeeding = Mamajamas.Views.QuizMultiChoiceImageQuestion.exten
 
   questionName: 'Feeding',
 
-  initialize: function() {
-    this.$el.attr("id", "quiz03");
-    this.on('quiz:question:saved', this.next);
-  }
+  quizId: 'quiz03'
 
 });
 
