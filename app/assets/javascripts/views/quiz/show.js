@@ -10,6 +10,7 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
   },
 
   questions: [
+
     [
       Mamajamas.Views.QuizIntro, new Mamajamas.Models.QuizQuestion()
     ],
@@ -34,6 +35,10 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
 
     [
       Mamajamas.Views.QuizTravel, new Mamajamas.Models.QuizQuestion()
+    ],
+
+    [
+      Mamajamas.Views.QuizCaution, new Mamajamas.Models.QuizQuestion()
     ],
 
   ],
