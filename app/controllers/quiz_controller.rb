@@ -12,7 +12,7 @@ class QuizController < ApplicationController
     answers = params[:answers] || []
     question.answer(*answers)
 
-    render json: { status: "ok" }
+    render json: { status: 'ok' }
   end
 
   def update_kid
@@ -27,6 +27,12 @@ class QuizController < ApplicationController
 
     current_user.build_list! if current_user.list.blank?
     respond_with @kid
+  end
+
+  def update_zip_code
+    zip_code = params[:zip_code].present? ? params[:zip_code].strip : nil
+    current_user.update_attributes!(zip_code: zip_code)
+    render json: { status: 'ok' }
   end
 
   private
