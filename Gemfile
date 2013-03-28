@@ -99,6 +99,10 @@ group :development do
   gem 'pry-rails'
   gem 'pry-debugger'
   gem 'interactive_editor'
+
+  # better errors
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test, :development do
