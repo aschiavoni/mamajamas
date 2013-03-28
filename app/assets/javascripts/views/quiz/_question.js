@@ -6,8 +6,12 @@ Mamajamas.Views.QuizQuestion = Backbone.View.extend({
 
   quizView: null,
 
+  large: false,
+
   initialize: function() {
     this.$el.attr("id", this.quizId);
+    if (this.large)
+      this.$el.addClass("large");
   },
 
   render: function() {

@@ -4,10 +4,9 @@ Mamajamas.Views.QuizIntro = Mamajamas.Views.QuizQuestion.extend({
 
   quizView: null,
 
-  initialize: function() {
-    this.$el.attr("id", "quiz01");
-    this.$el.addClass("large");
-  },
+  quizId: 'quiz01',
+
+  large: true,
 
   events: {
     'click #bt-start': 'start'
