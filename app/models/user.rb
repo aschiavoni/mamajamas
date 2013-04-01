@@ -60,6 +60,19 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.new_guest
+    guest_username = "guest_#{Time.now.to_i}#{rand(99)}"
+    create do |u|
+      u.username = guest_username
+      u.email = "#{guest_username}@mamajamas-guest.com"
+      u.guest = true
+    end
+  end
+
+  def display_email
+    guest? ? 'Guest' : email
+  end
+
   def set_username
     if email.present? && username.blank?
       self.username = UsernameGenerator.from_email(email)
@@ -104,5 +117,12 @@ class User < ActiveRecord::Base
     return nil if birthday.blank?
     dob = birthday
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  end
+
+  protected
+
+  def password_required?
+    return false if guest?
+    super
   end
 end

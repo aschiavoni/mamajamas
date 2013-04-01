@@ -131,4 +131,34 @@ describe User do
 
   end
 
+  describe "email" do
+
+    it "displays user's email address" do
+      user.display_email.should == user.email
+    end
+
+    it "displays 'Guest' for email address for guest users" do
+      User.new_guest.display_email.should == 'Guest'
+    end
+
+  end
+
+  describe "guest users" do
+
+    it "creates a new valid guest user" do
+      User.new_guest.should be_valid
+    end
+
+    it "creates a guest user" do
+      User.new_guest.should be_guest
+    end
+
+    it "saves guest user to the database" do
+      lambda {
+        User.new_guest
+      }.should change(User, :count).by(1)
+    end
+
+  end
+
 end

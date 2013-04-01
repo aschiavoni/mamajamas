@@ -39,7 +39,7 @@
               <span class="ss-dropdown"></span>
             <% end -%>
             <ul class="nav-drop">
-              <li class="user-email"><%= link_to current_user.email, profile_path %></li>
+              <li class="user-email"><%= link_to current_user.display_email, profile_path %></li>
               <li><%= link_to "My List", list_path %></li>
               <li><%= link_to "My Profile", profile_path %></li>
               <li class="last">

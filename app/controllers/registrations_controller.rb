@@ -4,27 +4,39 @@ class RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
   def create
-    build_resource
-
-    if resource.save
-      if resource.active_for_authentication?
-        flash_message = :signed_up
-        redirect_path = after_sign_up_path_for(resource)
+    if params[resource_name.to_sym].blank?
+      # create guest user
+      @user = User.new_guest
+      if @user.persisted?
+        sign_in(resource_name, @user)
+        redirect_to quiz_path and return
       else
-        flash_message = "signed_up_but_#{resource.inactive_message}"
-        redirect_path = after_inactive_sign_up_path_for(resource)
+        redirect_to new_user_registration_path
       end
-
-      set_flash_message :notice, flash_message if is_navigational_format?
-      sign_in(resource_name, resource)
-      (render(:js => "window.location=\"#{redirect_path}\";") && return) if request.xhr?
-      respond_with resource, :location => redirect_path
     else
-      clean_up_passwords resource
+      # create real user
+      build_resource
 
-      respond_to do |format|
-        format.html
-        format.json
+      if resource.save
+        if resource.active_for_authentication?
+          flash_message = :signed_up
+          redirect_path = after_sign_up_path_for(resource)
+        else
+          flash_message = "signed_up_but_#{resource.inactive_message}"
+          redirect_path = after_inactive_sign_up_path_for(resource)
+        end
+
+        set_flash_message :notice, flash_message if is_navigational_format?
+        sign_in(resource_name, resource)
+        (render(:js => "window.location=\"#{redirect_path}\";") && return) if request.xhr?
+        respond_with resource, :location => redirect_path
+      else
+        clean_up_passwords resource
+
+        respond_to do |format|
+          format.html
+          format.json
+        end
       end
     end
   end
