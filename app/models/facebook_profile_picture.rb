@@ -1,6 +1,9 @@
+# indicates the type of profile picture is not recognized
 class FacebookUnknownProfilePictureTypeException < Exception; end
+# indicates the facebook uid is nil
 class FacebookUidNilException < Exception; end
 
+# encapsulates facebook profile pictures
 class FacebookProfilePicture
   attr_reader :uid
 
@@ -19,11 +22,8 @@ class FacebookProfilePicture
 
   def url
     url = "http://graph.facebook.com/#{uid}/picture?"
-    if width.present? && height.present?
-      url += "width=#{width}&height=#{height}"
-    else
-      url += "type=#{type}"
-    end
+    url += dimensions_specified? ? dimensions_query_string : type_query_string
+    url
   end
 
   def type
@@ -48,5 +48,17 @@ class FacebookProfilePicture
     {
       type: :square
     }
+  end
+
+  def dimensions_specified?
+    width.present? && height.present?
+  end
+
+  def dimensions_query_string
+    "width=#{width}&height=#{height}"
+  end
+
+  def type_query_string
+    "type=#{type}"
   end
 end
