@@ -1,0 +1,38 @@
+<%= form_for @profile, url: account_complete_path, as: :profile, method: :put, html: { class: "label-infield", id: "frm-create-profile" } do |f| %>
+  <h3>My Basics</h3>
+  <dl class="clearfix">
+    <fieldset>
+      <!-- username -->
+      <dt>Email<strong class="required">*</strong></dt>
+      <dd>
+        <p>
+          <%= f.label :email, "Email address" %>
+          <br />
+          <%= f.text_field :email, value: "" %>
+          <%= field_error @profile, :email %>
+        </p>
+      </dd>
+      <dt>Password<strong class="required">*</strong></dt>
+      <dd>
+        <p>
+          <%= f.label :password %>
+          <br />
+          <%= f.text_field :password, value: "" %>
+          <%= field_error @profile, :password %>
+        </p>
+      </dd>
+      <dt>Password confirmation<strong class="required">*</strong></dt>
+      <dd>
+        <p>
+          <%= f.label :password, 'Confirm password' %>
+          <br />
+          <%= f.text_field :password, value: "" %>
+          <%= field_error @profile, :password %>
+        </p>
+      </dd>
+    </fieldset>
+  </dl>
+  <div class="button-row">
+    <button type="submit" class="button bt-color" id="bt-save">Create Account</button>
+  </div>
+<% end %>

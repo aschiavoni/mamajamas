@@ -22,6 +22,7 @@ Mamajamas::Application.routes.draw do
 
   get "/profile" => "users#edit"
   put "/profile" => "users#update"
+  put "/account/complete" => "users#complete"
 
   resources :friends, only: [ :index ] do
     collection do

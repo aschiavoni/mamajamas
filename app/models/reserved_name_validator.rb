@@ -1,6 +1,6 @@
 class ReservedNameValidator < ActiveModel::EachValidator
   RESERVED_NAMES = %w{
-    about account add admin api app apps archive archives auth age ages age_range age_ranges
+    about account accounts add admin api app apps archive archives auth age ages age_range age_ranges
     blog
     categories category config connect contact create
     delete direct_messages downloads
