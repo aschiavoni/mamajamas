@@ -8,7 +8,11 @@ class RecommendedFriend
   end
 
   def all(limit = nil)
-    friends = User.where("id <> ?", user.id).limit(limit)
+    friends = User.
+      where("id <> ?", user.id).
+      where(guest: false).
+      limit(limit)
+
     friends.reject { |f| excluded.include?(f) }
   end
 end
