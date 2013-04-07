@@ -82,4 +82,11 @@ class ApplicationController < ActionController::Base
   def not_found
     raise ActionController::RoutingError.new('Not Found')
   end
+
+  def no_guests
+    if current_user.guest?
+      flash[:notice] = render_to_string(partial: 'shared/guest_not_authorized').html_safe
+      redirect_to profile_path
+    end
+  end
 end
