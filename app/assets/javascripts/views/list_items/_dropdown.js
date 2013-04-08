@@ -1,4 +1,4 @@
-Mamajamas.Views.ListItemDropdown = Backbone.View.extend({
+Mamajamas.Views.ListItemDropdown = Mamajamas.Views.Base.extend({
 
   showArrow: function(event) {
     var $td = $(event.target);

@@ -1,4 +1,4 @@
-Mamajamas.Views.ListItemPlaceholder = Backbone.View.extend({
+Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
 
   tagName: 'tr',
 
@@ -39,17 +39,21 @@ Mamajamas.Views.ListItemPlaceholder = Backbone.View.extend({
   },
 
   addItem: function(event) {
-    var newItem = this.model.clone();
-    newItem.id = null;
-    newItem.set("name", null);
-    var addItem = new Mamajamas.Views.ListItemEdit({
-      model: newItem,
-      parent: this
-    });
+    if (this.isGuestUser()) {
+      this.unauthorized();
+    } else {
+      var newItem = this.model.clone();
+      newItem.id = null;
+      newItem.set("name", null);
+      var addItem = new Mamajamas.Views.ListItemEdit({
+        model: newItem,
+        parent: this
+      });
 
-    this.$el.after(addItem.render().$el);
-    this.$el.hide();
-    addItem.setup();
+      this.$el.after(addItem.render().$el);
+      this.$el.hide();
+      addItem.setup();
+    }
 
     return false;
   },
@@ -60,19 +64,22 @@ Mamajamas.Views.ListItemPlaceholder = Backbone.View.extend({
   },
 
   delete: function() {
-    if (confirm("Are you sure you want to delete this item?")) {
-      this.model.destroy({
-        wait: true,
-        success: function() {
-          Mamajamas.Context.ListItems.remove(this.model);
-        },
-        error: function(model, response, options) {
-          Mamajamas.Context.Notifications.error("We could not remove this item at this time. Please try again later.");
-        }
-      });
+    if (this.isGuestUser()) {
+      this.unauthorized();
+    } else {
+      if (confirm("Are you sure you want to delete this item?")) {
+        this.model.destroy({
+          wait: true,
+          success: function() {
+            Mamajamas.Context.ListItems.remove(this.model);
+          },
+          error: function(model, response, options) {
+            Mamajamas.Context.Notifications.error("We could not remove this item at this time. Please try again later.");
+          }
+        });
+      }
     }
     return false;
   }
 
 });
-

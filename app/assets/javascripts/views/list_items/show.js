@@ -1,4 +1,4 @@
-Mamajamas.Views.ListItemShow = Backbone.View.extend({
+Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
 
   tagName: 'tr',
 
@@ -44,31 +44,39 @@ Mamajamas.Views.ListItemShow = Backbone.View.extend({
   },
 
   edit: function() {
-    this.editing = true;
+    if (this.isGuestUser()) {
+      this.unauthorized();
+    } else {
+      this.editing = true;
 
-    var editView = new Mamajamas.Views.ListItemEdit({
-      model: this.model,
-      parent: this
-    });
+      var editView = new Mamajamas.Views.ListItemEdit({
+        model: this.model,
+        parent: this
+      });
 
-    this.$el.after(editView.render().$el);
-    this.$el.hide();
-    editView.setup();
+      this.$el.after(editView.render().$el);
+      this.$el.hide();
+      editView.setup();
+    }
 
     return false;
   },
 
   delete: function() {
-    if (confirm("Are you sure you want to delete this item?")) {
-      this.model.destroy({
-        wait: true,
-        success: function() {
-          Mamajamas.Context.ListItems.remove(this.model);
-        },
-        error: function(model, response, options) {
-          Mamajamas.Context.Notifications.error("We could not remove this list item at this time. Please try again later.");
-        }
-      });
+    if (this.isGuestUser()) {
+      this.unauthorized();
+    } else {
+      if (confirm("Are you sure you want to delete this item?")) {
+        this.model.destroy({
+          wait: true,
+          success: function() {
+            Mamajamas.Context.ListItems.remove(this.model);
+          },
+          error: function(model, response, options) {
+            Mamajamas.Context.Notifications.error("We could not remove this list item at this time. Please try again later.");
+          }
+        });
+      }
     }
     return false;
   },

@@ -23,15 +23,19 @@ Mamajamas.Views.ListItemPriority = Mamajamas.Views.ListItemDropdown.extend({
   },
 
   togglePriorityList: function(event) {
-    var $target = $(event.target);
-    var $prodDrop = $target.parents("td").find(".prod-drop");
-    var $priorityList = $prodDrop.find("ul");
+    // if (this.isGuestUser()) {
+    //   this.unauthorized();
+    // } else {
+      var $target = $(event.target);
+      var $prodDrop = $target.parents("td").find(".prod-drop");
+      var $priorityList = $prodDrop.find("ul");
 
-    if ($priorityList.hasClass("visuallyhidden")) {
-      $priorityList.removeClass("visuallyhidden");
-    } else {
-      $priorityList.addClass("visuallyhidden");
-    }
+      if ($priorityList.hasClass("visuallyhidden")) {
+        $priorityList.removeClass("visuallyhidden");
+      } else {
+        $priorityList.addClass("visuallyhidden");
+      }
+    // }
 
     return false;
   },

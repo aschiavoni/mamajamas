@@ -1,4 +1,4 @@
-Mamajamas.Views.ListShow = Backbone.View.extend({
+Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 
   template: HandlebarsTemplates['lists/show'],
 
@@ -11,6 +11,10 @@ Mamajamas.Views.ListShow = Backbone.View.extend({
     var _view = this;
     $("#add-product-type").click(function(event) {
       event.preventDefault();
+      if (_view.isGuestUser()) {
+        _view.unauthorized();
+        return false;
+      }
       return _view.addProductType(_view, event);
     });
   },

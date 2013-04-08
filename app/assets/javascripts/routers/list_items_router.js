@@ -10,6 +10,10 @@ Mamajamas.Routers.ListItems = Backbone.Router.extend({
   },
 
   index: function() {
+    $(document).ajaxError(function(e, xhr, options) {
+      Mamajamas.Context.User.trigger('server:unauthorized');
+    });
+
     var listView = new Mamajamas.Views.ListShow({
       model: Mamajamas.Context.List
     });
