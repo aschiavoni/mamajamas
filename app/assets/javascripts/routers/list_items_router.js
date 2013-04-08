@@ -11,7 +11,7 @@ Mamajamas.Routers.ListItems = Backbone.Router.extend({
 
   index: function() {
     $(document).ajaxError(function(e, xhr, options) {
-      Mamajamas.Context.User.trigger('server:unauthorized');
+      Mamajamas.Context.AppAuth.completeRegistration();
     });
 
     var listView = new Mamajamas.Views.ListShow({
