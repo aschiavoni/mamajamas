@@ -8,6 +8,7 @@ FactoryGirl.define do
     email { |u| "#{u.username}@factory.com" }
     password "foobar"
     password_confirmation { |u| u.password }
+    guest false
   end
 
   factory :category do
