@@ -85,8 +85,16 @@ class ApplicationController < ActionController::Base
 
   def no_guests
     if current_user.guest?
-      flash[:notice] = render_to_string(partial: 'shared/guest_not_authorized').html_safe
-      redirect_to profile_path
+      respond_to do |format|
+        format.html do
+          notice_partial = 'shared/guest_not_authorized'
+          flash[:notice] = render_to_string(partial: notice_partial).html_safe
+          redirect_to profile_path
+        end
+        format.json do
+          render json: { status: :unauthorized }, status: :unauthorized
+        end
+      end
     end
   end
 end
