@@ -39,6 +39,9 @@ class User < ActiveRecord::Base
 
   before_validation :set_username
 
+  scope :guests, lambda { where(guest: true) }
+  scope :registered, lambda { where(guest: false) }
+
   # hook devise to support logging in by email or username
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -63,7 +66,6 @@ class User < ActiveRecord::Base
   def self.new_guest
     guest_username = "guest_#{Time.now.to_i}#{rand(99)}"
     create do |u|
-      u.username = guest_username
       u.email = "#{guest_username}@mamajamas-guest.com"
       u.guest = true
     end
