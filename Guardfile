@@ -1,5 +1,5 @@
 # guard 'rspec', cli: "--tag focus" do
-guard 'rspec', cli: "--tag ~js" do
+guard 'rspec', zeus: true, bundler: false, cli: "--tag ~js" do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
@@ -18,7 +18,7 @@ guard 'rspec', cli: "--tag ~js" do
 end
 
 group 'features' do
-  guard 'rspec', all_after_pass: false, cli: "--drb --tag js" do
+  guard 'rspec', all_after_pass: false, zeus: true, bundler: false, cli: "--tag js" do
     watch(%r{^spec/features/.+_spec\.rb$})
     # Capybara features specs
     watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/features/#{m[1]}_spec.rb" }

@@ -87,7 +87,7 @@ gem 'heroku'
 
 group :development do
   gem 'guard'
-  gem 'guard-spork'
+  gem 'zeus'
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
   gem 'terminal-notifier-guard', :require => false # if RUBY_PLATFORM =~ /darwin/i
