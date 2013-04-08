@@ -1,5 +1,7 @@
 class UsernameGenerator
   def self.from_email(email)
+    return nil if email.blank?
+
     username_part = email.split("@").first
     username = username_part.dup
     num = 2

@@ -11,6 +11,11 @@ window.Mamajamas.Views.AppAuth = Backbone.View.extend({
       model: this.model,
       el: '#login-modal'
     });
+
+    this._completeRegistrationModal = new Mamajamas.Views.CompleteRegistrationModal({
+      model: this.model,
+      el: '#complete-registration-modal'
+    });
   },
   events: {
     "click #signup-link": "signup",
@@ -23,6 +28,10 @@ window.Mamajamas.Views.AppAuth = Backbone.View.extend({
   },
   signup: function() {
     this._signupModal.show();
+    return false;
+  },
+  completeRegistration: function() {
+    this._completeRegistrationModal.show();
     return false;
   },
   login: function() {

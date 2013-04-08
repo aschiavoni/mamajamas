@@ -125,6 +125,18 @@
     </div>
     <!-- end modal window box -->
   </div>
+<% else -%>
+  <% if current_user.guest? -%>
+    <div class="modal-wrap" style="display:none;" id="complete-registration-modal">
+      <div class="modal-overlay"> &nbsp; </div>
+      <div class="vertical-offset"></div>
+      <!-- modal window box -->
+      <div class="modal-box" id="create-account-email">
+        <%= render :partial => "devise/registrations/signup" %>
+      </div>
+      <!-- end modal window box -->
+    </div>
+  <% end -%>
 <% end -%>
 <!-- /end modal window ************ -->
 

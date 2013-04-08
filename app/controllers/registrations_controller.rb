@@ -20,23 +20,21 @@ class RegistrationsController < Devise::RegistrationsController
       if resource.save
         if resource.active_for_authentication?
           flash_message = :signed_up
-          redirect_path = after_sign_up_path_for(resource)
+          @redirect_path = after_sign_up_path_for(resource)
         else
           flash_message = "signed_up_but_#{resource.inactive_message}"
-          redirect_path = after_inactive_sign_up_path_for(resource)
+          @redirect_path = after_inactive_sign_up_path_for(resource)
         end
 
         set_flash_message :notice, flash_message if is_navigational_format?
         sign_in(resource_name, resource)
-        (render(:js => "window.location=\"#{redirect_path}\";") && return) if request.xhr?
-        respond_with resource, :location => redirect_path
       else
         clean_up_passwords resource
+      end
 
-        respond_to do |format|
-          format.html
-          format.json
-        end
+      respond_to do |format|
+        format.html { redirect_to @redirect_path }
+        format.json
       end
     end
   end

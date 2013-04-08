@@ -15,4 +15,15 @@ describe Forms::CompleteProfile do
     profile.update!(email: test_val, password: test_val)
   end
 
+  it "updates username based on email address" do
+    profile = Forms::CompleteProfile.new(User.new)
+    UsernameGenerator.should_receive(:from_email).
+      with('test99@example.com').
+      and_return('test99')
+
+    profile.update!(email: 'test99@example.com', password: test_val)
+
+    profile.user.username.should == 'test99'
+  end
+
 end

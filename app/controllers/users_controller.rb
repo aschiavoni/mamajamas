@@ -31,15 +31,20 @@ class UsersController < ApplicationController
 
   def complete
     init_view 'create-profile', 'Complete my profile', 3
+    @redirect_path = list_path
     @profile = Forms::CompleteProfile.new(current_user)
+    uparams = params[:profile] || params[:user]
+
     respond_to do |format|
-      format.html do
-        if @profile.update!(params[:profile])
-          sign_in @profile.user, bypass: true
-          redirect_to list_path
-        else
-          render action: 'edit'
+      if @profile.update!(uparams)
+        sign_in @profile.user, bypass: true
+        format.html do
+          redirect_to @redirect_path
         end
+        format.json
+      else
+        format.html { render action: 'edit' }
+        format.json
       end
     end
   end

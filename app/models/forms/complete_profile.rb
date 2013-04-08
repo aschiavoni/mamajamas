@@ -11,11 +11,10 @@ class Forms::CompleteProfile
 
   attr_reader :user
 
+  delegate :username, :to => :user
   delegate :email, :email=, :to => :user
   delegate :password, :password=, :to => :user
   delegate :password_confirmation, :password_confirmation=, :to => :user
-
-  validates(:password, presence: true, confirmation: true)
 
   validate do
     [user].each do |object|
@@ -47,6 +46,7 @@ class Forms::CompleteProfile
 
   def save
     ActiveRecord::Base.transaction do
+      user.username = UsernameGenerator.from_email(user.email)
       user.guest = false
       user.save!
     end

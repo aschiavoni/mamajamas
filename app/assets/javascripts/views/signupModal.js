@@ -1,5 +1,7 @@
 window.Mamajamas.Views.SignupModal = Backbone.View.extend({
 
+  url: '/users.json',
+
   initialize: function() {
     this.pwStrength = $("#password-strength");
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
@@ -45,6 +47,7 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
   hide: function() {
     this.$el.progressIndicator('hide').hide();
     this.pwStrength.html(null);
+    $(".collapsible", this.$el).collapsible('close');
     return true; // reset button
   },
 
@@ -76,8 +79,7 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
     _session.trigger('server:authenticating');
     // post to the server
     // if the registration succeeds, it will return a window.location redirect.
-    // if not, it returns the form markup and replaces the existing form.
-    $.post($form.attr("action") + ".json", $form.serialize(), function(data) {
+    $.post(this.url, $form.serialize(), function(data) {
       _view.hideProgress();
       if (data.errors) {
         $("#password-strength", _view.$el).html(null);
@@ -87,6 +89,8 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
           $errorTag.html(data.errors[errorField][0]);
           $field.after($errorTag);
         }
+      } else {
+        window.location = data.redirect_path
       }
     });
     return false;
@@ -148,5 +152,11 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
       return 'Strong';
     }
   }
+
+});
+
+Mamajamas.Views.CompleteRegistrationModal = Mamajamas.Views.SignupModal.extend({
+
+  url: '/account/complete.json'
 
 });
