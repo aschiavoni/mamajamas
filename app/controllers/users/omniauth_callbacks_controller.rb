@@ -3,7 +3,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def facebook
     auth_info = request.env["omniauth.auth"]
-    @user = FacebookUserCreator.from_oauth(request.env["omniauth.auth"])
+    if current_user.present? && current_user.guest?
+      current_user.add_facebook_uid!(auth_info.uid)
+    end
+
+    @user = FacebookUserCreator.from_oauth(auth_info)
 
     if @user.persisted?
       # TODO: background this?
@@ -17,7 +21,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       (render && return) if request.xhr?
       redirect_to registrations_facebook_path
     else
-      session["devise.facebook_data"] = request.env["omniauth.auth"]
+      session["devise.facebook_data"] = auth_info
       (render && return) if request.xhr?
       redirect_to new_user_registration_url
     end

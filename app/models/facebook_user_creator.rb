@@ -46,25 +46,39 @@ class FacebookUserCreator
   end
 
   def create_user
-    User.create!(username: facebook_username,
-                 provider: auth.provider,
-                 uid: auth.uid,
-                 email: auth.info.email,
-                 first_name: auth.info.first_name,
-                 last_name: auth.info.last_name,
-                 access_token: auth.credentials.token,
-                 access_token_expires_at: expires_at,
-                 password: random_password)
-
+    User.create!({
+      username: facebook_username,
+      provider: auth.provider,
+      uid: auth.uid,
+      email: auth.info.email,
+      first_name: auth.info.first_name,
+      last_name: auth.info.last_name,
+      access_token: auth.credentials.token,
+      access_token_expires_at: expires_at,
+      password: random_password,
+      guest: false,
+    }, without_protection: true)
   end
 
   def update_user(user)
-    user.update_attributes(provider: auth.provider,
-                           uid: auth.uid,
-                           first_name: auth.info.first_name,
-                           last_name: auth.info.last_name,
-                           access_token_expires_at: expires_at,
-                           access_token: auth.credentials.token)
+    attrs = {
+      provider: auth.provider,
+      uid: auth.uid,
+      first_name: auth.info.first_name,
+      last_name: auth.info.last_name,
+      access_token_expires_at: expires_at,
+      access_token: auth.credentials.token,
+      guest: false
+    }
+
+    if user.guest?
+      attrs.merge!({
+        username: facebook_username,
+        email: auth.info.email
+      })
+    end
+
+    user.update_attributes(attrs, without_protection: true)
     user
   end
 

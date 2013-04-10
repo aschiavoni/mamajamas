@@ -107,6 +107,7 @@ describe FacebookUserCreator do
       @creator = FacebookUserCreator.new(@auth)
 
       @user = double
+      @user.stub(:guest? => false)
       @user.stub(:update_attributes)
       @creator.stub(:find_user_by_facebook_uid).and_return(@user)
     end
@@ -144,6 +145,7 @@ describe FacebookUserCreator do
       @creator = FacebookUserCreator.new(@auth)
 
       @user = double
+      @user.stub(:guest? => false)
       @user.stub(:update_attributes)
 
       @creator.stub(:find_user_by_facebook_uid).and_return(nil)
@@ -182,7 +184,9 @@ describe FacebookUserCreator do
     creator.stub(:find_user).and_return(nil)
     creator.stub(:random_password).and_return("kjdslkjlskjf")
 
-    User.should_receive(:create!).with(hash_including(:uid))
+    User.
+      should_receive(:create!).
+      with(hash_including(:uid), hash_including(:without_protection))
 
     creator.update_or_create
   end
@@ -193,7 +197,24 @@ describe FacebookUserCreator do
     creator = FacebookUserCreator.new(auth)
     creator.stub(:find_user).and_return(user)
 
-    user.should_receive(:update_attributes).with(hash_including(:uid))
+    user.should_receive(:guest?).and_return(false)
+    user.
+      should_receive(:update_attributes).
+      with(hash_including(:uid), hash_including(:without_protection))
+
+    creator.update_or_create
+  end
+
+  it "should update a username and email if it is a guest user" do
+    user = double
+    auth = auth(auth_hash)
+    creator = FacebookUserCreator.new(auth)
+    creator.stub(:find_user).and_return(user)
+
+    user.should_receive(:guest?).and_return(true)
+    user.
+      should_receive(:update_attributes).
+      with(hash_including(:uid, :username), hash_including(:without_protection))
 
     creator.update_or_create
   end
