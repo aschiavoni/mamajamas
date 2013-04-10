@@ -161,4 +161,20 @@ describe User do
 
   end
 
+  describe "add facebook uid to an existing user" do
+
+    let(:uid) { '1234554321' }
+
+    it "adds facebook info to a guest user" do
+      user.add_facebook_uid!(uid)
+      user.uid.should == uid
+    end
+
+    it "adds facebook provider to a guest user" do
+      user.add_facebook_uid!(uid)
+      user.provider.should == 'facebook'
+    end
+
+  end
+
 end

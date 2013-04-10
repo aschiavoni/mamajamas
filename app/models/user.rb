@@ -86,6 +86,12 @@ class User < ActiveRecord::Base
     false
   end
 
+  def add_facebook_uid!(uid)
+    self.provider = "facebook"
+    self.uid = uid
+    save!
+  end
+
   def facebook_connected?
     provider == "facebook" && uid.present?
   end
