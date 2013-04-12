@@ -24,3 +24,4 @@ doc/spec_info.txt
 *.taskpaper
 /public/uploads/
 Session.vim
+spec/reports
