@@ -96,9 +96,9 @@ group :development do
   gem 'quiet_assets'
 
   # use pry in development
-  gem 'pry-rails' if RUBY_PLATFORM =~ /darwin/i
-  gem 'pry-debugger' if RUBY_PLATFORM =~ /darwin/i
-  gem 'interactive_editor' if RUBY_PLATFORM =~ /darwin/i
+  # gem 'pry-rails' if RUBY_PLATFORM =~ /darwin/i
+  # gem 'pry-debugger' if RUBY_PLATFORM =~ /darwin/i
+  # gem 'interactive_editor' if RUBY_PLATFORM =~ /darwin/i
 
   # better errors
   gem 'better_errors'
