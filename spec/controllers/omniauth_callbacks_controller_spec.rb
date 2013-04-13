@@ -19,13 +19,17 @@ describe Users::OmniauthCallbacksController do
     describe "guest users" do
       let(:guest) { create(:user, guest: true) }
 
-      before(:each) do
-        sign_in guest
-      end
-
       it "updates a guest user from facebook" do
+        sign_in guest
         User.any_instance.should_receive(:add_facebook_uid!).
           with(auth_hash['uid'])
+        get :facebook
+      end
+
+      it "doesn't update guest user if a facebook user exists with uid" do
+        create(:user, uid: auth_hash['uid'], provider: 'facebook')
+        sign_in guest
+        User.any_instance.should_not_receive(:add_facebook_uid!)
         get :facebook
       end
 
