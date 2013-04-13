@@ -63,8 +63,6 @@ GEM
       activesupport (>= 3.2.0)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
-    ci_reporter (1.8.4)
-      builder (>= 2.1.2)
     coderay (1.0.8)
     coffee-script (2.2.0)
       coffee-script-source
@@ -365,7 +363,6 @@ DEPENDENCIES
   binding_of_caller
   capybara
   carrierwave
-  ci_reporter
   database_cleaner
   devise
   factory_girl_rails
