@@ -4,6 +4,8 @@ describe Users::OmniauthCallbacksController do
 
   describe "facebook" do
 
+    let(:auth_hash) { OmniAuth.config.mock_auth[:facebook] }
+
     before do
       ProfilePictureUploader.any_instance.stub(:download! => false)
     end
@@ -11,7 +13,22 @@ describe Users::OmniauthCallbacksController do
     before(:each) do
       mock_omniauth
       request.env["devise.mapping"] = Devise.mappings[:user]
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
+      request.env["omniauth.auth"] = auth_hash
+    end
+
+    describe "guest users" do
+      let(:guest) { create(:user, guest: true) }
+
+      before(:each) do
+        sign_in guest
+      end
+
+      it "updates a guest user from facebook" do
+        User.any_instance.should_receive(:add_facebook_uid!).
+          with(auth_hash['uid'])
+        get :facebook
+      end
+
     end
 
     describe "html request" do
