@@ -12,7 +12,7 @@ class FacebookUserCreator
   end
 
   def update_or_create
-    user = find_user
+    user = FacebookUserFinder.find(auth)
     user = user.blank? ? create_user : update_user(user)
     user
   end
@@ -32,18 +32,6 @@ class FacebookUserCreator
   end
 
   private
-
-  def find_user
-    find_user_by_facebook_uid || find_user_by_facebook_email
-  end
-
-  def find_user_by_facebook_uid
-    User.where(provider: auth.provider, uid: auth.uid).first
-  end
-
-  def find_user_by_facebook_email
-    User.where(email: auth.info.email).first
-  end
 
   def create_user
     User.create!({

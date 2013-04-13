@@ -1,5 +1,6 @@
 require 'isolated_spec_helper'
 require 'facebook_user_creator'
+require 'facebook_user_finder'
 require 'omniauth'
 require 'active_support/core_ext/string'
 
@@ -40,8 +41,7 @@ describe FacebookUserCreator do
   it "should update a user based from an oauth hash" do
     auth = auth(auth_hash)
     user = User.new
-    FacebookUserCreator.any_instance.stub(:find_user).and_return(user)
-
+    FacebookUserFinder.stub(:find) { user }
     FacebookUserCreator.any_instance.should_receive(:update_user).with(user)
 
     FacebookUserCreator.from_oauth(auth)
@@ -49,11 +49,8 @@ describe FacebookUserCreator do
 
   it "should create a user based from an oauth hash" do
     auth = auth(auth_hash)
-    FacebookUserCreator.any_instance.stub(:find_user).
-      and_return(nil)
-
+    FacebookUserFinder.stub(:find) { nil }
     FacebookUserCreator.any_instance.should_receive(:create_user)
-
     FacebookUserCreator.from_oauth(auth)
   end
 
@@ -109,61 +106,11 @@ describe FacebookUserCreator do
       @user = double
       @user.stub(:guest? => false)
       @user.stub(:update_attributes)
-      @creator.stub(:find_user_by_facebook_uid).and_return(@user)
+      FacebookUserFinder.stub(:find) { @user }
     end
 
     it "should find user" do
       @creator.update_or_create.should == @user
-    end
-
-    it "should look for user by facebook uid" do
-      @creator.should_receive(:find_user_by_facebook_uid)
-      @creator.update_or_create
-    end
-
-    it "should look for user by facebook email" do
-      @creator.should_not_receive(:find_user_by_facebook_email)
-      @creator.update_or_create
-    end
-
-    it "should update user" do
-      @creator.should_receive(:update_user)
-      @creator.update_or_create
-    end
-
-    it "should not create user" do
-      @creator.should_not_receive(:create_user)
-      @creator.update_or_create
-    end
-
-  end
-
-  context "user has already registered with facebook email" do
-
-    before(:each) do
-      @auth = auth(auth_hash)
-      @creator = FacebookUserCreator.new(@auth)
-
-      @user = double
-      @user.stub(:guest? => false)
-      @user.stub(:update_attributes)
-
-      @creator.stub(:find_user_by_facebook_uid).and_return(nil)
-      @creator.stub(:find_user_by_facebook_email).and_return(@user)
-    end
-
-    it "should find user" do
-      @creator.update_or_create.should == @user
-    end
-
-    it "should look for user by facebook uid" do
-      @creator.should_receive(:find_user_by_facebook_uid)
-      @creator.update_or_create
-    end
-
-    it "should look for user by facebook email" do
-      @creator.should_receive(:find_user_by_facebook_email)
-      @creator.update_or_create
     end
 
     it "should update user" do
@@ -180,8 +127,8 @@ describe FacebookUserCreator do
 
   it "should create a user if the facebook user has not already authenticated" do
     auth = auth(auth_hash)
+    FacebookUserFinder.stub(:find) { nil }
     creator = FacebookUserCreator.new(auth)
-    creator.stub(:find_user).and_return(nil)
     creator.stub(:random_password).and_return("kjdslkjlskjf")
 
     User.
@@ -195,7 +142,7 @@ describe FacebookUserCreator do
     user = double
     auth = auth(auth_hash)
     creator = FacebookUserCreator.new(auth)
-    creator.stub(:find_user).and_return(user)
+    FacebookUserFinder.stub(:find) { user }
 
     user.should_receive(:guest?).and_return(false)
     user.
@@ -209,7 +156,7 @@ describe FacebookUserCreator do
     user = double
     auth = auth(auth_hash)
     creator = FacebookUserCreator.new(auth)
-    creator.stub(:find_user).and_return(user)
+    FacebookUserFinder.stub(:find) { user }
 
     user.should_receive(:guest?).and_return(true)
     user.
