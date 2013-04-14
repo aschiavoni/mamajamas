@@ -23,15 +23,15 @@ We are using the thin web server in development and production.
 
 3. Create the databases.
 
-    rake db:create
+        rake db:create
 
-    rake RAILS_ENV=test db:create
+        rake RAILS_ENV=test db:create
 
-    rake db:migrate
+        rake db:migrate
 
-    rake db:test:prepare
+        rake db:test:prepare
 
-    rake db:seed
+        rake db:seed
 
 #### Bundler
 
