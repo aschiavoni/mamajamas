@@ -29,6 +29,7 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
 
   save: function(event) {
     event.preventDefault();
+    this.trigger('quiz:question:saving');
 
     var _view = this;
     $.ajax({
