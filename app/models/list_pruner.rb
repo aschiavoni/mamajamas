@@ -1,4 +1,8 @@
 class ListPruner
+  def self.prune!(list)
+    self.new(list).prune!
+  end
+
   def initialize(list)
     @list = list
   end

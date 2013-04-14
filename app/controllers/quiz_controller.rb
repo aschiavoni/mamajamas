@@ -35,6 +35,11 @@ class QuizController < ApplicationController
     render json: { status: 'ok' }
   end
 
+  def prune_list
+    ListPruner.prune!(current_user.list)
+    render json: { status: 'ok' }
+  end
+
   private
 
   def init_view

@@ -58,6 +58,7 @@ Mamajamas::Application.routes.draw do
       get "list/product_types" => "lists#product_types"
       post "kids" => "quiz#update_kid"
       put "update_zip_code" => "quiz#update_zip_code"
+      post "prune_list" => "quiz#prune_list"
       post "list_item_images" => "list_item_images#create"
     end
   end

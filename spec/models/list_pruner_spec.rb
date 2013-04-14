@@ -10,7 +10,7 @@ describe ListPruner do
   end
 
   it "removes all low priority placeholders from the list" do
-    ListPruner.new(list).prune!
+    ListPruner.prune!(list)
     list.list_items.placeholders.map(&:priority).should_not include(3)
   end
 
@@ -22,7 +22,7 @@ describe ListPruner do
         priority: 3
       }))
     end
-    ListPruner.new(list).prune!
+    ListPruner.prune!(list)
     list.list_items.user_items.count.should == 2
   end
 

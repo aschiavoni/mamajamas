@@ -12,6 +12,7 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
       this.$el.addClass("large");
     this.on('quiz:question:rendered', this.rendered, this);
     this.on('quiz:question:saved', this.next, this);
+    this.pruneList();
   },
 
   events: {
@@ -48,6 +49,13 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
 
     return false;
   },
+
+  pruneList: function() {
+    $.ajax({
+      url: '/api/prune_list',
+      type: 'POST'
+    });
+  }
 
 })
 

@@ -102,4 +102,14 @@ describe QuizController do
 
   end
 
+  describe "POST prune list" do
+
+    it "prunes the user's list" do
+      user.stub(:list, stub)
+      ListPruner.should_receive(:prune!).with(user.list)
+      post 'prune_list'
+    end
+
+  end
+
 end
