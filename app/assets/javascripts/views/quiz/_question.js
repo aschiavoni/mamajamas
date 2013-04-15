@@ -148,6 +148,9 @@ Mamajamas.Views.QuizSliderQuestion = Mamajamas.Views.QuizQuestion.extend({
     'click #bt-prev': 'previous',
     'click #bt-next': 'save',
     'click .skip': 'skip',
+    'click #q-sliderscale': 'moveToCursor',
+    'click .q-slider a:first': 'moveToLeft',
+    'click .q-slider a:last': 'moveToRight',
   },
 
   steps: [ -21, 41, 105, 166, 229 ],
@@ -166,6 +169,35 @@ Mamajamas.Views.QuizSliderQuestion = Mamajamas.Views.QuizQuestion.extend({
           ui.position.left = _view.maxLeft();
       }
     });
+  },
+
+  moveToCursor: function(event) {
+    var target = $(event.currentTarget);
+    var x = event.pageX - target.offset().left - 24;
+
+    if (x < this.minLeft())
+      x = this.minLeft();
+    else if (x > this.maxLeft())
+      x = this.maxLeft();
+
+    this.moveTo(x);
+    return true;
+  },
+
+  moveToLeft: function(event) {
+    event.preventDefault();
+    this.moveTo(this.minLeft());
+    return false;
+  },
+
+  moveToRight: function(event) {
+    event.preventDefault();
+    this.moveTo(this.maxLeft());
+    return false;
+  },
+
+  moveTo: function(x) {
+    this.$sliderArrow.animate({ left: x }, 100, 'linear');
   },
 
   saving: function() {
