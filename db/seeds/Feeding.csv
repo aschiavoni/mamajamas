@@ -1,24 +1,24 @@
-Feeding (default pre-birth),Default Priority,Default When to Buy,Image Name,High Res Image Name,Contingencies,Image Pulled,Icon Created,,,
-Wipeable Bib,1,7-12 mo,wipeable_bib.png,wipeable_bib.png,,x,x,,,
-Bottle,1,Pre-birth,bottle.png,bottle@2x.png,-moves to 2 for Breasfeeding only mom,x,x,,,
-Bowl,1,7-12 mo,bowl.png,bowl@2x.png,,x,x,,,
-Baby food maker,2,7-12 mo,baby_food_maker.png,baby_food_maker@2x.png,,x,,,,
-Plate,1,7-12 mo,plate.png,plate@2x.png,,x,x,Age Ranges,Public Tags,Other Quiz Dependencies
-Baby Spoon,1,4-6 mo,spoon.png,spoon@2x.png,,x,x,Pre-birth,Veteran,Breastfeeding
-Toddler Spoon,1,13-18 mo,toddler_spoon.png,toddler_spoon@2x.png,,x,x,0-3 mo,First-Timer,Bottlefeeding
-High Chair,1,4-6 mo,high_chair.png,high_chair@2x.png,,x,x,4-6 mo,Eco,Both bf/bottle
-Snack Storage,2,7-12 mo,snack_storage.png,snack_storage@2x.png,,x,x,7-12 mo,Thrifty,Carrier
-Burp Cloth,2,Pre-birth,burp_cloth.png,burp_cloth@2x.png,,x,x,13-18 mo,Jetsetter,Stroller
-Cloth Bib,2,4-6 mo,cloth_bib.png,cloth_bib@2x.png,,x,x,19-24 mo,Homebody,Both Carrier/Stroller
-Bottle Bag,2,Pre-birth,bottle_bag.png,bottle_bag@2x.png,-moves to 3 for breastfeeding only mom,x,x,2y,Rural,Cloth Diapers
-Bottle Brush,2,Pre-birth,bottle_brush.png,bottle_brush@2x.png,-moves to 1 for bottle feeding & Pumping mom and 3 for breastfeeding only mom,x,x,3y,Suburban,Paper Diapers
-Bottle Warmer,2,Pre-birth,bottle_warmer.png,bottle_warmer@2x.png,-moves to 1 for bottle feeding & Pumping mom and 3 for breastfeeding only mom,x,x,4y,Urban,Baby Food Chef
-Booster Seat,2,13-18 mo,booster_seat.png,booster_seat@2x.png,,x,x,5y+,Very Urban,Baby Food Jars
-Lunch Box,3,7-12 mo,lunch_box.png,lunch_box@2x.png,,x,x,,,Bassinet
-Bottle Sterilizer,3,Pre-birth,bottle_sterilizer.png,bottle_sterilizer@2x.png,-moves to 2 for bottle feeding or pumping mom,x,x,,,Cautious
-Bottle Drying Rack,2,Pre-birth,bottle_drying_rack.png,bottle_drying_rack@2x.png,-moves to 3 for breastfeeding only mom,x,x,,,Mellow
-Feeding Set,3,7-12 mo,feeding_set.png,feeding_set@2x.png,,x,x,,,Zip Code
-Sandwich Cutter,3,2y,sandwich_cutter.png,sandwich_cutter@2x.png,,x,x,,,
-Teething Feeder,3,4-6 mo,teething_feeder.png,teething_feeder@2x.png,,x,x,,,
-Little Table,3,13-18 mo,table.png,table@2x.png,,x,x,,,
-Little Chair,3,13-18 mo,chair.png,chair@2x.png,,x,x,,,
+Feeding (default pre-birth),Default Priority,Default When to Buy,Image Name,High Res Image Name,Queries,Contingencies,Image Pulled,Icon Created,,,
+Wipeable Bib,1,7-12 mo,wipeable_bib.png,wipeable_bib.png,,,x,x,,,
+Bottle,1,Pre-birth,bottle.png,bottle@2x.png,,-moves to 2 for Breasfeeding only mom,x,x,,,
+Bowl,1,7-12 mo,bowl.png,bowl@2x.png,,,x,x,,,
+Baby food maker,2,7-12 mo,baby_food_maker.png,baby_food_maker@2x.png,,,x,,,,
+Plate,1,7-12 mo,plate.png,plate@2x.png,,,x,x,Age Ranges,Public Tags,Other Quiz Dependencies
+Baby Spoon,1,4-6 mo,spoon.png,spoon@2x.png,,,x,x,Pre-birth,Veteran,Breastfeeding
+Toddler Spoon,1,13-18 mo,toddler_spoon.png,toddler_spoon@2x.png,,,x,x,0-3 mo,First-Timer,Bottlefeeding
+High Chair,1,4-6 mo,high_chair.png,high_chair@2x.png,,,x,x,4-6 mo,Eco,Both bf/bottle
+Snack Storage,2,7-12 mo,snack_storage.png,snack_storage@2x.png,,,x,x,7-12 mo,Thrifty,Carrier
+Burp Cloth,2,Pre-birth,burp_cloth.png,burp_cloth@2x.png,,,x,x,13-18 mo,Jetsetter,Stroller
+Cloth Bib,2,4-6 mo,cloth_bib.png,cloth_bib@2x.png,,,x,x,19-24 mo,Homebody,Both Carrier/Stroller
+Bottle Bag,2,Pre-birth,bottle_bag.png,bottle_bag@2x.png,,-moves to 3 for breastfeeding only mom,x,x,2y,Rural,Cloth Diapers
+Bottle Brush,2,Pre-birth,bottle_brush.png,bottle_brush@2x.png,,-moves to 1 for bottle feeding & Pumping mom and 3 for breastfeeding only mom,x,x,3y,Suburban,Paper Diapers
+Bottle Warmer,2,Pre-birth,bottle_warmer.png,bottle_warmer@2x.png,,-moves to 1 for bottle feeding & Pumping mom and 3 for breastfeeding only mom,x,x,4y,Urban,Baby Food Chef
+Booster Seat,2,13-18 mo,booster_seat.png,booster_seat@2x.png,,,x,x,5y+,Very Urban,Baby Food Jars
+Lunch Box,3,7-12 mo,lunch_box.png,lunch_box@2x.png,,,x,x,,,Bassinet
+Bottle Sterilizer,3,Pre-birth,bottle_sterilizer.png,bottle_sterilizer@2x.png,,-moves to 2 for bottle feeding or pumping mom,x,x,,,Cautious
+Bottle Drying Rack,2,Pre-birth,bottle_drying_rack.png,bottle_drying_rack@2x.png,,-moves to 3 for breastfeeding only mom,x,x,,,Mellow
+Feeding Set,3,7-12 mo,feeding_set.png,feeding_set@2x.png,,,x,x,,,Zip Code
+Sandwich Cutter,3,2y,sandwich_cutter.png,sandwich_cutter@2x.png,,,x,x,,,
+Teething Feeder,3,4-6 mo,teething_feeder.png,teething_feeder@2x.png,,,x,x,,,
+Little Table,3,13-18 mo,table.png,table@2x.png,,,x,x,,,
+Little Chair,3,13-18 mo,chair.png,chair@2x.png,,,x,x,,,
