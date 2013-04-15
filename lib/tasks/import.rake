@@ -4,6 +4,7 @@ namespace :mamajamas do
 
     namespace :import do
 
+      desc 'Imports mamajamas categories and product types from csvs'
       task csv: :environment do
         csvs = File.join Dir.pwd, 'db', 'seeds', '*.csv'
         Dir.glob(csvs) do |file_name|
