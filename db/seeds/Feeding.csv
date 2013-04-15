@@ -1,5 +1,5 @@
 Feeding (default pre-birth),Default Priority,Default When to Buy,Image Name,High Res Image Name,Queries,Contingencies,Image Pulled,Icon Created,,,
-Wipeable Bib,1,7-12 mo,wipeable_bib.png,wipeable_bib.png,,,x,x,,,
+Wipeable Bib,1,7-12 mo,wipeable_bib.png,wipeable_bib@2x.png,,,x,x,,,
 Bottle,1,Pre-birth,bottle.png,bottle@2x.png,,-moves to 2 for Breasfeeding only mom,x,x,,,
 Bowl,1,7-12 mo,bowl.png,bowl@2x.png,,,x,x,,,
 Baby food maker,2,7-12 mo,baby_food_maker.png,baby_food_maker@2x.png,,,x,,,,
