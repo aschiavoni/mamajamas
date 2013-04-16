@@ -9,6 +9,7 @@ FactoryGirl.define do
     password "foobar"
     password_confirmation { |u| u.password }
     guest false
+    country "US"
   end
 
   factory :category do

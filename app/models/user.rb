@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :birthday
   attr_accessible :facebook_friends, :facebook_friends_updated_at
   attr_accessible :relationships_created_at
-  attr_accessible :zip_code
+  attr_accessible :zip_code, :country
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
