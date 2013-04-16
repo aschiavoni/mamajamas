@@ -26,8 +26,9 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
   rendered: function() {
     setTimeout(function() {
       $('label', this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-      $('#zip_code', this.$el).focus();
-    }, 200);
+      if ($('#zip_code', this.$el).val() == '')
+        $('#zip_code', this.$el).focus();
+    }, 0);
   },
 
   save: function(event) {
