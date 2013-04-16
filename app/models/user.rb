@@ -75,6 +75,11 @@ class User < ActiveRecord::Base
     guest? ? 'Guest' : email
   end
 
+  def country_name
+    c = Country[country]
+    c.present? ? c.name : nil
+  end
+
   def set_username
     if email.present? && username.blank?
       self.username = UsernameGenerator.from_email(email)
