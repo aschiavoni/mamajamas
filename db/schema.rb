@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416030254) do
+ActiveRecord::Schema.define(:version => 20130416044946) do
 
   create_table "age_ranges", :force => true do |t|
     t.string   "name"
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(:version => 20130416030254) do
     t.text     "notes"
     t.string   "zip_code"
     t.boolean  "guest",                       :default => false
-    t.string   "country",                     :default => "US"
+    t.string   "country_code",                :default => "US"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

@@ -180,12 +180,12 @@ describe User do
   describe "country" do
 
     it "returns a country name from a country code" do
-      user.country = 'US'
+      user.country_code = 'US'
       user.country_name.should == 'United States'
     end
 
     it "returns nil if the country code is unknown" do
-      user.country = "UU"
+      user.country_code = "UU"
       user.country_name.should be_nil
     end
 

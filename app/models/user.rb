@@ -76,8 +76,8 @@ class User < ActiveRecord::Base
   end
 
   def country_name
-    c = Country[country]
-    c.present? ? c.name : nil
+    country = Country[country_code]
+    country.present? ? country.name : nil
   end
 
   def set_username
