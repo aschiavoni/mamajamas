@@ -5,6 +5,7 @@ class QuizController < ApplicationController
   respond_to :json
 
   def show
+    @countries = Country.all.sort.to_json
   end
 
   def update

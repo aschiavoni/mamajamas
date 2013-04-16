@@ -64,7 +64,7 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
     event.preventDefault();
 
     var answerList = $(event.target, this.$el).parents('a').siblings('ol');
-    answerList.css('width', '8em');
+    answerList.css('width', '10em');
     answerList.css('max-height', '6.5em');
     answerList.css('overflow', 'auto');
     answerList.show();

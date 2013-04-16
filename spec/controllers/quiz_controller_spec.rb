@@ -9,10 +9,18 @@ describe QuizController do
   end
 
   describe "GET 'show'" do
+
     it "returns http success" do
       get 'show'
       response.should be_success
     end
+
+    it "assigns countries" do
+      Country.stub(:all => [ ["US", "United States"], ["BB", "Barbados"] ])
+      get 'show'
+      assigns(:countries).should_not be_nil
+    end
+
   end
 
   describe "PUT 'update'" do

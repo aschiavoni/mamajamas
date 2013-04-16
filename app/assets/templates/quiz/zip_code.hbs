@@ -10,32 +10,25 @@
         <p>
           <label for="zip_code">Enter zip code</label>
           <br />
-          <input name="zip_code" type="text" id="zip_code" value="">
+          <input name="zip_code" type="text" id="zip_code" value="{{zip_code}}">
         </p>
       </fieldset>
     </div>
     <!-- / question q08-01 ***** -->
     <!-- question q02-02 ***** -->
     <div id="q08-02" class="q-question">
-      <input name="country" type="hidden" id="country" value="">
+      <input name="country" type="hidden" id="country" value="{{country}}">
       Country:
       <!-- drop-down menu -->
       <div class="choicedrop">
         <a href="#" id="country-select">
-          <span id="country-select-desc">United States</span>
+          <span id="country-select-desc">{{country}}</span>
           <span class="ss-dropdown"></span>
         </a>
         <ol style="display:none;">
-          <li><a class="country-name" href="#">Argentina</a></li>
-          <li><a class="country-name" href="#">Barbados</a></li>
-          <li><a class="country-name" href="#">Canada</a></li>
-          <li><a class="country-name" href="#">Denmark</a></li>
-          <li><a class="country-name" href="#">Elba</a></li>
-          <li><a class="country-name" href="#">France</a></li>
-          <li><a class="country-name" href="#">Germany</a></li>
-          <li><a class="country-name" href="#">Hawaii</a></li>
-          <li><a class="country-name" href="#">India</a></li>
-          <li><a class="country-name" href="#">United States</a></li>
+          {{#each countries}}
+            <li><a class="country-name" href="#">{{this.[0]}}</a></li>
+          {{/each}}
         </ol>
       </div>
       <!-- end drop-down menu -->
