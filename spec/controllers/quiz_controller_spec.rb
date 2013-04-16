@@ -83,8 +83,8 @@ describe QuizController do
 
     it "updates zip code and country on the current user" do
       User.any_instance.should_receive(:update_attributes!).
-        with({ zip_code: '12345', country: 'UK' })
-      put 'update_zip_code', zip_code: '12345', country: 'UK'
+        with({ zip_code: '12345', country: 'GB' })
+      put 'update_zip_code', zip_code: '12345', country: 'United Kingdom'
     end
 
     it "sets zip code to nil if blank zip code provided" do
@@ -101,8 +101,8 @@ describe QuizController do
 
     it "returns ok status if it updates the zip code and country" do
       User.any_instance.should_receive(:update_attributes!).
-        with({ zip_code: '12345', country: 'UK' })
-      put 'update_zip_code', zip_code: '12345', country: 'UK'
+        with({ zip_code: '12345', country: 'GB' })
+      put 'update_zip_code', zip_code: '12345', country: 'United Kingdom'
       JSON.parse(response.body)['status'].should == 'ok'
     end
 

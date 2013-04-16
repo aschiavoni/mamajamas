@@ -31,7 +31,7 @@ class QuizController < ApplicationController
 
   def update_zip_code
     zip_code = params[:zip_code].present? ? params[:zip_code].strip : nil
-    country = params[:country].present? ? params[:country].strip : 'US'
+    country = params[:country].present? ? Country.find_by_name(params[:country].strip).first : 'US'
     current_user.update_attributes!(zip_code: zip_code, country: country)
     render json: { status: 'ok' }
   end
