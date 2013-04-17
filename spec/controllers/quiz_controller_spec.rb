@@ -90,28 +90,37 @@ describe QuizController do
   describe "PUT 'update' zip code" do
 
     it "updates zip code and country on the current user" do
-      User.any_instance.should_receive(:update_attributes!).
-        with({ zip_code: '12345', country: 'GB' })
+      User.any_instance.should_receive(:update_attributes).
+        with({ zip_code: '12345', country_code: 'GB' })
       put 'update_zip_code', zip_code: '12345', country: 'United Kingdom'
     end
 
     it "sets zip code to nil if blank zip code provided" do
-      User.any_instance.should_receive(:update_attributes!).
-        with({ zip_code: nil, country: 'US' })
+      User.any_instance.should_receive(:update_attributes).
+        with({ zip_code: nil, country_code: 'US' })
       put 'update_zip_code'
     end
 
     it "sets country to 'US' if blank country provided" do
-      User.any_instance.should_receive(:update_attributes!).
-        with({ zip_code: nil, country: 'US' })
+      User.any_instance.should_receive(:update_attributes).
+        with({ zip_code: nil, country_code: 'US' })
       put 'update_zip_code'
     end
 
-    it "returns ok status if it updates the zip code and country" do
-      User.any_instance.should_receive(:update_attributes!).
-        with({ zip_code: '12345', country: 'GB' })
-      put 'update_zip_code', zip_code: '12345', country: 'United Kingdom'
-      JSON.parse(response.body)['status'].should == 'ok'
+    it "updates the zip code and country" do
+      put 'update_zip_code',
+        zip_code: 'sl41eg',
+        country: 'United Kingdom',
+        format: :json
+      response.should be_success
+    end
+
+    it "returns errors if it cannot update the zip code and country" do
+      put 'update_zip_code',
+        zip_code: '11201',
+        country: 'United Kingdom',
+        format: :json
+      JSON.parse(response.body)['errors'].should_not be_empty
     end
 
   end
