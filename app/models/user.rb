@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
   validates(:username, presence: true, reserved_name: true,
             uniqueness: true, format: { :with => /^[A-Za-z\d_]+$/ })
   validate :valid_zip_code
+  validate :valid_country_code
 
   before_validation :set_username
 
@@ -80,6 +81,13 @@ class User < ActiveRecord::Base
         emsg = I18n.t 'activerecord.errors.models.user.attributes.zip_code.invalid'
         errors.add(:zip_code, emsg)
       end
+    end
+  end
+
+  def valid_country_code
+    if country_code.present?
+      emsg = I18n.t 'activerecord.errors.models.user.attributes.country_code.invalid'
+      errors.add(:country_code, emsg) unless Country[country_code]
     end
   end
 

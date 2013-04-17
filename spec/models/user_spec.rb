@@ -208,6 +208,16 @@ describe User do
 
   describe "country" do
 
+    it "validates a correct country code" do
+      u = build(:user, country_code: 'US')
+      u.should be_valid
+    end
+
+    it "validates an incorrect country code" do
+      u = build(:user, country_code: 'UU')
+      u.should_not be_valid
+    end
+
     it "returns a country name from a country code" do
       user.country_code = 'US'
       user.country_name.should == 'United States'
