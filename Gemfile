@@ -70,6 +70,7 @@ gem 'acts_as_list'
 gem 'possessive'
 gem 'active_decorator'
 gem 'countries'
+gem 'going_postal'
 
 # Use unicorn as the app server
 # gem 'unicorn'
