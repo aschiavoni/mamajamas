@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: [ :slugged, :history ]
 
+  include GoingPostal
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -21,7 +23,7 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :birthday
   attr_accessible :facebook_friends, :facebook_friends_updated_at
   attr_accessible :relationships_created_at
-  attr_accessible :zip_code, :country
+  attr_accessible :zip_code, :country_code
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
@@ -36,6 +38,7 @@ class User < ActiveRecord::Base
 
   validates(:username, presence: true, reserved_name: true,
             uniqueness: true, format: { :with => /^[A-Za-z\d_]+$/ })
+  validate :valid_zip_code
 
   before_validation :set_username
 
@@ -68,6 +71,15 @@ class User < ActiveRecord::Base
     create do |u|
       u.email = "#{guest_username}@mamajamas-guest.com"
       u.guest = true
+    end
+  end
+
+  def valid_zip_code
+    if zip_code.present?
+      unless zip_code_valid?
+        emsg = I18n.t 'activerecord.errors.models.user.attributes.zip_code.invalid'
+        errors.add(:zip_code, emsg)
+      end
     end
   end
 

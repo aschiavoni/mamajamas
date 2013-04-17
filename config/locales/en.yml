@@ -37,6 +37,8 @@ en:
               blank: "Sorry, but you must provide a password."
               too_short: "Password is too short. (minimum is 6 characters)"
               confirmation: "Sorry, but the password doesn't match the confirmation."
+            zip_code:
+              invalid: "Sorry, but that does not appear to be a valid postal code."
         list_item:
           attributes:
             name:

@@ -177,6 +177,35 @@ describe User do
 
   end
 
+  describe "postal codes" do
+
+    it "validates a correct us postal code" do
+      u = build(:user, zip_code: '11201', country_code: 'US')
+      u.should be_valid
+    end
+
+    it "validates an incorrect us postal code" do
+      u = build(:user, zip_code: 'sl41eg', country_code: 'US')
+      u.should_not be_valid
+    end
+
+    it "validates a correct uk postal code" do
+      u = build(:user, zip_code: 'sl41eg', country_code: 'GB')
+      u.should be_valid
+    end
+
+    it "validates an incorrect uk postal code" do
+      u = build(:user, zip_code: '11201', country_code: 'GB')
+      u.should_not be_valid
+    end
+
+    it "doesn't care about postal code validations in other countries" do
+      u = build(:user, zip_code: '11201', country_code: 'BB')
+      u.should be_valid
+    end
+
+  end
+
   describe "country" do
 
     it "returns a country name from a country code" do
