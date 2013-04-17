@@ -92,7 +92,7 @@ describe QuizController do
     it "updates zip code and country on the current user" do
       User.any_instance.should_receive(:update_attributes).
         with({ zip_code: '12345', country_code: 'GB' })
-      put 'update_zip_code', zip_code: '12345', country: 'United Kingdom'
+      put 'update_zip_code', zip_code: '12345', country: 'GB'
     end
 
     it "sets zip code to nil if blank zip code provided" do
@@ -110,7 +110,7 @@ describe QuizController do
     it "updates the zip code and country" do
       put 'update_zip_code',
         zip_code: 'sl41eg',
-        country: 'United Kingdom',
+        country: 'GB',
         format: :json
       response.should be_success
     end
