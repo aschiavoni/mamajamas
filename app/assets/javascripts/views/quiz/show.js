@@ -46,6 +46,7 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
         Mamajamas.Views.QuizZipCode, new Mamajamas.Models.QuizQuestion({
           zip_code: Mamajamas.Context.User.get('zip_code'),
           country: Mamajamas.Context.User.get('country'),
+          country_name: Mamajamas.Context.User.get('country_name'),
           countries: $('#countries').data('countries'),
         })
       ],

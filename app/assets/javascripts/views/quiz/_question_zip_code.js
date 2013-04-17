@@ -63,6 +63,7 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
   },
 
   displayError: function(errorMessage) {
+    this.clearErrors();
     var $errSpan = $("<span/>");
     $errSpan.html(errorMessage);
 
@@ -109,8 +110,8 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
     answerList.css('overflow', null);
     answerList.hide();
 
-    var answerText = answer.html();
-    $('#country-select-desc', this.$el).html(answerText);
+    var answerText = answer.data('country-code');
+    $('#country-select-desc', this.$el).html(answer.html());
     $('#country', this.$el).val(answerText);
 
     return false;

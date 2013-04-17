@@ -22,12 +22,16 @@
       <!-- drop-down menu -->
       <div class="choicedrop">
         <a href="#" id="country-select">
-          <span id="country-select-desc">{{country}}</span>
+          <span id="country-select-desc">{{country_name}}</span>
           <span class="ss-dropdown"></span>
         </a>
         <ol style="display:none;">
           {{#each countries}}
-            <li><a class="country-name" href="#">{{this.[0]}}</a></li>
+            <li>
+              <a class="country-name" data-country-code="{{this.[1]}}" href="#">
+                {{this.[0]}}
+              </a>
+            </li>
           {{/each}}
         </ol>
       </div>
