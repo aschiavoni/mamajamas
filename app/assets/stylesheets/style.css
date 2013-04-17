@@ -275,11 +275,24 @@ body {
 	margin: 0;
 	padding: 0;
 }
+
 /* footer ------ */
 #footer {
 	text-align: center;
 	color: #999;
 }
+#footer ul {
+	list-style-type:none;
+	margin:0;
+}
+#footer ul li {
+	display:inline;
+	margin:0 10px
+}
+#footer a {
+	color:#8c8c8c;
+}
+
 /* general ------ */
 p {
 	margin: 0 0 1em;
@@ -1846,6 +1859,182 @@ div.baby-bdate {
 	box-shadow:0 0 1px #000;
 }
 
+/* form page */
+.form-page form {
+	font-size:1.077em;
+}
+.form-page #progress {
+	display:none;
+}
+.form-page #title h2 {
+	padding-left:0;
+}
+.form-page h3 {
+	font-size: 1.33em;
+	font-weight: 300;
+	color: #407c40;
+	margin: 2em 0 1em;
+	border-bottom: 1px solid #8cb58c;
+}
+.form-page h3:first-child {
+	margin-top:.75em;
+}
+.form-page #title .instruction {
+	font-size: .923em;
+	color: #999;
+}
+.form-page #title strong {
+	color: #4d4d4d;
+}
+.form-page dl {
+	width: 99.9%;
+}
+.form-page dt,
+.form-page dd {
+	float: left;
+	margin-left: 1.9%;
+}
+.form-page dt {
+	color: #808080;
+	clear: left;
+	width: 15%;
+	padding: .3em 0;
+	text-align: right;
+}
+.form-page dd {
+	width: 81%;
+}
+.form-page dd.half {
+	width: 38.5%;
+}
+.form-page fieldset.half {
+	width: 52%;
+}
+.form-page dd p {
+	padding-left: .5em;
+}
+.form-page dd em {
+	font-style: normal;
+}
+.form-page dd p input, .form-page dd p textarea {
+	margin-left: -.5em;
+}
+.form-page dd.pad {
+	padding: .3em 0;
+}
+.form-page input[type="email"],
+.form-page input[type="text"],
+.form-page input[type="password"],
+.form-page textarea {
+	width: 96%;
+    padding: 0.4em 0.5em;
+}
+.form-page form.label-infield fieldset p label {
+    margin: 0.5em;
+}
+.form-page form .instruction {
+	font-size: .857em;
+	color: #999;
+}
+.form-page form p.instruction {
+	margin-bottom:1em;
+}
+
+/* home page */
+.home #progress {
+	display:none;
+}
+.home #primary {
+	background:#f1f1ed url(/assets/nest.jpg) no-repeat 50% 0;
+}
+.home h2 {
+	font-weight:normal;
+	font-family: "Reenie Beanie", sans-serif;
+	font-size:52px;
+	line-height:48px;
+	color:#542e56;
+	margin:0;
+	padding:35px 0 0 0;
+	width:240px;
+}
+.home h3 {
+	font-size:1em;
+	font-weight:400;
+	letter-spacing:.15em;
+	line-height:1.3846;
+	margin:0;
+	width:15.625%;
+	position:absolute;
+	top:216px;
+	right:0;
+}
+.home h3 a {
+	display:block;
+	padding: 10px;
+	color:#FFF;
+	background: #874789;
+	text-align:center;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+	border-radius:4px 0 0 4px;
+}
+.home h3 a:hover {
+	background:#555;
+	text-decoration:none;
+}
+.home h3 strong {
+	display:block;
+	padding:0;
+	font-weight:400;
+	text-transform:uppercase;
+}
+	.oldie .home h3 {
+		letter-spacing:.1em;
+		width:14%;
+	}
+.home h3,
+.home #secondary,
+.home #tertiary {
+	font-family: 'Open Sans', sans-serif;
+}
+.home #secondary {
+	font-size:1.231em;
+	line-height:1.625;
+	color:#474747;
+}
+.home #tertiary {
+	font-size:1.3846em;
+	font-weight:300;
+	line-height:1.22;
+	color:#656565;
+}
+.home #tertiary ul {
+	margin-top:3px;
+}
+.home #tertiary li {
+	margin-bottom:1em;
+}
+.home ul.screenshots {
+	position:absolute;
+	width:735px;
+	top:-100px;
+	left:16.36%;
+}
+ul.screenshots,
+ul.screenshots li {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+ul.screenshots li {
+	display:inline;
+	margin-right:20px;
+}
+ul.screenshots img {
+	box-shadow:1px 2px 2px rgba(0,0,0,.25);
+}
+.oldie ul.screenshots img {
+	border:solid 1px #ddd;
+}
 
 /* support for high-res devices */
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),  only screen and (-moz-min-device-pixel-ratio: 1.5),  only screen and (-o-min-device-pixel-ratio: 3/2),  only screen and (min-device-pixel-ratio: 1.5) {
