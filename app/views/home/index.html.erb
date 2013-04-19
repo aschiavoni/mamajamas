@@ -1,2 +1,21 @@
-<h2>Welcome to Mamajamas!</h2>
-<p><%= button_to 'Get Started', user_registration_path, method: :post %></p>
+<% content_for :nav do -%>
+  <h2>Need help setting up your nursery?</h2>
+  <h3>
+    <a href="/quiz"><strong>Take the quiz</strong> and get started!</a>
+    <%= button_to 'Get Started', user_registration_path, method: :post, style: "display:none;" %>
+  </h3>
+<% end -%>
+<% content_for :tertiary do -%>
+  <ul>
+    <li>Get a personalized list of baby gear</li>
+    <li>Customize your list</li>
+    <li>Share it with friends (if you want) </li>
+  </ul>
+<% end -%>
+<p>With so much on your mind right now, who has time to figure out exactly what you will need for the new baby? Mamajamas offers a super-easy way for you to build a personalized, prioritized list of baby gear.</p>
+<p>No more spreadsheets or sifting through epic emails from mom friends! Let us help you figure out exactly what items you need, then customize your list with help from other moms you trust.</p>
+<ul class="screenshots">
+  <li><img src="/assets/home-screenshot1.jpg" alt="preview: quiz" /></li>
+  <li><img src="/assets/home-screenshot2.jpg" alt="preview: gear list" /></li>
+  <li><img src="/assets/home-screenshot3.jpg" alt="preview: search" /></li>
+</ul>

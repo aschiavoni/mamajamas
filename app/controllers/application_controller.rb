@@ -40,6 +40,10 @@ class ApplicationController < ActionController::Base
     page_context.page_id = page_id
   end
 
+  def set_body_class(css_class)
+    page_context.body_class = css_class
+  end
+
   def set_subheader(subheader)
     page_context.subheader = subheader
   end
@@ -50,6 +54,10 @@ class ApplicationController < ActionController::Base
 
   def hide_progress_bar
     page_context.show_progress = false
+  end
+
+  def hide_header
+    page_context.show_header = false
   end
 
   protected

@@ -21,8 +21,8 @@ feature "logged in visitor", js: true do
   scenario "visits home page" do
     sign_in_with @testuser.username, @testuser.email, @password, :username
 
-    expect(page).to have_content("Signed in")
-    expect(page).to have_content("Your baby gear list")
+    expect(page).to have_content("My Account")
+    expect(page).to have_content("Take the quiz")
   end
 
 end

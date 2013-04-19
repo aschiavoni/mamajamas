@@ -55,6 +55,14 @@ module ApplicationHelper
     page_context.show_progress
   end
 
+  def show_header
+    page_context.show_header
+  end
+
+  def body_class
+    page_context.body_class
+  end
+
   private
 
   def notification_config

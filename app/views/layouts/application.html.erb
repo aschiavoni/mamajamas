@@ -6,6 +6,7 @@
 <html class="no-js">
 <!--<![endif]-->
 <head>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Reenie+Beanie' rel='stylesheet' type='text/css'>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +16,7 @@
 <%= javascript_include_tag "application" %>
 <%= csrf_meta_tags %>
 </head>
-<body>
+<body<%= " class=#{body_class}" if body_class.present? %>>
 <!-- header area ***** -->
 <%= content_for?(:header_overlay) ? yield(:header_overlay) : "" %>
 <div id="hed-wrap" class="<%= show_progress ? "progressbar" : "" %>">
@@ -73,15 +74,17 @@
 <!-- end header area -->
 <!-- body area ***** -->
 <div class="gridContainer clearfix"<%= "id=#{page_id}" unless page_id.blank? %>>
-  <div id="title">
-    <div id="subhed">
-      <h2><%= subheader %></h2>
+  <% if show_header -%>
+    <div id="title">
+      <div id="subhed">
+        <h2><%= subheader %></h2>
+      </div>
+      <%= content_for?(:subheader_content) ? yield(:subheader_content) : "" %>
+      <div id="title-links">
+        <%= yield(:title_links) %>
+      </div>
     </div>
-    <%= content_for?(:subheader_content) ? yield(:subheader_content) : "" %>
-    <div id="title-links">
-      <%= yield(:title_links) %>
-    </div>
-  </div>
+  <% end -%>
   <div id="primary">
     <div class="content">
       <%= content_for?(:nav) ? yield(:nav) : raw("&nbsp;") -%>
@@ -97,10 +100,19 @@
     </div>
   </div>
   <div id="tertiary">
-    <%= content_for?(:tertiary) ? yield(:tertiary) : raw("&nbsp;") -%>
+    <div class="content">
+      <%= content_for?(:tertiary) ? yield(:tertiary) : raw("&nbsp;") -%>
+    </div>
   </div>
   <div id="footer">
-    <div class="content">[footer]</div>
+    <div class="content">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
   </div>
 </div>
 <!-- end body area -->
