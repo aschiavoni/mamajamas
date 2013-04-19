@@ -1,5 +1,6 @@
 class QuizController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [ :show ]
+  before_filter :allow_guest!, only: [ :show ]
   before_filter :init_view, only: [ :show ]
 
   respond_to :json

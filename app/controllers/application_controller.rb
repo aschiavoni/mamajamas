@@ -66,6 +66,13 @@ class ApplicationController < ActionController::Base
     list_path
   end
 
+  def allow_guest!
+    if current_user.blank?
+      @user = User.new_guest
+      sign_in(:user, @user) if @user.persisted?
+    end
+  end
+
   # hide behind basic auth for now
   def require_basic_auth_maybe
     if Rails.env.production?
