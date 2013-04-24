@@ -1,4 +1,6 @@
 class PasswordsController < Devise::PasswordsController
+  before_filter :init_view
+
   def edit
     self.resource = resource_class.find_or_initialize_with_error_by(:reset_password_token, params[:reset_password_token])
   end
@@ -31,5 +33,13 @@ class PasswordsController < Devise::PasswordsController
         resource.update_attributes!(username: params[:user][:username])
       end
     end
+  end
+
+  def init_view
+    set_page_id "forgot-password"
+    set_subheader = "Forgot your password?"
+    set_body_class "form-page"
+    hide_header
+    hide_progress_bar
   end
 end
