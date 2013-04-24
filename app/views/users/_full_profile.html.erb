@@ -99,49 +99,6 @@
       </dd>
     </fieldset>
   </dl>
-  <h3>My Kids</h3>
-  <dl id="mykids">
-    <!-- first child -->
-    <dt>First Child</dt>
-    <dd>
-      <fieldset>
-        <div class="baby-gender clearfix">
-          <p>Gender:</p>
-          <fieldset>
-            <div>
-              <input name="babygender01" type="radio" class="gender-f" id="babygender01-f" value="female">
-              <label for="babygender01-f" title="girl">Girl</label>
-            </div>
-            <div>
-              <input name="babygender01" type="radio" class="gender-m" id="babygender01-m" value="male">
-              <label for="babygender01-m" title="boy">Boy</label>
-            </div>
-            <div>
-              <input name="babygender01" type="radio" class="gender-na" id="babygender01-na" value="not-sure" checked>
-              <label for="babygender01-na" title="not sure?">Not sure</label>
-            </div>
-          </fieldset>
-        </div>
-        <div class="baby-name">
-          <p>
-            <label for="field-baby01-name">Name</label>
-            <br />
-            <input name="field-baby01-name" type="text" id="field-baby01-name" value="">
-          </p>
-        </div>
-        <div class="baby-bdate">
-          <p>
-            <label for="field-baby01-bdate">Born / Due</label>
-            <br />
-            <input name="field-baby01-bdate" type="text" id="field-baby01-bdate" class="baby-bdate" value="">
-            <%= image_tag "icon_calendar@2x.png", class: "date-picker", alt: "calendar" %>
-        </div>
-      </fieldset>
-    </dd>
-    <!-- end first chid -->
-    <!-- (more children here) -->
-    <div class="add-more"> <a href="#"><span class="ss-plus"></span>Add more</a> </div>
-  </dl>
   <div class="button-row">
     <button type="submit" class="button bt-color" id="bt-save"><span class="ss-check"></span>Save and Preview</button>
   </div>
