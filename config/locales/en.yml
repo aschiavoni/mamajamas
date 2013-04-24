@@ -38,7 +38,7 @@ en:
               too_short: "Password is too short. (minimum is 6 characters)"
               confirmation: "Sorry, but the password doesn't match the confirmation."
             zip_code:
-              invalid: "Sorry, but that does not appear to be a valid postal code."
+              invalid: "Sorry, but that does not appear to be a valid zip code."
             country_code:
               invalid: "Sorry, but that does not appear to be a valid country."
         list_item:
