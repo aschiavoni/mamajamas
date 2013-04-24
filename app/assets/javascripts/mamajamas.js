@@ -13,6 +13,12 @@ window.Mamajamas = {
     });
     notifications.render();
 
+    // globally wire infield labels
+    var $infieldLabelForms = $('form.label-infield');
+    if ($infieldLabelForms.length > 0) {
+      $("label", $infieldLabelForms).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+    }
+
     // follow page
     if ($('#follow-moms').length > 0) {
       new Mamajamas.Views.FriendPicker({
