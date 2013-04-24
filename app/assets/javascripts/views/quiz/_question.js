@@ -20,6 +20,14 @@ Mamajamas.Views.QuizQuestion = Backbone.View.extend({
     return this;
   },
 
+  closeQuiz: function(event) {
+    event.preventDefault();
+    if (confirm("Are you sure you want to quit the quiz?")) {
+      window.location = '/';
+    }
+    return false;
+  },
+
   previous: function(event) {
     event.preventDefault();
     this.quizView.previous();
@@ -72,6 +80,7 @@ Mamajamas.Views.QuizMultiChoiceImageQuestion = Mamajamas.Views.QuizQuestion.exte
   selectedClass: 'q-selected',
 
   events: {
+    'click .bt-close': 'closeQuiz',
     'click #bt-prev': 'previous',
     'click #bt-next': 'save',
     'click .skip': 'skip',
@@ -145,6 +154,7 @@ Mamajamas.Views.QuizSliderQuestion = Mamajamas.Views.QuizQuestion.extend({
   },
 
   events: {
+    'click .bt-close': 'closeQuiz',
     'click #bt-prev': 'previous',
     'click #bt-next': 'save',
     'click .skip': 'skip',

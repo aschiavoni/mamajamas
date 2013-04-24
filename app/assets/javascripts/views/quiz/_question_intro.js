@@ -9,7 +9,8 @@ Mamajamas.Views.QuizIntro = Mamajamas.Views.QuizQuestion.extend({
   large: true,
 
   events: {
-    'click #bt-start': 'start'
+    'click #bt-start': 'start',
+    'click .bt-close': 'closeQuiz',
   },
 
   start: function(event) {
