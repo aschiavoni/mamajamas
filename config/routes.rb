@@ -1,5 +1,4 @@
 Mamajamas::Application.routes.draw do
-  resources :users, only: [ :edit, :update ]
   devise_for(:users,
              path_names:
              {
@@ -13,6 +12,7 @@ Mamajamas::Application.routes.draw do
                omniauth_callbacks: "users/omniauth_callbacks"
              })
 
+  resources :users, only: [ :edit, :update ]
   devise_scope :user do
     get "/registrations/facebook" => "registrations#facebook"
     put "/registrations/facebook" => "registrations#facebook"
