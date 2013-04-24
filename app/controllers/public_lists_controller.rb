@@ -12,10 +12,7 @@ class PublicListsController < ApplicationController
       redirect_to redirect_destination(@view) and return
     end
 
-    @list_entries_json = render_to_string(
-      template: 'list_items/index',
-      formats: :json,
-      locals: { list_entries: @view.list_entries })
+    @list_entries_json = render_list_entries(@view.list_entries)
 
     hide_progress_bar
 
@@ -26,7 +23,8 @@ class PublicListsController < ApplicationController
 
   def preview
     @view = PublicListView.new(@list, params[:category], true)
-    render 'show'
+    @list_entries_json = render_list_entries(@view.list_entries)
+    render 'show', formats: :html
   end
 
   def publish
@@ -39,6 +37,13 @@ class PublicListsController < ApplicationController
   end
 
   private
+
+  def render_list_entries(list_entries)
+    render_to_string(
+      template: 'list_items/index',
+      formats: :json,
+      locals: { list_entries: list_entries })
+  end
 
   def redirect_needed?(list_view)
     ![

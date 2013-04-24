@@ -29,4 +29,3 @@ class ListView
     @default_category == true
   end
 end
-
