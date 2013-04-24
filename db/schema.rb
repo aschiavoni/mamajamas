@@ -147,9 +147,9 @@ ActiveRecord::Schema.define(:version => 20130416044946) do
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
   create_table "users", :force => true do |t|
-    t.string   "username",                    :default => "",    :null => false
-    t.string   "email",                       :default => "",    :null => false
-    t.string   "encrypted_password",          :default => "",    :null => false
+    t.string   "username",                    :default => "",   :null => false
+    t.string   "email",                       :default => "",   :null => false
+    t.string   "encrypted_password",          :default => "",   :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -162,8 +162,8 @@ ActiveRecord::Schema.define(:version => 20130416044946) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.string   "provider"
     t.string   "uid"
     t.string   "access_token"
@@ -178,7 +178,7 @@ ActiveRecord::Schema.define(:version => 20130416044946) do
     t.string   "slug"
     t.text     "notes"
     t.string   "zip_code"
-    t.boolean  "guest",                       :default => false
+    t.boolean  "guest"
     t.string   "country_code",                :default => "US"
   end
 
