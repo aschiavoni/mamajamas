@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy, :facebook, :facebook_update]
+  before_filter :init_view, only: [ :new ]
 
   respond_to :json
 
@@ -30,6 +31,8 @@ class RegistrationsController < Devise::RegistrationsController
         sign_in(resource_name, resource)
       else
         clean_up_passwords resource
+        init_view
+        render 'new' and return
       end
 
       respond_to do |format|
@@ -71,5 +74,15 @@ class RegistrationsController < Devise::RegistrationsController
   protected
   def after_sign_up_path_for(resource)
     friends_path
+  end
+
+  private
+
+  def init_view
+    set_page_id "user-signup"
+    set_subheader = "Signup"
+    set_body_class "form-page"
+    hide_header
+    hide_progress_bar
   end
 end
