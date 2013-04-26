@@ -12,9 +12,12 @@ class Forms::CompleteProfile
   attr_reader :user
 
   delegate :username, :to => :user
-  delegate :email, :email=, :to => :user
+  delegate :email=, :to => :user
   delegate :password, :password=, :to => :user
   delegate :password_confirmation, :password_confirmation=, :to => :user
+
+  validates_presence_of     :password
+  validates_confirmation_of :password
 
   validate do
     [user].each do |object|
@@ -28,6 +31,10 @@ class Forms::CompleteProfile
 
   def initialize(user)
     @user = user
+  end
+
+  def email
+    user.guest? && !user.changed? ? nil : user.email
   end
 
   def update!(attributes = {})

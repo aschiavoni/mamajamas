@@ -26,4 +26,26 @@ describe Forms::CompleteProfile do
     profile.user.username.should == 'test99'
   end
 
+  context "user" do
+
+    it "returns nil for a guest email" do
+      guest = User.new_guest
+      profile = Forms::CompleteProfile.new(guest)
+      profile.email.should be_nil
+    end
+
+    it "returns real email for for a dirty guest" do
+      guest = User.new_guest
+      profile = Forms::CompleteProfile.new(guest)
+      profile.email = 'test123@example.com'
+      profile.email.should == 'test123@example.com'
+    end
+
+    it "returns real email for a non-guest user" do
+      user = build(:user)
+      profile = Forms::CompleteProfile.new(user)
+      profile.email.should == user.email
+    end
+
+  end
 end
