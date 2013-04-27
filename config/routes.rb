@@ -9,6 +9,7 @@ Mamajamas::Application.routes.draw do
                registrations: :registrations,
                sessions: :sessions,
                passwords: :passwords,
+               confirmations: :confirmations,
                omniauth_callbacks: "users/omniauth_callbacks"
              })
 

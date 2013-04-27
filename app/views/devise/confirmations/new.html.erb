@@ -1,12 +1,22 @@
-<h2>Resend confirmation instructions</h2>
-
-<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :login %><br />
-  <%= f.text_field :login %></div>
-
-  <div><%= f.submit "Resend confirmation instructions" %></div>
+<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, :class => "label-infield" }) do |f| %>
+  <h3>Resend confirmation instructions</h3>
+  <dl class="clearfix">
+    <fieldset>
+      <dt>Login<strong class="required">*</strong></dt>
+      <dd>
+        <p>
+          <%= f.label :login, "Username or email" %>
+          <br />
+          <%= f.text_field :login %>
+          <%= field_error resource, :login %>
+        </p>
+      </dd>
+    </fieldset>
+  </dl>
+  <div class="button-row">
+    <div class="progress-container">
+      <button type="submit" class="button bt-color" id="bt-log-in">Resend confirmation instructions</button>
+      <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
+    </div>
+  </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
