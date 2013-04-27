@@ -8,7 +8,9 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   },
   events: {
     "click #bt-cancel": "hide",
-    "submit #login-form": "submit"
+    "submit #login-form": "submit",
+    "click .modal-overlay": "close",
+    "click .bt-close": "close",
   },
   render: function(event) {
     return this;
@@ -27,6 +29,11 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   },
   hide: function() {
     this.$el.progressIndicator('hide').hide();
+  },
+  close: function(event) {
+    event.preventDefault();
+    this.hide();
+    return false;
   },
   onAuthenticated: function() {
     if (this.model.get("sign_in_count") <= 1)

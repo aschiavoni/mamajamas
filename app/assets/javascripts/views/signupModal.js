@@ -13,7 +13,9 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
   events: {
     "click #bt-cancel": "hide",
     "click #bt-create-account": "submit",
-    "keyup #user_password": "validatePassword"
+    "keyup #user_password": "validatePassword",
+    "click .modal-overlay": "close",
+    "click .bt-close": "close",
   },
 
   render: function(event) {
@@ -49,6 +51,12 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
     this.pwStrength.html(null);
     $(".collapsible", this.$el).collapsible('close');
     return true; // reset button
+  },
+
+  close: function(event) {
+    event.preventDefault();
+    this.hide();
+    return false;
   },
 
   openCollapsible: function(elem, opts) {
