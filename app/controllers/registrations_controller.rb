@@ -32,11 +32,16 @@ class RegistrationsController < Devise::RegistrationsController
       else
         clean_up_passwords resource
         init_view
-        render 'new' and return
       end
 
       respond_to do |format|
-        format.html { redirect_to @redirect_path }
+        format.html do
+          if defined?(@redirect_path)
+            redirect_to @redirect_path
+          else
+            render 'new' and return
+          end
+        end
         format.json
       end
     end
