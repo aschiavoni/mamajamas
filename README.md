@@ -111,3 +111,5 @@ of the rails server before they will take effect.
 ###### Mac
 
     brew install phantomjs
+
+
