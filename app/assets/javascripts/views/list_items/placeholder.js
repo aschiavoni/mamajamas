@@ -4,7 +4,7 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
 
   template: HandlebarsTemplates['list_items/placeholder'],
 
-  className: "prod prod-filled",
+  className: "prod",
 
   initialize: function() {
     this.model.on("change:age", this.saveAndRender, this);
