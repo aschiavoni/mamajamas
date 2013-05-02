@@ -50,18 +50,6 @@ describe ListBuilder do
 
     describe "skips placeholders" do
 
-      it "for product types with younger ages" do
-        kid = build(:kid, age_range: AgeRange.thirteen_to_eighteen_months)
-        builder = ListBuilder.new(user, kid)
-
-        list = builder.build!(product_types)
-
-        ages = list.list_items.map(&:age_range)
-        [ AgeRange.pre_birth, AgeRange.zero_to_three_months ].each do |age|
-          ages.should_not include(age)
-        end
-      end
-
       it "for product types > 13-18 mos for newborns" do
         kid = build(:kid, age_range: AgeRange.zero_to_three_months)
         builder = ListBuilder.new(user, kid)

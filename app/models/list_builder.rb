@@ -24,13 +24,8 @@ class ListBuilder
 
   def applicable?(product_type)
     return true unless kid.present?
-    age_applicable?(product_type) &&
       product_type_applicable?(product_type) &&
       category_applicable?(product_type)
-  end
-
-  def age_applicable?(product_type)
-    !younger_ages.include?(product_type.age_range)
   end
 
   def product_type_applicable?(product_type)
