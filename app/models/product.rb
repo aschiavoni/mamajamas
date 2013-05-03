@@ -1,6 +1,18 @@
 class Product < ActiveRecord::Base
   has_and_belongs_to_many :product_types
-  attr_accessible :name, :rating, :url, :image_url, :vendor, :vendor_id
+
+  attr_accessible :name
+  attr_accessible :rating
+  attr_accessible :url
+  attr_accessible :image_url
+  attr_accessible :vendor
+  attr_accessible :vendor_id
+  attr_accessible :sales_rank
+  attr_accessible :brand
+  attr_accessible :manufacturer
+  attr_accessible :model
+  attr_accessible :department
+  attr_accessible :categories
 
   validates :name, :vendor, :url, presence: true
   validates :vendor_id, presence: true, uniqueness: { scope: :vendor }
