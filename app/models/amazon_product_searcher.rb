@@ -23,6 +23,7 @@ class AmazonProductSearcher
       results << res.items.each_with_index.map do |item, idx|
         # return Amazon::Element instance
         item_attributes = item.get_element('ItemAttributes')
+        browse_nodes = item.get_array('BrowseNodes/BrowseNode/Name')
         small_image = item.get_element('SmallImage')
         {
           vendor_id: item.get('ASIN'),
@@ -30,7 +31,13 @@ class AmazonProductSearcher
           name: item_attributes.get('Title'),
           url: item.get('DetailPageURL'),
           image_url: small_image.blank? ? nil : small_image.get('URL'),
-          rating: nil
+          rating: nil,
+          sales_rank: item.get('SalesRank'),
+          brand: item_attributes.get('Brand'),
+          department: item_attributes.get('Department'),
+          manufacturer: item_attributes.get('Manufacturer'),
+          model: item_attributes.get('Model'),
+          categories: browse_nodes.join(', ')
         }
       end
     end
