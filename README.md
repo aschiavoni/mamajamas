@@ -113,3 +113,8 @@ of the rails server before they will take effect.
     brew install phantomjs
 
 
+### Amazon Searching
+
+Amazon api options are configured in config/amazon.yml.
+
+CachedProductSearcher -> ProductSearcher -> ProductSearcherFactory -> AmazonProductSearcher
