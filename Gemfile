@@ -66,6 +66,9 @@ gem 'mini_magick'
 # lists
 gem 'acts_as_list'
 
+# full text search
+gem 'pg_search'
+
 # handy things
 gem 'possessive'
 gem 'active_decorator'

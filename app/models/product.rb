@@ -19,4 +19,13 @@ class Product < ActiveRecord::Base
 
   scope :active, lambda { where("updated_at > ?", (Time.zone.now - 24.hours)) }
   scope :expired, lambda { where("updated_at < ?", (Time.zone.now - 24.hours)) }
+
+  include PgSearch
+  pg_search_scope :search,
+    against: [ :name, :categories, :brand, :manufacturer, :model, :department ],
+    using: { tsearch: { prefix: true, dictionary: 'english' } }
+
+  def self.text_search(query)
+    query.present? ? search(query) : scoped
+  end
 end

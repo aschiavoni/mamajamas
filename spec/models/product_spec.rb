@@ -93,4 +93,24 @@ describe Product do
 
   end
 
+  describe "searching" do
+
+    it "searches product names with full text search" do
+      product_name = "new ssddyy product"
+      product = create(:product, name: product_name)
+      Product.text_search("ssdd").first.should == product
+    end
+
+    it "searches product brands with full text search" do
+      brand_name = "tt jjkkll aa"
+      product = create(:product, brand: brand_name)
+      Product.text_search("jjkk").first.should == product
+    end
+
+    it "returns all products if no query" do
+      Product.text_search(nil).count.should == Product.count
+    end
+
+  end
+
 end
