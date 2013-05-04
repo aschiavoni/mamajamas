@@ -107,6 +107,12 @@ describe Product do
       Product.text_search("jjkk").first.should == product
     end
 
+    it "searches product categories with full text search" do
+      categories = "category1, category2, category3"
+      product = create(:product, categories: categories)
+      Product.text_search("category2").first.should == product
+    end
+
     it "returns all products if no query" do
       Product.text_search(nil).count.should == Product.count
     end
