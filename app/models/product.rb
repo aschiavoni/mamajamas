@@ -23,7 +23,8 @@ class Product < ActiveRecord::Base
   include PgSearch
   pg_search_scope :search,
     against: [ :name, :categories, :brand, :manufacturer, :model, :department ],
-    using: { tsearch: { prefix: true, dictionary: 'english' } }
+    using: { tsearch: { prefix: true, dictionary: 'english' } },
+    ignoring: :accents
 
   def self.text_search(query)
     query.present? ? search(query) : scoped

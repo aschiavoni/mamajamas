@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'spec_helper'
 
 describe Product do
@@ -96,21 +98,27 @@ describe Product do
   describe "searching" do
 
     it "searches product names with full text search" do
-      product_name = "new ssddyy product"
+      product_name = 'new ssddyy product'
       product = create(:product, name: product_name)
-      Product.text_search("ssdd").first.should == product
+      Product.text_search('ssdd').first.should == product
     end
 
     it "searches product brands with full text search" do
-      brand_name = "tt jjkkll aa"
+      brand_name = 'tt jjkkll aa'
       product = create(:product, brand: brand_name)
-      Product.text_search("jjkk").first.should == product
+      Product.text_search('jjkk').first.should == product
     end
 
     it "searches product categories with full text search" do
-      categories = "category1, category2, category3"
+      categories = 'category1, category2, category3'
       product = create(:product, categories: categories)
-      Product.text_search("category2").first.should == product
+      Product.text_search('category2').first.should == product
+    end
+
+    it "ignores accented characters in a search" do
+      product_name = 'El Niña'
+      product = create(:product, name: product_name)
+      Product.text_search('nina').first.should == product
     end
 
     it "returns all products if no query" do
