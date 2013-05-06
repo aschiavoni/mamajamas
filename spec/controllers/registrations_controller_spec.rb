@@ -55,6 +55,11 @@ describe RegistrationsController do
       assigns(:user).sign_in_count.should == 1
     end
 
+    it "redirects to friends path after signup" do
+      post :create, user: registration
+      response.should redirect_to(root_path)
+    end
+
   end
 
 end
