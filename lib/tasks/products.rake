@@ -1,9 +1,9 @@
 namespace :mamajamas do
   namespace :products do
     desc "Search amazon for all active product types"
-    task search: :environment do
+    task fetch: :environment do
       cache_hours = Rails.env.development? ? 96 : 24
-      searcher = CachedProductSearcher.new cache_hours
+      fetcher = CachedProductFetcher.new cache_hours
 
       count = ProductType.global.count.to_f
       msg_length = 0
@@ -12,14 +12,14 @@ namespace :mamajamas do
         msg = "#{percent_complete}%: Searching for #{product_type.name}..."
         print "\r#{msg.ljust(msg_length)}"
         msg_length = msg.length
-        searcher.search(product_type, pages: 10)
+        fetcher.fetch(product_type, pages: 10)
       end
       print "\r" + "Done".ljust(msg_length)
     end
 
     desc "Clear product search cache"
     task clear_cache: :environment do
-      REDIS.keys("product:searcher:*").each do |key|
+      REDIS.keys("product:fetcher:*").each do |key|
         REDIS.del(key)
       end
     end

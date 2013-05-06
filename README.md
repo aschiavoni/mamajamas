@@ -117,4 +117,4 @@ of the rails server before they will take effect.
 
 Amazon api options are configured in config/amazon.yml.
 
-CachedProductSearcher -> ProductSearcher -> ProductSearcherFactory -> AmazonProductSearcher
+CachedProductFetcher -> ProductFetcher -> ProductFetcherFactory -> AmazonProductFetcher

@@ -1,16 +1,16 @@
-class ProductSearcher
+class ProductFetcher
   include ActionView::Helpers::TextHelper
 
-  attr_reader :providers, :searchers
+  attr_reader :providers, :fetchers
 
   def initialize(options = {})
     @providers = options[:providers] || [ :amazon ]
-    @searchers = providers.map do |provider|
-      ProductSearcherFactory.create(provider)
+    @fetchers = providers.map do |provider|
+      ProductFetcherFactory.create(provider)
     end
   end
 
-  def search(product_type, options = { pages: 1 })
+  def fetch(product_type, options = { pages: 1 })
     product_type.queries.map do |query|
       query(query.query, options).map do |attrs|
         build_product(product_type, attrs)
@@ -46,8 +46,8 @@ class ProductSearcher
   end
 
   def query(query, options = {})
-    searchers.map do |finder|
-      finder.search(query, options)
+    fetchers.map do |finder|
+      finder.fetch(query, options)
     end.flatten
   end
 

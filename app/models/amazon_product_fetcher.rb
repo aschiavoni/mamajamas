@@ -1,4 +1,4 @@
-class AmazonProductSearcher
+class AmazonProductFetcher
   def initialize(options = {})
     Amazon::Ecs.options = {
       associate_tag: options["associate_tag"],
@@ -7,7 +7,7 @@ class AmazonProductSearcher
     }
   end
 
-  def search(query, options = { pages: 1 })
+  def fetch(query, options = { pages: 1 })
     results = []
 
     options[:pages].times do |i|

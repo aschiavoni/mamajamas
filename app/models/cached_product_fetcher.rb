@@ -1,4 +1,4 @@
-class CachedProductSearcher < ProductSearcher
+class CachedProductFetcher < ProductFetcher
   def initialize(cache_hours, options = {})
     @cache_hours = cache_hours || 24
     super options
@@ -7,7 +7,7 @@ class CachedProductSearcher < ProductSearcher
   protected
 
   def query(query, options)
-    cache_id = "product:searcher:#{query.parameterize}:#{options_sig(options)}"
+    cache_id = "product:fetcher:#{query.parameterize}:#{options_sig(options)}"
     json = Rails.cache.fetch(cache_id, expire_in: cache_hours) do
       super(query, options).to_json
     end

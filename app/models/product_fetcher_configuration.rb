@@ -1,4 +1,4 @@
-class ProductSearcherConfiguration
+class ProductFetcherConfiguration
   class << self
     def for(provider)
       self.new.configuration_for(provider)
