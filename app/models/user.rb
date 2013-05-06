@@ -141,6 +141,10 @@ class User < ActiveRecord::Base
     relationships_created_at.present?
   end
 
+  def has_list?
+    list.present?
+  end
+
   def build_list!
     kid = self.kids.order('created_at ASC').first
     ListBuilder.new(self, kid).build! if list.blank?

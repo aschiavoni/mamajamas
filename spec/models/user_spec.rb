@@ -230,4 +230,19 @@ describe User do
 
   end
 
+  describe "has_list" do
+
+    it "returns false if the user does not have a list" do
+      u = build(:user)
+      u.should_not have_list
+    end
+
+    it "returns true if the user does have a list" do
+      u = create(:user)
+      u.build_list!
+      u.should have_list
+    end
+
+  end
+
 end
