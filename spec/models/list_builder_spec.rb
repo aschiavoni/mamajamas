@@ -15,8 +15,8 @@ describe ListBuilder do
     builder.build!.should be_an_instance_of(List)
   end
 
-  it "should assign user to list" do
-    List.any_instance.should_receive(:user=).with(user)
+  it "should assign list to user" do
+    user.should_receive(:list=).with(builder.list)
     builder.build!
   end
 

@@ -1,4 +1,6 @@
 class ListBuilder
+  attr_reader :list
+
   def initialize(user, kid = nil)
     @user = user
     @kid = kid
@@ -6,7 +8,7 @@ class ListBuilder
   end
 
   def build!(product_types = ProductType.global)
-    list.user = user
+    user.list = list
 
     product_types.each do |product_type|
       add_placeholder(product_type)
@@ -50,10 +52,6 @@ class ListBuilder
 
   def kid
     @kid
-  end
-
-  def list
-    @list
   end
 
   def younger_ages
