@@ -47,14 +47,11 @@ Mamajamas::Application.routes.draw do
     resources :list_items
   end
 
-  get ":slug" => "public_lists#show", as: :public_list
-  get ":slug/:category" => "public_lists#show", as: :public_list_category
-
   scope "api" do
     defaults(format: "json") do
       get "categories" => "categories#index"
       get "categories/:category_id" => "product_types#index"
-      get "categories/:category_id/:product_type_id" => "products#index"
+      get "products" => "products#index"
       get "age_ranges" => "age_ranges#index"
       get "list/product_types" => "lists#product_types"
       post "kids" => "quiz#update_kid"
@@ -63,6 +60,9 @@ Mamajamas::Application.routes.draw do
       post "list_item_images" => "list_item_images#create"
     end
   end
+
+  get ":slug" => "public_lists#show", as: :public_list
+  get ":slug/:category" => "public_lists#show", as: :public_list_category
 
   get '/robots.txt' => 'robots#show'
   root :to => 'home#index'

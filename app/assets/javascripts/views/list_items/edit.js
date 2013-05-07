@@ -72,17 +72,16 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
   initializeAutocomplete: function() {
     var _view = this;
-    var productTypeId = this.model.get("product_type_id");
-    if (!productTypeId)
-      productTypeId = 0; // ugh, magic number
-    var url = "/api/categories/" + _view.model.get("category_id") + "/" + productTypeId;
+    var url = '/api/products/';
 
     $("#list_item_name", this.$el).autocomplete({
+      delay: 500,
       source: function(request, response) {
         $.getJSON(url, { filter: request.term }, function(data) {
           response($.map(data, function(item) {
             return {
-              label: item.name,
+              label: item.display_name,
+              name: item.name,
               value: item
             }
           }))
