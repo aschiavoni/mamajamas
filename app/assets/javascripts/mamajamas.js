@@ -50,6 +50,25 @@ window.Mamajamas = {
       new Mamajamas.Routers.Quiz();
       Backbone.history.start();
     }
+  },
+  Utils: {
+    // http://stackoverflow.com/a/7124052/31344
+    htmlEscape: function(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    },
+    htmlUnescape: function(value){
+      return String(value)
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+    }
   }
 };
 
