@@ -39,13 +39,16 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
   },
 
   findItem: function(event) {
+    event.preventDefault();
+
     if (this.isGuestUser()) {
       this.unauthorized();
     } else {
-      console.log('find item');
       var search = new Mamajamas.Views.ListItemSearch({});
       $('#buildlist').after(search.render().$el);
     }
+
+    return false;
   },
 
   // addItem: function(event) {

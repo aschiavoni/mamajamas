@@ -5,12 +5,21 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   className: 'modal-wrap',
 
   initialize: function() {
-    console.log('ListItemSearch');
+  },
+
+  events: {
+    'click .bt-close': 'close',
   },
 
   render: function() {
     this.$el.html(this.template({})).show();
     return this;
+  },
+
+  close: function() {
+    event.preventDefault();
+    this.$el.remove();
+    return false;
   },
 
 });
