@@ -100,7 +100,11 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
 
         return false;
       }
-    });
+    }).data('ui-autocomplete')._renderItem = function(ul, item) {
+      return $("<li class=\"ui-menu-item\" role=\"presentation\">").
+        append("<a class=\"ui-corner-all\" tabindex=\"-1\" title=\"" + Mamajamas.Utils.htmlEscape(item.name)+ "\"'>" + item.label + "</a>").
+        appendTo(ul);
+    };
   },
 
   save: function(event) {
