@@ -53,19 +53,21 @@ describe ListItemsController do
 
     describe "with category filter" do
 
+      let(:my_category) { create(:category) }
+
       before(:all) do
         # create 2 new product types in current category
         2.times do
-          create(:product_type, category_id: current_category.id)
+          create(:product_type, category_id: my_category.id)
         end
 
         2.times do
-          @list.list_items << create(:list_item, list_id: @list.id, category_id: current_category.id)
+          @list.list_items << create(:list_item, list_id: @list.id, category_id: my_category.id)
         end
       end
 
       before(:each) do
-        get :index, category: current_category.id
+        get :index, category: my_category.id
       end
 
       it "should assign list" do
@@ -73,7 +75,7 @@ describe ListItemsController do
       end
 
       it "should use assign category" do
-        assigns(:category).should == current_category
+        assigns(:category).should == my_category
       end
 
       it "should assign list entries" do
@@ -81,7 +83,7 @@ describe ListItemsController do
       end
 
       it "should create list entries for list items and product types in current category" do
-        list_items_size = @list.list_items.where(category_id: current_category.id).size
+        list_items_size = @list.list_items.where(category_id: my_category.id).size
 
         assigns(:list_entries).size.should == list_items_size
       end

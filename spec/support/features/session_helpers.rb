@@ -21,17 +21,18 @@ module Features
         password_confirmation: TEST_USER_PASSWORD
       })
       user.build_list!
+      user
     end
 
     def test_user
       user = User.find_by_username(TEST_USER_NAME)
-      user = create_test_user if user.blank?
+      user = SessionHelpers.create_test_user if user.blank?
       user
     end
 
     def test_user_with_list
       user = User.find_by_username(TEST_USER_NAME_WITH_LIST)
-      user = create_test_user_with_list if user.blank?
+      user = SessionHelpers.create_test_user_with_list if user.blank?
       user
     end
 

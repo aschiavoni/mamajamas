@@ -4,14 +4,15 @@ describe Users::OmniauthCallbacksController do
 
   describe "facebook" do
 
-    let(:auth_hash) { OmniAuth.config.mock_auth[:facebook] }
+    let(:auth_hash) {
+      mock_omniauth('91234560', 'fbuser@example.com', 'Joe', 'Case')
+    }
 
     before do
       ProfilePictureUploader.any_instance.stub(:download! => false)
     end
 
     before(:each) do
-      mock_omniauth
       request.env["devise.mapping"] = Devise.mappings[:user]
       request.env["omniauth.auth"] = auth_hash
     end
