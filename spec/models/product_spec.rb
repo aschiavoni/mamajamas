@@ -65,7 +65,7 @@ describe Product do
       end
 
       it "should only find expired products when using expired scope" do
-        subject.class.expired.size.should == Product.count  # - 2
+        subject.class.expired.size.should == Product.count - 2
       end
 
     end
