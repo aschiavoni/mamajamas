@@ -25,6 +25,8 @@ Capybara.default_wait_time = 3
 OmniAuth.config.test_mode = true
 
 RSpec.configure do |config|
+  config.order = :random
+
   # == Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
