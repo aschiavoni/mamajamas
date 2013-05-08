@@ -9,8 +9,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
 
   events: {
     'click .bt-close': 'close',
-    'keyup #field-search': 'startSearch',
-    'blur #field-search': 'endSearch',
+    'keyup #field-search': 'search'
   },
 
   render: function() {
@@ -27,12 +26,13 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     return false;
   },
 
-  startSearch: function() {
+  search: _.throttle(function() {
+    var _view = this;
     this.$el.progressIndicator('show');
-  },
-
-  endSearch: function() {
-    this.$el.progressIndicator('hide');
-  },
+    // console.log('search: ' + new Date());
+    setTimeout(function() {
+      _view.$el.progressIndicator('hide');
+    }, 2000);
+  }, 1000),
 
 });
