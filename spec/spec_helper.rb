@@ -26,6 +26,7 @@ OmniAuth.config.test_mode = true
 
 RSpec.configure do |config|
   config.order = :random
+  config.fail_fast = true
 
   # == Mock Framework
   #
