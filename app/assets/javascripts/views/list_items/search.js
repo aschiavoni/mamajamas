@@ -4,12 +4,14 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
 
   className: 'modal-wrap',
 
+  lastSearch: null,
+
   initialize: function() {
   },
 
   events: {
     'click .bt-close': 'close',
-    'keyup #field-search': 'search'
+    'keyup #field-search': 'searchMaybe'
   },
 
   render: function() {
@@ -26,13 +28,30 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     return false;
   },
 
-  search: _.throttle(function() {
+  searchMaybe: _.throttle(function(event) {
+    var searchField = $(event.target);
+    var query = searchField.val().trim();
+
+    // dont't search if it is the same query or no query
+    if (query.length >= 1 && this.lastSearch != query) {
+      this.lastSearch = query;
+      this.search(query);
+    }
+
+    return true;
+  }, 1000),
+
+  search: function(query) {
     var _view = this;
+
     this.$el.progressIndicator('show');
-    // console.log('search: ' + new Date());
+    // console.log('search: ' + query + ', at: ' + new Date());
     setTimeout(function() {
+      var item = $("<li/>").html(query);
+      $('#prod-search-results ul:first').append(item);
       _view.$el.progressIndicator('hide');
     }, 2000);
-  }, 1000),
+    return true;
+  },
 
 });
