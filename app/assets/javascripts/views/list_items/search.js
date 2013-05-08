@@ -47,8 +47,8 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     this.$el.progressIndicator('show');
     // console.log('search: ' + query + ', at: ' + new Date());
     setTimeout(function() {
-      var item = $("<li/>").html(query);
-      $('#prod-search-results ul:first').append(item);
+      var result = new Mamajamas.Views.ListItemSearchResult({});
+      $('#prod-search-results ul:first').append(result.render().$el);
       _view.$el.progressIndicator('hide');
     }, 2000);
     return true;
