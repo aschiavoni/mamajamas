@@ -32,6 +32,7 @@ class AmazonProductFetcher
           url: item.get('DetailPageURL'),
           image_url: small_image.blank? ? nil : small_image.get('URL'),
           rating: nil,
+          price: get_price(item),
           sales_rank: item.get('SalesRank'),
           brand: item_attributes.get('Brand'),
           department: item_attributes.get('Department'),
@@ -43,5 +44,15 @@ class AmazonProductFetcher
     end
 
     results.flatten
+  end
+
+  private
+
+  # TODO: get the price from the offer summary if there is no list price
+  def get_price(item)
+    price = nil
+    list_price = item.get_element('ItemAttributes').get_element('ListPrice')
+    price = list_price.get('FormattedPrice') if list_price.present?
+    price
   end
 end

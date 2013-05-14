@@ -13,6 +13,7 @@ class Product < ActiveRecord::Base
   attr_accessible :model
   attr_accessible :department
   attr_accessible :categories
+  attr_accessible :price
 
   validates :name, :vendor, :url, presence: true
   validates :vendor_id, presence: true, uniqueness: { scope: :vendor }
