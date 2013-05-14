@@ -400,7 +400,8 @@ CREATE TABLE products (
     manufacturer character varying(255),
     model character varying(255),
     department character varying(255),
-    categories character varying(255)
+    categories character varying(255),
+    price character varying(255)
 );
 
 
@@ -976,3 +977,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130416044946');
 INSERT INTO schema_migrations (version) VALUES ('20130503222311');
 
 INSERT INTO schema_migrations (version) VALUES ('20130504140158');
+
+INSERT INTO schema_migrations (version) VALUES ('20130514155705');
