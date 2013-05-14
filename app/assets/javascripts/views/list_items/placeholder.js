@@ -44,7 +44,9 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
     if (this.isGuestUser()) {
       this.unauthorized();
     } else {
-      var search = new Mamajamas.Views.ListItemSearch({});
+      var search = new Mamajamas.Views.ListItemSearch({
+        model: this.model
+      });
       $('#buildlist').after(search.render().$el);
     }
 

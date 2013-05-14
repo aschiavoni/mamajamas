@@ -5,14 +5,13 @@ Mamajamas.Views.ListItemSearchResult = Mamajamas.Views.Base.extend({
   tagName: 'li',
 
   initialize: function() {
-    console.log('ListItemSearchResult');
   },
 
   events: {
   },
 
   render: function() {
-    this.$el.html(this.template({}));
+    this.$el.html(this.template(this.model.toJSON()));
     return this;
   },
 
