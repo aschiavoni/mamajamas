@@ -26,8 +26,9 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     return this;
   },
 
-  close: function() {
-    event.preventDefault();
+  close: function(event) {
+    if (event)
+      event.preventDefault();
     this.$el.remove();
     return false;
   },
@@ -66,13 +67,43 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
 
   showResults: function(searchResults) {
     this.$el.progressIndicator('hide');
+    var _view = this;
     var $resultsContainer = $('#prod-search-results ul:first', this.$el);
     searchResults.each(function(result) {
       var resultView = new Mamajamas.Views.ListItemSearchResult({
         model: result
       });
+      resultView.on('search:product:selected', _view.addItem, _view);
       $resultsContainer.append(resultView.render().$el);
     });
+  },
+
+  addItem: function(searchResult) {
+    var _view = this;
+    var attributes = {
+      name: searchResult.get('name'),
+      link: searchResult.get('url'),
+      product_type_id: this.model.get('id'),
+      product_type: this.model.get('product_type_name'),
+      product_type_name: this.model.get('product_type_name'),
+      category_id: this.model.get('category_id'),
+      priority: this.model.get('priority'),
+      age: this.model.get('age'),
+      rating: this.model.get('rating'),
+      image_url: searchResult.get('image_url'),
+      owned: false,
+      placeholder: false
+    };
+    var listItem = Mamajamas.Context.ListItems.create(attributes, {
+      wait: true,
+      success: function() {
+        _view.close();
+      },
+      error: function(model, repsonse) {
+        Mamajamas.Context.Notifications.error('Please try again later.');
+        _view.close();
+      }
+    })
   },
 
 });
