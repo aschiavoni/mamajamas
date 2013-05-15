@@ -44,6 +44,7 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
     if (this.isGuestUser()) {
       this.unauthorized();
     } else {
+      this.setCurrentPosition();
       var search = new Mamajamas.Views.ListItemSearch({
         model: this.model
       });
@@ -51,6 +52,11 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
     }
 
     return false;
+  },
+
+  setCurrentPosition: function() {
+    var curPos = $('#list-items tr').index(this.$el);
+    Mamajamas.Context.List.set("current_position", curPos);
   },
 
   // addItem: function(event) {
