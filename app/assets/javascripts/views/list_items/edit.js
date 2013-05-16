@@ -22,6 +22,8 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   },
 
   render: function() {
+    var _view = this;
+
     this.$el.html(this.template(this.model.toJSON()));
 
     if (!Mamajamas.Context.User.is_facebook_connected || !this.model.isNew()) {
@@ -50,12 +52,12 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     this.$itemPictureProgress = $(".progress-container img.progress", this.$el);
     this.initializeItemPictureUploads();
 
-    return this;
-  },
+    _.defer(function() {
+      $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+      $("#list_item_name", _view.$el).focus();
+    });
 
-  setup: function() {
-    $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-    $("#list_item_name", this.$el).focus();
+    return this;
   },
 
   updateRating: function() {

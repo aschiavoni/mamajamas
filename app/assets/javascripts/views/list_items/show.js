@@ -56,7 +56,6 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
 
       this.$el.after(editView.render().$el);
       this.$el.hide();
-      editView.setup();
     }
 
     return false;
