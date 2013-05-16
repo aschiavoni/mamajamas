@@ -69,13 +69,17 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     this.$el.progressIndicator('hide');
     var _view = this;
     var $resultsContainer = $('#prod-search-results ul:first', this.$el);
-    searchResults.each(function(result) {
-      var resultView = new Mamajamas.Views.ListItemSearchResult({
-        model: result
+    if (searchResults.length > 0) {
+      searchResults.each(function(result) {
+        var resultView = new Mamajamas.Views.ListItemSearchResult({
+          model: result
+        });
+        resultView.on('search:product:selected', _view.addItem, _view);
+        $resultsContainer.append(resultView.render().$el);
       });
-      resultView.on('search:product:selected', _view.addItem, _view);
-      $resultsContainer.append(resultView.render().$el);
-    });
+    } else {
+      $resultsContainer.append($("<p/>").html("No results found"));
+    }
   },
 
   addItem: function(searchResult) {
