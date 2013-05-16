@@ -141,7 +141,8 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
         wait: true,
         success: function() {
           _view.$el.remove();
-          _view.options.parent.remove();
+          if (_view.options.parent)
+            _view.options.parent.remove();
           if (_view.shouldShareOnFacebook())
             _view.shareOnFacebook();
         },

@@ -79,7 +79,6 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   },
 
   addItem: function(searchResult) {
-    var _view = this;
     var attributes = {
       name: searchResult.get('name'),
       link: searchResult.get('url'),
@@ -94,16 +93,8 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       owned: false,
       placeholder: false
     };
-    var listItem = Mamajamas.Context.ListItems.create(attributes, {
-      wait: true,
-      success: function() {
-        _view.close();
-      },
-      error: function(model, repsonse) {
-        Mamajamas.Context.Notifications.error('Please try again later.');
-        _view.close();
-      }
-    })
+    Mamajamas.Context.ListItems.add(attributes);
+    this.close();
   },
 
 });
