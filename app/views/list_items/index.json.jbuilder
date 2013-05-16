@@ -4,7 +4,6 @@ json.array!(list_entries) do |list_entry|
   json.category_id list_entry.category.id
   json.category list_entry.category.name
   json.product_type_name list_entry.product_type_name
-  json.product_type_name_plural list_entry.product_type_name.try(:pluralize)
   if list_entry.product_type.present?
     json.product_type_id list_entry.product_type.id
   end
