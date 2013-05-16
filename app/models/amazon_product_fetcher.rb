@@ -1,4 +1,17 @@
 class AmazonProductFetcher
+
+  class FailedSearch
+    attr_reader :exception
+
+    def initialize(exception)
+      @exception = exception
+    end
+
+    def items
+      []
+    end
+  end
+
   def initialize(options = {})
     Amazon::Ecs.options = {
       associate_tag: options["associate_tag"],
@@ -11,14 +24,11 @@ class AmazonProductFetcher
     results = []
 
     options[:pages].times do |i|
+      page = i + 1
       # simple throttle so we don't abuse the api
-      sleep 1.1
+      sleep sleep_time
 
-      res = Amazon::Ecs.item_search(query, {
-        :response_group => 'Large',
-        :search_index => 'Baby',
-        :item_page => i + 1
-      })
+      res = perform_fetch(page, query)
 
       results << res.items.each_with_index.map do |item, idx|
         # return Amazon::Element instance
@@ -48,11 +58,33 @@ class AmazonProductFetcher
 
   private
 
+  def sleep_time
+    1.1
+  end
+
   # TODO: get the price from the offer summary if there is no list price
   def get_price(item)
     price = nil
     list_price = item.get_element('ItemAttributes').get_element('ListPrice')
     price = list_price.get('FormattedPrice') if list_price.present?
     price
+  end
+
+  def perform_fetch(page, query)
+    tries ||= 2
+    Amazon::Ecs.item_search(query, {
+      :response_group => 'Large',
+      :search_index => 'Baby',
+      :item_page => page
+    })
+  rescue Exception => e
+    if (tries -= 1) > 0
+      ProductFetcherLogger.info "Retrying search for #{query}, page #{page}..."
+      sleep sleep_time
+      retry
+    else
+      ProductFetcherLogger.error "Error searching for #{query}, page #{page}: #{e}"
+      FailedSearch.new e
+    end
   end
 end
