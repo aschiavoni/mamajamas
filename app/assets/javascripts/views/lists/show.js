@@ -59,7 +59,6 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     });
 
     $("#list-items").prepend(addItem.render().$el);
-    addItem.setup();
     return false;
   }
 

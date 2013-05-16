@@ -16,6 +16,8 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
   },
 
   render: function(event) {
+    var _view = this;
+
     this.$el.html(this.template({ listItem: this.model.toJSON() }));
 
     // subviews
@@ -31,12 +33,12 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
 
     this.initializeAutocomplete();
 
-    return this;
-  },
+    _.defer(function() {
+      $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+      $("#list_item_name", _view.$el).focus();
+    });
 
-  setup: function() {
-    $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-    $("#list_item_name", this.$el).focus();
+    return this;
   },
 
   cancel: function(event) {
