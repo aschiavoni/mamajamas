@@ -35,12 +35,16 @@ class AmazonProductFetcher
         item_attributes = item.get_element('ItemAttributes')
         browse_nodes = item.get_array('BrowseNodes/BrowseNode/Name')
         small_image = item.get_element('SmallImage')
+        medium_image = item.get_element('MediumImage')
+        large_image = item.get_element('LargeImage')
         {
           vendor_id: item.get('ASIN'),
           vendor: "amazon",
           name: item_attributes.get('Title'),
           url: item.get('DetailPageURL'),
           image_url: small_image.blank? ? nil : small_image.get('URL'),
+          medium_image_url: medium_image.blank? ? nil : medium_image.get('URL'),
+          large_image_url: large_image.blank? ? nil : large_image.get('URL'),
           rating: nil,
           price: get_price(item),
           sales_rank: item.get('SalesRank'),

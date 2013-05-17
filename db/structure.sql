@@ -401,7 +401,9 @@ CREATE TABLE products (
     model character varying(255),
     department character varying(255),
     categories character varying(255),
-    price character varying(255)
+    price character varying(255),
+    medium_image_url character varying(255),
+    large_image_url character varying(255)
 );
 
 
@@ -619,6 +621,14 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
+-- Name: age_ranges_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY age_ranges
+    ADD CONSTRAINT age_ranges_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -712,14 +722,6 @@ ALTER TABLE ONLY relationships
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
--- Name: when_to_buy_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY age_ranges
-    ADD CONSTRAINT when_to_buy_suggestions_pkey PRIMARY KEY (id);
 
 
 --
@@ -979,3 +981,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130503222311');
 INSERT INTO schema_migrations (version) VALUES ('20130504140158');
 
 INSERT INTO schema_migrations (version) VALUES ('20130514155705');
+
+INSERT INTO schema_migrations (version) VALUES ('20130516222507');

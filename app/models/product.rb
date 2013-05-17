@@ -5,6 +5,8 @@ class Product < ActiveRecord::Base
   attr_accessible :rating
   attr_accessible :url
   attr_accessible :image_url
+  attr_accessible :medium_image_url
+  attr_accessible :large_image_url
   attr_accessible :vendor
   attr_accessible :vendor_id
   attr_accessible :sales_rank
