@@ -16,4 +16,9 @@ describe ProductSearcher do
     ProductSearcher.search('globochem', 1).should have(1).products
   end
 
+  it "excludes products with no medium image url" do
+    product = create(:product, name: 'A GloboChem Product', medium_image_url: nil)
+    ProductSearcher.search('globochem').should be_empty
+  end
+
 end

@@ -56,6 +56,8 @@ FactoryGirl.define do
     url { |p| "http://#{p.vendor}.com/#{p.vendor_id}" }
     rating nil
     image_url { |p| "http://images.#{p.vendor}.com/#{p.vendor_id}" }
+    medium_image_url { |p| "http://images.#{p.vendor}.com/m#{p.vendor_id}" }
+    large_image_url { |p| "http://images.#{p.vendor}.com/l#{p.vendor_id}" }
   end
 
   factory :age_range do
