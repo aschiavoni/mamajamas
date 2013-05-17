@@ -185,8 +185,10 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
   },
 
   cancel: function(event) {
-    this.options.parent.$el.show();
-    this.options.parent.editing = false;
+    if (this.options.parent) {
+      this.options.parent.$el.show();
+      this.options.parent.editing = false;
+    }
     this.$el.remove();
     return true;
   },
