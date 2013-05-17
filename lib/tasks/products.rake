@@ -28,7 +28,7 @@ namespace :mamajamas do
     task remove_stale: :environment do
       stale_count = 0
       expired_count = Product.expired.count
-      Product.expired.each do |product|
+      Product.expired.each_with_index do |product, i|
         percent_complete = ((i + 1) / expired_count * 100.0).ceil
         print "\r#{percent_complete}%  "
         product.destroy
