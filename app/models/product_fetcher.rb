@@ -3,7 +3,8 @@ class ProductFetcher
 
   attr_reader :providers, :fetchers
 
-  def initialize(options = {})
+  def initialize(logger = ProductFetcherLogger, options = {})
+    @logger = logger
     @providers = options[:providers] || [ :amazon ]
     @fetchers = providers.map do |provider|
       ProductFetcherFactory.create(provider)
@@ -11,6 +12,7 @@ class ProductFetcher
   end
 
   def fetch(product_type, options = { pages: 1 })
+    logger.debug "Fetching products for #{product_type.name}..."
     product_type.queries.map do |query|
       query(query.query, options).map do |attrs|
         build_product(product_type, attrs)
@@ -32,7 +34,10 @@ class ProductFetcher
     product.assign_attributes(attrs)
 
     if product.changed?
-      product.save!
+      unless product.save
+        logger.error "Could not save product - vendor: #{product.vendor}, vendor_id: #{product.vendor_id} (#{product.id})"
+        logger.error product.errors.full_messages.to_sentence
+      end
     else
       # refresh updated_at regardless of whether it changed
       product.touch
@@ -52,6 +57,10 @@ class ProductFetcher
   end
 
   private
+
+  def logger
+    @logger
+  end
 
   def sanitize_name(name)
     name = HTMLEntities.new.decode(name)

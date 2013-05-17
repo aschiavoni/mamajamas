@@ -12,6 +12,6 @@ class ProductFetcherFactory
     # create the finder instance
     klass_name = "#{provider.to_s.titleize}ProductFetcher"
     klass = Object.const_get(klass_name)
-    klass.new(config_options)
+    klass.new(ProductFetcherLogger, config_options)
   end
 end

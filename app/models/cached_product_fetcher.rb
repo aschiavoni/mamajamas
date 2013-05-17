@@ -1,7 +1,7 @@
 class CachedProductFetcher < ProductFetcher
-  def initialize(cache_hours, options = {})
+  def initialize(cache_hours, logger = ProductFetcherLogger, options = {})
     @cache_hours = cache_hours || 24
-    super options
+    super logger, options
   end
 
   protected

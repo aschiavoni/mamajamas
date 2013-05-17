@@ -12,7 +12,8 @@ class AmazonProductFetcher
     end
   end
 
-  def initialize(options = {})
+  def initialize(logger = ProductFetcherLogger, options = {})
+    @logger = logger
     Amazon::Ecs.options = {
       associate_tag: options["associate_tag"],
       AWS_access_key_id: options["access_key_id"],
@@ -28,6 +29,7 @@ class AmazonProductFetcher
       # simple throttle so we don't abuse the api
       sleep sleep_time
 
+      logger.debug "Searching for #{query}, page #{page}..."
       res = perform_fetch(page, query)
 
       results << res.items.each_with_index.map do |item, idx|
@@ -62,6 +64,10 @@ class AmazonProductFetcher
 
   private
 
+  def logger
+    @logger
+  end
+
   def sleep_time
     1.1
   end
@@ -83,11 +89,11 @@ class AmazonProductFetcher
     })
   rescue Exception => e
     if (tries -= 1) > 0
-      ProductFetcherLogger.info "Retrying search for #{query}, page #{page}..."
+      logger.info "Retrying search for #{query}, page #{page}..."
       sleep sleep_time
       retry
     else
-      ProductFetcherLogger.error "Error searching for #{query}, page #{page}: #{e}"
+      logger.error "Error searching for #{query}, page #{page}: #{e}"
       FailedSearch.new e
     end
   end

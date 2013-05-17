@@ -1,5 +1,5 @@
 config = ProductFetcherConfiguration.for('amazon')
-fetcher = AmazonProductFetcher.new ({
+fetcher = AmazonProductFetcher.new(ProductFetcherLogger, {
   "associate_tag" => config['associate_tag'],
   "access_key_id" => config['access_key_id'],
   "secret_key" => config['secret_key']
