@@ -8,7 +8,9 @@ class ProductSearcher
   end
 
   def search(query, limit = nil)
-    products = product_class.text_search(query)
+    products =
+      product_class.text_search(query).
+      where("medium_image_url IS NOT NULL")
     products = products.limit(limit) if limit.present?
     products
   end
