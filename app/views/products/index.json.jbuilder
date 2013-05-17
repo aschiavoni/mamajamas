@@ -6,6 +6,8 @@ json.array! @products do |product|
   json.vendor_id product.vendor_id
   json.url product.url
   json.image_url product.image_url
+  json.medium_image_url product.medium_image_url
+  json.large_image_url product.large_image_url
   json.rating product.rating
   json.price product.price
 end
