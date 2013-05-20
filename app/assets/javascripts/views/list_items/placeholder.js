@@ -59,31 +59,6 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
     Mamajamas.Context.List.set("current_position", curPos);
   },
 
-  // addItem: function(event) {
-  //   if (this.isGuestUser()) {
-  //     this.unauthorized();
-  //   } else {
-  //     var newItem = this.model.clone();
-  //     newItem.id = null;
-  //     newItem.set("name", null);
-  //     var addItem = new Mamajamas.Views.ListItemEdit({
-  //       model: newItem,
-  //       parent: this
-  //     });
-
-  //     this.$el.after(addItem.render().$el);
-  //     this.$el.hide();
-  //     addItem.setup();
-  //   }
-
-  //   return false;
-  // },
-
-  // moveToBottom: function() {
-  //   this.$el.appendTo("#list-items");
-  //   this.$el.show();
-  // },
-
   delete: function() {
     if (this.isGuestUser()) {
       this.unauthorized();
