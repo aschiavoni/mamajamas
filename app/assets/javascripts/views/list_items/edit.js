@@ -1,4 +1,4 @@
-Mamajamas.Views.ListItemEdit = Backbone.View.extend({
+Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
 
   tagName: 'tr',
 
@@ -18,7 +18,8 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
     "submit .new-list-item": "save",
     "change input[name='list_item[owned]']": "toggleOwnedCheckbox",
     "change .owned-cb": "toggleOwnedRadioButtons",
-    "click .cancel-item.button": "cancel"
+    "click .cancel-item.button": "cancel",
+    "click .find-item.button": "findItem",
   },
 
   render: function() {
@@ -278,6 +279,22 @@ Mamajamas.Views.ListItemEdit = Backbone.View.extend({
         _view.$itemPicture.attr("src", listItem.image.url);
       }
     });
-  }
+  },
+
+  findItem: function(event) {
+    event.preventDefault();
+
+    if (this.isGuestUser()) {
+      this.unauthorized();
+    } else {
+      var search = new Mamajamas.Views.ListItemSearch({
+        model: this.model
+      });
+      $('#buildlist').after(search.render().$el);
+    }
+
+    return false;
+  },
+
 
 });
