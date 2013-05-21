@@ -12,6 +12,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:age", this.updateAgeRange, this);
     this.model.on("change:priority", this.updatePriority, this);
+    this.model.on('change', this.render, this);
   },
 
   events: {
@@ -157,9 +158,11 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
         silent: true, // don't fire change events for this save
         success: function() {
           _view.$el.remove();
-          _view.options.parent.render();
-          _view.options.parent.editing = false;
-          _view.options.parent.$el.show();
+          if (_view.options.parent) {
+            _view.options.parent.render();
+            _view.options.parent.editing = false;
+            _view.options.parent.$el.show();
+          }
         },
         error: function(model, response) {
           _view.handleError(model, response);
@@ -295,6 +298,5 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
 
     return false;
   },
-
 
 });
