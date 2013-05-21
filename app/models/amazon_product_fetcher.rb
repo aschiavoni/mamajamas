@@ -1,4 +1,5 @@
 class AmazonProductFetcher
+  include ProductFetcherLogging
 
   class FailedSearch
     attr_reader :exception
@@ -29,7 +30,7 @@ class AmazonProductFetcher
       # simple throttle so we don't abuse the api
       sleep sleep_time
 
-      logger.debug "Searching for #{query}, page #{page}..."
+      info "Searching for #{query}, page #{page}..."
       res = perform_fetch(page, query)
 
       results << res.items.each_with_index.map do |item, idx|
@@ -64,10 +65,6 @@ class AmazonProductFetcher
 
   private
 
-  def logger
-    @logger
-  end
-
   def sleep_time
     1.1
   end
@@ -89,11 +86,11 @@ class AmazonProductFetcher
     })
   rescue Exception => e
     if (tries -= 1) > 0
-      logger.info "Retrying search for #{query}, page #{page}..."
+      info "Retrying search for #{query}, page #{page}..."
       sleep sleep_time
       retry
     else
-      logger.error "Error searching for #{query}, page #{page}: #{e}"
+      error "Error searching for #{query}, page #{page}: #{e}"
       FailedSearch.new e
     end
   end

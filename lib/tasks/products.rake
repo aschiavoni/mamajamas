@@ -6,15 +6,17 @@ namespace :mamajamas do
       fetcher = CachedProductFetcher.new cache_hours
 
       count = ProductType.global.count.to_f
-      msg_length = 0
+      # msg_length = 0
       ProductType.global.each_with_index do |product_type, i|
         percent_complete = ((i + 1) / count * 100.0).ceil
         msg = "#{percent_complete}%: Searching for #{product_type.name}..."
-        print "\r#{msg.ljust(msg_length)}"
-        msg_length = msg.length
+        # print "\r#{msg.ljust(msg_length)}"
+        # msg_length = msg.length
+        puts msg
         fetcher.fetch(product_type, pages: 10)
       end
-      print "\r" + "Done".ljust(msg_length)
+      # print "\r" + "Done".ljust(msg_length)
+      puts "Done"
     end
 
     desc "Clear product search cache"

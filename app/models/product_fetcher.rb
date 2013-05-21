@@ -1,5 +1,6 @@
 class ProductFetcher
   include ActionView::Helpers::TextHelper
+  include ProductFetcherLogging
 
   attr_reader :providers, :fetchers
 
@@ -12,7 +13,7 @@ class ProductFetcher
   end
 
   def fetch(product_type, options = { pages: 1 })
-    logger.debug "Fetching products for #{product_type.name}..."
+    info "Fetching products for #{product_type.name}..."
     product_type.queries.map do |query|
       query(query.query, options).map do |attrs|
         build_product(product_type, attrs)
@@ -35,8 +36,8 @@ class ProductFetcher
 
     if product.changed?
       unless product.save
-        logger.error "Could not save product - vendor: #{product.vendor}, vendor_id: #{product.vendor_id} (#{product.id})"
-        logger.error product.errors.full_messages.to_sentence
+        error "Could not save product - vendor: #{product.vendor}, vendor_id: #{product.vendor_id} (#{product.id})"
+        error product.errors.full_messages.to_sentence
       end
     else
       # refresh updated_at regardless of whether it changed
@@ -57,10 +58,6 @@ class ProductFetcher
   end
 
   private
-
-  def logger
-    @logger
-  end
 
   def sanitize_name(name)
     name = HTMLEntities.new.decode(name)

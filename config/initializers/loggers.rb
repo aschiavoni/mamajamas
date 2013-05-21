@@ -1,1 +1,2 @@
-ProductFetcherLogger = ActiveSupport::BufferedLogger.new(Rails.root.join('log/product_fetcher.log'))
+# ProductFetcherLogger = ActiveSupport::BufferedLogger.new(Rails.root.join('log/product_fetcher.log'))
+ProductFetcherLogger = Rails.logger
