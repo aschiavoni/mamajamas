@@ -8,10 +8,11 @@ class ProductSearcher
   end
 
   def search(query, limit = nil)
-    products =
-      product_class.text_search(query).
-      where("medium_image_url IS NOT NULL")
-    products = products.limit(limit) if limit.present?
+    amazon_fetcher = ProductFetcherFactory.create('amazon')
+    products = amazon_fetcher.fetch(query.downcase).map do |item|
+      Product.new item
+    end
+    products = products.take(limit) if limit.present?
     products
   end
 

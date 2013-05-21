@@ -5,7 +5,11 @@ class ProductsController < ApplicationController
   respond_to :json
 
   def index
-    @products = ProductSearcher.search(params[:filter], 4)
+    query = params[:filter]
+    cache_id = "product:searcher:#{query.parameterize}"
+    @products = Rails.cache.fetch(cache_id, expire_in: 24.hours) do
+      ProductSearcher.search(query, 4)
+    end
 
     respond_to do |format|
       format.html { not_found }
