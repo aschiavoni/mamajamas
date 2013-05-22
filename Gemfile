@@ -126,5 +126,5 @@ group :test do
 
   # vcr
   gem 'vcr'
-  gem 'fakeweb'
+  gem 'webmock'
 end
