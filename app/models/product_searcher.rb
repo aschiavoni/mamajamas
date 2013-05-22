@@ -11,8 +11,10 @@ class ProductSearcher
     amazon_fetcher = ProductFetcherFactory.create('amazon')
     products = amazon_fetcher.fetch(query.downcase).map do |item|
       Product.new item
-    end
+    end.reject { |p| p[:medium_image_url].blank? }
+
     products = products.take(limit) if limit.present?
+
     products
   end
 

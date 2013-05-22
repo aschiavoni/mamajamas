@@ -1,0 +1,36 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://ecs.amazonaws.com/onca/xml?AWSAccessKeyId=AKIAIXAEIBVZBZEU56MQ&AssociateTag=mamajamas-20&ItemPage=1&Keywords=sjlksdfjlksdjflkdsjk&Operation=ItemSearch&ResponseGroup=Large&SearchIndex=Books&Timestamp=2013-05-22T17%3A44%3A39Z&Signature=6%2BUsWZF8YRW/qkCG9oQRquBq0fmngNwmeprw06I6CAQ%3D
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      accept: 
+      - "*/*"
+      user-agent: 
+      - Ruby
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      date: 
+      - Wed, 22 May 2013 17:44:39 GMT
+      server: 
+      - Server
+      content-type: 
+      - text/xml;charset=UTF-8
+      vary: 
+      - Accept-Encoding,User-Agent
+      nncoection: 
+      - close
+      transfer-encoding: 
+      - chunked
+    body: 
+      encoding: US-ASCII
+      string: <?xml version="1.0" ?><ItemSearchResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01"><OperationRequest><HTTPHeaders><Header Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>91a24320-75f0-4137-8404-07d6bb9ee901</RequestId><Arguments><Argument Name="Operation" Value="ItemSearch"></Argument><Argument Name="Signature" Value="6+UsWZF8YRW/qkCG9oQRquBq0fmngNwmeprw06I6CAQ="></Argument><Argument Name="ItemPage" Value="1"></Argument><Argument Name="AssociateTag" Value="mamajamas-20"></Argument><Argument Name="Keywords" Value="sjlksdfjlksdjflkdsjk"></Argument><Argument Name="AWSAccessKeyId" Value="AKIAIXAEIBVZBZEU56MQ"></Argument><Argument Name="Timestamp" Value="2013-05-22T17:44:39Z"></Argument><Argument Name="ResponseGroup" Value="Large"></Argument><Argument Name="SearchIndex" Value="Books"></Argument><Argument Name="Service" Value="AWSECommerceService"></Argument></Arguments><RequestProcessingTime>0.0542570000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemSearchRequest><ItemPage>1</ItemPage><Keywords>sjlksdfjlksdjflkdsjk</Keywords><ResponseGroup>Large</ResponseGroup><SearchIndex>Books</SearchIndex></ItemSearchRequest><Errors><Error><Code>AWS.ECommerceService.NoExactMatches</Code><Message>We did not find any matches for your request.</Message></Error></Errors></Request><TotalResults>0</TotalResults><TotalPages>0</TotalPages><MoreSearchResultsUrl>http://www.amazon.com/gp/redirect.html?camp=2025&amp;creative=386001&amp;location=http%3A%2F%2Fwww.amazon.com%2Fgp%2Fsearch%3Fkeywords%3Dsjlksdfjlksdjflkdsjk%26url%3Dsearch-alias%253Dstripbooks&amp;linkCode=xm2&amp;tag=mamajamas-20&amp;SubscriptionId=AKIAIXAEIBVZBZEU56MQ</MoreSearchResultsUrl></Items></ItemSearchResponse>
+    http_version: "1.1"
+  recorded_at: Wed, 22 May 2013 17:44:39 GMT
+recorded_with: VCR 2.5.0
