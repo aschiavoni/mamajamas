@@ -25,16 +25,18 @@ feature "Visitor signs up", js: true do
   end
 
   scenario "with valid facebook account" do
-    mock_omniauth('54321')
-    visit root_path
-    click_link "signup-link"
-    page.has_selector?('#create-account-email', visible: true)
+    VCR.use_cassette('signup/facebook') do
+      mock_omniauth('54321')
+      visit root_path
+      click_link "signup-link"
+      page.has_selector?('#create-account-email', visible: true)
 
-    # simulate login
-    page.execute_script("Mamajamas.Context.LoginSession.saveSession();")
+      # simulate login
+      page.execute_script("Mamajamas.Context.LoginSession.saveSession();")
 
-    # should be on the friends page
-    expect(page).to have_content("Follow Mom Friends")
+      # should be on the friends page
+      expect(page).to have_content("Follow Mom Friends")
+    end
   end
 
 end

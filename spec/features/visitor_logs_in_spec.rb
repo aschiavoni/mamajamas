@@ -39,20 +39,22 @@ feature "Visitor logs in", js: true do
   describe "with facebook" do
 
     scenario "existing user" do
-      # mock omniauth and pre-create a user so we simulate logging
-      # in an already exiting mamajamas user
-      mock_omniauth('99999', @testuser.email)
+      VCR.use_cassette('login/facebook') do
+        # mock omniauth and pre-create a user so we simulate logging
+        # in an already exiting mamajamas user
+        mock_omniauth('99999', @testuser.email)
 
-      visit root_path
-      click_link "login-link"
-      page.has_css?("#login-window", visible: true)
+        visit root_path
+        click_link "login-link"
+        page.has_css?("#login-window", visible: true)
 
-      # simulate login
-      page.execute_script("Mamajamas.Context.LoginSession.saveSession();")
+        # simulate login
+        page.execute_script("Mamajamas.Context.LoginSession.saveSession();")
 
-      # should be on the list page
-      expect(page).to have_content("Your baby gear list")
-      current_path.should == list_path
+        # should be on the list page
+        expect(page).to have_content("Your baby gear list")
+        current_path.should == list_path
+      end
     end
 
   end
