@@ -13,7 +13,7 @@ namespace :mamajamas do
         # print "\r#{msg.ljust(msg_length)}"
         # msg_length = msg.length
         puts msg
-        fetcher.fetch(product_type, pages: 10)
+        fetcher.fetch(product_type, pages: 1)
       end
       # print "\r" + "Done".ljust(msg_length)
       puts "Done"
