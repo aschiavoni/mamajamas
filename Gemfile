@@ -123,4 +123,8 @@ group :test do
   gem 'timecop'
   gem 'rack-contrib'
   gem 'simplecov', require: false
+
+  # vcr
+  gem 'vcr'
+  gem 'fakeweb'
 end
