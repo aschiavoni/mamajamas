@@ -9,13 +9,13 @@ class ProductSearcher
 
   def search(query, limit = nil)
     amazon_fetcher = ProductFetcherFactory.create('amazon')
-    products = amazon_fetcher.fetch(query.downcase).map do |item|
-      Product.new item
-    end.reject { |p| p[:medium_image_url].blank? }
 
-    products = products.take(limit) if limit.present?
+    results = amazon_fetcher.fetch(query.downcase).reject do |p|
+      p[:medium_image_url].blank? || p[:price].blank?
+    end
+    results = results.take(limit) if limit.present?
 
-    products
+    results.map { |r| Product.new r }
   end
 
   private

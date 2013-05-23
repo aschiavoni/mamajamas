@@ -41,4 +41,14 @@ describe ProductSearcher do
     end
   end
 
+  # this requires that all ListPrice elements are removed from the response
+  # i.e. if you re-generate the cassette, you will have to manually edit it
+  it "excludes products with no list price" do
+    VCR.use_cassette('product_searcher/weleda shampoo',
+                     serialize_with: :syck,
+                     match_requests_on: matcher) do
+      ProductSearcher.search('weleda shampoo').should be_empty
+    end
+  end
+
 end
