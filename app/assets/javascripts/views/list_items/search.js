@@ -71,6 +71,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     var _view = this;
     var $resultsContainer = $('#prod-search-results ul:first', this.$el);
     if (searchResults.length > 0) {
+      $('li', $resultsContainer).remove(); // clear existing
       searchResults.each(function(result) {
         var resultView = new Mamajamas.Views.ListItemSearchResult({
           model: result
