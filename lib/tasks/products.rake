@@ -19,9 +19,16 @@ namespace :mamajamas do
       puts "Done"
     end
 
-    desc "Clear product search cache"
-    task clear_cache: :environment do
+    desc "Clear product fetcher cache"
+    task clear_fetcher_cache: :environment do
       REDIS.keys("product:fetcher:*").each do |key|
+        REDIS.del(key)
+      end
+    end
+
+    desc "Clear product searcher cache"
+    task clear_searcher_cache: :environment do
+      REDIS.keys("product:searcher:*").each do |key|
         REDIS.del(key)
       end
     end
