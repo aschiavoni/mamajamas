@@ -81,7 +81,7 @@ class AmazonProductFetcher
     tries ||= 2
     Amazon::Ecs.item_search(query, {
       :response_group => 'Large',
-      # :search_index => 'Baby',
+      :search_index => 'All',
       :item_page => page
     })
   rescue Exception => e
