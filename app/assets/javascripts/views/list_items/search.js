@@ -51,6 +51,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
 
     this.clearResults();
     this.$el.progressIndicator('show');
+    $('.no-search-results', this.$el).hide();
 
     this.searchResults.fetch({
       data: {
@@ -78,7 +79,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
         $resultsContainer.append(resultView.render().$el);
       });
     } else {
-      $resultsContainer.append($("<p/>").html("No results found"));
+      $('.no-search-results', $resultsContainer).show();
     }
   },
 
