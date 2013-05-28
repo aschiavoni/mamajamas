@@ -16,6 +16,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   events: {
     'click .bt-close': 'close',
     'keyup #field-search': 'searchMaybe',
+    'submit #frm-prod-search': 'submit',
   },
 
   render: function() {
@@ -30,6 +31,12 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     if (event)
       event.preventDefault();
     this.$el.remove();
+    return false;
+  },
+
+  submit: function(event) {
+    event.preventDefault();
+    this.searchMaybe();
     return false;
   },
 
