@@ -22,7 +22,9 @@ class AmazonProductFetcher
     }
   end
 
-  def fetch(query, options = { pages: 1 })
+  def fetch(query, options = {})
+    default_options = { pages: 1, search_index: 'All' }
+    options = default_options.merge(options)
     results = []
 
     options[:pages].times do |i|
@@ -31,7 +33,7 @@ class AmazonProductFetcher
       sleep sleep_time
 
       info "Searching for #{query}, page #{page}..."
-      res = perform_fetch(page, query)
+      res = perform_fetch(page, query, options[:search_index])
 
       results << res.items.each_with_index.map do |item, idx|
         # return Amazon::Element instance
@@ -77,11 +79,12 @@ class AmazonProductFetcher
     price
   end
 
-  def perform_fetch(page, query)
+  def perform_fetch(page, query, search_index)
     tries ||= 2
+    search_index = 'All' if search_index.blank?
     Amazon::Ecs.item_search(query, {
       :response_group => 'Large',
-      :search_index => 'All',
+      :search_index => search_index,
       :item_page => page
     })
   rescue Exception => e

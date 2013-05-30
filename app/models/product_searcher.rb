@@ -1,21 +1,26 @@
 class ProductSearcher
-  def self.search(query, limit = 50)
-    new.search(query, limit)
+  def self.search(query, search_index = nil, limit = 10)
+    new.search(query, search_index, limit)
   end
 
   def initialize(product_class = Product)
     @product_class = product_class
   end
 
-  def search(query, limit = nil)
+  def search(query, search_index = nil, limit = 10)
     amazon_fetcher = ProductFetcherFactory.create('amazon')
 
-    results = amazon_fetcher.fetch(query.downcase).reject do |p|
+    fetch_options = {
+      search_index: search_index,
+      pages: (limit.nil? ? 1 : (limit / 10.0).ceil)
+    }
+
+    results = amazon_fetcher.fetch(query.downcase, fetch_options).reject do |p|
       p[:medium_image_url].blank? || p[:price].blank?
     end
     results = results.take(limit) if limit.present?
 
-    results.map { |r| Product.new r }
+    results.map { |r| product_class.new r }
   end
 
   private

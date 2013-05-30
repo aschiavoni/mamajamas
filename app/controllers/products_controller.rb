@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
     if query.present?
       cache_id = "product:searcher:#{query.parameterize}"
       @products = Rails.cache.fetch(cache_id, expire_in: 24.hours) do
-        ProductSearcher.search(query, 4)
+        ProductSearcher.search(query, 'All', 4)
       end
     end
 

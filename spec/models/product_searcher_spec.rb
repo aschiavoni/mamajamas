@@ -27,7 +27,7 @@ describe ProductSearcher do
     VCR.use_cassette('product_searcher/baby',
                      serialize_with: :syck,
                      match_requests_on: matcher) do
-      ProductSearcher.search('baby', 1).should have(1).products
+      ProductSearcher.search('baby', nil, 1).should have(1).products
     end
   end
 
