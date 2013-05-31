@@ -19,6 +19,19 @@ namespace :mamajamas do
       puts "Done"
     end
 
+    desc "Search amazon for product suggestions"
+    task suggestions: :environment do
+      require_dependency 'product'
+      count = ProductType.all.count.to_f
+      ProductType.all.each_with_index do |product_type, i|
+        percent_complete = ((i + 1) / count * 100.0).ceil
+        msg = "#{percent_complete}%: Getting suggestions for #{product_type.name}..."
+        puts msg
+        CachedProductTypeSuggestions.find(product_type)
+      end
+      puts "Done"
+    end
+
     desc "Clear product fetcher cache"
     task clear_fetcher_cache: :environment do
       REDIS.keys("product:fetcher:*").each do |key|
