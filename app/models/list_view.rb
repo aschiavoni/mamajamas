@@ -1,3 +1,7 @@
+# explicity depend on Product to fix undefined class/module errors in dev
+# http://aaronvb.com/articles/37-rails-caching-and-undefined-class-module
+require_dependency 'product'
+
 class ListView
   attr_reader :list
   attr_reader :category
