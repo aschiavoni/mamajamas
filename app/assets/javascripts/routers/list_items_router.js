@@ -21,6 +21,9 @@ Mamajamas.Routers.ListItems = Backbone.Router.extend({
 
     var listEntries = $("#my-list").data("list-entries");
     Mamajamas.Context.ListItems.reset(listEntries);
+
+    var suggestions = $("#my-list").data("product-type-suggestions");
+    Mamajamas.Context.ProductTypeSuggestions = suggestions
   }
 
 });

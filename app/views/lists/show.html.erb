@@ -34,7 +34,7 @@
   </div>
 </div>
 <% end -%>
-<form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>">
+<form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>" data-product-type-suggestions="<%= @view.suggestions.to_json %>">
 </form>
 <script type="text/javascript">
 Mamajamas.Context.List = new Mamajamas.Models.List({

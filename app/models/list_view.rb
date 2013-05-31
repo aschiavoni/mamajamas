@@ -21,6 +21,14 @@ class ListView
     @list_entries ||= list.list_entries(category)
   end
 
+  def suggestions
+    suggestions = list_entries.map do |list_entry|
+      product_type = list_entry.product_type
+      [ product_type.id, CachedProductTypeSuggestions.find(product_type) ]
+    end
+    Hash[suggestions]
+  end
+
   def owner
     list.user
   end

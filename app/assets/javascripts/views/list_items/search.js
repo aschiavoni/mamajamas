@@ -8,9 +8,14 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
 
   searchResults: null,
 
+  suggestions: null,
+
   initialize: function() {
     this.searchResults = new Mamajamas.Collections.SearchResults();
     this.searchResults.on('reset', this.showResults, this);
+
+    this.suggestions = new Mamajamas.Collections.SearchResults();
+    this.suggestions.on('reset', this.showSuggestions, this);
   },
 
   events: {
@@ -20,10 +25,16 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   },
 
   render: function() {
+    var _view = this
+    var productTypeId = this.model.get('product_type_id');
+    var _suggestions = Mamajamas.Context.ProductTypeSuggestions[productTypeId];
+
     this.$el.html(this.template(this.model.toJSON())).show(function() {
+      _view.suggestions.reset(_suggestions);
       $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
       $("#field-search", this.$el).focus();
     });
+
     return this;
   },
 
@@ -70,13 +81,21 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   },
 
   clearResults: function() {
-    $('#prod-search-results ul:first li', this.$el).remove();
+    $('#prod-search-results ul.search-results li', this.$el).remove();
+  },
+
+  showSuggestions: function(searchResults) {
+    var $resultsContainer = $('#prod-search-results ul.suggestions', this.$el);
+    this.addSearchResultsToContainer(searchResults, this, $resultsContainer);
   },
 
   showResults: function(searchResults) {
     this.$el.progressIndicator('hide');
-    var _view = this;
-    var $resultsContainer = $('#prod-search-results ul:first', this.$el);
+    var $resultsContainer = $('#prod-search-results ul.search-results', this.$el);
+    this.addSearchResultsToContainer(searchResults, this, $resultsContainer);
+  },
+
+  addSearchResultsToContainer: function(searchResults, _view, $resultsContainer) {
     if (searchResults.length > 0) {
       $('li', $resultsContainer).remove(); // clear existing
       searchResults.each(function(result) {
