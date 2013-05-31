@@ -33,6 +33,13 @@ namespace :mamajamas do
       end
     end
 
+    desc "Clear product suggestions cache"
+    task clear_suggestions_cache: :environment do
+      REDIS.keys("product:suggestions:*").each do |key|
+        REDIS.del(key)
+      end
+    end
+
     desc "Clear stale products"
     task remove_stale: :environment do
       stale_count = 0

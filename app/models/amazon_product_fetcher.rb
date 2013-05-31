@@ -22,6 +22,16 @@ class AmazonProductFetcher
     }
   end
 
+  def cached_fetch(query, options = {})
+    cache_hours = options[:cache_hours] || 23
+    cache_id = "product:fetcher:#{query.parameterize}:#{options_sig(options)}"
+    json = Rails.cache.fetch(cache_id, expire_in: cache_hours) do
+      fetch(query, options).to_json
+    end
+
+    JSON.parse(json).map(&:symbolize_keys)
+  end
+
   def fetch(query, options = {})
     default_options = { pages: 1, search_index: 'All' }
     options = default_options.merge(options)
@@ -96,5 +106,9 @@ class AmazonProductFetcher
       error "Error searching for #{query}, page #{page}: #{e}"
       FailedSearch.new e
     end
+  end
+
+  def options_sig(options)
+    Digest::MD5.hexdigest(options.inspect)
   end
 end

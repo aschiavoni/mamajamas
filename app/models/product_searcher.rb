@@ -8,14 +8,14 @@ class ProductSearcher
   end
 
   def search(query, search_index = nil, limit = 10)
-    amazon_fetcher = ProductFetcherFactory.create('amazon')
+    fetcher = ProductFetcherFactory.create('amazon')
 
     fetch_options = {
       search_index: search_index,
       pages: (limit.nil? ? 1 : (limit / 10.0).ceil)
     }
 
-    results = amazon_fetcher.fetch(query.downcase, fetch_options).reject do |p|
+    results = fetcher.cached_fetch(query.downcase, fetch_options).reject do |p|
       p[:medium_image_url].blank? || p[:price].blank?
     end
     results = results.take(limit) if limit.present?
