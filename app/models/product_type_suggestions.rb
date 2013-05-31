@@ -8,7 +8,7 @@ class ProductTypeSuggestions
   end
 
   def find(product_type)
-    searcher.search(product_type.name, 'All', 4)
+    searcher.search(product_type.name, 'All', 8)
   end
 
   private
