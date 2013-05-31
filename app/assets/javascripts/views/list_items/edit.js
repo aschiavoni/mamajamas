@@ -170,7 +170,19 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
       });
     }
 
+    this.clearPlaceholder(_view, _view.model.get('product_type_id'));
     return false;
+  },
+
+  clearPlaceholder: function(_view, productTypeId) {
+    var query = {
+      product_type_id: parseInt(productTypeId),
+      placeholder: true
+    };
+    var placeholders = Mamajamas.Context.ListItems.where(query);
+    _.each(placeholders, function(placeholder) {
+      placeholder.destroy();
+    })
   },
 
   shouldShareOnFacebook: function() {

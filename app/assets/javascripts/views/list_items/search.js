@@ -121,7 +121,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     var attributes = {
       name: searchResult.get('name'),
       link: searchResult.get('url'),
-      product_type_id: this.model.get('id'),
+      product_type_id: this.model.get('product_type_id'),
       product_type: this.model.get('product_type_name'),
       product_type_name: this.model.get('product_type_name'),
       category_id: this.model.get('category_id'),
