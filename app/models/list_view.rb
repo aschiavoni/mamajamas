@@ -28,8 +28,10 @@ class ListView
   def suggestions
     suggestions = list_entries.map do |list_entry|
       product_type = list_entry.product_type
-      [ product_type.id, CachedProductTypeSuggestions.find(product_type) ]
-    end
+      if product_type.present?
+        [ product_type.id, CachedProductTypeSuggestions.find(product_type) ]
+      end
+    end.reject { |suggestion| suggestion.blank? }
     Hash[suggestions]
   end
 
