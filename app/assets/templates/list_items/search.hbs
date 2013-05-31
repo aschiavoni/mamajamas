@@ -2,10 +2,9 @@
 <div class="vertical-offset"></div>
 <!-- modal window box -->
 <div class="modal-box" id="search-modal">
-  <!-- modal window close button -->
-  <a href="#" class="bt-close ss-icon">Close</a>
   <!-- modal window header -->
   <h2>Find <strong>{{product_type_name}}</strong></h2>
+  <a href="#" id="closewindow" class="ss-icon"><span>Close</span></a>
   <!-- modal window content -->
   <div class="content">
     <div id="prod-search">
@@ -20,24 +19,16 @@
       </form>
     </div>
     <div id="prod-search-results">
-      <!-- carousel -->
-      <div class="carousel">
-        <ul class="clearfix search-results">
-          <div class="progress-container">
-            <img src="/assets/progress-bar.gif" class="progress" style="display: none;" />
-          </div>
-          <p class="no-search-results" style="display: none;">No results found</p>
-        </ul>
-        <a class="prev disabled" href="#">prev</a> <a class="next" href="#">next</a> </div>
-      <!-- end carousel -->
+      <ul class="prod-search-list clearfix search-results">
+        <div class="progress-container">
+          <img src="/assets/progress-bar.gif" class="progress" style="display: none;" />
+        </div>
+        <p class="no-search-results" style="display: none;">No results found</p>
+      </ul>
       <h3>Suggested {{product_type_name}}</h3>
-      <!-- carousel -->
-      <div class="carousel">
-        <ul class="clearfix suggestions">
-          <p class="no-search-results" style="display: none;">No suggestions found</p>
-        </ul>
-        <a class="prev disabled" href="#">prev</a> <a class="next" href="#">next</a> </div>
-      <!-- end carousel -->
+      <ul class="prod-search-list clearfix suggestions">
+        <p class="no-search-results" style="display: none;">No suggestions found</p>
+      </ul>
     </div>
   </div>
   <!-- end modal window content -->

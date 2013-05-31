@@ -19,7 +19,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   },
 
   events: {
-    'click .bt-close': 'close',
+    'click #closewindow': 'close',
     'keyup #field-search': 'searchMaybe',
     'submit #frm-prod-search': 'submit',
   },

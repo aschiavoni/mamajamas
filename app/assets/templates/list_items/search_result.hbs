@@ -1,34 +1,18 @@
 <a class="product-image" href="#"><img src="{{medium_image_url}}" alt="" /></a>
 <div class="prod-detail-pop">
   <h4>{{name}}</h4>
-  <p class="detail-price">{{price}}</p>
-  <div class="detail-rating-mj rating">
-    <div class="eggs">
-      <div class="egg egg-full"></div>
-      <div class="egg egg-full"></div>
-      <div class="egg egg-full"></div>
-      <div class="egg egg-full"></div>
-      <div class="egg"></div>
-    </div>
-    Mamajamas rating
-  </div>
-  <div class="detail-rating-am rating">
-    <div class="stars">
-      <div class="star star-full"></div>
-      <div class="star star-full"></div>
-      <div class="star star-full"></div>
-      <div class="star"></div>
-      <div class="star"></div>
-    </div>
-    Amazon rating
-  </div>
+  <p class="detail-price">
+    {{price}} <em>on Amazon.com</em>
+  </p>
   <div class="prod-links">
     <ul>
       <li>
         <a href="#" class="add-to-list button bt-color"><span class="ss-plus"></span>Add to List</a>
       </li>
       <li>
-      <a href="{{url}}" class="button" target="_blank"><span class="ss-cart"></span>Buy</a>
+        <a href="{{url}}" class="button bt-buy" target="_blank">
+          Buy on <em>Amazon</em>
+        </a>
       </li>
     </ul>
   </div>
