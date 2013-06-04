@@ -25,6 +25,8 @@ Mamajamas::Application.routes.draw do
   put "/profile" => "users#update"
   put "/account/complete" => "users#complete"
   post "/account/complete" => "users#complete"
+  get '/terms-of-service' => 'pages#terms', :as => :terms
+  get '/robots.txt' => 'robots#show'
 
   resources :friends, only: [ :index ] do
     collection do
@@ -64,6 +66,5 @@ Mamajamas::Application.routes.draw do
   get ":slug" => "public_lists#show", as: :public_list
   get ":slug/:category" => "public_lists#show", as: :public_list_category
 
-  get '/robots.txt' => 'robots#show'
   root :to => 'home#index'
 end
