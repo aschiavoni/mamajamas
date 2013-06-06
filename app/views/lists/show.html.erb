@@ -19,8 +19,11 @@
 <%= content_for :nav do %>
 <nav id="categories">
   <ul>
+    <li class="<%= "cat-selected" if @view.default_category? %>">
+      <%= link_to "All", list_path %>
+    </li>
     <% @view.categories.each do |category| -%>
-      <li class="<%= "cat-selected" if category.id == @view.category.id %>">
+      <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
         <%= link_to category.name, list_category_path(category.slug) %>
       </li>
     <% end -%>
@@ -39,8 +42,10 @@
 <script type="text/javascript">
 Mamajamas.Context.List = new Mamajamas.Models.List({
   title: '<%= @view.list.title %>',
+  <% if @view.category.present? -%>
   category_id: '<%= @view.category.id %>',
   category: '<%= @view.category.slug %>',
+  <% end -%>
   current_position: 0
 })
 </script>

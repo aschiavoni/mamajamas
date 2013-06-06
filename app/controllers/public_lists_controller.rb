@@ -46,10 +46,12 @@ class PublicListsController < ApplicationController
   end
 
   def redirect_needed?(list_view)
-    ![
-      public_list_path(list_view.owner.slug),
-      public_list_category_path(list_view.owner.slug, list_view.category.slug)
-    ].include?(request.path)
+    paths = [ public_list_path(list_view.owner.slug) ]
+    if list_view.category.present?
+      paths << public_list_category_path(list_view.owner.slug,
+                                         list_view.category.slug)
+    end
+    !paths.include?(request.path)
   end
 
   def redirect_destination(list_view)

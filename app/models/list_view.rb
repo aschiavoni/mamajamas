@@ -13,7 +13,7 @@ class ListView
       @category = categories.by_slug(category_slug).first
     else
       @default_category = true
-      @category = categories.first
+      @category = nil
     end
   end
 
