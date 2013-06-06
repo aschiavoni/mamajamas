@@ -89,6 +89,7 @@ gem 'memoist'
 # infrastructure
 gem 'thin'
 gem 'heroku'
+gem 'rack-mini-profiler'
 
 group :development do
   gem 'guard'
