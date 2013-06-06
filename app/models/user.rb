@@ -108,7 +108,7 @@ class User < ActiveRecord::Base
 
   # prompt for confirmation but don't require it
   def confirmation_required?
-    false
+    !guest?
   end
 
   def add_facebook_uid!(uid)

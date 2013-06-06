@@ -26,6 +26,12 @@ describe RegistrationsController do
 
     end
 
+    it "should send confirmation email for new user" do
+      lambda {
+        post :create, user: registration
+      }.should change(ActionMailer::Base.deliveries, :count).by(1)
+    end
+
     it "should create guest user" do
       user_stub = stub(:persisted? => true)
       User.should_receive(:new_guest).and_return(user_stub)
@@ -33,6 +39,12 @@ describe RegistrationsController do
         with(:user, user_stub)
 
       post :create
+    end
+
+    it "should not send confirmation email for new guest user" do
+      lambda {
+        post :create
+      }.should_not change(ActionMailer::Base.deliveries, :count)
     end
 
     it "redirects to quiz when guest user is created" do

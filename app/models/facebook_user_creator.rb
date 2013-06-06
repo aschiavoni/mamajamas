@@ -14,6 +14,7 @@ class FacebookUserCreator
   def update_or_create
     user = FacebookUserFinder.find(auth)
     user = user.blank? ? create_user : update_user(user)
+    user.send_confirmation_instructions if user.confirmation_sent_at.blank?
     user
   end
 
