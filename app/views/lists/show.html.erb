@@ -33,11 +33,13 @@
 <% end -%>
 <% end -%>
 <%= content_for :tertiary do %>
-<div id="module-follow">
-  <div class="content">
-    <%= render partial: "friends/friends_sidebar", locals: { user: current_user } %>
-  </div>
-</div>
+  <% cache [ current_user, 'friends', 'sidebar' ] do -%>
+    <div id="module-follow">
+      <div class="content">
+        <%= render partial: "friends/friends_sidebar", locals: { user: current_user } %>
+      </div>
+    </div>
+  <% end -%>
 <% end -%>
 <% cache [ @view.list, @view.category_slug, 'list' ] do -%>
   <form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>">
