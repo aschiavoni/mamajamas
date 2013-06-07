@@ -11,8 +11,10 @@ describe ProductTypeSuggestions do
     VCR.use_cassette('product_searcher/shampoo',
                      serialize_with: :syck,
                      match_requests_on: matcher) do
-      product_type = build(:product_type, name: 'Shampoo')
-      ProductTypeSuggestions.find(product_type).should have_at_least(1).product
+      product_type = create(:product_type, name: 'Shampoo')
+      suggestions = ProductTypeSuggestions.find(product_type)
+      suggestions[:id].should == product_type.id
+      suggestions[:suggestions].size.should be > 1
     end
   end
 

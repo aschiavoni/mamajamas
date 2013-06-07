@@ -8,7 +8,10 @@ class ProductTypeSuggestions
   end
 
   def find(product_type)
-    searcher.search(product_type.name, 'All', 8)
+    suggestions = searcher.search(product_type.name, 'All', 8).map do |product|
+      product.attributes
+    end
+    { id: product_type.id, suggestions: suggestions }
   end
 
   private

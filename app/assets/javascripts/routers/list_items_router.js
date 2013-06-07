@@ -3,6 +3,9 @@ Mamajamas.Routers.ListItems = Backbone.Router.extend({
   initialize: function() {
     // use a global to store the list items collection
     Mamajamas.Context.ListItems = new Mamajamas.Collections.ListItems();
+
+    // use a global to store the suggestions collection
+    Mamajamas.Context.ProductTypeSuggestions = new Mamajamas.Collections.ProductTypeSuggestions();
   },
 
   routes: {
@@ -19,11 +22,12 @@ Mamajamas.Routers.ListItems = Backbone.Router.extend({
     });
     $("#my-list").html(listView.render().$el);
 
+    // get list entries from json in dom
     var listEntries = $("#my-list").data("list-entries");
     Mamajamas.Context.ListItems.reset(listEntries);
 
-    var suggestions = $("#my-list").data("product-type-suggestions");
-    Mamajamas.Context.ProductTypeSuggestions = suggestions
+    // get suggestions
+    Mamajamas.Context.ProductTypeSuggestions.fetch();
   }
 
 });

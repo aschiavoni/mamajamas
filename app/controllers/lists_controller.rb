@@ -30,6 +30,17 @@ class ListsController < ApplicationController
     end
   end
 
+  def suggestions
+    suggestions = ProductType.scoped.map do |product_type|
+      CachedProductTypeSuggestions.find(product_type)
+    end
+
+    respond_to do |format|
+      format.html { not_found }
+      format.json { render json: suggestions }
+    end
+  end
+
   private
 
   def init_view

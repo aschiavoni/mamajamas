@@ -27,7 +27,10 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   render: function() {
     var _view = this
     var productTypeId = this.model.get('product_type_id');
-    var _suggestions = Mamajamas.Context.ProductTypeSuggestions[productTypeId];
+    var ptSuggestion  = Mamajamas.Context.ProductTypeSuggestions.get(productTypeId);
+    var _suggestions = [];
+    if (ptSuggestion != null)
+      _suggestions = ptSuggestion.get('suggestions');
 
     this.$el.html(this.template(this.model.toJSON())).show(function() {
       _view.suggestions.reset(_suggestions);
