@@ -17,20 +17,20 @@
 </ul>
 <% end -%>
 <%= content_for :nav do %>
-<% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
-  <nav id="categories">
-    <ul>
-      <li class="<%= "cat-selected" if @view.default_category? %>">
-      <%= link_to "All", list_path %>
-      </li>
-      <% @view.categories.each do |category| -%>
-        <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
-        <%= link_to category.name, list_category_path(category.slug) %>
+  <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
+    <nav id="categories">
+      <ul>
+        <li class="<%= "cat-selected" if @view.default_category? %>">
+        <%= link_to "All", list_path %>
         </li>
-    <% end -%>
-    </ul>
-  </nav>
-<% end -%>
+        <% @view.categories.each do |category| -%>
+          <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
+          <%= link_to category.name, list_category_path(category.slug) %>
+          </li>
+      <% end -%>
+      </ul>
+    </nav>
+  <% end -%>
 <% end -%>
 <%= content_for :tertiary do %>
   <% cache [ current_user, 'friends', 'sidebar' ] do -%>

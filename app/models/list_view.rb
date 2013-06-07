@@ -24,7 +24,7 @@ class ListView
   end
 
   def default_category?
-    @default_category == !@category_slug.present?
+    @category_slug.blank?
   end
 
   private
