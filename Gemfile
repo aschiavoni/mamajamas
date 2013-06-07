@@ -90,6 +90,8 @@ gem 'memoist'
 gem 'thin'
 gem 'heroku'
 gem 'rack-mini-profiler'
+gem 'memcachier'
+gem 'dalli'
 
 group :development do
   gem 'guard'

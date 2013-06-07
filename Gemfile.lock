@@ -74,6 +74,7 @@ GEM
     crack (0.3.2)
     currencies (0.4.0)
     daemons (1.1.9)
+    dalli (2.6.4)
     database_cleaner (0.9.1)
     debug_inspector (0.0.2)
     debugger (1.1.4)
@@ -185,6 +186,7 @@ GEM
       skinny (~> 0.2.3)
       sqlite3 (~> 1.3)
       thin (~> 1.5.0)
+    memcachier (0.0.2)
     memoist (0.2.0)
     method_source (0.8.1)
     mime-types (1.19)
@@ -379,6 +381,7 @@ DEPENDENCIES
   capybara
   carrierwave
   countries
+  dalli
   database_cleaner
   devise
   factory_girl_rails
@@ -397,6 +400,7 @@ DEPENDENCIES
   jquery-ui-rails
   koala
   mailcatcher
+  memcachier
   memoist
   mini_magick
   oauth2
