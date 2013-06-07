@@ -12,11 +12,14 @@ class ListsController < ApplicationController
       redirect_to(quiz_path) and return
     end
 
-    @view = ListView.new(@list, params[:category])
-    @list_entries_json = render_to_string(
-      template: 'list_items/index',
-      formats: :json,
-      locals: { list_entries: @view.list_entries })
+    cat = params[:category]
+    @view = ListView.new(@list, cat)
+    @list_entries_json = Rails.cache.fetch [@list, cat, 'entries'] do
+      render_to_string(
+        template: 'list_items/index',
+        formats: :json,
+        locals: { list_entries: @view.list_entries })
+    end
 
     respond_to do |format|
       format.html

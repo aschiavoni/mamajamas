@@ -2,7 +2,7 @@ class ListItem < ActiveRecord::Base
   include Categorizable
   include AgeRangeAccessors
 
-  belongs_to :list
+  belongs_to :list, touch: true
   belongs_to :product_type
   belongs_to :age_range
   has_one :list_item_image

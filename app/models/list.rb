@@ -21,6 +21,7 @@ class List < ActiveRecord::Base
   def list_entries(category = nil)
     list_items.
       by_category(category).
+      includes(:product_type).
       order("placeholder ASC, product_type_name ASC")
   end
 
