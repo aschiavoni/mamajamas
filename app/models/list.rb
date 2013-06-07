@@ -22,6 +22,8 @@ class List < ActiveRecord::Base
     list_items.
       by_category(category).
       includes(:product_type).
+      includes(:category).
+      includes(:age_range).
       order("placeholder ASC, product_type_name ASC")
   end
 

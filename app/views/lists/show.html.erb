@@ -17,18 +17,20 @@
 </ul>
 <% end -%>
 <%= content_for :nav do %>
-<nav id="categories">
-  <ul>
-    <li class="<%= "cat-selected" if @view.default_category? %>">
+<% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
+  <nav id="categories">
+    <ul>
+      <li class="<%= "cat-selected" if @view.default_category? %>">
       <%= link_to "All", list_path %>
-    </li>
-    <% @view.categories.each do |category| -%>
-      <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
-        <%= link_to category.name, list_category_path(category.slug) %>
       </li>
+      <% @view.categories.each do |category| -%>
+        <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
+        <%= link_to category.name, list_category_path(category.slug) %>
+        </li>
     <% end -%>
-  </ul>
-</nav>
+    </ul>
+  </nav>
+<% end -%>
 <% end -%>
 <%= content_for :tertiary do %>
 <div id="module-follow">
@@ -37,15 +39,17 @@
   </div>
 </div>
 <% end -%>
-<form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>">
-</form>
-<script type="text/javascript">
-Mamajamas.Context.List = new Mamajamas.Models.List({
-  title: '<%= @view.list.title %>',
-  <% if @view.category.present? -%>
-  category_id: '<%= @view.category.id %>',
-  category: '<%= @view.category.slug %>',
-  <% end -%>
-  current_position: 0
-})
-</script>
+<% cache [ @view.list, @view.category_slug, 'list' ] do -%>
+  <form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>">
+  </form>
+  <script type="text/javascript">
+  Mamajamas.Context.List = new Mamajamas.Models.List({
+    title: '<%= @view.list.title %>',
+    <% if @view.category.present? -%>
+    category_id: '<%= @view.category.id %>',
+    category: '<%= @view.category.slug %>',
+    <% end -%>
+    current_position: 0
+  })
+  </script>
+<% end -%>

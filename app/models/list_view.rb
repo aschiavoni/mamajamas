@@ -1,16 +1,10 @@
 class ListView
   attr_reader :list
-  attr_reader :category
+  attr_reader :category_slug
 
   def initialize(list, category_slug = nil)
     @list = list
-    if category_slug.present?
-      @default_category = false
-      @category = categories.by_slug(category_slug).first
-    else
-      @default_category = true
-      @category = nil
-    end
+    @category_slug = category_slug
   end
 
   def categories
@@ -21,11 +15,24 @@ class ListView
     @list_entries ||= list.list_entries(category)
   end
 
+  def category
+    @category ||= find_category
+  end
+
   def owner
     list.user
   end
 
   def default_category?
-    @default_category == true
+    @default_category == !@category_slug.present?
+  end
+
+  private
+
+  def find_category
+    if @category_slug.present?
+      @category = categories.by_slug(@category_slug).first
+    end
+    @category
   end
 end
