@@ -1,7 +1,9 @@
 class ListsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :init_view, only: [ :show ]
-  before_filter :find_list
+  before_filter :find_list, only: [ :show, :product_types ]
+
+  caches_action :suggestions
 
   respond_to :html, :json
 
@@ -31,7 +33,11 @@ class ListsController < ApplicationController
   end
 
   def suggestions
-    suggestions = ProductType.scoped.map do |product_type|
+    category_slug = params[:category]
+    cat = Category.find_by_slug(category_slug) unless category_slug.blank?
+    product_types = cat.present? ? cat.product_types : ProductType.scoped
+
+    suggestions = product_types.map do |product_type|
       CachedProductTypeSuggestions.find(product_type)
     end
 
