@@ -5,12 +5,12 @@ describe ProductTypeRow do
 
   let(:category) { create(:category) }
 
-  def row_csv(name = "Bodysuit")
-    CSV.parse("#{name},1,Pre-birth,bodysuit.png,bodysuit@2x.png,bodysuit; body suit;body suits,,x,x,,,").flatten
+  def row_csv(name = "Bodysuit", plural_name = "Bodysuits")
+    CSV.parse("#{name},#{plural_name},1,Pre-birth,bodysuit.png,bodysuit@2x.png,bodysuit; body suit;body suits,,x,x,,,").flatten
   end
 
-  def row_csv_no_queries(name = "Bodysuit")
-    CSV.parse("#{name},1,Pre-birth,bodysuit.png,bodysuit@2x.png,,,x,x,,,").flatten
+  def row_csv_no_queries(name = "Bodysuit", plural_name = "Bodysuits")
+    CSV.parse("#{name},#{plural_name},1,Pre-birth,bodysuit.png,bodysuit@2x.png,,,x,x,,,").flatten
   end
 
   def row_csv_no_name

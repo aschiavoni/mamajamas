@@ -75,7 +75,7 @@ module Features
 
       # email login
       login = with == :username ? username : email
-      fill_in "Username or email", with: login
+      fill_in "Email address", with: login
       fill_in "Password", with: password
 
       click_button "Log in"
