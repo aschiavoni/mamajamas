@@ -25,6 +25,14 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       }
       return true;
     });
+
+    // get suggestions
+    var category = Mamajamas.Context.List.get('category');
+    Mamajamas.Context.ProductTypeSuggestions.fetch({
+      data: {
+        category: category
+      }
+    });
   },
 
   events: {
