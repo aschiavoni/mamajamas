@@ -217,7 +217,7 @@ CREATE TABLE list_items (
     link character varying(255),
     rating integer,
     priority integer,
-    notes character varying(255),
+    notes text,
     image_url character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -983,3 +983,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130504140158');
 INSERT INTO schema_migrations (version) VALUES ('20130514155705');
 
 INSERT INTO schema_migrations (version) VALUES ('20130516222507');
+
+INSERT INTO schema_migrations (version) VALUES ('20130611000152');
