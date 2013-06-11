@@ -3,7 +3,7 @@ class ListsController < ApplicationController
   before_filter :init_view, only: [ :show ]
   before_filter :find_list, only: [ :show, :product_types ]
 
-  caches_action :suggestions
+  caches_action :suggestions, expires_in: 1.hour
 
   respond_to :html, :json
 
