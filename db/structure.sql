@@ -328,7 +328,8 @@ CREATE TABLE product_types (
     slug character varying(255),
     image_name character varying(255),
     age_range_id integer,
-    user_id integer
+    user_id integer,
+    plural_name character varying(255)
 );
 
 
@@ -985,3 +986,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130514155705');
 INSERT INTO schema_migrations (version) VALUES ('20130516222507');
 
 INSERT INTO schema_migrations (version) VALUES ('20130611000152');
+
+INSERT INTO schema_migrations (version) VALUES ('20130611162641');

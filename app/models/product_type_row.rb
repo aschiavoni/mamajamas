@@ -14,24 +14,28 @@ class ProductTypeRow
     row[0]
   end
 
+  def plural_name
+    row[1].present? ? row[1] : name
+  end
+
   def age_range
     @age_range ||= AgeRange.find_by_normalized_name!(age_range_name)
   end
 
   def age_range_name
-    row[2]
+    row[3]
   end
 
   def priority
-    row[1].present? ? row[1].to_i : nil
+    row[2].present? ? row[2].to_i : nil
   end
 
   def image_name
-    row[4]
+    row[5]
   end
 
   def queries
-    queries = row[5].present? ? row[5].split(/;\s*/) : []
+    queries = row[6].present? ? row[6].split(/;\s*/) : []
     queries = [ name ] if queries.empty?
     queries
   end
@@ -69,6 +73,7 @@ class ProductTypeRow
     {
       category_id: category.id,
       name: name,
+      plural_name: plural_name,
       age_range_id: age_range.id,
       priority: priority,
       image_name: image_name

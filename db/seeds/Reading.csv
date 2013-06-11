@@ -1,17 +1,17 @@
-Reading (default pre-birth),Default Priority,Default When to Buy,Image Name,High Res Image,Queries,Contingencies,Image Pulled,Icon Created
-Board Book,1,Pre-birth,board_book.png,board_book@2x.png,,,x,
-Kid Book,1,2y,kid_book.png,kid_book@2x.png,,,x,
-Bath Book,2,7-12 mo,bath_book.png,bath_book@2x.png,,,x,same as in bathing
-Parenting Book,2,Pre-birth,parenting_book.png,parenting_book@2x.png,,,x,
-Pregnancy Book,2,Pre-birth,pregnancy_book.png,pregnancy_book@2x.png,,,x,same as in expecting
-Soft Book,3,4-6 mo,soft_book.png,soft_book@2x.png,,,x,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-6,,,,,,,,
+Reading (default pre-birth),Plural,Default Priority,Default When to Buy,Image Name,High Res Image,Queries,Contingencies,Image Pulled,Icon Created
+Board Book,Board Books,1,Pre-birth,board_book.png,board_book@2x.png,,,x,
+Kid Book,Kid Books,1,2y,kid_book.png,kid_book@2x.png,,,x,
+Bath Book,Bath Books,2,7-12 mo,bath_book.png,bath_book@2x.png,,,x,same as in bathing
+Parenting Book,Parenting Books,2,Pre-birth,parenting_book.png,parenting_book@2x.png,,,x,
+Pregnancy Book,Pregnancy Books,2,Pre-birth,pregnancy_book.png,pregnancy_book@2x.png,,,x,same as in expecting
+Soft Book,Soft Books,3,4-6 mo,soft_book.png,soft_book@2x.png,,,x,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+6,,,,,,,,,
