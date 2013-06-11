@@ -3,7 +3,7 @@
 <!-- modal window box -->
 <div class="modal-box" id="search-modal">
   <!-- modal window header -->
-  <h2>Find <strong>{{product_type_name}}</strong></h2>
+  <h2>Find <strong>{{product_type_plural_name}}</strong></h2>
   <a href="#" id="closewindow" class="ss-icon"><span>Close</span></a>
   <!-- modal window content -->
   <div class="content">
@@ -11,7 +11,7 @@
       <form method="POST" class="label-infield" id="frm-prod-search">
         <fieldset>
           <p>
-          <label for="field-search">Search for {{product_type_name}}</label>
+          <label for="field-search">Search for {{product_type_plural_name}}</label>
           <br />
           <input name="field-search" type="text" id="field-search" value="">
           </p>
@@ -25,7 +25,7 @@
         </div>
         <p class="no-search-results" style="display: none;">No results found</p>
       </ul>
-      <h3>Suggested {{product_type_name}}</h3>
+      <h3>Suggested {{product_type_plural_name}}</h3>
       <ul class="prod-search-list clearfix suggestions">
         <p class="no-search-results" style="display: none;">No suggestions found</p>
       </ul>

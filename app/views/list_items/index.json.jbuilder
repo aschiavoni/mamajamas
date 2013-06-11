@@ -6,6 +6,7 @@ json.array!(list_entries) do |list_entry|
   json.product_type_name list_entry.product_type_name
   if list_entry.product_type.present?
     json.product_type_id list_entry.product_type.id
+    json.product_type_plural_name list_entry.product_type.plural_name
   end
   json.owned list_entry.owned
   json.link list_entry.link
