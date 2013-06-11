@@ -92,6 +92,7 @@ gem 'heroku'
 gem 'rack-mini-profiler'
 gem 'memcachier'
 gem 'dalli'
+gem 'dalli-delete-matched'
 
 group :development do
   gem 'guard'
