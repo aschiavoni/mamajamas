@@ -108,6 +108,10 @@ of the rails server before they will take effect.
 
 ##### PhantomJS
 
+##### memcached
+
+    brew install memcached
+
 ###### Mac
 
     brew install phantomjs
