@@ -250,8 +250,9 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
 
   errorFieldMap: function() {
     return {
-      name: "#list_item_name",
-      link: "#list_item_link"
+      name: '#list_item_name',
+      link: '#list_item_link',
+      notes: '#list_item_notes',
     };
   },
 

@@ -13,6 +13,7 @@ class ListItem < ActiveRecord::Base
   attr_accessible :placeholder, :list_item_image_id
 
   validates :name, :link, presence: true, unless: :placeholder?
+  validates :notes, length: { maximum: 255 }
 
   scope :placeholders, where(placeholder: true)
   scope :user_items, where(placeholder: false)

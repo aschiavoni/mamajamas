@@ -20,7 +20,7 @@ class ListItemsController < ApplicationController
 
   def update
     @list_entry = @list.list_items.find(params[:id])
-    @list_entry.update_attributes!(clean_params(params[:list_item]))
+    @list_entry.update_attributes(clean_params(params[:list_item]))
     respond_with @list_entry
   end
 
