@@ -13,14 +13,14 @@
     <p class="divider"><strong>or</strong></p>
     <p class="instruction<%= " error" unless resource.errors.empty? %>">
       <% if resource.errors.empty? -%>
-        Please enter your Mamajamas username or email address and password below:
+        Please enter your Mamajamas email address and password below:
       <% else -%>
         <%= resource.errors.full_messages.to_sentence %>
       <% end -%>
     </p>
     <fieldset>
       <p>
-      <%= f.label :login, "Username or email" %>
+      <%= f.label :login, "Email address" %>
       <br />
       <%= f.text_field :login %>
       </p>
@@ -31,7 +31,7 @@
       </p>
     </fieldset>
     <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-      <p class="helper"><%= link_to "Forgot your username or password?", new_password_path(resource_name) %></p>
+      <p class="helper"><%= link_to "Forgot your password?", new_password_path(resource_name) %></p>
     <% end -%>
   </div>
   <!-- end modal window content --> 

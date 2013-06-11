@@ -1,12 +1,12 @@
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "label-infield" }) do |f| %>
   <h3>Forgot your password?</h3>
-  <p class="instruction">Please enter your username or your email address for password reset instructions.</p>
+  <p class="instruction">Please enter your email address for password reset instructions.</p>
   <dl class="clearfix">
     <fieldset>
       <dt>Login<strong class="required">*</strong></dt>
       <dd>
         <p>
-          <%= f.label :login, "Username or email" %>
+          <%= f.label :login, "Email address" %>
           <br/>
           <%= f.text_field :login %>
           <%= field_error resource, :login %>
