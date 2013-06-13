@@ -45,17 +45,11 @@
   <nav id="categories">
     <ul>
       <li class="<%= "cat-selected" if @view.default_category? %>">
-        <%= link_to "All", list_path %>
+        <%= link_to "All", @view.public_all_items_path %>
       </li>
       <% @view.categories.each do |category| -%>
         <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
-          <% if @view.preview? -%>
-            <%= link_to category.name,
-              public_list_preview_category_list_path(category.slug) %>
-          <% else -%>
-            <%= link_to category.name,
-              public_list_category_path(current_user.slug, category.slug) %>
-          <% end -%>
+          <%= link_to category.name, @view.public_category_path(category.slug) %>
         </li>
       <% end -%>
     </ul>

@@ -1,4 +1,6 @@
 class ListView
+  include Rails.application.routes.url_helpers
+
   attr_reader :list
   attr_reader :category_slug
 
