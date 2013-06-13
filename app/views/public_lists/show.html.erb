@@ -58,25 +58,27 @@
 <%= content_for :tertiary do %>
   <div id="module-profile">
     <div class="content">
-      <%= image_tag current_user.profile_picture.public_list, alt: "#{current_user.username} profile photo" %>
-      <h3><%= current_user.display_name %></h3>
-      <p>
-      Age <%= current_user.age %><br>
-      </p>
-      <% if current_user.notes.present? -%>
-        <p><%= current_user.notes %></p>
+      <%= image_tag @view.owner.profile_picture.public_list, alt: "#{@view.owner.username} profile photo" %>
+      <h3><%= @view.owner.display_name %></h3>
+      <% if @view.owner.age.present? -%>
+        <p>Age <%= @view.owner.age %><br></p>
       <% end -%>
-      <p class="right">
-        <%= link_to "Full profile", profile_path %>
-      </p>
+      <% if @view.owner.notes.present? -%>
+        <p><%= @view.owner.notes %></p>
+      <% end -%>
+      <% if @view.preview? -%>
+        <p class="right">
+          <%= link_to "Full profile", profile_path %>
+        </p>
+      <% end -%>
     </div>
   </div>
-  <% if current_user.followed_users_with_public_lists.any? -%>
+  <% if @view.owner.followed_users_with_public_lists.any? -%>
     <div id="module-friends">
       <div class="content">
-        <h3><%= "#{current_user.possessive_name} Friends" %></h3>
+        <h3><%= "#{@view.owner.possessive_name} Friends" %></h3>
         <ul class="clearfix">
-          <%= render partial: "friends/sidebar_friend", collection: current_user.followed_users_with_public_lists, locals: { show_names: false } %>
+          <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_public_lists, locals: { show_names: false } %>
         </ul>
         <p class="right">
           <%= link_to "See all", friends_path %>

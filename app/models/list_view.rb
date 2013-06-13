@@ -22,7 +22,7 @@ class ListView
   end
 
   def owner
-    list.user
+    @owner ||= decorated_owner
   end
 
   def default_category?
@@ -36,5 +36,11 @@ class ListView
       @category = categories.by_slug(@category_slug).first
     end
     @category
+  end
+
+  def decorated_owner
+    owner = list.user
+    owner.class.send(:include, UserDecorator)
+    owner
   end
 end
