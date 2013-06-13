@@ -24,14 +24,15 @@ class List < ActiveRecord::Base
       includes(:product_type).
       includes(:category).
       includes(:age_range).
-      order("placeholder ASC, product_type_name ASC")
+      order("list_items.placeholder ASC, age_ranges.position ASC, list_items.priority ASC")
   end
 
   def public_list_entries(category = nil)
     list_items.
       where(placeholder: false).
       by_category(category).
-      order("placeholder ASC, product_type_name ASC")
+      includes(:age_range).
+      order("list_items.placeholder ASC, age_ranges.position ASC, list_items.priority ASC")
   end
 
   def make_public!
