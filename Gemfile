@@ -93,6 +93,7 @@ gem 'rack-mini-profiler'
 gem 'memcachier'
 gem 'dalli'
 gem 'dalli-delete-matched'
+gem 'sentry-raven', :git => "https://github.com/getsentry/raven-ruby.git"
 
 group :development do
   gem 'guard'
