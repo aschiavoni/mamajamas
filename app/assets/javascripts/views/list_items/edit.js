@@ -9,10 +9,15 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
   initialize: function() {
     _errMap = this.errorFieldMap();
 
+    this.model.set('isnew', this.model.isNew());
+    if (!this.model.isNew()) {
+      this.$el.addClass('choose-bt');
+    }
+
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:age", this.updateAgeRange, this);
     this.model.on("change:priority", this.updatePriority, this);
-    this.model.on('change', this.render, this);
+    this.model.on('change', this.render,  this);
   },
 
   events: {
