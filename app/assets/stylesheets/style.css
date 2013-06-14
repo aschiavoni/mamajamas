@@ -522,8 +522,8 @@ input[type=text] + .button {
 }
 #title-links button:hover, #title-links button:focus, #title-links button:active,
 #title-links a.button:hover, #title-links a.button:focus, #title-links a.button:active {
-	color:#fff; !important;
-	opacity:1; !important;
+	color:#fff !important;
+	opacity:1 !important;
 }
 .bt-color {
 	border-color: #5daf5d;
