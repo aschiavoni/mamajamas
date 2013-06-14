@@ -124,4 +124,4 @@ Amazon api options are configured in config/amazon.yml.
 CachedProductFetcher -> ProductFetcher -> ProductFetcherFactory -> AmazonProductFetcher
 
 ---
-[2013-06-13 Thu 10:27]
+[2013-06-14 Fri 09:19]
