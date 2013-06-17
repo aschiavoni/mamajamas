@@ -38,6 +38,12 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       $("#field-search", this.$el).focus();
     });
 
+    var addYourOwnView = new Mamajamas.Views.ListItemAddYourOwn({
+      model: this.model
+    });
+    addYourOwnView.on('search:product:added', _view.addOrUpdateItem, _view);
+    $('#prod-search-results', this.$el).after(addYourOwnView.render().$el);
+
     return this;
   },
 
