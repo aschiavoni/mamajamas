@@ -26,6 +26,14 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       return true;
     });
 
+    $('#find-moms').click(function(event) {
+      if (_view.isGuestUser()) {
+        _view.unauthorized();
+        return false
+      }
+      return true;
+    });
+
     // get suggestions
     var category = Mamajamas.Context.List.get('category');
     Mamajamas.Context.ProductTypeSuggestions.fetch({
