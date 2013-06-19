@@ -22,6 +22,7 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
     'click .skip': 'skip',
     'click #country-select': 'showCountries',
     'click .country-name': 'selectCountry',
+    'submit #frm-zip': 'save',
   },
 
   rendered: function() {
@@ -118,5 +119,4 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
     return false;
   },
 
-})
-
+});
