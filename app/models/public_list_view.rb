@@ -12,6 +12,10 @@ class PublicListView < ListView
     @list_entries ||= list.public_list_entries(category)
   end
 
+  def categories
+    @categories ||= list.public_list_categories
+  end
+
   def public_category_path(slug)
     if preview?
       public_list_preview_category_list_path(slug)

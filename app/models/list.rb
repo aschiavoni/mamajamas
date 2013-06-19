@@ -35,6 +35,13 @@ class List < ActiveRecord::Base
       order("list_items.placeholder ASC, age_ranges.position ASC, list_items.priority ASC")
   end
 
+  def public_list_categories
+    categories.where(id: self.list_items.
+                     where(placeholder: false).
+                     select('DISTINCT(category_id)')).
+    order(:name)
+  end
+
   def make_public!
     set_public(true)
   end
