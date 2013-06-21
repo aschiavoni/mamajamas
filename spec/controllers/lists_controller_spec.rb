@@ -21,6 +21,11 @@ describe ListsController do
         response.should be_success
       end
 
+      it "should increment view count" do
+        List.any_instance.should_receive(:increment_view_count)
+        get :show
+      end
+
     end
 
     context "without list" do

@@ -13,6 +13,7 @@ class PublicListsController < ApplicationController
     end
 
     @list_entries_json = render_list_entries(@view.list_entries)
+    @list.increment_public_view_count
 
     hide_progress_bar
 

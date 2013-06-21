@@ -12,6 +12,8 @@ class ListsController < ApplicationController
       redirect_to(quiz_path) and return
     end
 
+    set_body_class "list-help" if @list.view_count == 0
+
     cat = params[:category]
     @view = ListView.new(@list, cat)
     @list_entries_json = Rails.cache.fetch [@list, cat, 'entries'] do
@@ -20,6 +22,7 @@ class ListsController < ApplicationController
         formats: :json,
         locals: { list_entries: @view.list_entries })
     end
+    @list.increment_view_count
 
     respond_to do |format|
       format.html

@@ -54,6 +54,11 @@ describe PublicListsController do
       assigns(:view).should be_instance_of(PublicListView)
     end
 
+    it "should increment public view count" do
+      List.any_instance.should_receive(:increment_public_view_count)
+      get 'show', slug: user.username
+    end
+
   end
 
   describe "preview" do

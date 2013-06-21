@@ -262,6 +262,25 @@ describe List do
       list.reload
       list.should_not be_public
     end
+
+  end
+
+  describe "view counts" do
+
+    let(:list) { create(:list) }
+
+    it "should increment view count" do
+      lambda do
+        list.increment_view_count
+      end.should change(list, :view_count).by(1)
+    end
+
+    it "should increment public view count" do
+      lambda do
+        list.increment_public_view_count
+      end.should change(list, :public_view_count).by(1)
+    end
+
   end
 
 end

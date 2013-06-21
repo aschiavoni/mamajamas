@@ -54,6 +54,11 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
   render: function() {
     this.$el.html(this.template);
     $("table#babygear", this.$el).append(this.indexView.render().$el);
+
+    if (this.model.get('view_count') <= 1) {
+      var helpModals = new Mamajamas.Views.ListHelpModals();
+      $('body').append(helpModals.render().$el);
+    }
     return this;
   },
 

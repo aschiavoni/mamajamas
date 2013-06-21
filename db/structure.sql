@@ -259,7 +259,9 @@ CREATE TABLE lists (
     user_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    public boolean DEFAULT false NOT NULL
+    public boolean DEFAULT false NOT NULL,
+    view_count integer DEFAULT 0 NOT NULL,
+    public_view_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -988,3 +990,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130516222507');
 INSERT INTO schema_migrations (version) VALUES ('20130611000152');
 
 INSERT INTO schema_migrations (version) VALUES ('20130611162641');
+
+INSERT INTO schema_migrations (version) VALUES ('20130621115725');
