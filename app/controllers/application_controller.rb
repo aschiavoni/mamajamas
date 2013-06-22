@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
   # show a confirmation message if the user is not confirmed and it has
   # been more than 48 hours since they signed up
   def prompt_to_confirm_email_maybe
-    if user_signed_in? && !current_user.confirmed?
+    if user_signed_in? && !current_user.guest? && !current_user.confirmed?
       if UserConfirmationPolicy.new(current_user).requires_confirmation_prompt?
         if flash[:notice].blank?
           flash[:notice] = render_to_string(partial: "shared/confirmation_instructions").html_safe
