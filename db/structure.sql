@@ -508,7 +508,7 @@ CREATE TABLE users (
     slug character varying(255),
     notes text,
     zip_code character varying(255),
-    guest boolean,
+    guest boolean DEFAULT false NOT NULL,
     country_code character varying(255) DEFAULT 'US'::character varying
 );
 
@@ -992,3 +992,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130611000152');
 INSERT INTO schema_migrations (version) VALUES ('20130611162641');
 
 INSERT INTO schema_migrations (version) VALUES ('20130621115725');
+
+INSERT INTO schema_migrations (version) VALUES ('20130622184714');
