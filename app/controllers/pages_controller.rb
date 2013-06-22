@@ -5,6 +5,10 @@ class PagesController < ApplicationController
     set_subheader "Terms of Service"
   end
 
+  def about
+    set_subheader "About Mamajamas"
+  end
+
   private
 
   def init_view

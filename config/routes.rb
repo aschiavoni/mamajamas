@@ -25,6 +25,7 @@ Mamajamas::Application.routes.draw do
   put "/profile" => "users#update"
   put "/account/complete" => "users#complete"
   post "/account/complete" => "users#complete"
+  get '/about' => 'pages#about', :as => :about
   get '/terms-of-service' => 'pages#terms', :as => :terms
   get '/robots.txt' => 'robots#show'
 
