@@ -43,6 +43,9 @@
             <ul class="nav-drop">
               <li class="user-email"><%= link_to current_user.display_email, profile_path %></li>
               <li><%= link_to "My List", list_path %></li>
+              <% if current_user.list.present? && current_user.list.public? -%>
+                <li><%= link_to "My Shared List", public_list_path(current_user) %></li>
+              <% end -%>
               <li><%= link_to "My Profile", profile_path %></li>
               <li class="last">
                 <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "logout" %>
