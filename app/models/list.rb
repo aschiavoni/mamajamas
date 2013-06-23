@@ -86,6 +86,10 @@ class List < ActiveRecord::Base
     list_items.where(placeholder: false).any?
   end
 
+  def item_count
+    list_items.where(placeholder: false).count
+  end
+
   # these increment methods may no handle concurrency
   # but we don't use them for anything but checking whether
   # the list has been viewed at least once so it doesn't matter

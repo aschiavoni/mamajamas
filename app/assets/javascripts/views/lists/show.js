@@ -19,9 +19,14 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     });
 
     $('#bt-share').click(function(event) {
+      if (Mamajamas.Context.List.get('item_count') == 0) {
+        event.preventDefault();
+        return false;
+      }
+
       if (_view.isGuestUser()) {
         _view.unauthorized();
-        return false
+        return false;
       }
       return true;
     });

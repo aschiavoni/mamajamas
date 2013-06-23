@@ -70,6 +70,8 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
           wait: true,
           success: function() {
             Mamajamas.Context.ListItems.remove(this.model);
+            var currentItemCount = Mamajamas.Context.List.get('item_count');
+            Mamajamas.Context.List.set('item_count', currentItemCount - 1);
           },
           error: function(model, response, options) {
             Mamajamas.Context.Notifications.error("We could not remove this list item at this time. Please try again later.");

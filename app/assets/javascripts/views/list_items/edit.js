@@ -152,6 +152,8 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
             _view.options.parent.remove();
           if (_view.shouldShareOnFacebook())
             _view.shareOnFacebook();
+          var currentItemCount = Mamajamas.Context.List.get('item_count');
+          Mamajamas.Context.List.set('item_count', currentItemCount + 1);
         },
         error: function(model, response) {
           _view.handleError(model, response);

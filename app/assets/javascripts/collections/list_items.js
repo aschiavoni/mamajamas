@@ -85,6 +85,10 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
 
     var sortFunction = this.isAscending() ? sortField : (sortField + "_desc");
     this.comparator = this.sortStrategies[sortFunction];
-  }
+  },
+
+  itemCount: function() {
+    return this.where({ placeholder: false }).length;
+  },
 
 });
