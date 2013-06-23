@@ -150,6 +150,13 @@ class User < ActiveRecord::Base
     ListBuilder.new(self, kid).build! if list.blank?
   end
 
+  def reset_list!
+    if has_list?
+      list.destroy
+      build_list!
+    end
+  end
+
   def age(now = Time.now.utc.to_date)
     return nil if birthday.blank?
     dob = birthday

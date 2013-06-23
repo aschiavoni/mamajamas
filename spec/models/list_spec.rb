@@ -283,4 +283,19 @@ describe List do
 
   end
 
+  describe "has items" do
+
+    let(:list) { create(:list) }
+
+    it "indicates if a user has added any list items" do
+      list_item = create(:list_item, list: list)
+      list.should have_items
+    end
+
+    it "indicates that user has not added any list items" do
+      list.should_not have_items
+    end
+
+  end
+
 end

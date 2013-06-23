@@ -82,6 +82,10 @@ class List < ActiveRecord::Base
     product_types
   end
 
+  def has_items?
+    list_items.where(placeholder: false).any?
+  end
+
   # these increment methods may no handle concurrency
   # but we don't use them for anything but checking whether
   # the list has been viewed at least once so it doesn't matter
