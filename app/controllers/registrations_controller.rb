@@ -18,6 +18,10 @@ class RegistrationsController < Devise::RegistrationsController
       # create real user
       build_resource
 
+      # manually default guest to false, I only have to do this
+      # in the heroku environment, not sure why
+      resource.guest = false if resource.respond_to?(:guest)
+
       if resource.save
         if resource.active_for_authentication?
           flash_message = :signed_up
