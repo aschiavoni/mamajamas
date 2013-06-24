@@ -30,7 +30,7 @@ class PublicListsController < ApplicationController
 
   def publish
     if params[:publish] == '1'
-      @list.make_public!
+      @list.share_public!
       redirect_to public_list_path(current_user.slug)
     else
       redirect_to list_path

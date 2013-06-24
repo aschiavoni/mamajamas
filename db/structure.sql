@@ -226,7 +226,8 @@ CREATE TABLE list_items (
     age_range_id integer,
     placeholder boolean DEFAULT false NOT NULL,
     product_type_name character varying(255),
-    list_item_image_id integer
+    list_item_image_id integer,
+    shared boolean DEFAULT false NOT NULL
 );
 
 
@@ -994,3 +995,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130611162641');
 INSERT INTO schema_migrations (version) VALUES ('20130621115725');
 
 INSERT INTO schema_migrations (version) VALUES ('20130622184714');
+
+INSERT INTO schema_migrations (version) VALUES ('20130624030937');

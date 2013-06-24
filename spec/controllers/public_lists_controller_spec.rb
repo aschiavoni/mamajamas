@@ -10,7 +10,7 @@ describe PublicListsController do
 
   describe "show" do
 
-    before(:all) { @list.make_public! }
+    before(:all) { @list.share_public! }
 
     it "returns a 404 if the user is not found" do
       lambda {
@@ -27,7 +27,7 @@ describe PublicListsController do
     end
 
     it "returns a 404 if the list is not public" do
-      @list.make_nonpublic!
+      @list.unshare_public!
 
       lambda {
         get 'show', slug: user.username

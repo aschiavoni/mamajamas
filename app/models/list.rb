@@ -28,26 +28,47 @@ class List < ActiveRecord::Base
   end
 
   def public_list_entries(category = nil)
-    list_items.
-      where(placeholder: false).
+    list_items.shared_items.
       by_category(category).
       includes(:age_range).
       order("list_items.placeholder ASC, age_ranges.position ASC, list_items.priority ASC")
   end
 
   def public_list_categories
-    categories.where(id: self.list_items.
-                     where(placeholder: false).
-                     select('DISTINCT(category_id)')).
-    order(:name)
+    categories.
+      where(id: list_items.shared_items.select('DISTINCT(category_id)')).
+      order(:name)
   end
 
-  def make_public!
+  def public_preview_list_entries(category = nil)
+    list_items.user_items.
+      by_category(category).
+      includes(:age_range).
+      order("list_items.placeholder ASC, age_ranges.position ASC, list_items.priority ASC")
+  end
+
+  def public_preview_list_categories
+    categories.
+      where(id: list_items.user_items.select('DISTINCT(category_id)')).
+      order(:name)
+  end
+
+  def share_public!
     set_public(true)
+    share_all_list_items!
   end
 
-  def make_nonpublic!
+  def unshare_public!
     set_public(false)
+    unshare_all_list_items!
+  end
+
+  def share_all_list_items!
+    list_items.user_items.update_all(shared: true)
+  end
+
+  def unshare_all_list_items!
+    list_items.user_items.update_all(shared: false)
   end
 
   def add_list_item_placeholder(product_type)
