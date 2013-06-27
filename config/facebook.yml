@@ -11,6 +11,6 @@ staging:
   secret_key: 929561c463d82bf1e6556fffa267c56b
   scope: "email, user_photos, publish_stream"
 production:
-  app_id: 437830716277340
-  secret_key: 929561c463d82bf1e6556fffa267c56b
+  app_id: 573733729331783
+  secret_key: 6fa806354d925b090488c0746da80a98
   scope: "email, user_photos, publish_stream"
