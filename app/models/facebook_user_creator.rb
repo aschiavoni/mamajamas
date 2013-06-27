@@ -4,7 +4,7 @@ class FacebookUserCreator
   attr_reader :auth
 
   def initialize(auth)
-   @auth = auth
+    @auth = auth
   end
 
   def self.from_oauth(auth)
@@ -28,8 +28,11 @@ class FacebookUserCreator
 
   def facebook_username
     raw_info = auth.extra.raw_info
-    return raw_info.username unless raw_info.username.blank?
-    "#{raw_info.first_name}#{raw_info.last_name}"
+    raw_username = raw_info.username
+    if raw_username.blank?
+      raw_username = "#{raw_info.first_name}#{raw_info.last_name}"
+    end
+    raw_username.gsub(/[^0-9a-z]/i, '')
   end
 
   private
