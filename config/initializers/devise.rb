@@ -209,7 +209,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-  if Rails.env.production?
+  if Rails.env.production? || Rails.env.staging?
     # ryanesc - MJs Staging
     # ssl client options are necessary on heroku
     config.omniauth :facebook, FACEBOOK_CONFIG["app_id"], FACEBOOK_CONFIG["secret_key"], { :scope => FACEBOOK_CONFIG["scope"], :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}

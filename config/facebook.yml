@@ -6,6 +6,10 @@ test:
   app_id: 163971090409302
   secret_key: ce1b64ceab5e5a6dbf5fc02de8eedde5
   scope: "email, user_photos, publish_stream"
+staging:
+  app_id: 437830716277340
+  secret_key: 929561c463d82bf1e6556fffa267c56b
+  scope: "email, user_photos, publish_stream"
 production:
   app_id: 437830716277340
   secret_key: 929561c463d82bf1e6556fffa267c56b

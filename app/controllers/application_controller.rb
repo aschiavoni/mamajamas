@@ -75,9 +75,15 @@ class ApplicationController < ActionController::Base
 
   # hide behind basic auth for now
   def require_basic_auth_maybe
-    if Rails.env.production?
+    if Rails.env.staging?
       authenticate_or_request_with_http_basic do |user, password|
         user == "mamajamas" && password == "mamab1rd"
+      end
+    end
+
+    if Rails.env.production?
+      authenticate_or_request_with_http_basic do |user, password|
+        user == "mamajamas" && password == "welcome123"
       end
     end
   end

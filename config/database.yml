@@ -46,6 +46,14 @@ test:
   username: mamajamas
   password:
 
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: mamajamas_staging
+  pool: 5
+  username: mamajamas
+  password:
+
 production:
   adapter: postgresql
   encoding: unicode
