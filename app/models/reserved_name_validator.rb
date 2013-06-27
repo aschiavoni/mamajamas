@@ -5,7 +5,7 @@ class ReservedNameValidator < ActiveModel::EachValidator
     blog
     categories category config connect contact create
     delete direct_messages downloads
-    edit email
+    edit email error
     faq favorites feed feeds fetch fetcher
     follow followers following friend friends
     help home

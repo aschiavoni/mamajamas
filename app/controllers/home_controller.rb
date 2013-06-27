@@ -4,6 +4,10 @@ class HomeController < ApplicationController
   def index
   end
 
+  def error
+    raise "Testing Sentry Integration"
+  end
+
   private
 
   def init_view
