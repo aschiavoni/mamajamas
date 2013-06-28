@@ -73,6 +73,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def logout_guest
+    sign_out :user if current_user && current_user.guest?
+  end
+
   # hide behind basic auth for now
   def require_basic_auth_maybe
     if Rails.env.staging?

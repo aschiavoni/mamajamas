@@ -1,6 +1,7 @@
 class SessionsController < Devise::SessionsController
   before_filter :init_view
   skip_filter :prompt_to_confirm_email_maybe, only: [ :create ]
+  prepend_before_filter :logout_guest, only: [ :new ]
 
   def new
     self.resource = build_resource(nil, :unsafe => true)
