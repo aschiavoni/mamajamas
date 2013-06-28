@@ -51,6 +51,10 @@ Mamajamas::Application.routes.draw do
     resources :list_items
   end
 
+  scope "admin" do
+    get "become/:username" => "admin#become"
+  end
+
   scope "api" do
     defaults(format: "json") do
       get "categories" => "categories#index"
