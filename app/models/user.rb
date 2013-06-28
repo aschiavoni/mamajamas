@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
 
   scope :guests, lambda { where(guest: true) }
   scope :registered, lambda { where(guest: false) }
+  scope :admins, lambda { where(admin: true) }
 
   # hook devise to support logging in by email or username
   def self.find_first_by_auth_conditions(warden_conditions)

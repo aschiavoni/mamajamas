@@ -510,7 +510,8 @@ CREATE TABLE users (
     notes text,
     zip_code character varying(255),
     guest boolean DEFAULT false NOT NULL,
-    country_code character varying(255) DEFAULT 'US'::character varying
+    country_code character varying(255) DEFAULT 'US'::character varying,
+    admin boolean DEFAULT false
 );
 
 
@@ -997,3 +998,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130621115725');
 INSERT INTO schema_migrations (version) VALUES ('20130622184714');
 
 INSERT INTO schema_migrations (version) VALUES ('20130624030937');
+
+INSERT INTO schema_migrations (version) VALUES ('20130628175553');
