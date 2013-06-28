@@ -3,8 +3,9 @@ class FacebookUserCreator
 
   attr_reader :auth
 
-  def initialize(auth)
+  def initialize(auth, username_finder = UsernameFinder)
     @auth = auth
+    @username_finder = username_finder
   end
 
   def self.from_oauth(auth)
@@ -32,14 +33,14 @@ class FacebookUserCreator
     if raw_username.blank?
       raw_username = "#{raw_info.first_name}#{raw_info.last_name}"
     end
-    raw_username.gsub(/[^0-9a-z]/i, '')
+    raw_username
   end
 
   private
 
   def create_user
     User.create!({
-      username: facebook_username,
+      username: username_finder.find(facebook_username),
       provider: auth.provider,
       uid: auth.uid,
       email: auth.info.email,
@@ -65,7 +66,7 @@ class FacebookUserCreator
 
     if user.guest?
       attrs.merge!({
-        username: facebook_username,
+        username: username_finder.find(facebook_username),
         email: auth.info.email
       })
     end
@@ -76,5 +77,9 @@ class FacebookUserCreator
 
   def random_password
     SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0, 20]
+  end
+
+  def username_finder
+    @username_finder
   end
 end

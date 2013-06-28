@@ -73,14 +73,6 @@ describe FacebookUserCreator do
       creator.facebook_username.should == "john"
     end
 
-    it "returns username stripped of non-alphanumeric characters" do
-      auth = auth(auth_hash.merge({
-        "extra" => { "raw_info" => { "username" => "arch.stanton.7127" } }
-      }))
-      creator = FacebookUserCreator.new(auth)
-      creator.facebook_username.should == "archstanton7127"
-    end
-
     it "should return full name if username is not in auth hash" do
       auth = auth(auth_hash.merge({
         "extra" => {
