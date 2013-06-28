@@ -12,6 +12,12 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
       this.$el.addClass("large");
     this.on('quiz:question:rendered', this.rendered, this);
     this.on('quiz:question:saved', this.next, this);
+
+    this.model.set('zip_code', Mamajamas.Context.User.get('zip_code'));
+    this.model.set('country', Mamajamas.Context.User.get('country'));
+    this.model.set('country_name', Mamajamas.Context.User.get('country_name'));
+    this.model.set('countries', $('#countries').data('countries'));
+
     this.pruneList();
   },
 

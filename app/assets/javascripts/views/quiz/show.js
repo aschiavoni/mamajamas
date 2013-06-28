@@ -9,8 +9,7 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
   events: {
   },
 
-  questions: function() {
-    return [
+  questions: [
 
       [
         Mamajamas.Views.QuizIntro, new Mamajamas.Models.QuizQuestion()
@@ -43,16 +42,10 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
       ],
 
       [
-        Mamajamas.Views.QuizZipCode, new Mamajamas.Models.QuizQuestion({
-          zip_code: Mamajamas.Context.User.get('zip_code'),
-          country: Mamajamas.Context.User.get('country'),
-          country_name: Mamajamas.Context.User.get('country_name'),
-          countries: $('#countries').data('countries'),
-        })
+        Mamajamas.Views.QuizZipCode, new Mamajamas.Models.QuizQuestion()
       ],
 
-    ];
-  },
+  ],
 
   render: function() {
     return this;
@@ -60,8 +53,8 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
 
   next: function() {
     this.currentQuestion++;
-    if (this.currentQuestion > this.questions().length - 1) {
-      this.currentQuestion = this.questions().length - 1;
+    if (this.currentQuestion > this.questions.length - 1) {
+      this.currentQuestion = this.questions.length - 1;
       this.done();
     } else {
       this.renderCurrentQuestion();
@@ -79,7 +72,7 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
   },
 
   getQuestion: function(index) {
-    var q = this.questions()[index];
+    var q = this.questions[index];
     var question = new q[0]({
       model: q[1]
     });
