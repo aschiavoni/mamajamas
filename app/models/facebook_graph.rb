@@ -51,8 +51,11 @@ class FacebookGraph
   def all_mamajamas_friends
     return [] if all_friends.blank?
     uids = all_friends.map { |f| f["id"] }
-    # get all the mamajamas users that have matching uids
-    User.where(uid: uids)
+    # get all the mamajamas users that have matching uids and public lists
+    User.
+      includes(:list).
+      where(uid: uids).
+      where("lists.public = true")
   end
   memoize :all_mamajamas_friends
 end
