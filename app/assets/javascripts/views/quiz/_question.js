@@ -171,14 +171,20 @@ Mamajamas.Views.QuizSliderQuestion = Mamajamas.Views.QuizQuestion.extend({
 
     this.$sliderArrow.draggable({
       axis: "x",
-      // grid: [63, 0],
       drag: function(event, ui) {
         if (ui.position.left < _view.minLeft())
           ui.position.left = _view.minLeft();
         else if (ui.position.left > _view.maxLeft())
           ui.position.left = _view.maxLeft();
+      },
+      stop: function(event, ui) {
+        _view.model.set('sliderPosition', ui.position.left);
       }
     });
+
+    var sliderPosition = this.model.get('sliderPosition');
+    if (sliderPosition != null)
+      this.moveTo(sliderPosition, 0);
   },
 
   moveToCursor: function(event) {
@@ -206,8 +212,12 @@ Mamajamas.Views.QuizSliderQuestion = Mamajamas.Views.QuizQuestion.extend({
     return false;
   },
 
-  moveTo: function(x) {
-    this.$sliderArrow.animate({ left: x }, 100, 'linear');
+  moveTo: function(x, speed) {
+    if (speed == null)
+      speed = 100;
+
+    this.$sliderArrow.animate({ left: x }, speed, 'linear');
+    this.model.set('sliderPosition', x);
   },
 
   saving: function() {
