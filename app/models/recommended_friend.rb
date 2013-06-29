@@ -9,8 +9,10 @@ class RecommendedFriend
 
   def all(limit = nil)
     friends = User.
-      where("id <> ?", user.id).
+      includes(:list).
+      where("users.id <> ?", user.id).
       where(guest: false).
+      where("lists.public = true").
       limit(limit)
 
     friends.reject { |f| excluded.include?(f) }
