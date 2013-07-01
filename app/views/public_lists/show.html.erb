@@ -80,9 +80,11 @@
         <ul class="clearfix">
           <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_public_lists, locals: { show_names: false } %>
         </ul>
-        <p class="right">
-          <%= link_to "See all", friends_path %>
-        </p>
+        <% if @view.owner.followed_users_with_public_lists.count > 5 -%>
+          <p class="right">
+            <%= link_to "See all", friends_path %>
+          </p>
+        <% end -%>
       </div>
     </div>
   <% end -%>
