@@ -17,7 +17,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:age", this.updateAgeRange, this);
     this.model.on("change:priority", this.updatePriority, this);
-    this.model.on('change', this.render,  this);
   },
 
   events: {
