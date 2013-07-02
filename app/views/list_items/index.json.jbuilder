@@ -1,3 +1,4 @@
+list_entries = @list_entries if defined?(@list_entries)
 json.array!(list_entries) do |list_entry|
   json.id list_entry.id
   json.name list_entry.name
