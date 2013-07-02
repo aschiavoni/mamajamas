@@ -2,6 +2,7 @@ class ListsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :init_view, only: [ :show ]
   before_filter :find_list, only: [ :show, :product_types ]
+  before_filter :set_cache_buster, only: [ :show ]
 
   # caches_action :suggestions, expires_in: 1.hour
 
