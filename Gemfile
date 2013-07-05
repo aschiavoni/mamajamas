@@ -116,6 +116,7 @@ group :development do
 end
 
 group :test, :development do
+  gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
