@@ -35,7 +35,7 @@ feature "Visitor signs up", js: true do
       page.execute_script("Mamajamas.Context.LoginSession.saveSession();")
 
       # should be on the friends page
-      expect(page).to have_content("Follow Mom Friends")
+      expect(page).to have_content("Follow Friends")
     end
   end
 

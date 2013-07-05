@@ -27,7 +27,7 @@ class FriendsController < ApplicationController
   protected
 
   def init_view
-    set_subheader "Follow Mom Friends"
+    set_subheader "Follow Friends"
     set_progress_id 2
   end
 end
