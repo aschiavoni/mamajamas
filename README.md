@@ -57,13 +57,14 @@ accessible (by default) at http://localhost:1080.
 We are currently using the [Mandrill Heroku
 add-on](https://addons.heroku.com/mandrill) to send email in production.
 To use the same add-on in development mode, you need to configure two
-environment variables:
+environment variables. In the .env file at the root of the project, update
+the following two environment variables:
 
-    export MANDRILL_APIKEY=value
-    export MANDRILL_USERNAME=value
+    MANDRILL_APIKEY
+    MANDRILL_USERNAME
 
-To retrieve the above values, you can use the following two heroku
-commands:
+To retrieve the above values from the staging instance, you can use the
+following two heroku commands:
 
     heroku config:get MANDRILL_APIKEY
     heroku config:get MANDRILL_USERNAME

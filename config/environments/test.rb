@@ -1,4 +1,3 @@
-ENV["REDISTOGO_URL"] = 'redis://localhost:6379'
 require 'rack/contrib/simple_endpoint'
 
 Mamajamas::Application.configure do
