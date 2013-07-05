@@ -46,6 +46,15 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
         category: category
       }
     });
+
+    this.model.on('change:item_count', function() {
+      var shareButton = $('#bt-share');
+      if (this.model.get('item_count') > 0) {
+        shareButton.removeClass('disabled');
+      } else {
+        shareButton.addClass('disabled');
+      }
+    }, this)
   },
 
   events: {
