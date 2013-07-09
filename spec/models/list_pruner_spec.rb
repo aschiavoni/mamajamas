@@ -4,6 +4,7 @@ describe ListPruner do
 
   let(:user) { create(:user) }
   let(:list) { user.build_list! }
+  let(:category) { create(:category) }
 
   before(:each) do
     2.times { create(:product_type, priority: 3) }
@@ -19,7 +20,8 @@ describe ListPruner do
       list.add_list_item(ListItem.create!({
         name: 'a new item',
         link: 'http://example.com/items/a-new-item',
-        priority: 3
+        priority: 3,
+        category_id: category.id
       }))
     end
     ListPruner.prune!(list)
