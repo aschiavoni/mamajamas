@@ -7,14 +7,25 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       collection: Mamajamas.Context.ListItems
     });
 
-    // add-product-type is not contained in the view so we wire it up globally
     var _view = this;
+
+    // add-product-type is not contained in the view so we wire it up globally
+    // hide the new item button if we are in the all category
+    if (Mamajamas.Context.List.isAllCategory())
+      $("#add-product-type").hide();
+
     $("#add-product-type").click(function(event) {
       event.preventDefault();
       if (_view.isGuestUser()) {
         _view.unauthorized();
         return false;
       }
+
+      // no-op if we are in the all category
+      if (Mamajamas.Context.List.isAllCategory()) {
+        return false;
+      }
+
       return _view.addProductType(_view, event);
     });
 
