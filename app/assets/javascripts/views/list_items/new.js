@@ -106,7 +106,8 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
 
   errorFieldMap: function() {
     return {
-      name: "#list_item_name"
+      name: "#list_item_name",
+      category_id: "#list_item_name"
     };
   },
 

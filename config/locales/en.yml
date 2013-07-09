@@ -52,6 +52,8 @@ en:
               blank: "Sorry, but you must provide a name for your item."
             link:
               blank: "Sorry, but you must provide a link for your item."
+            category_id:
+              blank: "Sorry, but an item must belong to a category."
             notes:
               too_long: "Sorry, but your notes are too long (max %{count} characters)."
         product_type:

@@ -14,6 +14,7 @@ class ListItem < ActiveRecord::Base
 
   validates :name, :link, presence: true, unless: :placeholder?
   validates :notes, length: { maximum: 1000 }
+  validates :category_id, presence: true
 
   scope :placeholders, where(placeholder: true)
   scope :user_items, where(placeholder: false)
