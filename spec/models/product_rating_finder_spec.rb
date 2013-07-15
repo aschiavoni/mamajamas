@@ -1,0 +1,37 @@
+describe ProductRatingFinder do
+
+  let(:vendor_id) { "B002PLU912" }
+  let(:vendor) { "amazon" }
+
+  def list_items(include_nil_rating = false)
+    items = [
+      build(:list_item, vendor: vendor, vendor_id: vendor_id, rating: 3),
+      build(:list_item, vendor: vendor, vendor_id: vendor_id, rating: 2)
+    ]
+    if include_nil_rating
+      items << build(:list_item, vendor: vendor, vendor_id: vendor_id, rating: nil)
+    end
+    items
+  end
+
+  it "queries the database by the vendor and vendor id" do
+    ListItem.should_receive(:where).
+      with(hash_including(vendor_id: vendor_id, vendor: vendor))
+    ProductRatingFinder.find(vendor_id, vendor)
+  end
+
+  it "returns a list of ratings for a vendor and vendor id combo" do
+    ListItem.should_receive(:where).
+      with(hash_including(vendor_id: vendor_id, vendor: vendor)).
+      and_return(list_items)
+    ProductRatingFinder.find(vendor_id, vendor).should == [ 3, 2 ]
+  end
+
+  it "excludes nil ratings" do
+    ListItem.should_receive(:where).
+      with(hash_including(vendor_id: vendor_id, vendor: vendor)).
+      and_return(list_items(true))
+    ProductRatingFinder.find(vendor_id, vendor).should == [ 3, 2 ]
+  end
+
+end

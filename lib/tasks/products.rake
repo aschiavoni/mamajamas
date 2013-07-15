@@ -32,6 +32,11 @@ namespace :mamajamas do
       puts "Done"
     end
 
+    desc "Calculate average ratings for all products"
+    task calculate_ratings: :environment do
+      ProductRatingUpdater.new.update
+    end
+
     desc "Clear product fetcher cache"
     task clear_fetcher_cache: :environment do
       REDIS.keys("product:fetcher:*").each do |key|
