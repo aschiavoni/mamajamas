@@ -132,6 +132,8 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     var attributes = {
       name: searchResult.get('name'),
       link: searchResult.get('url'),
+      vendor: searchResult.get('vendor'),
+      vendor_id: searchResult.get('vendor_id'),
       product_type_id: this.model.get('product_type_id'),
       product_type: this.model.get('product_type_name'),
       product_type_name: this.model.get('product_type_name'),
@@ -154,6 +156,8 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       image_url: searchResult.get('image_url'),
       rating: null,
       owned: false
+      vendor: searchResult.get('vendor'),
+      vendor_id: searchResult.get('vendor_id')
     };
 
     this.model.set(attributes);

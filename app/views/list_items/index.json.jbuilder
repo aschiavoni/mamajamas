@@ -18,4 +18,6 @@ json.array!(list_entries) do |list_entry|
   json.notes list_entry.notes
   json.image_url list_entry.image_url
   json.placeholder list_entry.placeholder
+  json.vendor list_entry.vendor
+  json.vendor_id list_entry.vendor_id
 end

@@ -146,6 +146,8 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
       image_url: $("#list_item_image_url", this.$el).val(),
       owned: $("input[name='list_item[owned]']:checked").val() == "1",
       placeholder: false,
+      vendor_id: $("#list_item_vendor_id", this.$el).val(),
+      vendor: $("#list_item_vendor", this.$el).val(),
       list_item_image_id: $('#list_item_list_item_image_id', this.$el).val()
     };
 
