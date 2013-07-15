@@ -227,7 +227,9 @@ CREATE TABLE list_items (
     placeholder boolean DEFAULT false NOT NULL,
     product_type_name character varying(255),
     list_item_image_id integer,
-    shared boolean DEFAULT false NOT NULL
+    shared boolean DEFAULT false NOT NULL,
+    vendor character varying(255),
+    vendor_id character varying(255)
 );
 
 
@@ -283,6 +285,39 @@ CREATE SEQUENCE lists_id_seq
 --
 
 ALTER SEQUENCE lists_id_seq OWNED BY lists.id;
+
+
+--
+-- Name: product_ratings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE product_ratings (
+    id integer NOT NULL,
+    vendor character varying(255),
+    vendor_id character varying(255),
+    rating double precision DEFAULT 0.0 NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: product_ratings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE product_ratings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: product_ratings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE product_ratings_id_seq OWNED BY product_ratings.id;
 
 
 --
@@ -588,6 +623,13 @@ ALTER TABLE ONLY lists ALTER COLUMN id SET DEFAULT nextval('lists_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY product_ratings ALTER COLUMN id SET DEFAULT nextval('product_ratings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY product_type_queries ALTER COLUMN id SET DEFAULT nextval('product_type_queries_id_seq'::regclass);
 
 
@@ -680,6 +722,14 @@ ALTER TABLE ONLY list_items
 
 ALTER TABLE ONLY lists
     ADD CONSTRAINT lists_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: product_ratings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY product_ratings
+    ADD CONSTRAINT product_ratings_pkey PRIMARY KEY (id);
 
 
 --
@@ -798,6 +848,20 @@ CREATE INDEX index_list_items_on_list_id ON list_items USING btree (list_id);
 --
 
 CREATE INDEX index_lists_on_user_id ON lists USING btree (user_id);
+
+
+--
+-- Name: index_product_ratings_on_vendor; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_product_ratings_on_vendor ON product_ratings USING btree (vendor);
+
+
+--
+-- Name: index_product_ratings_on_vendor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_product_ratings_on_vendor_id ON product_ratings USING btree (vendor_id);
 
 
 --
@@ -1001,5 +1065,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130622184714');
 INSERT INTO schema_migrations (version) VALUES ('20130624030937');
 
 INSERT INTO schema_migrations (version) VALUES ('20130628175553');
+
+INSERT INTO schema_migrations (version) VALUES ('20130710124449');
+
+INSERT INTO schema_migrations (version) VALUES ('20130710130139');
 
 INSERT INTO schema_migrations (version) VALUES ('20130716192840');
