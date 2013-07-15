@@ -75,4 +75,10 @@ FactoryGirl.define do
     user user
     image "/assets/some_image.png"
   end
+
+  factory :product_rating do
+    vendor "amazon"
+    vendor_id "B00083HK0M"
+    rating 3.0
+  end
 end
