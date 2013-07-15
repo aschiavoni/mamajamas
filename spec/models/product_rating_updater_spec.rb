@@ -20,22 +20,22 @@ describe ProductRatingUpdater do
       ]
     }
 
-    ProductRating.should_receive(:create).twice
-
-    ProductRatingUpdater.new(MockCalculator).update
+    lambda {
+      ProductRatingUpdater.new(MockCalculator).update
+    }.should change(ProductRating, :count).by(2)
   end
 
   it "updates product ratings" do
-    product_rating = create(:product_rating)
-
+    product_rating = create(:product_rating, rating: 5.0)
     ListItem.should_receive(:unique_products) {
       [
         [ product_rating.vendor_id, product_rating.vendor ]
       ]
     }
-    ProductRating.any_instance.should_receive(:update_attributes!).with(rating: 3.0)
 
     ProductRatingUpdater.new(MockCalculator).update
+    product_rating.reload
+    product_rating.rating.should == 3.0
   end
 
   it "removes a product rating if the calculator finds no rating" do
@@ -46,9 +46,10 @@ describe ProductRatingUpdater do
         [ product_rating.vendor_id, product_rating.vendor ]
       ]
     }
-    ProductRating.any_instance.should_receive(:destroy)
 
-    ProductRatingUpdater.new(MockNoRatingCalculator).update
+    lambda {
+      ProductRatingUpdater.new(MockNoRatingCalculator).update
+    }.should change(ProductRating, :count).by(-1)
   end
 
 end
