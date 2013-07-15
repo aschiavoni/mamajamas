@@ -66,4 +66,20 @@ describe ListItem do
 
   end
 
+  describe "unique products" do
+
+    before(:all) do
+      create(:list_item, vendor: "amazon", vendor_id: "1234")
+      create(:list_item, vendor: "amazon", vendor_id: "1234")
+      create(:list_item, vendor: "soap.com", vendor_id: "54321")
+    end
+
+    it "returns a unique list of vendor and vendor id combos" do
+      ListItem.unique_products.should == [
+        ["1234", "amazon" ], [ "54321", "soap.com" ]
+      ]
+    end
+
+  end
+
 end
