@@ -10,7 +10,7 @@ class ProductRatingCalculator
   end
 
   def calculate
-    ratings = ProductRatingFinder.find vendor_id, vendor
+    ratings = ListItemRatingFinder.find vendor_id, vendor
     return NoRating if ratings.size == 0
     avg = ratings.sum.to_f / ratings.size
     (avg * 2).round / 2.0

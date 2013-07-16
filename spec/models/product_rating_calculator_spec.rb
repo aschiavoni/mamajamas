@@ -4,7 +4,7 @@ describe ProductRatingCalculator do
   let(:vendor) { "amazon" }
 
   it "calculates a rating for an amazon product" do
-    ProductRatingFinder.should_receive(:find).
+    ListItemRatingFinder.should_receive(:find).
       with(vendor_id, vendor).
       and_return([ 3, 4 ])
 
@@ -21,7 +21,7 @@ describe ProductRatingCalculator do
       [4, 4, 4, 4, 5] => 4.0, # 4.2
     }
     map.each do |ratings, result|
-      ProductRatingFinder.should_receive(:find).
+      ListItemRatingFinder.should_receive(:find).
         with(vendor_id, vendor).
         and_return(ratings)
 
