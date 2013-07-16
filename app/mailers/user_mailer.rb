@@ -4,7 +4,7 @@ class UserMailer < ActionMailer::Base
   def welcome(user_id)
     @user = User.find(user_id)
     @display_name = display_name(@user)
-    mail to: @user.email
+    mail to: @user.email, bcc: "angie@mamajamas.com"
   end
 
   private

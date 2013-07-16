@@ -11,6 +11,7 @@ describe UserMailer do
     it "renders the headers" do
       mail.subject.should eq("Welcome to Mamajamas!")
       mail.to.should eq([ user.email ])
+      mail.bcc.should eq([ "angie@mamajamas.com" ])
       mail.from.should eq(["no-reply@mamajamas.com"])
     end
 
