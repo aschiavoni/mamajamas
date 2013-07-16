@@ -41,6 +41,7 @@ describe FacebookUserCreator do
   it "should update a user based from an oauth hash" do
     auth = auth(auth_hash)
     user = User.new
+    user.should_receive(:send_welcome_email)
     FacebookUserFinder.stub(:find) { user }
     FacebookUserCreator.any_instance.should_receive(:update_user).
       with(user).and_return(user)
@@ -50,16 +51,19 @@ describe FacebookUserCreator do
 
   it "should create a user based from an oauth hash" do
     auth = auth(auth_hash)
+    user_stub = stub(:send_welcome_email)
+    user_stub.should_receive(:send_welcome_email)
     FacebookUserFinder.stub(:find) { nil }
     FacebookUserCreator.any_instance.should_receive(:create_user).and_return(user_stub)
     FacebookUserCreator.from_oauth(auth)
   end
 
-  it "should send confirmation email if it hasn't been sent" do
+  it "should send welcome email" do
     auth = auth(auth_hash)
+    user_stub = stub
     FacebookUserFinder.stub(:find) { nil }
     FacebookUserCreator.any_instance.should_receive(:create_user).and_return(user_stub)
-    user_stub.should_receive(:send_confirmation_instructions)
+    user_stub.should_receive(:send_welcome_email)
     FacebookUserCreator.from_oauth(auth)
   end
 
@@ -115,6 +119,7 @@ describe FacebookUserCreator do
       @user = double
       @user.stub(:guest? => false)
       @user.stub(:update_attributes)
+      @user.stub(:send_welcome_email)
       FacebookUserFinder.stub(:find) { @user }
     end
 
@@ -143,7 +148,7 @@ describe FacebookUserCreator do
     User.
       should_receive(:create!).
       with(hash_including(:uid), hash_including(:without_protection)).
-      and_return(stub)
+      and_return(stub.as_null_object)
 
     creator.update_or_create
   end
@@ -154,6 +159,7 @@ describe FacebookUserCreator do
     creator = FacebookUserCreator.new(auth)
     FacebookUserFinder.stub(:find) { user }
 
+    user.should_receive(:send_welcome_email)
     user.should_receive(:guest?).and_return(false)
     user.
       should_receive(:update_attributes).
@@ -168,6 +174,7 @@ describe FacebookUserCreator do
     creator = FacebookUserCreator.new(auth)
     FacebookUserFinder.stub(:find) { user }
 
+    user.should_receive(:send_welcome_email)
     user.should_receive(:guest?).and_return(true)
     user.
       should_receive(:update_attributes).
