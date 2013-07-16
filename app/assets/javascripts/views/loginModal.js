@@ -43,7 +43,7 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   },
   onUnauthorized: function() {
     this.hide();
-    Mamajamas.Context.Notifications.error("You cannot be logged in at this time. Please verify that you have confirmed your email address.");
+    Mamajamas.Context.Notifications.error("You cannot be logged in at this time.");
   },
   submit: function() {
     var _session = this.model;
