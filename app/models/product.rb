@@ -16,6 +16,7 @@ class Product < ActiveRecord::Base
   attr_accessible :department
   attr_accessible :categories
   attr_accessible :price
+  attr_accessible :mamajamas_rating
 
   validates :name, :vendor, :url, presence: true
   validates :vendor_id, presence: true, uniqueness: { scope: :vendor }

@@ -13,6 +13,8 @@ class AmazonProductFetcher
     end
   end
 
+  VENDOR_NAME = "amazon"
+
   def initialize(logger = ProductFetcherLogger, options = {})
     @logger = logger
     Amazon::Ecs.options = {
@@ -46,15 +48,16 @@ class AmazonProductFetcher
       res = perform_fetch(page, query, options[:search_index])
 
       results << res.items.each_with_index.map do |item, idx|
-        # return Amazon::Element instance
+        vendor_id = item.get('ASIN')
+        mamajamas_rating = get_mamajamas_rating(vendor_id, VENDOR_NAME)
         item_attributes = item.get_element('ItemAttributes')
         browse_nodes = item.get_array('BrowseNodes/BrowseNode/Name')
         small_image = item.get_element('SmallImage')
         medium_image = item.get_element('MediumImage')
         large_image = item.get_element('LargeImage')
         {
-          vendor_id: item.get('ASIN'),
-          vendor: "amazon",
+          vendor_id: vendor_id,
+          vendor: VENDOR_NAME,
           name: item_attributes.get('Title'),
           url: item.get('DetailPageURL'),
           image_url: small_image.blank? ? nil : small_image.get('URL'),
@@ -67,7 +70,8 @@ class AmazonProductFetcher
           department: item_attributes.get('Department'),
           manufacturer: item_attributes.get('Manufacturer'),
           model: item_attributes.get('Model'),
-          categories: browse_nodes.join(', ')
+          categories: browse_nodes.join(', '),
+          mamajamas_rating: mamajamas_rating
         }
       end
     end
@@ -110,5 +114,11 @@ class AmazonProductFetcher
 
   def options_sig(options)
     Digest::MD5.hexdigest(options.inspect)
+  end
+
+  def get_mamajamas_rating(vendor_id, vendor)
+    conditions = { vendor_id: vendor_id, vendor: vendor }
+    product_rating = ProductRating.where(conditions).first
+    product_rating.present? ? product_rating.rating : nil
   end
 end

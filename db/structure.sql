@@ -442,7 +442,8 @@ CREATE TABLE products (
     categories character varying(255),
     price character varying(255),
     medium_image_url character varying(255),
-    large_image_url character varying(255)
+    large_image_url character varying(255),
+    mamajamas_rating double precision
 );
 
 
@@ -1069,5 +1070,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130628175553');
 INSERT INTO schema_migrations (version) VALUES ('20130710124449');
 
 INSERT INTO schema_migrations (version) VALUES ('20130710130139');
+
+INSERT INTO schema_migrations (version) VALUES ('20130716140118');
 
 INSERT INTO schema_migrations (version) VALUES ('20130716192840');
