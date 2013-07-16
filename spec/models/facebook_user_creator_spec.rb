@@ -51,7 +51,6 @@ describe FacebookUserCreator do
   it "should create a user based from an oauth hash" do
     auth = auth(auth_hash)
     FacebookUserFinder.stub(:find) { nil }
-    user_stub = stub(:confirmation_sent_at => Time.now)
     FacebookUserCreator.any_instance.should_receive(:create_user).and_return(user_stub)
     FacebookUserCreator.from_oauth(auth)
   end
@@ -59,7 +58,6 @@ describe FacebookUserCreator do
   it "should send confirmation email if it hasn't been sent" do
     auth = auth(auth_hash)
     FacebookUserFinder.stub(:find) { nil }
-    user_stub = stub(:confirmation_sent_at => nil)
     FacebookUserCreator.any_instance.should_receive(:create_user).and_return(user_stub)
     user_stub.should_receive(:send_confirmation_instructions)
     FacebookUserCreator.from_oauth(auth)
@@ -116,7 +114,6 @@ describe FacebookUserCreator do
 
       @user = double
       @user.stub(:guest? => false)
-      @user.stub(:confirmation_sent_at => Time.now)
       @user.stub(:update_attributes)
       FacebookUserFinder.stub(:find) { @user }
     end
@@ -146,7 +143,7 @@ describe FacebookUserCreator do
     User.
       should_receive(:create!).
       with(hash_including(:uid), hash_including(:without_protection)).
-      and_return(stub(:confirmation_sent_at => Time.now))
+      and_return(stub)
 
     creator.update_or_create
   end
@@ -157,7 +154,6 @@ describe FacebookUserCreator do
     creator = FacebookUserCreator.new(auth)
     FacebookUserFinder.stub(:find) { user }
 
-    user.should_receive(:confirmation_sent_at).and_return(Time.now)
     user.should_receive(:guest?).and_return(false)
     user.
       should_receive(:update_attributes).
@@ -172,7 +168,6 @@ describe FacebookUserCreator do
     creator = FacebookUserCreator.new(auth)
     FacebookUserFinder.stub(:find) { user }
 
-    user.should_receive(:confirmation_sent_at).and_return(Time.now)
     user.should_receive(:guest?).and_return(true)
     user.
       should_receive(:update_attributes).

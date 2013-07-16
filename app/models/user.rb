@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   attr_accessible :facebook_friends, :facebook_friends_updated_at
   attr_accessible :relationships_created_at
   attr_accessible :zip_code, :country_code
+  attr_accessible :welcome_sent_at
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
@@ -161,6 +162,13 @@ class User < ActiveRecord::Base
     return nil if birthday.blank?
     dob = birthday
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  end
+
+  def send_welcome_email
+    unless welcome_sent_at.present?
+      UserMailer.welcome(self.id).deliver
+      update_attributes!(welcome_sent_at: Time.now.utc)
+    end
   end
 
   protected

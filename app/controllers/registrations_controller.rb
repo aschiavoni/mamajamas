@@ -32,6 +32,7 @@ class RegistrationsController < Devise::RegistrationsController
           @redirect_path = after_inactive_sign_up_path_for(resource)
         end
 
+        resource.send_welcome_email if resource.respond_to?(:send_welcome_email)
         set_flash_message :notice, flash_message if is_navigational_format?
         sign_in(resource_name, resource)
       else

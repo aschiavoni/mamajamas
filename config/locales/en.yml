@@ -61,3 +61,6 @@ en:
             name:
               blank: "Sorry, but you must provide a name for your new item type."
               taken: "Sorry, but you have already created a type with that name."
+  user_mailer:
+    welcome:
+      subject: "Welcome to Mamajamas!"
