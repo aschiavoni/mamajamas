@@ -13,6 +13,8 @@ window.Mamajamas = {
     });
     notifications.render();
 
+    Mamajamas.Context.Progress = new Mamajamas.Views.Progress();
+
     // globally wire infield labels
     var $infieldLabelForms = $('form.label-infield');
     if ($infieldLabelForms.length > 0) {

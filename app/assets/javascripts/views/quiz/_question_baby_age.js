@@ -119,6 +119,7 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
   save: function(event) {
     event.preventDefault();
 
+    Mamajamas.Context.Progress.show();
     var _view = this;
     Mamajamas.Context.Kids.create({
       kid: {
@@ -131,6 +132,9 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
       },
       error: function(model, response) {
         Mamajamas.Context.Notifications.error('Please try again later.');
+      },
+      complete: function() {
+        _.delay(Mamajamas.Context.Progress.hide, 200);
       }
     });
 

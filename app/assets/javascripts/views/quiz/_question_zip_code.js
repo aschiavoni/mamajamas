@@ -41,6 +41,7 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
 
   save: function(event) {
     event.preventDefault();
+    Mamajamas.Context.Progress.show();
     this.trigger('quiz:question:saving');
 
     var _view = this;
@@ -64,6 +65,8 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
         } else {
           Mamajamas.Context.Notifications.error('Please try again later.');
         }
+      },
+      complete: function() {
       }
     });
 

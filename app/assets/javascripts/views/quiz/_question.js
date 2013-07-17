@@ -46,6 +46,7 @@ Mamajamas.Views.QuizQuestion = Backbone.View.extend({
 
   save: function(event) {
     event.preventDefault();
+    Mamajamas.Context.Progress.show();
     this.trigger('quiz:question:saving');
 
     var _view = this;
@@ -62,6 +63,9 @@ Mamajamas.Views.QuizQuestion = Backbone.View.extend({
       },
       error: function(xhr, status, error) {
         Mamajamas.Context.Notifications.error('Please try again later.');
+      },
+      complete: function() {
+        _.delay(Mamajamas.Context.Progress.hide, 200);
       }
     });
 
