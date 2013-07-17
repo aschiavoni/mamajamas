@@ -12,7 +12,9 @@ Mamajamas.Views.Progress = Backbone.View.extend({
   },
 
   hide: function() {
-    $('#loader-wrap').hide();
+    _.delay(function() {
+      $('#loader-wrap').hide();
+    }, 200);
   },
 
 });

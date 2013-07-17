@@ -65,7 +65,7 @@ Mamajamas.Views.QuizQuestion = Backbone.View.extend({
         Mamajamas.Context.Notifications.error('Please try again later.');
       },
       complete: function() {
-        _.delay(Mamajamas.Context.Progress.hide, 200);
+        Mamajamas.Context.Progress.hide();
       }
     });
 
