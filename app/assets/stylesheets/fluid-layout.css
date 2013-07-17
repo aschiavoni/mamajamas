@@ -152,10 +152,10 @@ img, object, embed, video {
 	margin-top:-6.25em;
 }
 #buildlist #subhed {
-	width: 66%;
+	width:74.5%;
 }
 #buildlist #title-links {
-	width: 33.33%;
+	width: 25%;
     border-right: 1px solid #D9D9D9;
 }
 #buildlist #secondary .content {
@@ -164,10 +164,17 @@ img, object, embed, video {
 }
 
 /* layout adjustments for published list */
+#publist #title {
+	width:83.333%;
+}
+#publist #tertiary {
+	margin-top:-6.583em;
+}
 #publist #subhed {
+	width:74.5%;
 }
 #publist #title-links {
-	width: 15.6%;
+	width: 24.5%;
 }
 #publist #secondary .content {
 	padding:1px 1px 20px 3px;
@@ -175,9 +182,8 @@ img, object, embed, video {
 }
 #title .pubdate {
 	float:left;
-	width: 15.6%;
-	margin-left:2%;
-	padding-top:25px;
+	width: 24.5%;
+	padding-top:11px;
 }
 
 /* layout adjustments for create my profile */
@@ -259,6 +265,11 @@ img, object, embed, video {
 	padding:75px 23.08% 65px 2.56%;
 }
 
+/* list intro position */
+#listintro.modal-box {
+	left: 56.5%;
+}
+
 /* Large screen layout */
 
 @media only screen and (min-width: 1000px) {
@@ -270,6 +281,15 @@ img, object, embed, video {
 	padding-left: 0;
 	padding-right: 0;
 	margin: auto;
+}
+
+}
+
+@media only screen and (min-width: 1245px) {
+
+/* list intro position */
+#listintro.modal-box {
+	left: 55%;
 }
 
 }
