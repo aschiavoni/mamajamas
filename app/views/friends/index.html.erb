@@ -1,20 +1,13 @@
 <div id="follow-moms">
   <%= form_tag notify_friends_path do %>
     <% if has_facebook_friends? -%>
-    <h3>
-      Your Friends
-    </h3>
+    <h3>Your Friends</h3>
     <p class="instruction">
       We recommend you follow these friends that have Mamajamas lists <em>(you can unfollow them below)</em>:
     </p>
     <ul class="follow-moms clearfix">
       <% @fb_friends.each do |friend| -%>
         <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
-      <% end -%>
-      <% if @total_fb_friends > 5 -%>
-        <li>
-          <a href="#" class="more-friends">Show more friends<br><strong><%= @total_fb_friends - 5 %></strong></a>
-        </li>
       <% end -%>
     </ul>
     <% end -%>
