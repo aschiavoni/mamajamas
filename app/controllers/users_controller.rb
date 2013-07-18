@@ -38,6 +38,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @profile.update!(uparams)
         sign_in @profile.user, bypass: true
+        @profile.user.send_welcome_email
         format.html do
           redirect_to @redirect_path
         end

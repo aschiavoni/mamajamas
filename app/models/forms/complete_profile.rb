@@ -56,7 +56,6 @@ class Forms::CompleteProfile
       user.username = UsernameGenerator.from_email(user.email)
       user.guest = false
       user.save!
-      user.send_confirmation_instructions
     end
   rescue
     user.reload

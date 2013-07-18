@@ -3,7 +3,11 @@ window.Mamajamas.Views.AppAuth = Backbone.View.extend({
   initialize: function() {
     this.model.on('facebook:disconnected', this.serverLogout, this);
 
-    this._signupModal = new Mamajamas.Views.SignupModal({
+    var signupView = Mamajamas.Views.SignupModal;
+    if (this.isGuest())
+      signupView = Mamajamas.Views.CompleteRegistrationModal;
+
+    this._signupModal = new signupView({
       model: this.model,
       el: '#signup-modal'
     });
@@ -11,11 +15,6 @@ window.Mamajamas.Views.AppAuth = Backbone.View.extend({
     this._loginModal = new Mamajamas.Views.LoginModal({
       model: this.model,
       el: '#login-modal'
-    });
-
-    this._completeRegistrationModal = new Mamajamas.Views.CompleteRegistrationModal({
-      model: this.model,
-      el: '#complete-registration-modal'
     });
   },
 
@@ -36,7 +35,7 @@ window.Mamajamas.Views.AppAuth = Backbone.View.extend({
   },
 
   completeRegistration: function() {
-    this._completeRegistrationModal.show();
+    this._signupModal.show();
     return false;
   },
 
@@ -58,6 +57,13 @@ window.Mamajamas.Views.AppAuth = Backbone.View.extend({
 
   serverLogout: function(fbresponse) {
     $("#server-logout").click();
+  },
+
+  isGuest: function() {
+    if (Mamajamas.Context.User)
+      return Mamajamas.Context.User.get('guest');
+    else
+      return false;
   },
 
 });
