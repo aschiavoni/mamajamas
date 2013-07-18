@@ -8,7 +8,7 @@ Mamajamas.Views.Base = Backbone.View.extend({
   },
 
   unauthorized: function() {
-    Mamajamas.Context.AppAuth.completeRegistration();
+    Mamajamas.Context.AppAuth.signup();
   },
 
 });

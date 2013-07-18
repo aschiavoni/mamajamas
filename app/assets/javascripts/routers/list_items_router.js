@@ -23,7 +23,7 @@ Mamajamas.Routers.ListItems = Backbone.Router.extend({
 
   index: function() {
     $(document).ajaxError(function(e, xhr, options) {
-      Mamajamas.Context.AppAuth.completeRegistration();
+      Mamajamas.Context.AppAuth.signup();
     });
 
     var listView = new Mamajamas.Views.ListShow({

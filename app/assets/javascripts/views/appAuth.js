@@ -34,11 +34,6 @@ window.Mamajamas.Views.AppAuth = Backbone.View.extend({
     return false;
   },
 
-  completeRegistration: function() {
-    this._signupModal.show();
-    return false;
-  },
-
   login: function() {
     this._loginModal.show();
     return false;
