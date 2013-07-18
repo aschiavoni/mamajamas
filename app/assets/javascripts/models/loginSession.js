@@ -114,6 +114,7 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     return (((new Date() - lastUpdatedAt) / 1000) > ( 60 * 60 * 24 ))
   },
   updateFriends: function(fbresponse) {
+    var _session = this;
     if(typeof FB == 'undefined')
       return;
     // fbresponse is the fb response from FB.login or Db.getLoginStatus
@@ -122,7 +123,7 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     FB.api("/me/friends", opts, function(response) {
       var data = { uid: fbresponse.authResponse.userID, friends: response.data };
       $.post("/registrations/facebook/friends", data, function(response) {
-        // do nothing
+        _session.trigger('server:facebook:friends:updated');
       });
     });
   },
@@ -138,7 +139,11 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
           last_name: data.last_name,
           sign_in_count: data.sign_in_count
         });
-        _session.trigger('server:authenticated');
+        // defer server:authenticated until we update a user's friends
+        _session.on('facebook:connected', _session.updateFriends);
+        _session.on('server:facebook:friends:updated', function() {
+          this.trigger('server:authenticated');
+        }, _session);
         _session.updateLoginStatus();
       }
       else {
