@@ -32,7 +32,7 @@ feature "Visitor signs up", js: true do
       page.has_selector?('#create-account-email', visible: true)
 
       # simulate login
-      page.execute_script("Mamajamas.Context.LoginSession.saveSession();")
+      page.execute_script("Mamajamas.Context.LoginSession.saveSession(true);")
 
       # should be on the friends page
       expect(page).to have_content("Follow Friends")

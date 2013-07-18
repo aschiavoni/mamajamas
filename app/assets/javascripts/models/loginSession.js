@@ -127,7 +127,9 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
       });
     });
   },
-  saveSession: function() {
+  saveSession: function(skipFriendsUpdate) {
+    // skipFriendsUpdate should be set when doing integration testing
+    // so that you don't actually try and talk to facebook
     var _session = this;
     _session.trigger('server:authenticating');
 
@@ -139,11 +141,16 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
           last_name: data.last_name,
           sign_in_count: data.sign_in_count
         });
-        // defer server:authenticated until we update a user's friends
-        _session.on('facebook:connected', _session.updateFriends);
-        _session.on('server:facebook:friends:updated', function() {
-          this.trigger('server:authenticated');
-        }, _session);
+
+        if (!skipFriendsUpdate) {
+          // defer server:authenticated until we update a user's friends
+          _session.on('facebook:connected', _session.updateFriends);
+          _session.on('server:facebook:friends:updated', function() {
+            this.trigger('server:authenticated');
+          }, _session);
+        } else {
+          _session.trigger('server:authenticated');
+        }
         _session.updateLoginStatus();
       }
       else {
