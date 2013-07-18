@@ -1,6 +1,6 @@
 <div id="follow-moms">
   <%= form_tag notify_friends_path do %>
-    <% unless @fb_friends.size == 0 -%>
+    <% if has_facebook_friends? -%>
     <h3>
       Your Friends
     </h3>
@@ -18,19 +18,25 @@
       <% end -%>
     </ul>
     <% end -%>
-    <h3>Follow Other Mamajamas Parents</h3>
-    <p class="instruction">
-      Based on your quiz answers, here are some other parents we think you should follow:
-    </p>
-    <ul class="follow-moms clearfix">
-      <% @recommended_friends.each do |friend| -%>
-        <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
-      <% end -%>
-    </ul>
-    <p class="option right">
-      <%= check_box_tag "notify", 1, true, id: "chk-let-friends-know" %>
-      <label for="chk-let-friends-know">Let friends know you are following them. </label>
-    </p>
+    <% if has_recommended_friends? -%>
+      <h3>Follow Other Mamajamas Parents</h3>
+      <p class="instruction">
+        Based on your quiz answers, here are some other parents we think you should follow:
+      </p>
+      <ul class="follow-moms clearfix">
+        <% @recommended_friends.each do |friend| -%>
+          <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+        <% end -%>
+      </ul>
+    <% end -%>
+    <% if has_any_friends? -%>
+      <p class="option right">
+        <%= check_box_tag "notify", 1, true, id: "chk-let-friends-know" %>
+        <label for="chk-let-friends-know">Let friends know you are following them. </label>
+      </p>
+    <% else -%>
+        <h4 class="center">Sorry, we were unable to find any recommended friends right now.</h4>
+    <% end -%>
     <div class="button-row">
       <%= submit_tag "Save and Go to List", class: "button bt-color" %>
     </div>
