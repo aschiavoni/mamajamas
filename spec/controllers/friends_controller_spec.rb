@@ -20,11 +20,6 @@ describe FriendsController do
       assigns(:fb_friends).should_not be_nil
     end
 
-    it "should assign total fb friends" do
-      get :index
-      assigns(:total_fb_friends).should_not be_nil
-    end
-
     it "should build relationships if never done before" do
       RelationshipBuilder.
         any_instance.

@@ -5,8 +5,7 @@ class FriendsController < ApplicationController
 
   def index
     all_fb_friends = current_user.facebook.mamajamas_friends
-    @fb_friends = all_fb_friends.slice(0..4)
-    @total_fb_friends = all_fb_friends.size
+    @fb_friends = all_fb_friends
     @recommended_friends = RecommendedFriend.new(current_user, all_fb_friends).all(5)
 
     if current_user.relationships_created_at.blank?
