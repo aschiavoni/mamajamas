@@ -19,7 +19,7 @@ class Forms::UserProfile
   delegate :profile_picture, :profile_picture=, :to => :user
   delegate :notes, :notes=, :to => :user
   delegate :profile_picture_cache, :profile_picture_cache=, :to => :user
-  delegate :title, :title=, :to => :list, :prefix => true
+  delegate :title, :title=, :to => :list, :prefix => true, :allow_nil => true
 
   validates(:username, presence: true, format: { :with => /^[A-Za-z\d_]+$/ })
 
