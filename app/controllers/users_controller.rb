@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   def complete
     init_view 'create-profile', 'Complete my profile', 3
-    @redirect_path = list_path
+    @redirect_path = friends_path
     @profile = Forms::CompleteProfile.new(current_user)
     uparams = params[:profile] || params[:user]
 

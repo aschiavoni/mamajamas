@@ -69,7 +69,7 @@ describe RegistrationsController do
 
     it "redirects to friends path after signup" do
       post :create, user: registration
-      response.should redirect_to(root_path)
+      response.should redirect_to(friends_path)
     end
 
   end

@@ -9,7 +9,7 @@ feature "Visitor signs up", js: true do
     expect(page).to have_selector("#logout")
     expect(page).to have_content("My Account")
     expect(page).to have_content("Take the quiz")
-    current_path.should == root_path
+    current_path.should == friends_path
   end
 
   scenario "with invalid email" do
