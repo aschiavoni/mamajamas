@@ -75,9 +75,10 @@ describe ListItem do
     end
 
     it "returns a unique list of vendor and vendor id combos" do
-      ListItem.unique_products.should == [
-        ["1234", "amazon" ], [ "54321", "soap.com" ]
-      ]
+      products = [["1234", "amazon" ], [ "54321", "soap.com" ]]
+      products.each do |product_data|
+        ListItem.unique_products.should include(product_data)
+      end
     end
 
   end
