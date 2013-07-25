@@ -4,7 +4,7 @@ namespace :mamajamas do
 
     # this is not perfect and is slow but only needs to be run once
 
-    desc ""
+    desc "Backfill vendor details"
     task vendor_details: :environment do
       ListItem.user_items.where(vendor: nil).each do |list_item|
         product_type = list_item.product_type
