@@ -4,6 +4,7 @@
   <p class="detail-price">
     {{price}} <em>on Amazon.com</em>
   </p>
+  {{#if mamajamas_rating}}
   <div class="detail-rating-mj rating">
     <div class="eggs">
       <div class="egg egg-full"></div>
@@ -14,6 +15,19 @@
     </div>
     Mamajamas rating
   </div>
+  {{/if}}
+  {{#if rating}}
+  <div class="detail-rating-am rating">
+    <div class="stars">
+      <div class="star star-full"></div>
+      <div class="star star-full"></div>
+      <div class="star star-half"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+    </div>
+    Amazon rating
+  </div>
+  {{/if}}
   <div class="prod-links">
     <ul>
       <li>
