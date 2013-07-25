@@ -3,11 +3,20 @@
 <!-- modal window box -->
 <div class="modal-box" id="search-modal">
   <!-- modal window header -->
-  <h2>Find <strong>{{product_type_plural_name}}</strong></h2>
-  <a href="#" id="closewindow" class="ss-icon"><span>Close</span></a>
+  <h2>Choose a <strong>{{product_type_name}}</strong></h2>
+  <a href="#" id="closewindow" class="bt-close ss-icon">Close</a>
   <!-- modal window content -->
   <div class="content">
+
+    <div id="prod-suggestions-results">
+      <h3>Suggested {{product_type_plural_name}}</h3>
+      <ul class="prod-search-list clearfix suggestions">
+        <p class="no-search-results" style="display: none;">No suggestions found</p>
+      </ul>
+    </div>
+
     <div id="prod-search">
+      <h3>Find More Choices</h3>
       <form method="POST" class="label-infield" id="frm-prod-search">
         <fieldset>
           <p>
@@ -18,6 +27,7 @@
         </fieldset>
       </form>
     </div>
+
     <div id="prod-search-results">
       <ul class="prod-search-list clearfix search-results">
         <div class="progress-container">
@@ -25,11 +35,8 @@
         </div>
         <p class="no-search-results" style="display: none;">No results found</p>
       </ul>
-      <h3>Suggested {{product_type_plural_name}}</h3>
-      <ul class="prod-search-list clearfix suggestions">
-        <p class="no-search-results" style="display: none;">No suggestions found</p>
-      </ul>
     </div>
+
   </div>
   <!-- end modal window content -->
 </div>

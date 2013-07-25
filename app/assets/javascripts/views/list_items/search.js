@@ -94,7 +94,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   },
 
   showSuggestions: function(searchResults) {
-    var $resultsContainer = $('#prod-search-results ul.suggestions', this.$el);
+    var $resultsContainer = $('#prod-suggestions-results ul.suggestions', this.$el);
     this.addSearchResultsToContainer(searchResults, this, $resultsContainer);
   },
 
