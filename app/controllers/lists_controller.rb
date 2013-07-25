@@ -58,6 +58,7 @@ class ListsController < ApplicationController
 
   def init_view
     set_subheader "Your baby gear list"
+    set_preheader "Editing My Master List"
     set_page_id "buildlist"
     set_progress_id 2
   end

@@ -47,6 +47,14 @@ module ApplicationHelper
     page_context.subheader
   end
 
+  def preheader
+    if page_context.preheader.present?
+      content_tag :p, class: "prehed" do
+        page_context.preheader
+      end
+    end
+  end
+
   def progress_id
     page_context.progress_id
   end

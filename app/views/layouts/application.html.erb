@@ -82,6 +82,7 @@
   <% if show_header -%>
     <div id="title">
       <div id="subhed">
+        <%= preheader %>
         <h2><%= subheader %></h2>
       </div>
       <%= content_for?(:subheader_content) ? yield(:subheader_content) : "" %>

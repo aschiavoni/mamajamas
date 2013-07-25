@@ -47,6 +47,10 @@ class ApplicationController < ActionController::Base
     page_context.subheader = subheader
   end
 
+  def set_preheader(preheader)
+    page_context.preheader = preheader
+  end
+
   def set_progress_id(progress_id)
     page_context.progress_id = progress_id
   end
