@@ -52,7 +52,7 @@ en:
             name:
               blank: "Sorry, but you must provide a name for your item."
             link:
-              blank: "Sorry, but you must provide a link for your item."
+              blank: "Please link to a website where you can buy this item."
             category_id:
               blank: "Sorry, but an item must belong to a category."
             notes:
