@@ -28,7 +28,7 @@ describe UserMailer do
     end
 
     it "includes a link to angie's list page" do
-      mail.body.encoded.should match("http://www.mamajamas.com/angieschiavoni")
+      mail.body.encoded.should match("http://www.mamajamas.com/angie")
     end
 
     it "includes a link to user's list page" do

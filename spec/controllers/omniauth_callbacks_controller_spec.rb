@@ -5,7 +5,7 @@ describe Users::OmniauthCallbacksController do
   describe "facebook" do
 
     let(:auth_hash) {
-      mock_omniauth('91234560', 'fbuser@example.com', 'Joe', 'Case')
+      mock_omniauth('91234560', 'fbuser@example.com', 'Joseph', 'Case')
     }
 
     before do
