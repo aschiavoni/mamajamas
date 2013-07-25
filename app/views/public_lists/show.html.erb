@@ -61,11 +61,6 @@
       <% if @view.owner.notes.present? -%>
         <p><%= @view.owner.notes %></p>
       <% end -%>
-      <% if @view.preview? -%>
-        <p class="right">
-          <%= link_to "Full profile", profile_path %>
-        </p>
-      <% end -%>
       <% unless @view.owner == current_user -%>
         <p id="bt-follow" data-owner-id="<%= @view.owner.id %>" data-relationship-id="<%= (@view.following? ? @view.following?.id : nil) %>">
           <% if @view.following? -%>
