@@ -120,10 +120,12 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   },
 
   addOrUpdateItem: function(searchResult) {
-    if (this.model.get('placeholder'))
+    if (this.model.get('placeholder')) {
       this.addItem(searchResult);
-    else
+    }
+    else {
       this.updateItem(searchResult);
+    }
   },
 
   addItem: function(searchResult) {
@@ -150,6 +152,8 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       name: searchResult.get('name'),
       link: searchResult.get('url'),
       image_url: searchResult.get('image_url'),
+      rating: null,
+      owned: false
     };
 
     this.model.set(attributes);

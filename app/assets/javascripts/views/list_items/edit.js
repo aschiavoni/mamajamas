@@ -6,6 +6,8 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
 
   className: "prod prod-filled edit-mode",
 
+  oldModel: null,
+
   initialize: function() {
     _errMap = this.errorFieldMap();
 
@@ -14,9 +16,15 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
       this.$el.addClass('choose-bt');
     }
 
+    // save a clone of the original model in case we cancel
+    this.oldModel = this.model.clone();
+
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:age", this.updateAgeRange, this);
     this.model.on("change:priority", this.updatePriority, this);
+    this.model.on("change:name", this.render, this);
+    this.model.on("change:link", this.render, this);
+    this.model.on("change:image_url", this.render, this);
   },
 
   events: {
@@ -207,6 +215,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
   },
 
   cancel: function(event) {
+    this.model.set(this.oldModel.attributes);
     if (this.options.parent) {
       this.options.parent.$el.show();
       this.options.parent.editing = false;
