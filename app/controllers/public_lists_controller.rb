@@ -5,7 +5,7 @@ class PublicListsController < ApplicationController
   before_filter :init_view
 
   def show
-    @view = PublicListView.new(@list, params[:category])
+    @view = PublicListView.new(@list, params[:category], false, current_user)
 
     # redirect if using an old slug
     if redirect_needed?(@view)

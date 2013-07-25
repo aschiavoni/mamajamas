@@ -3,10 +3,12 @@ class ListView
 
   attr_reader :list
   attr_reader :category_slug
+  attr_reader :current_user
 
-  def initialize(list, category_slug = nil)
+  def initialize(list, category_slug = nil, current_user = nil)
     @list = list
     @category_slug = category_slug
+    @current_user = current_user
   end
 
   def categories

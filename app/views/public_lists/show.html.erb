@@ -29,11 +29,6 @@
     <!-- / end message overlay -->
   <% end -%>
 <% end -%>
-<%= content_for :title_links do %>
-  <ul>
-    <li id="bt-follow"><a href="#" class="button">Follow</a></li>
-  </ul>
-<% end -%>
 <%= content_for :subheader_content do %>
   <p class="pubdate">
     Created <%= l @view.list.created_at, format: :friendly %>
@@ -69,6 +64,15 @@
       <% if @view.preview? -%>
         <p class="right">
           <%= link_to "Full profile", profile_path %>
+        </p>
+      <% end -%>
+      <% unless @view.owner == current_user -%>
+        <p id="bt-follow" data-owner-id="<%= @view.owner.id %>" data-relationship-id="<%= (@view.following? ? @view.following?.id : nil) %>">
+          <% if @view.following? -%>
+            <a href="#" class="button unfollow">Unfollow</a>
+          <% else -%>
+            <a href="#" class="button follow">Follow</a>
+          <% end -%>
         </p>
       <% end -%>
     </div>

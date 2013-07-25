@@ -18,6 +18,10 @@ Mamajamas.Routers.PublicListItems = Backbone.Router.extend({
 
     var listEntries = $("#public-list").data("list-entries");
     Mamajamas.Context.ListItems.reset(listEntries);
+
+    var sidebarView = new Mamajamas.Views.PublicListSidebar({
+      el: '#module-profile'
+    });
   }
 
 });

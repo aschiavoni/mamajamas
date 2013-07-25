@@ -1,6 +1,6 @@
 class PublicListView < ListView
-  def initialize(list, category_slug = nil, preview = false)
-    super(list, category_slug)
+  def initialize(list, category_slug = nil, preview = false, current_user = nil)
+    super(list, category_slug, current_user)
     @preview = preview
   end
 
@@ -14,6 +14,11 @@ class PublicListView < ListView
 
   def categories
     @categories ||= get_categories
+  end
+
+  def following?
+    return false unless current_user
+    current_user.following?(owner)
   end
 
   def public_category_path(slug)
