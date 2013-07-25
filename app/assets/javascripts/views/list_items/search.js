@@ -155,7 +155,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       link: searchResult.get('url'),
       image_url: searchResult.get('image_url'),
       rating: null,
-      owned: false
+      owned: false,
       vendor: searchResult.get('vendor'),
       vendor_id: searchResult.get('vendor_id')
     };

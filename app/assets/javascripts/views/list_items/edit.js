@@ -19,12 +19,10 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     // save a clone of the original model in case we cancel
     this.oldModel = this.model.clone();
 
+    this.model.on("change", this.render, this);
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:age", this.updateAgeRange, this);
     this.model.on("change:priority", this.updatePriority, this);
-    this.model.on("change:name", this.render, this);
-    this.model.on("change:link", this.render, this);
-    this.model.on("change:image_url", this.render, this);
   },
 
   events: {
