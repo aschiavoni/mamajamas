@@ -1,5 +1,10 @@
 require 'spec_helper'
 
+class FakeAnswerLogger
+  def self.save_answer!(*args)
+  end
+end
+
 describe Quiz::Feeding do
 
   let(:user) { create(:user) }
@@ -10,7 +15,7 @@ describe Quiz::Feeding do
     ListBuilder.new(user, kid).build!
   end
 
-  subject { Quiz::Feeding.new(list) }
+  subject { Quiz::Feeding.new(list, FakeAnswerLogger) }
 
   it "initializes with a list" do
     Quiz::Feeding.new(list)
@@ -24,6 +29,11 @@ describe Quiz::Feeding do
     lambda {
       subject.answer("heyo")
     }.should raise_error(ArgumentError)
+  end
+
+  it "saves the answer to the database" do
+    FakeAnswerLogger.should_receive(:save_answer!)
+    subject.answer("Pump", "Bottle Feed")
   end
 
   it "sets priority if a single option is included" do

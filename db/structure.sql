@@ -467,6 +467,39 @@ ALTER SEQUENCE products_id_seq OWNED BY products.id;
 
 
 --
+-- Name: quiz_answers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE quiz_answers (
+    id integer NOT NULL,
+    user_id integer,
+    question character varying(255),
+    answers text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: quiz_answers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE quiz_answers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: quiz_answers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE quiz_answers_id_seq OWNED BY quiz_answers.id;
+
+
+--
 -- Name: relationships; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -659,6 +692,13 @@ ALTER TABLE ONLY products ALTER COLUMN id SET DEFAULT nextval('products_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY quiz_answers ALTER COLUMN id SET DEFAULT nextval('quiz_answers_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY relationships ALTER COLUMN id SET DEFAULT nextval('relationships_id_seq'::regclass);
 
 
@@ -667,14 +707,6 @@ ALTER TABLE ONLY relationships ALTER COLUMN id SET DEFAULT nextval('relationship
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
-
-
---
--- Name: age_ranges_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY age_ranges
-    ADD CONSTRAINT age_ranges_pkey PRIMARY KEY (id);
 
 
 --
@@ -766,6 +798,14 @@ ALTER TABLE ONLY products
 
 
 --
+-- Name: quiz_answers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY quiz_answers
+    ADD CONSTRAINT quiz_answers_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: relationships_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -779,6 +819,14 @@ ALTER TABLE ONLY relationships
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: when_to_buy_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY age_ranges
+    ADD CONSTRAINT when_to_buy_suggestions_pkey PRIMARY KEY (id);
 
 
 --
@@ -1074,3 +1122,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130710130139');
 INSERT INTO schema_migrations (version) VALUES ('20130716140118');
 
 INSERT INTO schema_migrations (version) VALUES ('20130716192840');
+
+INSERT INTO schema_migrations (version) VALUES ('20130726153715');
