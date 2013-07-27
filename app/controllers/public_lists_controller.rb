@@ -15,6 +15,8 @@ class PublicListsController < ApplicationController
     @list_entries_json = render_list_entries(@view.list_entries)
     @list.increment_public_view_count
 
+    set_preheader "My Shared List" if current_user == @list.user
+
     respond_to do |format|
       format.html
     end
@@ -64,7 +66,6 @@ class PublicListsController < ApplicationController
   def init_view
     set_page_id "publist"
     set_subheader @list.title
-    set_preheader "My Shared List"
     set_progress_id 3
     hide_progress_bar
   end
