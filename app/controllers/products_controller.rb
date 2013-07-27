@@ -6,7 +6,8 @@ class ProductsController < ApplicationController
 
   def index
     @products = []
-    query = params[:filter]
+    query = search_query(params[:filter], params[:name])
+
     if query.present?
       cache_id = "product:searcher:#{query.parameterize}"
       @products = Rails.cache.fetch(cache_id, expire_in: 24.hours) do
@@ -18,5 +19,16 @@ class ProductsController < ApplicationController
       format.html { not_found }
       format.json
     end
+  end
+
+  private
+
+  def search_query(query, product_type_name)
+    return query if product_type_name.blank?
+    name = product_type_name.downcase
+    if query != name && query.split(' ').size == 1
+      query += " #{name}"
+    end
+    query
   end
 end

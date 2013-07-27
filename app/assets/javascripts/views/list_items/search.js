@@ -82,7 +82,8 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
 
     this.searchResults.fetch({
       data: {
-        filter: query
+        filter: query,
+        name: this.model.get('product_type_name')
       }
     });
 
