@@ -8,7 +8,7 @@ class Quiz::Answer < ActiveRecord::Base
   def self.save_answer!(user, name, answers)
     Quiz::Answer.create!({
       user_id: user.id,
-      question: "feeding",
+      question: name,
       answers: answers
     })
   end
