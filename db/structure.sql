@@ -367,7 +367,9 @@ CREATE TABLE product_types (
     image_name character varying(255),
     age_range_id integer,
     user_id integer,
-    plural_name character varying(255)
+    plural_name character varying(255),
+    search_index character varying(255) DEFAULT 'All'::character varying,
+    search_query character varying(255)
 );
 
 
@@ -1124,3 +1126,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130716140118');
 INSERT INTO schema_migrations (version) VALUES ('20130716192840');
 
 INSERT INTO schema_migrations (version) VALUES ('20130726153715');
+
+INSERT INTO schema_migrations (version) VALUES ('20130727125616');
