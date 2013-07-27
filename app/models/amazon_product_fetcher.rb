@@ -58,7 +58,7 @@ class AmazonProductFetcher
         {
           vendor_id: vendor_id,
           vendor: VENDOR_NAME,
-          name: item_attributes.get('Title'),
+          name: HTMLEntities.new.decode(item_attributes.get('Title')),
           url: item.get('DetailPageURL'),
           image_url: small_image.blank? ? nil : small_image.get('URL'),
           medium_image_url: medium_image.blank? ? nil : medium_image.get('URL'),
