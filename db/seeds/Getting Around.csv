@@ -1,19 +1,19 @@
-Getting Around (default pre-birth),Plural,Default Priority,Default When to Buy,Image Name,High Res Image,Queries,Contingencies,Image Pulled,Icon Created
-Back Pack,Back Packs,3,7-12 mo,backpack.png,backpack@2x.png,,-moves to 2 for jetsetter,x,x
-Infant Car Seat,Infant Car Seats,1,Pre-birth,infant_carseat.png,infant_carseat@2x.png,,,x,x
-Convertible Car Seat,Convertible Car Seats,1,7-12 mo,convertible_carseat.png,convertible_carseat@2x.png,,,x,x
-Carrier or Wrap,Carriers or Wraps,2,Pre-birth,carrier.png,carrier@2x.png,,,x,x
-Sling,Slings,2,Pre-birth,sling.png,sling@2x.png,,,x,x
-Bike Trailer,Bike Trailers,3,13-18 mo,bike_trailer.png,bike_trailer@2x.png,,,x,x
-Bike Seat,Bike Seats,3,13-18 mo,bike_seat.png,bike_seat@2x.png,,,x,x
-Stroller,Strollers,2,4-6 mo,stroller.png,stroller@2x.png,,,x,x
-Double Stroller,Double Strollers,3,4-6 mo,double_stroller.png,double_stroller@2x.png,,,x,x
-Jogging Stroller,Jogging Strollers,3,4-6 mo,jogging_stroller.png,jogging_stroller@2x.png,,,x,x
-Umbrella Stroller,Umbrella Strollers,2,7-12 mo,umbrella_stroller.png,umbrella_stroller@2x.png,,,x,x
-Stroller Liner,Stroller Liners,3,4-6 mo,stroller_liner.png,stroller_liner@2x.png,,,x,x
-Stroller Blanket,Stroller Blankets,3,4-6 mo,stroller_blanket.png,stroller_blanket@2x.png,,,x,x
-Stroller Hand Muff,Stroller Hand Muffs,3,4-6 mo,stroller_hand_muff.png,stroller_hand_muff@2x.png,,,x,x
-Stroller Foot Muff,Stroller Foot Muffs,2,4-6 mo,stroller_foot_muff.png,stroller_foot_muff@2x.png,,,x,
-Outdoor Blanket/Mat,Outdoor Blankets/Mats,3,4-6 mo,outdoor_blanket.png,outdoor_blanket@2x.png,,-moves to 2 for Cautious,x,x
-Diaper Bag,Diaper Bags,2,Pre-birth,diaper_bag.png,diaper_bag@2x.png,,,x,x
-Shopping Cart Cover,Shopping Cart Covers,3,7-12 mo,shopping_cart_cover.png,shopping_cart_cover@2x.png,,-moves to 2 for Cautious,x,x
+Getting Around (default pre-birth),Plural,,Default Priority,Default When to Buy,Image Name,High Res Image,Queries,Contingencies,Image Pulled,Icon Created
+Back Pack,Back Packs,,3,7-12 mo,backpack.png,backpack@2x.png,,-moves to 2 for jetsetter,x,x
+Infant Car Seat,Infant Car Seats,,1,Pre-birth,infant_carseat.png,infant_carseat@2x.png,,,x,x
+Convertible Car Seat,Convertible Car Seats,,1,7-12 mo,convertible_carseat.png,convertible_carseat@2x.png,,,x,x
+Carrier or Wrap,Carriers or Wraps,,2,Pre-birth,carrier.png,carrier@2x.png,,,x,x
+Sling,Slings,,2,Pre-birth,sling.png,sling@2x.png,,,x,x
+Bike Trailer,Bike Trailers,,3,13-18 mo,bike_trailer.png,bike_trailer@2x.png,,,x,x
+Bike Seat,Bike Seats,,3,13-18 mo,bike_seat.png,bike_seat@2x.png,,,x,x
+Stroller,Strollers,,2,4-6 mo,stroller.png,stroller@2x.png,,,x,x
+Double Stroller,Double Strollers,,3,4-6 mo,double_stroller.png,double_stroller@2x.png,,,x,x
+Jogging Stroller,Jogging Strollers,,3,4-6 mo,jogging_stroller.png,jogging_stroller@2x.png,,,x,x
+Umbrella Stroller,Umbrella Strollers,,2,7-12 mo,umbrella_stroller.png,umbrella_stroller@2x.png,,,x,x
+Stroller Liner,Stroller Liners,,3,4-6 mo,stroller_liner.png,stroller_liner@2x.png,,,x,x
+Stroller Blanket,Stroller Blankets,,3,4-6 mo,stroller_blanket.png,stroller_blanket@2x.png,,,x,x
+Stroller Hand Muff,Stroller Hand Muffs,,3,4-6 mo,stroller_hand_muff.png,stroller_hand_muff@2x.png,,,x,x
+Stroller Foot Muff,Stroller Foot Muffs,,2,4-6 mo,stroller_foot_muff.png,stroller_foot_muff@2x.png,,,x,
+Outdoor Blanket/Mat,Outdoor Blankets/Mats,,3,4-6 mo,outdoor_blanket.png,outdoor_blanket@2x.png,,-moves to 2 for Cautious,x,x
+Diaper Bag,Diaper Bags,,2,Pre-birth,diaper_bag.png,diaper_bag@2x.png,,,x,x
+Shopping Cart Cover,Shopping Cart Covers,,3,7-12 mo,shopping_cart_cover.png,shopping_cart_cover@2x.png,,-moves to 2 for Cautious,x,x

@@ -6,11 +6,11 @@ describe ProductTypeRow do
   let(:category) { create(:category) }
 
   def row_csv(name = "Bodysuit", plural_name = "Bodysuits")
-    CSV.parse("#{name},#{plural_name},1,Pre-birth,bodysuit.png,bodysuit@2x.png,bodysuit; body suit;body suits,,x,x,,,").flatten
+    CSV.parse("#{name},#{plural_name},Baby #{plural_name},1,Pre-birth,bodysuit.png,bodysuit@2x.png,bodysuit; body suit;body suits,,x,x,,,").flatten
   end
 
   def row_csv_no_queries(name = "Bodysuit", plural_name = "Bodysuits")
-    CSV.parse("#{name},#{plural_name},1,Pre-birth,bodysuit.png,bodysuit@2x.png,,,x,x,,,").flatten
+    CSV.parse("#{name},#{plural_name},Baby #{plural_name},1,Pre-birth,bodysuit.png,bodysuit@2x.png,,,x,x,,,").flatten
   end
 
   def row_csv_no_name
@@ -59,6 +59,10 @@ describe ProductTypeRow do
 
   it "finds age range" do
     product_type_row.age_range.should_not be_nil
+  end
+
+  it "finds search query" do
+    product_type_row.search_query.should == "Baby Bodysuits"
   end
 
   it "updates a product type if it does exist" do

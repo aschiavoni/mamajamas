@@ -1,14 +1,14 @@
-Feeding (default pre-birth),Plural,Default Priority,Default When to Buy,Image Name,High Res Image Name,Queries,Contingencies,Image Pulled,Icon Created
-Milk Storage,Milk Storage,2,Pre-Birth,milk_storage.png,milk_storage@2x.png,,-moves to 3 if pumping not chosen and 1 if pumping is chosen,x,x
-Breast Pump,Breast Pumps,2,Pre-Birth,breast_pump.png,breast_pump@2x.png,,-moves to 3 if pumping not chosen and 1 if pumping is chosen,x,x
-Breast Pump Accessory,Breast Pump Accessories,3,Pre-Birth,breast_pump_accessory.png,breast_pump_accessory@2x.png,,,x,x
-Nursing Pillow,Nursing Pillows,1,Pre-Birth,nursing_pillow.png,nursing_pillow@2x.png,,-moves to 2 if breastfeeding NOT chosen,x,x
-Nursing Pads,Nursing Pads,2,Pre-Birth,nursing_pads.png,nursing_pads@2x.png,,-moves to 1 if pumping or breasfeeding chosen,x,x
-Breast/Nipple Care,Breast/Nipple Care,2,Pre-Birth,breast_care.png,breast_care@2x.png,,-moves to 3 if pumping or breasfeeding NOT chosen,x,x
-Nursing Cover,Nursing Covers,3,Pre-Birth,nursing_cover.png,nursing_cover@2x.png,,-moves to 2 if breastfeeding chosen,x,x
-Nursing Bra,Nursing Bras,2,Pre-Birth,nursing_bra.png,nursing_bra@2x.png,,-moves to 1 for Breastfeeding and 3 for Bottlefeeding only mom,x,x
-Nursing Top,Nursing Tops,2,Pre-Birth,nursing_top.png,nursing_top@2x.png,,-moves to 3 for only bottle feeding,x,x
-Nursing Stool,Nursing Stools,2,Pre-Birth,nursing_stool.png,nursing_stool@2x.png,,-moves to 3 for only bottle feeding or pumping mom,x,x
-Nursing Tea,Nursing Teas,3,Pre-Birth,nursing_tea.png,nursing_tea@2x.png,,-moves to 2 for breastfeeding or pumping mom,x,x
-Nursing Book,Nursing Books,3,Pre-Birth,nursing_book.png,nursing_book@2x.png,,-moves to 2 for breastfeeding or pumping mom,x,x
-Pumping Bra,Pumping Bras,3,Pre-Birth,pumping_bra.png,pumping_bra@2x.png,,-moves to 2 for pumping mom ,x,x
+Feeding (default pre-birth),Plural,,Default Priority,Default When to Buy,Image Name,High Res Image Name,Queries,Contingencies,Image Pulled,Icon Created
+Milk Storage,Milk Storage,,2,Pre-Birth,milk_storage.png,milk_storage@2x.png,,-moves to 3 if pumping not chosen and 1 if pumping is chosen,x,x
+Breast Pump,Breast Pumps,,2,Pre-Birth,breast_pump.png,breast_pump@2x.png,,-moves to 3 if pumping not chosen and 1 if pumping is chosen,x,x
+Breast Pump Accessory,Breast Pump Accessories,,3,Pre-Birth,breast_pump_accessory.png,breast_pump_accessory@2x.png,,,x,x
+Nursing Pillow,Nursing Pillows,,1,Pre-Birth,nursing_pillow.png,nursing_pillow@2x.png,,-moves to 2 if breastfeeding NOT chosen,x,x
+Nursing Pads,Nursing Pads,,2,Pre-Birth,nursing_pads.png,nursing_pads@2x.png,,-moves to 1 if pumping or breasfeeding chosen,x,x
+Breast/Nipple Care,Breast/Nipple Care,,2,Pre-Birth,breast_care.png,breast_care@2x.png,,-moves to 3 if pumping or breasfeeding NOT chosen,x,x
+Nursing Cover,Nursing Covers,,3,Pre-Birth,nursing_cover.png,nursing_cover@2x.png,,-moves to 2 if breastfeeding chosen,x,x
+Nursing Bra,Nursing Bras,,2,Pre-Birth,nursing_bra.png,nursing_bra@2x.png,,-moves to 1 for Breastfeeding and 3 for Bottlefeeding only mom,x,x
+Nursing Top,Nursing Tops,,2,Pre-Birth,nursing_top.png,nursing_top@2x.png,,-moves to 3 for only bottle feeding,x,x
+Nursing Stool,Nursing Stools,,2,Pre-Birth,nursing_stool.png,nursing_stool@2x.png,,-moves to 3 for only bottle feeding or pumping mom,x,x
+Nursing Tea,Nursing Teas,,3,Pre-Birth,nursing_tea.png,nursing_tea@2x.png,,-moves to 2 for breastfeeding or pumping mom,x,x
+Nursing Book,Nursing Books,,3,Pre-Birth,nursing_book.png,nursing_book@2x.png,,-moves to 2 for breastfeeding or pumping mom,x,x
+Pumping Bra,Pumping Bras,,3,Pre-Birth,pumping_bra.png,pumping_bra@2x.png,,-moves to 2 for pumping mom ,x,x

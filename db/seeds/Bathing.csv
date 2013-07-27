@@ -1,15 +1,15 @@
-Bathing (default pre-birth),Plural,Default Priority,Default When to Buy,Image Name,High Res Image,Queries,Contingencies
-Shampoo or Body Wash,Shampoos or Body Washes,2,0-3 mo,shampoo.png,shampoo@2x.png,shampoo; body wash; baby wash,
-Bath Tub,Bath Tubs,2,Pre-birth,bath_tub.png,bath_tub@2x.png,tub; bather; bath pad; bath center; bathtub; bath tub,-Moves to 1 for Cautious
-Washcloth,Washcloths,2,Pre-birth,washcloth_png,washcloth@2x.png,"washcloth; washcloths; wash cloths, wash cloth; ",
-Towel,Towels,2,Pre-birth,towel.png,towel@2x.png,towel; towels; terry robe,
-Bath Seat,Bath Seats,3,7-12 mo,bath_seat.png,bath_seat@2x.png,bath seat; bath ring; bathing seat; seat,-Moves to 2 for Super Cautious
-Bath Mat,Bath Mats,3,4-6 mo,bath_mat.png,bath_mat@2x.png,bath mat; safety mat; mat; bath pad,-Moves to 2 for Super Cautious
-Bath Book,Bath Books,2,7-12 mo,bath_book.png,bath_book@2x.png,bath book; bath book; bubble book,
-Bath Stool or Kneeler,Bath Stools or Kneelers,3,4-6 mo,kneeler.png,kneeler@2x.png,bath stool; kneeler; bath seat; bath pad,-Moves to 2 for Cautious
-Faucet Cover,Faucet Covers,3,7-12 mo,faucet_cover.png,faucet_cover@2x.png,faucet cover; spout cover; spout guard; faucet guard; faucet extender,-Moves to 2 for Cautious
-Rinse Cup or Visor,Rinse Cups or Visors,2,4-6 mo,rinse_cup.png,rinse_cup@2x.png,rinse cup; shampoo rinser; splashguard; rinser; bath visor,
-Bath Toy,Bath Toys,1,4-6 mo,bath_toy.png,bath_toy@2x.png,bath toy; bath toys; squirters; squirt toys; bath letters; bathtub toy; bathtub toys,
-Bath Toy Storage,Bath Toy Storage,2,4-6 mo,bath_toy_storage.png,bath_toy_storage@2x.png,bath storage; bath toy organizer; bath toy bag; toy hammock; bath toy scoop; bath toy holder,
-Bath Thermometer,Bath Thermoemeters,3,Pre-birth,bath_thermometer.png,bath_thermometer@2x.png,bath thermometer,Moves to 2 for Cautious
-Bath Rail or Handle,Bath Rails or Handles,3,Pre-birth,bath_rail.png,bath_rail@2x.png,bath rail; bath handle; bath safety; safer grip,Moves to 2 for Cautious
+Bathing (default pre-birth),Plural,,Default Priority,Default When to Buy,Image Name,High Res Image,Queries,Contingencies
+Shampoo or Body Wash,Shampoos or Body Washes,Baby Shampoo,2,0-3 mo,shampoo.png,shampoo@2x.png,shampoo; body wash; baby wash,
+Bath Tub,Bath Tubs,,2,Pre-birth,bath_tub.png,bath_tub@2x.png,tub; bather; bath pad; bath center; bathtub; bath tub,-Moves to 1 for Cautious
+Washcloth,Washcloths,Baby Washcloth,2,Pre-birth,washcloth_png,washcloth@2x.png,"washcloth; washcloths; wash cloths, wash cloth; ",
+Towel,Towels,Baby Towel,2,Pre-birth,towel.png,towel@2x.png,towel; towels; terry robe,
+Bath Seat,Bath Seats,,3,7-12 mo,bath_seat.png,bath_seat@2x.png,bath seat; bath ring; bathing seat; seat,-Moves to 2 for Super Cautious
+Bath Mat,Bath Mats,,3,4-6 mo,bath_mat.png,bath_mat@2x.png,bath mat; safety mat; mat; bath pad,-Moves to 2 for Super Cautious
+Bath Book,Bath Books,,2,7-12 mo,bath_book.png,bath_book@2x.png,bath book; bath book; bubble book,
+Bath Stool or Kneeler,Bath Stools or Kneelers,,3,4-6 mo,kneeler.png,kneeler@2x.png,bath stool; kneeler; bath seat; bath pad,-Moves to 2 for Cautious
+Faucet Cover,Faucet Covers,,3,7-12 mo,faucet_cover.png,faucet_cover@2x.png,faucet cover; spout cover; spout guard; faucet guard; faucet extender,-Moves to 2 for Cautious
+Rinse Cup or Visor,Rinse Cups or Visors,,2,4-6 mo,rinse_cup.png,rinse_cup@2x.png,rinse cup; shampoo rinser; splashguard; rinser; bath visor,
+Bath Toy,Bath Toys,,1,4-6 mo,bath_toy.png,bath_toy@2x.png,bath toy; bath toys; squirters; squirt toys; bath letters; bathtub toy; bathtub toys,
+Bath Toy Storage,Bath Toy Storage,,2,4-6 mo,bath_toy_storage.png,bath_toy_storage@2x.png,bath storage; bath toy organizer; bath toy bag; toy hammock; bath toy scoop; bath toy holder,
+Bath Thermometer,Bath Thermoemeters,,3,Pre-birth,bath_thermometer.png,bath_thermometer@2x.png,bath thermometer,Moves to 2 for Cautious
+Bath Rail or Handle,Bath Rails or Handles,,3,Pre-birth,bath_rail.png,bath_rail@2x.png,bath rail; bath handle; bath safety; safer grip,Moves to 2 for Cautious

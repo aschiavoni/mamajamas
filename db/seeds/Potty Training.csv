@@ -1,13 +1,8 @@
-Potty Training (default but only with for moms with kids 12m+),Plural,Default Priority,Default When to Buy,Image Name,High Res Image,Queries,Contingencies,Image Pulled,Icon Created
-Travel Potty,Travel Potties,3,19-24 mo,travel_potty.png,travel_potty@2x.png,,,x,x
-Potty Chair,Potty Chairs,2,19-24 mo,potty_chair.png,potty_chair@2x.png,,,,x
-Potty Seat,Potty Seats,2,19-24 mo,potty_seat.png,potty_seat@2x.png,,,x,x
-Potty Training Book,Potty Training Books,2,19-24 mo,potty_book.png,potty_book@2x.png,,,x,x
-Step Stool,Step Stools,2,19-24 mo,step_stool.png,step_stool@2x.png,,,x,x
-Training Pants,Training Pants,2,19-24 mo,training_pants.png,training_pants@2x.png,,,x,x
-Night Time Pads,Night Time Pads,3,19-24 mo,night_time_pads.png,night_time_pads@2x.png,,,x,x
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-7,,,,,,,,,
+Potty Training (default but only with for moms with kids 12m+),Plural,,Default Priority,Default When to Buy,Image Name,High Res Image,Queries,Contingencies,Image Pulled,Icon Created
+Travel Potty,Travel Potties,,3,19-24 mo,travel_potty.png,travel_potty@2x.png,,,x,x
+Potty Chair,Potty Chairs,,2,19-24 mo,potty_chair.png,potty_chair@2x.png,,,,x
+Potty Seat,Potty Seats,,2,19-24 mo,potty_seat.png,potty_seat@2x.png,,,x,x
+Potty Training Book,Potty Training Books,,2,19-24 mo,potty_book.png,potty_book@2x.png,,,x,x
+Step Stool,Step Stools,,2,19-24 mo,step_stool.png,step_stool@2x.png,,,x,x
+Training Pants,Training Pants,,2,19-24 mo,training_pants.png,training_pants@2x.png,,,x,x
+Night Time Pads,Night Time Pads,,3,19-24 mo,night_time_pads.png,night_time_pads@2x.png,,,x,x
