@@ -1,5 +1,5 @@
 Sleeping (default pre-birth),Plural,,Default Priority,Default When to Buy,Image Name,High Res Image,Queries,Contingencies,Image Pulled,Icon Created
-Monitor,Monitors,,2,Pre-birth,baby_monitor.png,baby_monitor@2x.png,,-moves to 1 for cautious mom,x,
+Monitor,Monitors,Baby Monitors,2,Pre-birth,baby_monitor.png,baby_monitor@2x.png,,-moves to 1 for cautious mom,x,
 Night Light,Night Lights,,2,Pre-birth,night_light.png,night_light@2x.png,,,x,
 White Noise Machine,White Noise Machines,,2,Pre-birth,white_noise_machine.png,white_noise_machine@2x.png,,,x,
 Crib,Cribs,,2,4-6 mo,crib.png,crib@2x.png,,"-moves to 1 if crib chosen, 3 if not chosen",x,
@@ -30,5 +30,5 @@ Toddler Bed Mattress,Toddler Bed Mattresses,,2,2y,crib_mattress.png,mattress@2x.
 Futon,Futons,,2,19-24 mo,futon.png,futon@2x.png,,,x,
 Pacifier,Pacifers,,2,Pre-birth,pacifier.png,pacifier@2x.png,,,x,
 Rocking Chair or Glider,Rocking Chairs or Gliders,,2,Pre-birth,glider.png,glider@2x.png,,,x,
-Swing,Swings,,2,Pre-birth,baby_swing.png,baby_swing@2x.png,,,in playing,
+Swing,Swings,Baby Swing,2,Pre-birth,baby_swing.png,baby_swing@2x.png,,,in playing,
 Bouncy Chair,Bouncy Chairs,,2,Pre-birth,bouncy_chair.png,bouncy_chair@2x.png,,,x,

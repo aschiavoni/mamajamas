@@ -1,9 +1,9 @@
 Getting Around (default pre-birth),Plural,,Default Priority,Default When to Buy,Image Name,High Res Image,Queries,Contingencies,Image Pulled,Icon Created
-Back Pack,Back Packs,,3,7-12 mo,backpack.png,backpack@2x.png,,-moves to 2 for jetsetter,x,x
+Back Pack,Back Packs,Baby Backpack,3,7-12 mo,backpack.png,backpack@2x.png,,-moves to 2 for jetsetter,x,x
 Infant Car Seat,Infant Car Seats,,1,Pre-birth,infant_carseat.png,infant_carseat@2x.png,,,x,x
 Convertible Car Seat,Convertible Car Seats,,1,7-12 mo,convertible_carseat.png,convertible_carseat@2x.png,,,x,x
-Carrier or Wrap,Carriers or Wraps,,2,Pre-birth,carrier.png,carrier@2x.png,,,x,x
-Sling,Slings,,2,Pre-birth,sling.png,sling@2x.png,,,x,x
+Carrier or Wrap,Carriers or Wraps,Baby Carrier,2,Pre-birth,carrier.png,carrier@2x.png,,,x,x
+Sling,Slings,Baby Sling,2,Pre-birth,sling.png,sling@2x.png,,,x,x
 Bike Trailer,Bike Trailers,,3,13-18 mo,bike_trailer.png,bike_trailer@2x.png,,,x,x
 Bike Seat,Bike Seats,,3,13-18 mo,bike_seat.png,bike_seat@2x.png,,,x,x
 Stroller,Strollers,,2,4-6 mo,stroller.png,stroller@2x.png,,,x,x

@@ -1,13 +1,13 @@
 Feeding (default pre-birth),Plural,,Default Priority,Default When to Buy,Image Name,High Res Image Name,Queries,Contingencies,Image Pulled,Icon Created,,,
 Wipeable Bib,Wipeable Bibs,,1,7-12 mo,wipeable_bib.png,wipeable_bib@2x.png,,,x,x,,,
-Bottle,Bottles,,1,Pre-birth,bottle.png,bottle@2x.png,,-moves to 2 for Breasfeeding only mom,x,x,,,
-Bowl,Bowls,,1,7-12 mo,bowl.png,bowl@2x.png,,,x,x,,,
+Bottle,Bottles,Baby Bottle,1,Pre-birth,bottle.png,bottle@2x.png,,-moves to 2 for Breasfeeding only mom,x,x,,,
+Bowl,Bowls,Baby Bowl,1,7-12 mo,bowl.png,bowl@2x.png,,,x,x,,,
 Baby food maker,Baby food makers,,2,7-12 mo,baby_food_maker.png,baby_food_maker@2x.png,,,x,,,,
-Plate,Plates,,1,7-12 mo,plate.png,plate@2x.png,,,x,x,Age Ranges,Public Tags,Other Quiz Dependencies
+Plate,Plates,Baby Plates,1,7-12 mo,plate.png,plate@2x.png,,,x,x,Age Ranges,Public Tags,Other Quiz Dependencies
 Baby Spoon,Baby Spoons,,1,4-6 mo,spoon.png,spoon@2x.png,,,x,x,Pre-birth,Veteran,Breastfeeding
 Toddler Spoon,Toddler Spoons,,1,13-18 mo,toddler_spoon.png,toddler_spoon@2x.png,,,x,x,0-3 mo,First-Timer,Bottlefeeding
 High Chair,High Chairs,,1,4-6 mo,high_chair.png,high_chair@2x.png,,,x,x,4-6 mo,Eco,Both bf/bottle
-Snack Storage,Snack Storage,,2,7-12 mo,snack_storage.png,snack_storage@2x.png,,,x,x,7-12 mo,Thrifty,Carrier
+Snack Storage,Snack Storage,Toddler Snack Storage,2,7-12 mo,snack_storage.png,snack_storage@2x.png,,,x,x,7-12 mo,Thrifty,Carrier
 Burp Cloth,Burp Cloths,,2,Pre-birth,burp_cloth.png,burp_cloth@2x.png,,,x,x,13-18 mo,Jetsetter,Stroller
 Cloth Bib,Cloth Bibs,,2,4-6 mo,cloth_bib.png,cloth_bib@2x.png,,,x,x,19-24 mo,Homebody,Both Carrier/Stroller
 Bottle Bag,Bottle Bags,,2,Pre-birth,bottle_bag.png,bottle_bag@2x.png,,-moves to 3 for breastfeeding only mom,x,x,2y,Rural,Cloth Diapers

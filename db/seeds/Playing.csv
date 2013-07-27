@@ -7,7 +7,7 @@ Balance Bike,Balance Bikes,,2,3y,balance_bike.png,balance_bike@2x.png,,,x,x,,,
 Ball,Balls,,1,4-6 mo,ball.png,ball@2x.png,,,x,x,,,
 Bath Toy,Bath Toys,,1,7-12 mo,bath_toy.png,bath_toy@2x.png,,,x,x,(same as in bathing),,
 Beads or Jewelry,Beads or Jewelry,,3,3y,beads_jewelry.png,beads_jewelry@2x.png,,,x,x,,,
-Bicycle,Bicycles,,2,5y+,bicycle.png,bicycle@2x.png,,,x,x,,,
+Bicycle,Bicycles,Kids Bicycle,2,5y+,bicycle.png,bicycle@2x.png,,,x,x,,,
 Blocks,Blocks,,1,13-18 mo,blocks.png,blocks@2x.png,,,x,x,,,
 Building Set,Building Sets,,2,2y,building_set.png,building_set@2x.png,,,x,x,,,Bassinet
 Car or Truck,Cars or Trucks,,2,13-18 mo,car_or_truck.png,car_or_truck@2x.png,,,x,x,,,
@@ -26,10 +26,10 @@ Game,Games,,2,2y,game.png,game@2x.png,,,x,x,,,Zip Code
 Gardening,Gardening,,3,2y,gardening.png,gardening@2x.png,,,x,x,,,
 Grasping Toy,Grasping Toys,,1,0-3 mo,grasping_toy.png,grasping_toy@2x.png,,,x,x,,,
 Halloween Costume,Halloween Costumes,,3,Pre-birth,halloween_costume.png,halloween_costume@2x.png,,,x,x,,,
-Helmet,Helmets,,2,3y,helmet.png,helmet@2x.png,,,x,x,,,
+Helmet,Helmets,Baby Helmet,2,3y,helmet.png,helmet@2x.png,,,x,x,,,
 Lawn Game,Lawn Games,,3,13-18 mo,lawn_game.png,lawn_game@2x.png,,,x,x,4-6 mo,Eco,Both bf/bottle
 Movie,Movies,,3,2y,movie.png,movie@2x.png,,,x,x,,,Mellow
-Music,Music,,2,0-3 mo,music.png,music@2x.png,,,x,x,,,
+Music,Music,Baby Music,2,0-3 mo,music.png,music@2x.png,,,x,x,,,
 Playhouse,Playhouses,,2,13-18 mo,playhouse.png,playhouse@2x.png,,,x,x,0-3 mo,First-Timer,Bottlefeeding
 Pool Toy,Pool Toys,,3,13-18 mo,pool_toy.png,pool_toy@2x.png,,,x,x,7-12 mo,Thrifty,Carrier
 Puppet,Puppets,,3,7-12 mo,puppet.png,puppet@2x.png,,,x,x,,,
@@ -48,5 +48,5 @@ Train Set,Train Sets,,2,13-18 mo,train_set.png,train_set@2x.png,,,x,x,,,
 Tricycle,Tricycles,,2,19-24 mo,tricycle.png,tricycle@2x.png,,,x,x,,,
 Tummy Time Mat,Tummy Time Mats,,2,0-3 mo,tummy_time_mat.png,tummy_time_mat@2x.png,,,x,x,,,
 Wagon,Wagons,,2,13-18 mo,wagon.png,wagon@2x.png,,,x,x,,,
-Walker,Walkers,,3,7-12 mo,walker.png,walker@2x.png,,,x,x,,,
+Walker,Walkers,Baby Walker,3,7-12 mo,walker.png,walker@2x.png,,,x,x,,,
 Water Table,Water Tables,,2,13-18 mo,water_table.png,water_table@2x.png,,,x,x,,,
