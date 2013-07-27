@@ -1,5 +1,5 @@
 class RelationshipMailer < ActionMailer::Base
-  default from: "no-reply@mamajamas.com"
+  default from: "automom@mamajamas.com"
 
   def follower_notification(relationship)
     @followed = relationship.followed
