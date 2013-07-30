@@ -64,11 +64,11 @@ class List < ActiveRecord::Base
   end
 
   def share_all_list_items!
-    list_items.user_items.update_all(shared: true)
+    list_items.user_items.where(shared: false).update_all(shared: true)
   end
 
   def unshare_all_list_items!
-    list_items.user_items.update_all(shared: false)
+    list_items.user_items.where(shared: true).update_all(shared: false)
   end
 
   def add_list_item_placeholder(product_type)
@@ -90,6 +90,7 @@ class List < ActiveRecord::Base
 
   def add_list_item(list_item, placeholder = false)
     list_item.placeholder = placeholder
+    list_item.shared = self.public?
     list_items << list_item
     list_item
   end
