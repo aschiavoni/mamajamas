@@ -18,7 +18,7 @@ describe RelationshipMailer do
     end
 
     it "sends from the correct email address" do
-      mail.from.should include("no-reply@mamajamas.com")
+      mail.from.should include("automom@mamajamas.com")
     end
 
     it "includes followed username" do

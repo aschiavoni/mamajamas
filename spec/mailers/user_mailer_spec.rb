@@ -12,7 +12,7 @@ describe UserMailer do
       mail.subject.should eq("Welcome to Mamajamas!")
       mail.to.should eq([ user.email ])
       mail.bcc.should eq([ "angie@mamajamas.com" ])
-      mail.from.should eq(["no-reply@mamajamas.com"])
+      mail.from.should eq(["angie@mamajamas.com"])
     end
 
     it "renders the body" do
