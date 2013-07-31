@@ -168,4 +168,31 @@ describe ProductType do
 
   end
 
+  describe "admin_deleteable?" do
+
+    it "can be deleted" do
+      product_type = build(:product_type)
+      product_type.should be_admin_deleteable
+    end
+
+    it "can't be deleted if there are list items that use it" do
+      product_type = build(:product_type)
+      list_item = create(:list_item, product_type: product_type)
+      product_type.should_not be_admin_deleteable
+    end
+
+    it "can't be deleted if it is owned by a user" do
+      product_type = build(:product_type, user: build(:user))
+      product_type.list_items << build(:list_item)
+      product_type.should_not be_admin_deleteable
+    end
+
+    it "can't be deleted if there are associated products" do
+      product_type = create(:product_type)
+      product_type.products << create(:product)
+      product_type.should_not be_admin_deleteable
+    end
+
+  end
+
 end

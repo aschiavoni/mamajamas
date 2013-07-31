@@ -712,14 +712,6 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- Name: age_ranges_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY age_ranges
-    ADD CONSTRAINT age_ranges_pkey PRIMARY KEY (id);
-
-
---
 -- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -829,6 +821,14 @@ ALTER TABLE ONLY relationships
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: when_to_buy_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY age_ranges
+    ADD CONSTRAINT when_to_buy_suggestions_pkey PRIMARY KEY (id);
 
 
 --

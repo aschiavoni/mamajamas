@@ -7,6 +7,13 @@
     <%= @product_type.name %>
   </div>
   <%= render 'actions', category: @product_type.category %>
+  <% if @product_type.admin_deleteable? -%>
+    <div class="action-nav">
+      <%= link_to admin_product_type_path(@product_type), class: "button bt-color", method: "delete" do %>
+        <span class="ss-delete"></span> Delete
+    <% end -%>
+  </div>
+  <% end -%>
 <% end -%>
 
 <%= form_for([ :admin, @product_type ], html: { id: "product-type-form", class: "label-infield" }) do |f| %>

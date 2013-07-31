@@ -32,6 +32,7 @@ product_types.each do |category, product_type_hash|
     product_type = ProductType.find_by_name(product_type_attrs[:name])
     if product_type.blank?
       product_type = ProductType.create!(product_type_attrs.merge({
+        plural_name: "#{product_type_attrs[:name].pluralize}",
         category_id: category.id,
         age_range_id: age_range.id
       }), without_protection: true)

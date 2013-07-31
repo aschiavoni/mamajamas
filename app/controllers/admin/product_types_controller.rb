@@ -35,6 +35,18 @@ class Admin::ProductTypesController < Admin::BaseController
     render :new
   end
 
+  def destroy
+    @product_type = ProductType.find(params[:id])
+    if @product_type.admin_deleteable?
+      @product_type.destroy
+      flash[:notice] = "Deleted #{@product_type.name}"
+      redirect_to admin_category_product_types_path(@product_type.category)
+    else
+      flash[:error] = "#{@product_type.name} is in use"
+      redirect_to edit_admin_product_type_path(@product_type)
+    end
+  end
+
   protected
 
   def find_category

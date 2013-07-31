@@ -19,6 +19,7 @@ FactoryGirl.define do
   factory :product_type do
     category
     sequence(:name) { |n| "Product Type #{n}" }
+    plural_name { "#{name}.pluralize" }
     age_range
     priority 2
   end

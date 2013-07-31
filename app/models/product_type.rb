@@ -11,6 +11,7 @@ class ProductType < ActiveRecord::Base
   belongs_to :user
   belongs_to :age_range
   has_many :queries, class_name: "ProductTypeQuery", dependent: :destroy
+  has_many :list_items
   has_and_belongs_to_many :products
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
@@ -40,5 +41,9 @@ class ProductType < ActiveRecord::Base
       available_products = Product.active
     end
     available_products
+  end
+
+  def admin_deleteable?
+    user == nil && list_items.count == 0 && products.count == 0
   end
 end
