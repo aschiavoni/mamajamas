@@ -51,9 +51,10 @@ Mamajamas::Application.routes.draw do
     resources :list_items
   end
 
-  scope "admin" do
+  namespace "admin" do
     root :to => "admin#index"
     get "become/:username" => "admin#become"
+    resources :product_types
   end
 
   scope "api" do

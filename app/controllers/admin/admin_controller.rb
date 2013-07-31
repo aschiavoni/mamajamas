@@ -1,7 +1,4 @@
-class AdminController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :require_admin!
-
+class Admin::AdminController < Admin::BaseController
   def index
   end
 
@@ -13,9 +10,8 @@ class AdminController < ApplicationController
 
   protected
 
-  def require_admin!
-    unless current_user && current_user.admin?
-      render :file => "public/401", status: :unauthorized, layout: false
-    end
+  def init_view
+    set_subheader "Admin"
+    hide_progress_bar
   end
 end
