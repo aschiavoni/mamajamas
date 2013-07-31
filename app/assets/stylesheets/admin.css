@@ -80,8 +80,9 @@
 	padding: 0.4em 0.5em;
 }
 #adminpage select {
+  -webkit-appearance: menulist-button;
 	width: 20%;
-  height: 34px;
+  height: 32px;
 }
 #adminpage form.label-infield fieldset p label {
 	margin: 0.5em;
