@@ -1,10 +1,6 @@
 class Admin::ProductTypesView
   def initialize(category)
-    if category.present?
-      @category = category
-    else
-      @category = categories.first
-    end
+    @category = category
   end
 
   def category_slug

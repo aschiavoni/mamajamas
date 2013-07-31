@@ -10,6 +10,7 @@
 <% end -%>
 
 <%= form_for([ :admin, @product_type ], html: { id: "product-type-form", class: "label-infield" }) do |f| %>
-  <h3><%= @product_type.name %></h3>
+  <h3>New Product Type</h3>
   <%= render partial: 'form', locals: { f: f } %>
 <% end -%>
+

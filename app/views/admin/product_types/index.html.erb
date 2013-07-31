@@ -4,6 +4,7 @@
   <div id="admin-nav">
     <%= link_to "admin", "/admin" %> &gt; product types
   </div>
+  <%= render 'actions', category: @view.category %>
 <% end -%>
 
 <h2><%= @view.category.name %> Product Types</h2>

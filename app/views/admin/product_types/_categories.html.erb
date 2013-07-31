@@ -4,7 +4,7 @@
       <ul>
         <% categories.each do |category| -%>
           <li class="<%= "cat-selected" if !current_category.blank? && category.id == current_category.id %>">
-          <%= link_to category.name, admin_product_types_category_path(category: category.slug) %>
+          <%= link_to category.name, admin_category_product_types_path(category.slug) %>
           </li>
       <% end -%>
       </ul>

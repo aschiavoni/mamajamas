@@ -94,3 +94,7 @@
 #adminpage form p.instruction {
 	margin-bottom: 1em;
 }
+
+#adminpage .action-nav {
+  padding: 20px 15px;
+}
