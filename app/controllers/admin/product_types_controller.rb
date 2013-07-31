@@ -7,8 +7,8 @@ class Admin::ProductTypesController < Admin::BaseController
   end
 
   def edit
-    @categories = Category.scoped.order(:name)
     @product_type = ProductType.find(params[:id])
+    @view = Admin::ProductTypesView.new @product_type.category
   end
 
   protected

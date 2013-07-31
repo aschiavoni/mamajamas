@@ -1,21 +1,9 @@
-<%= content_for :nav do %>
-  <% cache [ 'admin', 'product_types', @view.category_slug, 'categories' ] do -%>
-    <nav id="categories">
-      <ul>
-        <% @view.categories.each do |category| -%>
-          <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
-          <%= link_to category.name, admin_product_types_category_path(category: category.slug) %>
-          </li>
-      <% end -%>
-      </ul>
-    </nav>
-  <% end -%>
-<% end -%>
+<%= render partial: 'categories', locals: { current_category: @view.category, categories: @view.categories } %>
 
 <%= content_for :tertiary do %>
-<div id="admin-nav">
-  <%= link_to "admin", "/admin" %> &gt; product types
-</div>
+  <div id="admin-nav">
+    <%= link_to "admin", "/admin" %> &gt; product types
+  </div>
 <% end -%>
 
 <h2><%= @view.category.name %> Product Types</h2>
