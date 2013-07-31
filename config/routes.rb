@@ -52,6 +52,7 @@ Mamajamas::Application.routes.draw do
   end
 
   scope "admin" do
+    root :to => "admin#index"
     get "become/:username" => "admin#become"
   end
 
