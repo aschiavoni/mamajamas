@@ -60,8 +60,12 @@ en:
         product_type:
           attributes:
             name:
-              blank: "Sorry, but you must provide a name for your new item type."
-              taken: "Sorry, but you have already created a type with that name."
+              blank: "Sorry, but you must provide a name for the product type."
+              taken: "Sorry, but you have already created a product type with that name."
+            plural_name:
+              blank: "Required"
+            image_name:
+              blank: "Required"
   user_mailer:
     welcome:
       subject: "Welcome to Mamajamas!"

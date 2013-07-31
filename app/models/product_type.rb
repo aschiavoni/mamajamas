@@ -5,7 +5,8 @@ class ProductType < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [ :slugged ]
 
-  attr_accessible :name, :age, :priority
+  attr_accessible :name, :plural_name, :age_range_id, :priority
+  attr_accessible :image_name, :search_index, :search_query
 
   belongs_to :user
   belongs_to :age_range
@@ -13,6 +14,8 @@ class ProductType < ActiveRecord::Base
   has_and_belongs_to_many :products
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
+  validates :plural_name, presence: true
+  validates :image_name, presence: true
 
   scope :global, where(user_id: nil)
   scope :user, where("user_id IS NOT NULL")

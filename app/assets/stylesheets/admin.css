@@ -17,3 +17,79 @@
   padding-top: 10px;
 }
 
+#adminpage form {
+	font-size: 1.077em;
+}
+#adminpage #progress {
+	display: none;
+}
+#adminpage h3 {
+	font-size: 1.33em;
+	font-weight: 300;
+	color: #407c40;
+	margin: 2em 0 1em;
+	border-bottom: 1px solid #8cb58c;
+}
+#adminpage h3:first-child {
+	margin-top: .75em;
+}
+#adminpage #title .instruction {
+	font-size: .923em;
+	color: #999;
+}
+#adminpage #title strong {
+	color: #4d4d4d;
+}
+#adminpage dl {
+	width: 99.9%;
+}
+#adminpage dt, #adminpage dd {
+	float: left;
+	margin-left: 1.9%;
+}
+#adminpage dt {
+	color: #808080;
+	clear: left;
+	width: 15%;
+	padding: .3em 0;
+	text-align: right;
+}
+#adminpage dd {
+	width: 81%;
+}
+#adminpage dd.half {
+	width: 38.5%;
+}
+#adminpage fieldset.half {
+	width: 52%;
+}
+#adminpage dd p {
+	padding-left: .5em;
+}
+#adminpage dd em {
+	font-style: normal;
+}
+#adminpage dd p input, #adminpage dd p textarea {
+	margin-left: -.5em;
+}
+#adminpage dd.pad {
+	padding: .3em 0;
+}
+#adminpage input[type="email"], #adminpage input[type="text"], #adminpage input[type="password"], #adminpage textarea {
+	width: 96%;
+	padding: 0.4em 0.5em;
+}
+#adminpage select {
+	width: 20%;
+  height: 34px;
+}
+#adminpage form.label-infield fieldset p label {
+	margin: 0.5em;
+}
+#adminpage form .instruction {
+	font-size: .857em;
+	color: #999;
+}
+#adminpage form p.instruction {
+	margin-bottom: 1em;
+}
