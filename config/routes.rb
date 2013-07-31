@@ -52,7 +52,7 @@ Mamajamas::Application.routes.draw do
   end
 
   namespace "admin" do
-    root :to => "admin#index"
+    root :to => "admin#index", as: "admin"
     get "become/:username" => "admin#become"
     resources :product_types
   end

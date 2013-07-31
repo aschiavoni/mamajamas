@@ -47,6 +47,9 @@
                 <li><%= link_to "My Shared List", public_list_path(current_user) %></li>
               <% end -%>
               <li><%= link_to "My Profile", profile_path %></li>
+              <% if current_user.admin? -%>
+                <li><%= link_to "Admin", admin_admin_path %></li>
+              <% end -%>
               <li class="last">
                 <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "logout" %>
                 <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "server-logout", style: "display: none;" %>
