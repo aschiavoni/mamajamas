@@ -14,6 +14,13 @@ namespace :mamajamas do
           suggestion["url"] == list_item.link
         end.first
 
+        if product_attrs.blank?
+          results = ProductSearcher.search(list_item.name)
+          product_attrs = results.select do |product|
+            product.url == list_item.link
+          end.first
+        end
+
         if product_attrs.present?
           puts "Updating #{list_item.name} for user: #{list_item.list.user.username}..."
           list_item.vendor = product_attrs["vendor"]

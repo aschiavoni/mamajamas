@@ -4,17 +4,12 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
 
   template: HandlebarsTemplates['list_items/edit'],
 
-  className: "prod prod-filled edit-mode",
+  className: "prod prod-filled edit-mode choose-bt",
 
   oldModel: null,
 
   initialize: function() {
     _errMap = this.errorFieldMap();
-
-    this.model.set('isnew', this.model.isNew());
-    if (!this.model.isNew()) {
-      this.$el.addClass('choose-bt');
-    }
 
     // save a clone of the original model in case we cancel
     this.oldModel = this.model.clone();

@@ -19,6 +19,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
     "click .ss-write": "edit",
     "click .ss-delete": "delete",
     "click .prod-note": "toggleNote",
+    "click .bt-addanother": "addAnother",
   },
 
   render: function() {
@@ -56,6 +57,34 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
 
       this.$el.after(editView.render().$el);
       this.$el.hide();
+    }
+
+    return false;
+  },
+
+  addAnother: function(event) {
+    event.preventDefault();
+    if (this.isGuestUser()) {
+      this.unauthorized();
+    } else {
+      this.editing = true;
+
+      var editView = new Mamajamas.Views.ListItemEdit({
+        model: new Mamajamas.Models.ListItem({
+          age: this.model.get('age'),
+          age_position: this.model.get('age_position'),
+          category: this.model.get('category'),
+          category_id: this.model.get('category_id'),
+          placeholder: false,
+          priority: this.model.get('priority'),
+          product_type_id: this.model.get('product_type_id'),
+          product_type_name: this.model.get('product_type_name'),
+          product_type_plural_name: this.model.get('product_type_plural_name'),
+          image_url: "/assets/products/icons/" + this.model.get('product_type_image_name')
+        })
+      });
+
+      this.$el.parent().prepend(editView.render().$el);
     }
 
     return false;
