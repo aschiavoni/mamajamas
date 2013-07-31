@@ -32,7 +32,7 @@ describe ProductTypeRow do
   def create_product_type(name)
     pt = ProductType.find_by_name(name)
     if pt.blank?
-      pt = ProductType.create!(name: name)
+      pt = ProductType.create!(name: name, plural_name: name.pluralize)
     end
     pt
   end
