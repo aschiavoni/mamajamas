@@ -1,0 +1,13 @@
+<%= content_for :nav do %>
+  <% cache [ 'admin', 'product_types', current_category.slug, 'categories' ] do -%>
+    <nav id="categories">
+      <ul>
+        <% categories.each do |category| -%>
+          <li class="<%= "cat-selected" if !current_category.blank? && category.id == current_category.id %>">
+          <%= link_to category.name, admin_product_types_category_path(category: category.slug) %>
+          </li>
+      <% end -%>
+      </ul>
+    </nav>
+  <% end -%>
+<% end -%>

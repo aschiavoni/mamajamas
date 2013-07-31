@@ -1,6 +1,10 @@
 class Admin::ProductTypesView
   def initialize(category)
-    @category = category
+    if category.present?
+      @category = category
+    else
+      @category = categories.first
+    end
   end
 
   def category_slug
@@ -8,10 +12,14 @@ class Admin::ProductTypesView
   end
 
   def categories
-    Category.all
+    @categories ||= Category.scoped.order(:name)
   end
 
   def category
     @category
+  end
+
+  def product_types
+    category.product_types.order(:name)
   end
 end

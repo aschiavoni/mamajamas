@@ -1,0 +1,11 @@
+<%= render partial: 'categories', locals: { current_category: @product_type.category, categories: @categories } %>
+
+<%= content_for :tertiary do %>
+<div id="admin-nav">
+  <%= link_to "admin", "/admin" %> &gt;
+  <%= link_to "product types", admin_product_types_category_path(@product_type.category) %> &gt;
+  <%= @product_type.name %>
+</div>
+<% end -%>
+
+<h2><%= @product_type.name %></h2>

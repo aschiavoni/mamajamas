@@ -4,7 +4,7 @@
       <ul>
         <% @view.categories.each do |category| -%>
           <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
-          <%= link_to category.name, list_category_path(category.slug) %>
+          <%= link_to category.name, admin_product_types_category_path(category: category.slug) %>
           </li>
       <% end -%>
       </ul>
@@ -17,4 +17,10 @@
   <%= link_to "admin", "/admin" %> &gt; product types
 </div>
 <% end -%>
-<h2>Product Types</h2>
+
+<h2><%= @view.category.name %> Product Types</h2>
+<% @view.product_types.each do |product_type| -%>
+  <p>
+    <%= link_to product_type.name, edit_admin_product_type_path(product_type) %>
+  </p>
+<% end -%>
