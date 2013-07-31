@@ -15,6 +15,9 @@
 <title>Mamajamas</title>
 <meta name="description" content="">
 <%= stylesheet_link_tag    "application", :media => "all" %>
+<% if admin_user? -%>
+  <%= stylesheet_link_tag    "admin", :media => "all" %>
+<% end -%>
 <%= javascript_include_tag "application" %>
 <%= csrf_meta_tags %>
 </head>
@@ -47,7 +50,7 @@
                 <li><%= link_to "My Shared List", public_list_path(current_user) %></li>
               <% end -%>
               <li><%= link_to "My Profile", profile_path %></li>
-              <% if current_user.admin? -%>
+              <% if admin_user? -%>
                 <li><%= link_to "Admin", admin_admin_path %></li>
               <% end -%>
               <li class="last">

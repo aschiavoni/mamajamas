@@ -3,7 +3,6 @@ class Admin::AdminController < Admin::BaseController
   end
 
   def become
-    return unless current_user.admin?
     sign_in(:user, User.find_by_username(params[:username]))
     redirect_to list_path
   end
@@ -12,6 +11,7 @@ class Admin::AdminController < Admin::BaseController
 
   def init_view
     set_subheader "Admin"
+    set_page_id "adminpage"
     hide_progress_bar
   end
 end
