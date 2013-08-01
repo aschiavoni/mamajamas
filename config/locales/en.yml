@@ -27,6 +27,8 @@ en:
       models:
         user:
           attributes:
+            full_name:
+              blank: "Sorry, but you must provide a name."
             login:
               blank: "Sorry, but you must provide a username or email address."
             username:

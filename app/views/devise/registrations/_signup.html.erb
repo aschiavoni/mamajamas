@@ -1,20 +1,28 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "label-infield" }) do |f| %>
+  <%= f.hidden_field :signup_registration?, value: true %>
   <!-- modal window close button -->
   <a href="#" class="bt-close ss-icon">Close</a>
   <!-- modal window header -->
   <h2>Sign Up</h2>
   <!-- modal window content -->
   <div class="content">
-    <p class="center">Sign up to save your list and get started keeping track of your baby gear!</p>
-    <div class="progress-container fb-progress-container">
+    <p class="intro center larger">Sign up to save your list and<br> get started keeping track of your baby gear!</p>
+    <div class="progress-container fb-progress-container progress-disabled">
       <p class="center"><a class="button" id="bt-fb-connect"><span>Login with Facebook</span></a></p>
-      <p class="instruction">We will never post anything without your express permission.</p>
+      <p class="tip tip-dwn">Signing in through Facebook allows you to find friends who already have Mamajamas lists.<span></span></p>
+      <p class="center instruction privacy">We value your privacy, and we’ll<br> never post anything without your express permission.</p>
       <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
     </div>
-    <p class="divider"><strong>or</strong></p>
-    <p class="collapsible center" id="collapsible1"><strong>Create an account using your email address.</strong></p>
+    <p id="collapsible1" class="collapsible center ss-directright"><strong>Or, create an account using your email address.</strong></p>
     <div class="collapsible-content">
-      <p class="instruction">Please enter your email address and choose a password.</p>
+      <fieldset>
+        <p>
+        <%= f.label :full_name, "First and last name" %>
+        <br />
+        <%= f.text_field :full_name %>
+        <%= field_error resource, :full_name %>
+        </p>
+      </fieldset>
       <fieldset>
         <p>
         <%= f.label :email, "Email address" %>

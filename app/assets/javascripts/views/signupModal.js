@@ -66,7 +66,7 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
       // it is necessary to refresh the placeholders
       // when the modal is re-opened
       $("input", this.$el).blur();
-      $("#user_email", this.$el).focus();
+      $("#user_full_name", this.$el).focus();
       $(".fb-progress-container", this.$el).addClass("progress-disabled");
     });
   },
