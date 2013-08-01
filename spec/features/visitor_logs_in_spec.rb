@@ -19,22 +19,26 @@ feature "Visitor logs in", js: true do
   end
 
   scenario "with valid email and password" do
-    sign_in_with @testuser.username, @testuser.email, @password, :email
+    VCR.use_cassette('login/valid') do
+      sign_in_with @testuser.username, @testuser.email, @password, :email
 
-    expect(page).to have_content("Signed in")
-    expect(page).to have_content("Your baby gear list")
-    current_path.should == list_path
+      expect(page).to have_content("Signed in")
+      expect(page).to have_content("Your baby gear list")
+      current_path.should == list_path
+    end
   end
 
   scenario "with invalid email" do
     sign_in_with @testuser.username, nil, @password, :email
 
+    sleep 0.5
     expect(page).to have_selector(".instruction.error", text: "login")
   end
 
   scenario "with invalid password" do
     sign_in_with @testuser.username, nil, nil, :email
 
+    sleep 0.5
     expect(page).to have_selector(".instruction.error", text: "login")
   end
 
