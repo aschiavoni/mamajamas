@@ -9,11 +9,13 @@ feature "Visitor logs in", js: true do
   end
 
   scenario "with valid username and password" do
-    sign_in_with @testuser.username, @testuser.email, @password, :username
+    VCR.use_cassette('login/valid') do
+      sign_in_with @testuser.username, @testuser.email, @password, :username
 
-    expect(page).to have_content("Signed in")
-    expect(page).to have_content("Your baby gear list")
-    current_path.should == list_path
+      expect(page).to have_content("Signed in")
+      expect(page).to have_content("Your baby gear list")
+      current_path.should == list_path
+    end
   end
 
   scenario "with valid email and password" do

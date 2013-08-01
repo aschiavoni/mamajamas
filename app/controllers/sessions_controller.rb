@@ -14,7 +14,7 @@ class SessionsController < Devise::SessionsController
     end
 
     clean_up_passwords(resource)
-    (render("new.json", :layout => false) && return) if request.xhr?
+    (render("new", :formats => [:json], :layout => false) && return) if request.xhr?
 
     respond_with(resource, serialize_options(resource))
   end

@@ -74,6 +74,10 @@ module Features
       click_link "login-link"
       page.should have_selector("#login-window", visible: true)
 
+      # expand email login form
+      find(".collapsible").click
+      page.should have_selector("#user_login", visible: true)
+
       # email login
       login = with == :username ? username : email
       fill_in "Email address", with: login
