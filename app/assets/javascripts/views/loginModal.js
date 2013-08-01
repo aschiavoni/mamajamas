@@ -2,6 +2,8 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   initialize: function() {
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
 
+    this.initializeCollapsible();
+
     this.model.on('server:authenticating', this.showProgress, this);
     this.model.on('server:authenticated', this.onAuthenticated, this);
     this.model.on('server:unauthorized', this.onUnauthorized, this);
@@ -15,11 +17,43 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   render: function(event) {
     return this;
   },
+
+  initializeCollapsible: function() {
+    $(".collapsible", this.$el).collapsible({
+      cssClose: "ss-directright",
+      cssOpen: "ss-dropdown",
+      speed: 200,
+      // these names are confusing
+      // animateClose is actually called when the collapsible expands
+      animateClose: this.openCollapsible,
+      animateOpen: this.closeCollapsible
+    });
+  },
+
+  openCollapsible: function(elem, opts) {
+    elem.next().slideDown(opts.speed, function() {
+      $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+      // TODO: remove this if we get rid of inFieldLabels
+      // it is necessary to refresh the placeholders
+      // when the modal is re-opened
+      $("input", this.$el).blur();
+      $("#user_login", this.$el).focus();
+    });
+  },
+
+  closeCollapsible: function(elem, opts) {
+    elem.next().slideUp(opts.speed, function() {
+    });
+  },
+
   showProgress: function() {
     this.$el.progressIndicator('show');
   },
   hideProgress: function() {
     this.$el.progressIndicator('hide');
+  },
+  clearError: function() {
+    $(".collapsible-content p.instruction.error", this.$el).remove();
   },
   show: function() {
     var _view = this;
@@ -29,6 +63,7 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   },
   hide: function() {
     this.$el.progressIndicator('hide').hide();
+    this.clearError();
   },
   close: function(event) {
     event.preventDefault();
@@ -53,16 +88,25 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
 
     _session.trigger('server:authenticating');
     // post to the server
-    // if the login succeeds, it will return a window.location redirect.
-    // if not, it returns the form markup and replaces the existing form.
     $.post($form.attr("action"), $form.serialize(), function(data) {
-      if (/^window\.location/.test(data)) {
-        _session.trigger('server:authenticated');
+      _view.hideProgress();
+      _view.clearError();
+      $("button[type=submit]", $form).attr("disabled", null);
+      if (data.errors) {
+        for (var errorField in data.errors) {
+          if (errorField == "base") {
+            var errMsg = data.errors[errorField][0];
+            var $errorTag = $("<p>").addClass("instruction").addClass("error").html(errMsg);
+            $('.collapsible-content', _view.$el).prepend($errorTag);
+          } else {
+            var $field = $("#user_" + errorField, _view.$el);
+            var $errorTag = $("<strong>").addClass("status-msg").addClass("error");
+            $errorTag.html(data.errors[errorField][0]);
+            $field.after($errorTag);
+          }
+        }
       } else {
-        $form.replaceWith(data);
-        $form = $("#login-form", _view.$el); // get a ref to the new element
-        $("label", $form).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-        $("#user_login", $form).focus();
+        _session.trigger('server:authenticated');
       }
     });
     return false;

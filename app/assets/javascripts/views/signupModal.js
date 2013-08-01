@@ -86,7 +86,6 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
 
     _session.trigger('server:authenticating');
     // post to the server
-    // if the registration succeeds, it will return a window.location redirect.
     $.post(this.url, $form.serialize(), function(data) {
       _view.hideProgress();
       if (data.errors) {

@@ -10,38 +10,38 @@
   <div class="content">
     <p></p>
     <p class="center"><a class="button" id="bt-fb-connect"><span>Login with Facebook</span></a></p>
-    <p class="instruction">We will never post anything without your express permission.</p>
-    <p class="divider"><strong>or</strong></p>
-    <p class="instruction<%= " error" unless resource.errors.empty? %>">
-      <% if resource.errors.empty? -%>
-        Please enter your Mamajamas email address and password below:
-      <% else -%>
-        <%= resource.errors.full_messages.to_sentence %>
-      <% end -%>
-    </p>
-    <fieldset>
-      <p>
-      <%= f.label :login, "Email address" %>
-      <br />
-      <%= f.text_field :login %>
-      </p>
-      <p>
-      <%= f.label :login_password, "Password" %>
-      <br />
-      <%= f.password_field :password, :id => "user_login_password" %>
-      </p>
-    </fieldset>
-    <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-      <p class="helper"><%= link_to "Forgot your password?", new_password_path(resource_name) %></p>
-    <% end -%>
-  </div>
-  <!-- end modal window content --> 
-  <!-- window bottom buttons -->
-  <div class="button-row">
+    <p class="center instruction">We value your privacy, and we’ll<br> never post anything without your express permission.</p>
     <div class="progress-container">
-      <button type="reset" class="button" id="bt-cancel">Cancel</button>
-      <button type="submit" class="button" id="bt-log-in">Log in</button>
       <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
     </div>
+    <p id="collapsible1" class="collapsible center ss-directright"><strong>Or, enter your Mamajamas username and password below:</strong></p>
+    <div class="collapsible-content" style="display: none;">
+      <% unless resource.errors.empty? -%>
+        <p class="instruction error">
+        <%= resource.errors.full_messages.to_sentence %>
+        </p>
+      <% end -%>
+      <fieldset>
+        <p>
+        <%= f.label :login, "Email address" %>
+        <br />
+        <%= f.text_field :login %>
+        </p>
+        <p>
+        <%= f.label :login_password, "Password" %>
+        <br />
+        <%= f.password_field :password, :id => "user_login_password" %>
+        </p>
+      </fieldset>
+      <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+        <p class="helper"><%= link_to "Forgot your password?", new_password_path(resource_name) %></p>
+      <% end -%>
+      <!-- window bottom buttons -->
+      <div class="button-row">
+        <button type="reset" class="button" id="bt-cancel">Cancel</button>
+        <button type="submit" class="button" id="bt-log-in">Log in</button>
+      </div>
+    </div>
   </div>
+  <!-- end modal window content -->
 <% end %>
