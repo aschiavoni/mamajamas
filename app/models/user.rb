@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   attr_accessible :facebook_friends, :facebook_friends_updated_at
   attr_accessible :relationships_created_at
   attr_accessible :zip_code, :country_code
+  attr_accessible :full_name
   attr_accessible :welcome_sent_at
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -79,6 +80,25 @@ class User < ActiveRecord::Base
       u.email = "#{guest_username}@mamajamas-guest.com"
       u.guest = true
     end
+  end
+
+  def full_name
+    if first_name.present? && last_name.present?
+      "#{first_name} #{last_name}"
+    elsif first_name.present?
+      "#{first_name}"
+    else
+      nil
+    end
+  end
+
+  def full_name=(full_name)
+    return if full_name.blank?
+    name_parts = full_name.split.reject { |p| p.blank? }
+    fname = name_parts.shift
+    lname = name_parts.join(" ") if name_parts.size > 0
+    self.first_name = fname if fname.present?
+    self.last_name = lname if lname.present?
   end
 
   def valid_zip_code

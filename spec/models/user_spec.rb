@@ -245,4 +245,73 @@ describe User do
 
   end
 
+  describe "full_name" do
+
+    it "returns full name" do
+      user = build(:user, first_name: "John", last_name: "Doe")
+      user.full_name.should == "John Doe"
+    end
+
+    it "returns first name if user does not have a last name" do
+      user = build(:user, first_name: "John", last_name: nil)
+      user.full_name.should == "John"
+    end
+
+    it "returns nil if user does not have first and last name" do
+      user = build(:user, first_name: nil, last_name: nil)
+      user.full_name.should be_nil
+    end
+
+    it "sets first name from full name" do
+      user = build(:user, first_name: nil, last_name: nil)
+      user.full_name = "John Doe"
+      user.first_name.should == "John"
+    end
+
+    it "sets last name from full name" do
+      user = build(:user, first_name: nil, last_name: nil)
+      user.full_name = "John Doe"
+      user.last_name.should == "Doe"
+    end
+
+    it "sets first name for a user with more than two names" do
+      user = build(:user, first_name: nil, last_name: nil)
+      user.full_name = "John Seymour Doe"
+      user.first_name.should == "John"
+    end
+
+    it "sets last name for a user with more than two names" do
+      user = build(:user, first_name: nil, last_name: nil)
+      user.full_name = "John Seymour Doe"
+      user.last_name.should == "Seymour Doe"
+    end
+
+    it "sets a first name even if no last name is specified" do
+      user = build(:user, first_name: nil, last_name: nil)
+      user.full_name = "John"
+      user.first_name.should == "John"
+    end
+
+    it "does not set a last name if full name does not include one" do
+      user = build(:user, first_name: nil, last_name: nil)
+      user.full_name = "John"
+      user.last_name.should be_nil
+    end
+
+    it "handles a nil value" do
+      user = build(:user, first_name: nil, last_name: nil)
+      user.full_name = nil
+      user.first_name.should be_nil
+      user.last_name.should be_nil
+    end
+
+    it "handles an empty value" do
+      user = build(:user, first_name: nil, last_name: nil)
+      user.full_name = nil
+      user.first_name.should be_nil
+      user.last_name.should be_nil
+    end
+
+  end
+
 end
