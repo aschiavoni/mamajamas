@@ -7,6 +7,7 @@ feature "Visitor signs up", js: true do
       @tempuser = build(:user)
       sign_up_with @tempuser.email, "really!good$password"
 
+      sleep 0.5
       expect(page).to have_selector("#logout")
       expect(page).to have_content("My Account")
       expect(page).to have_content("Take the quiz")
