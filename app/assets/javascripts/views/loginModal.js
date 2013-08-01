@@ -8,12 +8,14 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
     this.model.on('server:authenticated', this.onAuthenticated, this);
     this.model.on('server:unauthorized', this.onUnauthorized, this);
   },
+
   events: {
     "click #bt-cancel": "hide",
     "submit #login-form": "submit",
     "click .modal-overlay": "close",
     "click .bt-close": "close",
   },
+
   render: function(event) {
     return this;
   },
@@ -49,37 +51,45 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   showProgress: function() {
     this.$el.progressIndicator('show');
   },
+
   hideProgress: function() {
     this.$el.progressIndicator('hide');
   },
+
   clearError: function() {
     $(".collapsible-content p.instruction.error", this.$el).remove();
   },
+
   show: function() {
     var _view = this;
     this.$el.show(0, function() {
       $("#user_login", _view.$el).focus();
     });
   },
+
   hide: function() {
     this.$el.progressIndicator('hide').hide();
     this.clearError();
   },
+
   close: function(event) {
     event.preventDefault();
     this.hide();
     return false;
   },
+
   onAuthenticated: function() {
     if (this.model.get("sign_in_count") <= 1)
       window.location = "/friends";
     else
       window.location = "/list";
   },
+
   onUnauthorized: function() {
     this.hide();
     Mamajamas.Context.Notifications.error("You cannot be logged in at this time.");
   },
+
   submit: function() {
     var _session = this.model;
     var _view = this;
@@ -110,5 +120,6 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
       }
     });
     return false;
-  }
+  },
+
 });
