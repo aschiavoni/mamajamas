@@ -15,6 +15,9 @@ class Forms::CompleteProfile
   delegate :email=, :to => :user
   delegate :password, :password=, :to => :user
   delegate :password_confirmation, :password_confirmation=, :to => :user
+  delegate :full_name, :full_name=, :to => :user
+  delegate :signup_registration, :signup_registration=, :to => :user
+  delegate :signup_registration?, :to => :user
 
   validates_presence_of     :password
   validates_confirmation_of :password

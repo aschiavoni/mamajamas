@@ -212,7 +212,7 @@ class User < ActiveRecord::Base
   protected
 
   def password_required?
-    return false if guest?
+    return false if guest? && !signup_registration?
     super
   end
 end
