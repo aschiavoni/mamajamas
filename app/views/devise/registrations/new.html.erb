@@ -1,12 +1,25 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "label-infield" }) do |f| %>
+  <%= f.hidden_field :signup_registration?, value: true %>
   <h2 class="instruction center">Sign up to save your list and get started keeping track of your baby gear!</h2>
   <h3>Create an account with Facebook</h3>
   <p class="center"><a class="button" id="bt-fb-connect"><span>Login with Facebook</span></a></p>
-  <p class="instruction center">We will never post anything without your express permission.</p>
+  <p class="tip">Signing in through Facebook allows you to find friends who already have Mamajamas lists.<span></span></p>
+  <p class="center instruction privacy">We value your privacy, and we’ll<br> never post anything without your express permission.</p>
   <p class="divider"><strong>or</strong></p>
   <h3>Create an account using your email address</h3>
   <p class="instruction">Please choose a username, enter your email address and choose a password.</p>
   <dl class="clearfix">
+    <fieldset>
+      <dt>Full name<strong class="required">*</strong></dt>
+      <dd>
+        <p>
+          <%= f.label :full_name, "First and last name" %>
+          <br />
+          <%= f.text_field :full_name %>
+          <%= field_error resource, :full_name %>
+        </p>
+      </dd>
+    </fieldset>
     <fieldset>
       <dt>Email<strong class="required">*</strong></dt>
       <dd>
