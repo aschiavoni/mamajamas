@@ -19,7 +19,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 # Capybara.javascript_driver = :selenium
 Capybara.javascript_driver = :poltergeist
-Capybara.default_wait_time = 3
+Capybara.default_wait_time = 4
 
 # turn on omniauth test mode
 OmniAuth.config.test_mode = true
