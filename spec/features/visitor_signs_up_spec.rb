@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature "Visitor signs up", js: true do
 
-  scenario "with valid email and password" do
+  scenario "with valid name, email and password" do
     @tempuser = build(:user)
     sign_up_with @tempuser.email, "really!good$password"
 
@@ -22,6 +22,12 @@ feature "Visitor signs up", js: true do
     @tempuser = build(:user)
     sign_up_with @tempuser.email, nil
     expect(page).to have_selector(".status-msg.error", text: "password")
+  end
+
+  scenario "with invalid name" do
+    @tempuser = build(:user)
+    sign_up_with @tempuser.email, "really!good$password", nil
+    expect(page).to have_selector(".status-msg.error", text: "name")
   end
 
   scenario "with valid facebook account" do

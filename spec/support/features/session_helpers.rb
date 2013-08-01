@@ -36,7 +36,7 @@ module Features
       user
     end
 
-    def sign_up_with(email, password)
+    def sign_up_with(email, password, full_name = "Jane Doe")
       visit root_path
 
       # signup dialog
@@ -47,6 +47,7 @@ module Features
       page.should have_selector("#user_email", visible: true)
 
       # fill out signup form
+      fill_in "First and last name", with: full_name
       fill_in "Email", with: email
       fill_in "Password", with: password
       fill_in "Confirm password", with: password
