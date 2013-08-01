@@ -19,8 +19,8 @@
   <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
     <nav id="categories">
       <ul>
-        <li class="<%= "cat-selected" if @view.default_category? %>">
-        <%= link_to "All", list_path %>
+        <li class="<%= "cat-selected" if @view.all_category? %>">
+        <%= link_to "All", list_category_path('all') %>
         </li>
         <% @view.categories.each do |category| -%>
           <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
