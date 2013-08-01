@@ -1,5 +1,7 @@
 <li class="<%= "following" if following %>" id="<%= "friend_#{friend.id}" %>" data-friend-id="<%= friend.id %>" data-relationship-id="<%= following.id unless following.blank? %>">
+  <%= link_to public_list_path(friend.slug), target: "_blank" do %>
   <%= image_tag friend.profile_picture.friend, alt: friend.display_name %>
+  <% end -%>
   <p>
     <strong class="mom"><%= truncate(friend.display_name, :length => 15) %></strong>
     <% if following -%>
