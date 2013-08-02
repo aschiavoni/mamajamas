@@ -37,10 +37,10 @@
           <legend><span>Need vs. Own</span></legend>
           <ul class="inline">
             <li>
-            <input {{#unless owned}}checked="checked"{{/unless}} id="list_item_owned_0" name="list_item[owned]" type="radio" value="0"> <label for="list_item_owned_0">Need</label>
+            <input class="need-rb" {{#unless owned}}checked="checked"{{/unless}} id="list_item_owned_0" name="list_item[owned]" type="radio" value="0"> <label for="list_item_owned_0">Need</label>
             </li>
             <li>
-            <input {{#if owned}}checked="checked"{{/if}} id="list_item_owned_1" name="list_item[owned]" type="radio" value="1"> <label for="list_item_owned_1">Own</label>
+            <input class="owned-rb" {{#if owned}}checked="checked"{{/if}} id="list_item_owned_1" name="list_item[owned]" type="radio" value="1"> <label for="list_item_owned_1">Own</label>
             </li>
           </ul>
         </fieldset>

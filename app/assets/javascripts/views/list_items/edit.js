@@ -221,18 +221,18 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
 
   toggleOwnedCheckbox: function(event) {
     var owned = $("input[name='list_item[owned]']:checked", this.$el).val() == "1";
-    $("td.own input[type='checkbox']", this.$el).attr("checked", owned);
+    $("td.own input[type='checkbox']", this.$el).prop("checked", owned);
   },
 
   toggleOwnedRadioButtons: function(event) {
     var owned = $(event.target).is(":checked");
     var selector;
     if (owned)
-      selector = $("#list_item_owned_1");
+      selector = $(".owned-rb", this.$el);
     else
-      selector = $("#list_item_owned_0");
+      selector = $(".need-rb", this.$el);
 
-    $(selector, this.$el).attr("checked", "checked");
+    $(selector, this.$el).prop("checked", true);
   },
 
   handleError: function(item, response) {
