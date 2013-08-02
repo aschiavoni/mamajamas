@@ -143,7 +143,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       age: this.model.get('age'),
       rating: this.model.get('rating'),
       image_url: searchResult.get('image_url'),
-      owned: false,
+      owned: this.model.get('owned'),
       placeholder: false
     };
     Mamajamas.Context.ListItems.add(attributes);

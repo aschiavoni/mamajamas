@@ -1,5 +1,5 @@
 <td class="own">
-  <input id="own01" type="checkbox" title="Do you own this item?" disabled="disabled">
+  <input id="own{{listItem.id}}" class="prod-owned" type="checkbox" title="Do you own this item?" {{#if listItem.owned}}checked="checked"{{/if}}> <label for="own{{listItem.id}}">I own this item.</label>
   <label for="own01">I own this item.</label>
 </td>
 <td class="item">

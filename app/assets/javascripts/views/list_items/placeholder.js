@@ -13,8 +13,9 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
   },
 
   events: {
-    'click .find-item.button': 'findItem',
-    'click .ss-delete': 'delete',
+    "change .prod-owned": "updateOwned",
+    "click .find-item.button": "findItem",
+    "click .ss-delete": "delete",
   },
 
   render: function() {
@@ -36,6 +37,12 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
   saveAndRender: function() {
     this.model.save();
     this.render();
+  },
+
+  updateOwned: function(event) {
+    var $owned = $(event.target);
+    this.model.set("owned", $owned.is(":checked"));
+    this.model.save();
   },
 
   findItem: function(event) {
