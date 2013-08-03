@@ -8,11 +8,14 @@ namespace :mamajamas do
     task vendor_details: :environment do
       ListItem.user_items.where(vendor: nil).each do |list_item|
         product_type = list_item.product_type
-        next if product_type.blank?
-        suggestions = CachedProductTypeSuggestions.find(product_type)
-        product_attrs = suggestions[:suggestions].select do |suggestion|
-          suggestion["url"] == list_item.link
-        end.first
+        product_attrs = nil
+
+        if product_type.present?
+          suggestions = CachedProductTypeSuggestions.find(product_type)
+          product_attrs = suggestions[:suggestions].select do |suggestion|
+            suggestion["url"] == list_item.link
+          end.first
+        end
 
         if product_attrs.blank?
           results = ProductSearcher.search(list_item.name)
