@@ -112,6 +112,8 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
   },
 
   updateRating: function() {
+    if (this.editing)
+      return;
     this.model.save();
   },
 
@@ -123,6 +125,8 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
   },
 
   updateOwned: function(event) {
+    if (this.editing)
+      return;
     var $owned = $(event.target);
     this.model.set("owned", $owned.is(":checked"));
     this.model.save();
