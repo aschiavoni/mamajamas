@@ -22,7 +22,7 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
 
   render: function() {
     var $questionView = $(this.template(this.model.toJSON()));
-    if (this.model.get('answers')[0] != 'a mom to be.') {
+    if (this.model.get('answers')[0] != 'Mom/Dad to Be.') {
       $('#q02-02', $questionView).show();
     }
     this.$el.html($questionView);
@@ -43,7 +43,7 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
     event.preventDefault();
 
     var answerList = $(event.target, this.$el).parents('a').siblings('ol');
-    answerList.css('width', '8em');
+    answerList.css('width', '9em');
     answerList.show();
 
     return false;
@@ -62,7 +62,7 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
 
     var answers = this.model.get('answers');
     answers[0] = answerText;
-    if (answerText == 'a mom to be.') {
+    if (answerText == 'Mom/Dad to Be.') {
       this.kid.set('age_range', 'Pre-birth');
       this.hideBabyAgeQuestion();
     } else {
@@ -141,4 +141,4 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
     return false;
   },
 
-})
+});
