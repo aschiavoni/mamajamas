@@ -24,14 +24,15 @@ class List < ActiveRecord::Base
       includes(:product_type).
       includes(:category).
       includes(:age_range).
-      order("list_items.placeholder ASC, age_ranges.position ASC, list_items.priority ASC")
+      order(list_entries_sort_order)
   end
 
   def public_list_entries(category = nil)
     list_items.shared_items.
       by_category(category).
+      includes(:category).
       includes(:age_range).
-      order("list_items.placeholder ASC, age_ranges.position ASC, list_items.priority ASC")
+      order(list_entries_sort_order)
   end
 
   def public_list_categories
@@ -134,6 +135,11 @@ class List < ActiveRecord::Base
   def set_public(public)
     self.public = public
     self.save!
+  end
+
+  def list_entries_sort_order
+    @li_sort ||=
+      "list_items.placeholder ASC, categories.name ASC, age_ranges.position ASC, list_items.priority ASC, list_items.product_type_name ASC"
   end
 
 end
