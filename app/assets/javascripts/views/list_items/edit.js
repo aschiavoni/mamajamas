@@ -14,7 +14,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     // save a clone of the original model in case we cancel
     this.oldModel = this.model.clone();
 
-    this.model.on("change", this.render, this);
+    this.model.on("change", this.renderMaybe, this);
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:age", this.updateAgeRange, this);
     this.model.on("change:priority", this.updatePriority, this);
@@ -26,6 +26,16 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     "change .owned-cb": "toggleOwnedRadioButtons",
     "click .cancel-item.button": "cancel",
     "click .find-item.button": "findItem",
+  },
+
+  renderMaybe: function() {
+    var requiresRenderAttribs = [ 'name', 'link', 'image_url', 'vendor_id' ];
+    var changedAttribs = _.keys(this.model.changed);
+    var needsRender = _.any(changedAttribs, function(attrib) {
+      return _.contains(requiresRenderAttribs, attrib);
+    });
+    if (needsRender)
+      this.render();
   },
 
   render: function() {
