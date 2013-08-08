@@ -4,10 +4,15 @@ describe RecommendedFriend do
   let(:list) { create(:list, user: user, public: true) }
 
   before(:all) do
-    create_list(:list, 3, public: true)
+    create_list(:list, 4, public: true)
   end
 
-  it "returns recommended users" do
+  it "returns all recommended users" do
+    rf = RecommendedFriend.new(user)
+    rf.all.size.should == 4
+  end
+
+  it "returns limited number of recommended users" do
     rf = RecommendedFriend.new(user)
     rf.all(3).size.should == 3
   end
@@ -26,7 +31,7 @@ describe RecommendedFriend do
   it "excludes users without public lists" do
     new_user = create(:list, public: false).user
     rf = RecommendedFriend.new(user)
-    rf.all(5).should_not include(new_user)
+    rf.all.should_not include(new_user)
   end
 
 end

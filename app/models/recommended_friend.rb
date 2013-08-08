@@ -12,9 +12,9 @@ class RecommendedFriend
       includes(:list).
       where("users.id <> ?", user.id).
       where(guest: false).
-      where("lists.public = true").
-      limit(limit)
+      where("lists.public = true")
 
-    friends.reject { |f| excluded.include?(f) }
+    friends = friends.reject { |f| excluded.include?(f) }
+    limit.present? ? friends.take(limit) : friends
   end
 end

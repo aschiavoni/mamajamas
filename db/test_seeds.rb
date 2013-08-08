@@ -8,7 +8,7 @@ product_types = {
 
   "Birthing / Pregnancy" =>
   [
-    { name: "Pregnancy Book", age_range: "Pre-birth", priority: 2, image_name: "pregnancy_book.png" }
+    { name: "Pregnancy Book", age_range: "Pre-birth", priority: 2, image_name: "pregnancy_book@2x.png" }
   ],
 
   "Changing" =>
@@ -18,7 +18,7 @@ product_types = {
 
   "Feeding" =>
   [
-    { name: "Wipeable Bib", age_range: "7-12 mo", priority: 1, image_name: "wipeable_bib.png" }
+    { name: "Wipeable Bib", age_range: "7-12 mo", priority: 1, image_name: "wipeable_bib@2x.png" }
   ],
 
   "Potty Training" => []
