@@ -14,7 +14,7 @@ describe RecommendedFriend do
 
   it "returns limited number of recommended users" do
     rf = RecommendedFriend.new(user)
-    rf.all(3).size.should == 4
+    rf.all(3).size.should == 3
   end
 
   it "excludes current user" do
