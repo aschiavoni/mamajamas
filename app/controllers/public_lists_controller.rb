@@ -36,7 +36,7 @@ class PublicListsController < ApplicationController
   def publish
     if params[:publish] == '1'
       @list.share_public!
-      SharedListMailer.shared(current_user).deliver
+      SharedListNotifier.send_shared_list_notification(@list)
       redirect_to public_list_path(current_user.slug)
     else
       redirect_to list_path

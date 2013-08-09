@@ -121,10 +121,8 @@ describe PublicListsController do
     end
 
     it 'should send shared list notification' do
-      SharedListMailer.should_receive(:shared).
-        with(an_instance_of(User)).
-        once.
-        and_return(double("mailer", deliver: true))
+      SharedListNotifier.should_receive(:send_shared_list_notification).
+        with(an_instance_of(List))
       post 'publish', publish: '1'
     end
 
