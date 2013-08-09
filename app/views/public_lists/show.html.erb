@@ -75,7 +75,7 @@
   <% if @view.owner.followed_users_with_public_lists.any? -%>
     <div id="module-friends">
       <div class="content">
-        <h3><%= "#{@view.owner.possessive_name} Friends" %></h3>
+        <h3>People I'm Following</h3>
         <ul class="clearfix">
           <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_public_lists, locals: { show_names: false } %>
         </ul>
