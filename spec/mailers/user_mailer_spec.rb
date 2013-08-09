@@ -4,7 +4,7 @@ describe UserMailer do
 
   describe "welcome" do
 
-    let(:user) { create(:user) }
+    let(:user) { create(:user, first_name: "Jane") }
 
     let(:mail) { UserMailer.welcome(user.id) }
 
@@ -20,7 +20,7 @@ describe UserMailer do
     end
 
     it "includes a greeting" do
-      mail.body.encoded.should match("Hi #{user.username}")
+      mail.body.encoded.should match("Hi #{user.first_name}")
     end
 
     it "includes a link to the friends page" do

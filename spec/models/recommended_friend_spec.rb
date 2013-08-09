@@ -4,7 +4,10 @@ describe RecommendedFriend do
   let(:list) { create(:list, user: user, public: true) }
 
   before(:all) do
+    # unshare all existing lists (this sucks)
+    List.all.each { |l| l.unshare_public! }
     create_list(:list, 4, public: true)
+    @user_with_unshared_list = create(:list, public: false).user
   end
 
   it "returns all recommended users" do
@@ -29,9 +32,8 @@ describe RecommendedFriend do
   end
 
   it "excludes users without public lists" do
-    new_user = create(:list, public: false).user
     rf = RecommendedFriend.new(user)
-    rf.all.should_not include(new_user)
+    rf.all.should_not include(@user_with_unshared_list)
   end
 
 end
