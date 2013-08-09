@@ -96,7 +96,7 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
     return false;
   },
 
-  selectBabyAge: function() {
+  selectBabyAge: function(event) {
     event.preventDefault();
 
     var answer = $(event.target, this.$el);
