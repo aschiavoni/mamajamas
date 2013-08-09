@@ -120,6 +120,14 @@ describe PublicListsController do
       response.should redirect_to list_path
     end
 
+    it 'should send shared list notification' do
+      SharedListMailer.should_receive(:shared).
+        with(an_instance_of(User)).
+        once.
+        and_return(double("mailer", deliver: true))
+      post 'publish', publish: '1'
+    end
+
   end
 
 end
