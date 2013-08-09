@@ -1,11 +1,13 @@
 class RelationshipMailer < ActionMailer::Base
+  include MailerHelper
+
   default from: "automom@mamajamas.com"
 
   def follower_notification(relationship)
     @followed = relationship.followed
     @follower = relationship.follower
-    @followed_display_name = display_name(@followed)
-    @follower_display_name = display_name(@follower)
+    @followed_display_name = full_name(@followed)
+    @follower_display_name = full_name(@follower)
 
     relationship.delivered_notification_at = Time.zone.now
     relationship.save!
@@ -14,16 +16,5 @@ class RelationshipMailer < ActionMailer::Base
 
     mail(to: "#{@followed_display_name} <#{@followed.email}>",
          subject: subject)
-  end
-
-  private
-
-  # TODO: this method is a duplicate of one in FriendsHelper, dry this up
-  def display_name(user)
-    unless user.first_name.blank? || user.last_name.blank?
-      "#{user.first_name} #{user.last_name}"
-    else
-      user.username
-    end
   end
 end
