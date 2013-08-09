@@ -264,7 +264,8 @@ CREATE TABLE lists (
     updated_at timestamp without time zone NOT NULL,
     public boolean DEFAULT false NOT NULL,
     view_count integer DEFAULT 0 NOT NULL,
-    public_view_count integer DEFAULT 0 NOT NULL
+    public_view_count integer DEFAULT 0 NOT NULL,
+    shared_list_notification_sent_at timestamp without time zone
 );
 
 
@@ -712,6 +713,14 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
+-- Name: age_ranges_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY age_ranges
+    ADD CONSTRAINT age_ranges_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -821,14 +830,6 @@ ALTER TABLE ONLY relationships
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
--- Name: when_to_buy_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY age_ranges
-    ADD CONSTRAINT when_to_buy_suggestions_pkey PRIMARY KEY (id);
 
 
 --
@@ -1128,3 +1129,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130716192840');
 INSERT INTO schema_migrations (version) VALUES ('20130726153715');
 
 INSERT INTO schema_migrations (version) VALUES ('20130727125616');
+
+INSERT INTO schema_migrations (version) VALUES ('20130809135925');
