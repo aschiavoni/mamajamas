@@ -28,7 +28,7 @@ class ListView
   end
 
   def all_category?
-    @category_slug.blank?
+    @category_slug == 'all'
   end
 
   private
@@ -36,6 +36,8 @@ class ListView
   def find_category
     if @category_slug.present?
       @category = categories.by_slug(@category_slug).first
+    else
+      @category = categories.order(:name).first
     end
     @category
   end

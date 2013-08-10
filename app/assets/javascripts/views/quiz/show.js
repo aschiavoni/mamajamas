@@ -68,7 +68,7 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
   },
 
   done: function() {
-    window.location = '/list/bathing';
+    window.location = '/list';
   },
 
   getQuestion: function(index) {
