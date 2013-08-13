@@ -59,7 +59,8 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
       image_url: this.model.get("image_url"),
       product_type_id: this.model.get("product_type_id"),
       product_type_name: itemName,
-      placeholder: true
+      placeholder: true,
+      show_chooser: true
     };
 
     _view.model = Mamajamas.Context.ListItems.create(attributes, {
