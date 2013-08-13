@@ -11,6 +11,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
   },
 
   events: {
+    "submit .new-placeholder": "save",
     "click .save-item": "save",
     "click .cancel-item": "cancel"
   },
