@@ -84,7 +84,20 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       var helpModals = new Mamajamas.Views.ListHelpModals();
       $('body').append(helpModals.render().$el);
     }
+
+    if ($("#add-list-item").length > 0)
+      _.defer(this.addToMyList, this);
+
     return this;
+  },
+
+  addToMyList: function(_view) {
+    $.cookies.set("add_to_my_list", null);
+    var listItemAttrs = $("#add-list-item").data("add-list-item");
+    var editView = new Mamajamas.Views.ListItemEdit({
+      model: new Mamajamas.Models.ListItem(listItemAttrs)
+    });
+    $("#list-items").prepend(editView.render().$el);
   },
 
   sort: function(event) {

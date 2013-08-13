@@ -12,7 +12,8 @@ Mamajamas.Views.PublicListItemShow = Backbone.View.extend({
 
   events: {
     'click input.prod-owned': 'doNothing',
-    'click .prod-note': 'toggleNote'
+    'click .prod-note': 'toggleNote',
+    'click .bt-add': 'addToMyList',
   },
 
   render: function() {
@@ -39,6 +40,11 @@ Mamajamas.Views.PublicListItemShow = Backbone.View.extend({
     } else {
       $target.removeClass("open").addClass("closed");
     }
+  },
+
+  addToMyList: function(event) {
+    $.cookies.set("add_to_my_list", this.model.id);
+    return true;
   },
 
 });
