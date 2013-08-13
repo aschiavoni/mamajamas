@@ -11,6 +11,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
   },
 
   events: {
+    "submit .new-placeholder": "save",
     "click .save-item": "save",
     "click .cancel-item": "cancel"
   },
@@ -58,7 +59,8 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
       image_url: this.model.get("image_url"),
       product_type_id: this.model.get("product_type_id"),
       product_type_name: itemName,
-      placeholder: true
+      placeholder: true,
+      show_chooser: true
     };
 
     _view.model = Mamajamas.Context.ListItems.create(attributes, {
@@ -107,7 +109,8 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
   errorFieldMap: function() {
     return {
       name: "#list_item_name",
-      category_id: "#list_item_name"
+      category_id: "#list_item_name",
+      product_type_name: "#list_item_name"
     };
   },
 

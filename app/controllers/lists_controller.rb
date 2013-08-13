@@ -3,6 +3,7 @@ class ListsController < ApplicationController
   before_filter :init_view, only: [ :show ]
   before_filter :find_list, only: [ :show, :product_types ]
   before_filter :set_cache_buster, only: [ :show ]
+  before_filter :set_add_to_list, only: [ :show ]
 
   # caches_action :suggestions, expires_in: 1.hour
 
@@ -64,5 +65,13 @@ class ListsController < ApplicationController
 
   def find_list
     @list = current_user.list
+  end
+
+  def set_add_to_list
+    list_item_id = cookies[:add_to_my_list]
+    if list_item_id.present?
+      add_list_item = @list.clone_list_item(list_item_id)
+      @add_list_item_json = add_list_item.to_json(methods: [ :age ])
+    end
   end
 end

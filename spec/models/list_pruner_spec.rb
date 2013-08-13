@@ -20,6 +20,7 @@ describe ListPruner do
       list.add_list_item(ListItem.create!({
         name: 'a new item',
         link: 'http://example.com/items/a-new-item',
+        product_type_name: "Bath Tub",
         priority: 3,
         category_id: category.id
       }))

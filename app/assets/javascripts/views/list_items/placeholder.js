@@ -14,7 +14,7 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
 
   events: {
     "change .prod-owned": "updateOwned",
-    "click .find-item.button": "findItem",
+    "click .find-item.button": "findItemClicked",
     "click .ss-delete": "delete",
   },
 
@@ -31,6 +31,9 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
     });
     this.$el.append(priorityView.render().$el);
 
+    if (this.model.get('show_chooser'))
+      _.defer(this.findItem, this);
+
     return this;
   },
 
@@ -45,19 +48,22 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
     this.model.save();
   },
 
-  findItem: function(event) {
-    event.preventDefault();
-
-    if (this.isGuestUser()) {
-      this.unauthorized();
+  findItem: function(_view) {
+    if (_view.isGuestUser()) {
+      _view.unauthorized();
     } else {
-      this.setCurrentPosition();
+      _view.setCurrentPosition();
+      _view.model.set('show_chooser', false);
       var search = new Mamajamas.Views.ListItemSearch({
-        model: this.model
+        model: _view.model
       });
       $('#buildlist').after(search.render().$el);
     }
+  },
 
+  findItemClicked: function(event) {
+    event.preventDefault();
+    this.findItem(this);
     return false;
   },
 

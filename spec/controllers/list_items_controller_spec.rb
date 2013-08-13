@@ -96,6 +96,8 @@ describe ListItemsController do
 
     context "list item" do
 
+      let(:product_type) { create(:product_type) }
+
       let(:create_params) do
         {
           name: "some new product",
@@ -107,7 +109,8 @@ describe ListItemsController do
           notes: "these are notes",
           image_url: "http://domain.com/newproduct.png",
           category_id: current_category.id,
-          product_type_id: create(:product_type).id,
+          product_type_id: product_type.id,
+          product_type_name: product_type.name,
           placeholder: false
         }
       end

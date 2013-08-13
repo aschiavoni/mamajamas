@@ -47,6 +47,7 @@ FactoryGirl.define do
     priority 2
     notes nil
     image_url "http://somedomain.com/somelistitem"
+    product_type_name "Bath Tub"
     placeholder false
   end
 
