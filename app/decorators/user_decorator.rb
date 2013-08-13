@@ -23,7 +23,10 @@ module UserDecorator
   end
 
   def followed_users_with_public_lists
-    followed_users.includes(:list).where("lists.public = true")
+    followed_users.
+      includes(:list).
+      where("lists.public = true").
+      order(:first_name)
   end
   memoize :followed_users_with_public_lists
 end
