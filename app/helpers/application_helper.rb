@@ -24,6 +24,10 @@ module ApplicationHelper
     current_user && current_user.admin?
   end
 
+  def user_has_list?
+    current_user && current_user.list.present?
+  end
+
   # flash notifications
   def notifications
     notifications = ""

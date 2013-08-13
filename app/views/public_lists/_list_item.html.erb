@@ -12,6 +12,9 @@
       <h3>
         <%= link_to list_item.name, list_item.link, target: "_blank" %>
       </h3>
+      <% if user_has_list? -%>
+        <a href="#" class="button bt-color bt-add" title="Add to my list"><span class="ss-plus"></span><strong>Add</strong></a> 
+      <% end -%>
       <% unless list_item.notes.empty? -%>
         <div class="prod-note closed">
           <div class="note-content"><%= h list_item.notes %></div>
