@@ -126,6 +126,29 @@ class List < ActiveRecord::Base
     increment!(:public_view_count)
   end
 
+  def clone_list_item(list_item_id)
+    orig = ListItem.find_by_id(list_item_id)
+    return nil if orig.blank?
+
+    ListItem.new({
+      name: orig.name,
+      owned: false,
+      link: orig.link,
+      priority: orig.priority,
+      image_url: orig.image_url,
+      product_type_id: orig.product_type_id,
+      category_id: orig.category_id,
+      placeholder: false,
+      product_type_name: orig.product_type_name,
+      list_item_image_id: orig.list_item_image_id,
+      vendor: orig.vendor,
+      vendor_id: orig.vendor_id
+    }).tap do |li|
+      li.age = orig.age
+      li.shared = self.public?
+    end
+  end
+
   private
 
   def default_title
