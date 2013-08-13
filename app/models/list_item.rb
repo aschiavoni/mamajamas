@@ -14,6 +14,7 @@ class ListItem < ActiveRecord::Base
   attr_accessible :vendor, :vendor_id
 
   validates :name, :link, presence: true, unless: :placeholder?
+  validates :product_type_name, presence: true
   validates :notes, length: { maximum: 1000 }
   validates :category_id, presence: true
 

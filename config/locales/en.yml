@@ -59,6 +59,8 @@ en:
               blank: "Sorry, but an item must belong to a category."
             notes:
               too_long: "Sorry, but your notes are too long (max %{count} characters)."
+            product_type_name:
+              blank: "Sorry, but you must provide a name."
         product_type:
           attributes:
             name:
