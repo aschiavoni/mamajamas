@@ -49,10 +49,6 @@ describe FriendsController do
 
     describe "notifications enabled" do
 
-      def mailer_jobs
-        Sidekiq::Extensions::DelayedMailer.jobs
-      end
-
       before(:all) do
         # setup some relationships
         @following = create_list(:user, 2)
@@ -64,7 +60,7 @@ describe FriendsController do
       it "should send notifications" do
         lambda {
           post :notify, notify: "1"
-        }.should change(mailer_jobs, :size).by(@following.size)
+        }.should change(delayed_mailer_jobs, :size).by(@following.size)
       end
 
       it "should not re-deliver notifications to followed users" do
@@ -78,7 +74,7 @@ describe FriendsController do
         # that do not have delivered_notification_at set
         lambda {
           post :notify, notify: "1"
-        }.should change(mailer_jobs, :size).by(@following.size)
+        }.should change(delayed_mailer_jobs, :size).by(@following.size)
       end
 
     end
