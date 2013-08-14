@@ -94,6 +94,7 @@ gem 'memcachier'
 gem 'dalli'
 gem 'dalli-delete-matched'
 gem 'sentry-raven', :git => "https://github.com/getsentry/raven-ruby.git"
+gem 'sidekiq'
 gem 'rack-google-analytics'
 
 group :development do
