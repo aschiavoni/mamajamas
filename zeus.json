@@ -8,13 +8,11 @@
           "prerake": {"rake": []},
           "runner": ["r"],
           "console": ["c"],
-          "server": ["s"],
           "generate": ["g"],
           "destroy": ["d"],
           "dbconsole": []
         },
         "test_environment": {
-          "cucumber_environment": {"cucumber": []},
           "test_helper": {"test": ["rspec", "testrb"]}
         }
       }

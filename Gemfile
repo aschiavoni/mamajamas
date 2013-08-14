@@ -99,6 +99,7 @@ gem 'rack-google-analytics'
 
 group :development do
   gem 'guard'
+  gem 'foreman'
   gem 'zeus'
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
