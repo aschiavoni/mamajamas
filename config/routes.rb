@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Mamajamas::Application.routes.draw do
   devise_for(:users,
              path_names:
@@ -19,6 +21,10 @@ Mamajamas::Application.routes.draw do
     put "/registrations/facebook" => "registrations#facebook"
     post "/registrations/facebook/update" => "registrations#facebook_update"
     post "/registrations/facebook/friends" => "registrations#facebook_friends_update"
+  end
+
+  authenticate :user, lambda { |u| u.admin?  } do
+    mount Sidekiq::Web => '/admin/sidekiq'
   end
 
   get "/profile" => "users#edit"
