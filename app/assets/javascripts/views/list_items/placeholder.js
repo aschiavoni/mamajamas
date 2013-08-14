@@ -52,6 +52,7 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
     if (_view.isGuestUser()) {
       _view.unauthorized();
     } else {
+      Mamajamas.Context.ListItems.trigger("list:item:editing");
       _view.setCurrentPosition();
       _view.model.set('show_chooser', false);
       var search = new Mamajamas.Views.ListItemSearch({
