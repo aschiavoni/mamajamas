@@ -39,6 +39,8 @@ class ListItemImageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  process :fix_orientation
+
   # Create different versions of your uploaded files:
   version :thumb do
     process :resize_to_fill => [60, 60]
@@ -48,6 +50,13 @@ class ListItemImageUploader < CarrierWave::Uploader::Base
   # For images you might use something like this:
   def extension_white_list
     %w(jpg jpeg gif png)
+  end
+
+  def fix_orientation
+    manipulate! do |image|
+      image.auto_orient
+      image
+    end
   end
 
   # Override the filename of the uploaded files:
