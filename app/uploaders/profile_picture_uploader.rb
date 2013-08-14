@@ -42,6 +42,8 @@ class ProfilePictureUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  process :fix_orientation
+
   # Create different versions of your uploaded files:
   version :account do
     process :resize_to_fill => [24, 24]
@@ -63,6 +65,13 @@ class ProfilePictureUploader < CarrierWave::Uploader::Base
   # For images you might use something like this:
   def extension_white_list
     %w(jpg jpeg gif png)
+  end
+
+  def fix_orientation
+    manipulate! do |image|
+      image.auto_orient
+      image
+    end
   end
 
   # Override the filename of the uploaded files:
