@@ -16,7 +16,7 @@ class FriendsController < ApplicationController
   def notify
     if params[:notify] == "1"
       current_user.relationships.pending_notification.each do |relationship|
-        RelationshipMailer.follower_notification(relationship).deliver
+        RelationshipMailer.delay.follower_notification(relationship)
       end
     end
     flash[:notice] = "Thanks for signing up with Mamajamas. Now build your list!"
