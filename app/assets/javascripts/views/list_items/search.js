@@ -130,6 +130,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   },
 
   addItem: function(searchResult) {
+    var _view = this;
     var attributes = {
       name: searchResult.get('name'),
       link: searchResult.get('url'),
@@ -146,7 +147,17 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       owned: this.model.get('owned'),
       placeholder: false
     };
-    Mamajamas.Context.ListItems.add(attributes);
+    Mamajamas.Context.ListItems.create(attributes, {
+      wait: true,
+      success: function() {
+        var currentItemCount = Mamajamas.Context.List.get('item_count');
+        Mamajamas.Context.List.set('item_count', currentItemCount + 1);
+        Mamajamas.Context.ListItems.clearPlaceholders(_view.model.get('product_type_id'));
+      },
+      error: function(model, response) {
+        Mamajamas.Context.Notifications.error("We're sorry but we could not add this product at this time.");
+      }
+    });
     this.close();
   },
 
