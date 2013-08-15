@@ -1,6 +1,6 @@
 module AgeRangeAccessors
   def age
-    age_range.name
+    age_range.present? ? age_range.name : nil
   end
 
   def age=(age)
