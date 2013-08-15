@@ -18,8 +18,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:age", this.updateAgeRange, this);
     this.model.on("change:priority", this.updatePriority, this);
-
-    this.startListeningToEditingEvent();
   },
 
   events: {
@@ -89,11 +87,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
 
   updatePriority: function() {
     $("#list_item_priority", this.$el).val(this.model.get("priority"));
-  },
-
-  editingNewItem: function() {
-    this.stopListeningToEditingEvent();
-    alert("Did you want to save your list item(s)? Please click the green save button below each item.");
   },
 
   initializeAutocomplete: function() {
@@ -228,7 +221,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
   },
 
   cancel: function(event) {
-    this.stopListeningToEditingEvent();
     this.model.set(this.oldModel.attributes);
     if (this.options.parent) {
       this.options.parent.$el.show();
@@ -339,14 +331,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     }
 
     return false;
-  },
-
-  startListeningToEditingEvent: function() {
-    Mamajamas.Context.ListItems.on("list:item:editing", this.editingNewItem, this);
-  },
-
-  stopListeningToEditingEvent: function() {
-    Mamajamas.Context.ListItems.off("list:item:editing", this.editingNewItem, this);
   },
 
 });
