@@ -48,7 +48,6 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
     if (this.isGuestUser()) {
       this.unauthorized();
     } else {
-      Mamajamas.Context.ListItems.trigger("list:item:editing");
       this.editing = true;
 
       var editView = new Mamajamas.Views.ListItemEdit({

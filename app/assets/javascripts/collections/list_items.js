@@ -91,4 +91,15 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
     return this.where({ placeholder: false }).length;
   },
 
+  clearPlaceholders: function(productTypeId) {
+    var query = {
+      product_type_id: parseInt(productTypeId),
+      placeholder: true
+    };
+    var placeholders = Mamajamas.Context.ListItems.where(query);
+    _.each(placeholders, function(placeholder) {
+      placeholder.destroy();
+    });
+  },
+
 });
