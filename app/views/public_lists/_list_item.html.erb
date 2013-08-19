@@ -15,7 +15,7 @@
       <% if user_has_list? -%>
         <a href="/list/all" target="_blank" class="button bt-color bt-add" title="Add to my list"><span class="ss-plus"></span><strong>Add</strong></a>
       <% end -%>
-      <% unless list_item.notes.empty? -%>
+      <% if list_item.notes.present? -%>
         <div class="prod-note closed">
           <div class="note-content"><%= h list_item.notes %></div>
         </div>
