@@ -7,7 +7,6 @@
         "development_environment": {
           "prerake": {"rake": []},
           "runner": ["r"],
-          "server": ["s"],
           "console": ["c"],
           "generate": ["g"],
           "destroy": ["d"],
