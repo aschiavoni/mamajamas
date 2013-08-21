@@ -3,7 +3,8 @@ class RelationshipMailer < ActionMailer::Base
 
   default from: "automom@mamajamas.com"
 
-  def follower_notification(relationship)
+  def follower_notification(relationship_id)
+    relationship = Relationship.find(relationship_id)
     @followed = relationship.followed
     @follower = relationship.follower
     @followed_display_name = full_name(@followed)

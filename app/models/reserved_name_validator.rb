@@ -20,6 +20,7 @@ class ReservedNameValidator < ActiveModel::EachValidator
     quiz quizes
     register registrations relationship relationships remove replies robots rss
     save search searcher session sessions settings sign-in sign-out sign-up sign_in
+    sidekiq
     sign_out sign_up signin signout signup sitemap ssl
     subscribe suggestion suggestions
     terms test trends

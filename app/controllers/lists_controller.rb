@@ -5,8 +5,6 @@ class ListsController < ApplicationController
   before_filter :set_cache_buster, only: [ :show ]
   before_filter :set_add_to_list, only: [ :show ]
 
-  # caches_action :suggestions, expires_in: 1.hour
-
   respond_to :html, :json
 
   def show
@@ -37,21 +35,6 @@ class ListsController < ApplicationController
     respond_to do |format|
       format.html { not_found }
       format.json
-    end
-  end
-
-  def suggestions
-    category_slug = params[:category]
-    cat = Category.find_by_slug(category_slug) unless category_slug.blank?
-    product_types = cat.present? ? cat.product_types : ProductType.scoped
-
-    suggestions = product_types.map do |product_type|
-      CachedProductTypeSuggestions.find(product_type)
-    end
-
-    respond_to do |format|
-      format.html { not_found }
-      format.json { render json: suggestions }
     end
   end
 

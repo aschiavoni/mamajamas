@@ -14,7 +14,10 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     this.searchResults = new Mamajamas.Collections.SearchResults();
     this.searchResults.on('reset', this.showResults, this);
 
-    this.suggestions = new Mamajamas.Collections.SearchResults();
+    var productTypeId = this.model.get('product_type_id');
+    this.suggestions = new Mamajamas.Collections.ProductTypeSuggestions(null, {
+      productTypeId: productTypeId
+    });
     this.suggestions.on('reset', this.showSuggestions, this);
   },
 
@@ -26,14 +29,8 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
 
   render: function() {
     var _view = this
-    var productTypeId = this.model.get('product_type_id');
-    var ptSuggestion  = Mamajamas.Context.ProductTypeSuggestions.get(productTypeId);
-    var _suggestions = [];
-    if (ptSuggestion != null)
-      _suggestions = ptSuggestion.get('suggestions');
 
     this.$el.html(this.template(this.model.toJSON())).show(function() {
-      _view.suggestions.reset(_suggestions);
       $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
       $("#field-search", this.$el).focus();
     });
@@ -44,6 +41,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     addYourOwnView.on('search:product:added', _view.addOrUpdateItem, _view);
     $('#prod-search-results', this.$el).after(addYourOwnView.render().$el);
 
+    this.loadSuggestions();
     return this;
   },
 
@@ -77,8 +75,8 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     var _view = this;
 
     this.clearResults();
-    this.$el.progressIndicator('show');
-    $('.no-search-results', this.$el).hide();
+    $('#prod-search-results').progressIndicator('show');
+    $('#prod-search-results .no-search-results', this.$el).hide();
 
     this.searchResults.fetch({
       data: {
@@ -95,12 +93,13 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   },
 
   showSuggestions: function(searchResults) {
+    $('#prod-suggestions-results').progressIndicator('hide');
     var $resultsContainer = $('#prod-suggestions-results ul.suggestions', this.$el);
     this.addSearchResultsToContainer(searchResults, this, $resultsContainer);
   },
 
   showResults: function(searchResults) {
-    this.$el.progressIndicator('hide');
+    $('#prod-search-results').progressIndicator('hide');
     var $resultsContainer = $('#prod-search-results ul.search-results', this.$el);
     this.addSearchResultsToContainer(searchResults, this, $resultsContainer);
   },
@@ -174,6 +173,10 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
 
     this.model.set(attributes);
     this.close();
+  },
+
+  loadSuggestions: function() {
+    this.suggestions.fetch();
   },
 
 });

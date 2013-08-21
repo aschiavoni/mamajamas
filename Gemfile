@@ -96,8 +96,14 @@ gem 'dalli-delete-matched'
 gem 'sentry-raven', :git => "https://github.com/getsentry/raven-ruby.git"
 gem 'rack-google-analytics'
 
+# background processing
+gem 'sidekiq'
+gem 'slim', '>= 1.1.0'
+gem 'sinatra', '>= 1.3.0', :require => nil
+
 group :development do
   gem 'guard'
+  gem 'foreman'
   gem 'zeus'
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
