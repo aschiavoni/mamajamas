@@ -16,13 +16,13 @@
 (function($){
   var methods = {
     show: function() {
-      var $progressContainer = $(".progress-container:not(.progress-disabled)");
+      var $progressContainer = $(".progress-container:not(.progress-disabled)", this);
       var $progress = $(".progress", $progressContainer);
       $progress.show().siblings().hide();
       return this;
     },
     hide: function() {
-      var $progressContainer = $(".progress-container:not(.progress-disabled)");
+      var $progressContainer = $(".progress-container:not(.progress-disabled)", this);
       var $progress = $(".progress", $progressContainer);
       $progress.hide().siblings().show();
       return this;

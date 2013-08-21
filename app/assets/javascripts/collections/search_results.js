@@ -7,4 +7,4 @@ Mamajamas.Collections.SearchResults = Backbone.Collection.extend({
 
   model: Mamajamas.Models.SearchResult,
 
-})
+});

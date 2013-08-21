@@ -7,7 +7,7 @@ describe RelationshipMailer do
     let(:followed) { create(:user) }
     let(:follower) { create(:user) }
     let(:relationship) { follower.follow!(followed) }
-    let(:mail) { RelationshipMailer.follower_notification(relationship) }
+    let(:mail) { RelationshipMailer.follower_notification(relationship.id) }
 
     it "renders the subject" do
       mail.subject.should =~ /#{follower.username}/
@@ -31,6 +31,7 @@ describe RelationshipMailer do
 
     it "sets notification delivered at timestamp" do
       expect { mail }.to change {
+        relationship.reload
         relationship.delivered_notification_at
       }.from(NilClass).to(Time)
     end

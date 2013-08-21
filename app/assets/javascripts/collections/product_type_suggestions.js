@@ -1,9 +1,14 @@
 Mamajamas.Collections.ProductTypeSuggestions = Backbone.Collection.extend({
 
-  initialize: function() {
+  initialize: function(models, options) {
+    this.productTypeId = options.productTypeId;
   },
 
-  url: '/api/list/suggestions',
+  url: function() {
+    return "/api/suggestions/" + this.productTypeId;
+  },
+
+  model: Mamajamas.Models.ProductTypeSuggestion
 
 });
 

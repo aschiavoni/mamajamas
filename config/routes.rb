@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Mamajamas::Application.routes.draw do
   devise_for(:users,
              path_names:
@@ -19,6 +21,10 @@ Mamajamas::Application.routes.draw do
     put "/registrations/facebook" => "registrations#facebook"
     post "/registrations/facebook/update" => "registrations#facebook_update"
     post "/registrations/facebook/friends" => "registrations#facebook_friends_update"
+  end
+
+  authenticate :user, lambda { |u| u.admin?  } do
+    mount Sidekiq::Web => '/admin/sidekiq'
   end
 
   get "/profile" => "users#edit"
@@ -68,8 +74,7 @@ Mamajamas::Application.routes.draw do
       get "products" => "products#index"
       get "age_ranges" => "age_ranges#index"
       get "list/product_types" => "lists#product_types"
-      get "list/suggestions" => "lists#suggestions"
-      get "list/suggestions/:category" => "lists#suggestions"
+      get "suggestions/:id" => "product_type_suggestions#index"
       post "kids" => "quiz#update_kid"
       put "update_zip_code" => "quiz#update_zip_code"
       post "prune_list" => "quiz#prune_list"

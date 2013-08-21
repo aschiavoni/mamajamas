@@ -3,9 +3,6 @@ Mamajamas.Routers.ListItems = Backbone.Router.extend({
   initialize: function() {
     // use a global to store the list items collection
     Mamajamas.Context.ListItems = new Mamajamas.Collections.ListItems();
-
-    // use a global to store the suggestions collection
-    Mamajamas.Context.ProductTypeSuggestions = new Mamajamas.Collections.ProductTypeSuggestions();
   },
 
   routes: {

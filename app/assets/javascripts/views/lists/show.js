@@ -50,14 +50,6 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       return true;
     });
 
-    // get suggestions
-    var category = Mamajamas.Context.List.get('category');
-    Mamajamas.Context.ProductTypeSuggestions.fetch({
-      data: {
-        category: category
-      }
-    });
-
     this.model.on('change:item_count', function() {
       var shareButton = $('#bt-share');
       if (this.model.get('item_count') > 0) {
