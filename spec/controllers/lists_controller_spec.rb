@@ -61,30 +61,4 @@ describe ListsController do
 
   end
 
-  describe "suggestions" do
-
-    before(:each) do
-      sign_in user
-    end
-
-    it "lists all product type suggestions" do
-      CachedProductTypeSuggestions.should_receive(:find).
-        exactly(ProductType.scoped.count).times
-
-      get :suggestions, format: :json
-    end
-
-    it "lists product type suggestions for specific category" do
-      category = create(:category)
-      product_types = create_list(:product_type, 3, category: category)
-
-      CachedProductTypeSuggestions.should_receive(:find).
-        exactly(category.product_types.count).times
-
-      get :suggestions, category: category.slug, format: :json
-    end
-
-
-  end
-
 end
