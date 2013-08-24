@@ -64,6 +64,7 @@ class AmazonProductFetcher
           medium_image_url: medium_image.blank? ? nil : medium_image.get('URL'),
           large_image_url: large_image.blank? ? nil : large_image.get('URL'),
           rating: nil,
+          rating_count: 0,
           price: get_price(item),
           sales_rank: item.get('SalesRank'),
           brand: item_attributes.get('Brand'),
@@ -71,7 +72,8 @@ class AmazonProductFetcher
           manufacturer: item_attributes.get('Manufacturer'),
           model: item_attributes.get('Model'),
           categories: browse_nodes.join(', '),
-          mamajamas_rating: mamajamas_rating
+          mamajamas_rating: mamajamas_rating.present? ? mamajamas_rating.rating : nil,
+          mamajamas_rating_count: mamajamas_rating.present? ? mamajamas_rating.rating_count : 0
         }
       end
     end
@@ -119,6 +121,6 @@ class AmazonProductFetcher
   def get_mamajamas_rating(vendor_id, vendor)
     conditions = { vendor_id: vendor_id, vendor: vendor }
     product_rating = ProductRating.where(conditions).first
-    product_rating.present? ? product_rating.rating : nil
+    product_rating.present? ? product_rating : nil
   end
 end
