@@ -32,7 +32,7 @@ Mamajamas::Application.routes.draw do
   put "/account/complete" => "users#complete"
   post "/account/complete" => "users#complete"
   get '/about' => 'pages#about', :as => :about
-  get '/terms-of-service' => 'pages#terms', :as => :terms
+  get '/privacy-terms-of-service' => 'pages#terms', :as => :terms
   get '/test/error' => 'home#error'
   get '/robots.txt' => 'robots#show'
 

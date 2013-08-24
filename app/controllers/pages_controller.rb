@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_filter :init_view
 
   def terms
-    set_subheader "Terms of Service"
+    set_subheader "Privacy Policy & Terms of Service"
   end
 
   def about
