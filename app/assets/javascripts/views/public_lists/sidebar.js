@@ -3,6 +3,13 @@ Mamajamas.Views.PublicListSidebar = Backbone.View.extend({
   $followButton: null,
 
   initialize: function() {
+    $('div.expandable').expander({
+      expandText:       'Show more', // default is 'read more'
+      userCollapseText: 'Show less',  // default is 'read less'
+      expandEffect: 'slideDown',
+      collapseEffect: 'slideUp',
+      slicePoint: 200
+    });
     this.$followButton = $("#bt-follow", this.$el);
   },
 
