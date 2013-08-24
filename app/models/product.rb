@@ -3,6 +3,7 @@ class Product < ActiveRecord::Base
 
   attr_accessible :name
   attr_accessible :rating
+  attr_accessible :rating_count
   attr_accessible :url
   attr_accessible :image_url
   attr_accessible :medium_image_url
@@ -17,6 +18,7 @@ class Product < ActiveRecord::Base
   attr_accessible :categories
   attr_accessible :price
   attr_accessible :mamajamas_rating
+  attr_accessible :mamajamas_rating_count
 
   validates :name, :vendor, :url, presence: true
   validates :vendor_id, presence: true, uniqueness: { scope: :vendor }

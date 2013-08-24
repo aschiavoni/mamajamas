@@ -9,7 +9,7 @@ describe ProductRatingCalculator do
       and_return([ 3, 4 ])
 
     calc = ProductRatingCalculator.new vendor_id, vendor
-    calc.calculate.should == 3.5
+    calc.calculate[:average].should == 3.5
   end
 
   it "rounds a rating up to the nearest half rating" do
@@ -26,8 +26,17 @@ describe ProductRatingCalculator do
         and_return(ratings)
 
       calc = ProductRatingCalculator.new vendor_id, vendor
-      calc.calculate.should == result
+      calc.calculate[:average].should == result
     end
+  end
+
+  it "includes the number of ratings in the result" do
+    ListItemRatingFinder.should_receive(:find).
+      with(vendor_id, vendor).
+      and_return([ 3, 4 ])
+
+    calc = ProductRatingCalculator.new vendor_id, vendor
+    calc.calculate[:count].should == 2
   end
 
   it "indicates there is no rating for a product that has not been rated" do
