@@ -29,6 +29,11 @@
     <!-- / end message overlay -->
   <% end -%>
 <% end -%>
+<%= content_for :logged_out_header_buttons do %>
+  <li id="startlist">
+  <%= link_to "Start Your List", quiz_path, class: "button bt-color" %>
+  </li>
+<% end -%>
 <%= content_for :subheader_content do %>
   <p class="pubdate">
     Created <%= l @view.list.created_at, format: :friendly %>

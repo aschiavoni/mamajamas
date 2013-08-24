@@ -74,6 +74,7 @@
           <li>
           <%= link_to "Login", new_user_session_path, id: "login-link" %>
           </li>
+          <%= yield :logged_out_header_buttons -%>
         <% end -%>
         </ul>
       </div>
