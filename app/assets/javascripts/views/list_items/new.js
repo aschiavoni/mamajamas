@@ -52,6 +52,8 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
     var _view = this;
     _view.clearErrors();
     var itemName = $("#list_item_name", this.$el).val();
+    var pluralName = this.model.get("product_type_plural_name");
+    if (pluralName == null) pluralName = itemName;
     var attributes = {
       category_id: this.model.get("category_id"),
       priority: this.model.get("priority"),
@@ -59,6 +61,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
       image_url: this.model.get("image_url"),
       product_type_id: this.model.get("product_type_id"),
       product_type_name: itemName,
+      product_type_plural_name: pluralName,
       placeholder: true,
       show_chooser: true
     };
@@ -136,6 +139,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
         $(event.target).val(ui.item.value.name);
         _view.model.set("product_type_id", ui.item.value.id);
         _view.model.set("image_url", ui.item.value.image_url);
+        _view.model.set("product_type_plural_name", ui.item.value.plural_name);
 
         // re-initialize the inFieldLabels plugin
         $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });

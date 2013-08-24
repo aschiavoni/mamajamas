@@ -52,10 +52,13 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 
     this.model.on('change:item_count', function() {
       var shareButton = $('#bt-share');
+      var shareButonHeader = $('#bt-share-header');
       if (this.model.get('item_count') > 0) {
         shareButton.removeClass('disabled');
+        shareButonHeader.attr('href', "/profile")
       } else {
         shareButton.addClass('disabled');
+        shareButonHeader.attr('href', "/list")
       }
     }, this)
   },

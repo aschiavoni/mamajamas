@@ -9,6 +9,6 @@ class SharedListMailer < ActionMailer::Base
 
     mail to: @user.email,
       bcc: "angie@mamajamas.com",
-      subject: "Your Shared Mamajamas List"
+      subject: "Your List is Saved!"
   end
 end

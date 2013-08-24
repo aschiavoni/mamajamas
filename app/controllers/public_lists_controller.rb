@@ -16,12 +16,6 @@ class PublicListsController < ApplicationController
     @list_entries_json = render_list_entries(@view.list_entries)
     @list.increment_public_view_count
 
-    if current_user == @list.user
-      set_preheader "My Shared List"
-    else
-      set_preheader "Shared List"
-    end
-
     respond_to do |format|
       format.html
     end
