@@ -21,7 +21,8 @@ class ProductRatingUpdater
   def build_rating(vendor_id, vendor, rating)
     vattrs = { vendor_id: vendor_id, vendor: vendor }
     pr = ProductRating.where(vattrs).first || ProductRating.new(vattrs)
-    pr.rating = rating
+    pr.rating = rating[:average]
+    pr.rating_count = rating[:count]
     pr
   end
 
