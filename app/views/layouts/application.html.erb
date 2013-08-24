@@ -48,7 +48,7 @@
           <li id="myaccount">
             <%= link_to profile_path do %>
               <%= image_tag current_user.profile_picture.account %>
-              My Account
+              <%= current_user.first_name? ? current_user.first_name : current_user.username %>
               <span class="ss-dropdown"></span>
             <% end -%>
             <ul class="nav-drop">
@@ -74,15 +74,21 @@
           <li>
           <%= link_to "Login", new_user_session_path, id: "login-link" %>
           </li>
+          <%= yield :logged_out_header_buttons -%>
         <% end -%>
         </ul>
       </div>
       <% if show_progress -%>
         <div id="progress">
           <ol class="prog<%= progress_id %>"><!-- comments between list items prevent whitespace insertion when displayed inline -->
-            <li class="prog1"><strong>1</strong> Take the quiz</li><!--
-            --><li class="prog2"><strong>2</strong> Make your list and get advice</li><!--
-            --><li class="prog3"><strong>3</strong> Share your list</li>
+            <li class="prog1"><strong>1</strong> <%= link_to "Take the quiz", quiz_path %></li><!--
+            --><li class="prog2"><strong>2</strong> <%= link_to "Make your list and get advice", list_path %></li><!--
+            --><li class="prog3"><strong>3</strong> <% if current_user.present? && current_user.list.present? && current_user.list.list_items.user_items.any? -%>
+                  <%= link_to "Share your list", profile_path, id: "bt-share-header" %>
+                <% else -%>
+                  <%= link_to "Share your list", list_path, id: "bt-share-header" %>
+                <% end -%>
+               </li>
           </ol>
           <div class="progborder"></div>
         </div>
@@ -130,7 +136,7 @@
         <li><%= link_to "Home", root_path %></li>
         <li><%= link_to "About Us", about_path %></li>
         <li><a href="mailto:angie@mamajamas.com">Contact</a></li>
-        <li><%= link_to "Terms", terms_path %></li>
+        <li><%= link_to "Privacy & Terms", terms_path %></li>
       </ul>
     </div>
   </div>

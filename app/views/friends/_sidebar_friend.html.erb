@@ -1,6 +1,6 @@
 <% show_names = true if show_names.nil? -%>
 <li>
-  <%= link_to public_list_path(sidebar_friend.slug) do %>
+  <%= link_to public_list_path(sidebar_friend.slug), title: sidebar_friend.display_name do %>
     <%= image_tag sidebar_friend.profile_picture.friend, alt: sidebar_friend.display_name %>
     <% if show_names -%>
       <span class="firstname">
