@@ -1,15 +1,19 @@
 class ListBuilder
   attr_reader :list
 
-  def initialize(user, kid = nil)
+  def initialize(user, kid = nil, comparer = AgeRangeComparer)
     @user = user
     @kid = kid
     @list = List.new
+    @comparer = comparer.new
   end
 
   def build!(product_types = ProductType.global)
     user.list = list
 
+    if product_types.respond_to?(:includes)
+      product_types = product_types.includes(:age_range).includes(:category)
+    end
     product_types.each do |product_type|
       add_placeholder(product_type)
     end
@@ -31,9 +35,9 @@ class ListBuilder
   end
 
   def product_type_applicable?(product_type)
-    if kid.age_range.newborn?
+    if comparer.newborn?(kid.age_range)
       return !older_than_thirteen_to_eighteen_months.include?(product_type.age_range)
-    elsif kid.age_range.infant?
+    elsif comparer.infant?(kid.age_range)
       return !older_than_two_years.include?(product_type.age_range)
     end
     return true
@@ -41,7 +45,7 @@ class ListBuilder
 
   def category_applicable?(product_type)
     !(product_type.category == potty_training_category &&
-      kid.age_range.position <= AgeRange.thirteen_to_eighteen_months.position)
+      kid.age_range.position <= comparer.thirteen_to_eighteen_months.position)
   end
 
   private
@@ -54,16 +58,20 @@ class ListBuilder
     @kid
   end
 
+  def comparer
+    @comparer
+  end
+
   def younger_ages
     @younger ||= kid.age_range.younger
   end
 
   def older_than_thirteen_to_eighteen_months
-    @older_than_thirteen ||= AgeRange.thirteen_to_eighteen_months.older
+    @older_than_thirteen ||= comparer.older(comparer.thirteen_to_eighteen_months)
   end
 
   def older_than_two_years
-    @older_than_two_years ||= AgeRange.two_years.older
+    @older_than_two_years ||= comparer.older(comparer.two_years)
   end
 
   def potty_training_category
