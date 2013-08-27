@@ -109,6 +109,10 @@ class List < ActiveRecord::Base
     list_items.where(placeholder: false).any?
   end
 
+  def has_placeholder?(product_type)
+    list_items.placeholders.where(product_type_id: product_type.id).any?
+  end
+
   def item_count
     list_items.where(placeholder: false).count
   end

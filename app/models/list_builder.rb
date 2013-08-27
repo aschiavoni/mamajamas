@@ -4,7 +4,7 @@ class ListBuilder
   def initialize(user, kid = nil, comparer = AgeRangeComparer)
     @user = user
     @kid = kid
-    @list = List.new
+    @list = user.list || List.new
     @comparer = comparer.new
   end
 
@@ -24,7 +24,9 @@ class ListBuilder
 
   def add_placeholder(product_type)
     if applicable?(product_type)
-      list.add_list_item_placeholder(product_type)
+      unless list.has_placeholder?(product_type)
+        list.add_list_item_placeholder(product_type)
+      end
     end
   end
 
