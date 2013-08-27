@@ -83,4 +83,9 @@ FactoryGirl.define do
     vendor_id "B00083HK0M"
     rating 3.0
   end
+
+  factory :answer, class: "Quiz::Answer" do
+    question "feeding"
+    answers [ "Breast Feed", "Pump" ]
+  end
 end

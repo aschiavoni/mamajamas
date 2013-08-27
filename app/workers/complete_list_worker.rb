@@ -9,6 +9,7 @@ class CompleteListWorker
     user.build_list!
 
     # process questions
+    ListQuizUpdater.new(user).update!
 
     # prune list
     ListPruner.prune!(user.list)
