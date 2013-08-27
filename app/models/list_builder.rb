@@ -9,6 +9,7 @@ class ListBuilder
   end
 
   def build!(product_types = ProductType.global)
+    return if list.built_at.present?
     user.list = list
 
     if product_types.respond_to?(:includes)
@@ -18,6 +19,7 @@ class ListBuilder
       add_placeholder(product_type)
     end
 
+    list.built_at = Time.now.utc
     list.save!
     list
   end
