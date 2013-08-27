@@ -9,7 +9,7 @@ describe ListsController do
     context "with list" do
 
       before(:each) do
-        user.build_list!
+        user.build_list!.complete!
       end
 
       before(:each) do
@@ -24,17 +24,6 @@ describe ListsController do
       it "should increment view count" do
         List.any_instance.should_receive(:increment_view_count)
         get :show
-      end
-
-    end
-
-    context "without list" do
-
-      it "should redirect to quiz if list doesn't exist" do
-        u = create(:user)
-        sign_in u
-        get :show
-        response.should redirect_to(quiz_path)
       end
 
     end

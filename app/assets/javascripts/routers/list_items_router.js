@@ -23,6 +23,11 @@ Mamajamas.Routers.ListItems = Backbone.Router.extend({
       Mamajamas.Context.AppAuth.signup();
     });
 
+    if (Mamajamas.Context.List == null) {
+      var listWaiter = new Mamajamas.Views.ListWait();
+      return;
+    }
+
     var listView = new Mamajamas.Views.ListShow({
       model: Mamajamas.Context.List
     });

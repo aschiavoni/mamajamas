@@ -149,6 +149,16 @@ class List < ActiveRecord::Base
     end
   end
 
+  def completed?
+    completed_at.present?
+  end
+
+  def complete!
+    update_attributes!({
+      completed_at: Time.now.utc
+    }, { without_protection: true })
+  end
+
   private
 
   def default_title

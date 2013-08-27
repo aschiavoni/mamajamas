@@ -14,7 +14,7 @@
     <a href="#" class="ss-icon" title="Print"><span>Print</span></a>
   </li>
 </ul>
-<% end -%>
+<% end if completed_list? -%>
 <%= content_for :nav do %>
   <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
     <nav id="categories">
@@ -30,7 +30,7 @@
       </ul>
     </nav>
   <% end -%>
-<% end -%>
+<% end if completed_list? -%>
 <%= content_for :tertiary do %>
   <% cache [ current_user, 'friends', 'sidebar' ] do -%>
     <div id="module-follow">
@@ -40,23 +40,32 @@
     </div>
   <% end -%>
 <% end -%>
-<% cache [ @view.list, @view.category_slug, 'list' ] do -%>
-  <form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>" data-list-entries-loaded-at="<%= Time.now.utc %>">
-  </form>
-  <% if @add_list_item_json.present? -%>
-    <div id="add-list-item" data-add-list-item="<%= @add_list_item_json %>" style="display:none;"></div>
-  <% end -%>
-  <script type="text/javascript">
-  Mamajamas.Context.List = new Mamajamas.Models.List({
-    title: '<%= @view.list.title %>',
-    <% if @view.category.present? -%>
-    category_id: '<%= @view.category.id %>',
-    category: '<%= @view.category.slug %>',
+<% if completed_list? -%>
+  <% cache [ @view.list, @view.category_slug, 'list' ] do -%>
+    <form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>" data-list-entries-loaded-at="<%= Time.now.utc %>">
+    </form>
+    <% if @add_list_item_json.present? -%>
+      <div id="add-list-item" data-add-list-item="<%= @add_list_item_json %>" style="display:none;"></div>
     <% end -%>
-    current_position: 0,
-    item_count: <%= @view.list.item_count %>,
-    view_count: <%= @view.list.view_count %>,
-    public_view_count: <%= @view.list.public_view_count %>
-  })
-  </script>
+    <script type="text/javascript">
+    Mamajamas.Context.List = new Mamajamas.Models.List({
+      title: '<%= @view.list.title %>',
+      <% if @view.category.present? -%>
+      category_id: '<%= @view.category.id %>',
+      category: '<%= @view.category.slug %>',
+      <% end -%>
+      current_position: 0,
+      item_count: <%= @view.list.item_count %>,
+      view_count: <%= @view.list.view_count %>,
+      public_view_count: <%= @view.list.public_view_count %>
+    })
+    </script>
+  <% end -%>
+<% else -%>
+  <div id="my-list" class="center">
+    <h1>Please wait while we create your list</h1>
+    <p>
+    <%= image_tag "loader.gif" %>
+    </p>
+  </div>
 <% end -%>

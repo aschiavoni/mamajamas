@@ -47,6 +47,7 @@ Mamajamas::Application.routes.draw do
   resource :quiz, only: [ :show, :update ], controller: "quiz"
   resource :list, only: [ :show ] do
     resources :list_items, only: [ :index, :create, :update, :destroy ]
+    get 'check' => "lists#check", as: :list_check
     get 'preview' => "public_lists#preview", as: :public_list_preview
     get 'preview/:category' => "public_lists#preview", as: :public_list_preview_category
     post 'publish' => "public_lists#publish", as: :public_list_publish
