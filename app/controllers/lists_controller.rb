@@ -13,7 +13,10 @@ class ListsController < ApplicationController
     end
 
     if @list.present? && @list.completed?
-      set_body_class "list-help" if @list.view_count == 0
+      if @list.view_count == 0
+        set_body_class "list-help"
+        @list.touch
+      end
 
       cat = params[:category]
       @view = ListView.new(@list, cat)
