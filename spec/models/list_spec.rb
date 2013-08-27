@@ -320,12 +320,14 @@ describe List do
     it "should increment view count" do
       lambda do
         list.increment_view_count
+        list.reload
       end.should change(list, :view_count).by(1)
     end
 
     it "should increment public view count" do
       lambda do
         list.increment_public_view_count
+        list.reload
       end.should change(list, :public_view_count).by(1)
     end
 
