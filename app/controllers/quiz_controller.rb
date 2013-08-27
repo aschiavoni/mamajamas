@@ -14,6 +14,8 @@ class QuizController < ApplicationController
     answers = params[:answers] || []
     Quiz::Answer.save_answer!(current_user, question_name, answers)
 
+    CompleteListWorker.perform_async(current_user.id) if params[:complete_list]
+
     render json: { status: 'ok' }
   end
 
@@ -27,7 +29,7 @@ class QuizController < ApplicationController
       end
     end
 
-    current_user.build_list! if current_user.list.blank?
+    ListBuilderWorker.perform_async(current_user.id)
     respond_with @kid
   end
 
@@ -37,11 +39,6 @@ class QuizController < ApplicationController
     current_user.update_attributes(zip_code: zip_code, country_code: country)
 
     respond_with current_user
-  end
-
-  def prune_list
-    ListPruner.prune!(current_user.list)
-    render json: { status: 'ok' }
   end
 
   private

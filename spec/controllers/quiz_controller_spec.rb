@@ -30,9 +30,23 @@ describe QuizController do
       Quiz::Answer.should_receive(:save_answer!).
         with(user, 'feeding', answers)
 
+      CompleteListWorker.should_not_receive(:perform_async)
       put 'update', {
         question: 'Feeding',
         answers: answers
+      }
+    end
+
+    it "completes list if complete list set" do
+      answers = [ 'Pump', 'Bottle Feed' ]
+      Quiz::Answer.should_receive(:save_answer!).
+        with(user, 'feeding', answers)
+      CompleteListWorker.should_receive(:perform_async).with(user.id)
+
+      put 'update', {
+        question: 'Feeding',
+        answers: answers,
+        complete_list: true
       }
     end
 
@@ -47,7 +61,7 @@ describe QuizController do
     end
 
     before(:each) do
-      User.any_instance.should_receive(:build_list!)
+      ListBuilderWorker.should_receive(:perform_async).with(user.id)
     end
 
     it "finds the user's first kid" do
@@ -111,16 +125,6 @@ describe QuizController do
         country: 'United Kingdom',
         format: :json
       JSON.parse(response.body)['errors'].should_not be_empty
-    end
-
-  end
-
-  describe "POST prune list" do
-
-    it "prunes the user's list" do
-      user.stub(:list, stub)
-      ListPruner.should_receive(:prune!).with(user.list)
-      post 'prune_list'
     end
 
   end
