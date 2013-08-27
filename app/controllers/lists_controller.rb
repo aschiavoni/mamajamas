@@ -8,6 +8,10 @@ class ListsController < ApplicationController
   respond_to :html, :json
 
   def show
+    if current_user.quiz_taken_at.blank?
+      redirect_to quiz_path and return
+    end
+
     if @list.present? && @list.completed?
       set_body_class "list-help" if @list.view_count == 0
 

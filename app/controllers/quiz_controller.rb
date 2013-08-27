@@ -36,7 +36,9 @@ class QuizController < ApplicationController
   def update_zip_code
     zip_code = params[:zip_code].present? ? params[:zip_code].strip : nil
     country = params[:country].present? ? params[:country].strip : 'US'
-    current_user.update_attributes(zip_code: zip_code, country_code: country)
+    if current_user.update_attributes(zip_code: zip_code, country_code: country)
+      current_user.complete_quiz!
+    end
 
     respond_with current_user
   end

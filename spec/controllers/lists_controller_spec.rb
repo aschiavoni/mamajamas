@@ -6,6 +6,19 @@ describe ListsController do
 
   describe "show" do
 
+    context "never taken quiz" do
+
+      let(:user_no_quiz) { create(:user, quiz_taken_at: nil) }
+
+      before(:each) { sign_in user_no_quiz }
+
+      it "redirects to quiz" do
+        get :show
+        response.should redirect_to(quiz_path)
+      end
+
+    end
+
     context "with list" do
 
       before(:each) do

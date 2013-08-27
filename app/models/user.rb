@@ -196,6 +196,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def complete_quiz!
+    update_attributes!({ quiz_taken_at: Time.now.utc },
+                       { without_protection: true })
+  end
+
   def age(now = Time.now.utc.to_date)
     return nil if birthday.blank?
     dob = birthday

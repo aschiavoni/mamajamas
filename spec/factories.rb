@@ -10,6 +10,7 @@ FactoryGirl.define do
     password_confirmation { |u| u.password }
     guest false
     country_code "US"
+    quiz_taken_at { Time.now.utc }
   end
 
   factory :category do

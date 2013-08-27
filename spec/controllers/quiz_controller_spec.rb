@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe QuizController do
 
-  let(:user) { create(:user) }
+  let(:user) { create(:user, quiz_taken_at: nil) }
 
   before(:each) do
     sign_in user
@@ -125,6 +125,17 @@ describe QuizController do
         country: 'United Kingdom',
         format: :json
       JSON.parse(response.body)['errors'].should_not be_empty
+    end
+
+    it "marks that the user has taken the quiz" do
+      User.any_instance.should_receive(:update_attributes).
+        with({ zip_code: 'sl41eg', country_code: 'GB' }).
+        and_return(true)
+      User.any_instance.should_receive(:complete_quiz!)
+      put 'update_zip_code',
+        zip_code: 'sl41eg',
+        country: 'GB',
+        format: :json
     end
 
   end
