@@ -117,17 +117,16 @@ class List < ActiveRecord::Base
     list_items.where(placeholder: false).count
   end
 
-  # these increment methods may no handle concurrency
+  # these increment methods may not handle concurrency
   # but we don't use them for anything but checking whether
   # the list has been viewed at least once so it doesn't matter
   # for now
-  # http://apidock.com/rails/ActiveRecord/Base/increment!
   def increment_view_count
-    increment!(:view_count)
+    List.increment_counter(:view_count, id)
   end
 
   def increment_public_view_count
-    increment!(:public_view_count)
+    List.increment_counter(:public_view_count, id)
   end
 
   def clone_list_item(list_item_id)
