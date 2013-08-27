@@ -10,9 +10,9 @@ class QuizController < ApplicationController
   end
 
   def update
-    question = Quiz::Question.by_name(params[:question], current_user.list)
+    question_name = params[:question].downcase
     answers = params[:answers] || []
-    question.answer(*answers)
+    Quiz::Answer.save_answer!(current_user, question_name, answers)
 
     render json: { status: 'ok' }
   end

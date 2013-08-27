@@ -25,20 +25,10 @@ describe QuizController do
 
   describe "PUT 'update'" do
 
-    it "looks for question class" do
-      user.stub(:list, stub)
-      Quiz::Question.should_receive(:by_name).
-        with('Feeding', user.list).
-        and_return(stub.as_null_object)
-
-      put 'update', {
-        question: 'Feeding'
-      }
-    end
-
     it "answers question" do
       answers = [ 'Pump', 'Bottle Feed' ]
-      Quiz::Feeding.any_instance.should_receive(:answer).with(*answers)
+      Quiz::Answer.should_receive(:save_answer!).
+        with(user, 'feeding', answers)
 
       put 'update', {
         question: 'Feeding',
