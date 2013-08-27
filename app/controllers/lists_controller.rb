@@ -13,9 +13,6 @@ class ListsController < ApplicationController
     end
 
     if @list.present? && @list.completed?
-      set_body_class "list-help" if @list.view_count == 0
-      @list.touch if @list.view_count == 1
-
       cat = params[:category]
       @view = ListView.new(@list, cat)
       @list_entries_json = Rails.cache.fetch [@list, cat, 'entries'] do
