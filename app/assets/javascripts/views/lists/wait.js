@@ -1,4 +1,5 @@
 Mamajamas.Views.ListWait = Mamajamas.Views.Base.extend({
+  delay: 1000,
 
   initialize: function() {
     this.check(this);
@@ -18,7 +19,8 @@ Mamajamas.Views.ListWait = Mamajamas.Views.Base.extend({
         if (data.complete) {
           location.reload();
         } else {
-          _.delay(_view.check, 1000, _view);
+          _.delay(_view.check, _view.delay, _view);
+          _view.delay = _view.delay * 1.1;
         }
       }
     });
