@@ -31,19 +31,21 @@ describe ListBuilder do
       Category.find("potty-training")
     end
 
+    let(:comparer) { AgeRangeComparer.new }
+
     let(:product_types) do
       [
-        build(:product_type, age_range: AgeRange.pre_birth),
-        build(:product_type, age_range: AgeRange.zero_to_three_months),
-        build(:product_type, age_range: AgeRange.thirteen_to_eighteen_months),
-        build(:product_type, age_range: AgeRange.two_years),
-        build(:product_type, age_range: AgeRange.three_years),
-        build(:product_type, age_range: AgeRange.four_years),
+        build(:product_type, age_range: comparer.pre_birth),
+        build(:product_type, age_range: comparer.zero_to_three_months),
+        build(:product_type, age_range: comparer.thirteen_to_eighteen_months),
+        build(:product_type, age_range: comparer.two_years),
+        build(:product_type, age_range: comparer.three_years),
+        build(:product_type, age_range: comparer.four_years),
         build(:product_type,
-              age_range: AgeRange.thirteen_to_eighteen_months,
+              age_range: comparer.thirteen_to_eighteen_months,
               category: potty_training),
         build(:product_type,
-              age_range: AgeRange.two_years,
+              age_range: comparer.two_years,
               category: potty_training)
       ]
     end
@@ -51,31 +53,31 @@ describe ListBuilder do
     describe "skips placeholders" do
 
       it "for product types > 13-18 mos for newborns" do
-        kid = build(:kid, age_range: AgeRange.zero_to_three_months)
+        kid = build(:kid, age_range: comparer.zero_to_three_months)
         builder = ListBuilder.new(user, kid)
 
         list = builder.build!(product_types)
 
         ages = list.list_items.map(&:age_range)
-        [ AgeRange.two_years, AgeRange.three_years, AgeRange.four_years ].each do |age|
+        [ comparer.two_years, comparer.three_years, comparer.four_years ].each do |age|
           ages.should_not include(age)
         end
       end
 
       it "for product types > 2y for infants" do
-        kid = build(:kid, age_range: AgeRange.four_to_six_months)
+        kid = build(:kid, age_range: comparer.four_to_six_months)
         builder = ListBuilder.new(user, kid)
 
         list = builder.build!(product_types)
 
         ages = list.list_items.map(&:age_range)
-        [ AgeRange.three_years, AgeRange.four_years ].each do |age|
+        [ comparer.three_years, comparer.four_years ].each do |age|
           ages.should_not include(age)
         end
       end
 
       it "for product types in potty training category if kid is <= 13-18 mos" do
-        kid = build(:kid, age_range: AgeRange.pre_birth)
+        kid = build(:kid, age_range: comparer.pre_birth)
         builder = ListBuilder.new(user, kid)
 
         list = builder.build!(product_types)

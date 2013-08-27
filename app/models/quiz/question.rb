@@ -3,10 +3,9 @@ class Quiz::Question
     Quiz.const_get(name.titleize).new(list)
   end
 
-  def initialize(list, answer_logger = Quiz::Answer)
+  def initialize(list)
     @list = list
     @answers = []
-    @answer_logger = answer_logger
   end
 
   def choices
@@ -17,12 +16,11 @@ class Quiz::Question
     raise NotImplementedError
   end
 
-  def answer(*answers)
+  def process_answers!(*answers)
     answers.each do |answer|
       raise ArgumentError unless choices.include?(answer)
     end
     @answers = answers
-    answer_logger.save_answer!(list.user, question_name, answers)
     rules
   end
 
@@ -60,13 +58,5 @@ class Quiz::Question
 
   def list
     @list
-  end
-
-  def question_name
-    self.class.name.split('::')[1].downcase
-  end
-
-  def answer_logger
-    @answer_logger
   end
 end

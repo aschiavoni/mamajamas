@@ -18,8 +18,9 @@ module Features
         username: TEST_USER_NAME_WITH_LIST,
         email: "#{TEST_USER_NAME_WITH_LIST}@test.com",
         password: TEST_USER_PASSWORD,
-        password_confirmation: TEST_USER_PASSWORD
-      })
+        password_confirmation: TEST_USER_PASSWORD,
+        quiz_taken_at: Time.now.utc
+      }, { without_protection: true })
       user.build_list!
       user
     end

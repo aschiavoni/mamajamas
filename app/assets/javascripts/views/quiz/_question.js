@@ -56,7 +56,8 @@ Mamajamas.Views.QuizQuestion = Backbone.View.extend({
       type: 'PUT',
       data: {
         question: _view.questionName,
-        answers: _view.model.get('answers')
+        answers: _view.model.get('answers'),
+        complete_list: _view.model.get('complete_list')
       },
       success: function(data, status, xhr) {
         _view.trigger('quiz:question:saved');
