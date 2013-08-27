@@ -55,9 +55,15 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
       });
     } else {
       // ListItem
-      view = new Mamajamas.Views.ListItemShow({
-        model: item
-      });
+      if (item.get('edit_mode') == true) {
+        view = new Mamajamas.Views.ListItemEdit({
+          model: item
+        });
+      } else {
+        view = new Mamajamas.Views.ListItemShow({
+          model: item
+        });
+      }
     }
     return view;
   }

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe QuizController do
 
-  let(:user) { create(:user) }
+  let(:user) { create(:user, quiz_taken_at: nil) }
 
   before(:each) do
     sign_in user
@@ -25,24 +25,28 @@ describe QuizController do
 
   describe "PUT 'update'" do
 
-    it "looks for question class" do
-      user.stub(:list, stub)
-      Quiz::Question.should_receive(:by_name).
-        with('Feeding', user.list).
-        and_return(stub.as_null_object)
-
-      put 'update', {
-        question: 'Feeding'
-      }
-    end
-
     it "answers question" do
       answers = [ 'Pump', 'Bottle Feed' ]
-      Quiz::Feeding.any_instance.should_receive(:answer).with(*answers)
+      Quiz::Answer.should_receive(:save_answer!).
+        with(user, 'feeding', answers)
 
+      CompleteListWorker.should_not_receive(:perform_async)
       put 'update', {
         question: 'Feeding',
         answers: answers
+      }
+    end
+
+    it "completes list if complete list set" do
+      answers = [ 'Pump', 'Bottle Feed' ]
+      Quiz::Answer.should_receive(:save_answer!).
+        with(user, 'feeding', answers)
+      CompleteListWorker.should_receive(:perform_async).with(user.id)
+
+      put 'update', {
+        question: 'Feeding',
+        answers: answers,
+        complete_list: true
       }
     end
 
@@ -57,7 +61,7 @@ describe QuizController do
     end
 
     before(:each) do
-      User.any_instance.should_receive(:build_list!)
+      ListBuilderWorker.should_receive(:perform_async).with(user.id)
     end
 
     it "finds the user's first kid" do
@@ -123,14 +127,15 @@ describe QuizController do
       JSON.parse(response.body)['errors'].should_not be_empty
     end
 
-  end
-
-  describe "POST prune list" do
-
-    it "prunes the user's list" do
-      user.stub(:list, stub)
-      ListPruner.should_receive(:prune!).with(user.list)
-      post 'prune_list'
+    it "marks that the user has taken the quiz" do
+      User.any_instance.should_receive(:update_attributes).
+        with({ zip_code: 'sl41eg', country_code: 'GB' }).
+        and_return(true)
+      User.any_instance.should_receive(:complete_quiz!)
+      put 'update_zip_code',
+        zip_code: 'sl41eg',
+        country: 'GB',
+        format: :json
     end
 
   end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
 
-  let(:user) { create(:user) }
+  let(:user) { create(:user, quiz_taken_at: nil) }
 
   describe "slugs" do
 
@@ -243,6 +243,15 @@ describe User do
       u.should have_list
     end
 
+  end
+
+  describe "complete_quiz!" do
+
+    it "marks quiz as completed" do
+      user.quiz_taken_at.should be_blank
+      user.complete_quiz!
+      user.quiz_taken_at.should be_present
+    end
   end
 
   describe "full_name" do

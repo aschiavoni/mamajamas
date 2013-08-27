@@ -17,8 +17,6 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
     this.model.set('country', Mamajamas.Context.User.get('country'));
     this.model.set('country_name', Mamajamas.Context.User.get('country_name'));
     this.model.set('countries', $('#countries').data('countries'));
-
-    this.pruneList();
   },
 
   events: {
@@ -57,6 +55,7 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
         _view.trigger('quiz:question:saved');
       },
       error: function(response, status, error) {
+        Mamajamas.Context.Progress.hide();
         var data = $.parseJSON(response.responseText);
         if (data.errors) {
           for (var err in data.errors) {
@@ -90,13 +89,6 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
 
   clearErrors: function() {
     $('.q08-error').remove();
-  },
-
-  pruneList: function() {
-    $.ajax({
-      url: '/api/prune_list',
-      type: 'POST'
-    });
   },
 
   showCountries: function(event) {

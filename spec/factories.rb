@@ -10,6 +10,7 @@ FactoryGirl.define do
     password_confirmation { |u| u.password }
     guest false
     country_code "US"
+    quiz_taken_at { Time.now.utc }
   end
 
   factory :category do
@@ -82,5 +83,10 @@ FactoryGirl.define do
     vendor "amazon"
     vendor_id "B00083HK0M"
     rating 3.0
+  end
+
+  factory :answer, class: "Quiz::Answer" do
+    question "feeding"
+    answers [ "Breast Feed", "Pump" ]
   end
 end

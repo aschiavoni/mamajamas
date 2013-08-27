@@ -38,7 +38,9 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
       ],
 
       [
-        Mamajamas.Views.QuizCaution, new Mamajamas.Models.QuizQuestion()
+        Mamajamas.Views.QuizCaution, new Mamajamas.Models.QuizQuestion({
+          complete_list: true
+        })
       ],
 
       [

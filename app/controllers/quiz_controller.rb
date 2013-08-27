@@ -10,9 +10,11 @@ class QuizController < ApplicationController
   end
 
   def update
-    question = Quiz::Question.by_name(params[:question], current_user.list)
+    question_name = params[:question].downcase
     answers = params[:answers] || []
-    question.answer(*answers)
+    Quiz::Answer.save_answer!(current_user, question_name, answers)
+
+    CompleteListWorker.perform_async(current_user.id) if params[:complete_list]
 
     render json: { status: 'ok' }
   end
@@ -27,21 +29,18 @@ class QuizController < ApplicationController
       end
     end
 
-    current_user.build_list! if current_user.list.blank?
+    ListBuilderWorker.perform_async(current_user.id)
     respond_with @kid
   end
 
   def update_zip_code
     zip_code = params[:zip_code].present? ? params[:zip_code].strip : nil
     country = params[:country].present? ? params[:country].strip : 'US'
-    current_user.update_attributes(zip_code: zip_code, country_code: country)
+    if current_user.update_attributes(zip_code: zip_code, country_code: country)
+      current_user.complete_quiz!
+    end
 
     respond_with current_user
-  end
-
-  def prune_list
-    ListPruner.prune!(current_user.list)
-    render json: { status: 'ok' }
   end
 
   private

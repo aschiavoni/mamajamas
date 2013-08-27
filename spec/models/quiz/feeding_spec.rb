@@ -1,10 +1,5 @@
 require 'spec_helper'
 
-class FakeAnswerLogger
-  def self.save_answer!(*args)
-  end
-end
-
 describe Quiz::Feeding do
 
   let(:user) { create(:user) }
@@ -15,7 +10,7 @@ describe Quiz::Feeding do
     ListBuilder.new(user, kid).build!
   end
 
-  subject { Quiz::Feeding.new(list, FakeAnswerLogger) }
+  subject { Quiz::Feeding.new(list) }
 
   it "initializes with a list" do
     Quiz::Feeding.new(list)
@@ -27,13 +22,8 @@ describe Quiz::Feeding do
 
   it "does not accept an invalid answer" do
     lambda {
-      subject.answer("heyo")
+      subject.process_answers!("heyo")
     }.should raise_error(ArgumentError)
-  end
-
-  it "saves the answer to the database" do
-    FakeAnswerLogger.should_receive(:save_answer!)
-    subject.answer("Pump", "Bottle Feed")
   end
 
   it "sets priority if a single option is included" do
@@ -41,7 +31,7 @@ describe Quiz::Feeding do
       should_receive(:set_priority).
       with("Bottle Brush", 1)
 
-    subject.answer("Pump", "Bottle Feed")
+    subject.process_answers!("Pump", "Bottle Feed")
   end
 
   it "sets priority if a multiple options are included" do
@@ -49,7 +39,7 @@ describe Quiz::Feeding do
       should_receive(:set_priority).
       with("Bottle Warmer", 1)
 
-    subject.answer("Pump", "Breast Feed")
+    subject.process_answers!("Pump", "Breast Feed")
   end
 
   it "sets priority if only a single answer is submitted" do
@@ -57,7 +47,7 @@ describe Quiz::Feeding do
       should_receive(:set_priority).
       with("Nursing Pads", 3)
 
-    subject.answer("Bottle Feed")
+    subject.process_answers!("Bottle Feed")
   end
 
   it "doesn't set priority if the single answer does not match" do
@@ -65,7 +55,7 @@ describe Quiz::Feeding do
       should_not_receive(:set_priority).
       with("Nursing Pads", 3)
 
-    subject.answer("Bottle Feed", "Pump")
+    subject.process_answers!("Bottle Feed", "Pump")
   end
 
   it "sets priority if an answer is excluded" do
@@ -73,7 +63,7 @@ describe Quiz::Feeding do
       should_receive(:set_priority).
       with("Milk Storage", 3)
 
-    subject.answer("Breast Feed", "Bottle Feed")
+    subject.process_answers!("Breast Feed", "Bottle Feed")
   end
 
   it "does not set priority if an answer is not excluded" do
@@ -81,6 +71,6 @@ describe Quiz::Feeding do
       should_not_receive(:set_priority).
       with("Milk Storage", 3)
 
-    subject.answer("Pump", "Breast Feed", "Bottle Feed")
+    subject.process_answers!("Pump", "Breast Feed", "Bottle Feed")
   end
 end
