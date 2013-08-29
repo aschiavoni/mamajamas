@@ -13,9 +13,9 @@ class UsernameFinder
     idx = 0
     while user_class.find_by_username(next_username).present?
       idx += 1
-      next_username = "#{requested}#{idx}"
+      next_username = "#{requested}_#{idx}"
     end
-    next_username.gsub(/[^0-9a-z]/i, '')
+    next_username.gsub(/[^0-9a-z_]/i, '')
   end
 
   private

@@ -69,24 +69,24 @@ describe FacebookUserCreator do
 
   context "facebook username" do
 
-    it "should return username if specified" do
+    it "returns username based on full name if specified" do
       auth = auth(auth_hash)
       creator = FacebookUserCreator.new(auth)
-      creator.facebook_username.should == "john"
+      creator.facebook_username.should == "johndoe"
     end
 
-    it "should return full name if username is not in auth hash" do
+    it "returns user name if facebook name is not in auth hash" do
       auth = auth(auth_hash.merge({
         "extra" => {
           "raw_info" => {
-            "username" => nil,
-            "first_name" => "John",
-            "last_name" => "Doe"
+            "username" => "johnjohn",
+            "first_name" => nil,
+            "last_name" => nil
           }
         }
       }))
       creator = FacebookUserCreator.new(auth)
-      creator.facebook_username.should == "JohnDoe"
+      creator.facebook_username.should == "johnjohn"
     end
   end
 

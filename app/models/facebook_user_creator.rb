@@ -30,10 +30,10 @@ class FacebookUserCreator
   def facebook_username
     raw_info = auth.extra.raw_info
     raw_username = raw_info.username
-    if raw_username.blank?
+    if raw_info.first_name.present?
       raw_username = "#{raw_info.first_name}#{raw_info.last_name}"
     end
-    raw_username
+    raw_username.downcase
   end
 
   private

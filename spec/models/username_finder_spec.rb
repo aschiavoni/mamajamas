@@ -8,13 +8,13 @@ describe UsernameFinder do
   it "returns the username with a number added when the username is in use" do
     requested = "username"
     User.stub(:find_by_username).and_return(stub, nil)
-    UsernameFinder.find(requested).should == "#{requested}1"
+    UsernameFinder.find(requested).should == "#{requested}_1"
   end
 
   it "increments the number added to username until a unique one is found" do
     requested = "username"
     User.stub(:find_by_username).and_return(stub, stub, nil)
-    UsernameFinder.find(requested).should == "#{requested}2"
+    UsernameFinder.find(requested).should == "#{requested}_2"
   end
 
   it "removes invalid characters from returned username" do

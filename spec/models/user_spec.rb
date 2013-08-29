@@ -27,8 +27,8 @@ describe User do
 
     it "sets a username from full name" do
       new_user = create(:user,
-                        first_name: "John", last_name: "Doe", username: nil)
-      new_user.username.should == "johndoe"
+                        first_name: "Jonathan", last_name: "Doe", username: nil)
+      new_user.username.should == "jonathandoe"
     end
 
     it "sets a username from first name" do
