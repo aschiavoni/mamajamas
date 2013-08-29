@@ -19,7 +19,6 @@ class FriendsController < ApplicationController
         RelationshipMailer.delay.follower_notification(relationship)
       end
     end
-    flash[:notice] = "Thanks for signing up with Mamajamas. Now build your list!"
     redirect_to list_path
   end
 
