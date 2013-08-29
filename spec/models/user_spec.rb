@@ -21,8 +21,8 @@ describe User do
   describe "set username" do
 
     it "sets a username from email if name not provided" do
-      new_user = create(:user, email: "johndoe@example.com", username: nil)
-      new_user.username.should == "johndoe"
+      new_user = create(:user, email: "jackdoe@example.com", username: nil)
+      new_user.username.should == "jackdoe"
     end
 
     it "sets a username from full name" do
@@ -33,8 +33,8 @@ describe User do
 
     it "sets a username from first name" do
       new_user = create(:user,
-                        first_name: "John", last_name: nil, username: nil)
-      new_user.username.should == "john"
+                        first_name: "Jane", last_name: nil, username: nil)
+      new_user.username.should == "jane"
     end
 
     it "fails to create user if a username cannot be generated" do
