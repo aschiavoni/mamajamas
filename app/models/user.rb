@@ -140,8 +140,12 @@ class User < ActiveRecord::Base
   end
 
   def set_username
-    if email.present? && username.blank?
-      self.username = UsernameGenerator.from_email(email)
+    if username.blank?
+      if full_name.present?
+        self.username = UsernameGenerator.from_name(full_name)
+      elsif email.present?
+        self.username = UsernameGenerator.from_email(email)
+      end
     end
   end
 

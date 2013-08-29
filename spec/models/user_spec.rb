@@ -18,6 +18,35 @@ describe User do
     end
   end
 
+  describe "set username" do
+
+    it "sets a username from email if name not provided" do
+      new_user = create(:user, email: "johndoe@example.com", username: nil)
+      new_user.username.should == "johndoe"
+    end
+
+    it "sets a username from full name" do
+      new_user = create(:user,
+                        first_name: "John", last_name: "Doe", username: nil)
+      new_user.username.should == "johndoe"
+    end
+
+    it "sets a username from first name" do
+      new_user = create(:user,
+                        first_name: "John", last_name: nil, username: nil)
+      new_user.username.should == "john"
+    end
+
+    it "fails to create user if a username cannot be generated" do
+      lambda {
+        new_user = create(:user,
+                          first_name: nil, last_name: nil,
+                          username: nil, email: nil)
+      }.should raise_error(ActiveRecord::RecordInvalid)
+    end
+
+  end
+
   describe "facebook connected" do
 
     it "should be facebook connected" do

@@ -5,7 +5,7 @@ FactoryGirl.define do
 
   factory :user do
     username { FactoryGirl.generate(:username) }
-    email { |u| "#{u.username}@factory.com" }
+    email { |u| "#{u.username || FactoryGirl.generate(:username)}@factory.com" }
     password "foobar"
     password_confirmation { |u| u.password }
     guest false
