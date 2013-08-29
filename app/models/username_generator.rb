@@ -7,8 +7,7 @@ class UsernameGenerator
   end
 
   def self.from_name(name)
-    return nil if name.blank?
-    self.new(name.parameterize("")).generate
+    self.new(name).generate
   end
 
   def initialize(name)
@@ -18,7 +17,7 @@ class UsernameGenerator
   def generate
     return nil if name.blank?
 
-    username_part = name
+    username_part = name.parameterize("")
     username = username_part.dup
     num = 2
 
