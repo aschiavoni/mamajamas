@@ -112,7 +112,7 @@
         <th scope="col" class="priority sorting" data-sort="priority">Priority</th>
       </tr>
     </thead>
-    <tbody id="list-items">
+    <tbody id="list-items" class="readonly">
       <%= render partial: "list_item", collection: @view.list_entries %>
     </tbody>
   </table>
