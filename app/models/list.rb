@@ -165,7 +165,11 @@ class List < ActiveRecord::Base
   private
 
   def default_title
-    user.present? ? "#{user.username.possessive} List" : "List"
+    if user.present?
+      "#{(user.first_name || user.username).possessive} List"
+    else
+      "List"
+    end
   end
 
   def set_public(public)

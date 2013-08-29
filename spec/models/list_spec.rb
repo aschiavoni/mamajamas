@@ -4,14 +4,29 @@ describe List do
 
   describe "title" do
 
-    let(:list) { build(:list, title: nil) }
+    let(:user) {
+      build(:user, first_name: "John", last_name: "Doe")
+    }
+    let(:list) { build(:list, title: nil, user: user) }
 
     let(:default_title) do
-      "#{list.user.username.possessive} List"
+      "John#{Possessive::APOSTROPHE_CHAR}s List"
     end
 
     it "should have a default title" do
       list.title.should == default_title
+    end
+
+    it "uses username in default title if first name not present" do
+      u = build(:user, username: "testu", first_name: nil)
+      l = build(:list, title: nil, user: u)
+      default = "testu#{Possessive::APOSTROPHE_CHAR}s List"
+      l.title.should == default
+    end
+
+    it "uses List as default title if list does not have a user" do
+      l = List.new
+      l.title.should == "List"
     end
 
     it "should not overwrite title if it matches the default title" do
