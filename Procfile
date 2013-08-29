@@ -1,2 +1,2 @@
 web: bundle exec thin start -R config.ru -e $RAILS_ENV -p $PORT
-worker: bundle exec sidekiq -c 5 -v
+worker: env DB_POOL=25 bundle exec sidekiq -c 5 -v
