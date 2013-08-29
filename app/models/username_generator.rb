@@ -2,7 +2,23 @@ class UsernameGenerator
   def self.from_email(email)
     return nil if email.blank?
 
-    username_part = email.split("@").first
+    name = email.split("@").first
+    self.new(name).generate
+  end
+
+  def self.from_name(name)
+    return nil if name.blank?
+    self.new(name.parameterize("")).generate
+  end
+
+  def initialize(name)
+    @name = name
+  end
+
+  def generate
+    return nil if name.blank?
+
+    username_part = name
     username = username_part.dup
     num = 2
 
@@ -12,5 +28,11 @@ class UsernameGenerator
     end
 
     username
+  end
+
+  private
+
+  def name
+    @name
   end
 end
