@@ -214,7 +214,7 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     unless welcome_sent_at.present?
-      UserMailer.welcome(self.id).deliver
+      UserMailer.delay.welcome(self.id)
       update_attributes!(welcome_sent_at: Time.now.utc)
     end
   end

@@ -29,7 +29,7 @@ describe RegistrationsController do
     it "should send confirmation email for new user" do
       lambda {
         post :create, user: registration
-      }.should change(ActionMailer::Base.deliveries, :count).by(1)
+      }.should change(delayed_mailer_jobs, :size).by(1)
     end
 
     it "should create guest user" do
@@ -44,7 +44,7 @@ describe RegistrationsController do
     it "should not send confirmation email for new guest user" do
       lambda {
         post :create
-      }.should_not change(ActionMailer::Base.deliveries, :count)
+      }.should_not change(delayed_mailer_jobs, :size)
     end
 
     it "redirects to quiz when guest user is created" do
