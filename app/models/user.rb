@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable,
-    :rememberable, :trackable, :validatable, :omniauthable
+    :rememberable, :trackable, :validatable, :omniauthable, :async
 
   # cache facebook friends in the database
   serialize :facebook_friends, Array

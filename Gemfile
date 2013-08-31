@@ -31,6 +31,8 @@ gem 'jquery-ui-rails'
 
 # authentication
 gem 'devise'
+gem 'devise-async'
+
 # for facebook auth
 gem 'omniauth'
 gem 'oauth2'
