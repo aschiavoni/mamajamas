@@ -79,6 +79,7 @@ class User < ActiveRecord::Base
     guest_username = "guest_#{Time.now.to_i}#{rand(99)}"
     create do |u|
       u.email = "#{guest_username}@mamajamas-guest.com"
+      u.remember_me = true
       u.guest = true
     end
   end

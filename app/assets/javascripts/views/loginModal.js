@@ -90,7 +90,8 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
     Mamajamas.Context.Notifications.error("You cannot be logged in at this time.");
   },
 
-  submit: function() {
+  submit: function(event) {
+    event.preventDefault();
     var _session = this.model;
     var _view = this;
     var $form = $("#login-form", this.$el);

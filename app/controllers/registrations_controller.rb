@@ -23,6 +23,9 @@ class RegistrationsController < Devise::RegistrationsController
       # in the heroku environment, not sure why
       resource.guest = false if resource.respond_to?(:guest)
 
+      # always remember password
+      resource.remember_me = true if resource.respond_to?(:remember_me)
+
       if resource.save
         if resource.active_for_authentication?
           flash_message = :signed_up
@@ -35,6 +38,7 @@ class RegistrationsController < Devise::RegistrationsController
         resource.send_welcome_email if resource.respond_to?(:send_welcome_email)
         set_flash_message :notice, flash_message if is_navigational_format?
         sign_in(resource_name, resource)
+        delete_guest_user_id
       else
         clean_up_passwords resource
         init_view

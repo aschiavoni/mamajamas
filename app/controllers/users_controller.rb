@@ -38,7 +38,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @profile.update!(uparams)
         sign_in @profile.user, bypass: true
+        delete_guest_user_id
         @profile.user.send_welcome_email
+        reremember_me!(@profile.user)
         format.html do
           redirect_to @redirect_path
         end
@@ -56,5 +58,11 @@ class UsersController < ApplicationController
     set_page_id page_id
     set_subheader subheader
     set_progress_id progress_step
+  end
+
+  def reremember_me!(user)
+    cookies.delete :remember_user_token
+    Devise::Controllers::Rememberable::Proxy.new(request.env['warden']).remember_me(user)
+    user.remember_me!
   end
 end

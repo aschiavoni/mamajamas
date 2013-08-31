@@ -21,6 +21,7 @@ class SessionsController < Devise::SessionsController
 
   def create
     self.resource = warden.authenticate!(auth_options)
+    delete_guest_user_id if guest_user_id.present?
     set_flash_message(:notice, :signed_in) if is_navigational_format?
     (render(:js => "window.location=\"#{after_sign_in_path_for(resource)}\";") && return) if request.xhr?
     respond_with resource, :location => after_sign_in_path_for(resource)
@@ -59,6 +60,7 @@ class SessionsController < Devise::SessionsController
         else
           self.resource = User.new login: login
           self.resource.errors.add(:base, I18n.t("devise.failure.invalid"))
+          (render("new", :formats => [:json], :layout => false) && return) if request.xhr?
           render partial: 'login', layout: false and return
         end
         return

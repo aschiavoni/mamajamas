@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :require_basic_auth_maybe
+  before_filter :restore_guest!
 
   # Convenience accessor for flash[:error]
   def error
@@ -69,15 +70,31 @@ class ApplicationController < ActionController::Base
     list_path
   end
 
+  def restore_guest!
+    if current_user.blank? && guest_user_id.present?
+      @user = User.where(guest: true, id: guest_user_id).first
+      if @user.present?
+        sign_in(:user, @user) if @user.persisted?
+      end
+    end
+  end
+
   def allow_guest!
     if current_user.blank?
-      @user = User.new_guest
+      if guest_user_id.present?
+        @user = User.where(guest: true, id: guest_user_id).first
+      end
+      @user = User.new_guest if @user.blank?
       sign_in(:user, @user) if @user.persisted?
+      set_guest_user_id @user.id
     end
   end
 
   def logout_guest
-    sign_out :user if current_user && current_user.guest?
+    if current_user && current_user.guest?
+      sign_out :user
+      delete_guest_user_id
+    end
   end
 
   # hide behind basic auth for now
@@ -118,5 +135,17 @@ class ApplicationController < ActionController::Base
     response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
+
+  def guest_user_id
+    cookies.signed[:guuid]
+  end
+
+  def set_guest_user_id(user_id)
+    cookies.permanent.signed[:guuid] = [ user_id ]
+  end
+
+  def delete_guest_user_id
+    cookies.delete :guuid
   end
 end
