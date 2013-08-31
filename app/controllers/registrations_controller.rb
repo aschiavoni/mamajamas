@@ -38,7 +38,6 @@ class RegistrationsController < Devise::RegistrationsController
         resource.send_welcome_email if resource.respond_to?(:send_welcome_email)
         set_flash_message :notice, flash_message if is_navigational_format?
         sign_in(resource_name, resource)
-        delete_guest_user_id
       else
         clean_up_passwords resource
         init_view

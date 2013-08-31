@@ -38,7 +38,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @profile.update!(uparams)
         sign_in @profile.user, bypass: true
-        delete_guest_user_id
         @profile.user.send_welcome_email
         reremember_me!(@profile.user)
         format.html do
