@@ -5,7 +5,8 @@ Mamajamas.Views.ListItemAddYourOwn = Mamajamas.Views.Base.extend({
   },
 
   events: {
-    'click .add-your-own-button': 'add'
+    'click .add-your-own-button': 'add',
+    'submit #frm-addown': 'add'
   },
 
   render: function() {
