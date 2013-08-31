@@ -23,18 +23,14 @@ Mamajamas.Views.ListItemAgeRange = Mamajamas.Views.ListItemDropdown.extend({
   },
 
   toggleAgeRangeList: function(event) {
-    if (this.isGuestUser()) {
-      this.unauthorized();
-    } else {
-      var $target = $(event.target);
-      var $prodDrop = $target.parents("td").find(".prod-drop");
-      var $ageRangeList = $prodDrop.find("ul");
+    var $target = $(event.target);
+    var $prodDrop = $target.parents("td").find(".prod-drop");
+    var $ageRangeList = $prodDrop.find("ul");
 
-      if ($ageRangeList.hasClass("visuallyhidden")) {
-        $ageRangeList.removeClass("visuallyhidden");
-      } else {
-        $ageRangeList.addClass("visuallyhidden");
-      }
+    if ($ageRangeList.hasClass("visuallyhidden")) {
+      $ageRangeList.removeClass("visuallyhidden");
+    } else {
+      $ageRangeList.addClass("visuallyhidden");
     }
 
     return false;

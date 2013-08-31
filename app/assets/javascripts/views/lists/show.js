@@ -16,10 +16,6 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 
     $("#add-product-type").click(function(event) {
       event.preventDefault();
-      if (_view.isGuestUser()) {
-        _view.unauthorized();
-        return false;
-      }
 
       // no-op if we are in the all category
       if (Mamajamas.Context.List.isAllCategory()) {
@@ -29,7 +25,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       return _view.addProductType(_view, event);
     });
 
-    $('#bt-share').click(function(event) {
+    $('#bt-share, #bt-share-header').click(function(event) {
       if (Mamajamas.Context.List.get('item_count') == 0) {
         event.preventDefault();
         return false;

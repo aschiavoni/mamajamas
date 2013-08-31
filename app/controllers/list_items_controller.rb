@@ -1,6 +1,5 @@
 class ListItemsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :no_guests
   before_filter :find_list
   before_filter :find_category, only: [ :index ]
   before_filter :set_cache_buster, only: [ :index ]

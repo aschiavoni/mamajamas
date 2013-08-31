@@ -310,14 +310,10 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
   findItem: function(event) {
     event.preventDefault();
 
-    if (this.isGuestUser()) {
-      this.unauthorized();
-    } else {
-      var search = new Mamajamas.Views.ListItemSearch({
-        model: this.model
-      });
-      $('#buildlist').after(search.render().$el);
-    }
+    var search = new Mamajamas.Views.ListItemSearch({
+      model: this.model
+    });
+    $('#buildlist').after(search.render().$el);
 
     return false;
   },

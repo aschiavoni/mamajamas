@@ -45,68 +45,56 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
   },
 
   edit: function() {
-    if (this.isGuestUser()) {
-      this.unauthorized();
-    } else {
-      this.editing = true;
+    this.editing = true;
 
-      var editView = new Mamajamas.Views.ListItemEdit({
-        model: this.model,
-        parent: this
-      });
+    var editView = new Mamajamas.Views.ListItemEdit({
+      model: this.model,
+      parent: this
+    });
 
-      this.$el.after(editView.render().$el);
-      this.$el.hide();
-    }
+    this.$el.after(editView.render().$el);
+    this.$el.hide();
 
     return false;
   },
 
   addAnother: function(event) {
     event.preventDefault();
-    if (this.isGuestUser()) {
-      this.unauthorized();
-    } else {
-      this.editing = true;
+    this.editing = true;
 
-      var editView = new Mamajamas.Views.ListItemEdit({
-        model: new Mamajamas.Models.ListItem({
-          age: this.model.get('age'),
-          age_position: this.model.get('age_position'),
-          category: this.model.get('category'),
-          category_id: this.model.get('category_id'),
-          placeholder: false,
-          priority: this.model.get('priority'),
-          product_type_id: this.model.get('product_type_id'),
-          product_type_name: this.model.get('product_type_name'),
-          product_type_plural_name: this.model.get('product_type_plural_name'),
-          image_url: "/assets/products/icons/" + this.model.get('product_type_image_name')
-        })
-      });
+    var editView = new Mamajamas.Views.ListItemEdit({
+      model: new Mamajamas.Models.ListItem({
+        age: this.model.get('age'),
+        age_position: this.model.get('age_position'),
+        category: this.model.get('category'),
+        category_id: this.model.get('category_id'),
+        placeholder: false,
+        priority: this.model.get('priority'),
+        product_type_id: this.model.get('product_type_id'),
+        product_type_name: this.model.get('product_type_name'),
+        product_type_plural_name: this.model.get('product_type_plural_name'),
+        image_url: "/assets/products/icons/" + this.model.get('product_type_image_name')
+      })
+    });
 
-      this.$el.parent().prepend(editView.render().$el);
-    }
+    this.$el.parent().prepend(editView.render().$el);
 
     return false;
   },
 
   delete: function() {
-    if (this.isGuestUser()) {
-      this.unauthorized();
-    } else {
-      if (confirm("Are you sure you want to delete this item?")) {
-        this.model.destroy({
-          wait: true,
-          success: function() {
-            Mamajamas.Context.ListItems.remove(this.model);
-            var currentItemCount = Mamajamas.Context.List.get('item_count');
-            Mamajamas.Context.List.set('item_count', currentItemCount - 1);
-          },
-          error: function(model, response, options) {
-            Mamajamas.Context.Notifications.error("We could not remove this list item at this time. Please try again later.");
-          }
-        });
-      }
+    if (confirm("Are you sure you want to delete this item?")) {
+      this.model.destroy({
+        wait: true,
+        success: function() {
+          Mamajamas.Context.ListItems.remove(this.model);
+          var currentItemCount = Mamajamas.Context.List.get('item_count');
+          Mamajamas.Context.List.set('item_count', currentItemCount - 1);
+        },
+        error: function(model, response, options) {
+          Mamajamas.Context.Notifications.error("We could not remove this list item at this time. Please try again later.");
+        }
+      });
     }
     return false;
   },

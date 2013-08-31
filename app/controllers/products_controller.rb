@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :no_guests
 
   respond_to :json
 

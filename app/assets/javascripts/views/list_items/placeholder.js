@@ -49,16 +49,12 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
   },
 
   findItem: function(_view) {
-    if (_view.isGuestUser()) {
-      _view.unauthorized();
-    } else {
-      _view.setCurrentPosition();
-      _view.model.set('show_chooser', false);
-      var search = new Mamajamas.Views.ListItemSearch({
-        model: _view.model
-      });
-      $('#buildlist').after(search.render().$el);
-    }
+    _view.setCurrentPosition();
+    _view.model.set('show_chooser', false);
+    var search = new Mamajamas.Views.ListItemSearch({
+      model: _view.model
+    });
+    $('#buildlist').after(search.render().$el);
   },
 
   findItemClicked: function(event) {
@@ -73,20 +69,16 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
   },
 
   delete: function() {
-    if (this.isGuestUser()) {
-      this.unauthorized();
-    } else {
-      if (confirm("Are you sure you want to delete this item?")) {
-        this.model.destroy({
-          wait: true,
-          success: function() {
-            Mamajamas.Context.ListItems.remove(this.model);
-          },
-          error: function(model, response, options) {
-            Mamajamas.Context.Notifications.error("We could not remove this item at this time. Please try again later.");
-          }
-        });
-      }
+    if (confirm("Are you sure you want to delete this item?")) {
+      this.model.destroy({
+        wait: true,
+        success: function() {
+          Mamajamas.Context.ListItems.remove(this.model);
+        },
+        error: function(model, response, options) {
+          Mamajamas.Context.Notifications.error("We could not remove this item at this time. Please try again later.");
+        }
+      });
     }
     return false;
   }
