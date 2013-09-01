@@ -97,6 +97,7 @@ gem 'dalli'
 gem 'dalli-delete-matched'
 gem 'sentry-raven', :git => "https://github.com/getsentry/raven-ruby.git"
 gem 'rack-google-analytics'
+gem 'newrelic_rpm'
 
 # background processing
 gem 'sidekiq'
