@@ -29,7 +29,7 @@ class QuizController < ApplicationController
       end
     end
 
-    ListBuilderWorker.perform_async(current_user.id)
+    # ListBuilderWorker.perform_async(current_user.id)
     respond_with @kid
   end
 

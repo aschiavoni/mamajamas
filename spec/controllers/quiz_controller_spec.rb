@@ -60,9 +60,9 @@ describe QuizController do
       }
     end
 
-    before(:each) do
-      ListBuilderWorker.should_receive(:perform_async).with(user.id)
-    end
+    # before(:each) do
+    #   ListBuilderWorker.should_receive(:perform_async).with(user.id)
+    # end
 
     it "finds the user's first kid" do
       kids = [ stub.as_null_object ]
