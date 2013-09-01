@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ListBuilder do
 
-  let(:user) { build(:user) }
+  let(:user) { create(:user) }
 
   let(:builder) { ListBuilder.new(user) }
 
@@ -35,18 +35,18 @@ describe ListBuilder do
 
     let(:product_types) do
       [
-        build(:product_type, age_range: comparer.pre_birth),
-        build(:product_type, age_range: comparer.zero_to_three_months),
-        build(:product_type, age_range: comparer.thirteen_to_eighteen_months),
-        build(:product_type, age_range: comparer.two_years),
-        build(:product_type, age_range: comparer.three_years),
-        build(:product_type, age_range: comparer.four_years),
-        build(:product_type,
-              age_range: comparer.thirteen_to_eighteen_months,
-              category: potty_training),
-        build(:product_type,
-              age_range: comparer.two_years,
-              category: potty_training)
+        create(:product_type, age_range: comparer.pre_birth),
+        create(:product_type, age_range: comparer.zero_to_three_months),
+        create(:product_type, age_range: comparer.thirteen_to_eighteen_months),
+        create(:product_type, age_range: comparer.two_years),
+        create(:product_type, age_range: comparer.three_years),
+        create(:product_type, age_range: comparer.four_years),
+        create(:product_type,
+               age_range: comparer.thirteen_to_eighteen_months,
+               category: potty_training),
+        create(:product_type,
+               age_range: comparer.two_years,
+               category: potty_training)
       ]
     end
 
@@ -93,10 +93,10 @@ describe ListBuilder do
   describe "with no kid" do
 
     it "should add list item placeholders" do
-      product_types = build_list(:product_type, 3)
-      List.any_instance.
-        should_receive(:add_list_item_placeholder).
-        exactly(product_types.size).times
+      product_types = create_list(:product_type, 3)
+      List.connection.
+        should_receive(:execute).
+        at_least(product_types.size).times
       list = builder.build!(product_types)
     end
 
