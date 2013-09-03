@@ -213,6 +213,7 @@ class User < ActiveRecord::Base
   end
 
   def send_welcome_email
+    return if guest?
     unless welcome_sent_at.present?
       UserMailer.delay.welcome(self.id)
       update_attributes!(welcome_sent_at: Time.now.utc)
