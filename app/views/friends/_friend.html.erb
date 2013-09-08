@@ -3,14 +3,17 @@
   <%= image_tag friend.profile_picture.friend, alt: friend.display_name %>
   <% end -%>
   <p>
-    <strong class="mom"><%= truncate(friend.display_name, :length => 15) %></strong>
+    <strong class="mom"><%= friend.display_name %></strong>
     <% if following -%>
       <em class="ss-icon check">checked</em>
     <% end -%>
   </p>
   <% if following -%>
-    <button type="submit" class="button bt-light unfollow">Unfollow</button>
+    <!-- button: state 1: Follow, state 2: Following, state 2 hover: Unfollow  -->
+    <button class="button bt-color bt-follow bt-active unfollow" type="submit">
+      <span class="bt-text1"><span class="ss-check"></span>Following</span><em class="bt-text2"><span class="ss-delete"></span>Unfollow</em>
+    </button>
   <% else -%>
-    <button type="submit" class="button bt-color bt-favored follow">Follow</button>
+    <button class="button bt-color bt-follow follow" type="submit"><span class="ss-check"></span>Follow</button>
   <% end -%>
 </li>

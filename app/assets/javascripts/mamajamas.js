@@ -22,9 +22,9 @@ window.Mamajamas = {
     }
 
     // follow page
-    if ($('#follow-moms').length > 0) {
+    if ($('#friendslist').length > 0) {
       new Mamajamas.Views.FriendPicker({
-        el: '#follow-moms'
+        el: '#friendslist'
       });
     }
 

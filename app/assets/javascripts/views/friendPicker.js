@@ -1,13 +1,23 @@
 window.Mamajamas.Views.FriendPicker = Backbone.View.extend({
+
+  padHeight: "28",
+
+  targetElement: ".friends-list",
+
   initialize: function() {
+    $(window).resize(this.sizeContent);
+    this.sizeContent();
   },
+
   events: {
-    "click .follow-moms button.follow": "follow",
-    "click .follow-moms button.unfollow": "unfollow"
+    "click button.follow": "follow",
+    "click button.unfollow": "unfollow"
   },
+
   render: function(event) {
     return this;
   },
+
   follow: function(view) {
     var btn = $(view.currentTarget);
     var li = btn.parent("li");
@@ -19,6 +29,7 @@ window.Mamajamas.Views.FriendPicker = Backbone.View.extend({
     })
     return false;
   },
+
   unfollow: function(view) {
     var btn = $(view.currentTarget);
     var li = btn.parent("li");
@@ -29,5 +40,12 @@ window.Mamajamas.Views.FriendPicker = Backbone.View.extend({
       li.replaceWith(response);
     })
     return false;
-  }
+  },
+
+  sizeContent: function() {
+    console.log("sizing content");
+	  var newHeight = $(window).height() - $("#hed-wrap").height() - $("#title").height() - $(".menu").height() - $("#footer").height() - this.padHeight + "px";
+	  $(this.targetElement).css("height", newHeight);
+  },
+
 });
