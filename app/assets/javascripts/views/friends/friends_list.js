@@ -1,11 +1,8 @@
-window.Mamajamas.Views.FriendsList = Backbone.View.extend({
-
-  padHeight: "28",
-
-  targetElement: ".friends-list",
+window.Mamajamas.Views.FriendsList = Mamajamas.Views.FriendsView.extend({
 
   initialize: function() {
-    $(window).resize(this.sizeContent);
+    this.padHeight = "28";
+    this.targetElement = ".friends-list";
     this.sizeContent();
   },
 
@@ -40,11 +37,6 @@ window.Mamajamas.Views.FriendsList = Backbone.View.extend({
       li.replaceWith(response);
     })
     return false;
-  },
-
-  sizeContent: function() {
-	  var newHeight = $(window).height() - $("#hed-wrap").height() - $("#title").height() - $(".menu").height() - $("#footer").height() - this.padHeight + "px";
-	  $(this.targetElement).css("height", newHeight);
   },
 
 });
