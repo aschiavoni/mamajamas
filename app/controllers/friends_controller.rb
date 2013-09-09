@@ -1,10 +1,13 @@
 class FriendsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :no_guests
-  before_filter :init_view, only: [ :index ]
+  before_filter :init_view, only: [ :index, :new ]
 
   def index
     @friends = current_user.followed_users
+  end
+
+  def new
   end
 
   def notify

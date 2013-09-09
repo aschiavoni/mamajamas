@@ -28,6 +28,13 @@ window.Mamajamas = {
       });
     }
 
+    // find friends
+    if ($('#findfriends').length > 0) {
+      new Mamajamas.Views.FindFriends({
+        el: '#findfriends'
+      });
+    }
+
     // user profile
     if ($('#frm-create-profile').length > 0) {
       new Mamajamas.Views.UserProfile({
