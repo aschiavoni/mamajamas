@@ -21,9 +21,9 @@ window.Mamajamas = {
       $("label", $infieldLabelForms).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
     }
 
-    // follow page
+    // friends list
     if ($('#friendslist').length > 0) {
-      new Mamajamas.Views.FriendPicker({
+      new Mamajamas.Views.FriendsList({
         el: '#friendslist'
       });
     }

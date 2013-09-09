@@ -1,4 +1,4 @@
-window.Mamajamas.Views.FriendPicker = Backbone.View.extend({
+window.Mamajamas.Views.FriendsList = Backbone.View.extend({
 
   padHeight: "28",
 
@@ -43,7 +43,6 @@ window.Mamajamas.Views.FriendPicker = Backbone.View.extend({
   },
 
   sizeContent: function() {
-    console.log("sizing content");
 	  var newHeight = $(window).height() - $("#hed-wrap").height() - $("#title").height() - $(".menu").height() - $("#footer").height() - this.padHeight + "px";
 	  $(this.targetElement).css("height", newHeight);
   },
