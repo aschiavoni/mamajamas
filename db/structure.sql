@@ -139,6 +139,42 @@ ALTER SEQUENCE friendly_id_slugs_id_seq OWNED BY friendly_id_slugs.id;
 
 
 --
+-- Name: invites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE invites (
+    id integer NOT NULL,
+    provider character varying(255),
+    uid character varying(255),
+    email character varying(255),
+    name character varying(255),
+    picture_url character varying(255),
+    invite_sent_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: invites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE invites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: invites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE invites_id_seq OWNED BY invites.id;
+
+
+--
 -- Name: kids; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -638,6 +674,13 @@ ALTER TABLE ONLY friendly_id_slugs ALTER COLUMN id SET DEFAULT nextval('friendly
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY invites ALTER COLUMN id SET DEFAULT nextval('invites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY kids ALTER COLUMN id SET DEFAULT nextval('kids_id_seq'::regclass);
 
 
@@ -740,6 +783,14 @@ ALTER TABLE ONLY categories
 
 ALTER TABLE ONLY friendly_id_slugs
     ADD CONSTRAINT friendly_id_slugs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: invites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY invites
+    ADD CONSTRAINT invites_pkey PRIMARY KEY (id);
 
 
 --
@@ -1147,3 +1198,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130827004746');
 INSERT INTO schema_migrations (version) VALUES ('20130827123837');
 
 INSERT INTO schema_migrations (version) VALUES ('20130827150518');
+
+INSERT INTO schema_migrations (version) VALUES ('20130909233428');
