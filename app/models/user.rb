@@ -161,6 +161,13 @@ class User < ActiveRecord::Base
     save!
   end
 
+  def clear_facebook!
+    self.provider = nil
+    self.uid = nil
+    self.facebook_friends = nil
+    save!
+  end
+
   def facebook_connected?
     provider == "facebook" && uid.present?
   end

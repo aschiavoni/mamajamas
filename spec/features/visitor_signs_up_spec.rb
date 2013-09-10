@@ -10,7 +10,7 @@ feature "Visitor signs up", js: true do
       sleep 0.5
       expect(page).to have_selector("#logout")
       expect(page).to have_content(@tempuser.username)
-      expect(page).to have_content("Take the quiz")
+      expect(page).to have_content("My Friends' Lists")
       current_path.should == friends_path
     end
   end
@@ -47,7 +47,7 @@ feature "Visitor signs up", js: true do
       page.execute_script("Mamajamas.Context.LoginSession.saveSession(true);")
 
       # should be on the friends page
-      expect(page).to have_content("Follow Friends")
+      expect(page).to have_content("My Friends' Lists")
     end
   end
 

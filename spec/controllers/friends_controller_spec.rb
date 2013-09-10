@@ -15,27 +15,9 @@ describe FriendsController do
       response.should be_success
     end
 
-    it "should assign fb friends" do
+    it "should assign friends" do
       get :index
-      assigns(:fb_friends).should_not be_nil
-    end
-
-    it "should build relationships if never done before" do
-      RelationshipBuilder.
-        any_instance.
-        should_receive(:build_relationships).
-        with([])
-      get :index
-    end
-
-    it "should not build relationships if done before" do
-      user.relationships_created_at = Time.now.utc
-      user.save!
-
-      RelationshipBuilder.
-        any_instance.
-        should_not_receive(:build_relationships)
-      get :index
+      assigns(:friends).should_not be_nil
     end
 
   end

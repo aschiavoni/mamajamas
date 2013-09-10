@@ -8,6 +8,7 @@ class FriendsController < ApplicationController
   end
 
   def new
+    @view = FindFriendsView.new(current_user)
   end
 
   def notify

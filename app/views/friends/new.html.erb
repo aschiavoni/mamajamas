@@ -14,115 +14,24 @@
   <!-- tab: Facebook -->
   <h2 id="facebookfriends">Facebook</h2>
   <div class="tabbody">
-    <!-- Friends list (Facebook) -->
-    <ul class="clearfix friends-list findfriends-lists">
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Maggie Harman"></a>
-      <p>
-      <strong class="mom">Martha Arbuckle</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Holly McGee"></a>
-      <p>
-      <strong class="mom">Kris Cooper</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Maggie Harman"></a>
-      <p>
-      <strong class="mom">Qin Lee</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Holly McGee"></a>
-      <p>
-      <strong class="mom">Remy Lawrence</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Maggie Harman"></a>
-      <p>
-      <strong class="mom">Lauren Mallard</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Maggie Harman"></a>
-      <p>
-      <strong class="mom">Sarita Patel</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Maggie Harman"></a>
-      <p>
-      <strong class="mom">Winnie Sung</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-    </ul>
+    <% if current_user.facebook_connected? -%>
+      <!-- Friends list (Facebook) -->
+      <ul class="clearfix friends-list findfriends-lists">
+        <% @view.mamajamas_facebook_friends.each do |friend| -%>
+          <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+        <% end -%>
+        <%= render partial: 'invite', collection: @view.facebook_invites %>
+      </ul>
+    <% else  -%>
+      <%= render 'prompt' %>
+    <% end -%>
   </div>
   <!-- end tab: Facebook -->
   <!-- begin tab: Gmail -->
   <h2 id="gmailfriends">Gmail</h2>
   <div class="tabbody">
     <!-- Friends list (Gmail) -->
-    <ul class="clearfix friends-list findfriends-lists">
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Maggie Harman"></a>
-      <p>
-      <strong class="mom">Maggie Harman</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Holly McGee"></a>
-      <p>
-      <strong class="mom">Holly McGee</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Maggie Harman"></a>
-      <p>
-      <strong class="mom">Maggie Harman</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Holly McGee"></a>
-      <p>
-      <strong class="mom">Holly McGee</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Maggie Harman"></a>
-      <p>
-      <strong class="mom">Maggie Harman</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Maggie Harman"></a>
-      <p>
-      <strong class="mom">Shirley Bromdingnaghy</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-      <li data-relationship-id="" data-friend-id="" id="" class="">
-      <a target="_blank" href="#"><img src="/assets/profile_photo-default-l.png" alt="Maggie Harman"></a>
-      <p>
-      <strong class="mom">Maggie Harman</strong>
-      </p>
-      <button class="button bt-color bt-follow" type="submit"><span class="ss-check"></span>Follow</button>
-      </li>
-    </ul>
+    <%= render 'prompt' %>
   </div>
   <!-- end tab: Gmail -->
   <!-- begin tab: Invite a Friend -->

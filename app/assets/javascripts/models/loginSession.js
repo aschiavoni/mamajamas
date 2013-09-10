@@ -67,6 +67,18 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
       }
     }, { scope: this.get('scope') });
   },
+  facebook_connect: function() {
+    if(typeof FB == 'undefined')
+      return;
+    var _session = this;
+    return FB.login(function(response) {
+      if (response.authResponse) {
+        _session.connectUserToFacebook(response.authResponse);
+      }
+      else {
+      }
+    }, { scope: this.get('scope') });
+  },
   refreshTokenRequired: function() {
     var lastRefresh = this.refreshedTokenAt();
     if (!lastRefresh) {
@@ -127,6 +139,23 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
       });
     });
   },
+
+  connectUserToFacebook: function(authResponse) {
+    var _session = this;
+    $.get("/users/auth/facebook/callback", function(data, status) {
+      if (data.username) {
+        _session.on('facebook:connected', _session.updateFriends);
+        _session.on('server:facebook:friends:updated', function() {
+          window.location = "/friends/find";
+        }, _session);
+        _session.updateLoginStatus();
+      }
+      else {
+        _session.trigger('server:unauthorized');
+      }
+    });
+  },
+
   saveSession: function(skipFriendsUpdate) {
     // skipFriendsUpdate should be set when doing integration testing
     // so that you don't actually try and talk to facebook
