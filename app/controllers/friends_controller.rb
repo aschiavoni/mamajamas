@@ -11,15 +11,6 @@ class FriendsController < ApplicationController
     @view = FindFriendsView.new(current_user)
   end
 
-  def notify
-    if params[:notify] == "1"
-      current_user.relationships.pending_notification.each do |relationship|
-        RelationshipMailer.delay.follower_notification(relationship)
-      end
-    end
-    redirect_to list_path
-  end
-
   protected
 
   def init_view

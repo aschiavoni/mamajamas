@@ -8,6 +8,10 @@ class RelationshipsController < ApplicationController
     relationship = current_user.following?(@friend)
     relationship = current_user.follow!(@friend) if relationship.blank?
 
+    if relationship.delivered_notification_at.blank?
+      RelationshipMailer.delay.follower_notification(relationship)
+    end
+
     respond_to do |format|
       format.html do
         render(partial: 'friends/friend', locals: { friend: @friend, following: relationship })

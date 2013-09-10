@@ -36,11 +36,7 @@ Mamajamas::Application.routes.draw do
   get '/test/error' => 'home#error'
   get '/robots.txt' => 'robots#show'
 
-  resources :friends, only: [ :index, :new ], path_names: { new: "find" } do
-    collection do
-      post 'notify'
-    end
-  end
+  resources :friends, only: [ :index, :new ], path_names: { new: "find" }
 
   resources :relationships, only: [ :create, :destroy ]
 

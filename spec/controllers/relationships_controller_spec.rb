@@ -9,23 +9,42 @@ describe RelationshipsController do
 
     before(:each) do
       sign_in current_user
-      post :create, relationship: { followed_id: user_to_follow.id }
     end
 
     it "should assign friend" do
+      post :create, relationship: { followed_id: user_to_follow.id }
       assigns(:friend).should == user_to_follow
     end
 
     it "should create following relationship" do
+      post :create, relationship: { followed_id: user_to_follow.id }
       current_user.should be_following(user_to_follow)
     end
 
     it "should create follower relationship" do
+      post :create, relationship: { followed_id: user_to_follow.id }
       user_to_follow.followers.should include(current_user)
     end
 
     it "should render friend template" do
+      post :create, relationship: { followed_id: user_to_follow.id }
       response.should render_template("friends/_friend")
+    end
+
+    it "sends notification email" do
+      lambda {
+        post :create, relationship: { followed_id: user_to_follow.id }
+      }.should change(delayed_mailer_jobs, :size).by(1)
+    end
+
+    it "does not send notification email if it has already been sent" do
+      current_user.relationships.create({
+        followed_id: user_to_follow.id,
+        delivered_notification_at: Time.now.utc
+      }, { without_protection: true })
+      lambda {
+        post :create, relationship: { followed_id: user_to_follow.id }
+      }.should_not change(delayed_mailer_jobs, :size)
     end
 
   end
