@@ -57,8 +57,6 @@ class FacebookUserCreator
     attrs = {
       provider: auth.provider,
       uid: auth.uid,
-      first_name: auth.info.first_name,
-      last_name: auth.info.last_name,
       access_token_expires_at: expires_at,
       access_token: auth.credentials.token,
       guest: false
@@ -67,7 +65,9 @@ class FacebookUserCreator
     if user.guest?
       attrs.merge!({
         username: username_finder.find(facebook_username),
-        email: auth.info.email
+        email: auth.info.email,
+        first_name: auth.info.first_name,
+        last_name: auth.info.last_name,
       })
     end
 
