@@ -30,6 +30,7 @@ window.Mamajamas = {
 
     // find friends
     if ($('#findfriends').length > 0) {
+      Mamajamas.Context.Invites = new Mamajamas.Collections.Invites();
       new Mamajamas.Views.FindFriends({
         el: '#findfriends'
       });

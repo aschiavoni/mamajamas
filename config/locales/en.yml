@@ -70,6 +70,16 @@ en:
               blank: "Required"
             image_name:
               blank: "Required"
+        invite:
+          attributes:
+            user_id:
+              blank: "Sorry, but a user required to send an invite."
+            name:
+              blank: "Sorry, but you must provide a name."
+              too_long: "Sorry, but the name is too long."
+            provider:
+              blank: "Sorry, but you must provide an invite provider."
+              inclusion: "Sorry, but we don't recognize that provider."
   user_mailer:
     welcome:
       subject: "Welcome to Mamajamas!"

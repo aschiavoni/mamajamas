@@ -148,10 +148,11 @@ CREATE TABLE invites (
     uid character varying(255),
     email character varying(255),
     name character varying(255),
-    picture_url character varying(255),
+    picture_url text,
     invite_sent_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    user_id integer
 );
 
 
@@ -1200,3 +1201,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130827123837');
 INSERT INTO schema_migrations (version) VALUES ('20130827150518');
 
 INSERT INTO schema_migrations (version) VALUES ('20130909233428');
+
+INSERT INTO schema_migrations (version) VALUES ('20130912114452');
+
+INSERT INTO schema_migrations (version) VALUES ('20130912123846');

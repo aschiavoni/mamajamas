@@ -75,6 +75,7 @@ Mamajamas::Application.routes.draw do
       post "kids" => "quiz#update_kid"
       put "update_zip_code" => "quiz#update_zip_code"
       post "list_item_images" => "list_item_images#create"
+      resources :invites, only: [ :create ]
     end
   end
 

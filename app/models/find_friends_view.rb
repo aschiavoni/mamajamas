@@ -1,4 +1,6 @@
 class FindFriendsView
+  FACEBOOK_PROVIDER = "facebook"
+
   extend Memoist
 
   def initialize(user)
@@ -8,7 +10,8 @@ class FindFriendsView
   def facebook_invites
     user.facebook_friends.map do |friend|
       unless mamajamas_facebook_friend_ids.include?(friend[:id])
-        build_invite_from_facebook_friend(friend)
+        existing_facebook_invites[friend[:id]] ||
+          build_invite_from_facebook_friend(friend)
       end
     end.reject { |f| f.blank? }
   end
@@ -24,6 +27,13 @@ class FindFriendsView
   end
   memoize :mamajamas_facebook_friend_ids
 
+  def existing_facebook_invites
+    Hash[user.invites.where(provider: FACEBOOK_PROVIDER).map do |invite|
+      [ invite.uid, invite  ]
+    end]
+  end
+  memoize :existing_facebook_invites
+
   private
 
   def user
@@ -33,9 +43,10 @@ class FindFriendsView
   def build_invite_from_facebook_friend(friend)
     uid = friend[:id]
     Invite.new do |i|
+      i.user_id = user.id
       i.uid = uid
       i.name = friend[:name]
-      i.provider = "facebook"
+      i.provider = FACEBOOK_PROVIDER
       i.picture_url = "https://graph.facebook.com/#{uid}/picture?width=86&height=86&access_token=#{user.access_token}"
     end
   end

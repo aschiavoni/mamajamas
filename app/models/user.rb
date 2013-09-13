@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   has_many :kids, dependent: :destroy
   has_many :list_item_images, dependent: :destroy
   has_many :quiz_answers, class_name: "Quiz::Answer"
+  has_many :invites, dependent: :destroy
 
   mount_uploader :profile_picture, ProfilePictureUploader
 

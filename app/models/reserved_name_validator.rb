@@ -9,7 +9,7 @@ class ReservedNameValidator < ActiveModel::EachValidator
     faq favorites feed feeds fetch fetcher
     follow followers following friend friends
     help home
-    invitations invite
+    invitations invite invites
     jobs
     list list_item list_items lists
     log-in log-out log_in log_out login logout logs
