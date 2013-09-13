@@ -8,7 +8,7 @@ class RelationshipsController < ApplicationController
     relationship = current_user.following?(@friend)
     relationship = current_user.follow!(@friend) if relationship.blank?
 
-    if relationship.delivered_notification_at.blank?
+    if params[:no_notification].blank? && relationship.delivered_notification_at.blank?
       RelationshipMailer.delay.follower_notification(relationship)
     end
 

@@ -1,0 +1,19 @@
+<li class="<%= "following" if following %>" id="<%= "friend_#{friend.id}" %>" data-friend-id="<%= friend.id %>" data-relationship-id="<%= following.id unless following.blank? %>">
+  <%= link_to public_list_path(friend.slug), target: "_blank" do %>
+  <%= image_tag friend.profile_picture.friend, alt: friend.display_name %>
+  <% end -%>
+  <p>
+    <strong class="mom"><%= friend.display_name %></strong>
+    <% if following -%>
+      <em class="ss-icon check">checked</em>
+    <% end -%>
+  </p>
+  <% if following -%>
+    <!-- button: state 1: Follow, state 2: Following, state 2 hover: Unfollow  -->
+    <button class="button bt-color bt-follow bt-active unfollow" type="submit">
+      <span class="bt-text1"><span class="ss-check"></span>Following</span><em class="bt-text2"><span class="ss-delete"></span>Unfollow</em>
+    </button>
+  <% else -%>
+    <button class="button bt-color bt-follow follow" type="submit"><span class="ss-check"></span>Follow</button>
+  <% end -%>
+</li>

@@ -1,7 +1,7 @@
 <%= content_for :nav do %>
   <ul class="sidemenu">
     <li>
-      <%= link_to "My Friends", friends_path %>
+      <%= link_to "My Friends", list_friends_path %>
     </li>
     <li class="current">
       <%= link_to "Find Friends", new_friend_path %>
@@ -18,7 +18,7 @@
       <!-- Friends list (Facebook) -->
       <ul class="clearfix friends-list findfriends-lists">
         <% @view.mamajamas_facebook_friends.each do |friend| -%>
-          <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+          <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend) } %>
         <% end -%>
         <%= render partial: 'invite', collection: @view.facebook_invites %>
       </ul>

@@ -21,6 +21,13 @@ window.Mamajamas = {
       $("label", $infieldLabelForms).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
     }
 
+    // follow page
+    if ($('#follow-moms').length > 0) {
+      new Mamajamas.Views.FriendPicker({
+        el: '#follow-moms'
+      });
+    }
+
     // friends list
     if ($('#friendslist').length > 0) {
       new Mamajamas.Views.FriendsList({

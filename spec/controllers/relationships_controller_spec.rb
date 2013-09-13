@@ -47,6 +47,12 @@ describe RelationshipsController do
       }.should_not change(delayed_mailer_jobs, :size)
     end
 
+    it "does not send notification email if no notification flag set" do
+      new_user = create(:user)
+      lambda {
+        post :create, no_notification: "1", relationship: { followed_id: new_user.id }
+      }.should_not change(delayed_mailer_jobs, :size)
+    end
   end
 
   describe "destroy relationship" do

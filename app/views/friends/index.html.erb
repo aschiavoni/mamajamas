@@ -1,18 +1,37 @@
-<%= content_for :nav do %>
-  <ul class="sidemenu">
-    <li class="current">
-      <%= link_to "My Friends", friends_path %>
-    </li>
-    <li>
-      <%= link_to "Find Friends", new_friend_path %>
-    </li>
-  </ul>
-<% end -%>
-<h2 class="visuallyhidden">My Friends</h2>
-<!-- friends list -->
-<ul id="friendslist" class="clearfix friends-list">
-  <% @friends.each do |friend| -%>
-    <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+<div id="follow-moms">
+  <%= form_tag notify_friends_path do %>
+    <% if has_facebook_friends? -%>
+    <h3>Your Facebook Friends</h3>
+    <p class="instruction">
+      We recommend you follow these friends that have Mamajamas lists <em>(you can unfollow them below)</em>:
+    </p>
+    <ul class="follow-moms clearfix">
+      <% @fb_friends.each do |friend| -%>
+        <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+      <% end -%>
+    </ul>
+    <% end -%>
+    <% if has_recommended_friends? -%>
+      <h3>Follow Other Mamajamas Parents</h3>
+      <p class="instruction">
+        Based on your quiz answers, here are some other parents we think you should follow:
+      </p>
+      <ul class="follow-moms clearfix">
+        <% @recommended_friends.each do |friend| -%>
+          <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+        <% end -%>
+      </ul>
+    <% end -%>
+    <% if has_any_friends? -%>
+      <p class="option right">
+        <%= check_box_tag "notify", 1, true, id: "chk-let-friends-know" %>
+        <label for="chk-let-friends-know">Let friends know you are following them. </label>
+      </p>
+    <% else -%>
+        <h4 class="center">Sorry, we were unable to find any recommended friends right now.</h4>
+    <% end -%>
+    <div class="button-row">
+      <%= submit_tag "Save and Go to List", class: "button bt-color" %>
+    </div>
   <% end -%>
-</ul>
-<!-- end friends list -->
+</div>
