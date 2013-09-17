@@ -1,9 +1,9 @@
 <p>
-Hello <%= @invite.name %>,
+Hello <%= h @invite.name %>,
 </p>
 <% if @invite.message.present? -%>
   <p>
-    h <%= @invite.message %>
+    <%= h @invite.message %>
   </p>
 <% end -%>
 <p>
@@ -15,5 +15,5 @@ http://www.mamajamas.com
 <p>
 Thanks!
 <br/>
-<%= @from_name %>
+<%= h @from_name %>
 </p>
