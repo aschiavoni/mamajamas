@@ -74,6 +74,9 @@ en:
           attributes:
             user_id:
               blank: "Sorry, but a user required to send an invite."
+            email:
+              blank: "Sorry, but an email address is required to send an invite."
+              invalid: "Sorry, but that does not look like a valid email address."
             name:
               blank: "Sorry, but you must provide a name."
               too_long: "Sorry, but the name is too long."

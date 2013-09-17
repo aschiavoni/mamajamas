@@ -37,60 +37,7 @@
   <!-- begin tab: Invite a Friend -->
   <h2 id="invitefriend">Invite a Friend</h2>
   <div class="tabbody form-page">
-    <form class="label-infield">
-      <dl class="clearfix">
-        <fieldset>
-          <!-- row -->
-          <dt>To<strong class="required">*</strong></dt>
-          <dd class="half">
-          <p>
-          <label for="field-1">Friend’s email (required)</label>
-          <br />
-          <input name="field-1" type="text" id="field-1" value="">
-          </p>
-          </dd>
-          <dd class="half">
-          <p>
-          <label for="field-2">Friend’s Name</label>
-          <br />
-          <input name="field-2" type="text" id="field-2" value="">
-          </p>
-          </dd>
-          <!-- row -->
-          <dt>From</dt>
-          <dd>
-          <p>
-          <label for="field-2">Name</label>
-          <br />
-          <input name="field-2" type="text" id="field-2" value="">
-          </p>
-          </dd>
-        </fieldset>
-        <!-- row -->
-        <fieldset>
-          <dt>Subject</dt>
-          <dd class="pad">
-          <p>Rick has invited you to join Mamajamas</p>
-          </dd>
-          <!-- row -->
-          <dt>Message</dt>
-          <dd>
-          <p>
-          <label for="field-3">Personalized message</label>
-          <br />
-          <textarea rows="2" name="field-3" id="field-3"></textarea>
-          </p>
-          <p class="normal"><span class="instruction">Your message will include the following text:</span><br>
-          Create your own baby gear list at Mamajamas:<br>
-          <a href="http://www.mamajamas.com">http://www.mamajamas.com</a></p>
-          </dd>
-        </fieldset>
-      </dl>
-      <div class="button-row">
-        <button type="submit" class="button bt-light" id="bt-cancel"><span class="ss-icon ss-delete"></span>Cancel</button>
-        <button type="submit" class="button bt-color" id="bt-name"><span class="ss-icon ss-send"></span>Send</button>
-      </div>
-    </form>
+    <%= render partial: 'email_invite', locals: { email_invite: @view.email_invite } %>
   </div>
   <!-- end tab: Invite a Friend -->
 </div>

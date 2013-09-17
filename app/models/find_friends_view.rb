@@ -7,6 +7,13 @@ class FindFriendsView
     @user = user
   end
 
+  def email_invite
+    @email_invite ||= Invite.new do |i|
+      i.user = user
+      i.provider = "mamajamas"
+    end
+  end
+
   def facebook_invites
     user.facebook_friends.map do |friend|
       unless mamajamas_facebook_friend_ids.include?(friend[:id])

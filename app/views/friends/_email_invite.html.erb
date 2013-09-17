@@ -1,0 +1,54 @@
+<%= form_for email_invite, url: invites_path, html: { class: "label-infield", id: "frm-create-email-invite" } do |f| %>
+  <%= f.hidden_field :provider, value: email_invite.provider %>
+  <dl class="clearfix">
+    <fieldset>
+      <!-- row -->
+      <dt>To<strong class="required">*</strong></dt>
+      <dd class="half">
+        <p>
+          <%= f.label :email, "Friend’s email (required)" %>
+          <br />
+          <%= f.text_field :email %>
+        </p>
+      </dd>
+      <dd class="half">
+        <p>
+          <%= f.label :name, "Friend’s Name" %>
+          <br />
+          <%= f.text_field :name %>
+        </p>
+      </dd>
+      <!-- row -->
+      <dt>From</dt>
+      <dd>
+        <p>
+          <%= f.label :from, "Name" %>
+          <br />
+          <%= f.text_field :from %>
+        </p>
+      </dd>
+    </fieldset>
+    <!-- row -->
+    <fieldset>
+      <dt>Subject</dt>
+      <dd class="pad">
+        <p><%= current_user.display_first_name_or_username %> has invited you to join Mamajamas</p>
+      </dd>
+      <!-- row -->
+      <dt>Message</dt>
+      <dd>
+        <p>
+          <%= f.label :message, "Personalized message" %>
+          <br />
+          <%= f.text_area :message, rows: 2 %>
+        </p>
+        <p class="normal"><span class="instruction">Your message will include the following text:</span><br>
+        Create your own baby gear list at Mamajamas:<br>
+        <a href="http://www.mamajamas.com">http://www.mamajamas.com</a></p>
+      </dd>
+    </fieldset>
+  </dl>
+  <div class="button-row">
+    <button type="submit" class="button bt-color bt-send" id="bt-name"><span class="ss-icon ss-send"></span>Send</button>
+  </div>
+<% end -%>

@@ -4,6 +4,7 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     this.padHeight = "49";
     this.targetElement = ".friends-list";
     this.sizeContent();
+    this._errMap = this.errorFieldMap();
 
     this.tabs = $(".tabs").accessibleTabs({
       tabhead:'h2',
@@ -16,15 +17,14 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     if (!Mamajamas.Context.User.get("is_facebook_connected")) {
       this.tabs.showAccessibleTab(2);
     }
-
-    this.on("find_friends:invite:created", this.toggleInvitedButton, this);
   },
 
   events: {
     "click #facebookfriends": "selectFacebookFriends",
     "click button.follow": "follow",
     "click button.unfollow": "unfollow",
-    "click button.fb-invite": "facebookInvite"
+    "click button.fb-invite": "facebookInvite",
+    "submit #frm-create-email-invite": "emailInvite",
   },
 
   render: function(event) {
@@ -35,6 +35,30 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     if (!Mamajamas.Context.User.get('is_facebook_connected')) {
       Mamajamas.Context.LoginSession.facebook_connect();
     }
+  },
+
+  emailInvite: function(event) {
+    event.preventDefault();
+    var _view = this;
+    var $form = $(event.currentTarget);
+    var invite = {
+      provider: $("#invite_provider", $form).val(),
+      email: $("#invite_email", $form).val(),
+      name: $("#invite_name", $form).val(),
+      from: $("#invite_from", $form).val(),
+      message: $("#invite_message", $form).val()
+    };
+
+    this.clearErrors();
+    this.createInvite(invite, function(model) {
+      _view.clearEmailForm($form);
+      Mamajamas.Context.Notifications.info("Thanks, your invite has been sent!");
+    }, function(errors) {
+      for (var err in errors) {
+        _view.showError(errors, err);
+      }
+    });
+    return false;
   },
 
   facebookInvite: function(event) {
@@ -60,30 +84,32 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
           name: name,
           picture_url: picUrl,
           provider: "facebook"
-        }, $button);
+        }, function(model) {
+          _view.toggleInvitedButton($button);
+        }, function(errors) {
+          var errMsg = "Please try again later."
+          if (errors) {
+            var firstErrKey = _.keys(errors)[0];
+            errMsg = errors[firstErrKey][0];
+          }
+          Mamajamas.Context.Notifications.error(errMsg);
+        });
       }
     });
 
     return false;
   },
 
-  createInvite: function(invite, $button) {
+  createInvite: function(invite, success_cb, error_cb) {
     var _view = this;
     Mamajamas.Context.Invites.create({
       invite: invite
     }, {
       wait: true,
-      success: function(model) {
-        _view.trigger("find_friends:invite:created", $button);
-      },
+      success: success_cb,
       error: function(model, response) {
-        var errMsg = "Please try again later."
         var errors = $.parseJSON(response.responseText).errors;
-        if (errors) {
-          var firstErrKey = _.keys(errors)[0];
-          errMsg = errors[firstErrKey][0];
-        }
-        Mamajamas.Context.Notifications.error(errMsg);
+        error_cb(errors);
       },
       complete: function() {
       }
@@ -94,6 +120,39 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     $button.addClass("bt-active").
       removeClass("fb-invite").
       html("<span class=\"ss-check\"></span>Invited");
+  },
+
+  clearEmailForm: function($form) {
+    $("#invite_email", $form).val("").blur();
+    $("#invite_name", $form).val("").blur();
+    $("#invite_from", $form).val("").blur();
+    $("#invite_message", $form).val("").blur();
+    _.defer(function() {
+      $("label", $form).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+      $("#invite_email", $form).focus();
+    });
+  },
+
+  showError: function(errors, field) {
+    var $field = $(this._errMap[field]);
+    var $errSpan = $("<span/>");
+    $errSpan.addClass("status-msg").addClass("error");
+    $errSpan.html(errors[field]);
+    $field.after($errSpan);
+    $field.focus();
+  },
+
+  errorFieldMap: function() {
+    return {
+      email: '#invite_email',
+      name: '#invite_name',
+      from: '#invite_from',
+      message: '#invite_message'
+    };
+  },
+
+  clearErrors: function() {
+    $(".status-msg.error").remove();
   },
 
 });
