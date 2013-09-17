@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   def complete
     init_view 'create-profile', 'Complete my profile', 3
-    @redirect_path = friends_path
+    @redirect_path = complete_redirect_path
     @profile = Forms::CompleteProfile.new(current_user)
     uparams = params[:profile] || params[:user]
 
@@ -63,5 +63,11 @@ class UsersController < ApplicationController
     cookies.delete :remember_user_token
     Devise::Controllers::Rememberable::Proxy.new(request.env['warden']).remember_me(user)
     user.remember_me!
+  end
+
+  def complete_redirect_path
+    path = cookies[:guest_redirect_path] || friends_path
+    cookies.delete(:guest_redirect_path)
+    path
   end
 end

@@ -32,7 +32,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       }
 
       if (_view.isGuestUser()) {
-        _view.unauthorized();
+        _view.unauthorized("/profile");
         return false;
       }
       return true;
@@ -40,7 +40,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 
     $('#find-moms').click(function(event) {
       if (_view.isGuestUser()) {
-        _view.unauthorized();
+        _view.unauthorized("/friends/find");
         return false
       }
       return true;
