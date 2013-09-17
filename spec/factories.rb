@@ -89,4 +89,13 @@ FactoryGirl.define do
     question "feeding"
     answers [ "Breast Feed", "Pump" ]
   end
+
+  factory :invite do
+    user
+    provider "mamajamas"
+    email "user@example.com"
+    name "Stu Redmond"
+    from "John Doe"
+    message "check this out"
+  end
 end

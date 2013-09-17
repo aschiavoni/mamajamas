@@ -1,0 +1,12 @@
+Hello <%= @invite.name %>,
+
+<% if @invite.message.present? -%>
+  h <%= @invite.message %>
+<% end -%>
+
+Create your own baby gear list at Mamajamas:
+
+http://www.mamajamas.com
+
+Thanks!
+<%= @from_name %>
