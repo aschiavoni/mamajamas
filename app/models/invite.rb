@@ -10,5 +10,5 @@ class Invite < ActiveRecord::Base
     inclusion: { in: %w(facebook gmail mamajamas) }
 
   validates :email, presence: true, unless: Proc.new { |i| i.provider == "facebook" }
-  validates :email, format: { with: Devise.email_regexp }
+  validates :email, format: { with: Devise.email_regexp }, if: Proc.new { |i| i.email.present? }
 end
