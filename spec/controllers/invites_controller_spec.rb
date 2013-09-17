@@ -51,6 +51,13 @@ describe InvitesController do
       assigns(:invite).invite_sent_at.should_not be_nil
     end
 
+    it "sends an invitation email for mamajamas invites" do
+      invite_params.merge!(provider: "mamajamas")
+      lambda {
+        post :create, invite: invite_params, format: :json
+      }.should change(delayed_mailer_jobs, :size).by(1)
+    end
+
   end
 
 end

@@ -135,11 +135,14 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
 
   showError: function(errors, field) {
     var $field = $(this._errMap[field]);
-    var $errSpan = $("<span/>");
-    $errSpan.addClass("status-msg").addClass("error");
-    $errSpan.html(errors[field]);
-    $field.after($errSpan);
-    $field.focus();
+    var fieldErrors = errors[field];
+    if (fieldErrors != null) {
+      var $errSpan = $("<span/>");
+      $errSpan.addClass("status-msg").addClass("error");
+      $errSpan.html(fieldErrors[0]);
+      $field.after($errSpan);
+      $field.focus();
+    }
   },
 
   errorFieldMap: function() {

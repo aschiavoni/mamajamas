@@ -6,10 +6,17 @@ class InvitesController < ApplicationController
 
   def create
     invite_params = params[:invite].merge(user_id: current_user.id)
+
     if invite_params[:provider] == "facebook"
       invite_params.merge!(invite_sent_at: Time.now.utc)
     end
+
     @invite = Invite.create(invite_params)
+
+    if @invite.persisted? && invite_params[:provider] == "mamajamas"
+      InvitationMailer.delay.invitation(@invite.id)
+    end
+
     respond_with @invite
   end
 end
