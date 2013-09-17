@@ -16,7 +16,7 @@ Mamajamas.Views.ListItemAddYourOwn = Mamajamas.Views.Base.extend({
   },
 
   initCollapsible: function(_view) {
-    $('.collapsible', this.$el).collapsible({
+    $('#search-modal .collapsible', this.$el).collapsible({
       cssClose: 'ss-directright',
       cssOpen: 'ss-dropdown',
       speed:200,

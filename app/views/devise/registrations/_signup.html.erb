@@ -1,4 +1,4 @@
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "label-infield" }) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :id => "signup-form", :class => "label-infield" }) do |f| %>
   <%= f.hidden_field :signup_registration?, value: true %>
   <!-- modal window close button -->
   <a href="#" class="bt-close ss-icon">Close</a>
@@ -13,7 +13,7 @@
       <p class="center instruction privacy">We value your privacy, and we’ll<br> never post anything without your express permission.</p>
       <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
     </div>
-    <p id="collapsible1" class="collapsible center ss-directright"><strong>Or, create an account using your email address.</strong></p>
+    <p id="signup-collapsible" class="collapsible center ss-directright"><strong>Or, create an account using your email address.</strong></p>
     <div class="collapsible-content">
       <fieldset>
         <p>

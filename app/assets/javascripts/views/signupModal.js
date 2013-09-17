@@ -23,7 +23,7 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
   },
 
   initializeCollapsible: function() {
-    $(".collapsible", this.$el).collapsible({
+    $("#signup-form .collapsible", this.$el).collapsible({
       cssClose: "ss-directright",
       cssOpen: "ss-dropdown",
       speed: 200,
@@ -80,7 +80,7 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
   submit: function() {
     var _session = this.model;
     var _view = this;
-    var $form = $("#new_user", this.$el);
+    var $form = $("#signup-form", this.$el);
     $("button[type=submit]", this).attr("disabled", "disabled");
     this.clearFormErrors();
 

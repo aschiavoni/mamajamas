@@ -21,7 +21,7 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   },
 
   initializeCollapsible: function() {
-    $(".collapsible", this.$el).collapsible({
+    $("#login-form .collapsible", this.$el).collapsible({
       cssClose: "ss-directright",
       cssOpen: "ss-dropdown",
       speed: 200,
