@@ -10,6 +10,7 @@ class Quiz::Feeding < Quiz::Question
   def rules
     if included("Bottle Feed")
       set_priority("Bottle Brush", 1)
+      set_priority("Formula", 2)
     end
 
     if included("Bottle Feed", "Pump")
@@ -27,6 +28,7 @@ class Quiz::Feeding < Quiz::Question
       set_priority("Nursing Stool", 3)
       set_priority("Nursing Book", 3)
       set_priority("Nursing Tea", 3)
+      set_priority("Formula", 1)
     end
 
     if excluded("Breast Feed")
@@ -43,6 +45,7 @@ class Quiz::Feeding < Quiz::Question
 
     if excluded("Bottle Feed")
       set_priority("Bottle", 2)
+      set_priority("Formula", 3)
     end
   end
 end
