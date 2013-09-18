@@ -52,12 +52,12 @@
         <input type="checkbox" class="chk-fb-share" id="chk-fb-share-{{product_type_id}}"> <label for="chk-fb-share-{{product_type_id}}" class="small">Share on Facebook</label>
         </p>
       </fieldset>
+      <div class="list-item-image-file" style="display: none;">
+        <input id="list_item_image_image" name="list_item_image[image]" type="file" value="Photo">
+        <input id="list_item_image_image_cache" name="list_item_image[image_cache]" type="hidden">
+      </div>
       <div class="progress-container">
         <a class="button bt-light bt-thumb-upload"><span class="ss-upload"></span>Photo</a>
-        <div class="list-item-image-file" style="display: none;">
-          <input id="list_item_image_image" name="list_item_image[image]" type="file" value="Photo">
-          <input id="list_item_image_image_cache" name="list_item_image[image_cache]" type="hidden">
-        </div>
         <img alt="Progress-bar" class="progress bt-thumb-upload" src="/assets/progress-bar.gif" style="display: none;">
       </div>
       <div class="prod-links">

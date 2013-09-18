@@ -66,6 +66,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
 
     this.initializeAutocomplete();
 
+    this.$form = $(".new-list-item", this.$el);
     this.$itemPicture = $(".prod-thumb > img", this.$el);
     this.$itemPictureProgress = $(".progress-container img.progress", this.$el);
     this.initializeItemPictureUploads();
@@ -77,6 +78,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
 
     if (this.ie9orLower()) {
       $(".list-item-image-file", this.$el).show();
+      $(".bt-thumb-upload", this.$el).remove();
     }
 
     return this;
@@ -286,11 +288,11 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
       pasteZone: _view.$itemPicture,
       maxNumberOfFiles: 1,
       start: function(e) {
-        _view.$itemPictureProgress.progressIndicator("show");
+        _view.$form.progressIndicator("show");
       },
       stop: function(e) {
         setTimeout(function() {
-          _view.$itemPictureProgress.progressIndicator("hide");
+          _view.$form.progressIndicator("hide");
         }, 600);
       },
       add: function(e, data) {
