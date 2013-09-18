@@ -1,7 +1,6 @@
 class ListItemImagesController < ApplicationController
   before_filter :authenticate_user!
-
-  respond_to :json
+  skip_before_filter :verify_authenticity_token
 
   def create
     attrs = params[:list_item_image]
@@ -10,6 +9,10 @@ class ListItemImagesController < ApplicationController
       list_item_image.user_id = current_user.id
     end
 
-    respond_with @list_item_image
+    json = render_to_string(
+      template: 'list_item_images/create',
+      formats: :json)
+
+    render text: json, content_type: "text/plain"
   end
 end

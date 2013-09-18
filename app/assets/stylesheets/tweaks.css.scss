@@ -29,3 +29,26 @@ $autocomplete-height: 160px;
 .prod-filled .prod-thumb img {
   height: 60px;
 }
+
+.list-item-image-file {
+  position: absolute;
+  top: 70px;
+  left: -72px;
+  font-size: 0.846em;
+  line-height: 1.33em;
+  padding: 3px 5px 0.125em;
+  background: #ececec;
+
+  input {
+    margin: 0;
+    width: 49px;
+    // background: #ffffff;
+    border: solid transparent;
+    // opacity: 0.0;
+    // filter: alpha(opacity=0);
+    -o-transform: translate(250px, -50px) scale(1);
+    -moz-transform: translate(-300px, 0) scale(4);
+    direction: ltr;
+    cursor: pointer;
+  }
+}

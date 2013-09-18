@@ -9,6 +9,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
   oldModel: null,
 
   initialize: function() {
+    BrowserDetect.init();
     _errMap = this.errorFieldMap();
 
     // save a clone of the original model in case we cancel
@@ -73,6 +74,10 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
       $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
       $("#list_item_name", _view.$el).focus();
     });
+
+    if (this.ie9orLower()) {
+      $(".list-item-image-file", this.$el).show();
+    }
 
     return this;
   },
@@ -277,7 +282,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     $("#list_item_image_image", this.$el).fileupload({
       url: '/api/list_item_images',
       type: 'POST',
-      dataType: "json",
       dropZone: _view.$itemPicture,
       pasteZone: _view.$itemPicture,
       maxNumberOfFiles: 1,
@@ -299,7 +303,13 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
         }
       },
       done: function(e, data) {
-        var listItem = data.result;
+        var listItem = null;
+        if (_view.ie9orLower()) {
+          var result = $( 'pre', data.result  ).text();
+          listItem = $.parseJSON(result);
+        } else {
+          listItem = $.parseJSON(data.result);
+        }
         $('#list_item_list_item_image_id', _view.$el).val(listItem.id)
         $('#list_item_image_url', _view.$el).val(listItem.image.url);
         _view.$itemPicture.attr("src", listItem.image.url);
@@ -316,6 +326,10 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     $('#buildlist').after(search.render().$el);
 
     return false;
+  },
+
+  ie9orLower: function() {
+    return (BrowserDetect.browser == 'Explorer' && BrowserDetect.version <= 9);
   },
 
 });
