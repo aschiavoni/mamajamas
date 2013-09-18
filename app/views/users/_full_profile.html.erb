@@ -17,10 +17,13 @@
     <p class="instruction">Upload a photo, or drag one into the box.</p>
   </div>
 <% end -%>
-<%= form_for @profile, url: profile_path, as: :profile, method: :put, html: { class: "label-infield", id: "frm-create-profile" } do |f| %>
-  <div style="display: none;">
-    <%= f.file_field :profile_picture %>
-    <%= f.hidden_field :profile_picture_cache %>
+<%= form_for @profile, url: profile_path, as: :profile, method: :put, html: { class: "label-infield", id: "frm-create-profile", multipart: true } do |f| %>
+  <div id="profile-photo-file" style="display: none;">
+    <h3>Profile Picture</h3>
+    <fieldset>
+      <%= f.file_field :profile_picture %>
+      <%= f.hidden_field :profile_picture_cache %>
+    </fieldset>
   </div>
   <h3>My Basics</h3>
   <dl class="clearfix">

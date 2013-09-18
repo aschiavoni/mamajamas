@@ -1,6 +1,7 @@
 Mamajamas.Views.UserProfile = Backbone.View.extend({
 
   initialize: function() {
+    BrowserDetect.init();
     this.birthdayField = $("#field-bdate", this.$el);
     this.birthdayField.datepicker({
       changeMonth: true,
@@ -18,10 +19,17 @@ Mamajamas.Views.UserProfile = Backbone.View.extend({
     this.$profilePicture = $("#profile-photo > img");
     this.$profilePictureProgress = $("#profile-photo .progress-container img.progress");
     this.$profilePictureUploadText = $('#profile-photo p.instruction');
+    this.$form = $('#frm-create-profile');
 
     this.initializeProfilePictureUploads();
 
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+
+    if (this.ie9orLower()) {
+      $("#profile-photo-file").show();
+      $("#bt-upload", this.$profilePictureContainer).hide();
+      $(".instruction", this.$profilePictureContainer).hide();
+    }
   },
 
   events: {
@@ -38,6 +46,10 @@ Mamajamas.Views.UserProfile = Backbone.View.extend({
   showBirthdayCalendar: function(event) {
     this.birthdayField.focus();
     return false;
+  },
+
+  ie9orLower: function() {
+    return (BrowserDetect.browser == 'Explorer' && BrowserDetect.version <= 9);
   },
 
   initializeProfilePictureUploads: function() {
@@ -65,6 +77,8 @@ Mamajamas.Views.UserProfile = Backbone.View.extend({
           _view.$profilePictureContainer.progressIndicator("hide");
           _view.$profilePictureUploadText.show();
         }, 600);
+        if (_view.ie9orLower())
+          _view.$form.submit();
       },
       add: function(e, data) {
         var types = /(\.|\/)(gif|jpe?g|png)$/i;
