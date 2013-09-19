@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 
 class Admin::UsersCsvReport
   def initialize(users)
