@@ -3,7 +3,7 @@
   <%= render partial: "friends/sidebar_friend", collection: user.followed_users_with_public_lists %>
 </ul>
 <p>
-  <%= link_to new_friend_path, id: 'find-moms', class: "button" do %>
+  <%= link_to find_friends_path(current_user), id: 'find-moms', class: "button" do %>
     <span class="ss-users"></span>Find more parents
   <% end -%>
 </p>
