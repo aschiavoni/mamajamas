@@ -1,16 +1,18 @@
 <div id="follow-moms">
   <%= form_tag notify_friends_path do %>
-    <% if has_facebook_friends? -%>
     <h3>Your Facebook Friends</h3>
     <p class="instruction">
-      We recommend you follow these friends that have Mamajamas lists <em>(you can unfollow them below)</em>:
+      <% if has_facebook_friends? -%>
+        We recommend you follow these friends that have Mamajamas lists <em>(you can unfollow them below)</em>:
+      <% else -%>
+        None of your facebook friends have Mamajamas lists yet, <%= link_to "invite them", new_friend_path(anchor: "facebookfriends") %> now or check your <%= link_to "gmail contacts", new_friend_path(anchor: "gmailfriends") %>.
+      <% end -%>
     </p>
     <ul class="follow-moms clearfix">
       <% @fb_friends.each do |friend| -%>
         <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
       <% end -%>
     </ul>
-    <% end -%>
     <% if has_recommended_friends? -%>
       <h3>Follow Other Mamajamas Parents</h3>
       <p class="instruction">
