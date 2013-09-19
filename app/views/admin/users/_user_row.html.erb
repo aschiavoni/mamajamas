@@ -1,0 +1,36 @@
+<tr>
+  <td>
+    <%= image_tag user.profile_picture, size: "45x45", class: "avatar" %>
+    <span class="name">
+      <% if user.public_list? -%>
+        <%= link_to user.display_name, public_list_path(user.username) %>
+      <% else -%>
+        <%= user.display_name %>
+      <% end -%>
+    </span>
+    <br/>
+    <span class="subtext">
+      <%= mail_to(user.email) %>
+    </span>
+  </td>
+  <td>
+    <%= user.username %>
+  </td>
+  <td>
+    <%= check_box_tag "public_list", "1", user.public_list?, disabled: true %>
+  </td>
+  <td>
+    <%= user.signed_up %>
+  </td>
+  <td>
+    <%= user.last_sign_in %>
+  </td>
+  <td class="user-actions">
+    <%= link_to "admin_become_path(user.username)", class: "button bt-become" do %>
+      <span class="ss-users"> Impersonate</span>
+    <% end -%>
+    <%= link_to admin_user_path(user), method: "delete", class: "button bt-user-delete" do %>
+      <span class="ss-delete"> Delete</span>
+    <% end -%>
+  </td>
+</tr>

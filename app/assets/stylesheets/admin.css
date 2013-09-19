@@ -98,3 +98,82 @@
 #adminpage .action-nav {
   padding: 20px 15px;
 }
+
+#adminpage .table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: table;
+}
+
+#adminpage .table thead {
+  border-top: 1px solid #dee3ea;
+}
+
+#adminpage .table tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+#adminpage .table tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+#adminpage .table tr th {
+  display: table-cell;
+  text-align: left;
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 20px !important;
+  padding-top: 5px !important;
+  text-transform: uppercase;
+  font-size: 11px;
+  vertical-align: top !important;
+  border-bottom: 0px !important;
+}
+
+#adminpage .table tr td {
+  font-size: 13px;
+  padding: 8px;
+  line-height: 1.428571429;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+  color: #526273;
+  border-top-color: #edf2f7 !important;
+  vertical-align: middle !important;
+  display: table-cell;
+}
+
+#adminpage .table tr.first td {
+  border-top: 0 none;
+}
+
+
+#adminpage .users-list .table img.avatar {
+  float: left;
+  margin-right: 14px;
+  max-width: 45px;
+  /* position: relative; */
+  /* top: 8px; */
+}
+
+#adminpage .users-list .table .name {
+}
+
+#adminpage .users-list .table .subtext {
+  font-size: 12px;
+  margin-left: 0;
+  color: #778391;
+  font-style: italic;
+  margin-top: 0;
+}
+
+#adminpage .users-list .table .user-actions a {
+  text-align: center;
+  margin-bottom: 10px;
+  width: 90px;
+}

@@ -61,12 +61,13 @@ Mamajamas::Application.routes.draw do
 
   namespace "admin" do
     root :to => "admin#index", as: "admin"
-    get "become/:username" => "admin#become"
+    get "become/:username" => "admin#become", as: "become"
 
     resources :product_types, except: [ :show ]
     resources :categories, only: [ :index ], shallow: true do
       resources :product_types, except: [ :show ]
     end
+    resources :users, only: [ :index, :destroy ]
   end
 
   scope "api" do

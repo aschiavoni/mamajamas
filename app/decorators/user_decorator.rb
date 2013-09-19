@@ -29,4 +29,28 @@ module UserDecorator
       order(:first_name)
   end
   memoize :followed_users_with_public_lists
+
+  def public_list?
+    list.present? && list.public?
+  end
+  memoize :public_list?
+
+  def list_item_count
+    return 0 if list.blank?
+    list.list_items.user_items.count
+  end
+
+  def signed_up
+    formatted_date(created_at)
+  end
+
+  def last_sign_in
+    formatted_date(last_sign_in_at)
+  end
+
+  private
+
+  def formatted_date(ts)
+    ts.present? ? ts.to_formatted_s(:long) : nil
+  end
 end
