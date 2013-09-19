@@ -14,7 +14,7 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
       saveState:true
     });
 
-    if (!Mamajamas.Context.User.get("is_facebook_connected")) {
+    if (!window.location.hash && !Mamajamas.Context.User.get("is_facebook_connected")) {
       this.tabs.showAccessibleTab(2);
     }
   },

@@ -11,8 +11,12 @@
 <h2 class="visuallyhidden">My Friends</h2>
 <!-- friends list -->
 <ul id="friendslist" class="clearfix friends-list">
-  <% @friends.each do |friend| -%>
-    <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+  <% if @friends.size > 0 -%>
+    <% @friends.each do |friend| -%>
+      <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+    <% end -%>
+  <% else -%>
+    <p>None of your facebook friends have Mamajamas lists yet, <%= link_to "invite them", new_friend_path(anchor: "facebookfriends") %> now or check your <%= link_to "gmail contacts", new_friend_path(anchor: "gmailfriends") %>.</p>
   <% end -%>
 </ul>
 <!-- end friends list -->
