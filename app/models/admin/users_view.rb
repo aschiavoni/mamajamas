@@ -7,6 +7,6 @@ class Admin::UsersView
   end
 
   def registered_csv
-    UsersCsvReport.new(registered).generate
+    Admin::UsersCsvReport.new(registered).generate
   end
 end
