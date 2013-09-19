@@ -64,6 +64,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
 
     var editView = new Mamajamas.Views.ListItemEdit({
       model: new Mamajamas.Models.ListItem({
+        show_chooser: true,
         age: this.model.get('age'),
         age_position: this.model.get('age_position'),
         category: this.model.get('category'),

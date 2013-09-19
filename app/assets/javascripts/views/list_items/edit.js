@@ -26,7 +26,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     "change input[name='list_item[owned]']": "toggleOwnedCheckbox",
     "change .owned-cb": "toggleOwnedRadioButtons",
     "click .cancel-item.button": "cancel",
-    "click .find-item.button": "findItem",
+    "click .find-item.button": "findItemClicked",
   },
 
   renderMaybe: function() {
@@ -80,6 +80,9 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
       $(".list-item-image-file", this.$el).show();
       $(".bt-thumb-upload", this.$el).remove();
     }
+
+    if (this.model.get('show_chooser'))
+      this.findItem(this);
 
     return this;
   },
@@ -319,14 +322,17 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     });
   },
 
-  findItem: function(event) {
-    event.preventDefault();
-
+  findItem: function(_view) {
+    _view.model.set('show_chooser', false);
     var search = new Mamajamas.Views.ListItemSearch({
-      model: this.model
+      model: _view.model
     });
     $('#buildlist').after(search.render().$el);
+  },
 
+  findItemClicked: function(event) {
+    event.preventDefault();
+    this.findItem(this);
     return false;
   },
 
