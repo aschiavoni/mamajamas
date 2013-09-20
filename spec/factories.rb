@@ -98,4 +98,12 @@ FactoryGirl.define do
     from "John Doe"
     message "check this out"
   end
+
+  factory :authentication do
+    user
+    provider "facebook"
+    uid "999999"
+    access_token "kjdkk"
+    access_token_expires_at { 30.days.from_now }
+  end
 end
