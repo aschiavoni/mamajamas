@@ -48,7 +48,7 @@ feature "Visitor logs in", js: true do
       VCR.use_cassette('login/facebook') do
         # mock omniauth and pre-create a user so we simulate logging
         # in an already exiting mamajamas user
-        mock_omniauth('99999', @testuser.email)
+        mock_facebook_omniauth('99999', @testuser.email)
 
         visit root_path
         click_link "login-link"

@@ -1,6 +1,6 @@
 module Features
   module OmniauthHelpers
-    def mock_omniauth(uid = '12345', email = nil, first_name = nil, last_name = nil)
+    def mock_facebook_omniauth(uid = '12345', email = nil, first_name = nil, last_name = nil)
       fname = first_name || "John"
       lname = last_name || "Doe"
       username = fname.downcase

@@ -38,7 +38,7 @@ feature "Visitor signs up", js: true do
 
   scenario "with valid facebook account" do
     VCR.use_cassette('signup/facebook') do
-      mock_omniauth('54321')
+      mock_facebook_omniauth('54321')
       visit root_path
       click_link "signup-link"
       page.has_selector?('#create-account-email', visible: true)
