@@ -37,6 +37,7 @@ gem 'devise-async'
 gem 'omniauth'
 gem 'oauth2'
 gem 'omniauth-facebook', '1.4.0'
+gem 'omniauth-google-oauth2'
 
 # facebook
 gem 'koala'

@@ -1,0 +1,16 @@
+development:
+  app_id: 1009373955981.apps.googleusercontent.com
+  secret_key: SZ9Iooyidv6A0mzfhKF29gMG
+  scope: "userinfo.email, userinfo.profile, https://www.google.com/m8/feeds/"
+test:
+  app_id: 1009373955981.apps.googleusercontent.com
+  secret_key: SZ9Iooyidv6A0mzfhKF29gMG
+  scope: "userinfo.email, userinfo.profile, https://www.google.com/m8/feeds/"
+staging:
+  app_id: "xxx"
+  secret_key: "xxx"
+  scope: ""
+production:
+  app_id: "xxx"
+  secret_key: "xxx"
+  scope: ""

@@ -1,5 +1,6 @@
-# setup facebook
+# setup facebook and google
 FACEBOOK_CONFIG = YAML.load_file(Rails.root.join("config", "facebook.yml"))[Rails.env]
+GOOGLE_AUTH_CONFIG = YAML.load_file(Rails.root.join("config", "google.yml"))[Rails.env]
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
@@ -217,6 +218,12 @@ Devise.setup do |config|
     # ryanesc - MJs Development
     config.omniauth :facebook, FACEBOOK_CONFIG["app_id"], FACEBOOK_CONFIG["secret_key"], { :scope => FACEBOOK_CONFIG["scope"] }
   end
+  config.omniauth(:google_oauth2,
+                  GOOGLE_AUTH_CONFIG["app_id"],
+                  GOOGLE_AUTH_CONFIG["secret_key"], {
+                    :name => "google",
+                    :scope => GOOGLE_AUTH_CONFIG["scope"]
+                  })
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

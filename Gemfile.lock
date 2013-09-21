@@ -233,6 +233,9 @@ GEM
       rack
     omniauth-facebook (1.4.0)
       omniauth-oauth2 (~> 1.0.2)
+    omniauth-google-oauth2 (0.2.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2
     omniauth-oauth2 (1.0.3)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
@@ -448,6 +451,7 @@ DEPENDENCIES
   oauth2
   omniauth
   omniauth-facebook (= 1.4.0)
+  omniauth-google-oauth2
   pg
   pg_search
   poltergeist
