@@ -1,5 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   skip_before_filter :require_basic_auth_maybe
+  before_filter :authenticate_user!, only: [ :google ]
 
   def facebook
     auth_info = request.env["omniauth.auth"]
@@ -36,5 +37,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       (render && return) if request.xhr?
       redirect_to new_user_registration_url
     end
+  end
+
+  def google
+    redirect_to new_user_session_path and return unless current_user.present?
+    auth_info = request.env["omniauth.auth"]
+    AddsAuthentication.new(current_user).from_oauth(auth_info)
+    redirect_to new_friend_path(anchor: "gmailfriends")
   end
 end

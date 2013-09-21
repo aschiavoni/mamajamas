@@ -104,4 +104,44 @@ describe Users::OmniauthCallbacksController do
 
   end
 
+  describe "google" do
+
+    let(:auth_hash) {
+      mock_google_omniauth('91234560', 'googleuser@gmail.com', 'Joseph', 'Case')
+    }
+
+    before(:each) do
+      request.env["devise.mapping"] = Devise.mappings[:user]
+      request.env["omniauth.auth"] = auth_hash
+    end
+
+    describe "unauthenticated" do
+
+      it "requires an authenticated user" do
+        get :google
+        response.should redirect_to(new_user_session_path)
+      end
+
+    end
+
+    describe "authenticated" do
+
+      let(:user) { create(:user) }
+
+      before(:each) { sign_in user }
+
+      it "returns a successful response" do
+        get :google
+        response.should redirect_to(new_friend_path(anchor: "gmailfriends"))
+      end
+
+      it "adds an authentication" do
+        AddsAuthentication.any_instance.should_receive(:from_oauth)
+        get :google
+      end
+
+    end
+
+  end
+
 end
