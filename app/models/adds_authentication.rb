@@ -10,11 +10,15 @@ class AddsAuthentication
       access_token: parser.access_token,
       access_token_expires_at: parser.access_token_expires_at
     }
-    auth = user.authentications.where(provider: parser.provider).first
+    add(parser.provider, attrs)
+  end
+
+  def add(provider, attrs)
+    auth = user.authentications.where(provider: provider).first
     if auth.present?
       auth.update_attributes!(attrs)
     else
-      user.authentications.create!(attrs.merge(provider: parser.provider))
+      user.authentications.create!(attrs.merge(provider: provider))
     end
   end
 
