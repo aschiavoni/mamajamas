@@ -50,11 +50,12 @@ describe User do
   describe "facebook connected" do
 
     it "should be facebook connected" do
-      user.update_attributes!(provider: "facebook", uid: 12345)
+      create(:authentication, user: user, provider: "facebook")
       user.should be_facebook_connected
     end
 
     it "should not be facebook connected" do
+      user.clear_facebook!
       user.should_not be_facebook_connected
     end
 
@@ -186,22 +187,6 @@ describe User do
       lambda {
         User.new_guest
       }.should change(User, :count).by(1)
-    end
-
-  end
-
-  describe "add facebook uid to an existing user" do
-
-    let(:uid) { '1234554321' }
-
-    it "adds facebook info to a guest user" do
-      user.add_facebook_uid!(uid)
-      user.uid.should == uid
-    end
-
-    it "adds facebook provider to a guest user" do
-      user.add_facebook_uid!(uid)
-      user.provider.should == 'facebook'
     end
 
   end

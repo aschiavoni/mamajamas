@@ -7,7 +7,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if current_user.present?
       unless FacebookUserFinder.find(auth_info)
-        current_user.add_facebook_uid!(auth_info.uid)
+        AddsAuthentication.new(current_user).add("facebook", uid: auth_info.uid)
         unless current_user.guest?
           # if we are logged in and not a guest, we just connected
           # facebook to an existing user and we do not want to

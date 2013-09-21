@@ -22,15 +22,20 @@ describe Users::OmniauthCallbacksController do
 
       it "updates a guest user from facebook" do
         sign_in guest
-        User.any_instance.should_receive(:add_facebook_uid!).
-          with(auth_hash['uid'])
+        adds_authentication = stub
+        AddsAuthentication.should_receive(:new).with(guest) { adds_authentication }
+        adds_authentication.should_receive(:add).
+          with("facebook", uid: auth_hash.uid)
         get :facebook
       end
 
       it "doesn't update guest user if a facebook user exists with uid" do
-        create(:user, uid: auth_hash['uid'], provider: 'facebook')
+        u = create(:user, uid: auth_hash['uid'], provider: 'facebook')
+        create(:authentication,
+               user: u, uid: auth_hash.uid,
+               provider: "facebook")
         sign_in guest
-        User.any_instance.should_not_receive(:add_facebook_uid!)
+        AddsAuthentication.should_not_receive(:new)
         get :facebook
       end
 

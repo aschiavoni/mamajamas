@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me
-  attr_accessible :login, :provider, :uid, :access_token, :access_token_expires_at
+  attr_accessible :login
   attr_accessible :first_name, :last_name, :birthday
   attr_accessible :facebook_friends, :facebook_friends_updated_at
   attr_accessible :relationships_created_at
@@ -53,7 +53,14 @@ class User < ActiveRecord::Base
   scope :registered, lambda { where(guest: false) }
   scope :admins, lambda { where(admin: true) }
   scope :facebook, lambda {
-    registered.where(provider: "facebook").where("uid IS NOT NULL")
+    registered.joins(:authentications).
+    where("authentications.provider" => "facebook").
+    where("authentications.uid IS NOT NULL")
+  }
+  scope :google, lambda {
+    registered.joins(:authentications).
+    where("authentications.provider" => "google").
+    where("authentications.uid IS NOT NULL")
   }
 
   # hook devise to support logging in by email or username
@@ -157,21 +164,15 @@ class User < ActiveRecord::Base
     !guest?
   end
 
-  def add_facebook_uid!(uid)
-    self.provider = "facebook"
-    self.uid = uid
-    save!
-  end
-
   def clear_facebook!
-    self.provider = nil
-    self.uid = nil
+    authentications.where(provider: "facebook").destroy_all
     self.facebook_friends = nil
     save!
   end
 
   def facebook_connected?
-    provider == "facebook" && uid.present?
+    auth = authentications.facebook.first
+    auth.present? && auth.uid.present?
   end
 
   def facebook
