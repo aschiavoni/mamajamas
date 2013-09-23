@@ -28,10 +28,11 @@ describe FacebookUserFinder do
     }
   end
 
-  let(:auth) { OmniAuth::AuthHash.new auth_hash }
+  let(:auth) { OmniauthHashParser.new(OmniAuth::AuthHash.new(auth_hash)) }
 
   it "finds a user from a uid in the auth hash" do
-    user = create(:user, uid: auth_hash['uid'], provider: auth_hash['provider'])
+    user = create(:user)
+    authentication = create(:authentication, uid: auth_hash['uid'], user: user)
     FacebookUserFinder.new(auth).find.should == user
   end
 

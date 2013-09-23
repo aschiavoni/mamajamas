@@ -33,4 +33,38 @@ describe OmniauthHashParser do
     result.access_token_expires_at.should be_nil
   end
 
+  it "parses email address" do
+    oauth_hash = mock_google_omniauth("99933", "99933@example.com")
+    result = OmniauthHashParser.new(oauth_hash)
+    result.email.should == "99933@example.com"
+  end
+
+  it "parses first name" do
+    oauth_hash = mock_google_omniauth("99933", "99933@example.com",
+                                      "Julius", "Caesar")
+    result = OmniauthHashParser.new(oauth_hash)
+    result.first_name.should == "Julius"
+  end
+
+  it "parses last name" do
+    oauth_hash = mock_google_omniauth("99933", "99933@example.com",
+                                      "Julius", "Caesar")
+    result = OmniauthHashParser.new(oauth_hash)
+    result.last_name.should == "Caesar"
+  end
+
+  it "extracts a username from first name and last name" do
+    oauth_hash = mock_google_omniauth("99933", "99933@example.com",
+                                      "Julius", "Caesar")
+    result = OmniauthHashParser.new(oauth_hash)
+    result.extracted_username.should == "juliuscaesar"
+  end
+
+  it "parses extra info username" do
+    oauth_hash = mock_facebook_omniauth("99933", "99933@example.com",
+                                        "Julius", "Caesar")
+    result = OmniauthHashParser.new(oauth_hash)
+    result.username.should == "julius"
+  end
+
 end

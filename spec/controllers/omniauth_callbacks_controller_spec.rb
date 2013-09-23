@@ -8,6 +8,10 @@ describe Users::OmniauthCallbacksController do
       mock_facebook_omniauth('91234560', 'fbuser@example.com', 'Joseph', 'Case')
     }
 
+    let(:oauth) {
+      OmniauthHashParser.new(auth_hash)
+    }
+
     before do
       ProfilePictureUploader.any_instance.stub(:download! => false)
     end
@@ -22,20 +26,18 @@ describe Users::OmniauthCallbacksController do
 
       it "updates a guest user from facebook" do
         sign_in guest
-        adds_authentication = stub
-        AddsAuthentication.should_receive(:new).with(guest) { adds_authentication }
-        adds_authentication.should_receive(:add).
-          with("facebook", uid: auth_hash.uid)
         get :facebook
+        assigns(:user).should == guest
       end
 
       it "doesn't update guest user if a facebook user exists with uid" do
-        u = create(:user, uid: auth_hash['uid'], provider: 'facebook')
+        u = create(:user)
         create(:authentication,
                user: u, uid: auth_hash.uid,
                provider: "facebook")
         sign_in guest
         AddsAuthentication.should_not_receive(:new)
+        FacebookUserCreator.should_receive(:from_oauth) { u }
         get :facebook
       end
 

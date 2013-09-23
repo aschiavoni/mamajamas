@@ -3,14 +3,13 @@ class AddsAuthentication
     @user = user
   end
 
-  def from_oauth(oauth_hash, oauth_parser = OmniauthHashParser)
-    parser = oauth_parser.new(oauth_hash)
+  def from_oauth(oauth)
     attrs = {
-      uid: parser.uid,
-      access_token: parser.access_token,
-      access_token_expires_at: parser.access_token_expires_at
+      uid: oauth.uid,
+      access_token: oauth.access_token,
+      access_token_expires_at: oauth.access_token_expires_at
     }
-    add(parser.provider, attrs)
+    add(oauth.provider, attrs)
   end
 
   def add(provider, attrs)

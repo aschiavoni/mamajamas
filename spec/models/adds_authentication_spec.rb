@@ -7,14 +7,16 @@ describe AddsAuthentication do
     it "adds an oauth authentication" do
       user.authentications.stub(where: [])
       user.authentications.should_receive(:create!)
-      AddsAuthentication.new(user).from_oauth(mock_google_omniauth)
+      oauth = OmniauthHashParser.new(mock_google_omniauth)
+      AddsAuthentication.new(user).from_oauth(oauth)
     end
 
     it "updates an existing oauth authentication" do
       authentication = stub
       user.authentications.stub(where: [ authentication ])
       authentication.should_receive(:update_attributes!)
-      AddsAuthentication.new(user).from_oauth(mock_google_omniauth)
+      oauth = OmniauthHashParser.new(mock_google_omniauth)
+      AddsAuthentication.new(user).from_oauth(oauth)
     end
 
   end

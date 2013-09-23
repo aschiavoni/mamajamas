@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   attr_accessible :zip_code, :country_code
   attr_accessible :full_name, :signup_registration
   attr_accessible :welcome_sent_at
+  attr_accessible :guest
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy

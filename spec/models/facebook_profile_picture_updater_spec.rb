@@ -2,8 +2,9 @@ describe FacebookProfilePictureUpdater do
 
   it "should update facebook profile picture if it does not exist" do
     uploader = stub(:blank? => true)
-    user = stub(:uid => "12345", :profile_picture => uploader)
-    updater = FacebookProfilePictureUpdater.new(user)
+    uid = "12345"
+    user = stub(:profile_picture => uploader)
+    updater = FacebookProfilePictureUpdater.new(user, uid)
 
     user.should_receive(:save!)
     uploader.should_receive(:download!)
@@ -14,7 +15,7 @@ describe FacebookProfilePictureUpdater do
   it "should not update facebook profile picture if it does exist" do
     uploader = stub(:blank? => false)
     user = stub(:profile_picture => uploader)
-    updater = FacebookProfilePictureUpdater.new(user)
+    updater = FacebookProfilePictureUpdater.new(user, "12345")
 
     user.should_not_receive(:save!)
 
