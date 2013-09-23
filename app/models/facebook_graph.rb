@@ -1,9 +1,9 @@
 class FacebookGraph
   extend Memoist
 
-  def initialize(user, profile_pic_provider = FacebookProfilePicture)
+  def initialize(user, facebook_authentication, profile_pic_provider = FacebookProfilePicture)
     @user = user
-    @facebook = user.access_token.blank? ? nil : Koala::Facebook::API.new(user.access_token)
+    @authentication = facebook_authentication
     @profile_pic_provider = profile_pic_provider
   end
 
@@ -22,7 +22,7 @@ class FacebookGraph
   end
 
   def post_to_wall(message, attachment = {})
-    @facebook.put_wall_post(message, attachment)
+    fb_api.put_wall_post(message, attachment)
   end
 
   private
@@ -31,13 +31,25 @@ class FacebookGraph
     @user
   end
 
+  def authentication
+    @authentication
+  end
+
   def profile_pic_provider
     @profile_pic_provider
   end
 
+  def fb_api
+    @facebook = nil
+    if authentication.present? && authentication.access_token.present?
+      @facebook = Koala::Facebook::API.new(user.access_token)
+    end
+  end
+  memoize :fb_api
+
   def facebook
-    return nil if @facebook.blank?
-    block_given? ? yield(@facebook) : @facebook
+    return nil if fb_api.blank?
+    block_given? ? yield(fb_api) : fb_api
   rescue Koala::Facebook::APIError => e
     Rails.logger.error e.to_s
     nil
@@ -54,7 +66,8 @@ class FacebookGraph
     # get all the mamajamas users that have matching uids and public lists
     User.
       includes(:list).
-      where(uid: uids).
+      joins(:authentications).
+      where("authentications.uid" => uids).
       where("lists.public = true")
   end
   memoize :all_mamajamas_friends

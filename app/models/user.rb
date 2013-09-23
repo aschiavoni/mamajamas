@@ -166,7 +166,7 @@ class User < ActiveRecord::Base
   end
 
   def clear_facebook!
-    authentications.where(provider: "facebook").destroy_all
+    authentications.facebook.destroy_all
     self.facebook_friends = nil
     save!
   end
@@ -177,7 +177,7 @@ class User < ActiveRecord::Base
   end
 
   def facebook
-    @facebook ||= FacebookGraph.new(self)
+    @facebook ||= FacebookGraph.new(self, authentications.facebook.first)
   end
 
   def following?(other_user)
