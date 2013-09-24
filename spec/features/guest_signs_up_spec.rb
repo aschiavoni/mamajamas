@@ -12,6 +12,8 @@ feature "guest visitor", js: true do
 
     add_manual_item "Bath Tub", "http://google.com"
 
+    # HACK: force there to be an item
+    page.execute_script("Mamajamas.Context.List.set('item_count', 1)")
     click_link "Share your list"
     page.should have_selector("#signup-modal", visible: true)
 
@@ -23,6 +25,7 @@ feature "guest visitor", js: true do
     fill_in "Email", with: "guestsignup@example.com"
     fill_in "Password", with: "test12345!"
     fill_in "Confirm password", with: "test12345!"
+    sleep 0.5
 
     page.should have_selector("#bt-create-account", visible: true)
     click_button "bt-create-account"
