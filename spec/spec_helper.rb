@@ -14,13 +14,7 @@ require 'rspec/rails'
 require 'capybara/poltergeist'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
-
-require 'sidekiq/testing'
 require 'sidekiq/testing/inline'
-
-def delayed_mailer_jobs
-  Sidekiq::Extensions::DelayedMailer.jobs
-end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

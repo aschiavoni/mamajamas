@@ -55,7 +55,7 @@ describe InvitesController do
       invite_params.merge!(provider: "mamajamas")
       lambda {
         post :create, invite: invite_params, format: :json
-      }.should change(delayed_mailer_jobs, :size).by(1)
+      }.should change(ActionMailer::Base.deliveries, :size).by(1)
     end
 
   end

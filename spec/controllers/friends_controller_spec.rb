@@ -42,7 +42,7 @@ describe FriendsController do
       it "should send notifications" do
         lambda {
           post :notify, notify: "1"
-        }.should change(delayed_mailer_jobs, :size).by(@following.size)
+        }.should change(ActionMailer::Base.deliveries, :size).by(@following.size)
       end
 
       it "should not re-deliver notifications to followed users" do
@@ -56,7 +56,7 @@ describe FriendsController do
         # that do not have delivered_notification_at set
         lambda {
           post :notify, notify: "1"
-        }.should change(delayed_mailer_jobs, :size).by(@following.size)
+        }.should change(ActionMailer::Base.deliveries, :size).by(@following.size)
       end
 
     end

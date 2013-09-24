@@ -34,7 +34,7 @@ describe RelationshipsController do
     it "sends notification email" do
       lambda {
         post :create, relationship: { followed_id: user_to_follow.id }
-      }.should change(delayed_mailer_jobs, :size).by(1)
+      }.should change(ActionMailer::Base.deliveries, :size).by(1)
     end
 
     it "does not send notification email if it has already been sent" do
@@ -44,14 +44,14 @@ describe RelationshipsController do
       }, { without_protection: true })
       lambda {
         post :create, relationship: { followed_id: user_to_follow.id }
-      }.should_not change(delayed_mailer_jobs, :size)
+      }.should_not change(ActionMailer::Base.deliveries, :size)
     end
 
     it "does not send notification email if no notification flag set" do
       new_user = create(:user)
       lambda {
         post :create, no_notification: "1", relationship: { followed_id: new_user.id }
-      }.should_not change(delayed_mailer_jobs, :size)
+      }.should_not change(ActionMailer::Base.deliveries, :size)
     end
   end
 
