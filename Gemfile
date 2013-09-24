@@ -140,6 +140,7 @@ group :test do
   gem 'timecop'
   gem 'rack-contrib'
   gem 'simplecov', require: false
+  gem 'capybara-screenshot'
 
   # vcr
   gem 'vcr'

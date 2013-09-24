@@ -68,6 +68,9 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
+    capybara-screenshot (0.3.14)
+      capybara (>= 1.0, < 3)
+      launchy
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -419,6 +422,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   capybara
+  capybara-screenshot
   carrierwave
   countries
   dalli
