@@ -16,6 +16,7 @@ require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
 
 require 'sidekiq/testing'
+require 'sidekiq/testing/inline'
 
 def delayed_mailer_jobs
   Sidekiq::Extensions::DelayedMailer.jobs
@@ -57,6 +58,8 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
   config.include Features::SessionHelpers, type: :feature
   config.include Features::HeadlessHelpers, type: :feature
+  config.include Features::QuizHelpers, type: :feature
+  config.include Features::ListHelpers, type: :feature
   config.include Features::OmniauthHelpers
 
   # can use this to instrument factory creation

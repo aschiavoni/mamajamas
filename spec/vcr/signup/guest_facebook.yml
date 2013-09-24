@@ -1,0 +1,120 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://graph.facebook.com/9993883/picture?type=large
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Content-Type:
+      - image/jpeg
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Location:
+      - http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/HsTZSDw4avx.gif
+      Pragma:
+      - no-cache
+      X-Fb-Rev:
+      - '945951'
+      X-Fb-Debug:
+      - FsRkCwSovX34lzFfqlipiYHyhdORZ82FQdD+LQhReyE=
+      Date:
+      - Tue, 24 Sep 2013 12:53:10 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Tue, 24 Sep 2013 12:53:13 GMT
+- request:
+    method: get
+    uri: http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/HsTZSDw4avx.gif
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        aW1hZ2UvZ2lm
+      !binary "TGFzdC1Nb2RpZmllZA==":
+      - !binary |-
+        VGh1LCAxMiBBcHIgMjAxMiAwMzowMzoxNSBHTVQ=
+      !binary "WC1Db250ZW50LVR5cGUtT3B0aW9ucw==":
+      - !binary |-
+        bm9zbmlmZg==
+      !binary "WC1GYi1EZWJ1Zw==":
+      - !binary |-
+        dGdOMkMwb0tKMGp5ZWdYMEc4bjJnbzBrNjhLa3dHU2RuQTR4djB3QWRtdz0=
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        OTc4
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        cHVibGljLCBtYXgtYWdlPTk1NTQyMTA=
+      !binary "RXhwaXJlcw==":
+      - !binary |-
+        TW9uLCAxMyBKYW4gMjAxNCAwMjo1MDowMSBHTVQ=
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VHVlLCAyNCBTZXAgMjAxMyAxMjo1MzoxMSBHTVQ=
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        R0lGODlhyAB+AMQAAM3V5e3w9sXO4dzi7dXc6eXp8vn6/PT1+crS4+ru9PL0
+        +OLm8Nje6t/k7v39/tTa6Nvg7Pb4+tHY5/7+/+/y9+js8/v8/fj5+/z8/cfQ
+        4s/X5uzv9cvT5MzU5P///8TN4CH5BAAAAAAALAAAAADIAH4AAAX/4CeOZGme
+        aKqubOu+cCzPdG3feK7vfO//wKBwSCwaj8ikcslsOp/QqHRKrVptAgABMmhc
+        v2AbAhK4ODxoTyLMbqc4jEp6jl647+5OIULvU/CAVxIFfYVoAIGJUQN8hoYD
+        ipFLC46VaBqSmUQMGJaeDJqhPQgHnqZqoqk3A6etFxmqsTABrbUeBLK5KRkG
+        trZeusEiHb7Fa8K5GsXLf8iqHMvRx86hZ9HLENSalNfRAtqS3dd24Ims4tHl
+        iRTo0YjqeL3txcDwbQjzy9P2Ycr5vgr4tSHwz9cBgWwIFqxlAWGYBgtrYfjm
+        8Aq3iKYsUKxY5SJGSxo5WvH40VFIkVRI/5YsdBKlFJUr6bR0CQViTJMbaT55
+        cNPRRJ1RFPbscwFo0KGFDhrdibSP0qVNiDWd8xTqEn9T0Wyw2gRA1jRbuS7J
+        YC1rWLFJyH71UADtkk5fs7k9IgDChLUBOswtksHC2jly9waR+hdNW8FB1Bb2
+        UA/xD3mFcTkGUmoxh8lAEiz2gBmIzb8YOv8QuraZaB7QCh8+zWMxJNY87v59
+        AJtHo7Xvauc499WAbh4bvjrA9HtH5aYSivMgNBWWch2ke0Z4vgNf033Ub9zu
+        CSp7DuZDveuQgHS6+ByybwY+b0NOT+fsbXi9GTA+ju0fJdu3wSBm0f04KLBS
+        bgDWIEB6C61WoP8N4C20YA79ReTAgziQF1F9FNZg4ULmZUhDhAtN4GENnxUk
+        4ogzNFhQTii6oBlGerUIg4AY0SbjCxd8tN6NKhz4kYI87lISdkGWkAED7HyE
+        QQPEFVmCiiXB56QISd7U5JQflBVTd1gKgFQFWIoQ3Uq+heneUCwG6RdSrzmJ
+        1VBV8cgAZEglcNmNA2iZVQBXPpgBTGspoB+AHdCyWR8WtMkeAzQe6sgCd2a3
+        wJqOekJBn7Bp8GKltUTQmGgM4MdpLRMkgABmAAA6KkBcuvVAo6u2Y0EBUhqV
+        QQN6xppPADbqBIChupZ0wacOMRosUgucihAEdB47VF722OXsX9BqQ0BPs9N+
+        BSYyAlSZ7WatxjLmt4sFkIuq5P41kyZQpnuoA2kqAoG7ujakSWr0xkpkIMfl
+        u2pykYDo76r/KQLrwKMCHEgGCAe7bSC8NTzqhEGEAAA7
+    http_version: 
+  recorded_at: Tue, 24 Sep 2013 12:53:14 GMT
+recorded_with: VCR 2.5.0
