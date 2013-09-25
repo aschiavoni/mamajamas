@@ -646,10 +646,6 @@ CREATE TABLE users (
     unconfirmed_email character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    provider character varying(255),
-    uid character varying(255),
-    access_token character varying(255),
-    access_token_expires_at timestamp without time zone,
     first_name character varying(255),
     last_name character varying(255),
     facebook_friends text,
@@ -1272,3 +1268,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130917124858');
 INSERT INTO schema_migrations (version) VALUES ('20130920162951');
 
 INSERT INTO schema_migrations (version) VALUES ('20130921132027');
+
+INSERT INTO schema_migrations (version) VALUES ('20130925165606');
