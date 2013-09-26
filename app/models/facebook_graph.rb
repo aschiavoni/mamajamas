@@ -18,7 +18,11 @@ class FacebookGraph
   memoize :mamajamas_friends
 
   def profile_pic_url(type = :square)
-    profile_pic_provider.new(user.uid, type: type).url
+    profile_pic_provider.new(authentication.uid, type: type).url
+  end
+
+  def profile_pic_url(width, height)
+    profile_pic_provider.new(authentication.uid, width: width, height: height).url
   end
 
   def post_to_wall(message, attachment = {})
@@ -42,7 +46,7 @@ class FacebookGraph
   def fb_api
     @facebook = nil
     if authentication.present? && authentication.access_token.present?
-      @facebook = Koala::Facebook::API.new(user.access_token)
+      @facebook = Koala::Facebook::API.new(authentication.access_token)
     end
   end
   memoize :fb_api

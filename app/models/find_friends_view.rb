@@ -54,7 +54,7 @@ class FindFriendsView
       i.uid = uid
       i.name = friend[:name]
       i.provider = FACEBOOK_PROVIDER
-      i.picture_url = "https://graph.facebook.com/#{uid}/picture?width=86&height=86&access_token=#{user.access_token}"
+      i.picture_url = user.facebook.profile_pic_url(86, 86)
     end
   end
 end
