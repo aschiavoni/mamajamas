@@ -39,7 +39,8 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
   },
 
   selectGmailFriends: function(event) {
-    window.location = "/users/auth/google"
+    if (!Mamajamas.Context.User.get("is_google_connected"))
+      window.location = "/users/auth/google"
   },
 
   emailInvite: function(event) {
