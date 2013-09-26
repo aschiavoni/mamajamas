@@ -149,6 +149,11 @@ GEM
     formatador (0.2.4)
     friendly_id (4.0.9)
     going_postal (0.1.2)
+    google_contacts_api (0.3.3)
+      activesupport
+      hashie
+      i18n
+      json
     guard (1.4.0)
       listen (>= 0.4.2)
       thor (>= 0.14.6)
@@ -436,6 +441,7 @@ DEPENDENCIES
   foreman
   friendly_id
   going_postal
+  google_contacts_api
   guard
   guard-rspec
   handlebars_assets

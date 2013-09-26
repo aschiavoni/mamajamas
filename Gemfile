@@ -45,6 +45,9 @@ gem 'koala'
 # amazon
 gem 'amazon-ecs'
 
+# google
+gem 'google_contacts_api'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
