@@ -54,7 +54,11 @@ class FindFriendsView
       i.uid = uid
       i.name = friend[:name]
       i.provider = FACEBOOK_PROVIDER
-      i.picture_url = user.facebook.profile_pic_url(86, 86)
+      i.picture_url = FacebookProfilePicture.new(uid, picture_options).url
     end
+  end
+
+  def picture_options
+    @pic_opts ||= { width: 86, height: 86 }
   end
 end
