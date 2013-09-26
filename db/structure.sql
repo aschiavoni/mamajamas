@@ -624,6 +624,39 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: social_friends; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE social_friends (
+    id integer NOT NULL,
+    user_id integer,
+    provider character varying(255),
+    friends text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: social_friends_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE social_friends_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: social_friends_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE social_friends_id_seq OWNED BY social_friends.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -799,6 +832,13 @@ ALTER TABLE ONLY relationships ALTER COLUMN id SET DEFAULT nextval('relationship
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY social_friends ALTER COLUMN id SET DEFAULT nextval('social_friends_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -920,6 +960,14 @@ ALTER TABLE ONLY quiz_answers
 
 ALTER TABLE ONLY relationships
     ADD CONSTRAINT relationships_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_friends_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY social_friends
+    ADD CONSTRAINT social_friends_pkey PRIMARY KEY (id);
 
 
 --
@@ -1069,6 +1117,20 @@ CREATE INDEX index_relationships_on_follower_id ON relationships USING btree (fo
 --
 
 CREATE UNIQUE INDEX index_relationships_on_follower_id_and_followed_id ON relationships USING btree (follower_id, followed_id);
+
+
+--
+-- Name: index_social_friends_on_provider; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_social_friends_on_provider ON social_friends USING btree (provider);
+
+
+--
+-- Name: index_social_friends_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_social_friends_on_user_id ON social_friends USING btree (user_id);
 
 
 --
@@ -1270,3 +1332,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130920162951');
 INSERT INTO schema_migrations (version) VALUES ('20130921132027');
 
 INSERT INTO schema_migrations (version) VALUES ('20130925165606');
+
+INSERT INTO schema_migrations (version) VALUES ('20130926180736');
