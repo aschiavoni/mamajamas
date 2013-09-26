@@ -61,6 +61,27 @@ describe User do
 
   end
 
+  describe "google connected" do
+
+    it "is connected to google" do
+      create(:authentication, user: user, provider: "google")
+      user.should be_google_connected
+    end
+
+    it "is not connected to google" do
+      user.clear_google!
+      user.should_not be_google_connected
+    end
+
+    it "has expired google access token" do
+      user.clear_google!
+      create(:authentication, user: user,
+             provider: "google", access_token_expires_at: 2.days.ago)
+      user.should_not be_google_connected
+    end
+
+  end
+
   describe "relationships" do
 
     describe "created at" do

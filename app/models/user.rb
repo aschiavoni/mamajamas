@@ -180,6 +180,15 @@ class User < ActiveRecord::Base
     @facebook ||= FacebookGraph.new(self, authentications.facebook.first)
   end
 
+  def clear_google!
+    authentications.google.destroy_all
+  end
+
+  def google_connected?
+    auth = authentications.google.first
+    auth.present? && auth.uid.present? && !auth.access_token_expired?
+  end
+
   def following?(other_user)
     relationships.find_by_followed_id(other_user.id)
   end
