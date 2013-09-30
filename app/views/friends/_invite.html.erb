@@ -1,4 +1,4 @@
-<li data-fbuid="<%= invite.uid %>" data-name="<%= invite.name %>" data-pictureurl="<%= invite.picture_url %>">
+<li data-uid="<%= invite.uid %>" data-name="<%= invite.name %>" data-pictureurl="<%= invite.picture_url %>">
   <a target="_blank" href="#">
     <img src="<%= invite.picture_url %>" alt="<%= invite.name %>">
   </a>
@@ -10,7 +10,7 @@
       <span class="ss-check"></span>Invited
     </button>
   <% else -%>
-    <button class="button bt-color bt-follow fb-invite" type="submit">
+    <button class="button bt-color bt-follow <%= prefix %>-invite" type="submit">
       <span class="ss-check"></span>Invite
     </button>
   <% end -%>

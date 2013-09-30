@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
   has_many :quiz_answers, class_name: "Quiz::Answer"
   has_many :invites, dependent: :destroy
   has_many :authentications, dependent: :destroy
+  has_many :social_friends, dependent: :destroy, class_name: "SocialFriends"
 
   mount_uploader :profile_picture, ProfilePictureUploader
 
@@ -182,11 +183,18 @@ class User < ActiveRecord::Base
 
   def clear_google!
     authentications.google.destroy_all
+    social_friends.google.destroy_all
   end
 
   def google_connected?
     auth = authentications.google.first
     auth.present? && auth.uid.present? && !auth.access_token_expired?
+  end
+
+  def google_friends
+    friends = social_friends.google.first
+    return [] if friends.blank?
+    friends.friends
   end
 
   def following?(other_user)

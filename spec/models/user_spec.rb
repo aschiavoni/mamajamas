@@ -80,6 +80,18 @@ describe User do
       user.should_not be_google_connected
     end
 
+    it "returns empty array when user does not have google friends" do
+      user.clear_google!
+      user.google_friends.should be_empty
+    end
+
+    it "retrieves google friends" do
+      create(:authentication, user: user, provider: "google")
+      create(:social_friends, user: user,
+             provider: "google", friends: [ { id: 10 } ])
+      user.google_friends.should_not be_empty
+    end
+
   end
 
   describe "relationships" do

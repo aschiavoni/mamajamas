@@ -20,7 +20,7 @@
         <% @view.mamajamas_facebook_friends.each do |friend| -%>
           <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend) } %>
         <% end -%>
-        <%= render partial: 'invite', collection: @view.facebook_invites %>
+        <%= render partial: 'invite', collection: @view.facebook_invites, locals: { prefix: "fb" } %>
       </ul>
     <% else  -%>
       <%= render 'prompt' %>
@@ -30,11 +30,24 @@
   <!-- begin tab: Gmail -->
   <h2 id="gmailfriends">Gmail</h2>
   <div class="tabbody">
-    <!-- Friends list (Gmail) -->
-    <div id="findfriends-prompt">
-      <h3>Gmail support coming soon!</h3>
-      <p>&nbsp;</p>
-    </div>
+    <% if current_user.google_connected? -%>
+      <% if @view.mamajamas_google_friends.any? || @view.google_invites.any? -%>
+        <!-- Friends list (Google) -->
+        <ul class="clearfix friends-list findfriends-lists">
+          <% @view.mamajamas_google_friends.each do |friend| -%>
+            <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+        <% end -%>
+        <%= render partial: 'invite', collection: @view.google_invites, locals: { prefix: "google" } %>
+        </ul>
+      <% else -%>
+        <div class="friends-progress google-friends-progress">
+          <%= image_tag "loader.gif" %>
+          <h3>downloading gmail contacts</h3>
+        </div>
+      <% end -%>
+    <% else  -%>
+      <%= render 'prompt' %>
+    <% end -%>
   </div>
   <!-- end tab: Gmail -->
   <!-- begin tab: Invite a Friend -->

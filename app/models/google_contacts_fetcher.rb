@@ -30,8 +30,8 @@ class GoogleContactsFetcher
           id: contact.id,
           name: contact.title,
           email: contact.primary_email,
-          photo_link: contact.photo_link,
-          photo: contact.photo
+          # photo_link: contact.photo_link,
+          # photo: contact.photo
         }
       end
     end.reject { |c| c.blank? }

@@ -106,4 +106,10 @@ FactoryGirl.define do
     access_token "kjdkk"
     access_token_expires_at { 30.days.from_now }
   end
+
+  factory :social_friends do
+    user
+    provider "facebook"
+    friends []
+  end
 end

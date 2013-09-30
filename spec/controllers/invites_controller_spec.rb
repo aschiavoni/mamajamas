@@ -9,7 +9,7 @@ describe InvitesController do
       name: "Bill Carson",
       picture_url: "https://mamajamas-dev.s3.amazonaws.com/uploads/user/profile_picture/103/friend_yDnr5YfbJCH.gif",
       uid: "3232445",
-      provider: "gmail"
+      provider: "google"
     }
   }
 

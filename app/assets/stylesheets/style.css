@@ -904,6 +904,11 @@ ul.friends-list {
 	margin-top:20px;
 }
 
+.friends-progress {
+  margin-top: 20px;
+  text-align: center;
+}
+
 /* Find friends menu and button images ------ */
 #findfriends .menu a {
 	padding-left:45px;

@@ -22,6 +22,27 @@ describe FriendsController do
 
   end
 
+  describe "new" do
+
+    it "assigns friends view" do
+      get :new
+      assigns(:view).should be_an_instance_of(FindFriendsView)
+    end
+
+    it "calls GoogleContactsWorker if google connected with no friends" do
+      create(:authentication, provider: "google", user: user)
+      GoogleContactsWorker.should_receive(:perform_async).with(user.id)
+      get :new
+    end
+
+    it "does not call GoogleContactsWorker" do
+      user.clear_google!
+      GoogleContactsWorker.should_not_receive(:perform_async)
+      get :new
+    end
+
+  end
+
   describe "notify" do
 
     it "should redirect to list" do

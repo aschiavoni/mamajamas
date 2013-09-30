@@ -20,6 +20,9 @@ class FriendsController < ApplicationController
   end
 
   def new
+    if current_user.google_connected? && current_user.google_friends.empty?
+      GoogleContactsWorker.perform_async(current_user.id)
+    end
     @view = FindFriendsView.new(current_user)
   end
 

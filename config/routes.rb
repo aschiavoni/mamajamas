@@ -78,6 +78,7 @@ Mamajamas::Application.routes.draw do
       get "age_ranges" => "age_ranges#index"
       get "list/product_types" => "lists#product_types"
       get "suggestions/:id" => "product_type_suggestions#index"
+      get "social_friends/check/:provider" => "social_friends#check"
       post "kids" => "quiz#update_kid"
       put "update_zip_code" => "quiz#update_zip_code"
       post "list_item_images" => "list_item_images#create"

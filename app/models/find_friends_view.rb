@@ -1,5 +1,6 @@
 class FindFriendsView
   FACEBOOK_PROVIDER = "facebook"
+  GOOGLE_PROVIDER = "google"
 
   extend Memoist
 
@@ -41,6 +42,43 @@ class FindFriendsView
   end
   memoize :existing_facebook_invites
 
+  def mamajamas_google_friends_emails
+    mamajamas_google_friends.map(&:email)
+  end
+  memoize :mamajamas_google_friends_emails
+
+  def google_friends_emails
+    user.google_friends.map { |f| f[:email] }
+  end
+  memoize :google_friends_emails
+
+  def mamajamas_google_friends
+    User.includes(:list).
+      where("users.email" => google_friends_emails).
+      where("users.email <> ?", user.email).
+      where("lists.public = true")
+  end
+  memoize :mamajamas_google_friends
+
+  def existing_google_invites
+    Hash[user.invites.where(provider: GOOGLE_PROVIDER).map do |invite|
+      [ invite.uid, invite  ]
+    end]
+  end
+  memoize :existing_google_invites
+
+  def google_invites
+    is = user.google_friends.map do |friend|
+      unless mamajamas_google_friends_emails.include?(friend[:email])
+        existing_google_invites[friend[:email]] ||
+          build_invite_from_google_friend(friend)
+      end
+    end.reject { |f| f.blank? }
+    p is
+    is
+  end
+  memoize :google_invites
+
   private
 
   def user
@@ -58,7 +96,22 @@ class FindFriendsView
     end
   end
 
+  def build_invite_from_google_friend(friend)
+    uid = friend[:email]
+    Invite.new do |i|
+      i.user_id = user.id
+      i.uid = uid
+      i.name = friend[:name]
+      i.provider = GOOGLE_PROVIDER
+      i.picture_url = GravatarProfilePicture.url(uid, picture_size)
+    end
+  end
+
   def picture_options
-    @pic_opts ||= { width: 86, height: 86 }
+    @pic_opts ||= { width: picture_size, height: picture_size }
+  end
+
+  def picture_size
+    @pic_size ||= 86
   end
 end

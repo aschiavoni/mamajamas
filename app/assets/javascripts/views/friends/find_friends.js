@@ -1,4 +1,5 @@
 window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
+  delay: 1000,
 
   initialize: function() {
     this.padHeight = "49";
@@ -17,6 +18,10 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     if (!window.location.hash && !Mamajamas.Context.User.get("is_facebook_connected")) {
       this.tabs.showAccessibleTab(2);
     }
+
+    if ($('.google-friends-progress').length > 0) {
+      this.waitForFriends(this, "google");
+    }
   },
 
   events: {
@@ -25,11 +30,31 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     "click button.follow": "follow",
     "click button.unfollow": "unfollow",
     "click button.fb-invite": "facebookInvite",
+    "click button.google-invite": "googleInvite",
     "submit #frm-create-email-invite": "emailInvite",
   },
 
   render: function(event) {
     return this;
+  },
+
+  waitForFriends: function(_view, provider) {
+    $.ajax("/api/social_friends/check/" + provider, {
+      dataType: "json",
+      success: function(data) {
+        if (data.complete) {
+          if (_view.currentTab() == "gmailfriends")
+            location.reload();
+        } else {
+          _.delay(_view.waitForFriends, _view.delay, _view, provider);
+          _view.delay = _view.delay * 1.1;
+        }
+      }
+    });
+  },
+
+  currentTab: function() {
+    return $('.tabs ul > li.current > a').attr('id');
   },
 
   selectFacebookFriends: function(event) {
@@ -39,8 +64,9 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
   },
 
   selectGmailFriends: function(event) {
-    if (!Mamajamas.Context.User.get("is_google_connected"))
+    if (!Mamajamas.Context.User.get("is_google_connected")) {
       window.location = "/users/auth/google"
+    }
   },
 
   emailInvite: function(event) {
@@ -67,31 +93,63 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     return false;
   },
 
+  googleInvite: function(event) {
+    event.preventDefault();
+    var _view = this;
+    var $button = $(event.currentTarget);
+    var uid = $button.parents("li").data("uid");
+    var name = $button.parents("li").data("name");
+    var picUrl = $button.parents("li").data("pictureurl");
+
+    var invite = {
+      provider: "google",
+      uid: uid,
+      email: uid,
+      name: name,
+      from: Mamajamas.Context.User.get('display_name'),
+      picture_url: picUrl
+    };
+
+
+    this.createInvite(invite, function(model) {
+      _view.toggleInvitedButton($button, "google");
+    }, function(errors) {
+      var errMsg = "Please try again later."
+      if (errors) {
+        var firstErrKey = _.keys(errors)[0];
+        errMsg = errors[firstErrKey][0];
+      }
+      Mamajamas.Context.Notifications.error(errMsg);
+    });
+
+    return false;
+  },
+
   facebookInvite: function(event) {
     event.preventDefault();
 
     var _view = this;
     var $button = $(event.currentTarget);
-    var fbUid = $button.parents("li").data("fbuid");
+    var uid = $button.parents("li").data("uid");
     var name = $button.parents("li").data("name");
     var picUrl = $button.parents("li").data("pictureurl");
 
     FB.ui({
       method: 'send',
       link: 'http://mamajamas-meta.herokuapp.com/',
-      to: fbUid,
+      to: uid,
       name: 'Mamajamas',
       description: 'With so much on your mind right now, who has time to figure out exactly what you will need for the new baby? Mamajamas offers a super-easy way for you to build a personalized, prioritized list of baby gear.',
       picture: 'http://mamajamas-meta.herokuapp.com/assets/logo-m@2x.png'
     }, function(response) {
       if (response && response.success)  {
         _view.createInvite({
-          uid: fbUid,
+          uid: uid,
           name: name,
           picture_url: picUrl,
           provider: "facebook"
         }, function(model) {
-          _view.toggleInvitedButton($button);
+          _view.toggleInvitedButton($button, "fb");
         }, function(errors) {
           var errMsg = "Please try again later."
           if (errors) {
@@ -122,9 +180,9 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     });
   },
 
-  toggleInvitedButton: function($button) {
+  toggleInvitedButton: function($button, prefix) {
     $button.addClass("bt-active").
-      removeClass("fb-invite").
+      removeClass(prefix + "-invite").
       html("<span class=\"ss-check\"></span>Invited");
   },
 
