@@ -7,9 +7,9 @@ test:
   secret_key: SZ9Iooyidv6A0mzfhKF29gMG
   scope: "userinfo.email, userinfo.profile, https://www.google.com/m8/feeds/"
 staging:
-  app_id: "xxx"
-  secret_key: "xxx"
-  scope: ""
+  app_id: 1009373955981-7ilh14gra0gpulvu47h72o4gopoe4d2a.apps.googleusercontent.com
+  secret_key: k2BGSiV780SeZ2g8bPTpHqE9
+  scope: "userinfo.email, userinfo.profile, https://www.google.com/m8/feeds/"
 production:
   app_id: "xxx"
   secret_key: "xxx"
