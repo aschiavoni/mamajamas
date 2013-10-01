@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :require_basic_auth_maybe
+  before_filter :set_meta
 
   # Convenience accessor for flash[:error]
   def error
@@ -64,6 +65,21 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def site_description
+    @site_description ||= "With so much on your mind right now, who has time to figure out exactly what you will need for the new baby? Mamajamas offers a super-easy way for you to build a personalized, prioritized list of baby gear."
+  end
+
+  def set_meta
+    set_meta_tags(title: 'Mamajamas',
+                  description: site_description,
+                  og: {
+                    title: "Mamajamas",
+                    description: site_description,
+                    url: "http://www.mamajamas.com/",
+                    image: "http://www.mamajamas.com/assets/logo-m@2x.png"
+                  })
+  end
 
   def after_sign_in_path_for(resource)
     list_path
