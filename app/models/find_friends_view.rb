@@ -31,7 +31,9 @@ class FindFriendsView
   memoize :mamajamas_facebook_friends
 
   def mamajamas_facebook_friend_ids
-    mamajamas_facebook_friends.map(&:uid)
+    mamajamas_facebook_friends.includes(:authentications).
+      where("authentications.provider" => "facebook").
+      map(&:authentications).flatten.map(&:uid)
   end
   memoize :mamajamas_facebook_friend_ids
 
