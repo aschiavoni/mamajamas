@@ -138,9 +138,6 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
       method: 'send',
       link: 'http://mamajamas-meta.herokuapp.com/',
       to: uid,
-      name: 'Mamajamas',
-      description: 'With so much on your mind right now, who has time to figure out exactly what you will need for the new baby? Mamajamas offers a super-easy way for you to build a personalized, prioritized list of baby gear.',
-      picture: 'http://mamajamas-meta.herokuapp.com/assets/logo-m@2x.png'
     }, function(response) {
       if (response && response.success)  {
         _view.createInvite({
