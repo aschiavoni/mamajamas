@@ -80,6 +80,7 @@ gem 'possessive'
 gem 'active_decorator'
 gem 'countries'
 gem 'going_postal'
+gem 'meta-tags', :require => 'meta_tags'
 
 # Use unicorn as the app server
 # gem 'unicorn'

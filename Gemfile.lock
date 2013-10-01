@@ -218,6 +218,8 @@ GEM
       thin (~> 1.5.0)
     memcachier (0.0.2)
     memoist (0.2.0)
+    meta-tags (1.5.0)
+      actionpack
     method_source (0.8.1)
     mime-types (1.19)
     mini_magick (3.4)
@@ -456,6 +458,7 @@ DEPENDENCIES
   mailcatcher
   memcachier
   memoist
+  meta-tags
   mini_magick
   newrelic_rpm
   oauth2
