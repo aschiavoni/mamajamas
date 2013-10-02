@@ -16,7 +16,7 @@ class FindFriendsView
   end
 
   def recommended_friends
-    RecommendedFriend.new(user, mamajamas_facebook_friends).all
+    RecommendedFriend.new(user, mamajamas_facebook_friends).not_following
   end
   memoize :recommended_friends
 
