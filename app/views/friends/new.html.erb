@@ -11,6 +11,17 @@
 <h2 class="visuallyhidden">Find Friends</h2>
 <!-- tabs -->
 <div id="findfriends" class="tabs">
+  <!-- tab: Mamajamas -->
+  <h2 id="mamajamasfriends">Mamajamas</h2>
+  <div class="tabbody">
+    <!-- Friends list (Mamajamas) -->
+    <ul class="clearfix friends-list findfriends-lists">
+      <% @view.recommended_friends.each do |friend| -%>
+        <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+      <% end -%>
+    </ul>
+  </div>
+  <!-- end tab: Mamajamas -->
   <!-- tab: Facebook -->
   <h2 id="facebookfriends">Facebook</h2>
   <div class="tabbody">

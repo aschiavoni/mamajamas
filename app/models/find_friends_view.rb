@@ -15,6 +15,11 @@ class FindFriendsView
     end
   end
 
+  def recommended_friends
+    RecommendedFriend.new(user, mamajamas_facebook_friends).all
+  end
+  memoize :recommended_friends
+
   def facebook_invites
     user.facebook_friends.map do |friend|
       unless mamajamas_facebook_friend_ids.include?(friend[:id])

@@ -16,7 +16,7 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     });
 
     if (!window.location.hash && !Mamajamas.Context.User.get("is_facebook_connected")) {
-      this.tabs.showAccessibleTab(2);
+      this.tabs.showAccessibleTab(3);
     }
 
     if ($('.google-friends-progress').length > 0) {
