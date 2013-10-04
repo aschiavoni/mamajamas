@@ -133,7 +133,13 @@ FOG_PROVIDER will always be "AWS" but the other variables can differ
 in each environment.
 
 When deploying, use heroku config:set to configure the environment
-variables.
+variables. For example:
+
+    heroku config:set AMAZON_ASSOCIATE_TAG="XXXX" --app mamajamas
+    heroku config:set AWS_ACCESS_KEY_ID="XXXX" --app mamajamas
+    heroku config:set AWS_SECRET_ACCESS_KEY="XXXX" --app mamajamas
+    heroku config:set FOG_DIRECTORY="mamajamas" --app mamajamas
+    heroku config:set FOG_PROVIDER="AWS" --app mamajamas
 
 CachedProductFetcher -> ProductFetcher -> ProductFetcherFactory -> AmazonProductFetcher
 
