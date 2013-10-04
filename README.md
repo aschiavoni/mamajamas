@@ -118,9 +118,22 @@ of the rails server before they will take effect.
     brew install phantomjs
 
 
-### Amazon Searching
+### Amazon Searching and Uploads
 
-Amazon api options are configured in config/amazon.yml.
+Amazon API options are set via environment variables. The following
+environment variables need to be set in your environment:
+
+  AMAZON_ASSOCIATE_TAG
+  AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY
+  FOG_DIRECTORY
+  FOG_PROVIDER
+
+FOG_PROVIDER will always be "AWS" but the other variables can differ
+in each environment.
+
+When deploying, use heroku config:set to configure the environment
+variables.
 
 CachedProductFetcher -> ProductFetcher -> ProductFetcherFactory -> AmazonProductFetcher
 
