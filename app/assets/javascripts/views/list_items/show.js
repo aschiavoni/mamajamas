@@ -62,14 +62,14 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
     event.preventDefault();
     this.editing = true;
 
-    var editView = new Mamajamas.Views.ListItemEdit({
+    var searchView = new Mamajamas.Views.ListItemSearch({
       model: new Mamajamas.Models.ListItem({
         show_chooser: true,
         age: this.model.get('age'),
         age_position: this.model.get('age_position'),
         category: this.model.get('category'),
         category_id: this.model.get('category_id'),
-        placeholder: false,
+        placeholder: true,
         priority: this.model.get('priority'),
         product_type_id: this.model.get('product_type_id'),
         product_type_name: this.model.get('product_type_name'),
@@ -78,7 +78,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
       })
     });
 
-    this.$el.parent().prepend(editView.render().$el);
+    $('#buildlist').after(searchView.render().$el);
 
     return false;
   },
