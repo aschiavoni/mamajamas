@@ -24,6 +24,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   # and handlebars
   gem 'handlebars_assets'
+  gem 'asset_sync'
 end
 
 gem 'jquery-rails'
