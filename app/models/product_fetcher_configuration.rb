@@ -21,6 +21,11 @@ class ProductFetcherConfiguration
   private
 
   def amazon_config
-    @amazon_config ||= YAML.load_file(Rails.root.join("config", "amazon.yml"))[Rails.env]
+    @amazon_config ||= {
+      "associate_tag" => ENV['AMAZON_ASSOCIATE_TAG'],
+      "access_key_id" => ENV['AWS_ACCESS_KEY_ID'],
+      "secret_key" => ENV['AWS_SECRET_ACCESS_KEY'],
+      "bucket" => ENV['FOG_DIRECTORY']
+    }
   end
 end

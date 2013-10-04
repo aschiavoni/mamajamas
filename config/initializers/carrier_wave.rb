@@ -4,13 +4,12 @@ if Rails.env.test? || Rails.env.cucumber?
     config.enable_processing = false
   end
 else
-  amazon_config = YAML.load_file(Rails.root.join("config", "amazon.yml"))[Rails.env]
   CarrierWave.configure do |config|
     config.fog_credentials = {
-      :provider => 'AWS',
-      :aws_access_key_id => amazon_config["access_key_id"],
-      :aws_secret_access_key => amazon_config["secret_key"]
+      :provider => ENV['FOG_PROVIDER'],
+      :aws_access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
-    config.fog_directory = amazon_config["bucket"]
+    config.fog_directory = ENV['FOG_DIRECTORY']
   end
 end
