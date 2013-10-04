@@ -144,4 +144,4 @@ variables. For example:
 CachedProductFetcher -> ProductFetcher -> ProductFetcherFactory -> AmazonProductFetcher
 
 ---
-[2013-06-14 Fri 09:19]
+[2013-10-04 Fri 16:01]
