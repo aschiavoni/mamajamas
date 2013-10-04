@@ -25,9 +25,7 @@ class ProductsController < ApplicationController
   def search_query(query, product_type_name)
     return query if product_type_name.blank?
     name = product_type_name.downcase
-    if query != name && query.split(' ').size == 1
-      query += " #{name}"
-    end
+    query += " #{name}" if query != name
     query
   end
 end

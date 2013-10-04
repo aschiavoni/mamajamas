@@ -31,8 +31,8 @@ describe ProductsController do
       get :index, filter: filter, format: :json
     end
 
-    it "searches for filter + name if filter is one word" do
-      filter = "medela"
+    it "searches for filter + name" do
+      filter = "medela product"
       name = "Bottle"
       ProductSearcher.should_receive(:search).
         with("#{filter} #{name.downcase}", anything, anything)
@@ -41,14 +41,6 @@ describe ProductsController do
 
     it "does not append product type name if filter == name" do
       filter = "bottle"
-      name = "Bottle"
-      ProductSearcher.should_receive(:search).
-        with("#{filter}", anything, anything)
-      get :index, filter: filter, name: name, format: :json
-    end
-
-    it "ignores name if filter is more than one word" do
-      filter = "medela products"
       name = "Bottle"
       ProductSearcher.should_receive(:search).
         with("#{filter}", anything, anything)
