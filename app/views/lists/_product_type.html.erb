@@ -6,7 +6,7 @@
     </td>
     <td class="item">
       <div class="prod-thumb">
-        <img src="/assets/products/thumb_nursing_bottle-sketch@2x.png" alt="bottle">
+        <%= image_tag "products/icons/#{product_type.image_url}", alt: product_type.name %>
       </div>
       <div class="prod-desc">
         <div class="prod-category"><%= product_type.name %></div>
