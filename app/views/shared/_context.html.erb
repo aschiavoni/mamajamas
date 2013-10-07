@@ -1,5 +1,5 @@
 <script type="text/javascript">
-Mamajamas.Context.AssetPath = "<%= asset_path("") %>";
+Mamajamas.Context.AssetPath = "<%= asset_path("about-mamajamas.jpg").gsub("about-mamajamas.jpg", "") %>";
 <% if user_signed_in? -%>
 Mamajamas.Context.User = new Mamajamas.Models.User({
   id: <%= current_user.id %>,
