@@ -1,4 +1,4 @@
-Mamajamas.Views.PublicListSidebar = Backbone.View.extend({
+Mamajamas.Views.PublicListSidebar = Mamajamas.Views.Base.extend({
 
   $followButton: null,
 
@@ -23,6 +23,12 @@ Mamajamas.Views.PublicListSidebar = Backbone.View.extend({
 
   toggleRelationship: function(event) {
     event.preventDefault();
+
+    if (!this.isAuthenticated() || this.isGuestUser()) {
+      this.unauthorized(window.location.pathname);
+      return false;
+    }
+
     if (this.$followButton.hasClass("bt-active")) {
       this.unfollow();
     } else {
