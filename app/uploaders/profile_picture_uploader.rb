@@ -32,7 +32,7 @@ class ProfilePictureUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
   def default_url
-    "/assets/profile_photo-default-l.png"
+    ActionController::Base.helpers.asset_path("/assets/profile_photo-default-l.png")
   end
 
   # Process files as they are uploaded:

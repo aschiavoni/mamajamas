@@ -79,8 +79,7 @@ class List < ActiveRecord::Base
       list_item.product_type = product_type
       list_item.category = product_type.category
       list_item.priority = product_type.priority
-      # TODO: don't hardcode image path
-      list_item.image_url = "/assets/products/icons/#{product_type.image_name}"
+      list_item.image_url = product_type.image_name
       list_item.age_range = product_type.age_range
     end
 

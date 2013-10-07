@@ -71,13 +71,14 @@ class ApplicationController < ActionController::Base
   end
 
   def set_meta
+    logo = asset_url("logo-m@2x.png")
     set_meta_tags(title: 'Mamajamas',
                   description: site_description,
                   og: {
                     title: "Mamajamas",
                     description: site_description,
                     url: "http://www.mamajamas.com/",
-                    image: "http://www.mamajamas.com/assets/logo-m@2x.png"
+                    image: logo
                   })
   end
 
@@ -134,5 +135,13 @@ class ApplicationController < ActionController::Base
     response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
+
+  def asset_url(source)
+    path = ActionController::Base.helpers.asset_path(source)
+    unless Rails.application.config.action_controller.asset_host.present?
+      path = "#{request.protocol}#{request.host_with_port}#{path}"
+    end
+    path
   end
 end

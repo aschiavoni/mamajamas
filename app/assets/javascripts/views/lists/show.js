@@ -106,7 +106,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
         category_id: view.model.get("category_id"),
         age: "Pre-birth",
         priority: 2,
-        image_url: "/assets/products/icons/unknown.png"
+        image_url: "products/icons/unknown.png"
       })
     });
 

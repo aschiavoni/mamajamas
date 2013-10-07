@@ -120,7 +120,7 @@ describe List do
 
     it "should have a list item with the correct image url" do
       list_item = list.add_list_item_placeholder(product_type)
-      list_item.image_url.should == "/assets/products/icons/#{product_type.image_name}"
+      list_item.image_url.should == product_type.image_name
     end
 
     it "should have a list item with the correct age range" do

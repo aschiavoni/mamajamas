@@ -138,7 +138,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
       select: function(event, ui) {
         $(event.target).val(ui.item.value.name);
         _view.model.set("product_type_id", ui.item.value.id);
-        _view.model.set("image_url", ui.item.value.image_url);
+        _view.model.set("image_url", ui.item.value.image_name);
         _view.model.set("product_type_plural_name", ui.item.value.plural_name);
 
         // re-initialize the inFieldLabels plugin

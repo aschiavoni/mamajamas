@@ -101,7 +101,7 @@ class ListBuilder
     #{pt.age_range_id},
     #{pt.category_id},
     '#{ts}',
-    '/assets/products/icons/#{pt.image_name}',
+    '#{pt.image_name}',
     #{list.id},
     TRUE,
     #{pt.priority},

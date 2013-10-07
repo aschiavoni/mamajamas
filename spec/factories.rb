@@ -76,7 +76,7 @@ FactoryGirl.define do
 
   factory :list_item_image do
     user user
-    image "/assets/some_image.png"
+    image "some_image.png"
   end
 
   factory :product_rating do

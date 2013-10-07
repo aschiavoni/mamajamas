@@ -1,4 +1,5 @@
 <script type="text/javascript">
+Mamajamas.Context.AssetPath = "<%= asset_path("") %>";
 <% if user_signed_in? -%>
 Mamajamas.Context.User = new Mamajamas.Models.User({
   id: <%= current_user.id %>,
