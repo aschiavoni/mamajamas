@@ -4,6 +4,7 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
 
   initialize: function() {
     this.renderCurrentQuestion();
+    this.preloadImages();
   },
 
   events: {
@@ -85,6 +86,28 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
   renderCurrentQuestion: function() {
     var question = this.getQuestion(this.currentQuestion);
     this.$el.html(question.render().$el);
+  },
+
+  preloadImages: function() {
+    var assetPath = Mamajamas.Context.AssetPath;
+    var images = [
+      assetPath + "quiz/q03a_breastfeed.jpg",
+      assetPath + "quiz/q03b_pump.jpg",
+      assetPath + "quiz/q03c_bottle.jpg",
+      assetPath + "quiz/q04a_cloth.jpg",
+      assetPath + "quiz/q04b_disposable.jpg",
+      assetPath + "quiz/q05a_bassinet.jpg",
+      assetPath + "quiz/q05b_crib.jpg",
+      assetPath + "quiz/q05c_co-sleeping.jpg",
+      assetPath + "quiz/q06a_homebody.jpg",
+      assetPath + "quiz/q06b_jetsetter.jpg",
+      assetPath + "quiz/q07a_mellow.jpg",
+      assetPath + "quiz/q07b_cautious.jpg",
+    ];
+
+    $(images).each(function() {
+      $("<img/>")[0].src = this;
+    });
   },
 
 });
