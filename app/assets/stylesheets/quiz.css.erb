@@ -233,7 +233,7 @@ div.checked { /* checkbox overlay for selected item */
 	height:220px;
 }
 .q-selected div.checked { /* adding class ".q-selected" to list item makes checkbox overlay visible */
-	background-image:url(/assets/quiz/q_checked.png);
+	background-image:url(<%= asset_path("quiz/q_checked.png") %>);
 	background-repeat:no-repeat;
 	background-position:0 0;
 	background-size:220px 221px;
@@ -255,7 +255,7 @@ div.checked { /* checkbox overlay for selected item */
 #q-sliderscale {
 	width:254px;
 	height:30px;
-	background:url(/assets/quiz/slider-scale.png) no-repeat 0 50%;
+	background:url(<%= asset_path("quiz/slider-scale.png") %>) no-repeat 0 50%;
 	background-size:254px 30px;
 	position:relative;
 	top:-120px;
@@ -272,7 +272,7 @@ div.checked { /* checkbox overlay for selected item */
 	/* left:41px; left 1 tick */
 	/* left:166px; right 1 tick */
 	/* left:229px;  far right */
-	background:url(/assets/quiz/sliderarrow.png) no-repeat;
+	background:url(<%= asset_path("quiz/sliderarrow.png") %>) no-repeat;
 	background-size:132px 50px;
 	cursor:pointer;
 }
@@ -359,7 +359,7 @@ span.ss-navigateright {
 	color:#000;
 }
 .skip {
-	background:url(/assets/quiz/icon_skip.png) no-repeat 0 0;
+	background:url(<%= asset_path("quiz/icon_skip.png") %>) no-repeat 0 0;
 	background-size:18px 18px;
 	margin-left:2px;
 	padding-left:20px;
@@ -464,18 +464,18 @@ only screen and (-moz-min-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3/2),
 only screen and (min-device-pixel-ratio: 1.5) {
 	.skip {
-		background-image:url(/assets/quiz/icon_skip@2x.png);
+		background-image:url(<%= asset_path("quiz/icon_skip@2x.png") %>);
 	}
 	div.checked {
 		background-image:none;
 	}
 	.q-selected div.checked {
-		background-image:url(/assets/quiz/q_checked@2x.png);
+		background-image:url(<%= asset_path("quiz/q_checked@2x.png") %>);
 	}
 	#q-sliderscale {
-		background-image:url(/assets/quiz/slider-scale@2x.png);
+		background-image:url(<%= asset_path("quiz/slider-scale@2x.png") %>);
 	}
 	#q-sliderarrow {
-		background-image:url(/assets/quiz/sliderarrow@2x.png);
+		background-image:url(<%= asset_path("quiz/sliderarrow@2x.png") %>);
  	}
 }

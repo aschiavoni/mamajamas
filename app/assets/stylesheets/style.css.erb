@@ -48,7 +48,7 @@ b, strong { font-weight: 600; }
 	font-size: 14px;
 	width: 136px;
 	height: 50px;
-	background: url(/assets/logo-m.png) no-repeat 0 0;
+	background: url(<%= asset_path("logo-m.png") %>) no-repeat 0 0;
 	background-size: 136px 50px;
 }
 
@@ -61,7 +61,7 @@ b, strong { font-weight: 600; }
 	width: 109px;
 	padding: 4px 4px 3px 25px;
 	color: #b3b3b3;
-	background: url(/assets/icon_search.png) no-repeat 5px 50%;
+	background: url(<%= asset_path("icon_search.png") %>) no-repeat 5px 50%;
 	background-size: 18px 18px;
 }
 #search input[type=text]:focus {
@@ -204,14 +204,14 @@ b, strong { font-weight: 600; }
 	position: relative;
 	top: 1px;
 	padding: 7px 0 7px 25px;
-	background: transparent url(/assets/progress.png) no-repeat 0 2px; /* the arrows preceding each step */
+	background: transparent url(<%= asset_path("progress.png") %>) no-repeat 0 2px; /* the arrows preceding each step */
 }
 .progborder{
 	position:absolute;
 	top:0;
 	width:100%;
 	height:1px;
-	background:url(/assets/progress-border.png) no-repeat 50% 0;
+	background:url(<%= asset_path("progress-border.png") %>) no-repeat 50% 0;
 }
 .oldie #progress ol {
 	margin: 12px 0 8px;
@@ -228,13 +228,13 @@ b, strong { font-weight: 600; }
 	padding: 8px 0 8px 25px;
 }
 #progress li.prog3 {
-	background: transparent url(/assets/progress.png) no-repeat 100% -55px; /* the arrow to the right of the final step */
+	background: transparent url(<%= asset_path("progress.png") %>) no-repeat 100% -55px; /* the arrow to the right of the final step */
 	padding-right: 23px;
 }
 #progress .prog1 li.prog1, #progress .prog2 li.prog2, #progress .prog3 li.prog3, #progress .prog3 li.prog3 strong {
 	color: #fff;
 	text-shadow: 0 -1px 0 rgba(0,0,0,0.35);
-	background: transparent url(/assets/progress.png) no-repeat 0 -111px; /* the active background color */
+	background: transparent url(<%= asset_path("progress.png") %>) no-repeat 0 -111px; /* the active background color */
 }
 #progress .prog3 li.prog3 strong {
 	background-position: 0 -111px;
@@ -603,7 +603,7 @@ input[type=text] + .button {
 	overflow: hidden;
 	width: 53px;
 	height: 16px;
-	background: url(/assets/logo_amazon-s.png) no-repeat 0 0;
+	background: url(<%= asset_path("logo_amazon-s.png") %>) no-repeat 0 0;
 }
 a.bt-buy:hover {
 	text-shadow: 0 -1px 0 rgba(0,0,0,0.35);
@@ -649,7 +649,7 @@ a.bt-buy:hover {
 	font-weight: 600;
 	line-height: 1.57em;
 	text-align: center;
-	background: #5f78ab url(/assets/icon_fb.png) no-repeat 25px 50%;
+	background: #5f78ab url(<%= asset_path("icon_fb.png") %>) no-repeat 25px 50%;
 	margin-bottom:0.5em;
 	padding: 1em 15px;
 	text-shadow: 0 -1px 0 rgba(0,0,0,.5);
@@ -666,7 +666,7 @@ a#bt-fb-connect { /* fb login in A tag*/
 	padding: 6px 0 3px 17px;
 }
 #bt-fb-connect:hover, #bt-fb-connect:focus, #bt-fb-connect:active {
-	background: #555 url(/assets/icon_fb.png) no-repeat 25px 50% !important;
+	background: #555 url(<%= asset_path("icon_fb.png") %>) no-repeat 25px 50% !important;
 }
 #bt-fb-connect:hover, #bt-account-email:hover {
 	color: #fff;
@@ -918,7 +918,7 @@ ul.friends-list {
 /* Find friends menu and button images ------ */
 #findfriends .menu a {
 	padding-left: 45px;
-	background-image: url(/assets/icons_find-friends.png);
+	background-image: url(<%= asset_path("icons_find-friends.png") %>);
 	background-repeat: no-repeat;
 	background-size: 480px 96px;
 }
@@ -953,7 +953,7 @@ ul.friends-list {
 
 /* Find friends prompt ------ */
 #findfriends-prompt {
-	background:url(/assets/icon_find-friends.png) no-repeat 0 3px;
+	background:url(<%= asset_path("icon_find-friends.png") %>) no-repeat 0 3px;
 	background-size:75px 55px;
 	padding:0 40px 0 80px;
 }
@@ -1030,7 +1030,7 @@ ul.friends-list {
 	height:17px;
 	text-indent:-9999px;
 	overflow:hidden;
-	background: url(/assets/icon_close.png) no-repeat 0 0;
+	background: url(<%= asset_path("icon_close.png") %>) no-repeat 0 0;
 }
 
 /* modal windows (via simple modal) ------ */
@@ -1247,7 +1247,7 @@ ul.friends-list {
 	margin:0.5em 0 0.25em 10px;
 	padding-top:.25em;
 	padding-bottom:.25em;
-	background: url(/assets/logo_amazon-s.png) no-repeat 96% 9px;
+	background: url(<%= asset_path("logo_amazon-s.png") %>) no-repeat 96% 9px;
 }
 #frm-prod-search {
 	margin-bottom: 0;
@@ -1260,7 +1260,7 @@ ul.friends-list {
 	width: 460px;
 	padding-left: 24px;
 	border-color:#97CA99;
-	background: #fff url("/assets/icon_search.png") no-repeat 6px 53%;
+	background: #fff url(<%= asset_path("icon_search.png") %>) no-repeat 6px 53%;
 	background-size: 18px 18px;
 }
 #prod-search form.label-infield p label {
@@ -1285,7 +1285,7 @@ button#bt-prod-search:focus {
 	display:block;
 	width:18px;
 	height:18px;
-	background: transparent url("/assets/icon_search-w.png") no-repeat 0 0;
+	background: transparent url(<%= asset_path("icon_search-w.png") %>) no-repeat 0 0;
 	background-size: 18px 18px;
 }
 #prod-search-results, #prod-suggestions-results {
@@ -1391,7 +1391,7 @@ ul.prod-search-list {
 	right: -14px;
 	width: 14px;
 	height: 26px;
-	background: url(/assets/pop-arrow-r.png) no-repeat 0 0;
+	background: url(<%= asset_path("pop-arrow-r.png") %>) no-repeat 0 0;
 	background-size: 14px 26px;
 }
 
@@ -1440,7 +1440,7 @@ ul.prod-search-list {
 	letter-spacing: 0;
 	margin: 6px -20px 10px;
 	padding: 10px 20px 10px 49px;
-	background: transparent url(/assets/arrow-l-sketch.png) no-repeat 6px 4px;
+	background: transparent url(<%= asset_path("arrow-l-sketch.png") %>) no-repeat 6px 4px;
 	background-size: 39px 37px;
 }
 #listintro ul {
@@ -1509,13 +1509,13 @@ ul.info-balloons {
 	display:block;
 	width:28px;
 	height:17px;
-	background:url(/assets/info-balloon-arrow-d.png) no-repeat 0 0;
+	background:url(<%= asset_path("info-balloon-arrow-d.png") %>) no-repeat 0 0;
 	position:absolute;
 	left:20px;
 	bottom:-17px;
 }
 .oldie .info-balloons li span {
-	background-image:url(/assets/info-balloon-arrow-d2.png);
+	background-image:url(<%= asset_path("info-balloon-arrow-d2.png") %>);
 }
 
 /* Follow modal (triggered from public list "follow" button) */
@@ -1584,7 +1584,7 @@ ul.info-balloons {
 	height: 30px;
 	text-indent: -9999px;
 	overflow: hidden;
-	background: url(/assets/carousel-arrows.png) no-repeat 0 0;
+	background: url(<%= asset_path("carousel-arrows.png") %>) no-repeat 0 0;
 	background-size: 24px 120px;
 	display: none; /* hidden until future release */
 }
@@ -1781,7 +1781,7 @@ ul.info-balloons {
 	background: #ecf1f4;
 }
 #buildlist #title {
-	background-image:url(/assets/editing-ribbon.png);
+	background-image:url(<%= asset_path("editing-ribbon.png") %>);
 	background-repeat:repeat-x;
 	background-position:0 1px;
 }
@@ -1795,7 +1795,7 @@ ul.info-balloons {
 #buildlist #title p.prehed {
 	margin-left: 18px;
 	padding-left: 26px;
-	background:url(/assets/icons_list-title.png) no-repeat 0 1px;
+	background:url(<%= asset_path("icons_list-title.png") %>) no-repeat 0 1px;
 }
 #buildlist #title h2 {
 	padding-top:0;
@@ -1842,7 +1842,7 @@ ul.info-balloons {
 
 /* social icons */
 .social {
-	background-image: url(/assets/icons_social.png);
+	background-image: url(<%= asset_path("icons_social.png") %>);
 	background-size:72px 120px;
 	background-repeat: no-repeat;
 	width: 24px;
@@ -1984,7 +1984,7 @@ div.priority-high, div.priority-med, div.priority-low {
 	width: 18px;
 	height: 18px;
 	margin: 0 auto;
-	background: url(/assets/icons_priority-sprite.png) no-repeat 0 0;
+	background: url(<%= asset_path("icons_priority-sprite.png") %>) no-repeat 0 0;
 	background-size: 94px 94px;
 	cursor: pointer;
 }
@@ -2065,7 +2065,7 @@ div.priority-low {
 	color: #888;
 	padding: 2px 0 0 22px;
 	min-height: 15px;
-	background: url(/assets/icon_note.png) no-repeat 0 0;
+	background: url(<%= asset_path("icon_note.png") %>) no-repeat 0 0;
 }
 .note-content {
 	position: absolute;
@@ -2236,7 +2236,7 @@ div.priority-low {
 	margin: -2px 2px 0 -4px;
 	font-weight: normal;
 	vertical-align: middle;
-	background: url(/assets/icons_priority-sprite.png) no-repeat -76px 0;
+	background: url(<%= asset_path("icons_priority-sprite.png") %>) no-repeat -76px 0;
 	background-size: 94px 94px;
 }
 .oldie .priority .prod-drop strong {
@@ -2333,7 +2333,7 @@ a.bt-addanother:hover span {
 	clear: left;
 	padding: 2px 0 1px 21px;
 	cursor: pointer;
-	background: url(/assets/icons_checkboxes.png) no-repeat 50% 0;
+	background: url(<%= asset_path("icons_checkboxes.png") %>) no-repeat 50% 0;
 	background-size: 19px 118px;
 }
 
@@ -2378,7 +2378,7 @@ a.bt-addanother:hover span {
 	height: 14px;
 	float: left;
 	position: relative;
-	background: url(/assets/icon_rating-eggs.png) no-repeat 0 0;
+	background: url(<%= asset_path("icon_rating-eggs.png") %>) no-repeat 0 0;
 	background-size: 11px 45px;
 	cursor: pointer;
 }
@@ -2387,7 +2387,7 @@ a.bt-addanother:hover span {
 	height: 14px;
 	float: left;
 	position: relative;
-	background: url(/assets/icon_rating-stars.png) no-repeat 0 0;
+	background: url(<%= asset_path("icon_rating-stars.png") %>) no-repeat 0 0;
 	background-size: 12px 45px;
 	cursor: pointer;
 }
@@ -2406,7 +2406,7 @@ a.bt-addanother:hover span {
 
 /* page background colors ---- */
 #publist {
-	background:#ecf1f4 url(/assets/bg_sharedlist.png) repeat-y right 0;
+	background:#ecf1f4 url(<%= asset_path("bg_sharedlist.png") %>) repeat-y right 0;
 }
 #publist #secondary {
 	background: #fff;
@@ -2421,7 +2421,7 @@ a.bt-addanother:hover span {
 #publist #title p.prehed {
 	margin-left:18px;
 	padding-left: 26px;
-	background:url(/assets/icons_list-title.png) no-repeat 0 -31px;
+	background:url(<%= asset_path("icons_list-title.png") %>) no-repeat 0 -31px;
 }
 #publist #title h2 {
 	padding-top:0;
@@ -2758,7 +2758,7 @@ a.bt-addanother:hover span {
 	margin: 0;
 	padding: 6px 0 4px 29px;
 	cursor: pointer;
-	background: url(/assets/icons_gender.png) no-repeat 0 0;
+	background: url(<%= asset_path("icons_gender.png") %>) no-repeat 0 0;
 	background-size: 174px 132px;
 	color: #808080;
 }
@@ -2903,7 +2903,7 @@ div.baby-bdate {
 	width: 46.8%;
 	margin-left: 15.7%;
 	padding-top: 10px;
-	background: url(/assets/arrow-dwn-sketch.png) no-repeat 0 17px;
+	background: url(<%= asset_path("arrow-dwn-sketch.png") %>) no-repeat 0 17px;
 	background-size: 41px 43px;
 }
 .preview-msg .col2 {
@@ -3043,14 +3043,14 @@ div.baby-bdate {
 	margin: 10px 0 6px 10px;
 	width: 163px;
 	height: 59px;
-	background: url(/assets/logo.png) no-repeat 0 0;
+	background: url(<%= asset_path("logo.png") %>) no-repeat 0 0;
 	background-size: 163px 59px;
 }
 .home #progress {
 	display: none;
 }
 .home #primary {
-	background: #f1f1ed url(/assets/nest.jpg) no-repeat 50% 0;
+	background: #f1f1ed url(<%= asset_path("nest.jpg") %>) no-repeat 50% 0;
 }
 .home #primary h2 {
 	font-weight: normal;
@@ -3143,47 +3143,47 @@ ul.screenshots img {
 /* support for high-res devices */
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
    #branding h1 {
-   background-image: url(/assets/logo-m@2x.png); /* logo */
+   background-image: url(<%= asset_path("logo-m@2x.png") %>); /* logo */
   }
    .home #branding h1 {
-   background-image: url(/assets/logo@2x.png); /* logo */
+   background-image: url(<%= asset_path("logo@2x.png") %>); /* logo */
   }
    #search input[type=text], input[type=text]#field-search {
-   background-image: url(/assets/icon_search@2x.png); /* search field icon */
+   background-image: url(<%= asset_path("icon_search@2x.png") %>); /* search field icon */
   }
    .own input[type='checkbox'] + label {
-   background-image: url(/assets/icons_checkboxes@2x.png); /* "own" checkboxes */
+   background-image: url(<%= asset_path("icons_checkboxes@2x.png") %>); /* "own" checkboxes */
   }
    div.priority-high, div.priority-med, div.priority-low, .priority .prod-drop strong {
-   background-image:url(/assets/icons_priority-sprite@2x.png); /* priority icons */
+   background-image:url(<%= asset_path("icons_priority-sprite@2x.png") %>); /* priority icons */
   }
    .baby-gender input[type='radio'] + label {
-   background-image: url(/assets/icons_gender@2x.png); /* baby gender radio buttons */
+   background-image: url(<%= asset_path("icons_gender@2x.png") %>); /* baby gender radio buttons */
   }
    .carousel .prev, .carousel .next {
-   background-image: url(/assets/carousel-arrows@2x.png); /* product carousel arrows */
+   background-image: url(<%= asset_path("carousel-arrows@2x.png") %>); /* product carousel arrows */
   }
    .prod-detail-pop span.arrow {
-   background-image:url(/assets/pop-arrow-r@2x.png); /* product carousel detail arrow */
+   background-image:url(<%= asset_path("pop-arrow-r@2x.png") %>); /* product carousel detail arrow */
   }
   .social {
-	background-image: url(/assets/icons_social@2x.png);
+	background-image: url(<%= asset_path("icons_social@2x.png") %>);
   }
   .preview-msg .col1 {
-	background-image: url(/assets/arrow-dwn-sketch@2x.png);
+	background-image: url(<%= asset_path("arrow-dwn-sketch@2x.png") %>);
   }
   #listintro.modal-box h2 {
-	background-image: url(/assets/arrow-l-sketch@2x.png); /* build list intro arrow */
+	background-image: url(<%= asset_path("arrow-l-sketch@2x.png") %>); /* build list intro arrow */
   }
   #buildlist #title p.prehed,
   #publist #title p.prehed {
-	background-image: url(/assets/icons_list-title@2x.png);
+	background-image: url(<%= asset_path("icons_list-title@2x.png") %>);
   }
   #findfriends-prompt {
-	background-image:url(/assets/icon_find-friends@2x.png);
+	background-image:url(<%= asset_path("icon_find-friends@2x.png") %>);
   }
   #findfriends .menu a {
-	background-image:url(/assets/icons_find-friends@2x.png); /* find friends company logos*/
+	background-image:url(<%= asset_path("icons_find-friends@2x.png") %>); /* find friends company logos*/
   }
 }
 
@@ -3252,7 +3252,7 @@ ul.screenshots img {
 	position:absolute;
 	top:10px;
 	right:10px;
-	background:#fff url(/assets/icon_close.png) no-repeat 0 0;
+	background:#fff url(<%= asset_path("icon_close.png") %>) no-repeat 0 0;
 }
 #gallery-image-container {
 	display:none;
