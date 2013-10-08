@@ -11,7 +11,7 @@ class GravatarProfilePicture
   end
 
   def self.default_url
-    "http://www.mamajamas.com/assets/profile_photo-default-l.png"
+    "http://mamajamas.s3.amazonaws.com/assets/profile_photo-default-l.png"
   end
 
   private
