@@ -1,0 +1,114 @@
+<%= content_for :tertiary do %>
+  <div id="admin-nav">
+    <%= link_to "admin", "/admin" %> &gt; <%= link_to "users", admin_users_path %> &gt; <%= @view.username %>
+  </div>
+<% end -%>
+
+<div class="user-list">
+  <h2>
+    <%= image_tag @view.profile_picture, size: "45x45", class: "avatar" %>
+    <%= @view.full_name %>
+  </h2>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>URL slug</td>
+        <td><%= @view.username %></td>
+      </tr>
+      <tr>
+        <td>First name</td>
+        <td><%= @view.first_name %></td>
+      </tr>
+      <tr>
+        <td>Last name</td>
+        <td><%= @view.last_name %></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td><%= mail_to @view.email %></td>
+      </tr>
+      <tr>
+        <td>Signed up</td>
+        <td><%= @view.user.signed_up %></td>
+      </tr>
+      <tr>
+        <td>Last active</td>
+        <td><%= @view.user.last_sign_in %></td>
+      </tr>
+      <tr>
+        <td>Followers</td>
+        <td><%= @view.follower_count %></td>
+      </tr>
+      <tr>
+        <td>Following</td>
+        <td><%= @view.following_count %></td>
+      </tr>
+      <% if @view.has_social_connection? -%>
+        <tr>
+          <td>Social</td>
+          <td>
+            <% if @view.user.facebook_connected? -%>
+              <%= image_tag "facebook.png", size: "35x35" %>
+            <% end -%>
+            <% if @view.user.google_connected? -%>
+              <%= image_tag "google.png", size: "35x35" %>
+            <% end -%>
+          </td>
+        </tr>
+      <% end -%>
+      <tr>
+        <td>Notes</td>
+        <td>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>
+    List
+  </h2>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>Public?</td>
+        <td>
+          <%= check_box_tag "public_list", "1", @view.user.public_list?, disabled: true %>
+        </td>
+      </tr>
+      <tr>
+        <td>Item count</td>
+        <td>
+          <%= @view.list_item_count %>
+        </td>
+      </tr>
+      <tr>
+        <td>View count</td>
+        <td>
+          <%= @view.list_view_count %>
+        </td>
+      </tr>
+      <tr>
+        <td>Public view count</td>
+        <td>
+          <%= @view.list_public_view_count %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <% if @view.quiz_answers.size > 0 -%>
+    <h2>
+      Quiz
+    </h2>
+    <table class="table">
+      <tbody>
+        <% @view.quiz_answers.each do |answer| -%>
+          <tr>
+            <td><%= answer.question %></td>
+            <td>
+              <%= answer.answers.join(", ") %>
+            </td>
+          </tr>
+        <% end -%>
+      </tbody>
+    </table>
+  <% end -%>
+</div>

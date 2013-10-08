@@ -177,3 +177,8 @@
   margin-bottom: 10px;
   width: 90px;
 }
+
+#adminpage .user-list .table tr td:first-child {
+  font-weight: bold;
+  width: 200px;
+}

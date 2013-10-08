@@ -2,11 +2,7 @@
   <td>
     <%= image_tag user.profile_picture, size: "45x45", class: "avatar" %>
     <span class="name">
-      <% if user.public_list? -%>
-        <%= link_to user.display_name, public_list_path(user.username) %>
-      <% else -%>
-        <%= user.display_name %>
-      <% end -%>
+      <%= link_to user.display_name, admin_user_path(user) %>
     </span>
     <br/>
     <span class="subtext">
@@ -14,7 +10,11 @@
     </span>
   </td>
   <td>
-    <%= user.username %>
+    <% if user.public_list? -%>
+      <%= link_to user.username, public_list_path(user.username) %>
+    <% else -%>
+      <%= user.username %>
+    <% end -%>
   </td>
   <td>
     <%= check_box_tag "public_list", "1", user.public_list?, disabled: true %>
