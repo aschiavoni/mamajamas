@@ -11,6 +11,6 @@ staging:
   secret_key: k2BGSiV780SeZ2g8bPTpHqE9
   scope: "userinfo.email, userinfo.profile, https://www.google.com/m8/feeds/"
 production:
-  app_id: "xxx"
-  secret_key: "xxx"
-  scope: ""
+  app_id: 129917495425.apps.googleusercontent.com
+  secret_key: qgl_tuEFCceYwKW8irzI4cEg
+  scope: "userinfo.email, userinfo.profile, https://www.google.com/m8/feeds/"
