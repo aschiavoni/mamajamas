@@ -152,6 +152,15 @@
   border-top: 0 none;
 }
 
+#adminpage .admin-button {
+  margin: 10px 0px;
+  text-align: center;
+}
+
+#adminpage .admin-button a {
+  width: 90px;
+  text-align: center;
+}
 
 #adminpage .users-list .table img.avatar {
   float: left;
@@ -181,4 +190,24 @@
 #adminpage .user-list .table tr td:first-child {
   font-weight: bold;
   width: 200px;
+}
+
+#adminpage .user-list #user-notes {
+  margin-bottom: 20px;
+}
+
+#adminpage .user-list #admin-notes {
+  margin-bottom: 20px;
+}
+
+#adminpage .user-list #user-notes-form {
+  text-align: right;
+}
+
+#adminpage .user-list #user-notes-form textarea {
+  margin-bottom: 10px;
+  height: 200px;
+}
+
+#adminpage .user-list #user-notes-form input[type=submit] {
 }

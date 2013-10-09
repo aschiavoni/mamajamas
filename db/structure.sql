@@ -693,7 +693,8 @@ CREATE TABLE users (
     country_code character varying(255) DEFAULT 'US'::character varying,
     admin boolean DEFAULT false,
     welcome_sent_at timestamp without time zone,
-    quiz_taken_at timestamp without time zone
+    quiz_taken_at timestamp without time zone,
+    admin_notes text
 );
 
 
@@ -1334,3 +1335,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130921132027');
 INSERT INTO schema_migrations (version) VALUES ('20130925165606');
 
 INSERT INTO schema_migrations (version) VALUES ('20130926180736');
+
+INSERT INTO schema_migrations (version) VALUES ('20131008224900');

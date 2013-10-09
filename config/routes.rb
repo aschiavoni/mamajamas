@@ -67,7 +67,7 @@ Mamajamas::Application.routes.draw do
     resources :categories, only: [ :index ], shallow: true do
       resources :product_types, except: [ :show ]
     end
-    resources :users, only: [ :index, :show, :destroy ]
+    resources :users, only: [ :index, :show, :update, :destroy ]
   end
 
   scope "api" do

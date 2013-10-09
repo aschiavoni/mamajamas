@@ -2,6 +2,16 @@
   <div id="admin-nav">
     <%= link_to "admin", "/admin" %> &gt; <%= link_to "users", admin_users_path %> &gt; <%= @view.username %>
   </div>
+  <div class="admin-button">
+    <%= link_to admin_become_path(@view.user.username), class: "button bt-become" do %>
+      <span class="ss-users"> Impersonate</span>
+    <% end -%>
+  </div>
+  <div class="admin-button">
+    <%= link_to admin_user_path(@view.user), method: "delete", class: "button bt-user-delete" do %>
+      <span class="ss-delete"> Delete</span>
+    <% end -%>
+  </div>
 <% end -%>
 
 <div class="user-list">
@@ -9,6 +19,22 @@
     <%= image_tag @view.profile_picture, size: "45x45", class: "avatar" %>
     <%= @view.full_name %>
   </h2>
+  <div id="user-notes">
+    <div id="admin-notes">
+      <%= h @view.user.admin_notes %>
+    </div>
+    <% if @view.user.admin_notes.present? -%>
+      <%= link_to "Update notes", "#", class: "toggle-notes" %>
+    <% else -%>
+      <%= link_to "Add notes", "#", class: "toggle-notes" %>
+    <% end -%>
+    <div id="user-notes-form" style="display: none;">
+      <%= form_for([ :admin, @view.user ]) do |f| %>
+        <%= f.text_area :admin_notes %>
+        <%= f.submit "Update", class: "button bt-color" %>
+      <% end -%>
+    </div>
+  </div>
   <table class="table">
     <tbody>
       <tr>
@@ -56,11 +82,6 @@
           </td>
         </tr>
       <% end -%>
-      <tr>
-        <td>Notes</td>
-        <td>
-        </td>
-      </tr>
     </tbody>
   </table>
   <h2>
@@ -112,3 +133,25 @@
     </table>
   <% end -%>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+  $(".admin-button .bt-become").click(function(event) {
+    return confirm("Are you sure you want to impersonate this user?");
+  });
+  $(".admin-button .bt-user-delete").click(function(event) {
+    return confirm("Are you sure you want to delete this user?");
+  });
+  $(".user-list .toggle-notes").click(function(event) {
+    event.preventDefault();
+    var $link = $(event.currentTarget);
+    var $adminNotes = $("#admin-notes");
+    var $formContainer = $("#user-notes-form");
+    var $textArea = $("textarea", $formContainer);
+    $link.hide();
+    $adminNotes.hide();
+    $formContainer.show();
+    $textArea.focus();
+    return false;
+  });
+});
+</script>

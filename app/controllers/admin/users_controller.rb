@@ -13,6 +13,13 @@ class Admin::UsersController < Admin::BaseController
     @view = Admin::UserView.new(@user)
   end
 
+  def update
+    admin_notes = params[:user][:admin_notes]
+    user = User.find(params[:id])
+    user.update_attributes!(admin_notes: admin_notes)
+    redirect_to admin_user_path(params[:id])
+  end
+
   def destroy
     @user = User.find(params[:id])
     @user.destroy

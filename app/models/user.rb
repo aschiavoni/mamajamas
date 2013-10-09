@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   attr_accessible :full_name, :signup_registration
   attr_accessible :welcome_sent_at
   attr_accessible :guest
+  attr_accessible :admin_notes
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
