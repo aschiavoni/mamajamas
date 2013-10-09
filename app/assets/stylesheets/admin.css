@@ -148,6 +148,14 @@
   display: table-cell;
 }
 
+#adminpage .table tr.no-border td {
+  border: none;
+}
+
+#adminpage .table td.admin-notes {
+  padding-left: 60px;
+}
+
 #adminpage .table tr.first td {
   border-top: 0 none;
 }

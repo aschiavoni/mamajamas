@@ -34,3 +34,13 @@
     <% end -%>
   </td>
 </tr>
+<% if user.admin_notes.present? -%>
+  <tr class="no-border">
+    <td colspan="5" class="admin-notes">
+      <span class="subtext">Notes</span>
+      <br/>
+      <%= h user.admin_notes %>
+    </td>
+    <td></td>
+  </tr>
+<% end -%>
