@@ -85,7 +85,7 @@ describe List do
 
     let(:list) { create(:list) }
 
-    let(:product_type) { build(:product_type) }
+    let(:product_type) { build(:product_type, recommended_quantity: 2) }
 
     it "should return a new list item" do
       list_item = list.add_list_item_placeholder(product_type)
@@ -126,6 +126,11 @@ describe List do
     it "should have a list item with the correct age range" do
       list_item = list.add_list_item_placeholder(product_type)
       list_item.age_range.should == product_type.age_range
+    end
+
+    it "should have a list item with the correct quantity" do
+      list_item = list.add_list_item_placeholder(product_type)
+      list_item.quantity.should == product_type.recommended_quantity
     end
 
   end
