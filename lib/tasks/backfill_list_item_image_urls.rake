@@ -23,4 +23,3 @@ namespace :mamajamas do
   end
 
 end
-

@@ -303,7 +303,8 @@ CREATE TABLE list_items (
     list_item_image_id integer,
     shared boolean DEFAULT false NOT NULL,
     vendor character varying(255),
-    vendor_id character varying(255)
+    vendor_id character varying(255),
+    quantity integer DEFAULT 1 NOT NULL
 );
 
 
@@ -447,7 +448,8 @@ CREATE TABLE product_types (
     user_id integer,
     plural_name character varying(255),
     search_index character varying(255) DEFAULT 'All'::character varying,
-    search_query character varying(255)
+    search_query character varying(255),
+    recommended_quantity integer DEFAULT 1 NOT NULL
 );
 
 
@@ -1337,3 +1339,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130925165606');
 INSERT INTO schema_migrations (version) VALUES ('20130926180736');
 
 INSERT INTO schema_migrations (version) VALUES ('20131008224900');
+
+INSERT INTO schema_migrations (version) VALUES ('20131011143458');
+
+INSERT INTO schema_migrations (version) VALUES ('20131011143530');

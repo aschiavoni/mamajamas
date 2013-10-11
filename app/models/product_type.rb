@@ -7,6 +7,7 @@ class ProductType < ActiveRecord::Base
 
   attr_accessible :name, :plural_name, :age_range_id, :priority
   attr_accessible :image_name, :search_index, :search_query
+  attr_accessible :recommended_quantity
 
   belongs_to :user
   belongs_to :age_range
