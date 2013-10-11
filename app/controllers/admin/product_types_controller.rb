@@ -16,6 +16,7 @@ class Admin::ProductTypesController < Admin::BaseController
     flash[:notice] = "Updated #{@product_type.name}"
     redirect_to edit_admin_product_type_path(@product_type)
   rescue ActiveRecord::RecordInvalid
+    flash[:error] = "Could not update #{@product_type.name}: #{@product_type.errors.first[1]}"
     @view = Admin::ProductTypesView.new @product_type.category
     render :edit
   end
@@ -31,6 +32,7 @@ class Admin::ProductTypesController < Admin::BaseController
     flash[:notice] = "Created #{@product_type.name}"
     redirect_to edit_admin_product_type_path(@product_type)
   rescue ActiveRecord::RecordInvalid
+    flash[:error] = "Could not update #{@product_type.name}: #{@product_type.errors.first[1]}"
     @view = Admin::ProductTypesView.new @product_type.category
     render :new
   end

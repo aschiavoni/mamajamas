@@ -18,6 +18,8 @@ class ProductType < ActiveRecord::Base
   validates :name, presence: true, uniqueness: { scope: :user_id }
   validates :plural_name, presence: true
   validates :image_name, presence: true
+  validates :recommended_quantity,
+    numericality: { only_integer: true, greater_than: 0 }
 
   scope :global, where(user_id: nil)
   scope :user, where("user_id IS NOT NULL")

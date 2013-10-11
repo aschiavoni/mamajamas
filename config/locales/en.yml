@@ -61,6 +61,10 @@ en:
               too_long: "Sorry, but your notes are too long (max %{count} characters)."
             product_type_name:
               blank: "Sorry, but you must provide a name."
+            quantity:
+              only_integer: "Sorry, this is not a valid quantity."
+              not_a_number: "Sorry, this is not a valid quantity."
+              greater_than: "Sorry, but you must specify a quantity of at least 1."
         product_type:
           attributes:
             name:
@@ -70,6 +74,10 @@ en:
               blank: "Required"
             image_name:
               blank: "Required"
+            recommended_quantity:
+              only_integer: "Sorry, this is not a valid quantity."
+              not_a_number: "Sorry, this is not a valid quantity."
+              greater_than: "Sorry, but you must specify a quantity of at least 1."
         invite:
           attributes:
             user_id:

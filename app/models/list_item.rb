@@ -17,6 +17,7 @@ class ListItem < ActiveRecord::Base
   validates :product_type_name, presence: true
   validates :notes, length: { maximum: 1000 }
   validates :category_id, presence: true
+  validates :quantity, numericality: { only_integer: true, greater_than: 0 }
 
   scope :placeholders, where(placeholder: true)
   scope :user_items, where(placeholder: false)
