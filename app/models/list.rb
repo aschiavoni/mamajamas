@@ -81,6 +81,7 @@ class List < ActiveRecord::Base
       list_item.priority = product_type.priority
       list_item.image_url = product_type.image_name
       list_item.age_range = product_type.age_range
+      list_item.quantity = product_type.recommended_quantity
     end
 
     list_items << list_item
