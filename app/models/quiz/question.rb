@@ -27,9 +27,11 @@ class Quiz::Question
   protected
 
   def set_priority(name, priority)
-    list.list_items.where(product_type_name: name).each do |item|
-      item.update_attributes!(priority: priority)
-    end
+    update_list_items!(name, priority: priority)
+  end
+
+  def set_quantity(name, quantity)
+    update_list_items!(name, quantity: quantity)
   end
 
   def included(*items)
@@ -58,5 +60,11 @@ class Quiz::Question
 
   def list
     @list
+  end
+
+  def update_list_items!(product_type_name, attrs)
+    list.list_items.where(product_type_name: product_type_name).each do |item|
+      item.update_attributes!(attrs)
+    end
   end
 end
