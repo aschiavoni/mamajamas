@@ -1,0 +1,194 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:600,400,300' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Reenie+Beanie' rel='stylesheet' type='text/css'>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%= display_meta_tags %>
+<!-- favicon -->
+<link rel="icon" type="image/x-icon" href="<%= asset_path("favicon.ico") %>" />
+<!-- for Retina display: -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= asset_path("apple-touch-icon-114.png") %>">
+<!-- for iPad: -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= asset_path("apple-touch-icon-72.png") %>">
+<!-- for iPhone: -->
+<link rel="apple-touch-icon-precomposed" href="<%= asset_path("apple-touch-icon-57.png") %>">
+<%= stylesheet_link_tag    "application", :media => "all" %>
+<% if admin_user? -%>
+  <%= stylesheet_link_tag    "admin", :media => "all" %>
+<% end -%>
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
+</head>
+<body<%= " class=#{body_class}" if body_class.present? %>>
+<!-- header area ***** -->
+<%= content_for?(:header_overlay) ? yield(:header_overlay) : "" %>
+<div id="hed-wrap" class="<%= show_progress ? "progressbar" : "" %>">
+  <div class="gridContainer clearfix">
+    <div id="header">
+      <div id="branding">
+        <%= link_to (user_signed_in? ? list_path : root_path) do %>
+          <h1>Mamajamas</h1>
+        <% end -%>
+      </div>
+      <nav id="mainnav">
+        <% if user_signed_in? -%>
+          <ul>
+            <li class="active">
+              <%= link_to "Edit List", list_path %>
+            </li>
+            <li>
+              <%= link_to "Friends’ Lists", find_friends_path(current_user), class: "find-moms" %>
+            </li>
+          </ul>
+        <% end -%>
+      </nav>
+      <div id="search">
+        <input type="text" placeholder="Search">
+      </div>
+      <div id="login">
+        <ul>
+        <% if user_signed_in? && !current_user.guest? -%>
+          <li id="myaccount">
+            <%= link_to profile_path do %>
+              <%= image_tag current_user.profile_picture.account %>
+              <%= current_user.first_name? ? current_user.first_name : current_user.username %>
+              <span class="ss-dropdown"></span>
+            <% end -%>
+            <ul class="nav-drop">
+              <li class="user-email"><%= link_to current_user.display_email, profile_path %></li>
+              <li><%= link_to "My List", list_path %></li>
+              <% if current_user.list.present? && current_user.list.public? -%>
+                <li><%= link_to "My Shared List", public_list_path(current_user) %></li>
+              <% end -%>
+              <li><%= link_to "My Profile", profile_path %></li>
+              <% if admin_user? -%>
+                <li><%= link_to "Admin", admin_admin_path %></li>
+              <% end -%>
+              <li class="last">
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "logout" %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "server-logout", style: "display: none;" %>
+              </li>
+            </ul>
+          </li>
+        <% else -%>
+          <li>
+          <%= link_to "Sign Up", new_user_registration_path, id: "signup-link" %>
+          </li>
+          <li>
+          <%= link_to "Login", new_user_session_path, id: "login-link" %>
+          </li>
+          <%= yield :logged_out_header_buttons -%>
+        <% end -%>
+        </ul>
+      </div>
+      <% if show_progress -%>
+        <div id="progress">
+          <ol class="prog<%= progress_id %>"><!-- comments between list items prevent whitespace insertion when displayed inline -->
+            <li class="prog1"><strong>1</strong> <%= link_to "Take the quiz", quiz_path %></li><!--
+            --><li class="prog2"><strong>2</strong> <%= link_to "Make your list and get advice", list_path %></li><!--
+            --><li class="prog3"><strong>3</strong> <% if current_user.present? && current_user.list.present? && current_user.list.list_items.user_items.any? -%>
+                  <%= link_to "Share your list", profile_path, id: "bt-share-header" %>
+                <% else -%>
+                  <%= link_to "Share your list", list_path, id: "bt-share-header" %>
+                <% end -%>
+               </li>
+          </ol>
+          <div class="progborder"></div>
+        </div>
+      <% end -%>
+    </div>
+  </div>
+</div>
+<!-- end header area -->
+<!-- body area ***** -->
+<div class="gridContainer clearfix"<%= "id=#{page_id}" unless page_id.blank? %>>
+  <% if show_header -%>
+    <div id="title">
+      <div id="subhed">
+        <%= preheader %>
+        <h2><%= subheader %></h2>
+      </div>
+      <%= content_for?(:subheader_content) ? yield(:subheader_content) : "" %>
+      <div id="title-links">
+        <%= yield(:title_links) %>
+      </div>
+    </div>
+  <% end -%>
+  <div id="primary">
+    <div class="content">
+      <%= content_for?(:nav) ? yield(:nav) : raw("&nbsp;") -%>
+    </div>
+  </div>
+  <div id="secondary">
+    <div class="content">
+      <!-- notification ***** -->
+      <div id="notifications">
+        <%= notifications %>
+      </div>
+      <%= yield %>
+    </div>
+  </div>
+  <div id="tertiary">
+    <div class="content">
+      <%= content_for?(:tertiary) ? yield(:tertiary) : raw("&nbsp;") -%>
+    </div>
+  </div>
+  <div id="footer">
+    <div class="content">
+    	<a href="#" id="footer-trigger"><span class="ss-rows"></span><em>More Mamajamas</em></a>
+      <ul class="nav-drop">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "About Us", about_path %></li>
+        <li><%= link_to "Blog", "http://mamajamasmom.com/", target: "_blank" %></li>
+        <li><a href="mailto:angie@mamajamas.com">Contact</a></li>
+        <li><%= link_to "Privacy & Terms", terms_path %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- end body area -->
+<%= yield(:modal) %>
+<!-- modal window ************ -->
+<% if (user_signed_in? && current_user.guest?) || !user_signed_in? -%>
+  <div class="modal-wrap" style="display:none;" id="signup-modal">
+    <div class="modal-overlay"> &nbsp; </div>
+    <div class="vertical-offset"></div>
+    <!-- modal window box -->
+    <div class="modal-box" id="create-account-email">
+      <%= render :partial => "devise/registrations/signup" %>
+    </div>
+    <!-- end modal window box -->
+  </div>
+  <div class="modal-wrap" style="display:none;" id="login-modal">
+    <div class="modal-overlay"> &nbsp; </div>
+    <div class="vertical-offset"></div>
+    <!-- modal window box -->
+    <div class="modal-box" id="login-window">
+      <%= render :partial => "devise/sessions/login" %>
+    </div>
+    <!-- end modal window box -->
+  </div>
+<% end -%>
+<!-- /end modal window ************ -->
+<!-- loader graphic -->
+<div id="loader-wrap" class="modal-wrap" style="display:none;">
+  <div class="modal-overlay"> &nbsp; </div>
+	<div class="vertical-offset"></div>
+  <div id="loader">
+    <%= image_tag "loader.gif", alt: "Please wait..." %>
+  </div>
+</div>
+<!-- /end loader ************ -->
+
+<!-- Google Analytics -->
+<%= render partial: "shared/context" %>
+<%= render partial: "shared/facebook" %>
+</body>
+</html>
