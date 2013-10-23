@@ -21,7 +21,6 @@ Vagrantfile
 .vagrant
 doc/spec_info.txt
 .idea
-*.taskpaper
 public/uploads/
 Session.vim
 spec/reports

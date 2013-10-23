@@ -1,24 +1,20 @@
 Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
 
-  tagName: 'tr',
+  tagName: 'div',
 
   template: HandlebarsTemplates['list_items/show'],
 
-  className: "prod prod-filled",
+  className: "prod prod-filled clearfix",
 
   initialize: function() {
     this.editing = false;
     this.model.on("change:rating", this.updateRating, this);
-    this.model.on("change:age", this.saveAndRender, this);
-    this.model.on("change:priority", this.saveAndRender, this);
     this.$el.attr("id", this.model.get("id"));
   },
 
   events: {
-    "change .prod-owned": "updateOwned",
     "click .ss-write": "edit",
     "click .ss-delete": "delete",
-    "click .prod-note": "toggleNote",
     "click .bt-addanother": "addAnother",
   },
 
@@ -29,17 +25,12 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
     var ratingView = new Mamajamas.Views.ListItemRating({
       model: this.model
     });
-    $("td.rating", this.$el).append(ratingView.render().$el);
+    $("div.rating", this.$el).append(ratingView.render().$el);
 
-    var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
+    var notesView = new Mamajamas.Views.ListItemNotes({
       model: this.model
     });
-    this.$el.append(ageRangeView.render().$el);
-
-    var priorityView = new Mamajamas.Views.ListItemPriority({
-      model: this.model
-    });
-    this.$el.append(priorityView.render().$el);
+    $("div.prod-when-own", this.$el).after(notesView.render().$el);
 
     return this;
   },
@@ -112,22 +103,5 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
     this.model.save();
     this.render();
   },
-
-  updateOwned: function(event) {
-    if (this.editing)
-      return;
-    var $owned = $(event.target);
-    this.model.set("owned", $owned.is(":checked"));
-    this.model.save();
-  },
-
-  toggleNote: function(event) {
-    var $target = $(event.target);
-    if ($target.hasClass("closed")) {
-      $target.removeClass("closed").addClass("open");
-    } else {
-      $target.removeClass("open").addClass("closed");
-    }
-  }
 
 });

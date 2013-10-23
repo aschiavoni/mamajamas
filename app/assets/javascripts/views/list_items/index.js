@@ -2,20 +2,36 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
 
   template: HandlebarsTemplates['list_items/index'],
 
-  tagName: "tbody",
+  tagName: "div",
+
+  className: "clearfix",
 
   initialize: function() {
     this.collection.on("reset", this.render, this);
     this.collection.on("add", this.insertItem, this);
     this.collection.on("remove", this.removeItem, this);
-
     this.$el.attr("id", "list-items");
   },
 
   render: function() {
     this.$el.html(this.template);
     this.collection.each(this.appendItem, this);
+    this.initExpandables();
     return this;
+  },
+
+  initExpandables: function() {
+    // make all notes expandable
+    $("div.expandable", this.$el).expander('destroy').expander({
+      expandPrefix:     '... ',
+      expandText:       'Expand', // default is 'read more'
+      userCollapseText: 'Collapse',  // default is 'read less'
+      expandEffect: 'show',
+      expandSpeed: 0,
+      collapseEffect: 'hide',
+      collapseSpeed: 0,
+      slicePoint: 265
+    });
   },
 
   insertItem: function(item, collection, options) {

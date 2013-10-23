@@ -14,7 +14,7 @@ json.array!(list_entries) do |list_entry|
   json.link list_entry.link
   json.rating list_entry.rating
   json.age list_entry.age
-  json.age list_entry.quantity
+  json.quantity list_entry.quantity
   json.age_position list_entry.age_range.position
   json.priority list_entry.priority
   json.notes list_entry.notes

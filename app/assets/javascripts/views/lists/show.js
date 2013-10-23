@@ -58,7 +58,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
         shareButton.addClass('disabled');
         shareButonHeader.attr('href', "/list")
       }
-    }, this)
+    }, this);
   },
 
   events: {
@@ -70,8 +70,8 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
   },
 
   render: function() {
-    this.$el.html(this.template);
-    $("table#babygear", this.$el).append(this.indexView.render().$el);
+    this.$el.html(this.template(this.model.toJSON()));
+    $(this.$el).append(this.indexView.render().$el);
 
     if (this.model.get('view_count') == 0) {
       var helpModals = new Mamajamas.Views.ListHelpModals();

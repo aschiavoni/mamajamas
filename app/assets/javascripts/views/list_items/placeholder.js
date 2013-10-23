@@ -1,19 +1,16 @@
 Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
 
-  tagName: 'tr',
+  tagName: "div",
 
-  template: HandlebarsTemplates['list_items/placeholder'],
+  template: HandlebarsTemplates["list_items/placeholder"],
 
-  className: "prod",
+  className: "prod clearfix",
 
   initialize: function() {
-    this.model.on("change:age", this.saveAndRender, this);
-    this.model.on("change:priority", this.saveAndRender, this);
     this.$el.attr("id", this.model.get("id"));
   },
 
   events: {
-    "change .prod-owned": "updateOwned",
     "click .find-item.button": "findItemClicked",
     "click .ss-delete": "delete",
   },
@@ -21,31 +18,10 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
   render: function() {
     this.$el.html(this.template({ listItem: this.model.toJSON() }));
 
-    var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
-      model: this.model
-    });
-    this.$el.append(ageRangeView.render().$el);
-
-    var priorityView = new Mamajamas.Views.ListItemPriority({
-      model: this.model
-    });
-    this.$el.append(priorityView.render().$el);
-
     if (this.model.get('show_chooser'))
       _.defer(this.findItem, this);
 
     return this;
-  },
-
-  saveAndRender: function() {
-    this.model.save();
-    this.render();
-  },
-
-  updateOwned: function(event) {
-    var $owned = $(event.target);
-    this.model.set("owned", $owned.is(":checked"));
-    this.model.save();
   },
 
   findItem: function(_view) {
@@ -81,6 +57,6 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
       });
     }
     return false;
-  }
+  },
 
 });

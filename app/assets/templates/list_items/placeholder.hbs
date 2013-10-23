@@ -1,27 +1,38 @@
-<td class="own">
-  <input id="own{{listItem.id}}" class="prod-owned" type="checkbox" title="Do you own this item?" {{#if listItem.owned}}checked="checked"{{/if}}> <label for="own{{listItem.id}}">I own this item.</label>
-  <label for="own01">I own this item.</label>
-</td>
-<td class="item">
-  <div class="prod-thumb">
-    <img src="{{assetPath listItem.image_url}}" alt="{{listItem.product_type_name}}">
+<!-- product image -->
+<div class="prod-thumb">
+  <img alt="{{listItem.product_type_name}}" src="{{assetPath listItem.image_url}}">
+</div>
+
+<!-- product description -->
+<div class="prod-desc clearfix">
+
+  <!-- product category, name, rating -->
+  <div class="prod-cat-name-rating">
+    <div class="prod-category"> {{listItem.product_type_name}} </div>
   </div>
-  <div class="prod-desc">
-    <div class="prod-category">{{listItem.product_type_name}}</div>
-    <!-- drop-down editing menu -->
-    <div class="prod-edit-menu">
-      <ul class="clearfix">
-        <li>
-        <a href="#" class="ss-delete"><span>Delete</span></a>
-        </li>
-      </ul>
-    </div><!-- / drop-down editing menu -->
-    <div class="prod-links">
-      <ul>
-        <li>
-        <a href="#" class="find-item button bt-color"><span class="ss-search"></span>Choose</a></li>
-      </ul>
-    </div>
+
+  <!-- when to buy, need vs. have -->
+  <div class="prod-when-own">
+    <div class="when"> Buy at {{listItem.age}}. </div>
+    <div class="own"> I need {{listItem.quantity}} of these. </div>
   </div>
-</td>
-<td class="rating">&nbsp;</td>
+  <!-- end when to buy, need vs. have -->
+
+  <!-- choose button -->
+  <div class="prod-links">
+    <ul>
+      <li> <a class="find-item button bt-color" href="#"><span class="ss-search"></span>Choose</a></li>
+    </ul>
+  </div>
+
+  <!-- menu: delete, drag, edit -->
+  <div class="prod-edit-menu">
+    <ul>
+      <li><a href="#" class="delete tooltip"><span>Delete<em></em></span></a></li>
+      <li><a href="#" class="drag tooltip"><span>Drag to reorder<em></em></span></a></li>
+    </ul>
+  </div>
+  <!-- end menu: delete, drag, edit -->
+
+  <!-- end product description -->
+</div>
