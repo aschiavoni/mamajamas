@@ -14,7 +14,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
 
   events: {
     "click .ss-write": "edit",
-    "click .ss-delete": "delete",
+    "click .prod-edit-menu .delete": "delete",
     "click .bt-addanother": "addAnother",
   },
 
@@ -95,13 +95,6 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
     if (this.editing)
       return;
     this.model.save();
-  },
-
-  saveAndRender: function() {
-    if (this.editing)
-      return;
-    this.model.save();
-    this.render();
   },
 
 });
