@@ -24,8 +24,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
 
   events: {
     "submit .new-list-item": "save",
-    "change input[name='list_item[owned]']": "toggleOwnedCheckbox",
-    "change .owned-cb": "toggleOwnedRadioButtons",
     "click .cancel-item.button": "cancel",
     "click .find-item.button": "findItemClicked",
   },
@@ -255,22 +253,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     }
     this.$el.remove();
     return true;
-  },
-
-  toggleOwnedCheckbox: function(event) {
-    var owned = $("input[name='list_item[owned]']:checked", this.$el).val() == "1";
-    $("td.own input[type='checkbox']", this.$el).prop("checked", owned);
-  },
-
-  toggleOwnedRadioButtons: function(event) {
-    var owned = $(event.target).is(":checked");
-    var selector;
-    if (owned)
-      selector = $(".owned-rb", this.$el);
-    else
-      selector = $(".need-rb", this.$el);
-
-    $(selector, this.$el).prop("checked", true);
   },
 
   handleError: function(item, response) {
