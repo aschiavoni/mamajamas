@@ -20,7 +20,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     this.model.on("change:age", this.updateAgeRange, this);
     this.model.on("change:owned", this.updateOwned, this);
     this.model.on("change:quantity", this.updateQuantity, this);
-    this.model.on("change:priority", this.updatePriority, this);
   },
 
   events: {
@@ -108,10 +107,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
 
   updateQuantity: function() {
     this.itemField("quantity").val(this.model.get("quantity"));
-  },
-
-  updatePriority: function() {
-    this.itemField("priority").val(this.model.get("priority"));
   },
 
   initializeAutocomplete: function() {
