@@ -1,6 +1,6 @@
 Mamajamas.Views.ListItemAgeRange = Mamajamas.Views.ListItemDropdown.extend({
 
-  tagName: 'td',
+  tagName: "div",
 
   className: "when",
 
@@ -9,12 +9,8 @@ Mamajamas.Views.ListItemAgeRange = Mamajamas.Views.ListItemDropdown.extend({
   initialize: function() {},
 
   events: {
-    "click .prod-drop .prod-drop-arrow": "toggleAgeRangeList",
-    "click .when-txt": "toggleAgeRangeList",
-    "click .prod-drop ul li a": "selectAgeRange",
-    "mouseenter .when-txt": "showArrow",
-    "mouseleave": "hideArrow",
-    "mouseleave .prod-drop-arrow": "hideArrow"
+    "click .choicedrop a": "toggleList",
+    "click .choicedrop ul li a": "selectAgeRange",
   },
 
   render: function() {
@@ -22,27 +18,13 @@ Mamajamas.Views.ListItemAgeRange = Mamajamas.Views.ListItemDropdown.extend({
     return this;
   },
 
-  toggleAgeRangeList: function(event) {
-    var $target = $(event.target);
-    var $prodDrop = $target.parents("td").find(".prod-drop");
-    var $ageRangeList = $prodDrop.find("ul");
-
-    if ($ageRangeList.hasClass("visuallyhidden")) {
-      $ageRangeList.removeClass("visuallyhidden");
-    } else {
-      $ageRangeList.addClass("visuallyhidden");
-    }
-
-    return false;
-  },
-
   selectAgeRange: function(event) {
-    var $target = $(event.target);
+    var $target = $(event.currentTarget);
     var $ageRangeList = $target.parents("ul");
     var ageRange = $target.html();
 
     this.model.set("age", ageRange);
-    $ageRangeList.addClass("visuallyhidden");
+    $ageRangeList.hide();
     this.render();
 
     return false;

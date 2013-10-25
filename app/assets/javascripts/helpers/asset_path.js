@@ -4,4 +4,3 @@ Handlebars.registerHelper('assetPath', function(name) {
     path = Mamajamas.Context.AssetPath + name;
   return new Handlebars.SafeString(path);
 });
-

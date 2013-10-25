@@ -1,19 +1,21 @@
 Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
 
-  tagName: 'div',
+  tagName: "div",
 
-  template: HandlebarsTemplates['list_items/show'],
+  template: HandlebarsTemplates["list_items/show"],
 
   className: "prod prod-filled clearfix",
 
   initialize: function() {
     this.editing = false;
-    this.model.on("change:rating", this.updateRating, this);
+    this.model.on("change:rating", this.update, this);
+    this.model.on("change:owned", this.update, this);
+    this.model.on("change:quantity", this.update, this);
     this.$el.attr("id", this.model.get("id"));
   },
 
   events: {
-    "click .ss-write": "edit",
+    "click .prod-edit-menu .edit": "edit",
     "click .prod-edit-menu .delete": "delete",
     "click .bt-addanother": "addAnother",
   },
@@ -26,6 +28,12 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
       model: this.model
     });
     $("div.rating", this.$el).append(ratingView.render().$el);
+
+    var quantityView = new Mamajamas.Views.ListItemQuantity({
+      model: this.model
+    });
+    $(".prod-when-own", this.$el).append(quantityView.render().$el);
+
 
     var notesView = new Mamajamas.Views.ListItemNotes({
       model: this.model
@@ -91,7 +99,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
     return false;
   },
 
-  updateRating: function() {
+  update: function() {
     if (this.editing)
       return;
     this.model.save();
