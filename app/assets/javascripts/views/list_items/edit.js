@@ -1,4 +1,4 @@
-Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
+Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
 
   tagName: "div",
 
@@ -145,8 +145,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     if (event)
       event.preventDefault();
 
-    var curPos = $("#list-items tr").index(this.$el);
-    Mamajamas.Context.List.set("current_position", curPos);
+    this.setCurrentPosition();
 
     var _view = this;
     _view.clearErrors();

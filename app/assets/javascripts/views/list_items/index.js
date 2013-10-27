@@ -6,6 +6,14 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
 
   className: "clearfix",
 
+  prioritySelectors: {
+    1: "div.priority-high",
+    2: "div.priority-med",
+    3: "div.priority-low"
+  },
+
+  priorityContainers: {},
+
   initialize: function() {
     this.collection.on("reset", this.render, this);
     this.collection.on("add", this.insertItem, this);
@@ -16,6 +24,7 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
   render: function() {
     this.$el.html(this.template);
     this.collection.each(this.appendItem, this);
+    this.initCollapsibles();
     this.initExpandables();
     return this;
   },
@@ -34,18 +43,32 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     });
   },
 
+  initCollapsibles: function() {
+    $('.priority.collapsible').collapsible({
+      cssClose: 'ss-directright',
+      cssOpen: 'ss-dropdown',
+      defaultOpen: 'priority-high-hed,priority-med-hed',
+      bind: 'click',
+      speed:200
+    });
+  },
+
   insertItem: function(item, collection, options) {
+    var $itemView = this.itemView(item).render().$el;
+    var priority = item.get("priority");
     var insertAt = Mamajamas.Context.List.get("current_position");
     if (insertAt == 0) {
-      $("#list-items").prepend(this.itemView(item).render().$el);
+      this.$priorityContainer(priority).prepend($itemView);
     } else {
-      $("#list-items tr:nth-child(" + insertAt + ")").after(this.itemView(item).render().$el);
+      var selector = this.prioritySelectors[priority];
+      $(selector + " div.prod:nth-child(" + insertAt + ")").after($itemView);
     }
   },
 
   appendItem: function(item) {
     var $itemView = this.itemView(item).render().$el;
-    $("#list-items").append($itemView);
+    var priority = item.get("priority");
+    $(this.$priorityContainer(priority)).append($itemView);
   },
 
   removeItem: function(item, items, options) {
@@ -53,6 +76,16 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     if ($listItem) {
       $listItem.remove();
     }
+  },
+
+
+  $priorityContainer: function(priority) {
+    var container = this.priorityContainers[priority];
+    if (container == null) {
+      container = $(this.prioritySelectors[priority], this.$el);
+      this.priorityContainers[priority] = container;
+    }
+    return container;
   },
 
   sort: function(event) {

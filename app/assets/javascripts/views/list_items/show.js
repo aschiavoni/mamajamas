@@ -1,4 +1,4 @@
-Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
+Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
 
   tagName: "div",
 

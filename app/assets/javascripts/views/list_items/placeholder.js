@@ -1,4 +1,4 @@
-Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
+Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.ListItem.extend({
 
   tagName: "div",
 
@@ -37,11 +37,6 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
     event.preventDefault();
     this.findItem(this);
     return false;
-  },
-
-  setCurrentPosition: function() {
-    var curPos = $('#list-items tr').index(this.$el);
-    Mamajamas.Context.List.set("current_position", curPos);
   },
 
   delete: function() {
