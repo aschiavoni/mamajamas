@@ -11,4 +11,3 @@ Mamajamas.Collections.ProductTypeSuggestions = Backbone.Collection.extend({
   model: Mamajamas.Models.ProductTypeSuggestion
 
 });
-

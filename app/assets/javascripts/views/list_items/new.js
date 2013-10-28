@@ -1,10 +1,10 @@
 Mamajamas.Views.ListItemNew = Backbone.View.extend({
 
-  tagName: 'tr',
+  tagName: "div",
 
-  template: HandlebarsTemplates['list_items/new'],
+  template: HandlebarsTemplates["list_items/new"],
 
-  className: "prod new-mode",
+  className: "prod new-mode clearfix",
 
   initialize: function() {
     this._errMap = this.errorFieldMap();
@@ -22,28 +22,38 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
     this.$el.html(this.template({ listItem: this.model.toJSON() }));
 
     // subviews
-    var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
-      model: this.model
-    });
-    this.$el.append(ageRangeView.render().$el);
-
     var priorityView = new Mamajamas.Views.ListItemPriority({
       model: this.model
     });
-    this.$el.append(priorityView.render().$el);
+    $(".prod-when-own", this.$el).append(priorityView.render().$el);
+
+    var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
+      model: this.model
+    });
+    $(".prod-when-own", this.$el).append(ageRangeView.render().$el);
+
+    var quantityView = new Mamajamas.Views.ListItemQuantity({
+      model: this.model
+    });
+    $(".prod-when-own", this.$el).append(quantityView.render().$el);
 
     this.initializeAutocomplete();
 
     _.defer(function() {
-      $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-      $("#list_item_name", _view.$el).focus();
+      _view.inFieldLabels();
+      $("#new_list_item_name", _view.$el).focus();
     });
 
     return this;
   },
 
-  cancel: function(event) {
+  close: function() {
     this.$el.remove();
+    this.trigger("list_item:new:closed", this);
+  },
+
+  cancel: function(event) {
+    this.close();
   },
 
   save: function(event) {
@@ -51,7 +61,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
 
     var _view = this;
     _view.clearErrors();
-    var itemName = $("#list_item_name", this.$el).val();
+    var itemName = $("#new_list_item_name", this.$el).val();
     var pluralName = this.model.get("product_type_plural_name");
     if (pluralName == null) pluralName = itemName;
     var attributes = {
@@ -60,6 +70,8 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
       age: this.model.get("age"),
       image_url: this.model.get("image_url"),
       product_type_id: this.model.get("product_type_id"),
+      quantity: this.model.get("quantity"),
+      owned: this.model.get("owned"),
       product_type_name: itemName,
       product_type_plural_name: pluralName,
       placeholder: true,
@@ -69,21 +81,13 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
     _view.model = Mamajamas.Context.ListItems.create(attributes, {
       wait: true,
       success: function(model) {
-        _view.remove();
+        _view.close();
       },
       error: function(model, response) {
         _view.handleError(model, response);
       }
     });
     return false;
-  },
-
-  updateAgeRange: function() {
-    $("#list_item_age", this.$el).val(this.model.get("age"));
-  },
-
-  updatePriority: function() {
-    $("#list_item_priority", this.$el).val(this.model.get("priority"));
   },
 
   handleError: function(item, response) {
@@ -111,9 +115,9 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
 
   errorFieldMap: function() {
     return {
-      name: "#list_item_name",
-      category_id: "#list_item_name",
-      product_type_name: "#list_item_name"
+      name: "#new_list_item_name",
+      category_id: "#new_list_item_name",
+      product_type_name: "#new_list_item_name"
     };
   },
 
@@ -121,7 +125,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
     var _view = this;
     var url = "/api/list/product_types/";
 
-    $("#list_item_name", this.$el).autocomplete({
+    $("#new_list_item_name", this.$el).autocomplete({
       source: function(request, response) {
         $.getJSON(url, { filter: request.term }, function(data) {
           response($.map(data, function(item) {
@@ -140,13 +144,15 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
         _view.model.set("product_type_id", ui.item.value.id);
         _view.model.set("image_url", ui.item.value.image_name);
         _view.model.set("product_type_plural_name", ui.item.value.plural_name);
-
-        // re-initialize the inFieldLabels plugin
-        $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+        _view.inFieldLabels();
 
         return false;
       }
     });
-  }
+  },
+
+  inFieldLabels: function() {
+    $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+  },
 
 });

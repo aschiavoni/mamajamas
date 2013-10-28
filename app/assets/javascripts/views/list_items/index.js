@@ -21,6 +21,10 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     this.$el.attr("id", "list-items");
   },
 
+  events: {
+    "click .new-item": "addProductType"
+  },
+
   render: function() {
     this.$el.html(this.template);
     this.collection.each(this.appendItem, this);
@@ -97,15 +101,19 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
 
   itemView: function(item) {
     var view = null;
-    if (item.get('placeholder')) {
+    if (item.get("placeholder")) {
       // Placeholder
       view = new Mamajamas.Views.ListItemPlaceholder({
         model: item
       });
     } else {
       // ListItem
-      if (item.get('edit_mode') == true) {
+      if (item.get("edit_mode") == true) {
         view = new Mamajamas.Views.ListItemEdit({
+          model: item
+        });
+      } else if (item.get("new_mode") == true) {
+        view = new Mamajamas.Views.ListItemNew({
           model: item
         });
       } else {
@@ -115,6 +123,38 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
       }
     }
     return view;
-  }
+  },
+
+  addProductType: function(event) {
+    event.preventDefault();
+
+    // no-op if we are in the all category
+    if (Mamajamas.Context.List.isAllCategory()) {
+      return false;
+    }
+
+    var addItem = new Mamajamas.Views.ListItemNew({
+      model: new Mamajamas.Models.ListItem({
+        category_id: Mamajamas.Context.List.get("category_id"),
+        age: "Pre-birth",
+        priority: 2,
+        quantity: 1,
+        owned: false,
+        image_url: "products/icons/unknown.png"
+      })
+    });
+    addItem.on("list_item:new:closed", this.showAddNew, this);
+
+    var $addNew = $("#add-new");
+    $addNew.before(addItem.render().$el);
+    $addNew.hide();
+
+    return false;
+  },
+
+  showAddNew: function(view) {
+    $("#add-new").show();
+    view.off("list_item:new:closed");
+  },
 
 });
