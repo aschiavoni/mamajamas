@@ -58,7 +58,6 @@
           <li id="myaccount">
             <%= link_to profile_path do %>
               <%= image_tag current_user.profile_picture.account %>
-              <%= current_user.first_name? ? current_user.first_name : current_user.username %>
               <span class="ss-dropdown"></span>
             <% end -%>
             <ul class="nav-drop">
