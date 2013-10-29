@@ -67,6 +67,12 @@ window.Mamajamas = {
       new Mamajamas.Routers.Quiz();
       Backbone.history.start();
     }
+
+    // footer
+    $("#footer .nav-drop-trigger a.nav-drop-link").click(function() {
+      event.preventDefault();
+      return false;
+    });
   },
   Utils: {
     // http://stackoverflow.com/a/7124052/31344
