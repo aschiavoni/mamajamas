@@ -45,6 +45,7 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
       connectWith: "div.collapsible-content",
       dropOnEmpty: true,
       opacity: 1.0,
+      placeholder: "edit-mode",
       forcePlaceholderSize: true,
       start: function(event, ui) {
         $(ui.item).css({ backgroundColor: "#FFFFFF" });
