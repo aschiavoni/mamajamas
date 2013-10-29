@@ -54,11 +54,6 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     this.$el.html(this.template(this.model.toJSON()));
     $(this.$el).append(this.indexView.render().$el);
 
-    if (this.model.get('view_count') == 0) {
-      var helpModals = new Mamajamas.Views.ListHelpModals();
-      $('body').append(helpModals.render().$el).addClass("list-help");
-    }
-
     if ($("#add-list-item").length > 0)
       _.defer(this.addToMyList, this);
 

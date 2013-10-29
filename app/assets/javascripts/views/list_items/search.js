@@ -65,7 +65,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
         $("#field-search", _view.$el).focus();
       },
       onClose: function(dialog) {
-        this.close();
+        this.close(); // this is the modal
         _view.$el.remove();
         $("#search-modal").remove(); // make SURE it is removed
       }

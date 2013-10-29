@@ -34,6 +34,13 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     this.initCollapsibles();
     this.initExpandables();
     this.initDraggables();
+
+    if (Mamajamas.Context.List.get('view_count') == 0) {
+      var helpModals = new Mamajamas.Views.ListHelpModals();
+      $('body').append(helpModals.render().$el);
+      helpModals.show();
+    }
+
     return this;
   },
 
