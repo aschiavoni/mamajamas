@@ -46,11 +46,8 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
   },
 
   events: {
-    "click #babygear th.own": "sort",
-    "click #babygear th.item": "sort",
-    "click #babygear th.rating": "sort",
-    "click #babygear th.when": "sort",
-    "click #babygear th.priority": "sort"
+    "click .listsort .choicedrop a": "toggleSortList",
+    "click .listsort .choicedrop ol li a": "sort",
   },
 
   render: function() {
@@ -79,10 +76,25 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     Mamajamas.Context.ListItems.add(listItemAttrs);
   },
 
+  toggleSortList: function(event) {
+    var $target = $(event.currentTarget);
+    var $choiceDrop = $target.parents(".choicedrop");
+    var $list = $choiceDrop.find("ol");
+
+    if ($list.is(":visible")) {
+      $list.hide();
+    } else {
+      $list.show();
+    }
+
+    return false;
+  },
+
   sort: function(event) {
-    $("#babygear th").removeClass("sorting");
-    var $header = $(event.target);
-    $header.addClass("sorting");
+    var $sortLink = $(event.currentTarget);
+    var sortName = $sortLink.html();
+    var $sortDisplay = $sortLink.parents(".choicedrop").children("a");
+    $sortDisplay.html(sortName + " <span class=\"ss-dropdown\"></span>");
     return this.indexView.sort(event);
   },
 

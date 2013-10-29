@@ -26,6 +26,7 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
   },
 
   render: function() {
+    this.priorityContainers = {};
     this.$el.html(this.template);
     this.collection.each(this.appendItem, this);
     this.initCollapsibles();
@@ -81,7 +82,6 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
       $listItem.remove();
     }
   },
-
 
   $priorityContainer: function(priority) {
     var container = this.priorityContainers[priority];

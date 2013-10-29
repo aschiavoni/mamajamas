@@ -179,7 +179,7 @@ class List < ActiveRecord::Base
 
   def list_entries_sort_order
     @li_sort ||=
-      "list_items.placeholder ASC, categories.name ASC, age_ranges.position ASC, list_items.priority ASC, list_items.product_type_name ASC"
+      "list_items.placeholder ASC, age_ranges.position ASC, categories.name ASC, list_items.product_type_name ASC"
   end
 
 end
