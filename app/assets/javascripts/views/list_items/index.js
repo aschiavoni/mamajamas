@@ -14,6 +14,8 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
 
   priorityContainers: {},
 
+  collapsiblesToReset: [],
+
   initialize: function() {
     this.collection.on("reset", this.render, this);
     this.collection.on("add", this.insertItem, this);
@@ -31,7 +33,36 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     this.collection.each(this.appendItem, this);
     this.initCollapsibles();
     this.initExpandables();
+    this.initDraggables();
     return this;
+  },
+
+  initDraggables: function() {
+    var _view = this;
+    $("div.collapsible-content", this.el).sortable({
+      axis: "y",
+      handle: ".drag",
+      connectWith: "div.collapsible-content",
+      dropOnEmpty: true,
+      opacity: 1.0,
+      forcePlaceholderSize: true,
+      start: function(event, ui) {
+        $(ui.item).css({ backgroundColor: "#FFFFFF" });
+        _view.openCollapsibles();
+      },
+      stop: function(event, ui) {
+        $(ui.item).css({ backgroundColor: "rgba(0, 0, 0, 0)" });
+        _view.closeCollapsibles();
+      },
+      update: function(event, ui) {
+        var $prod = $(ui.item);
+        var $priorityContainer = $prod.parents(".collapsible-content");
+        var newPriority = parseInt($priorityContainer.data("priority"));
+        var listItem = _view.collection.get($prod.attr("id"));
+        if (newPriority != listItem.get("priority"))
+          listItem.save({ priority: newPriority });
+      }
+    }).disableSelection();
   },
 
   initExpandables: function() {
@@ -56,6 +87,26 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
       bind: 'click',
       speed:200
     });
+  },
+
+  openCollapsibles: function() {
+    var _view = this;
+    $('.priority.collapsible').each(function(index, e) {
+      var $c = $(e);
+      if ($c.collapsible("collapsed")) {
+        _view.collapsiblesToReset.push($c);
+        $c.collapsible("open");
+      }
+    });
+  },
+
+  closeCollapsibles: function() {
+    _.each(this.collapsiblesToReset, function($el) {
+      var $items = $el.next(".collapsible-content").children("div.prod");
+      if ($items.length == 0)
+        $el.collapsible("close");
+    });
+    this.collapsiblesToReset = [];
   },
 
   insertItem: function(item, collection, options) {

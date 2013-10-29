@@ -17,6 +17,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
   events: {
     "click .prod-edit-menu .edit": "edit",
     "click .prod-edit-menu .delete": "delete",
+    "click .prod-edit-menu .drag": "doNothing",
     "click .bt-addanother": "addAnother",
   },
 

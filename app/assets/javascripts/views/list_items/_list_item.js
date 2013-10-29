@@ -6,4 +6,9 @@ Mamajamas.Views.ListItem = Mamajamas.Views.Base.extend({
     Mamajamas.Context.List.set("current_position", curPos);
   },
 
+  doNothing: function(event) {
+    event.preventDefault();
+    return false;
+  },
+
 });

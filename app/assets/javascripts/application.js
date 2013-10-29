@@ -15,6 +15,7 @@
 //= require jquery.ui.autocomplete
 //= require jquery.ui.datepicker
 //= require jquery.ui.draggable
+//= require jquery.ui.sortable
 //= require jquery-fileupload/basic
 //= require underscore
 //= require backbone

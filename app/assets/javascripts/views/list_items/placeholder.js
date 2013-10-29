@@ -13,6 +13,7 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.ListItem.extend({
   events: {
     "click .find-item.button": "findItemClicked",
     "click .prod-edit-menu .delete": "delete",
+    "click .prod-edit-menu .drag": "doNothing",
   },
 
   render: function() {
