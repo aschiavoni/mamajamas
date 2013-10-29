@@ -87,6 +87,14 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
       bind: 'click',
       speed:200
     });
+
+    $('.priority.collapsible').each(function(index, e) {
+      var $c = $(e);
+      var $items = $c.next(".collapsible-content").children("div.prod");
+      if ($items.length == 0) {
+        $c.collapsible("close");
+      }
+    });
   },
 
   openCollapsibles: function() {
