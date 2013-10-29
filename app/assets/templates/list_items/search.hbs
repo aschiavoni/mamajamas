@@ -1,46 +1,39 @@
-<div class="modal-overlay"> &nbsp; </div>
-<div class="vertical-offset"></div>
-<!-- modal window box -->
-<div class="modal-box" id="search-modal">
-  <!-- modal window header -->
-  <h2>Choose a <strong>{{product_type_name}}</strong></h2>
-  <a href="#" id="closewindow" class="bt-close ss-icon">Close</a>
-  <!-- modal window content -->
-  <div class="content">
+<!-- modal window header -->
+<h2>Choose a <strong>{{product_type_name}}</strong></h2>
+<!-- modal window content -->
+<div class="content">
 
-    <div id="prod-suggestions-results">
-      <h3>Suggested {{product_type_plural_name}}</h3>
-      <ul class="prod-search-list clearfix suggestions">
-        <div class="progress-container">
-          <img src="{{assetPath 'progress-bar.gif'}}" class="progress" style="" />
-        </div>
-        <p class="no-search-results" style="display: none;">No suggestions found</p>
-      </ul>
-    </div>
+  <div id="prod-suggestions-results">
+    <h3>Suggested {{product_type_plural_name}}</h3>
+    <ul class="prod-search-list clearfix suggestions">
+      <div class="progress-container">
+        <img src="{{assetPath 'progress-bar.gif'}}" class="progress" style="" />
+      </div>
+      <p class="no-search-results" style="display: none;">No suggestions found</p>
+    </ul>
+  </div>
 
-    <div id="prod-search">
-      <h3>Find More Choices on Amazon</h3>
-      <form method="POST" class="label-infield" id="frm-prod-search">
-        <fieldset>
-          <p>
+  <div id="prod-search">
+    <h3>Find More Choices on Amazon</h3>
+    <form method="POST" class="label-infield" id="frm-prod-search">
+      <fieldset>
+        <p>
           <label for="field-search">Enter keywords to live search for {{product_type_plural_name}}</label>
           <br />
           <input name="field-search" type="text" id="field-search" value="">
-          </p>
-        </fieldset>
-      </form>
-    </div>
-
-    <div id="prod-search-results">
-      <ul class="prod-search-list clearfix search-results">
-        <div class="progress-container">
-          <img src="{{assetPath 'progress-bar.gif'}}" class="progress" style="display: none;" />
-        </div>
-        <p class="no-search-results" style="display: none;">No results found</p>
-      </ul>
-    </div>
-
+        </p>
+      </fieldset>
+    </form>
   </div>
-  <!-- end modal window content -->
+
+  <div id="prod-search-results">
+    <ul class="prod-search-list clearfix search-results">
+      <div class="progress-container">
+        <img src="{{assetPath 'progress-bar.gif'}}" class="progress" style="display: none;" />
+      </div>
+      <p class="no-search-results" style="display: none;">No results found</p>
+    </ul>
+  </div>
+
 </div>
-<!-- end modal window box -->
+<!-- end modal window content -->

@@ -79,6 +79,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     });
 
     $('#buildlist').after(searchView.render().$el);
+    searchView.show();
 
     return false;
   },

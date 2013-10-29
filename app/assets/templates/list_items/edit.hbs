@@ -5,18 +5,18 @@
 
 <!-- product description -->
 <div class="prod-desc editing clearfix">
-  <form action="/list/list_items/{{id}}" method="post" class="new-list-item" enctype="multipart/form-data">
+  <form action="/list/list_items/{{idSuffix}}" method="post" class="new-list-item" enctype="multipart/form-data">
 
-    <input id="list_item_product_type_id_{{id}}" name="list_item[product_type_id]" type="hidden" value="{{product_type_id}}">
-    <input id="list_item_vendor_id_{{id}}" name="list_item[vendor_id]" type="hidden" value="{{vendor_id}}">
-    <input id="list_item_vendor_{{id}}" name="list_item[vendor]" type="hidden" value="{{vendor}}">
-    <input id="list_item_category_id_{{id}}" name="list_item[category_id]" type="hidden" value="{{category_id}}">
-    <input id="list_item_priority_{{id}}" name="list_item[priority]" type="hidden" value="{{priority}}">
-    <input id="list_item_age_{{id}}" name="list_item[age]" type="hidden" value="{{age}}">
-    <input id="list_item_rating_{{id}}" name="list_item[rating]" type="hidden" value="{{rating}}">
-    <input id="list_item_owned_{{id}}" name="list_item[owned]" type="hidden" value="{{owned}}">
-    <input id="list_item_image_url_{{id}}" name="list_item[image_url]" type="hidden" value="{{image_url}}">
-    <input id="list_item_list_item_image_id_{{id}}" name="list_item[list_item_image_id]" type="hidden">
+    <input id="list_item_product_type_id_{{idSuffix}}" name="list_item[product_type_id]" type="hidden" value="{{product_type_id}}">
+    <input id="list_item_vendor_id_{{idSuffix}}" name="list_item[vendor_id]" type="hidden" value="{{vendor_id}}">
+    <input id="list_item_vendor_{{idSuffix}}" name="list_item[vendor]" type="hidden" value="{{vendor}}">
+    <input id="list_item_category_id_{{idSuffix}}" name="list_item[category_id]" type="hidden" value="{{category_id}}">
+    <input id="list_item_priority_{{idSuffix}}" name="list_item[priority]" type="hidden" value="{{priority}}">
+    <input id="list_item_age_{{idSuffix}}" name="list_item[age]" type="hidden" value="{{age}}">
+    <input id="list_item_rating_{{idSuffix}}" name="list_item[rating]" type="hidden" value="{{rating}}">
+    <input id="list_item_owned_{{idSuffix}}" name="list_item[owned]" type="hidden" value="{{owned}}">
+    <input id="list_item_image_url_{{idSuffix}}" name="list_item[image_url]" type="hidden" value="{{image_url}}">
+    <input id="list_item_list_item_image_id_{{idSuffix}}" name="list_item[list_item_image_id]" type="hidden">
 
     <!-- product category, name, rating -->
     <div class="prod-cat-name-rating">
@@ -25,13 +25,13 @@
       <fieldset>
         <legend><span>Product Info</span></legend>
         <p>
-          <label for="list_item_name_{{id}}" style="display: none; opacity: 0;">Product name / brand</label>
+          <label for="list_item_name_{{idSuffix}}" style="display: none; opacity: 0;">Product name / brand</label>
           <br>
-          <input type="text" class="field-prodname ui-autocomplete-input" value="{{name}}" autocomplete="off" size="30" name="list_item[name]" id="list_item_name_{{id}}">
+          <input type="text" class="field-prodname ui-autocomplete-input" value="{{name}}" autocomplete="off" size="30" name="list_item[name]" id="list_item_name_{{idSuffix}}">
           <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span> <a class="button find-item" href="#"><span class="ss-search"></span>Choose</a> </p>
         <p>
-          <label for="list_item_link_{{id}}" style="display: none;">Link to buy</label>
-          <input type="text" value="{{link}}" size="30" name="list_item[link]" class="list-item-link" id="list_item_link_{{id}}">
+          <label for="list_item_link_{{idSuffix}}" style="display: none;">Link to buy</label>
+          <input type="text" value="{{link}}" size="30" name="list_item[link]" class="list-item-link" id="list_item_link_{{idSuffix}}">
         </p>
       </fieldset>
       <div class="rating"> <em>My rating:</em>
@@ -55,9 +55,9 @@
       <div class="prod-note-input">
         <fieldset>
           <p>
-            <label for="list_item_edit_notes_{{id}}"><span class="ss-chat"></span> Review/comment</label>
+            <label for="list_item_edit_notes_{{idSuffix}}"><span class="ss-chat"></span> Review/comment</label>
             <br />
-            <textarea name="list_item[notes]" id="list_item_edit_notes_{{id}}">{{notes}}</textarea>
+            <textarea name="list_item[notes]" id="list_item_edit_notes_{{idSuffix}}">{{notes}}</textarea>
           </p>
         </fieldset>
       </div>
@@ -90,8 +90,8 @@
     <!-- end photo upload -->
 
     <div class="list-item-image-file" style="display: none;">
-      <input id="list_item_image_image_{{id}}" name="list_item_image[image]" type="file" value="Photo">
-      <input id="list_item_image_image_cache_{{id}}" name="list_item_image[image_cache]" type="hidden">
+      <input id="list_item_image_image_{{idSuffix}}" name="list_item_image[image]" type="file" value="Photo">
+      <input id="list_item_image_image_cache_{{idSuffix}}" name="list_item_image[image_cache]" type="hidden">
     </div>
 
     <!-- menu: delete, drag, edit -->

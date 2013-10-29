@@ -10,6 +10,10 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
 
   initialize: function() {
     BrowserDetect.init();
+
+    var suffix = this.model.id == null ? "new" : this.model.id;
+    this.model.set("idSuffix", suffix);
+
     _errMap = this.errorFieldMap();
 
     // save a clone of the original model in case we cancel
@@ -84,11 +88,12 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
   },
 
   itemId: function(name) {
-    return "#list_item_" + name + "_" + this.model.id;
+    return "#list_item_" + name + "_" + this.model.get("idSuffix");
   },
 
   itemField: function(name) {
-    return $(this.itemId(name), this.$el);
+    var itemId = this.itemId(name);
+    return $(itemId, this.$el);
   },
 
   updateRating: function() {
@@ -166,7 +171,8 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
       placeholder: false,
       vendor_id: this.itemField("vendor_id").val(),
       vendor: this.itemField("vendor").val(),
-      list_item_image_id: this.itemField('list_item_image_id').val()
+      list_item_image_id: this.itemField('list_item_image_id').val(),
+      idSuffix: _view.model.get("idSuffix"),
     };
 
     if (_view.model.isNew()) {

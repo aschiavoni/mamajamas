@@ -31,7 +31,8 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.ListItem.extend({
     var search = new Mamajamas.Views.ListItemSearch({
       model: _view.model
     });
-    $('#buildlist').after(search.render().$el);
+    $("#buildlist").after(search.render().$el);
+    search.show();
   },
 
   findItemClicked: function(event) {
