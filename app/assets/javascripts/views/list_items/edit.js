@@ -344,6 +344,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
       model: _view.model
     });
     $('#buildlist').after(search.render().$el);
+    search.show();
   },
 
   findItemClicked: function(event) {
