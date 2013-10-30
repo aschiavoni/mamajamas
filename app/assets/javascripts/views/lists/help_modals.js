@@ -18,6 +18,7 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
   },
 
   show: function() {
+    var _view = this;
     this.$el.modal({
       containerId:'listintro-container',
       autoPosition:false,
