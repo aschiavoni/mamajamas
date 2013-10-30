@@ -46,6 +46,6 @@ class QuizController < ApplicationController
   private
 
   def init_view
-    set_progress_id 1
+    hide_mainnav
   end
 end

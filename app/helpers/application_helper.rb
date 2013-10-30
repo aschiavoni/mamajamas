@@ -63,16 +63,12 @@ module ApplicationHelper
     end
   end
 
-  def progress_id
-    page_context.progress_id
-  end
-
-  def show_progress
-    page_context.show_progress
-  end
-
   def show_header
     page_context.show_header
+  end
+
+  def show_mainnav
+    page_context.show_mainnav
   end
 
   def body_class

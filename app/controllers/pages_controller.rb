@@ -12,8 +12,6 @@ class PagesController < ApplicationController
   private
 
   def init_view
-    hide_progress_bar
     set_body_class "text-page"
   end
 end
-

@@ -7,8 +7,6 @@ class ListsController < ApplicationController
 
   respond_to :html, :json
 
-  layout "modern_application"
-
   def show
     if current_user.quiz_taken_at.blank?
       redirect_to quiz_path and return
@@ -49,7 +47,6 @@ class ListsController < ApplicationController
   def init_view
     set_subheader "Your baby gear list"
     set_page_id "buildlist"
-    hide_progress_bar
   end
 
   def find_list

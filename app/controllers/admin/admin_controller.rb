@@ -12,6 +12,6 @@ class Admin::AdminController < Admin::BaseController
   def init_view
     set_subheader "Admin"
     set_page_id "adminpage"
-    hide_progress_bar
+    hide_mainnav
   end
 end

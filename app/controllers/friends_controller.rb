@@ -41,11 +41,9 @@ class FriendsController < ApplicationController
   def init_view
     set_body_class "layout_2-7-3"
     set_subheader "My Friends' Lists"
-    hide_progress_bar
   end
 
   def init_index_view
     set_subheader "Follow Friends"
-    set_progress_id 2
   end
 end

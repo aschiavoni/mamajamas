@@ -66,8 +66,6 @@ class PublicListsController < ApplicationController
   def init_view
     set_page_id "publist"
     set_subheader @list.title
-    set_progress_id 3
-    hide_progress_bar
   end
 
   def find_list
