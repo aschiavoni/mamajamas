@@ -1,25 +1,25 @@
 <% if @view.preview? -%>
-  <%= content_for :header_overlay do %>
-    <!-- message overlay -->
+    <%= content_for :header_overlay do %>
+      <!-- message overlay -->
     <div class="msg-overlay preview-msg">
-      <div class="overlay-bg">&nbsp;</div>
+        <div class="overlay-bg">&nbsp;</div>
       <div class="gridContainer clearfix">
-        <div class="col1">
-          <h1>Preview</h1>
+          <div class="col1">
+            <h1>Preview</h1>
           <p>This is what your list will look like to others.</p>
         </div>
         <div class="col2">
-          <%= form_tag public_list_publish_list_path do %>
-            <p>
-              <% if current_user.present? && current_user.facebook_connected? -%>
-                <%= check_box_tag 'facebook_share', '1', true %>
-                <%= label_tag 'facebook_share', 'Share on Facebook' %>
+            <%= form_tag public_list_publish_list_path do %>
+              <p>
+                <% if current_user.present? && current_user.facebook_connected? -%>
+                  <%= check_box_tag 'facebook_share', '1', true %>
+                  <%= label_tag 'facebook_share', 'Share on Facebook' %>
               <% else -%>
-                &nbsp;
+                  &nbsp;
               <% end -%>
             </p>
             <p>
-              <button type="submit" class="button" id="bt-cancel" name="cancel" value="1">Cancel</button>
+                <button type="submit" class="button" id="bt-cancel" name="cancel" value="1">Cancel</button>
               <button type="submit" class="button bt-color" id="bt-publish" name="publish" value="1">Save</button>
             </p>
           <% end -%>
@@ -30,26 +30,26 @@
   <% end -%>
 <% end -%>
 <%= content_for :logged_out_header_buttons do %>
-  <li id="startlist">
-  <%= link_to "Start Your List", quiz_path, class: "button bt-color" %>
+    <li id="startlist">
+    <%= link_to "Start Your List", quiz_path, class: "button bt-color" %>
   </li>
 <% end -%>
 <%= content_for :subheader_content do %>
-  <p class="pubdate">
-    Created <%= l @view.list.created_at, format: :friendly %>
-    <br>
+    <p class="pubdate">
+      Created <%= l @view.list.created_at, format: :friendly %>
+      <br>
     Updated <%= l @view.list.updated_at, format: :friendly %>
-  </p>
+        </p>
 <% end -%>
 <%= content_for :nav do %>
-  <nav id="categories">
-    <ul>
-      <li class="<%= "cat-selected" if @view.all_category? %>">
-        <%= link_to "All", @view.public_all_items_path %>
+    <nav id="categories">
+      <ul>
+        <li class="<%= "cat-selected" if @view.all_category? %>">
+          <%= link_to "All", @view.public_all_items_path %>
       </li>
       <% @view.categories.each do |category| -%>
-        <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
-          <%= link_to category.name, @view.public_category_path(category.slug) %>
+          <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
+            <%= link_to category.name, @view.public_category_path(category.slug) %>
         </li>
       <% end -%>
     </ul>
@@ -88,17 +88,17 @@
         <% end -%>
       </div>
     </div>
-  <% if @view.owner.followed_users_with_public_lists.any? -%>
-    <div id="module-friends">
-    <div class="content">
-      <h3>People I'm Following</h3>
-      <ul class="clearfix">
-        <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_public_lists, locals: { show_names: false } %>
-      </ul>
-    </div>
+    <% if @view.owner.followed_users_with_public_lists.any? -%>
+      <div id="module-friends">
+        <div class="content">
+          <h3>People I'm Following</h3>
+          <ul class="clearfix">
+            <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_public_lists, locals: { show_names: false } %>
+          </ul>
+        </div>
+      </div>
+    <% end -%>
   </div>
-<% end -%>
-</div>
 <% end -%>
 <form id="public-list" class="label-infield" data-list-entries="<%= @list_entries_json %>">
   <!-- baby gear table ******* -->
@@ -119,12 +119,12 @@
   <!-- end baby gear table ******* -->
 </form>
 <script type="text/javascript">
-Mamajamas.Context.List = new Mamajamas.Models.List({
-  title: '<%= @view.list.title %>',
-  <% if @view.category.present? -%>
-  category_id: '<%= @view.category.id %>',
-  category: '<%= @view.category.slug %>',
-  <% end -%>
-  current_position: 0
-})
+ Mamajamas.Context.List = new Mamajamas.Models.List({
+   title: '<%= @view.list.title %>',
+   <% if @view.category.present? -%>
+   category_id: '<%= @view.category.id %>',
+   category: '<%= @view.category.slug %>',
+   <% end -%>
+   current_position: 0
+ })
 </script>
