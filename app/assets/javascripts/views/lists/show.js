@@ -64,10 +64,6 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     $.cookies.set("add_to_my_list", null);
     var listItemAttrs = $("#add-list-item").data("add-list-item");
     listItemAttrs["edit_mode"] = true;
-    // var editView = new Mamajamas.Views.ListItemEdit({
-    //   model: new Mamajamas.Models.ListItem(listItemAttrs)
-    // });
-    // $("#list-items").prepend(editView.render().$el);
     Mamajamas.Context.ListItems.add(listItemAttrs);
   },
 

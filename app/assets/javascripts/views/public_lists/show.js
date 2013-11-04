@@ -1,5 +1,13 @@
 Mamajamas.Views.PublicListShow = Backbone.View.extend({
 
+  priorityContainers: {},
+
+  prioritySelectors: {
+    1: "div.priority-high",
+    2: "div.priority-med",
+    3: "div.priority-low"
+  },
+
   initialize: function() {
     this.collection.on('reset', this.render, this);
   },
@@ -13,18 +21,23 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
   },
 
   render: function() {
-    // $("#list-items").empty();
-    // this.collection.each(this.appendItem, this);
+    this.clearList();
+    this.collection.each(this.appendItem, this);
     this.initCollapsibles();
     this.initExpandables();
     return this;
   },
 
+  clearList: function() {
+    $("div.collapsible-content").empty();
+  },
+
   appendItem: function(item) {
+    var priority = item.get("priority");
     var view = new Mamajamas.Views.PublicListItemShow({
       model: item
     });
-    $("#list-items").append(view.render().$el);
+    $(this.$priorityContainer(priority)).append(view.render().$el);
   },
 
   sort: function(event) {
@@ -68,6 +81,15 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
       collapseSpeed: 0,
       slicePoint: 265
     });
+  },
+
+  $priorityContainer: function(priority) {
+    var container = this.priorityContainers[priority];
+    if (container == null) {
+      container = $(this.prioritySelectors[priority]);
+      this.priorityContainers[priority] = container;
+    }
+    return container;
   },
 
 });

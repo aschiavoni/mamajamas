@@ -1,18 +1,16 @@
 Mamajamas.Views.PublicListItemShow = Backbone.View.extend({
 
-  tagName: 'tr',
+  tagName: "div",
 
-  template: HandlebarsTemplates['public_list_items/show'],
+  template: HandlebarsTemplates["public_list_items/show"],
 
-  className: "prod prod-filled",
+  className: "prod prod-filled clearfix",
 
   initialize: function() {
     this.$el.attr("id", this.model.get("id"));
   },
 
   events: {
-    'click input.prod-owned': 'doNothing',
-    'click .prod-note': 'toggleNote',
     'click .bt-add': 'addToMyList',
   },
 
@@ -24,22 +22,9 @@ Mamajamas.Views.PublicListItemShow = Backbone.View.extend({
       model: this.model,
     });
     ratingView.readOnly = true;
-    $("td.rating", this.$el).append(ratingView.render().$el);
+    $("div.rating", this.$el).append(ratingView.render().$el);
 
     return this;
-  },
-
-  doNothing: function() {
-    return false;
-  },
-
-  toggleNote: function(event) {
-    var $target = $(event.target);
-    if ($target.hasClass("closed")) {
-      $target.removeClass("closed").addClass("open");
-    } else {
-      $target.removeClass("open").addClass("closed");
-    }
   },
 
   addToMyList: function(event) {
