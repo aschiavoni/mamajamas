@@ -18,6 +18,8 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
     // "click #babygear th.when": "sort",
     // "click #babygear th.rating": "sort",
     // "click #babygear th.priority": "sort"
+    "click .listsort .choicedrop a": "toggleSortList",
+    "click .listsort .choicedrop ol li a": "sort",
   },
 
   render: function() {
@@ -40,13 +42,26 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
     $(this.$priorityContainer(priority)).append(view.render().$el);
   },
 
+  toggleSortList: function(event) {
+    var $target = $(event.currentTarget);
+    var $choiceDrop = $target.parents(".choicedrop");
+    var $list = $choiceDrop.find("ol");
+
+    if ($list.is(":visible")) {
+      $list.hide();
+    } else {
+      $list.show();
+    }
+
+    return false;
+  },
+
   sort: function(event) {
-    var $header = $(event.target);
-    $("#babygear th").removeClass("sorting");
-    $header.addClass("sorting");
-
-    var sortBy = $header.data("sort");
-
+    var $sortLink = $(event.currentTarget);
+    var sortName = $sortLink.html();
+    var $sortDisplay = $sortLink.parents(".choicedrop").children("a");
+    var sortBy = $sortLink.data("sort");
+    $sortDisplay.html(sortName + " <span class=\"ss-dropdown\"></span>");
     this.collection.changeSort(sortBy);
     this.collection.sort();
   },
