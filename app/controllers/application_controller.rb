@@ -43,6 +43,10 @@ class ApplicationController < ActionController::Base
     page_context.body_class = css_class
   end
 
+  def set_tertiary_class(css_class)
+    page_context.tertiary_class = css_class
+  end
+
   def set_subheader(subheader)
     page_context.subheader = subheader
   end

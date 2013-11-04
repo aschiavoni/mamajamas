@@ -119,7 +119,7 @@
       <%= yield %>
     </div>
   </div>
-  <div id="tertiary">
+  <div id="tertiary"<%= " class=#{tertiary_class}" if tertiary_class.present? %>>
     <div class="content">
       <%= content_for?(:tertiary) ? yield(:tertiary) : raw("&nbsp;") -%>
     </div>

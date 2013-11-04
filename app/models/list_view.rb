@@ -19,8 +19,16 @@ class ListView
     @list_entries ||= list.list_entries(category)
   end
 
+  def list_entries_by_priority(priority)
+    list_items_by_priority[priority]
+  end
+
   def category
     @category ||= find_category
+  end
+
+  def category_name
+    @category.present? ? @category.name : "All"
   end
 
   def owner
@@ -46,5 +54,17 @@ class ListView
     owner = list.user
     owner.class.send(:include, UserDecorator)
     owner
+  end
+
+  def list_items_by_priority
+    @list_items_by_priority ||= group_by_priority
+  end
+
+  def group_by_priority
+    by_priority = Hash.new {|h, k| h[k] = []}
+    list_entries.each do |list_entry|
+      by_priority[list_entry.priority] << list_entry
+    end
+    by_priority
   end
 end

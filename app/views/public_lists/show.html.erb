@@ -1,25 +1,25 @@
 <% if @view.preview? -%>
-    <%= content_for :header_overlay do %>
-      <!-- message overlay -->
+  <%= content_for :header_overlay do %>
+    <!-- message overlay -->
     <div class="msg-overlay preview-msg">
-        <div class="overlay-bg">&nbsp;</div>
+      <div class="overlay-bg">&nbsp;</div>
       <div class="gridContainer clearfix">
-          <div class="col1">
-            <h1>Preview</h1>
+        <div class="col1">
+          <h1>Preview</h1>
           <p>This is what your list will look like to others.</p>
         </div>
         <div class="col2">
-            <%= form_tag public_list_publish_list_path do %>
-              <p>
-                <% if current_user.present? && current_user.facebook_connected? -%>
-                  <%= check_box_tag 'facebook_share', '1', true %>
-                  <%= label_tag 'facebook_share', 'Share on Facebook' %>
+          <%= form_tag public_list_publish_list_path do %>
+            <p>
+              <% if current_user.present? && current_user.facebook_connected? -%>
+                <%= check_box_tag 'facebook_share', '1', true %>
+                <%= label_tag 'facebook_share', 'Share on Facebook' %>
               <% else -%>
-                  &nbsp;
+                &nbsp;
               <% end -%>
             </p>
             <p>
-                <button type="submit" class="button" id="bt-cancel" name="cancel" value="1">Cancel</button>
+              <button type="submit" class="button" id="bt-cancel" name="cancel" value="1">Cancel</button>
               <button type="submit" class="button bt-color" id="bt-publish" name="publish" value="1">Save</button>
             </p>
           <% end -%>
@@ -30,93 +30,103 @@
   <% end -%>
 <% end -%>
 <%= content_for :logged_out_header_buttons do %>
-    <li id="startlist">
+  <li id="startlist">
     <%= link_to "Start Your List", quiz_path, class: "button bt-color" %>
   </li>
 <% end -%>
 <%= content_for :subheader_content do %>
-    <p class="pubdate">
-      Created <%= l @view.list.created_at, format: :friendly %>
-      <br>
+  <p class="pubdate">
+    Created <%= l @view.list.created_at, format: :friendly %>
+    <br>
     Updated <%= l @view.list.updated_at, format: :friendly %>
-        </p>
+  </p>
 <% end -%>
 <%= content_for :nav do %>
-    <nav id="categories">
-      <ul>
-        <li class="<%= "cat-selected" if @view.all_category? %>">
-          <%= link_to "All", @view.public_all_items_path %>
+  <nav id="categories">
+    <ul>
+      <li class="<%= "cat-selected" if @view.all_category? %>">
+        <%= link_to "All", @view.public_all_items_path %>
       </li>
       <% @view.categories.each do |category| -%>
-          <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
-            <%= link_to category.name, @view.public_category_path(category.slug) %>
+        <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
+          <%= link_to category.name, @view.public_category_path(category.slug) %>
         </li>
       <% end -%>
     </ul>
   </nav>
 <% end -%>
 <%= content_for :tertiary do %>
-  <div class="content">
-    <div id="module-profile">
+  <div id="module-profile">
+    <div class="content">
+      <p id="sharedby"><span></span>Shared by</p>
+      <h3><%= @view.owner.display_name %></h3>
+      <%= image_tag @view.owner.profile_picture.public_list, alt: "#{@view.owner.username} profile photo" %>
+      <% unless @view.owner == current_user -%>
+        <div class="center">
+          <% if @view.following? -%>
+            <a href="#" id="bt-follow" class="button bt-color bt-active" data-owner-id="<%= @view.owner.id %>" data-relationship-id="<%= @view.following?.id %>">
+              <span class="bt-text1">
+                <span class="ss-check"></span>Following
+              </span>
+              <em class="bt-text2"><span class="ss-delete"></span>Unfollow</em>
+            </a>
+          <% else -%>
+            <a href="#" id="bt-follow" class="button bt-color" data-owner-id="<%= @view.owner.id %>">
+              <span class="ss-check"></span>Follow
+            </a>
+          <% end -%>
+        </div>
+      <% end -%>
+      <% if @view.owner.age.present? -%>
+        <p>Age <%= @view.owner.age %><br></p>
+      <% end -%>
+      <% if @view.owner.notes.present? -%>
+        <div class="expandable">
+          <p><%= @view.owner.notes %></p>
+        </div>
+      <% end -%>
+    </div>
+  </div>
+  <% if @view.owner.followed_users_with_public_lists.any? -%>
+    <div id="module-friends">
       <div class="content">
-        <p id="sharedby"><span></span>Shared by</p>
-        <h3><%= @view.owner.display_name %></h3>
-        <%= image_tag @view.owner.profile_picture.public_list, alt: "#{@view.owner.username} profile photo" %>
-        <% unless @view.owner == current_user -%>
-          <div class="center">
-            <% if @view.following? -%>
-              <a href="#" id="bt-follow" class="button bt-color bt-active" data-owner-id="<%= @view.owner.id %>" data-relationship-id="<%= @view.following?.id %>">
-                <span class="bt-text1">
-                  <span class="ss-check"></span>Following
-                </span>
-                <em class="bt-text2"><span class="ss-delete"></span>Unfollow</em>
-              </a>
-            <% else -%>
-              <a href="#" id="bt-follow" class="button bt-color" data-owner-id="<%= @view.owner.id %>">
-                <span class="ss-check"></span>Follow
-              </a>
-            <% end -%>
-          </div>
-        <% end -%>
-        <% if @view.owner.age.present? -%>
-          <p>Age <%= @view.owner.age %><br></p>
-        <% end -%>
-        <% if @view.owner.notes.present? -%>
-          <div class="expandable">
-            <p><%= @view.owner.notes %></p>
-          </div>
-        <% end -%>
+        <h3><%= @view.owner.possessive_name %> Friends</h3>
+        <ul class="clearfix">
+          <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_public_lists, locals: { show_names: false } %>
+        </ul>
       </div>
     </div>
-    <% if @view.owner.followed_users_with_public_lists.any? -%>
-      <div id="module-friends">
-        <div class="content">
-          <h3>People I'm Following</h3>
-          <ul class="clearfix">
-            <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_public_lists, locals: { show_names: false } %>
-          </ul>
-        </div>
-      </div>
-    <% end -%>
-  </div>
+  <% end -%>
 <% end -%>
 <form id="public-list" class="label-infield" data-list-entries="<%= @list_entries_json %>">
-  <!-- baby gear table ******* -->
-  <table width="100%" cellspacing="0" id="babygear">
-    <thead>
-      <tr>
-        <th scope="col" class="own" data-sort="owned">Own</th>
-        <th scope="col" class="item" data-sort="name">Item</th>
-        <th scope="col" class="rating" data-sort="rating">Rating</th>
-        <th scope="col" class="when" data-sort="age">When to Buy</th>
-        <th scope="col" class="priority sorting" data-sort="priority">Priority</th>
-      </tr>
-    </thead>
-    <tbody id="list-items" class="readonly">
-      <%= render partial: "list_item", collection: @view.list_entries %>
-    </tbody>
-  </table>
-  <!-- end baby gear table ******* -->
+  <div id="listcontrols" class="clearfix">
+    <div class="listhed">
+      <h3><%= @view.category_name %></h3>
+    </div>
+    <div class="listsort">Sort by:
+      <div class="choicedrop"> <a href="#">When to buy <span class="ss-dropdown"></span></a>
+        <ol style="display:none; width:7.5em;">
+          <li><a href="#age" data-sort="age">When to buy</a></li>
+          <li><a href="#name" data-sort="name">Name (A - Z)</a></li>
+          <li><a href="#rating" data-sort="rating">Rating</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix">
+    <h4 id="priority-high-hed" class="priority priority-high collapsible"><strong>Must-Have</strong></h4>
+    <div class="priority-high collapsible-content"> 
+      <%= render partial: "list_item", collection: @view.list_entries_by_priority(1) %>
+    </div>
+    <h4 id="priority-med-hed" class="priority collapsible"><strong>Consider</strong></h4>
+    <div class="priority-med collapsible-content"> 
+      <%= render partial: "list_item", collection: @view.list_entries_by_priority(2) %>
+    </div>
+    <h4 id="priority-low-hed" class="priority collapsible ss-directright"><strong>Don’t Bother</strong></h4>
+    <div class="priority-low collapsible-content">
+      <%= render partial: "list_item", collection: @view.list_entries_by_priority(3) %>
+    </div>
+  </div>
 </form>
 <script type="text/javascript">
  Mamajamas.Context.List = new Mamajamas.Models.List({

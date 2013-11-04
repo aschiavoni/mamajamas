@@ -66,6 +66,7 @@ class PublicListsController < ApplicationController
   def init_view
     set_page_id "publist"
     set_subheader @list.title
+    set_tertiary_class "light"
   end
 
   def find_list

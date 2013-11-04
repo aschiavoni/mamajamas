@@ -1,51 +1,40 @@
-<tr class="prod prod-filled">
-  <td class="own">
-    <%= check_box_tag "owned_#{list_item.id}", "1", list_item.owned?, class: 'owned-cb' %>
-    <%= label_tag "owned_#{list_item.id}", "I own this item." %>
-  </td>
-  <td class="item">
-    <div class="prod-thumb">
-      <%= image_tag list_item.image_url, alt: list_item.name %>
+<div class="prod prod-filled clearfix" id="<%= list_item.id %>">
+  <div class="prod-thumb">
+    <%= image_tag list_item.image_url, alt: list_item.name %>
+  </div>
+  <div class="prod-desc clearfix">
+    <div class="prod-category"> <%= list_item.product_type_name %> </div>
+    <h3>
+      <%= link_to list_item.name, list_item.link, target: "_blank" %>
+    </h3>
+    <% if user_has_list? -%>
+      <a href="/list/all" target="_blank" class="button bt-color bt-add" title="Add to my list"><span class="ss-plus"></span><strong>Add</strong></a>
+    <% end -%>
+    <div class="rating"> <em>My rating:</em>
+      <% rating = list_item.rating || 0 -%>
+      <div class="stars">
+        <div class="egg <%= "egg-full" if rating > 0 %>"></div>
+        <div class="egg <%= "egg-full" if rating > 1 %>"></div>
+        <div class="egg <%= "egg-full" if rating > 2 %>"></div>
+        <div class="egg <%= "egg-full" if rating > 3 %>"></div>
+        <div class="egg <%= "egg-full" if rating > 4 %>"></div>
+      </div>
     </div>
-    <div class="prod-desc">
-      <div class="prod-category"><%= list_item.product_type_name %></div>
-      <h3>
-        <%= link_to list_item.name, list_item.link, target: "_blank" %>
-      </h3>
-      <% if user_has_list? -%>
-        <a href="/list/all" target="_blank" class="button bt-color bt-add" title="Add to my list"><span class="ss-plus"></span><strong>Add to my list</strong></a>
-      <% end -%>
+    <div class="prod-when-own">
+      <div class="when">
+        <%= link_to "Buy", list_item.link, target: "_blank" %> at <%= list_item.age %>
+      </div>
+      <div class="own">
+        <%= list_item.owned? ? "Has" : "Needs" %> <%= list_item.quantity%> of these
+      </div>
+      <div class="gift"><a class="bt-gift" href="#"><span>Gift this to Angie</span></a></div>
+    </div>
+    <div class="prod-note">
       <% if list_item.notes.present? -%>
-        <div class="prod-note closed">
-          <div class="note-content"><%= h list_item.notes %></div>
+        <div class="prod-note-content expandable">
+          <p><span class="ss-chat"></span> <%= h list_item.notes %></p>
         </div>
       <% end -%>
     </div>
-  </td>
-  <td class="rating">
-    <% rating = list_item.rating || 0 -%>
-    <div class="eggs">
-      <div class="egg <%= "egg-full" if rating > 0 %>"></div>
-      <div class="egg <%= "egg-full" if rating > 1 %>"></div>
-      <div class="egg <%= "egg-full" if rating > 2 %>"></div>
-      <div class="egg <%= "egg-full" if rating > 3 %>"></div>
-      <div class="egg <%= "egg-full" if rating > 4 %>"></div>
-    </div>
-  </td>
-  <td class="when"><%= list_item.age %></td>
-  <td class="priority">
-    <% if list_item.priority == 1 -%>
-      <div class="priority-display priority-high" title="Get it">
-        list_item.priority
-      </div>
-    <% elsif list_item.priority == 2 -%>
-      <div class="priority-display priority-med" title="Consider it">
-        list_item.priority
-      </div>
-    <% else -%>
-      <div class="priority-display priority-low" title="Don't bother">
-        list_item.priority
-      </div>
-    <% end -%>
-  </td>
-</tr>
+  </div>
+</div>

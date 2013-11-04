@@ -75,6 +75,10 @@ module ApplicationHelper
     page_context.body_class
   end
 
+  def tertiary_class
+    page_context.tertiary_class
+  end
+
   private
 
   def notification_config
