@@ -26,6 +26,8 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.ListItem.extend({
   },
 
   findItem: function(_view) {
+    // close the help modal if it exists
+    $.modal.close();
     _view.setCurrentPosition();
     _view.model.set('show_chooser', false);
     var search = new Mamajamas.Views.ListItemSearch({

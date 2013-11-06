@@ -6,6 +6,7 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
 
   initialize: function() {
     this.$el.attr("id", "listintro");
+    this.$el.css({ display: "none" });
   },
 
   events: {
@@ -19,6 +20,7 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
 
   show: function() {
     var _view = this;
+    $("#bt-share").removeClass("disabled");
     this.$el.modal({
       containerId:'listintro-container',
       autoPosition:false,
@@ -30,6 +32,8 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
         $(".info-balloon").remove();
         _view.$el.remove();
         $("#listintro").remove();
+        if (Mamajamas.Context.List.get("item_count") == 0)
+          $("#bt-share").addClass("disabled");
       }
     });
     this.showTips();
@@ -43,15 +47,6 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
   },
 
   showTips: function() {
-    $("#categories").prepend($("#categories-balloon", this.$el).html())
-      .addClass("info-element");
-
-    $("#mainnav a.find-moms").after($("#friends-balloon", this.$el).html())
-      .parent("li").addClass("info-element");
-
-    $("#bt-share").after($("#save-balloon", this.$el).html())
-      .parent("li").addClass("info-element");
-
     var $firstItem = $("#my-list div.prod").first();
     var $choose = $(".prod-links a.find-item", $firstItem);
     $choose.after($("#choose-balloon", this.$el).html())
