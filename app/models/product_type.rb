@@ -24,6 +24,10 @@ class ProductType < ActiveRecord::Base
   scope :global, where(user_id: nil)
   scope :user, where("user_id IS NOT NULL")
 
+  before_save do
+    self.image_name.downcase!
+  end
+
   # TODO: remove this when we have all product images available
   # temporary accessor for product types without image names
   def image_name
