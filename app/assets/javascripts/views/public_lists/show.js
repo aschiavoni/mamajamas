@@ -13,11 +13,6 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
   },
 
   events: {
-    // "click #babygear th.own": "sort",
-    // "click #babygear th.item": "sort",
-    // "click #babygear th.when": "sort",
-    // "click #babygear th.rating": "sort",
-    // "click #babygear th.priority": "sort"
     "click .listsort .choicedrop a": "toggleSortList",
     "click .listsort .choicedrop ol li a": "sort",
   },
@@ -70,7 +65,7 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
     $('.priority.collapsible').collapsible({
       cssClose: 'ss-directright',
       cssOpen: 'ss-dropdown',
-      defaultOpen: 'priority-high-hed,priority-med-hed',
+      defaultOpen: 'priority-high-hed,priority-med-hed,priority-low-hed',
       bind: 'click',
       speed:200
     });
