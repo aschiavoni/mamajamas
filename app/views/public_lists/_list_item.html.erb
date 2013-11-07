@@ -1,6 +1,8 @@
 <div class="prod prod-filled clearfix" id="<%= list_item.id %>">
   <div class="prod-thumb">
-    <%= image_tag list_item.image_url, alt: list_item.name %>
+    <%= link_to list_item.link, target: "_blank" do %>
+      <%= image_tag list_item.image_url, alt: list_item.name %>
+    <% end -%>
   </div>
   <div class="prod-desc clearfix">
     <div class="prod-category"> <%= list_item.product_type_name %> </div>
