@@ -10,11 +10,6 @@ describe ListPruner do
     2.times { create(:product_type, priority: 3) }
   end
 
-  it "removes all low priority placeholders from the list" do
-    ListPruner.prune!(list)
-    list.list_items.placeholders.map(&:priority).should_not include(3)
-  end
-
   it "does not remove non-placeholder items with low priority" do
     2.times do
       list.add_list_item(ListItem.create!({
