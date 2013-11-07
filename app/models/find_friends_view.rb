@@ -26,7 +26,7 @@ class FindFriendsView
         existing_facebook_invites[friend[:id]] ||
           build_invite_from_facebook_friend(friend)
       end
-    end.reject { |f| f.blank? }
+    end.reject { |f| f.blank? }.sort { |i, j| i.name <=> j.name }
   end
   memoize :facebook_invites
 
@@ -63,7 +63,8 @@ class FindFriendsView
     User.includes(:list).
       where("users.email" => google_friends_emails).
       where("users.email <> ?", user.email).
-      where("lists.public = true")
+      where("lists.public = true").
+      order(:first_name)
   end
   memoize :mamajamas_google_friends
 
@@ -80,8 +81,7 @@ class FindFriendsView
         existing_google_invites[friend[:email]] ||
           build_invite_from_google_friend(friend)
       end
-    end.reject { |f| f.blank? }
-    p is
+    end.reject { |f| f.blank? }.sort { |i, j| i.name <=> j.name }
     is
   end
   memoize :google_invites

@@ -13,11 +13,10 @@ class FriendsController < ApplicationController
     if current_user.relationships_created_at.blank?
       RelationshipBuilder.new(current_user).build_relationships(@fb_friends)
     end
-    @friends = current_user.followed_users
   end
 
   def list
-    @friends = current_user.followed_users
+    @friends = current_user.followed_users.order("first_name asc")
   end
 
   def new

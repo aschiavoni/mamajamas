@@ -72,7 +72,8 @@ class FacebookGraph
       includes(:list).
       joins(:authentications).
       where("authentications.uid" => uids).
-      where("lists.public = true")
+      where("lists.public = true").
+      order(:first_name)
   end
   memoize :all_mamajamas_friends
 end
