@@ -15,11 +15,6 @@ describe FriendsController do
       response.should be_success
     end
 
-    it "should assign friends" do
-      get :index
-      assigns(:friends).should_not be_nil
-    end
-
   end
 
   describe "new" do
