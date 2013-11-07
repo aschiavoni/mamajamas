@@ -15,7 +15,10 @@ namespace :mamajamas do
 
       ProductType.all.each do |product_type|
         image_name = product_type.image_name
-        product_type.update_column(:image_name, "products/icons/#{image_name}")
+        unless image_name =~ /^products\/icons/
+          product_type.update_column(:image_name,
+                                     "products/icons/#{image_name}")
+        end
       end
 
     end
