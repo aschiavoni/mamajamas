@@ -15,9 +15,7 @@ class ProductSearcher
       pages: (limit.nil? ? 1 : (limit / 10.0).ceil)
     }
 
-    results = fetcher.cached_fetch(query.downcase, fetch_options).reject do |p|
-      p[:medium_image_url].blank? || p[:price].blank?
-    end
+    results = fetcher.cached_fetch(query.downcase, fetch_options)
     results = results.take(limit) if limit.present?
 
     results.map { |r| product_class.new r }
