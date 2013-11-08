@@ -106,7 +106,9 @@ class AmazonProductFetcher
   end
 
   def get_offer(item)
-    item.get_element("Offers").get_element("Offer")
+    offers = item.get_element("Offers")
+    return offers.get_element("Offer") if offers.present?
+    nil
   end
 
   def perform_fetch(page, query, search_index)
