@@ -1,3 +1,4 @@
+# sample with blank medium image url
 --- 
 http_interactions: 
 - request: 
