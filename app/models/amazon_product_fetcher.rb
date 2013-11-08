@@ -65,7 +65,7 @@ class AmazonProductFetcher
           large_image_url: large_image.blank? ? nil : large_image.get('URL'),
           rating: nil,
           rating_count: 0,
-          price: get_price(item),
+          price: get_offer_price(item),
           sales_rank: item.get('SalesRank'),
           brand: item_attributes.get('Brand'),
           department: item_attributes.get('Department'),
@@ -93,6 +93,20 @@ class AmazonProductFetcher
     list_price = item.get_element('ItemAttributes').get_element('ListPrice')
     price = list_price.get('FormattedPrice') if list_price.present?
     price
+  end
+
+  def get_offer_price(item)
+    price = get_price(item)
+    first_offer = get_offer(item)
+    if first_offer.present?
+      offer_price = first_offer.get_element("Price")
+      price = offer_price.get("FormattedPrice") if offer_price.present?
+    end
+    price
+  end
+
+  def get_offer(item)
+    item.get_element("Offers").get_element("Offer")
   end
 
   def perform_fetch(page, query, search_index)

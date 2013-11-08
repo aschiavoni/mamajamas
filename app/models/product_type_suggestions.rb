@@ -11,7 +11,8 @@ class ProductTypeSuggestions
     search_index = search_index(product_type)
     search_query = search_query(product_type)
 
-    suggestions = searcher. search(search_query, search_index, 8).map do |product|
+    suggestions = searcher.search(search_query, search_index, 8).
+                  map do |product|
       product.attributes
     end
 
