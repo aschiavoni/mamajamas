@@ -3,7 +3,9 @@
   <%= image_tag friend.profile_picture.friend, alt: friend.display_name %>
   <% end -%>
   <p>
-    <strong class="mom"><%= friend.display_name %></strong>
+    <%= link_to public_list_path(friend.slug), target: "_blank" do %>
+      <strong class="mom"><%= friend.display_name %></strong>
+    <% end -%>
     <% if following -%>
       <em class="ss-icon check">checked</em>
     <% end -%>
