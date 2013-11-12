@@ -1,32 +1,50 @@
 <% if @view.preview? -%>
   <%= content_for :header_overlay do %>
-    <!-- message overlay -->
     <div class="msg-overlay preview-msg">
-      <div class="overlay-bg">&nbsp;</div>
       <div class="gridContainer clearfix">
-        <div class="col1">
-          <h1>Preview</h1>
-          <p>This is what your list will look like to others.</p>
-        </div>
-        <div class="col2">
-          <%= form_tag public_list_publish_list_path do %>
-            <p>
-              <% if current_user.present? && current_user.facebook_connected? -%>
-                <%= check_box_tag 'facebook_share', '1', true %>
-                <%= label_tag 'facebook_share', 'Share on Facebook' %>
-              <% else -%>
-                &nbsp;
-              <% end -%>
-            </p>
-            <p>
-              <button type="submit" class="button" id="bt-cancel" name="cancel" value="1">Cancel</button>
-              <button type="submit" class="button bt-color" id="bt-publish" name="publish" value="1">Save</button>
-            </p>
-          <% end -%>
-        </div>
+        <%= form_tag public_list_publish_list_path do %>
+          <div class="col1">
+            <h1>List Preview</h1>
+            <p>This is what your saved list will look like to other users.</p>
+	    <p id="listprivacy-hed" class="collapsible ss-directright"><strong>Privacy Setting: </strong> 
+	      <em class="privacy-status" style="display:inline;"><span class="icon-globe"></span> Anyone can see your list.</em>
+	      <em class="privacy-status" style="display:none;"><span class="icon-bird"></span> Mamajamas users can see your list.</em>
+	      <em class="privacy-status" style="display:none;"><span class="icon-gift"></span> Registry: anyone can see items you need.</em>
+	      <span class="helper">(click to edit)</span>
+	    </p>
+            <div id="listprivacy-select" class="collapsible-content" style="display: none;">
+	      <p>Who would you like to see your list?</p>
+	      <fieldset>
+		<ul>
+		  <li>
+		    <label>
+		      <input type="radio" name="listprivacy-radio" value="radio" id="listprivacy-radio_0" checked>
+		      Anyone</label> — Everyone who visits Mamajamas. 
+		  </li>
+		  <li>
+		    <label>
+		      <input type="radio" name="listprivacy-radio" value="radio" id="listprivacy-radio_1">
+		      Mamajamas users</label> — Only logged-in Mamajamas users.
+		  </li>
+		  <li>
+		    <label>
+		      <input type="radio" name="listprivacy-radio" value="radio" id="listprivacy-radio_2">
+		      Registry option</label> — Everyone can see only items you need.
+		  </li> 
+		</ul>
+	      </fieldset>
+	    </div>
+          </div>
+          <div class="col2">
+	    <p>
+	      <button type="submit" class="button" id="bt-cancel">Cancel</button>
+              <button type="submit" class="button bt-color" id="bt-publish">Save</button>
+	    </p>
+          </div>
+	</form>
+        <% end -%>
       </div>
     </div>
-    <!-- / end message overlay -->
   <% end -%>
 <% end -%>
 <%= content_for :logged_out_header_buttons do %>

@@ -26,7 +26,7 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
   },
 
   clearList: function() {
-    $("div.collapsible-content").empty();
+    $("#public-list div.collapsible-content").empty();
   },
 
   appendItem: function(item) {
@@ -62,7 +62,7 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
   },
 
   initCollapsibles: function() {
-    $('.priority.collapsible').collapsible({
+    $('.priority.collapsible, .preview-msg .collapsible').collapsible({
       cssClose: 'ss-directright',
       cssOpen: 'ss-dropdown',
       defaultOpen: 'priority-high-hed,priority-med-hed,priority-low-hed',
