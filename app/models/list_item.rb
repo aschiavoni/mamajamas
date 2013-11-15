@@ -21,7 +21,6 @@ class ListItem < ActiveRecord::Base
 
   scope :placeholders, where(placeholder: true)
   scope :user_items, where(placeholder: false)
-  scope :shared_items, where(placeholder: false, shared: true)
   scope :vendored_items, where("vendor IS NOT NULL")
 
   def self.unique_products

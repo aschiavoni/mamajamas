@@ -28,7 +28,7 @@ class List < ActiveRecord::Base
   end
 
   def public_list_entries(category = nil)
-    list_items.shared_items.
+    list_items.user_items.
       by_category(category).
       includes(:category).
       includes(:age_range).
@@ -37,7 +37,7 @@ class List < ActiveRecord::Base
 
   def public_list_categories
     categories.
-      where(id: list_items.shared_items.select('DISTINCT(category_id)')).
+      where(id: list_items.user_items.select('DISTINCT(category_id)')).
       order(:name)
   end
 
@@ -56,24 +56,14 @@ class List < ActiveRecord::Base
 
   def share_public!
     set_public(true)
-    share_all_list_items!
   end
 
   def unshare_public!
     set_public(false)
-    unshare_all_list_items!
-  end
-
-  def share_all_list_items!
-    list_items.user_items.where(shared: false).update_all(shared: true)
-  end
-
-  def unshare_all_list_items!
-    list_items.user_items.where(shared: true).update_all(shared: false)
   end
 
   def add_list_item_placeholder(product_type)
-    list_item = ListItem.new do |list_item|
+    placeholder = ListItem.new do |list_item|
       list_item.placeholder = true
       list_item.product_type_name = product_type.name
       list_item.product_type = product_type
@@ -84,14 +74,13 @@ class List < ActiveRecord::Base
       list_item.quantity = product_type.recommended_quantity
     end
 
-    list_items << list_item
+    list_items << placeholder
 
-    list_item
+    placeholder
   end
 
   def add_list_item(list_item, placeholder = false)
     list_item.placeholder = placeholder
-    list_item.shared = self.public?
     list_items << list_item
     list_item
   end
@@ -148,7 +137,6 @@ class List < ActiveRecord::Base
       vendor_id: orig.vendor_id
     }).tap do |li|
       li.age = orig.age
-      li.shared = self.public?
     end
   end
 

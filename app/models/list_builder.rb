@@ -96,7 +96,7 @@ class ListBuilder
     %Q(INSERT INTO "list_items"
     ("age_range_id", "category_id", "created_at", "image_url", "list_id",
     "placeholder", "priority", "product_type_id", "product_type_name",
-    "quantity", "shared", "updated_at")
+    "quantity", "updated_at")
     VALUES (
     #{pt.age_range_id},
     #{pt.category_id},
@@ -108,7 +108,6 @@ class ListBuilder
     #{pt.id},
     '#{pt.name}',
     #{pt.recommended_quantity},
-    FALSE,
     '#{ts}'
     )
     )
