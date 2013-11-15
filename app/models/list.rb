@@ -1,4 +1,9 @@
 class List < ActiveRecord::Base
+  PRIVACY_PRIVATE       = 0
+  PRIVACY_PUBLIC        = 1
+  PRIVACY_AUTHENTICATED = 2
+  PRIVACY_REGISTRY      = 3
+
   attr_accessible :title
 
   belongs_to :user
@@ -18,6 +23,22 @@ class List < ActiveRecord::Base
     write_attribute(:title, new_title) unless new_title == default_title
   end
 
+  def private?
+    privacy == PRIVACY_PRIVATE
+  end
+
+  def public?
+    privacy == PRIVACY_PUBLIC
+  end
+
+  def authed_users_only?
+    privacy == PRIVACY_AUTHENTICATED
+  end
+
+  def registry?
+    privacy == PRIVACY_REGISTRY
+  end
+
   def list_entries(category = nil)
     list_items.
       by_category(category).
@@ -25,6 +46,26 @@ class List < ActiveRecord::Base
       includes(:category).
       includes(:age_range).
       order(list_entries_sort_order)
+  end
+
+  def shared_list_entries(category = nil)
+    return [] if private?
+    shared_items = list_items.user_items.
+      by_category(category).
+      includes(:category).
+      includes(:age_range)
+
+    if registry?
+      shared_items = shared_items.where(owned: false)
+    end
+
+    shared_items.order(list_entries_sort_order)
+  end
+
+  def shared_list_categories
+    categories.
+      where(id: shared_list_entries.select('DISTINCT(category_id)')).
+      order(:name)
   end
 
   def public_list_entries(category = nil)
@@ -161,7 +202,8 @@ class List < ActiveRecord::Base
   end
 
   def set_public(public)
-    self.public = public
+    privacy = public ? PRIVACY_PUBLIC : PRIVACY_PRIVATE
+    self.privacy = privacy
     self.save!
   end
 

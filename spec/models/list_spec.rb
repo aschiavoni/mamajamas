@@ -157,11 +157,6 @@ describe List do
       list_item.should be_placeholder
     end
 
-    it "new list items should not be shared" do
-      list_item = list.add_list_item(build(:list_item, list_id: nil))
-      list_item.should_not be_shared
-    end
-
   end
 
   describe "available product types" do
@@ -262,6 +257,41 @@ describe List do
         end
       end
 
+    end
+
+  end
+
+  describe "shared list entries" do
+
+    let(:current_user) { create(:user) }
+
+    before(:all) do
+      @list = current_user.build_list!
+      @list.add_list_item(build(:list_item, list_id: nil))
+      @list.add_list_item(build(:list_item,
+                                list_id: nil, owned: true))
+    end
+
+    it "has no shared entries when list is private" do
+      @list.privacy = List::PRIVACY_PRIVATE
+      @list.shared_list_entries.should be_empty
+    end
+
+    it "has all user items shared when list is public" do
+      @list.privacy = List::PRIVACY_PUBLIC
+      @list.shared_list_entries.count.should ==
+        @list.list_items.user_items.count
+    end
+
+    it "has all user items shared when list is authenticated only" do
+      @list.privacy = List::PRIVACY_AUTHENTICATED
+      @list.shared_list_entries.count.should ==
+        @list.list_items.user_items.count
+    end
+
+    it "has only needed shared entries when list is registry" do
+      @list.privacy = List::PRIVACY_REGISTRY
+      @list.shared_list_entries.map(&:owned).uniq.should == [ false ]
     end
 
   end
