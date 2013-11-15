@@ -301,7 +301,6 @@ CREATE TABLE list_items (
     placeholder boolean DEFAULT false NOT NULL,
     product_type_name character varying(255),
     list_item_image_id integer,
-    shared boolean DEFAULT false NOT NULL,
     vendor character varying(255),
     vendor_id character varying(255),
     quantity integer DEFAULT 1 NOT NULL
@@ -1345,3 +1344,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131011143458');
 INSERT INTO schema_migrations (version) VALUES ('20131011143530');
 
 INSERT INTO schema_migrations (version) VALUES ('20131029014324');
+
+INSERT INTO schema_migrations (version) VALUES ('20131115130239');
