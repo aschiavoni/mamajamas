@@ -4,7 +4,7 @@
     <%= link_to "Save", profile_path, id: "bt-share", class: "button bt-color" + (@view.list.has_items? ? "" : " disabled") %>
   </li>
   <li>
-    <%= link_to "View", public_list_path(current_user), id: "bt-view", class: "button" + (@view.list.public? && @view.list.has_items? ? "" : " disabled") %>
+    <%= link_to "View", public_list_path(current_user), id: "bt-view", class: "button" + (@view.list.has_items? && !@view.list.private? ? "" : " disabled") %>
   </li>
 </ul>
 <% end if completed_list? -%>
