@@ -1,7 +1,7 @@
 class PublicListsController < ApplicationController
   before_filter :authenticate_user!, only: [ :preview, :publish ]
   before_filter :find_list, only: [ :preview, :publish ]
-  before_filter :find_public_list, only: [ :show ]
+  before_filter :find_shared_list, only: [ :show ]
   before_filter :init_view
 
   def show
@@ -74,9 +74,17 @@ class PublicListsController < ApplicationController
     not_found if @list.blank?
   end
 
-  def find_public_list
+  def find_shared_list
     owner = User.find(params[:slug])
     @list = owner.list if owner.present?
-    not_found if @list.blank? || !@list.public?
+    not_found unless shareable?(@list)
+  end
+
+  private
+
+  def shareable?(list)
+    return false if @list.blank? || @list.private?
+    return false if @list.authenticated_users_only? && !current_user
+    return true
   end
 end

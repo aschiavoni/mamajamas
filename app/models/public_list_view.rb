@@ -9,11 +9,11 @@ class PublicListView < ListView
   end
 
   def list_entries
-    @list_entries ||= get_list_entries
+    @list_entries ||= list.shared_list_entries(category)
   end
 
   def categories
-    @categories ||= get_categories
+    @categories ||= list.shared_list_categories
   end
 
   def following?
@@ -34,24 +34,6 @@ class PublicListView < ListView
       public_list_preview_list_path
     else
       public_list_path(owner.slug)
-    end
-  end
-
-  private
-
-  def get_list_entries
-    if preview?
-      list.public_preview_list_entries(category)
-    else
-      list.public_list_entries(category)
-    end
-  end
-
-  def get_categories
-    if preview?
-      list.public_preview_list_categories
-    else
-      list.public_list_categories
     end
   end
 end

@@ -5,6 +5,7 @@ class List < ActiveRecord::Base
   PRIVACY_REGISTRY      = 3
 
   attr_accessible :title
+  attr_accessible :privacy
 
   belongs_to :user
   has_many :categories, through: :list_items, uniq: true do
@@ -31,7 +32,7 @@ class List < ActiveRecord::Base
     privacy == PRIVACY_PUBLIC
   end
 
-  def authed_users_only?
+  def authenticated_users_only?
     privacy == PRIVACY_AUTHENTICATED
   end
 
@@ -63,35 +64,9 @@ class List < ActiveRecord::Base
   end
 
   def shared_list_categories
+    category_ids = shared_list_entries.map(&:category_id).uniq
     categories.
-      where(id: shared_list_entries.select('DISTINCT(category_id)')).
-      order(:name)
-  end
-
-  def public_list_entries(category = nil)
-    list_items.user_items.
-      by_category(category).
-      includes(:category).
-      includes(:age_range).
-      order(list_entries_sort_order)
-  end
-
-  def public_list_categories
-    categories.
-      where(id: list_items.user_items.select('DISTINCT(category_id)')).
-      order(:name)
-  end
-
-  def public_preview_list_entries(category = nil)
-    list_items.user_items.
-      by_category(category).
-      includes(:age_range).
-      order("list_items.placeholder ASC, age_ranges.position ASC, list_items.priority ASC")
-  end
-
-  def public_preview_list_categories
-    categories.
-      where(id: list_items.user_items.select('DISTINCT(category_id)')).
+      where(id: category_ids).
       order(:name)
   end
 
