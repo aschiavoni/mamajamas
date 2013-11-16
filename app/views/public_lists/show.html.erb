@@ -7,9 +7,9 @@
             <h1>List Preview</h1>
             <p>This is what your saved list will look like to other users.</p>
 	    <p id="listprivacy-hed" class="collapsible ss-directright"><strong>Privacy Setting: </strong> 
-	      <em class="privacy-status" style="display:inline;"><span class="icon-globe"></span> Anyone can see your list.</em>
-	      <em class="privacy-status" style="display:none;"><span class="icon-bird"></span> Mamajamas users can see your list.</em>
-	      <em class="privacy-status" style="display:none;"><span class="icon-gift"></span> Registry: anyone can see items you need.</em>
+	      <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_PUBLIC || @view.list.privacy == List::PRIVACY_PRIVATE ? "inline" : "none" %>;"><span class="icon-globe"></span> Anyone can see your list.</em>
+	      <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_AUTHENTICATED ? "inline" : "none" %>;"><span class="icon-bird"></span> Mamajamas users can see your list.</em>
+	      <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_REGISTRY ? "inline" : "none" %>;"><span class="icon-gift"></span> Registry: anyone can see items you need.</em>
 	      <span class="helper">(click to edit)</span>
 	    </p>
             <div id="listprivacy-select" class="collapsible-content" style="display: none;">
@@ -18,17 +18,17 @@
 		<ul>
 		  <li>
 		    <label>
-		      <input type="radio" name="listprivacy-radio" value="radio" id="listprivacy-radio_0" checked>
+                      <%= radio_button_tag :privacy, List::PRIVACY_PUBLIC, @view.list.privacy == List::PRIVACY_PUBLIC || @view.list.privacy == List::PRIVACY_PRIVATE %>
 		      Anyone</label> — Everyone who visits Mamajamas. 
 		  </li>
 		  <li>
 		    <label>
-		      <input type="radio" name="listprivacy-radio" value="radio" id="listprivacy-radio_1">
+                      <%= radio_button_tag :privacy, List::PRIVACY_AUTHENTICATED, @view.list.privacy == List::PRIVACY_AUTHENTICATED %>
 		      Mamajamas users</label> — Only logged-in Mamajamas users.
 		  </li>
 		  <li>
 		    <label>
-		      <input type="radio" name="listprivacy-radio" value="radio" id="listprivacy-radio_2">
+                      <%= radio_button_tag :privacy, List::PRIVACY_REGISTRY, @view.list.privacy == List::PRIVACY_REGISTRY %>
 		      Registry option</label> — Everyone can see only items you need.
 		  </li> 
 		</ul>
@@ -37,8 +37,8 @@
           </div>
           <div class="col2">
 	    <p>
-	      <button type="submit" class="button" id="bt-cancel">Cancel</button>
-              <button type="submit" class="button bt-color" id="bt-publish">Save</button>
+	      <button type="submit" class="button" id="bt-cancel" name="cancel" value="1">Cancel</button>
+              <button type="submit" class="button bt-color" id="bt-publish" name="publish" value="1">Save</button>
 	    </p>
           </div>
 	</form>

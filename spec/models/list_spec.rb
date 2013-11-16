@@ -272,9 +272,10 @@ describe List do
                                 list_id: nil, owned: true))
     end
 
-    it "has no shared entries when list is private" do
+    it "has all user items shared when list is private" do
       @list.privacy = List::PRIVACY_PRIVATE
-      @list.shared_list_entries.should be_empty
+      @list.shared_list_entries.count.should ==
+        @list.list_items.user_items.count
     end
 
     it "has all user items shared when list is public" do

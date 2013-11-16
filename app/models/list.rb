@@ -50,7 +50,6 @@ class List < ActiveRecord::Base
   end
 
   def shared_list_entries(category = nil)
-    return [] if private?
     shared_items = list_items.user_items.
       by_category(category).
       includes(:category).

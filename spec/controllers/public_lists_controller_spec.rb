@@ -101,18 +101,28 @@ describe PublicListsController do
     before(:each) { sign_in user }
 
     it "should assign list" do
-      post 'publish', publish: '1'
+      post 'publish', privacy: List::PRIVACY_PUBLIC
       assigns(:list).should == @list
     end
 
     it 'should redirect to public list path on publish' do
-      post 'publish', publish: '1'
+      post 'publish', privacy: List::PRIVACY_PUBLIC
       response.should redirect_to(public_list_path(user.slug))
     end
 
     it 'should make list public on publish' do
-      post 'publish', publish: '1'
+      post 'publish', privacy: List::PRIVACY_PUBLIC
       assigns(:list).should be_public
+    end
+
+    it 'should make list authenticated on publish' do
+      post 'publish', privacy: List::PRIVACY_AUTHENTICATED
+      assigns(:list).should be_authenticated_users_only
+    end
+
+    it 'should make list registry on publish' do
+      post 'publish', privacy: List::PRIVACY_REGISTRY
+      assigns(:list).should be_registry
     end
 
     it 'should redirect to profile path when cancelled' do
@@ -123,7 +133,7 @@ describe PublicListsController do
     it 'should send shared list notification' do
       SharedListNotifier.should_receive(:send_shared_list_notification).
         with(an_instance_of(List))
-      post 'publish', publish: '1'
+      post 'publish', privacy: List::PRIVACY_PUBLIC
     end
 
   end

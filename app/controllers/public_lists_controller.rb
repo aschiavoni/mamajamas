@@ -28,8 +28,8 @@ class PublicListsController < ApplicationController
   end
 
   def publish
-    if params[:publish] == '1'
-      @list.share_public!
+    unless params[:cancel] == '1'
+      @list.update_attributes!(privacy: params[:privacy])
       SharedListNotifier.send_shared_list_notification(@list)
       redirect_to public_list_path(current_user.slug)
     else
