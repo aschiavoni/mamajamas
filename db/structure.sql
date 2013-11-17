@@ -341,7 +341,8 @@ CREATE TABLE lists (
     shared_list_notification_sent_at timestamp without time zone,
     completed_at timestamp without time zone,
     built_at timestamp without time zone,
-    privacy integer DEFAULT 0 NOT NULL
+    privacy integer DEFAULT 0 NOT NULL,
+    public boolean DEFAULT false NOT NULL
 );
 
 
