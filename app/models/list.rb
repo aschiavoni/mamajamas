@@ -1,7 +1,7 @@
 class List < ActiveRecord::Base
   PRIVACY_PRIVATE       = 0
   PRIVACY_PUBLIC        = 1
-  PRIVACY_AUTHENTICATED = 2
+  PRIVACY_REGISTERED    = 2
   PRIVACY_REGISTRY      = 3
 
   attr_accessible :title
@@ -32,8 +32,8 @@ class List < ActiveRecord::Base
     privacy == PRIVACY_PUBLIC
   end
 
-  def authenticated_users_only?
-    privacy == PRIVACY_AUTHENTICATED
+  def registered_users_only?
+    privacy == PRIVACY_REGISTERED
   end
 
   def registry?
@@ -67,14 +67,6 @@ class List < ActiveRecord::Base
     categories.
       where(id: category_ids).
       order(:name)
-  end
-
-  def share_public!
-    set_public(true)
-  end
-
-  def unshare_public!
-    set_public(false)
   end
 
   def add_list_item_placeholder(product_type)
@@ -173,12 +165,6 @@ class List < ActiveRecord::Base
     else
       "List"
     end
-  end
-
-  def set_public(public)
-    privacy = public ? PRIVACY_PUBLIC : PRIVACY_PRIVATE
-    self.privacy = privacy
-    self.save!
   end
 
   def list_entries_sort_order

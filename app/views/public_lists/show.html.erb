@@ -8,7 +8,7 @@
             <p>This is what your saved list will look like to other users.</p>
 	    <p id="listprivacy-hed" class="collapsible ss-directright"><strong>Privacy Setting: </strong> 
 	      <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_PUBLIC || @view.list.privacy == List::PRIVACY_PRIVATE ? "inline" : "none" %>;"><span class="icon-globe"></span> Anyone can see your list.</em>
-	      <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_AUTHENTICATED ? "inline" : "none" %>;"><span class="icon-bird"></span> Mamajamas users can see your list.</em>
+	      <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_REGISTERED ? "inline" : "none" %>;"><span class="icon-bird"></span> Mamajamas users can see your list.</em>
 	      <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_REGISTRY ? "inline" : "none" %>;"><span class="icon-gift"></span> Registry: anyone can see items you need.</em>
 	      <span class="helper">(click to edit)</span>
 	    </p>
@@ -23,7 +23,7 @@
 		  </li>
 		  <li>
 		    <label>
-                      <%= radio_button_tag :privacy, List::PRIVACY_AUTHENTICATED, @view.list.privacy == List::PRIVACY_AUTHENTICATED %>
+                      <%= radio_button_tag :privacy, List::PRIVACY_REGISTERED, @view.list.privacy == List::PRIVACY_REGISTERED %>
 		      Mamajamas users</label> — Only logged-in Mamajamas users.
 		  </li>
 		  <li>

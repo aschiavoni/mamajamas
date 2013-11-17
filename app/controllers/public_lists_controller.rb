@@ -17,7 +17,13 @@ class PublicListsController < ApplicationController
     @list.increment_public_view_count
 
     respond_to do |format|
-      format.html
+      format.html do
+        if @list.registered_users_only? && !allowed_user?
+          render "private"
+        else
+          render "show"
+        end
+      end
     end
   end
 
@@ -84,7 +90,10 @@ class PublicListsController < ApplicationController
 
   def shareable?(list)
     return false if @list.blank? || @list.private?
-    return false if @list.authenticated_users_only? && !current_user
     return true
+  end
+
+  def allowed_user?
+    current_user && !current_user.guest?
   end
 end

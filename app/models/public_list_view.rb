@@ -16,6 +16,10 @@ class PublicListView < ListView
     @categories ||= list.shared_list_categories
   end
 
+  def all_categories
+    @all_categories ||= Category.all
+  end
+
   def following?
     return false unless current_user
     current_user.following?(owner)

@@ -16,6 +16,11 @@ window.Mamajamas.Views.AppAuth = Backbone.View.extend({
       model: this.model,
       el: '#login-modal'
     });
+
+    this._privateLoginModal = new Mamajamas.Views.LoginModal({
+      model: this.model,
+      el: '#private-modal'
+    });
   },
 
   events: {

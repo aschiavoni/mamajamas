@@ -62,6 +62,11 @@ window.Mamajamas = {
       Backbone.history.start();
     }
 
+    // public authenticated users only list
+    if ($("#private-modal").length > 0) {
+      new Mamajamas.Views.PublicListPrivate();
+    }
+
     // quiz
     if ($('#quiz').length > 0) {
       new Mamajamas.Routers.Quiz();

@@ -285,7 +285,7 @@ describe List do
     end
 
     it "has all user items shared when list is authenticated only" do
-      @list.privacy = List::PRIVACY_AUTHENTICATED
+      @list.privacy = List::PRIVACY_REGISTERED
       @list.shared_list_entries.count.should ==
         @list.list_items.user_items.count
     end
@@ -293,31 +293,6 @@ describe List do
     it "has only needed shared entries when list is registry" do
       @list.privacy = List::PRIVACY_REGISTRY
       @list.shared_list_entries.map(&:owned).uniq.should == [ false ]
-    end
-
-  end
-
-  describe "sharing" do
-
-    let(:list) { create(:list) }
-    let(:product_type) { create(:product_type) }
-
-    it "should not be public by default" do
-      list.should_not be_public
-    end
-
-    it "shares list and marks it as public" do
-      list.share_public!
-      list.reload
-      list.should be_public
-    end
-
-    it "should unshare list and mark it as not public" do
-      list.share_public!
-      list.reload
-      list.unshare_public!
-      list.reload
-      list.should_not be_public
     end
 
   end
