@@ -3,6 +3,15 @@
   <dl class="clearfix">
     <fieldset>
       <!-- username -->
+      <dt>Full Name<strong class="required">*</strong></dt>
+      <dd>
+        <p>
+          <%= f.label :full_name, "First and last name" %>
+          <br />
+          <%= f.text_field :full_name %>
+          <%= field_error @profile, :full_name %>
+        </p>
+      </dd>
       <dt>Email<strong class="required">*</strong></dt>
       <dd>
         <p>
