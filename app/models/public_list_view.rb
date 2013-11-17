@@ -9,7 +9,7 @@ class PublicListView < ListView
   end
 
   def list_entries
-    @list_entries ||= list.shared_list_entries(category)
+    @list_entries ||= list.shared_list_entries(category, preview?)
   end
 
   def categories

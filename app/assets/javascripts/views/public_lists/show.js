@@ -8,8 +8,24 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
     3: "div.priority-low"
   },
 
+  currentPrivacy: null,
+
+  hideOwned: false,
+
+  privacyRegistry: 3,
+
   initialize: function() {
+    Mamajamas.Context.Test = this.collection;
     this.collection.on('reset', this.render, this);
+
+    this.initCollapsibles();
+    this.initExpandables();
+
+    // since the privacy options are not contained in this.$el, we
+    // will wire the events up manually
+    this.currentPrivacy = parseInt($("input[name=privacy]:checked").val());
+    this.hideOwned = this.currentPrivacy == this.privacyRegistry;
+    $("input[name=privacy]").on("change", $.proxy(this.updatePrivacy, this));
   },
 
   events: {
@@ -20,8 +36,6 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
   render: function() {
     this.clearList();
     this.collection.each(this.appendItem, this);
-    this.initCollapsibles();
-    this.initExpandables();
     return this;
   },
 
@@ -31,6 +45,8 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
 
   appendItem: function(item) {
     var priority = item.get("priority");
+    if (this.hideOwned && item.get("owned"))
+      return;
     var view = new Mamajamas.Views.PublicListItemShow({
       model: item
     });
@@ -91,6 +107,22 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
       collapseSpeed: 0,
       slicePoint: 265
     });
+  },
+
+  updatePrivacy: function(event) {
+    var $selected = $(event.currentTarget);
+    var newPrivacy = parseInt($selected.val());
+
+    if (this.currentPrivacy != newPrivacy) {
+      if (newPrivacy == this.privacyRegistry) {
+        this.hideOwned = true;
+        this.render();
+      } else if (this.currentPrivacy == this.privacyRegistry) {
+        this.hideOwned = false;
+        this.render();
+      }
+      this.currentPrivacy = newPrivacy;
+    }
   },
 
   $priorityContainer: function(priority) {

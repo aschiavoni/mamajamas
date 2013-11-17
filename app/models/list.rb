@@ -49,13 +49,13 @@ class List < ActiveRecord::Base
       order(list_entries_sort_order)
   end
 
-  def shared_list_entries(category = nil)
+  def shared_list_entries(category = nil, ignore_privacy = false)
     shared_items = list_items.user_items.
       by_category(category).
       includes(:category).
       includes(:age_range)
 
-    if registry?
+    if !ignore_privacy && registry?
       shared_items = shared_items.where(owned: false)
     end
 

@@ -295,6 +295,12 @@ describe List do
       @list.shared_list_entries.map(&:owned).uniq.should == [ false ]
     end
 
+    it "has all user items shared when ignoring privacy" do
+      @list.privacy = List::PRIVACY_REGISTRY
+      @list.shared_list_entries(nil, true).count.should ==
+        @list.list_items.user_items.count
+    end
+
   end
 
   describe "view counts" do
