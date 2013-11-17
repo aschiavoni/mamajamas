@@ -21,7 +21,7 @@
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :id => "private-list-login-form", :class => "login-form label-infield" }) do |f| %>
     <!-- modal window content -->
     <div class="content">
-      <p class="intro center larger">You must be logged-in to Mamajamas to see Jane’s list.</p>        
+      <p class="intro center larger">You must be logged-in to Mamajamas to see <%= @view.list.title %>.</p>        
       <% if devise_mapping.rememberable? -%>
         <%= f.hidden_field :remember_me, :value => true %>
       <% end -%>
