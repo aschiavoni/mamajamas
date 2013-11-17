@@ -10,14 +10,14 @@
     </span>
   </td>
   <td>
-    <% if user.public_list? -%>
+    <% if user.shared_list? -%>
       <%= link_to user.username, public_list_path(user.username) %>
     <% else -%>
       <%= user.username %>
     <% end -%>
   </td>
   <td>
-    <%= check_box_tag "public_list", "1", user.public_list?, disabled: true %>
+    <%= check_box_tag "shared_list", "1", user.shared_list?, disabled: true %>
   </td>
   <td>
     <%= user.signed_up %>

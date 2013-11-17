@@ -32,7 +32,7 @@ class RecommendedFriend
       includes(:list).
       where("users.id <> ?", user.id).
       where(guest: false).
-      where("lists.public = true")
+      where("lists.privacy <> ?", List::PRIVACY_PRIVATE)
 
     if exclude_following
       followed_ids = user.relationships.map(&:followed_id)

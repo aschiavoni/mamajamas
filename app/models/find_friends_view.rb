@@ -63,7 +63,7 @@ class FindFriendsView
     User.includes(:list).
       where("users.email" => google_friends_emails).
       where("users.email <> ?", user.email).
-      where("lists.public = true").
+      where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
       order(:first_name)
   end
   memoize :mamajamas_google_friends

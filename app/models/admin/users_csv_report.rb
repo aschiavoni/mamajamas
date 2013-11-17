@@ -30,7 +30,7 @@ class Admin::UsersCsvReport
       :last_name,
       :created_at,
       :list_item_count,
-      :public_list?,
+      :shared_list?,
       :sign_in_count,
       :last_sign_in_at,
       :facebook_connected?,

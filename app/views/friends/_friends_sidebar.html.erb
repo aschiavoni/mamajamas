@@ -1,6 +1,6 @@
 <h3>People I'm Following</h3>
 <ul class="clearfix">
-  <%= render partial: "friends/sidebar_friend", collection: user.followed_users_with_public_lists %>
+  <%= render partial: "friends/sidebar_friend", collection: user.followed_users_with_shared_lists %>
 </ul>
 <p>
   <%= link_to find_friends_path(current_user), id: 'find-moms', class: "button" do %>
