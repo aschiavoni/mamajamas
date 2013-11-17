@@ -336,7 +336,6 @@ CREATE TABLE lists (
     user_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    public boolean DEFAULT false NOT NULL,
     view_count integer DEFAULT 0 NOT NULL,
     public_view_count integer DEFAULT 0 NOT NULL,
     shared_list_notification_sent_at timestamp without time zone,
@@ -1351,3 +1350,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131115130239');
 INSERT INTO schema_migrations (version) VALUES ('20131115134849');
 
 INSERT INTO schema_migrations (version) VALUES ('20131115222228');
+
+INSERT INTO schema_migrations (version) VALUES ('20131117145900');

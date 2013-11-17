@@ -6,15 +6,14 @@ describe PublicListsController do
 
   before(:all) do
     @list = user.build_list!
-  end
-
-  before(:each) do
     @list.update_attributes!(privacy: List::PRIVACY_PUBLIC)
   end
 
   describe "show" do
 
-    before(:all) { @list.update_attributes!(privacy: List::PRIVACY_PUBLIC) }
+    before(:each) do
+      @list.update_attributes!(privacy: List::PRIVACY_PUBLIC)
+    end
 
     it "returns a 404 if the user is not found" do
       lambda {
