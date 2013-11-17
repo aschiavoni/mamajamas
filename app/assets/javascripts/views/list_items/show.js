@@ -74,7 +74,8 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
         product_type_id: this.model.get('product_type_id'),
         product_type_name: this.model.get('product_type_name'),
         product_type_plural_name: this.model.get('product_type_plural_name'),
-        image_url: this.model.get('product_type_image_name')
+        image_url: this.model.get('product_type_image_name'),
+        owned: false,
       })
     });
 

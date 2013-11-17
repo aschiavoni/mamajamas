@@ -167,7 +167,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
       age: this.itemField("age").val(),
       rating: this.itemField("rating").val(),
       image_url: this.itemField("image_url").val(),
-      owned: this.itemField("owned").val(),
+      owned: _view.model.get("owned"),
       placeholder: false,
       vendor_id: this.itemField("vendor_id").val(),
       vendor: this.itemField("vendor").val(),

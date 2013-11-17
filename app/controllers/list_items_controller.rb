@@ -43,6 +43,7 @@ class ListItemsController < ApplicationController
     [ :id, :category, :product_type, :age_position  ].each do |key|
       params_to_clean.delete(key)
     end
+    params_to_clean[:owned] = false if params_to_clean[:owned].blank?
     params_to_clean
   end
 end
