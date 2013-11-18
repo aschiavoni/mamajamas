@@ -27,7 +27,7 @@
         <%= link_to "Buy", list_item.link, target: "_blank" %> at <%= list_item.age %>
       </div>
       <div class="own">
-        <%= list_item.owned? ? "Has" : "Needs" %> <%= list_item.quantity%> of these
+        <strong><%= list_item.owned? ? "Has" : "Needs" %></strong> <%= list_item.quantity%> of these
       </div>
     </div>
     <div class="prod-note">
