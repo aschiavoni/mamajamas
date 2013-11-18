@@ -26,6 +26,14 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
     this.currentPrivacy = parseInt($("input[name=privacy]:checked").val());
     this.hideOwned = this.currentPrivacy == this.privacyRegistry;
     $("input[name=privacy]").on("change", $.proxy(this.updatePrivacy, this));
+
+    if ($("#friends-modal").length > 0) {
+      $('#friends-modal').modal({
+        position: ["15%", null],
+        closeHTML:'<a class="bt-close ss-icon" href="#">Close</a>',
+        overlayClose: true
+      });
+    }
   },
 
   events: {

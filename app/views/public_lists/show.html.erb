@@ -6,42 +6,42 @@
           <div class="col1">
             <h1>List Preview</h1>
             <p>This is what your saved list will look like to other users.</p>
-	    <p id="listprivacy-hed" class="collapsible ss-directright"><strong>Privacy Setting: </strong> 
-	      <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_PUBLIC || @view.list.privacy == List::PRIVACY_PRIVATE ? "inline" : "none" %>;"><span class="icon-globe"></span> Anyone can see your list.</em>
-	      <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_REGISTERED ? "inline" : "none" %>;"><span class="icon-bird"></span> Mamajamas users can see your list.</em>
-	      <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_REGISTRY ? "inline" : "none" %>;"><span class="icon-gift"></span> Registry: anyone can see items you need.</em>
-	      <span class="helper">(click to edit)</span>
-	    </p>
+            <p id="listprivacy-hed" class="collapsible ss-directright"><strong>Privacy Setting: </strong>
+              <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_PUBLIC || @view.list.privacy == List::PRIVACY_PRIVATE ? "inline" : "none" %>;"><span class="icon-globe"></span> Anyone can see your list.</em>
+              <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_REGISTERED ? "inline" : "none" %>;"><span class="icon-bird"></span> Mamajamas users can see your list.</em>
+              <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_REGISTRY ? "inline" : "none" %>;"><span class="icon-gift"></span> Registry: anyone can see items you need.</em>
+              <span class="helper">(click to edit)</span>
+            </p>
             <div id="listprivacy-select" class="collapsible-content" style="display: none;">
-	      <p>Who would you like to see your list?</p>
-	      <fieldset>
-		<ul>
-		  <li>
-		    <label>
+              <p>Who would you like to see your list?</p>
+              <fieldset>
+                <ul>
+                  <li>
+                    <label>
                       <%= radio_button_tag :privacy, List::PRIVACY_PUBLIC, @view.list.privacy == List::PRIVACY_PUBLIC || @view.list.privacy == List::PRIVACY_PRIVATE %>
-		      Anyone</label> — Everyone who visits Mamajamas. 
-		  </li>
-		  <li>
-		    <label>
+                      Anyone</label> — Everyone who visits Mamajamas.
+                  </li>
+                  <li>
+                    <label>
                       <%= radio_button_tag :privacy, List::PRIVACY_REGISTERED, @view.list.privacy == List::PRIVACY_REGISTERED %>
-		      Mamajamas users</label> — Only logged-in Mamajamas users.
-		  </li>
-		  <li>
-		    <label>
+                      Mamajamas users</label> — Only logged-in Mamajamas users.
+                  </li>
+                  <li>
+                    <label>
                       <%= radio_button_tag :privacy, List::PRIVACY_REGISTRY, @view.list.privacy == List::PRIVACY_REGISTRY %>
-		      Registry option</label> — Everyone can see only items you need.
-		  </li> 
-		</ul>
-	      </fieldset>
-	    </div>
+                      Registry option</label> — Everyone can see only items you need.
+                  </li>
+                </ul>
+              </fieldset>
+            </div>
           </div>
           <div class="col2">
-	    <p>
-	      <button type="submit" class="button" id="bt-cancel" name="cancel" value="1">Cancel</button>
+            <p>
+              <button type="submit" class="button" id="bt-cancel" name="cancel" value="1">Cancel</button>
               <button type="submit" class="button bt-color" id="bt-publish" name="publish" value="1">Save</button>
-	    </p>
+            </p>
           </div>
-	</form>
+        </form>
         <% end -%>
       </div>
     </div>
@@ -163,4 +163,27 @@
      current_position: 0
    })
   </script>
+<% end -%>
+<% if @view.friends_prompt? -%>
+  <!-- modal window box -->
+  <div id="friends-modal" class="modal-win">
+    <!-- modal window header -->
+    <h2>Saved</h2>
+
+    <!-- modal window content -->
+    <div class="content">
+      <p class="intro center larger">Your list has been saved</p>
+      <p class="center">Next up, follow your friends &rsquo; lists!</p>
+
+      <p class="center">
+        <%= link_to friends_path, class: "button bt-color", id: "bt-createlist" do %>
+          <span class="ss-icon ss-users"></span>Find &amp; follow friends
+        <% end -%>
+      </p>
+
+    </div>
+    <!-- end modal window content -->
+
+  </div>
+  <!-- end modal window box -->
 <% end -%>
