@@ -1,12 +1,16 @@
 <%= content_for :title_links do %>
-<ul>
-  <li>
-    <%= link_to "Save", profile_path, id: "bt-share", class: "button bt-color" + (@view.list.has_items? ? "" : " disabled") %>
-  </li>
-  <li>
-    <%= link_to "View", public_list_path(current_user), id: "bt-view", class: "button" + (@view.list.has_items? && !@view.list.private? ? "" : " disabled") %>
-  </li>
-</ul>
+  <ul>
+    <li>
+      <% if @view.list.private? %>
+        <%= link_to "Save", profile_path, id: "bt-share", class: "button bt-color" + (@view.list.has_items? ? "" : " disabled") %>
+      <% else -%>
+        &nbsp;
+      <% end -%>
+    </li>
+    <li>
+      <%= link_to "View", public_list_path(current_user), id: "bt-view", class: "button" + (@view.list.has_items? && !@view.list.private? ? "" : " disabled") %>
+    </li>
+  </ul>
 <% end if completed_list? -%>
 <%= content_for :nav do %>
   <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
