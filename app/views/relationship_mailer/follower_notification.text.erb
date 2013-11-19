@@ -2,7 +2,9 @@ Hi <%= @followed_display_name %>,
 
 <%= @follower_display_name %> is now following your Mamajamas list.
 
-Make sure your list is up to date by editing it here: <%= list_url %>.
+You can follow them back by going to their list here: <%= public_list_url(@follower) %>
+
+You may also want to make sure your list is up to date by editing it here: <%= list_url %>
 
 Best,
 
