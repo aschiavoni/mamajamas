@@ -3,6 +3,7 @@ json.array! @product_types do |product_type|
   json.name product_type.name
   json.slug product_type.slug
   json.age product_type.age
+  json.recommended_quantity product_type.recommended_quantity
   json.priority product_type.priority
   json.image_name product_type.image_name
   json.category_id product_type.category.id

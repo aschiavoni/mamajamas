@@ -1,130 +1,189 @@
 <% if @view.preview? -%>
   <%= content_for :header_overlay do %>
-    <!-- message overlay -->
     <div class="msg-overlay preview-msg">
-      <div class="overlay-bg">&nbsp;</div>
       <div class="gridContainer clearfix">
-        <div class="col1">
-          <h1>Preview</h1>
-          <p>This is what your list will look like to others.</p>
-        </div>
-        <div class="col2">
-          <%= form_tag public_list_publish_list_path do %>
-            <p>
-              <% if current_user.present? && current_user.facebook_connected? -%>
-                <%= check_box_tag 'facebook_share', '1', true %>
-                <%= label_tag 'facebook_share', 'Share on Facebook' %>
-              <% else -%>
-                &nbsp;
-              <% end -%>
+        <%= form_tag public_list_publish_list_path do %>
+          <div class="col1">
+            <h1>List Preview</h1>
+            <p>This is what your saved list will look like to other users.</p>
+            <p id="listprivacy-hed" class="collapsible ss-directright"><strong>Privacy Setting: </strong>
+              <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_PUBLIC || @view.list.privacy == List::PRIVACY_PRIVATE ? "inline" : "none" %>;"><span class="icon-globe"></span> Anyone can see your list.</em>
+              <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_REGISTERED ? "inline" : "none" %>;"><span class="icon-bird"></span> Mamajamas users can see your list.</em>
+              <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_REGISTRY ? "inline" : "none" %>;"><span class="icon-gift"></span> Registry: anyone can see items you need.</em>
+              <span class="helper">(click to edit)</span>
             </p>
+            <div id="listprivacy-select" class="collapsible-content" style="display: none;">
+              <p>Who would you like to see your list?</p>
+              <fieldset>
+                <ul>
+                  <li>
+                    <label>
+                      <%= radio_button_tag :privacy, List::PRIVACY_PUBLIC, @view.list.privacy == List::PRIVACY_PUBLIC || @view.list.privacy == List::PRIVACY_PRIVATE %>
+                      Anyone</label> — Everyone who visits Mamajamas.
+                  </li>
+                  <li>
+                    <label>
+                      <%= radio_button_tag :privacy, List::PRIVACY_REGISTERED, @view.list.privacy == List::PRIVACY_REGISTERED %>
+                      Mamajamas users</label> — Only logged-in Mamajamas users.
+                  </li>
+                  <li>
+                    <label>
+                      <%= radio_button_tag :privacy, List::PRIVACY_REGISTRY, @view.list.privacy == List::PRIVACY_REGISTRY %>
+                      Registry option</label> — Everyone can see only items you need.
+                  </li>
+                </ul>
+              </fieldset>
+            </div>
+          </div>
+          <div class="col2">
             <p>
               <button type="submit" class="button" id="bt-cancel" name="cancel" value="1">Cancel</button>
               <button type="submit" class="button bt-color" id="bt-publish" name="publish" value="1">Save</button>
             </p>
-          <% end -%>
-        </div>
+          </div>
+        </form>
+        <% end -%>
       </div>
     </div>
-    <!-- / end message overlay -->
   <% end -%>
 <% end -%>
 <%= content_for :logged_out_header_buttons do %>
   <li id="startlist">
-  <%= link_to "Start Your List", quiz_path, class: "button bt-color" %>
+    <%= link_to "Start Your List", quiz_path, class: "button bt-color" %>
   </li>
 <% end -%>
 <%= content_for :subheader_content do %>
-  <p class="pubdate">
-    Created <%= l @view.list.created_at, format: :friendly %>
-    <br>
-    Updated <%= l @view.list.updated_at, format: :friendly %>
-  </p>
+  <% cache [ @view.list, 'pubdates' ] do -%>
+    <p class="pubdate">
+      Created <%= l @view.list.created_at, format: :friendly %>
+      <br>
+      Updated <%= l @view.list.updated_at, format: :friendly %>
+    </p>
+  <% end -%>
 <% end -%>
 <%= content_for :nav do %>
-  <nav id="categories">
-    <ul>
-      <li class="<%= "cat-selected" if @view.all_category? %>">
-        <%= link_to "All", @view.public_all_items_path %>
-      </li>
-      <% @view.categories.each do |category| -%>
+  <% cache [ @view.list, @view.category_slug, 'public_categories' ] do -%>
+    <nav id="categories">
+      <ul>
+        <li class="<%= "cat-selected" if @view.all_category? %>">
+          <%= link_to "All", @view.public_all_items_path %>
+        </li>
+        <% @view.categories.each do |category| -%>
         <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
           <%= link_to category.name, @view.public_category_path(category.slug) %>
         </li>
-      <% end -%>
-    </ul>
-  </nav>
+        <% end -%>
+      </ul>
+    </nav>
+  <% end -%>
 <% end -%>
 <%= content_for :tertiary do %>
-  <div class="content">
+  <% cache [ @view.owner, 'public_list_owner' ] do -%>
     <div id="module-profile">
       <div class="content">
         <p id="sharedby"><span></span>Shared by</p>
         <h3><%= @view.owner.display_name %></h3>
         <%= image_tag @view.owner.profile_picture.public_list, alt: "#{@view.owner.username} profile photo" %>
         <% unless @view.owner == current_user -%>
-          <div class="center">
-            <% if @view.following? -%>
-              <a href="#" id="bt-follow" class="button bt-color bt-active" data-owner-id="<%= @view.owner.id %>" data-relationship-id="<%= @view.following?.id %>">
-                <span class="bt-text1">
-                  <span class="ss-check"></span>Following
-                </span>
-                <em class="bt-text2"><span class="ss-delete"></span>Unfollow</em>
-              </a>
-            <% else -%>
-              <a href="#" id="bt-follow" class="button bt-color" data-owner-id="<%= @view.owner.id %>">
-                <span class="ss-check"></span>Follow
-              </a>
-            <% end -%>
-          </div>
+        <div class="center">
+          <% if @view.following? -%>
+          <a href="#" id="bt-follow" class="button bt-color bt-active" data-owner-id="<%= @view.owner.id %>" data-relationship-id="<%= @view.following?.id %>">
+            <span class="bt-text1">
+              <span class="ss-check"></span>Following
+            </span>
+            <em class="bt-text2"><span class="ss-delete"></span>Unfollow</em>
+          </a>
+          <% else -%>
+          <a href="#" id="bt-follow" class="button bt-color" data-owner-id="<%= @view.owner.id %>">
+            <span class="ss-check"></span>Follow
+          </a>
+          <% end -%>
+        </div>
         <% end -%>
         <% if @view.owner.age.present? -%>
-          <p>Age <%= @view.owner.age %><br></p>
+        <p>Age <%= @view.owner.age %><br></p>
         <% end -%>
         <% if @view.owner.notes.present? -%>
-          <div class="expandable">
-            <p><%= @view.owner.notes %></p>
-          </div>
+        <div class="expandable">
+          <p><%= @view.owner.notes %></p>
+        </div>
         <% end -%>
       </div>
     </div>
-  <% if @view.owner.followed_users_with_public_lists.any? -%>
-    <div id="module-friends">
-    <div class="content">
-      <h3>People I'm Following</h3>
-      <ul class="clearfix">
-        <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_public_lists, locals: { show_names: false } %>
-      </ul>
-    </div>
-  </div>
-<% end -%>
-</div>
-<% end -%>
-<form id="public-list" class="label-infield" data-list-entries="<%= @list_entries_json %>">
-  <!-- baby gear table ******* -->
-  <table width="100%" cellspacing="0" id="babygear">
-    <thead>
-      <tr>
-        <th scope="col" class="own" data-sort="owned">Own</th>
-        <th scope="col" class="item" data-sort="name">Item</th>
-        <th scope="col" class="rating" data-sort="rating">Rating</th>
-        <th scope="col" class="when" data-sort="age">When to Buy</th>
-        <th scope="col" class="priority sorting" data-sort="priority">Priority</th>
-      </tr>
-    </thead>
-    <tbody id="list-items" class="readonly">
-      <%= render partial: "list_item", collection: @view.list_entries %>
-    </tbody>
-  </table>
-  <!-- end baby gear table ******* -->
-</form>
-<script type="text/javascript">
-Mamajamas.Context.List = new Mamajamas.Models.List({
-  title: '<%= @view.list.title %>',
-  <% if @view.category.present? -%>
-  category_id: '<%= @view.category.id %>',
-  category: '<%= @view.category.slug %>',
+    <% if @view.owner.followed_users_with_shared_lists.any? -%>
+      <div id="module-friends">
+        <div class="content">
+          <h3><%= @view.owner.possessive_name %> Friends</h3>
+          <ul class="clearfix">
+            <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_shared_lists, locals: { show_names: false } %>
+          </ul>
+        </div>
+      </div>
+    <% end -%>
   <% end -%>
-  current_position: 0
-})
-</script>
+<% end -%>
+<% cache [ @view.list, @view.category_slug, 'public_list' ] do -%>
+  <form id="public-list" class="label-infield" data-list-entries="<%= @list_entries_json %>">
+    <div id="listcontrols" class="clearfix">
+      <div class="listhed">
+        <h3><%= @view.category_name %></h3>
+      </div>
+      <div class="listsort">Sort by:
+        <div class="choicedrop"> <a href="#">When to buy <span class="ss-dropdown"></span></a>
+          <ol style="display:none; width:7.5em;">
+            <li><a href="#age" data-sort="age">When to buy</a></li>
+            <li><a href="#name" data-sort="name">Name (A - Z)</a></li>
+            <li><a href="#rating" data-sort="rating">Rating</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+      <h4 id="priority-high-hed" class="priority priority-high collapsible"><strong>Must-Have</strong></h4>
+      <div class="priority-high collapsible-content">
+        <%= render partial: "list_item", collection: @view.list_entries_by_priority(1) %>
+      </div>
+      <h4 id="priority-med-hed" class="priority collapsible"><strong>Consider</strong></h4>
+      <div class="priority-med collapsible-content">
+        <%= render partial: "list_item", collection: @view.list_entries_by_priority(2) %>
+      </div>
+      <h4 id="priority-low-hed" class="priority collapsible ss-directright"><strong>Don’t Bother</strong></h4>
+      <div class="priority-low collapsible-content">
+        <%= render partial: "list_item", collection: @view.list_entries_by_priority(3) %>
+      </div>
+    </div>
+  </form>
+  <script type="text/javascript">
+   Mamajamas.Context.List = new Mamajamas.Models.List({
+     title: '<%= @view.list.title %>',
+     <% if @view.category.present? -%>
+     category_id: '<%= @view.category.id %>',
+     category: '<%= @view.category.slug %>',
+     <% end -%>
+     current_position: 0
+   })
+  </script>
+<% end -%>
+<% if @view.friends_prompt? -%>
+  <!-- modal window box -->
+  <div id="friends-modal" class="modal-win">
+    <!-- modal window header -->
+    <h2>Saved</h2>
+
+    <!-- modal window content -->
+    <div class="content">
+      <p class="intro center larger">Your list has been saved</p>
+      <p class="center">Next up, follow your friends &rsquo; lists!</p>
+
+      <p class="center">
+        <%= link_to friends_path, class: "button bt-color", id: "bt-createlist" do %>
+          <span class="ss-icon ss-users"></span>Find &amp; follow friends
+        <% end -%>
+      </p>
+
+    </div>
+    <!-- end modal window content -->
+
+  </div>
+  <!-- end modal window box -->
+<% end -%>

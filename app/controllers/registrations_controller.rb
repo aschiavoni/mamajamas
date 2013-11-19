@@ -96,6 +96,5 @@ class RegistrationsController < Devise::RegistrationsController
     set_subheader = "Signup"
     set_body_class "form-page"
     hide_header
-    hide_progress_bar
   end
 end

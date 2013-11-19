@@ -56,7 +56,6 @@ class UsersController < ApplicationController
   def init_view(page_id, subheader, progress_step)
     set_page_id page_id
     set_subheader subheader
-    set_progress_id progress_step
   end
 
   def reremember_me!(user)

@@ -1,20 +1,16 @@
 Mamajamas.Views.ListItemPriority = Mamajamas.Views.ListItemDropdown.extend({
 
-  tagName: 'td',
+  tagName: "div",
 
-  className: "priority",
+  className: "priorityset",
 
   template: HandlebarsTemplates['list_items/priority'],
 
   initialize: function() {},
 
   events: {
-    "click .prod-drop .prod-drop-arrow": "togglePriorityList",
-    "click .priority-display": "togglePriorityList",
-    "click .prod-drop ul li a": "selectPriority",
-    "mouseenter .priority-display": "showArrow",
-    "mouseleave": "hideArrow",
-    "mouseleave .prod-drop-arrow": "hideArrow",
+    "click .choicedrop a": "toggleList",
+    "click .choicedrop ul li a": "selectPriority",
   },
 
   render: function() {
@@ -22,44 +18,16 @@ Mamajamas.Views.ListItemPriority = Mamajamas.Views.ListItemDropdown.extend({
     return this;
   },
 
-  togglePriorityList: function(event) {
-    var $target = $(event.target);
-    var $prodDrop = $target.parents("td").find(".prod-drop");
-    var $priorityList = $prodDrop.find("ul");
+  selectPriority: function(event) {
+    var $target = $(event.currentTarget);
+    var $priorityList = $target.parents("ul");
+    var priority = parseInt($target.data("priority"));
 
-    if ($priorityList.hasClass("visuallyhidden")) {
-      $priorityList.removeClass("visuallyhidden");
-    } else {
-      $priorityList.addClass("visuallyhidden");
-    }
+    this.model.set("priority", priority);
+    $priorityList.hide();
+    this.render();
 
     return false;
   },
 
-  selectPriority: function(event) {
-    var $target = $(event.target);
-    var $prodDrop = $target.parents(".prod-drop");
-    var priorityClass = $target.parents("li").attr("class");
-
-    var newPriority = 3;
-    switch(priorityClass) {
-      case "priority-low":
-        newPriority = 3;
-        break;
-      case "priority-med":
-        newPriority = 2;
-        break;
-      case "priority-high":
-        newPriority = 1;
-        break;
-    }
-
-    this.model.set("priority", newPriority);
-    $prodDrop.addClass("hidden");
-    this.render();
-
-    return false;
-  }
-
 });
-

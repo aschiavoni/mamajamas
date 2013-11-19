@@ -226,8 +226,11 @@ class User < ActiveRecord::Base
   def reset_list!
     if has_list?
       list.destroy
-      build_list!
     end
+    build_list!
+    ListQuizUpdater.new(self).update!
+    ListPruner.prune!(list)
+    list.complete!
   end
 
   def complete_quiz!

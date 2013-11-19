@@ -22,18 +22,18 @@ module UserDecorator
     display_first_name_or_username.possessive
   end
 
-  def followed_users_with_public_lists
+  def followed_users_with_shared_lists
     followed_users.
       includes(:list).
-      where("lists.public = true").
+      where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
       order(:first_name)
   end
-  memoize :followed_users_with_public_lists
+  memoize :followed_users_with_shared_lists
 
-  def public_list?
-    list.present? && list.public?
+  def shared_list?
+    list.present? && !list.private?
   end
-  memoize :public_list?
+  memoize :shared_list?
 
   def list_item_count
     return 0 if list.blank?

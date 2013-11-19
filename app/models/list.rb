@@ -1,5 +1,11 @@
 class List < ActiveRecord::Base
+  PRIVACY_PRIVATE       = 0
+  PRIVACY_PUBLIC        = 1
+  PRIVACY_REGISTERED    = 2
+  PRIVACY_REGISTRY      = 3
+
   attr_accessible :title
+  attr_accessible :privacy
 
   belongs_to :user
   has_many :categories, through: :list_items, uniq: true do
@@ -18,6 +24,22 @@ class List < ActiveRecord::Base
     write_attribute(:title, new_title) unless new_title == default_title
   end
 
+  def private?
+    privacy == PRIVACY_PRIVATE
+  end
+
+  def public?
+    privacy == PRIVACY_PUBLIC
+  end
+
+  def registered_users_only?
+    privacy == PRIVACY_REGISTERED
+  end
+
+  def registry?
+    privacy == PRIVACY_REGISTRY
+  end
+
   def list_entries(category = nil)
     list_items.
       by_category(category).
@@ -27,53 +49,28 @@ class List < ActiveRecord::Base
       order(list_entries_sort_order)
   end
 
-  def public_list_entries(category = nil)
-    list_items.shared_items.
+  def shared_list_entries(category = nil, ignore_privacy = false)
+    shared_items = list_items.user_items.
       by_category(category).
       includes(:category).
-      includes(:age_range).
-      order(list_entries_sort_order)
+      includes(:age_range)
+
+    if !ignore_privacy && registry?
+      shared_items = shared_items.where(owned: false)
+    end
+
+    shared_items.order(list_entries_sort_order)
   end
 
-  def public_list_categories
+  def shared_list_categories
+    category_ids = shared_list_entries.map(&:category_id).uniq
     categories.
-      where(id: list_items.shared_items.select('DISTINCT(category_id)')).
+      where(id: category_ids).
       order(:name)
-  end
-
-  def public_preview_list_entries(category = nil)
-    list_items.user_items.
-      by_category(category).
-      includes(:age_range).
-      order("list_items.placeholder ASC, age_ranges.position ASC, list_items.priority ASC")
-  end
-
-  def public_preview_list_categories
-    categories.
-      where(id: list_items.user_items.select('DISTINCT(category_id)')).
-      order(:name)
-  end
-
-  def share_public!
-    set_public(true)
-    share_all_list_items!
-  end
-
-  def unshare_public!
-    set_public(false)
-    unshare_all_list_items!
-  end
-
-  def share_all_list_items!
-    list_items.user_items.where(shared: false).update_all(shared: true)
-  end
-
-  def unshare_all_list_items!
-    list_items.user_items.where(shared: true).update_all(shared: false)
   end
 
   def add_list_item_placeholder(product_type)
-    list_item = ListItem.new do |list_item|
+    placeholder = ListItem.new do |list_item|
       list_item.placeholder = true
       list_item.product_type_name = product_type.name
       list_item.product_type = product_type
@@ -81,16 +78,16 @@ class List < ActiveRecord::Base
       list_item.priority = product_type.priority
       list_item.image_url = product_type.image_name
       list_item.age_range = product_type.age_range
+      list_item.quantity = product_type.recommended_quantity
     end
 
-    list_items << list_item
+    list_items << placeholder
 
-    list_item
+    placeholder
   end
 
   def add_list_item(list_item, placeholder = false)
     list_item.placeholder = placeholder
-    list_item.shared = self.public?
     list_items << list_item
     list_item
   end
@@ -147,7 +144,6 @@ class List < ActiveRecord::Base
       vendor_id: orig.vendor_id
     }).tap do |li|
       li.age = orig.age
-      li.shared = self.public?
     end
   end
 
@@ -171,14 +167,9 @@ class List < ActiveRecord::Base
     end
   end
 
-  def set_public(public)
-    self.public = public
-    self.save!
-  end
-
   def list_entries_sort_order
     @li_sort ||=
-      "list_items.placeholder ASC, categories.name ASC, age_ranges.position ASC, list_items.priority ASC, list_items.product_type_name ASC"
+      "list_items.placeholder ASC, age_ranges.position ASC, categories.name ASC, list_items.product_type_name ASC"
   end
 
 end

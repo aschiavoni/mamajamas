@@ -1,27 +1,17 @@
 Mamajamas.Views.ListItemDropdown = Mamajamas.Views.Base.extend({
 
-  showArrow: function(event) {
-    var $td = $(event.target);
-    if (!$td.is('td'))
-      $td = $(event.target).parents("td");
+  toggleList: function(event) {
+    var $target = $(event.currentTarget);
+    var $choiceDrop = $target.parents(".choicedrop");
+    var $list = $choiceDrop.find("ul");
 
-    // check if the prod-drop is already open
-    // if it is do nothing
-    if ($td.find(".prod-drop ul").hasClass("visuallyhidden")) {
-      var $arrow = $td.find(".prod-drop .prod-drop-arrow");
-      $arrow.show();
+    if ($list.is(":visible")) {
+      $list.hide();
+    } else {
+      $list.show();
     }
+
+    return false;
   },
-
-  hideArrow: function(event) {
-    var $td = $(event.target);
-    if (!$td.is('td'))
-      $td = $(event.target).parents("td");
-
-    if ($td.find(".prod-drop ul").hasClass("visuallyhidden")) {
-      var $arrow = $td.find(".prod-drop .prod-drop-arrow");
-      $arrow.hide();
-    }
-  }
 
 });

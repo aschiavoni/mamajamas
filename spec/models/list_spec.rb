@@ -85,7 +85,7 @@ describe List do
 
     let(:list) { create(:list) }
 
-    let(:product_type) { build(:product_type) }
+    let(:product_type) { build(:product_type, recommended_quantity: 2) }
 
     it "should return a new list item" do
       list_item = list.add_list_item_placeholder(product_type)
@@ -128,6 +128,11 @@ describe List do
       list_item.age_range.should == product_type.age_range
     end
 
+    it "should have a list item with the correct quantity" do
+      list_item = list.add_list_item_placeholder(product_type)
+      list_item.quantity.should == product_type.recommended_quantity
+    end
+
   end
 
   describe "add list item" do
@@ -150,11 +155,6 @@ describe List do
     it "should add a placeholder list item" do
       list_item = list.add_list_item(build(:list_item, list_id: nil), true)
       list_item.should be_placeholder
-    end
-
-    it "new list items should not be shared" do
-      list_item = list.add_list_item(build(:list_item, list_id: nil))
-      list_item.should_not be_shared
     end
 
   end
@@ -261,69 +261,44 @@ describe List do
 
   end
 
-  describe "sharing" do
+  describe "shared list entries" do
 
-    let(:list) { create(:list) }
-    let(:product_type) { create(:product_type) }
+    let(:current_user) { create(:user) }
 
-    it "should not be public by default" do
-      list.should_not be_public
+    before(:all) do
+      @list = current_user.build_list!
+      @list.add_list_item(build(:list_item, list_id: nil))
+      @list.add_list_item(build(:list_item,
+                                list_id: nil, owned: true))
     end
 
-    it "shares list and marks it as public" do
-      list.share_public!
-      list.reload
-      list.should be_public
+    it "has all user items shared when list is private" do
+      @list.privacy = List::PRIVACY_PRIVATE
+      @list.shared_list_entries.count.should ==
+        @list.list_items.user_items.count
     end
 
-    it "marks all items in list as shared when list is shared" do
-      list.should_receive(:share_all_list_items!)
-      list.share_public!
+    it "has all user items shared when list is public" do
+      @list.privacy = List::PRIVACY_PUBLIC
+      @list.shared_list_entries.count.should ==
+        @list.list_items.user_items.count
     end
 
-    it "should unshare list and mark it as not public" do
-      list.share_public!
-      list.reload
-      list.unshare_public!
-      list.reload
-      list.should_not be_public
+    it "has all user items shared when list is authenticated only" do
+      @list.privacy = List::PRIVACY_REGISTERED
+      @list.shared_list_entries.count.should ==
+        @list.list_items.user_items.count
     end
 
-    it "marks all items in list as not shared when list is unshared" do
-      list.should_receive(:unshare_all_list_items!)
-      list.unshare_public!
+    it "has only needed shared entries when list is registry" do
+      @list.privacy = List::PRIVACY_REGISTRY
+      @list.shared_list_entries.map(&:owned).uniq.should == [ false ]
     end
 
-    context "share all list items" do
-
-      before(:each) do
-        list.add_list_item_placeholder(product_type)
-        list.add_list_item(build(:list_item, list_id: nil))
-        list.share_all_list_items!
-      end
-
-      it "shares all user items" do
-        list.list_items.user_items.map(&:shared).uniq.should == [ true ]
-      end
-
-      it "does not share placeholders" do
-        list.list_items.placeholders.map(&:shared).uniq.should == [ false ]
-      end
-
-    end
-
-    context "unshare all list items" do
-
-      before(:each) do
-        list.add_list_item_placeholder(product_type)
-        list.add_list_item(build(:list_item, list_id: nil, shared: true))
-      end
-
-      it "unshares all user items" do
-        list.unshare_all_list_items!
-        list.list_items.user_items.map(&:shared).uniq.should == [ false ]
-      end
-
+    it "has all user items shared when ignoring privacy" do
+      @list.privacy = List::PRIVACY_REGISTRY
+      @list.shared_list_entries(nil, true).count.should ==
+        @list.list_items.user_items.count
     end
 
   end

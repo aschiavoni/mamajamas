@@ -14,7 +14,7 @@ feature "guest visitor", js: true do
 
     # HACK: force there to be an item
     page.execute_script("Mamajamas.Context.List.set('item_count', 1)")
-    click_link "Share your list"
+    click_link "Save"
     page.should have_selector("#signup-modal", visible: true)
 
     find("#signup-collapsible").click
@@ -45,7 +45,7 @@ feature "guest visitor", js: true do
 
       add_manual_item "Bath Tub", "http://google.com"
 
-      click_link "Share your list"
+      click_link "Save"
       page.has_selector?('#create-account-email', visible: true)
 
       mock_facebook_omniauth('9993883', "guestfacebook@example.com")

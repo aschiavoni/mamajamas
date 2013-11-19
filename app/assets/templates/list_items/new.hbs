@@ -1,35 +1,46 @@
-<td class="own"></td>
-<td class="item">
-  <div class="prod-thumb">
-    <img id="list_item_image" src="{{assetPath listItem.image_url}}" alt="new Mamajamas Item">
-  </div>
+<!-- product image -->
+<div class="prod-thumb"> <img src="{{assetPath "products/blank-mamabird.png"}}" alt="New Item"> </div>
+
+<!-- product description -->
+<div class="prod-desc clearfix">
   <form class="new-placeholder">
-    <div class="prod-desc">
-      <input id="list_item_category_id" name="list_item[category_id]" type="hidden" value="{{listItem.category_id}}">
-      <input id="list_item_priority" name="list_item[priority]" type="hidden" value="{{listItem.priority}}">
-      <input id="list_item_age" name="list_item[age]" type="hidden" value="{{listItem.age}}">
+    <!-- product category, name, rating -->
+    <div class="prod-cat-name-rating">
       <div class="prod-category">
         <fieldset>
           <p>
-          <label for="list_item_name">
-            Enter the name of an item here (i.e. Wipes Warmer, Stretch Mark Cream)
-          </label>
-          <br />
-          <input type="text" name="list_item[name]" value="" id="list_item_name">
+            <label for="new_list_item_name">
+              Enter the name of an item (i.e. Wipes Warmer, Stretch Mark Cream)</label>
+            <br />
+            <input type="text" id="new_list_item_name" value="" name="list_item[name]" class="ui-autocomplete-input" autocomplete="off">
           </p>
         </fieldset>
       </div>
-      <div class="prod-links">
-        <ul>
-          <li>
-            <a href="#" class="save-item button bt-color"><span class="ss-check"></span>Save</a>
-          </li>
-          <li>
-            <button type="reset" value="Cancel" class="cancel-item button bt-light">Cancel</button>
-          </li>
-        </ul>
-      </div>
     </div>
+
+    <!-- when to buy, need vs. have -->
+    <div class="prod-when-own">
+    </div>
+    <!-- end when to buy, need vs. have -->
+
+    <!-- save-cancel buttons [shown in edit state] -->
+    <div class="prod-links">
+      <ul>
+        <li>
+          <button class="cancel-item button bt-light" value="Reset" type="reset">Cancel</button>
+        </li>
+        <li>
+          <a class="save-item button bt-color" href="#">Save</a>
+        </li>
+      </ul>
+    </div>
+    <!-- end save-cancel buttons -->
+
+    <div class="prod-edit-menu">
+      <ul>
+      </ul>
+    </div>
+
+    <!-- end product description -->
   </form>
-</td>
-<td class="rating">&nbsp;</td>
+</div>

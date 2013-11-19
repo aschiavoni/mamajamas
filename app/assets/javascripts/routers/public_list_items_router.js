@@ -25,4 +25,3 @@ Mamajamas.Routers.PublicListItems = Backbone.Router.extend({
   }
 
 });
-

@@ -1,24 +1,23 @@
-Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
+Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
 
-  tagName: 'tr',
+  tagName: "div",
 
-  template: HandlebarsTemplates['list_items/show'],
+  template: HandlebarsTemplates["list_items/show"],
 
-  className: "prod prod-filled",
+  className: "prod prod-filled clearfix",
 
   initialize: function() {
     this.editing = false;
-    this.model.on("change:rating", this.updateRating, this);
-    this.model.on("change:age", this.saveAndRender, this);
-    this.model.on("change:priority", this.saveAndRender, this);
+    this.model.on("change:rating", this.update, this);
+    this.model.on("change:owned", this.update, this);
+    this.model.on("change:quantity", this.update, this);
     this.$el.attr("id", this.model.get("id"));
   },
 
   events: {
-    "change .prod-owned": "updateOwned",
-    "click .ss-write": "edit",
-    "click .ss-delete": "delete",
-    "click .prod-note": "toggleNote",
+    "click .prod-edit-menu .edit": "edit",
+    "click .prod-edit-menu .delete": "delete",
+    "click .prod-edit-menu .drag": "doNothing",
     "click .bt-addanother": "addAnother",
   },
 
@@ -29,17 +28,18 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
     var ratingView = new Mamajamas.Views.ListItemRating({
       model: this.model
     });
-    $("td.rating", this.$el).append(ratingView.render().$el);
+    $("div.rating", this.$el).append(ratingView.render().$el);
 
-    var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
+    var quantityView = new Mamajamas.Views.ListItemQuantity({
       model: this.model
     });
-    this.$el.append(ageRangeView.render().$el);
+    $(".prod-when-own", this.$el).append(quantityView.render().$el);
 
-    var priorityView = new Mamajamas.Views.ListItemPriority({
+
+    var notesView = new Mamajamas.Views.ListItemNotes({
       model: this.model
     });
-    this.$el.append(priorityView.render().$el);
+    $("div.prod-when-own", this.$el).after(notesView.render().$el);
 
     return this;
   },
@@ -74,11 +74,13 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
         product_type_id: this.model.get('product_type_id'),
         product_type_name: this.model.get('product_type_name'),
         product_type_plural_name: this.model.get('product_type_plural_name'),
-        image_url: this.model.get('product_type_image_name')
+        image_url: this.model.get('product_type_image_name'),
+        owned: false,
       })
     });
 
     $('#buildlist').after(searchView.render().$el);
+    searchView.show();
 
     return false;
   },
@@ -100,34 +102,10 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.Base.extend({
     return false;
   },
 
-  updateRating: function() {
+  update: function() {
     if (this.editing)
       return;
     this.model.save();
   },
-
-  saveAndRender: function() {
-    if (this.editing)
-      return;
-    this.model.save();
-    this.render();
-  },
-
-  updateOwned: function(event) {
-    if (this.editing)
-      return;
-    var $owned = $(event.target);
-    this.model.set("owned", $owned.is(":checked"));
-    this.model.save();
-  },
-
-  toggleNote: function(event) {
-    var $target = $(event.target);
-    if ($target.hasClass("closed")) {
-      $target.removeClass("closed").addClass("open");
-    } else {
-      $target.removeClass("open").addClass("closed");
-    }
-  }
 
 });

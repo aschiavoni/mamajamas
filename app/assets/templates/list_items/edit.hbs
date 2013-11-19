@@ -1,77 +1,109 @@
-<td class="own">
-  <input type="checkbox" {{#if owned}}checked="checked"{{/if}} id="owned-cb-{{product_type_id}}" class="owned-cb" title="Do you own this item?"> <label for="owned-cb-{{product_type_id}}">I own this item.</label>
-</td>
-<td class="item">
-  <div class="prod-thumb">
-    <img src="{{assetPath image_url}}" alt="Shampoo or Body Wash">
-  </div>
-  <form class="new-list-item" enctype="multipart/form-data">
-    <input id="list_item_product_type_id" name="list_item[product_type_id]" type="hidden" value="{{product_type_id}}">
-    <input id="list_item_vendor_id" name="list_item[vendor_id]" type="hidden" value="{{vendor_id}}">
-    <input id="list_item_vendor" name="list_item[vendor]" type="hidden" value="{{vendor}}">
-    <input id="list_item_category_id" name="list_item[category_id]" type="hidden" value="{{category_id}}">
-    <input id="list_item_priority" name="list_item[priority]" type="hidden" value="{{priority}}">
-    <input id="list_item_age" name="list_item[age]" type="hidden" value="{{age}}">
-    <input id="list_item_rating" name="list_item[rating]" type="hidden" value="{{rating}}">
-    <input id="list_item_image_url" name="list_item[image_url]" type="hidden" value="{{image_url}}">
-    <input id="list_item_list_item_image_id" name="list_item[list_item_image_id]" type="hidden">
-    <div class="prod-desc">
-      <div class="prod-category">
-        {{product_type}}
-      </div>
-      <h3>{{name}}</h3>
-      <div class="prod-note"></div>
+<!-- product image -->
+<div class="prod-thumb">
+  <img alt="{{product_type_name}}" src="{{assetPath image_url}}">
+</div>
+
+<!-- product description -->
+<div class="prod-desc editing clearfix">
+  <form action="/list/list_items/{{idSuffix}}" method="post" class="new-list-item" enctype="multipart/form-data">
+
+    <input id="list_item_product_type_id_{{idSuffix}}" name="list_item[product_type_id]" type="hidden" value="{{product_type_id}}">
+    <input id="list_item_vendor_id_{{idSuffix}}" name="list_item[vendor_id]" type="hidden" value="{{vendor_id}}">
+    <input id="list_item_vendor_{{idSuffix}}" name="list_item[vendor]" type="hidden" value="{{vendor}}">
+    <input id="list_item_category_id_{{idSuffix}}" name="list_item[category_id]" type="hidden" value="{{category_id}}">
+    <input id="list_item_priority_{{idSuffix}}" name="list_item[priority]" type="hidden" value="{{priority}}">
+    <input id="list_item_age_{{idSuffix}}" name="list_item[age]" type="hidden" value="{{age}}">
+    <input id="list_item_rating_{{idSuffix}}" name="list_item[rating]" type="hidden" value="{{rating}}">
+    <input id="list_item_owned_{{idSuffix}}" name="list_item[owned]" type="hidden" value="{{owned}}">
+    <input id="list_item_image_url_{{idSuffix}}" name="list_item[image_url]" type="hidden" value="{{image_url}}">
+    <input id="list_item_list_item_image_id_{{idSuffix}}" name="list_item[list_item_image_id]" type="hidden">
+
+    <!-- product category, name, rating -->
+    <div class="prod-cat-name-rating">
+      <div class="prod-category"> {{product_type_name}}} </div>
+      <h3><a target="_blank" href="{{link}}">{{name}}</a></h3>
       <fieldset>
         <legend><span>Product Info</span></legend>
         <p>
-        <label for="list_item_name">Product name / brand</label>
-        <br />
-        <input id="list_item_name" name="list_item[name]" size="30" type="text" autocomplete="off" value="{{name}}" class="field-prodname">
-        <a href="#" class="button bt-narrow find-item"><span class="ss-search"></span>Choose</a>
-        </p>
-        <fieldset>
-          <legend><span>Need vs. Own</span></legend>
-          <ul class="inline">
-            <li>
-            <input class="need-rb" {{#unless owned}}checked="checked"{{/unless}} id="list_item_owned_0" name="list_item[owned]" type="radio" value="0"> <label for="list_item_owned_0">Need</label>
-            </li>
-            <li>
-            <input class="owned-rb" {{#if owned}}checked="checked"{{/if}} id="list_item_owned_1" name="list_item[owned]" type="radio" value="1"> <label for="list_item_owned_1">Own</label>
-            </li>
-          </ul>
-        </fieldset>
+          <label for="list_item_name_{{idSuffix}}" style="display: none; opacity: 0;">Product name / brand</label>
+          <br>
+          <input type="text" class="field-prodname ui-autocomplete-input" value="{{name}}" autocomplete="off" size="30" name="list_item[name]" id="list_item_name_{{idSuffix}}">
+          <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span> <a class="button find-item" href="#"><span class="ss-search"></span>Choose</a> </p>
         <p>
-        <label for="list_item_link">Link to buy</label>
-        <input id="list_item_link" name="list_item[link]" size="30" type="text" value="{{link}}">
-        </p>
-        <p>
-        <label for="list_item_notes">Notes</label> 
-        <textarea cols="40" id="list_item_notes" name="list_item[notes]">{{notes}}</textarea>
-        </p>
-        <p class="label-norm facebook-sharing">
-        <input type="checkbox" class="chk-fb-share" id="chk-fb-share-{{product_type_id}}"> <label for="chk-fb-share-{{product_type_id}}" class="small">Share on Facebook</label>
+          <label for="list_item_link_{{idSuffix}}" style="display: none;">Link to buy</label>
+          <input type="text" value="{{link}}" size="30" name="list_item[link]" class="list-item-link" id="list_item_link_{{idSuffix}}">
         </p>
       </fieldset>
-      <div class="list-item-image-file" style="display: none;">
-        <input id="list_item_image_image" name="list_item_image[image]" type="file" value="Photo">
-        <input id="list_item_image_image_cache" name="list_item_image[image_cache]" type="hidden">
+      <div class="rating"> <em>My rating:</em>
       </div>
-      <div class="progress-container">
-        <a class="button bt-light bt-thumb-upload"><span class="ss-upload"></span>Photo</a>
-        <img alt="Progress-bar" class="progress bt-thumb-upload" src="{{assetPath 'progress-bar.gif'}}" style="display: none;">
+    </div>
+    <!-- end product category, name, rating -->
+
+    <!-- when to buy, need vs. have -->
+    <div class="prod-when-own">
+    </div>
+    <!-- end when to buy, need vs. have -->
+
+    <!-- prod note [editing state, filled] *** -->
+    <div class="prod-note prod-note_edit">
+
+      <!-- note input link -->
+      <p class="prod-note-trigger"><span class="ss-chat"></span> <strong>Review/comment</strong></p>
+      <!-- end note input link -->
+
+      <!-- note input area -->
+      <div class="prod-note-input">
+        <fieldset>
+          <p>
+            <label for="list_item_edit_notes_{{idSuffix}}"><span class="ss-chat"></span> Review/comment</label>
+            <br />
+            <textarea name="list_item[notes]" id="list_item_edit_notes_{{idSuffix}}">{{notes}}</textarea>
+          </p>
+        </fieldset>
       </div>
+      <!-- end note input area -->
+
+      <!-- note content area -->
+      <div class="prod-note-content expandable">
+        <p><span class="ss-chat"></span> {{notes}}</p>
+      </div>
+      <!-- end note content area -->
+
+      <!-- save-cancel buttons -->
       <div class="prod-links">
         <ul>
           <li>
-            <input class="save-item button bt-color" name="commit" type="submit" value="Save">
+            <button class="cancel-item button bt-light" value="Reset" type="reset">Cancel</button>
           </li>
           <li>
-            <button type="reset" value="Reset" class="cancel-item button bt-light">Cancel</button>
+            <input type="submit" value="Save" name="commit" class="save-item button bt-color">
           </li>
         </ul>
       </div>
+      <!-- end save-cancel buttons -->
+
     </div>
+    <!-- end prod note *** -->
+
+    <!-- photo upload -->
+    <div class="progress-container"> <a class="button bt-light bt-thumb-upload"><span class="ss-upload"></span>Photo</a> <img style="display: none;" src="{{assetPath 'progress-bar.gif'}}" class="progress bt-thumb-upload" alt="Progress-bar"> </div>
+    <!-- end photo upload -->
+
+    <div class="list-item-image-file" style="display: none;">
+      <input id="list_item_image_image_{{idSuffix}}" name="list_item_image[image]" type="file" value="Photo">
+      <input id="list_item_image_image_cache_{{idSuffix}}" name="list_item_image[image_cache]" type="hidden">
+    </div>
+
+    <!-- menu: delete, drag, edit -->
+    <div class="prod-edit-menu">
+      <ul>
+        <li><a href="#" class="delete tooltip"><span>Delete<em></em></span></a></li>
+        <li><a href="#" class="drag tooltip"><span>Drag to reorder<em></em></span></a></li>
+        <li><a href="#" class="edit tooltip"><span>Edit<em></em></span></a></li>
+      </ul>
+    </div>
+    <!-- end menu: delete, drag, edit -->
+
+    <!-- end product description -->
   </form>
-</td>
-<td class="rating">
-</td>
+</div>

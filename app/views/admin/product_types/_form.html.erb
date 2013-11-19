@@ -27,6 +27,12 @@
       <%= f.select :age_range_id, options_for_select(AgeRange.scoped.order(:position).map { |a| [ a.name, a.id ] }, @product_type.age_range_id) %>
       </p>
     </dd>
+    <dt>Quantity<strong class="required">*</strong></dt>
+    <dd>
+      <p>
+      <%= f.select :recommended_quantity, options_for_select((1..10).to_a, @product_type.recommended_quantity) %>
+      </p>
+    </dd>
     <dt>Plural name<strong class="required">*</strong></dt>
     <dd>
       <p>

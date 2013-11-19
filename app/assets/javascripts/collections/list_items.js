@@ -1,7 +1,7 @@
 Mamajamas.Collections.ListItems = Backbone.Collection.extend({
 
   initialize: function() {
-    this.sortField = "name";
+    this.sortField = "age";
     this.sortDirection = "ASC";
   },
 

@@ -1,0 +1,36 @@
+<!-- note input trigger -->
+<p class="prod-note-trigger"><span class="ss-chat"></span> <strong>Review/comment</strong></p>
+<!-- end note input trigger -->
+
+<!-- note input area -->
+<div class="prod-note-input">
+  <fieldset>
+    <p>
+      <label for="list_item_notes_{{listItem.id}}"><span class="ss-chat"></span> Review/comment</label>
+      <br />
+      <textarea name="list_item[notes]" value="" id="list_item_notes_{{listItem.id}}"></textarea>
+    </p>
+  </fieldset>
+</div>
+<!-- end note input area -->
+
+<!-- note content area -->
+<div class="prod-note-content expandable">
+  <p><span class="ss-chat"></span>
+    {{listItem.notes}}
+  </p>
+</div>
+<!-- end note content area -->
+
+<!-- note save-cancel buttons -->
+<div class="prod-links">
+  <ul>
+    <li>
+      <button class="cancel-item button bt-light" value="Reset" type="reset">Cancel</button>
+    </li>
+    <li>
+      <input type="submit" value="Save" name="commit" class="save-item button bt-color">
+    </li>
+  </ul>
+</div>
+<!-- end note save-cancel buttons -->

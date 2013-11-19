@@ -5,9 +5,12 @@ describe RecommendedFriend do
 
   before(:all) do
     # unshare all existing lists (this sucks)
-    List.all.each { |l| l.unshare_public! }
-    create_list(:list, 4, public: true)
-    @user_with_unshared_list = create(:list, public: false).user
+    List.all.each do |l|
+      l.update_attributes!(privacy: List::PRIVACY_PRIVATE)
+    end
+    create_list(:list, 4, privacy: List::PRIVACY_PUBLIC)
+    @user_with_unshared_list =
+      create(:list, privacy: List::PRIVACY_PRIVATE).user
   end
 
   it "returns all recommended users" do

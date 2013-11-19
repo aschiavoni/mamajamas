@@ -40,6 +40,5 @@ class PasswordsController < Devise::PasswordsController
     set_subheader = "Forgot your password?"
     set_body_class "form-page"
     hide_header
-    hide_progress_bar
   end
 end

@@ -12,7 +12,7 @@ class HomeController < ApplicationController
 
   def init_view
     hide_header
-    hide_progress_bar
+    hide_mainnav
     set_body_class "home"
   end
 end

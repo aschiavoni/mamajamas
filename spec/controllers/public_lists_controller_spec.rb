@@ -6,11 +6,14 @@ describe PublicListsController do
 
   before(:all) do
     @list = user.build_list!
+    @list.update_attributes!(privacy: List::PRIVACY_PUBLIC)
   end
 
   describe "show" do
 
-    before(:all) { @list.share_public! }
+    before(:each) do
+      @list.update_attributes!(privacy: List::PRIVACY_PUBLIC)
+    end
 
     it "returns a 404 if the user is not found" do
       lambda {
@@ -27,7 +30,7 @@ describe PublicListsController do
     end
 
     it "returns a 404 if the list is not public" do
-      @list.unshare_public!
+      @list.update_attributes!(privacy: List::PRIVACY_PRIVATE)
 
       lambda {
         get 'show', slug: user.username
@@ -39,9 +42,29 @@ describe PublicListsController do
       response.should be_success
     end
 
-    it "renders show template" do
+    it "renders show" do
       get 'show', slug: user.username
       response.should render_template("show")
+    end
+
+    it "renders private if the list is auth users only" do
+      @list.update_attributes(privacy: List::PRIVACY_REGISTERED)
+      get 'show', slug: user.username
+      response.should render_template("private")
+    end
+
+    it "renders show if list is auth users only but user is authed" do
+      @list.update_attributes(privacy: List::PRIVACY_REGISTERED)
+      sign_in create(:user)
+      get 'show', slug: user.username
+      response.should render_template("show")
+    end
+
+    it "renders private if the list is auth users only and guest user" do
+      @list.update_attributes(privacy: List::PRIVACY_REGISTERED)
+      sign_in create(:user, guest: true)
+      get 'show', slug: user.username
+      response.should render_template("private")
     end
 
     it "should assign list" do
@@ -101,18 +124,28 @@ describe PublicListsController do
     before(:each) { sign_in user }
 
     it "should assign list" do
-      post 'publish', publish: '1'
+      post 'publish', privacy: List::PRIVACY_PUBLIC
       assigns(:list).should == @list
     end
 
     it 'should redirect to public list path on publish' do
-      post 'publish', publish: '1'
+      post 'publish', privacy: List::PRIVACY_PUBLIC
       response.should redirect_to(public_list_path(user.slug))
     end
 
     it 'should make list public on publish' do
-      post 'publish', publish: '1'
+      post 'publish', privacy: List::PRIVACY_PUBLIC
       assigns(:list).should be_public
+    end
+
+    it 'should make list authenticated on publish' do
+      post 'publish', privacy: List::PRIVACY_REGISTERED
+      assigns(:list).should be_registered_users_only
+    end
+
+    it 'should make list registry on publish' do
+      post 'publish', privacy: List::PRIVACY_REGISTRY
+      assigns(:list).should be_registry
     end
 
     it 'should redirect to profile path when cancelled' do
@@ -123,7 +156,7 @@ describe PublicListsController do
     it 'should send shared list notification' do
       SharedListNotifier.should_receive(:send_shared_list_notification).
         with(an_instance_of(List))
-      post 'publish', publish: '1'
+      post 'publish', privacy: List::PRIVACY_PUBLIC
     end
 
   end

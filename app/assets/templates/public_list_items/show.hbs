@@ -1,32 +1,31 @@
-<td class="own">
-  <input id="own{{listItem.id}}" class="prod-owned" type="checkbox" title="Do you own this item?" {{#if listItem.owned}}checked="checked"{{/if}}> <label for="own{{listItem.id}}">I own this item.</label>
-</td>
-<td class="item">
-  <div class="prod-thumb">
+<div class="prod-thumb">
+  <a target="_blank" href="{{listItem.link}}">
     <img src="{{assetPath listItem.image_url}}" alt="{{listItem.name}}">
+  </a>
+</div>
+<div class="prod-desc clearfix">
+  <div class="prod-category"> 
+    {{listItem.product_type_name}}
   </div>
-  <div class="prod-desc">
-    <div class="prod-category">
-      {{listItem.product_type_name}}
+  <h3>
+    <a href="{{listItem.link}}" target="_blank">{{listItem.name}}</a>
+  </h3>
+  {{addToMyListButton}}
+  <div class="rating"> <em>My rating:</em>
+  </div>
+  <div class="prod-when-own">
+    <div class="when">
+      <a href="{{listItem.link}}" target="_blank">Buy</a> at {{listItem.age}}
     </div>
-    <h3>
-      <a href="{{listItem.link}}" target="_blank">{{listItem.name}}</a>
-    </h3>
-    {{addToMyListButton}}
+    <div class="own">
+      <strong>{{publicHaveNeed listItem.owned}}</strong> {{listItem.quantity}} of these
+    </div>
+  </div>
+  <div class="prod-note">
     {{#if listItem.notes}}
-    <div class="prod-note closed">
-      <div class="note-content">
-        {{listItem.notes}}
+      <div class="prod-note-content expandable">
+        <p><span class="ss-chat"></span> {{listItem.notes}}</p>
       </div>
-    </div>
     {{/if}}
   </div>
-</td>
-<td class="rating">
-</td>
-<td class="when">
-  {{listItem.age}}
-</td>
-<td class="priority">
-  {{priorityIndicator listItem.priority}}
-</td>
+</div>

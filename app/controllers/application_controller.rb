@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
     @page_context ||= PageContext.new do
       page_id = nil
       subheader = "Welcome to Mamajamas!"
-      progress_id = 1
     end
   end
   helper_method :page_context
@@ -44,6 +43,10 @@ class ApplicationController < ActionController::Base
     page_context.body_class = css_class
   end
 
+  def set_tertiary_class(css_class)
+    page_context.tertiary_class = css_class
+  end
+
   def set_subheader(subheader)
     page_context.subheader = subheader
   end
@@ -52,16 +55,12 @@ class ApplicationController < ActionController::Base
     page_context.preheader = preheader
   end
 
-  def set_progress_id(progress_id)
-    page_context.progress_id = progress_id
-  end
-
-  def hide_progress_bar
-    page_context.show_progress = false
-  end
-
   def hide_header
     page_context.show_header = false
+  end
+
+  def hide_mainnav
+    page_context.show_mainnav = false
   end
 
   protected

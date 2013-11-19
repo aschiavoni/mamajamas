@@ -1,42 +1,35 @@
-Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
+Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
 
-  tagName: 'tr',
+  tagName: "div",
 
-  template: HandlebarsTemplates['list_items/edit'],
+  template: HandlebarsTemplates["list_items/edit"],
 
-  className: "prod prod-filled edit-mode choose-bt",
+  className: "prod prod-filled edit-mode choose-bt clearfix",
 
   oldModel: null,
 
   initialize: function() {
     BrowserDetect.init();
+
+    var suffix = this.model.id == null ? "new" : this.model.id;
+    this.model.set("idSuffix", suffix);
+
     _errMap = this.errorFieldMap();
 
     // save a clone of the original model in case we cancel
     this.oldModel = this.model.clone();
 
-    this.model.on("change", this.renderMaybe, this);
+    this.model.on("change", this.updateMaybe, this);
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:age", this.updateAgeRange, this);
-    this.model.on("change:priority", this.updatePriority, this);
+    this.model.on("change:owned", this.updateOwned, this);
+    this.model.on("change:quantity", this.updateQuantity, this);
   },
 
   events: {
     "submit .new-list-item": "save",
-    "change input[name='list_item[owned]']": "toggleOwnedCheckbox",
-    "change .owned-cb": "toggleOwnedRadioButtons",
     "click .cancel-item.button": "cancel",
     "click .find-item.button": "findItemClicked",
-  },
-
-  renderMaybe: function() {
-    var requiresRenderAttribs = [ 'name', 'link', 'image_url', 'vendor_id' ];
-    var changedAttribs = _.keys(this.model.changed);
-    var needsRender = _.any(changedAttribs, function(attrib) {
-      return _.contains(requiresRenderAttribs, attrib);
-    });
-    if (needsRender)
-      this.render();
   },
 
   render: function() {
@@ -57,23 +50,22 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
       model: this.model
     });
-    this.$el.append(ageRangeView.render().$el);
+    $(".prod-when-own", this.$el).append(ageRangeView.render().$el);
 
-    var priorityView = new Mamajamas.Views.ListItemPriority({
+    var quantityView = new Mamajamas.Views.ListItemQuantity({
       model: this.model
     });
-    this.$el.append(priorityView.render().$el);
+    $(".prod-when-own", this.$el).append(quantityView.render().$el);
 
     this.initializeAutocomplete();
 
-    this.$form = $(".new-list-item", this.$el);
     this.$itemPicture = $(".prod-thumb > img", this.$el);
     this.$itemPictureProgress = $(".progress-container img.progress", this.$el);
     this.initializeItemPictureUploads();
 
     _.defer(function() {
-      $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-      $("#list_item_name", _view.$el).focus();
+      _view.inFieldLabels();
+      _view.itemField("name").focus();
     });
 
     if (this.ie9orLower()) {
@@ -87,23 +79,44 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     return this;
   },
 
+  inFieldLabels: function() {
+    $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+  },
+
+  itemForm: function() {
+    return $(".new-list-item", this.$el);
+  },
+
+  itemId: function(name) {
+    return "#list_item_" + name + "_" + this.model.get("idSuffix");
+  },
+
+  itemField: function(name) {
+    var itemId = this.itemId(name);
+    return $(itemId, this.$el);
+  },
+
   updateRating: function() {
-    $("#list_item_rating", this.$el).val(this.model.get("rating"));
+    this.itemField("rating").val(this.model.get("rating"));
   },
 
   updateAgeRange: function() {
-    $("#list_item_age", this.$el).val(this.model.get("age"));
+    this.itemField("age").val(this.model.get("age"));
   },
 
-  updatePriority: function() {
-    $("#list_item_priority", this.$el).val(this.model.get("priority"));
+  updateOwned: function() {
+    this.itemField("owned").val(this.model.get("owned"));
+  },
+
+  updateQuantity: function() {
+    this.itemField("quantity").val(this.model.get("quantity"));
   },
 
   initializeAutocomplete: function() {
     var _view = this;
     var url = '/api/products/';
 
-    $("#list_item_name", this.$el).autocomplete({
+    _view.itemField("name").autocomplete({
       delay: 500,
       source: function(request, response) {
         $.getJSON(url, { filter: request.term }, function(data) {
@@ -121,12 +134,9 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
       },
       select: function(event, ui) {
         $(event.target).val(ui.item.value.name);
-        $("#list_item_link", _view.$el).val(ui.item.value.url);
-        $("#list_item_image_url", _view.$el).val(ui.item.value.image_url);
-
-        // re-initialize the inFieldLabels plugin
-        $("label", _view.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-
+        _view.itemField("link").val(ui.item.value.url);
+        _view.itemField("image_url").val(ui.item.value.image_url);
+        _view.inFieldLabels();
         return false;
       }
     }).data('ui-autocomplete')._renderItem = function(ul, item) {
@@ -140,29 +150,29 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     if (event)
       event.preventDefault();
 
-    var curPos = $("#list-items tr").index(this.$el);
-    Mamajamas.Context.List.set("current_position", curPos);
+    this.setCurrentPosition();
 
     var _view = this;
     _view.clearErrors();
 
     attributes = {
-      name: $("#list_item_name", this.$el).val(),
-      link: $("#list_item_link", this.$el).val(),
-      notes: $("#list_item_notes", this.$el).val(),
-      product_type_id: $("#list_item_product_type_id", this.$el).val(),
+      name: this.itemField("name").val(),
+      link: this.itemField("link").val(),
+      notes: this.itemField("edit_notes").val(),
+      product_type_id: this.itemField("product_type_id").val(),
       product_type: _view.model.get("product_type"),
       product_type_name: _view.model.get("product_type_name"),
-      category_id: $("#list_item_category_id", this.$el).val(),
-      priority: $("#list_item_priority", this.$el).val(),
-      age: $("#list_item_age", this.$el).val(),
-      rating: $("#list_item_rating", this.$el).val(),
-      image_url: $("#list_item_image_url", this.$el).val(),
-      owned: $("input[name='list_item[owned]']:checked").val() == "1",
+      category_id: this.itemField("category_id").val(),
+      priority: this.itemField("priority").val(),
+      age: this.itemField("age").val(),
+      rating: this.itemField("rating").val(),
+      image_url: this.itemField("image_url").val(),
+      owned: _view.model.get("owned"),
       placeholder: false,
-      vendor_id: $("#list_item_vendor_id", this.$el).val(),
-      vendor: $("#list_item_vendor", this.$el).val(),
-      list_item_image_id: $('#list_item_list_item_image_id', this.$el).val()
+      vendor_id: this.itemField("vendor_id").val(),
+      vendor: this.itemField("vendor").val(),
+      list_item_image_id: this.itemField('list_item_image_id').val(),
+      idSuffix: _view.model.get("idSuffix"),
     };
 
     if (_view.model.isNew()) {
@@ -204,6 +214,27 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     return false;
   },
 
+  updateMaybe: function() {
+    var requiresUpdateAttribs = [ 'name', 'link', 'image_url', 'vendor_id' ];
+    var changedAttribs = _.keys(this.model.changed);
+    var needsUpdate = _.any(changedAttribs, function(attrib) {
+      return _.contains(requiresUpdateAttribs, attrib);
+    });
+    if (needsUpdate)
+      this.update();
+  },
+
+  update: function() {
+    this.$itemPicture.attr("src", this.model.get("image_url"));
+
+    this.itemField("name").val(this.model.get("name"));
+    this.itemField("link").val(this.model.get("link"));
+    this.itemField("image_url").val(this.model.get("image_url"));
+    this.itemField("vendor").val(this.model.get("vendor"));
+    this.itemField("vendor_id").val(this.model.get("vendor_id"));
+  },
+
+
   shouldShareOnFacebook: function() {
     return $(".chk-fb-share", this.$el).is(":checked");
   },
@@ -227,22 +258,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
     }
     this.$el.remove();
     return true;
-  },
-
-  toggleOwnedCheckbox: function(event) {
-    var owned = $("input[name='list_item[owned]']:checked", this.$el).val() == "1";
-    $("td.own input[type='checkbox']", this.$el).prop("checked", owned);
-  },
-
-  toggleOwnedRadioButtons: function(event) {
-    var owned = $(event.target).is(":checked");
-    var selector;
-    if (owned)
-      selector = $(".owned-rb", this.$el);
-    else
-      selector = $(".need-rb", this.$el);
-
-    $(selector, this.$el).prop("checked", true);
   },
 
   handleError: function(item, response) {
@@ -269,10 +284,11 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
   },
 
   errorFieldMap: function() {
+    var _view = this;
     return {
-      name: '#list_item_name',
-      link: '#list_item_link',
-      notes: '#list_item_notes',
+      name: this.itemId("name"),
+      link: this.itemId("link"),
+      notes: this.itemId("edit_notes"),
     };
   },
 
@@ -281,21 +297,21 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
 
     $(".bt-thumb-upload, .prod-thumb", this.$el).click(function(event) {
       event.preventDefault();
-      $("#list_item_image_image", _view.$el).trigger("click");
+      _view.itemField("image_image").trigger("click");
     });
 
-    $("#list_item_image_image", this.$el).fileupload({
+    this.itemField("image_image").fileupload({
       url: '/api/list_item_images',
       type: 'POST',
       dropZone: _view.$itemPicture,
       pasteZone: _view.$itemPicture,
       maxNumberOfFiles: 1,
       start: function(e) {
-        _view.$form.progressIndicator("show");
+        _view.itemForm().progressIndicator("show");
       },
       stop: function(e) {
         setTimeout(function() {
-          _view.$form.progressIndicator("hide");
+          _view.itemForm().progressIndicator("hide");
         }, 600);
       },
       add: function(e, data) {
@@ -315,8 +331,8 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
         } else {
           listItem = $.parseJSON(data.result);
         }
-        $('#list_item_list_item_image_id', _view.$el).val(listItem.id)
-        $('#list_item_image_url', _view.$el).val(listItem.image.url);
+        _view.itemField('list_item_image_id').val(listItem.id)
+        _view.itemField('image_url').val(listItem.image.url);
         _view.$itemPicture.attr("src", listItem.image.url);
       }
     });
@@ -328,6 +344,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.Base.extend({
       model: _view.model
     });
     $('#buildlist').after(search.render().$el);
+    search.show();
   },
 
   findItemClicked: function(event) {

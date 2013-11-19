@@ -1,39 +1,34 @@
-<td class="own">
-  <input id="own{{listItem.id}}" class="prod-owned" type="checkbox" title="Do you own this item?" {{#if listItem.owned}}checked="checked"{{/if}}> <label for="own{{listItem.id}}">I own this item.</label>
-</td>
-<td class="item">
-  <div class="prod-thumb">
-    <img src="{{assetPath listItem.image_url}}" alt="{{listItem.product_type}}">
+<!-- product image -->
+<div class="prod-thumb">
+  <a target="_blank" href="{{listItem.link}}">
+    <img alt="{{listItem.product_type_name}}" src="{{assetPath listItem.image_url}}">
+  </a>
+</div>
+
+<!-- product description -->
+<div class="prod-desc clearfix">
+
+  <!-- product category, name, rating -->
+  <div class="prod-category"> {{listItem.product_type_name}} <a class="bt-addanother" href="#"><strong>+</strong> <span>Add another</span></a> </div>
+  <h3><a target="_blank" href="{{listItem.link}}">{{listItem.name}}</a></h3>
+  <div class="rating"> <em>My rating:</em>
   </div>
-  <div class="prod-desc">
-    <div class="prod-category">
-      {{listItem.product_type_name}} <a href="#" class="bt-addanother"><strong>+</strong> <span>Add another</span></a>
-    </div>
-    <h3>
-      <a href="{{listItem.link}}" target="_blank">{{listItem.name}}</a>
-    </h3>
-    {{#if listItem.notes}}
-    <div class="prod-note closed">
-      <div class="note-content">
-        {{listItem.notes}}
-      </div>
-    </div>
-    {{/if}}
-    <!-- drop-down editing menu -->
-    <div class="prod-edit-menu">
-      <ul class="clearfix">
-        <li>
-        <a href="#" class="ss-write"><span>Edit</span></a>
-        </li>
-        <li>
-        <a href="{{listItem.link}}" class="ss-cart" target="_blank"><span>Buy</span></a>
-        </li>
-        <li>
-        <a href="#" class="ss-delete"><span>Delete</span></a>
-        </li>
-      </ul>
-    </div><!-- / drop-down editing menu -->
+  <!-- end product category, name, rating -->
+
+  <!-- when to buy, need vs. have -->
+  <div class="prod-when-own">
+    <div class="when"> <a target="_blank" href="{{listItem.link}}">Buy</a> at {{listItem.age}} </div>
   </div>
-</td>
-<td class="rating">
-</td>
+  <!-- end when to buy, need vs. have -->
+  <!-- menu: delete, drag, edit -->
+  <div class="prod-edit-menu">
+    <ul>
+      <li><a href="#" class="delete tooltip"><span>Delete<em></em></span></a> </li>
+      <li><a href="#" class="drag tooltip"><span>Drag to reorder<em></em></span></a> </li>
+      <li><a href="#" class="edit tooltip"><span>Edit<em></em></span></a> </li>
+    </ul>
+  </div>
+  <!-- end menu: delete, drag, edit -->
+
+  <!-- end product description -->
+</div>

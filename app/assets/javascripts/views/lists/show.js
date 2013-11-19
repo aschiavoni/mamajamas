@@ -9,22 +9,6 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 
     var _view = this;
 
-    // add-product-type is not contained in the view so we wire it up globally
-    // hide the new item button if we are in the all category
-    if (Mamajamas.Context.List.isAllCategory())
-      $("#add-product-type").hide();
-
-    $("#add-product-type").click(function(event) {
-      event.preventDefault();
-
-      // no-op if we are in the all category
-      if (Mamajamas.Context.List.isAllCategory()) {
-        return false;
-      }
-
-      return _view.addProductType(_view, event);
-    });
-
     $('#bt-share, #bt-share-header').click(function(event) {
       if (Mamajamas.Context.List.get('item_count') == 0) {
         event.preventDefault();
@@ -39,7 +23,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       return true;
     });
 
-    $('#find-moms').click(function(event) {
+    $('#find-moms, .find-moms').click(function(event) {
       if (_view.isGuestUser()) {
         var link = $(event.currentTarget).attr("href");
         _view.unauthorized(link);
@@ -58,25 +42,17 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
         shareButton.addClass('disabled');
         shareButonHeader.attr('href', "/list")
       }
-    }, this)
+    }, this);
   },
 
   events: {
-    "click #babygear th.own": "sort",
-    "click #babygear th.item": "sort",
-    "click #babygear th.rating": "sort",
-    "click #babygear th.when": "sort",
-    "click #babygear th.priority": "sort"
+    "click .listsort .choicedrop a": "toggleSortList",
+    "click .listsort .choicedrop ol li a": "sort",
   },
 
   render: function() {
-    this.$el.html(this.template);
-    $("table#babygear", this.$el).append(this.indexView.render().$el);
-
-    if (this.model.get('view_count') == 0) {
-      var helpModals = new Mamajamas.Views.ListHelpModals();
-      $('body').append(helpModals.render().$el).addClass("list-help");
-    }
+    this.$el.html(this.template(this.model.toJSON()));
+    $(this.$el).append(this.indexView.render().$el);
 
     if ($("#add-list-item").length > 0)
       _.defer(this.addToMyList, this);
@@ -87,31 +63,30 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
   addToMyList: function(_view) {
     $.cookies.set("add_to_my_list", null);
     var listItemAttrs = $("#add-list-item").data("add-list-item");
-    var editView = new Mamajamas.Views.ListItemEdit({
-      model: new Mamajamas.Models.ListItem(listItemAttrs)
-    });
-    $("#list-items").prepend(editView.render().$el);
+    listItemAttrs["edit_mode"] = true;
+    Mamajamas.Context.ListItems.add(listItemAttrs);
+  },
+
+  toggleSortList: function(event) {
+    var $target = $(event.currentTarget);
+    var $choiceDrop = $target.parents(".choicedrop");
+    var $list = $choiceDrop.find("ol");
+
+    if ($list.is(":visible")) {
+      $list.hide();
+    } else {
+      $list.show();
+    }
+
+    return false;
   },
 
   sort: function(event) {
-    $("#babygear th").removeClass("sorting");
-    var $header = $(event.target);
-    $header.addClass("sorting");
+    var $sortLink = $(event.currentTarget);
+    var sortName = $sortLink.html();
+    var $sortDisplay = $sortLink.parents(".choicedrop").children("a");
+    $sortDisplay.html(sortName + " <span class=\"ss-dropdown\"></span>");
     return this.indexView.sort(event);
   },
-
-  addProductType: function(view, event) {
-    var addItem = new Mamajamas.Views.ListItemNew({
-      model: new Mamajamas.Models.ListItem({
-        category_id: view.model.get("category_id"),
-        age: "Pre-birth",
-        priority: 2,
-        image_url: "products/icons/unknown.png"
-      })
-    });
-
-    $("#list-items").prepend(addItem.render().$el);
-    return false;
-  }
 
 });

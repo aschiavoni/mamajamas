@@ -70,14 +70,14 @@ describe UserDecorator do
       user.save!
 
       user1 = create(:list).user
-      user2 = create(:list, public: true).user
+      user2 = create(:list, privacy: List::PRIVACY_PUBLIC).user
       user3 = create(:list).user
 
       user.follow!(user1)
       user.follow!(user2)
       user.follow!(user3)
 
-      user.followed_users_with_public_lists.should == [ user2 ]
+      user.followed_users_with_shared_lists.should == [ user2 ]
     end
 
   end

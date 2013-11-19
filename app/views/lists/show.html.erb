@@ -1,23 +1,21 @@
 <%= content_for :title_links do %>
-<ul>
-  <li>
-    <a href="#" id="add-product-type" class="button">
-      <span class="ss-plus"></span>New Item
-    </a>
-  </li>
-  <li>
-  <%= link_to profile_path, id: "bt-share", class: "button" + (@view.list.has_items? ? "" : " disabled") do %>
-    <span class="ss-action"></span>Save &amp; Share
-  <% end -%>
-  </li>
-  <li style="display: none;" id="print">
-    <a href="#" class="ss-icon" title="Print"><span>Print</span></a>
-  </li>
-</ul>
+  <ul>
+    <li>
+      <% if @view.list.private? %>
+        <%= link_to "Save", profile_path, id: "bt-share", class: "button bt-color" + (@view.list.has_items? ? "" : " disabled") %>
+      <% else -%>
+        &nbsp;
+      <% end -%>
+    </li>
+    <li>
+      <%= link_to "View", public_list_path(current_user), id: "bt-view", class: "button" + (@view.list.has_items? && !@view.list.private? ? "" : " disabled") %>
+    </li>
+  </ul>
 <% end if completed_list? -%>
 <%= content_for :nav do %>
   <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
     <nav id="categories">
+      <h3>Categories</h3>
       <ul>
         <li class="<%= "cat-selected" if @view.all_category? %>">
         <%= link_to "All", list_category_path('all') %>
@@ -31,15 +29,6 @@
     </nav>
   <% end -%>
 <% end if completed_list? -%>
-<%= content_for :tertiary do %>
-  <% cache [ current_user, 'friends', 'sidebar' ] do -%>
-    <div id="module-follow">
-      <div class="content">
-        <%= render partial: "friends/friends_sidebar", locals: { user: current_user } %>
-      </div>
-    </div>
-  <% end -%>
-<% end -%>
 <% if completed_list? -%>
   <% cache [ @view.list, @view.category_slug, 'list' ] do -%>
     <form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>" data-list-entries-loaded-at="<%= Time.now.utc %>">
@@ -53,6 +42,7 @@
       <% if @view.category.present? -%>
       category_id: '<%= @view.category.id %>',
       category: '<%= @view.category.slug %>',
+      category_name: '<%= @view.category.name %>',
       <% end -%>
       current_position: 0,
       item_count: <%= @view.list.item_count %>

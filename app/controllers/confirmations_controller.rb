@@ -8,6 +8,5 @@ class ConfirmationsController < Devise::ConfirmationsController
     set_subheader = "Resend confirmation instructions"
     set_body_class "form-page"
     hide_header
-    hide_progress_bar
   end
 end

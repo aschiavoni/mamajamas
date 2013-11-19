@@ -1,35 +1,23 @@
-Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
+Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.ListItem.extend({
 
-  tagName: 'tr',
+  tagName: "div",
 
-  template: HandlebarsTemplates['list_items/placeholder'],
+  template: HandlebarsTemplates["list_items/placeholder"],
 
-  className: "prod",
+  className: "prod clearfix",
 
   initialize: function() {
-    this.model.on("change:age", this.saveAndRender, this);
-    this.model.on("change:priority", this.saveAndRender, this);
     this.$el.attr("id", this.model.get("id"));
   },
 
   events: {
-    "change .prod-owned": "updateOwned",
     "click .find-item.button": "findItemClicked",
-    "click .ss-delete": "delete",
+    "click .prod-edit-menu .delete": "delete",
+    "click .prod-edit-menu .drag": "doNothing",
   },
 
   render: function() {
     this.$el.html(this.template({ listItem: this.model.toJSON() }));
-
-    var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
-      model: this.model
-    });
-    this.$el.append(ageRangeView.render().$el);
-
-    var priorityView = new Mamajamas.Views.ListItemPriority({
-      model: this.model
-    });
-    this.$el.append(priorityView.render().$el);
 
     if (this.model.get('show_chooser'))
       _.defer(this.findItem, this);
@@ -37,35 +25,22 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
     return this;
   },
 
-  saveAndRender: function() {
-    this.model.save();
-    this.render();
-  },
-
-  updateOwned: function(event) {
-    var $owned = $(event.target);
-    this.model.set("owned", $owned.is(":checked"));
-    this.model.save();
-  },
-
   findItem: function(_view) {
+    // close the help modal if it exists
+    $.modal.close();
     _view.setCurrentPosition();
     _view.model.set('show_chooser', false);
     var search = new Mamajamas.Views.ListItemSearch({
       model: _view.model
     });
-    $('#buildlist').after(search.render().$el);
+    $("#buildlist").after(search.render().$el);
+    search.show();
   },
 
   findItemClicked: function(event) {
     event.preventDefault();
     this.findItem(this);
     return false;
-  },
-
-  setCurrentPosition: function() {
-    var curPos = $('#list-items tr').index(this.$el);
-    Mamajamas.Context.List.set("current_position", curPos);
   },
 
   delete: function() {
@@ -81,6 +56,6 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.Base.extend({
       });
     }
     return false;
-  }
+  },
 
 });

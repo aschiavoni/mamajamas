@@ -1,12 +1,13 @@
 class PublicListsController < ApplicationController
   before_filter :authenticate_user!, only: [ :preview, :publish ]
   before_filter :find_list, only: [ :preview, :publish ]
-  before_filter :find_public_list, only: [ :show ]
+  before_filter :find_shared_list, only: [ :show ]
   before_filter :init_view
 
   def show
     cat = params[:category] || 'all'
     @view = PublicListView.new(@list, cat, false, current_user)
+    @view.friends_prompt = cookies.delete(:friends_prompt)
 
     # redirect if using an old slug
     if redirect_needed?(@view)
@@ -17,7 +18,13 @@ class PublicListsController < ApplicationController
     @list.increment_public_view_count
 
     respond_to do |format|
-      format.html
+      format.html do
+        if @list.registered_users_only? && !allowed_user?
+          render "private"
+        else
+          render "show"
+        end
+      end
     end
   end
 
@@ -28,9 +35,10 @@ class PublicListsController < ApplicationController
   end
 
   def publish
-    if params[:publish] == '1'
-      @list.share_public!
+    unless params[:cancel] == '1'
+      @list.update_attributes!(privacy: params[:privacy])
       SharedListNotifier.send_shared_list_notification(@list)
+      cookies[:friends_prompt] = true
       redirect_to public_list_path(current_user.slug)
     else
       redirect_to list_path
@@ -66,8 +74,7 @@ class PublicListsController < ApplicationController
   def init_view
     set_page_id "publist"
     set_subheader @list.title
-    set_progress_id 3
-    hide_progress_bar
+    set_tertiary_class "light"
   end
 
   def find_list
@@ -75,9 +82,20 @@ class PublicListsController < ApplicationController
     not_found if @list.blank?
   end
 
-  def find_public_list
+  def find_shared_list
     owner = User.find(params[:slug])
     @list = owner.list if owner.present?
-    not_found if @list.blank? || !@list.public?
+    not_found unless shareable?(@list)
+  end
+
+  private
+
+  def shareable?(list)
+    return false if @list.blank? || @list.private?
+    return true
+  end
+
+  def allowed_user?
+    current_user && !current_user.guest?
   end
 end

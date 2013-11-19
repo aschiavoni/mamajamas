@@ -1,11 +1,8 @@
-{{priorityIndicator listItem.priority}}
-<!-- drop-down menu: priority -->
-<div class="prod-drop">
-  <div class="prod-drop-arrow"><span class="ss-icon">dropdown</span></div>
-  <ul class="visuallyhidden">
-    <li class="hed">Priority:</li>
-    <li class="priority-high"><a href="#"><strong>!!</strong> Get it</a></li>
-    <li class="priority-med"><a href="#"><strong>!</strong> Consider it</a></li>
-    <li class="priority-low"><a href="#"><strong>x</strong> Don't bother</a></li>
-  </ul>
-</div>
+ Priority:
+  <div class="choicedrop"> <a href="#">{{priorityIndicator listItem.priority}} <span class="ss-dropdown"></span></a>
+    <ul style="display:none; width:7.5em;">
+      <li><a href="#1" data-priority="1">Must-Have</a></li>
+      <li><a href="#2" data-priority="2">Consider</a></li>
+      <li><a href="#3" data-priority="3">Don’t Bother</a></li>
+    </ul>
+  </div>

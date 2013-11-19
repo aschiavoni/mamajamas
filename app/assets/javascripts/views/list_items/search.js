@@ -2,8 +2,6 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
 
   template: HandlebarsTemplates['list_items/search'],
 
-  className: 'modal-wrap',
-
   lastSearch: null,
 
   searchResults: null,
@@ -11,18 +9,20 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   suggestions: null,
 
   initialize: function() {
+    this.$el.attr("id", "search-modal");
     this.searchResults = new Mamajamas.Collections.SearchResults();
     this.searchResults.on('reset', this.showResults, this);
 
     var productTypeId = this.model.get('product_type_id');
-    this.suggestions = new Mamajamas.Collections.ProductTypeSuggestions(null, {
-      productTypeId: productTypeId
-    });
-    this.suggestions.on('reset', this.showSuggestions, this);
+    if (productTypeId != null) {
+      this.suggestions = new Mamajamas.Collections.ProductTypeSuggestions(null, {
+        productTypeId: productTypeId
+      });
+      this.suggestions.on('reset', this.showSuggestions, this);
+    }
   },
 
   events: {
-    'click #closewindow': 'close',
     'keyup #field-search': 'searchMaybe',
     'submit #frm-prod-search': 'submit',
   },
@@ -30,10 +30,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   render: function() {
     var _view = this
 
-    this.$el.html(this.template(this.model.toJSON())).show(function() {
-      $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-      $("#field-search", this.$el).focus();
-    });
+    this.$el.html(this.template(this.model.toJSON()));
 
     var addYourOwnView = new Mamajamas.Views.ListItemAddYourOwn({
       model: this.model
@@ -41,14 +38,44 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     addYourOwnView.on('search:product:added', _view.addManualItem, _view);
     $('#prod-search-results', this.$el).after(addYourOwnView.render().$el);
 
-    this.loadSuggestions();
+    if (this.suggestions != null) {
+      this.loadSuggestions();
+    }
+    else {
+      _.defer(function() {
+        _view.showSuggestions([]);
+      });
+    }
     return this;
+  },
+
+  inFieldLabels: function() {
+    $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+  },
+
+  show: function() {
+    var _view = this;
+    this.$el.modal({
+      position: ["15%",null],
+      zIndex: 5000,
+      closeHTML:'<a class="bt-close ss-icon" href="#">Close</a>',
+      overlayClose: true,
+      onShow: function(dialog) {
+        _view.inFieldLabels();
+        $("#field-search", _view.$el).focus();
+      },
+      onClose: function(dialog) {
+        this.close(); // this is the modal
+        _view.$el.remove();
+        $("#search-modal").remove(); // make SURE it is removed
+      }
+    });
   },
 
   close: function(event) {
     if (event)
       event.preventDefault();
-    this.$el.remove();
+    $.modal.close();
     return false;
   },
 
@@ -75,7 +102,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     var _view = this;
 
     this.clearResults();
-    $('#prod-search-results').progressIndicator('show');
+    $('#prod-search-results', this.$el).progressIndicator('show');
     $('#prod-search-results .no-search-results', this.$el).hide();
 
     this.searchResults.fetch({
@@ -93,13 +120,13 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   },
 
   showSuggestions: function(searchResults) {
-    $('#prod-suggestions-results').progressIndicator('hide');
+    $('#prod-suggestions-results', this.$el).progressIndicator('hide');
     var $resultsContainer = $('#prod-suggestions-results ul.suggestions', this.$el);
     this.addSearchResultsToContainer(searchResults, this, $resultsContainer);
   },
 
   showResults: function(searchResults) {
-    $('#prod-search-results').progressIndicator('hide');
+    $('#prod-search-results', this.$el).progressIndicator('hide');
     var $resultsContainer = $('#prod-search-results ul.search-results', this.$el);
     this.addSearchResultsToContainer(searchResults, this, $resultsContainer);
   },
@@ -142,6 +169,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       age: this.model.get('age'),
       rating: this.model.get('rating'),
       image_url: searchResult.get('image_url'),
+      quantity: this.model.get('quantity'),
       owned: this.model.get('owned'),
       placeholder: false,
       edit_mode: true
@@ -165,6 +193,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       age: this.model.get('age'),
       rating: this.model.get('rating'),
       image_url: searchResult.get('image_url'),
+      quantity: this.model.get('quantity'),
       owned: this.model.get('owned'),
       placeholder: false
     };

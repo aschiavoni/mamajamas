@@ -2,6 +2,7 @@ class PublicListView < ListView
   def initialize(list, category_slug = nil, preview = false, current_user = nil)
     super(list, category_slug, current_user)
     @preview = preview
+    @friends_prompt = false
   end
 
   def preview?
@@ -9,11 +10,15 @@ class PublicListView < ListView
   end
 
   def list_entries
-    @list_entries ||= get_list_entries
+    @list_entries ||= list.shared_list_entries(category, preview?)
   end
 
   def categories
-    @categories ||= get_categories
+    @categories ||= list.shared_list_categories
+  end
+
+  def all_categories
+    @all_categories ||= Category.all
   end
 
   def following?
@@ -37,21 +42,11 @@ class PublicListView < ListView
     end
   end
 
-  private
-
-  def get_list_entries
-    if preview?
-      list.public_preview_list_entries(category)
-    else
-      list.public_list_entries(category)
-    end
+  def friends_prompt?
+    owner == current_user and @friends_prompt
   end
 
-  def get_categories
-    if preview?
-      list.public_preview_list_categories
-    else
-      list.public_list_categories
-    end
+  def friends_prompt=(val)
+    @friends_prompt = val
   end
 end

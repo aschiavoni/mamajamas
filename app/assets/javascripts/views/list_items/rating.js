@@ -1,6 +1,6 @@
 Mamajamas.Views.ListItemRating = Backbone.View.extend({
 
-  className: "eggs",
+  className: "stars",
 
   template: HandlebarsTemplates['list_items/rating'],
 
@@ -13,9 +13,9 @@ Mamajamas.Views.ListItemRating = Backbone.View.extend({
   events: {
     "mouseenter": "enableRating",
     "mouseleave": "disableRating",
-    "mouseenter .egg": "highlight",
-    "mouseleave .egg": "unhighlight",
-    "click .egg": "rate"
+    "mouseenter .star": "highlight",
+    "mouseleave .star": "unhighlight",
+    "click .star": "rate"
   },
 
   render: function() {
@@ -27,8 +27,8 @@ Mamajamas.Views.ListItemRating = Backbone.View.extend({
   rate: function(event) {
     if (this.readOnly)
       return true;
-    var $egg = $(event.target);
-    var rating = parseInt($egg.data("rating"));
+    var $star = $(event.target);
+    var rating = parseInt($star.data("rating"));
     this.model.set("rating", rating);
   },
 
@@ -44,11 +44,11 @@ Mamajamas.Views.ListItemRating = Backbone.View.extend({
   restoreRating: function() {
     var rating = this.model.get("rating");
     if (rating) {
-      $(".egg", this.$el).each(function(idx, el) {
-        var $egg = $(el);
-        if ($egg.data("rating").toString() === rating.toString()) {
-          $egg.prevAll().andSelf().addClass("egg-full");
-          $egg.nextAll().removeClass("egg-full");
+      $(".star", this.$el).each(function(idx, el) {
+        var $star = $(el);
+        if ($star.data("rating").toString() === rating.toString()) {
+          $star.prevAll().andSelf().addClass("star-full");
+          $star.nextAll().removeClass("star-full");
           return false;
         }
       });
@@ -58,15 +58,15 @@ Mamajamas.Views.ListItemRating = Backbone.View.extend({
   highlight: function(event) {
     if (!this._ratingEnabled || this.readOnly)
       return true;
-    var $egg = $(event.target);
-    $egg.prevAll().andSelf().addClass("egg-full");
-    $egg.nextAll().removeClass("egg-full");
+    var $star = $(event.target);
+    $star.prevAll().andSelf().addClass("star-full");
+    $star.nextAll().removeClass("star-full");
   },
 
   unhighlight: function(event) {
     if (!this._ratingEnabled || this.readOnly)
       return true;
-    var $egg = $(event.target);
-    $egg.prevAll().andSelf().removeClass("egg-full");
+    var $star = $(event.target);
+    $star.prevAll().andSelf().removeClass("star-full");
   }
 });

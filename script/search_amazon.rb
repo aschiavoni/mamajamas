@@ -5,4 +5,5 @@ fetcher = AmazonProductFetcher.new(ProductFetcherLogger, {
   "secret_key" => config['secret_key']
 })
 
-puts fetcher.fetch ARGV[0] || "strollers"
+results = fetcher.fetch ARGV[0] || "Baby Shampoo"
+puts results.inspect

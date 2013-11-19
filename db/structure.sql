@@ -287,9 +287,9 @@ CREATE TABLE list_items (
     id integer NOT NULL,
     list_id integer,
     name character varying(255),
-    owned boolean,
+    owned boolean DEFAULT false NOT NULL,
     link character varying(255),
-    rating integer,
+    rating integer DEFAULT 0,
     priority integer,
     notes text,
     image_url character varying(255),
@@ -301,9 +301,9 @@ CREATE TABLE list_items (
     placeholder boolean DEFAULT false NOT NULL,
     product_type_name character varying(255),
     list_item_image_id integer,
-    shared boolean DEFAULT false NOT NULL,
     vendor character varying(255),
-    vendor_id character varying(255)
+    vendor_id character varying(255),
+    quantity integer DEFAULT 1 NOT NULL
 );
 
 
@@ -341,7 +341,8 @@ CREATE TABLE lists (
     public_view_count integer DEFAULT 0 NOT NULL,
     shared_list_notification_sent_at timestamp without time zone,
     completed_at timestamp without time zone,
-    built_at timestamp without time zone
+    built_at timestamp without time zone,
+    privacy integer DEFAULT 0 NOT NULL
 );
 
 
@@ -447,7 +448,8 @@ CREATE TABLE product_types (
     user_id integer,
     plural_name character varying(255),
     search_index character varying(255) DEFAULT 'All'::character varying,
-    search_query character varying(255)
+    search_query character varying(255),
+    recommended_quantity integer DEFAULT 1 NOT NULL
 );
 
 
@@ -844,6 +846,14 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
+-- Name: age_ranges_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY age_ranges
+    ADD CONSTRAINT age_ranges_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: authentications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -977,14 +987,6 @@ ALTER TABLE ONLY social_friends
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
--- Name: when_to_buy_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY age_ranges
-    ADD CONSTRAINT when_to_buy_suggestions_pkey PRIMARY KEY (id);
 
 
 --
@@ -1337,3 +1339,17 @@ INSERT INTO schema_migrations (version) VALUES ('20130925165606');
 INSERT INTO schema_migrations (version) VALUES ('20130926180736');
 
 INSERT INTO schema_migrations (version) VALUES ('20131008224900');
+
+INSERT INTO schema_migrations (version) VALUES ('20131011143458');
+
+INSERT INTO schema_migrations (version) VALUES ('20131011143530');
+
+INSERT INTO schema_migrations (version) VALUES ('20131029014324');
+
+INSERT INTO schema_migrations (version) VALUES ('20131115130239');
+
+INSERT INTO schema_migrations (version) VALUES ('20131115134849');
+
+INSERT INTO schema_migrations (version) VALUES ('20131115222228');
+
+INSERT INTO schema_migrations (version) VALUES ('20131117145900');

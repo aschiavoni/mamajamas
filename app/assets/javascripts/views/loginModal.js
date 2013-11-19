@@ -12,6 +12,7 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   events: {
     "click #bt-cancel": "hide",
     "submit #login-form": "submit",
+    "submit #private-list-login-form": "submit",
     "click .modal-overlay": "close",
     "click .bt-close": "close",
   },
@@ -21,7 +22,8 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   },
 
   initializeCollapsible: function() {
-    $("#login-form .collapsible", this.$el).collapsible({
+    $("#login-form .collapsible, #private-list-login-form .collapsible",
+      this.$el).collapsible({
       cssClose: "ss-directright",
       cssOpen: "ss-dropdown",
       speed: 200,
@@ -94,7 +96,7 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
     event.preventDefault();
     var _session = this.model;
     var _view = this;
-    var $form = $("#login-form", this.$el);
+    var $form = $(".login-form", this.$el);
     $("button[type=submit]", $form).attr("disabled", "disabled");
 
     _session.trigger('server:authenticating');

@@ -81,6 +81,5 @@ class SessionsController < Devise::SessionsController
     set_subheader = "Login"
     set_body_class "form-page"
     hide_header
-    hide_progress_bar
   end
 end

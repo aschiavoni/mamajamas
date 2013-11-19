@@ -2,7 +2,9 @@
 <div class="prod-detail-pop">
   <h4>{{name}}</h4>
   <p class="detail-price">
-    <a href="{{url}}" target="_blank">{{price}}</a> <em>on Amazon.com</em>
+    {{#if price}}
+      <a href="{{url}}" target="_blank">{{price}}</a> <em>on Amazon.com</em>
+    {{/if}}
   </p>
   {{#if mamajamas_rating}}
   <div class="detail-rating-mj rating">
