@@ -139,18 +139,24 @@
       </div>
     </div>
     <div class="clearfix">
-      <h4 id="priority-high-hed" class="priority priority-high collapsible"><strong>Must-Have</strong></h4>
-      <div class="priority-high collapsible-content">
-        <%= render partial: "list_item", collection: @view.list_entries_by_priority(1) %>
-      </div>
-      <h4 id="priority-med-hed" class="priority collapsible"><strong>Consider</strong></h4>
-      <div class="priority-med collapsible-content">
-        <%= render partial: "list_item", collection: @view.list_entries_by_priority(2) %>
-      </div>
-      <h4 id="priority-low-hed" class="priority collapsible ss-directright"><strong>Don’t Bother</strong></h4>
-      <div class="priority-low collapsible-content">
-        <%= render partial: "list_item", collection: @view.list_entries_by_priority(3) %>
-      </div>
+      <% if @view.list_entries_by_priority(1).size > 0 -%>
+        <h4 id="priority-high-hed" class="priority priority-high collapsible"><strong>Must-Have</strong></h4>
+        <div class="priority-high collapsible-content">
+          <%= render partial: "list_item", collection: @view.list_entries_by_priority(1) %>
+        </div>
+      <% end -%>
+      <% if @view.list_entries_by_priority(2).size > 0 -%>
+        <h4 id="priority-med-hed" class="priority collapsible"><strong>Consider</strong></h4>
+        <div class="priority-med collapsible-content">
+          <%= render partial: "list_item", collection: @view.list_entries_by_priority(2) %>
+        </div>
+      <% end -%>
+      <% if @view.list_entries_by_priority(3).size > 0 -%>
+        <h4 id="priority-low-hed" class="priority collapsible ss-directright"><strong>Don’t Bother</strong></h4>
+        <div class="priority-low collapsible-content">
+          <%= render partial: "list_item", collection: @view.list_entries_by_priority(3) %>
+        </div>
+      <% end -%>
     </div>
   </form>
   <script type="text/javascript">
