@@ -19,7 +19,6 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
     this.collection.on('reset', this.render, this);
 
     this.initCollapsibles();
-    this.initExpandables();
 
     // since the privacy options are not contained in this.$el, we
     // will wire the events up manually
@@ -44,6 +43,7 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
   render: function() {
     this.clearList();
     this.collection.each(this.appendItem, this);
+    this.initExpandables();
     return this;
   },
 
