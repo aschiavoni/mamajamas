@@ -23,24 +23,24 @@ class Admin::UsersCsvReport
 
   def attributes
     @attrs ||= [
-      :id,
-      :username,
-      :email,
-      :first_name,
-      :last_name,
-      :created_at,
-      :list_item_count,
-      :shared_list?,
-      :sign_in_count,
-      :last_sign_in_at,
-      :facebook_connected?,
-      :birthday,
-      :profile_picture,
-      :notes,
-      :zip_code,
-      :country_code,
-      :admin,
-      :admin_notes
+                :id,
+                :username,
+                :email,
+                :first_name,
+                :last_name,
+                :created_at,
+                :list_item_count,
+                :shared_list?,
+                :sign_in_count,
+                :last_sign_in_at,
+                :facebook_connected?,
+                :birthday,
+                :profile_picture,
+                :notes,
+                :zip_code,
+                :country_code,
+                :admin,
+                :admin_notes
     ]
   end
 

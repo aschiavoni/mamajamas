@@ -79,4 +79,9 @@ class Admin::ProductTypesView
       "WirelessAccessories"
     ]
   end
+
+  def csv
+    product_types = ProductType.scoped.order(:category_id)
+    Admin::ProductTypesCsvReport.new(product_types).generate
+  end
 end

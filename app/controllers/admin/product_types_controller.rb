@@ -3,6 +3,10 @@ class Admin::ProductTypesController < Admin::BaseController
 
   def index
     @view = Admin::ProductTypesView.new @category
+    respond_to do |format|
+      format.html
+      format.csv { render text: @view.csv }
+    end
   end
 
   def edit
