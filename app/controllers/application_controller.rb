@@ -82,7 +82,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    list_path
+    cookies.delete(:after_sign_in_path) || list_path
   end
 
   def allow_guest!

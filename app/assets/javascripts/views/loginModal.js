@@ -1,4 +1,7 @@
 window.Mamajamas.Views.LoginModal = Backbone.View.extend({
+
+  signInPath: "/list",
+
   initialize: function() {
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
 
@@ -12,9 +15,10 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   events: {
     "click #bt-cancel": "hide",
     "submit #login-form": "submit",
-    "submit #private-list-login-form": "submit",
+    "submit #private-list-login-form": "submitPrivate",
     "click .modal-overlay": "close",
     "click .bt-close": "close",
+    "click #bt-fb-connect": "facebookLogin",
   },
 
   render: function(event) {
@@ -81,15 +85,31 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   },
 
   onAuthenticated: function() {
-    if (this.model.get("sign_in_count") <= 1)
+    if (this.model.get("sign_in_count") <= 1) {
       window.location = "/friends";
-    else
-      window.location = "/list";
+    }
+    else {
+      window.location = this.signInPath;
+    }
   },
 
   onUnauthorized: function() {
     this.hide();
     Mamajamas.Context.Notifications.error("You cannot be logged in at this time.");
+  },
+
+  submitPrivate: function(event) {
+    this.setAfterSigninPath();
+    submit(event);
+  },
+
+  facebookLogin: function(event) {
+    this.setAfterSigninPath();
+    return true;
+  },
+
+  setAfterSigninPath: function() {
+    this.signInPath = window.location.pathname;
   },
 
   submit: function(event) {
