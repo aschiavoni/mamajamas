@@ -33,6 +33,11 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
         overlayClose: true
       });
     }
+
+    // setup social links
+    new Mamajamas.Views.SocialLinks({
+      el: '#social-links'
+    });
   },
 
   events: {
