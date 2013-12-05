@@ -61,6 +61,20 @@
     </p>
   <% end -%>
 <% end -%>
+<%= content_for :title_links do %>
+  <ul class="iconrow">
+    <li><a href="#" class="ss-icon print" title="Print">Print</a></li>
+    <li id="social-links" class="nav-drop-trigger">
+      <a href="#" class="nav-drop-link"><span class="ss-action"></span><em>Share</em></a>
+      <ul class="nav-drop">
+        <li class="hed">Share:</li>
+        <li><a href="#" class="ss-icon ss-social-circle" title="Pinterest">Pinterest</a></li>
+        <li><a href="#" class="ss-icon ss-social-circle" title="Twitter">Twitter</a></li>
+        <li><a href="#" class="ss-icon ss-social-circle" title="Facebook">Facebook</a></li>
+      </ul>
+    </li>
+  </ul>
+<% end -%>
 <%= content_for :nav do %>
   <% cache [ @view.list, @view.category_slug, 'public_categories' ] do -%>
     <nav id="categories">
