@@ -1,3 +1,8 @@
+// RAE: [2013-12-06 Fri 12:02]
+// this is a hacked version of pinit.js from https://github.com/pinterest/widgets
+// a couple of edits were made to allow us to use our own custom
+// pin button, it seems to work ok for now but we should keep an
+// eye out for problems
 // show pin counts for Any Image buttons
 
 (function (w, d, a) {
@@ -145,7 +150,7 @@
 
           // cdn
           rules = rules.replace(/_cdn/g, cdn);
-          
+
           // resolution
           rules = rules.replace(/_rez/g, $.v.resolution);
 
@@ -188,19 +193,19 @@
         },
 
         showFloatingButton: function (img) {
-        
+
           var height = $.f.getData(img, 'height') || $.v.config.height;
           var color = $.f.getData(img, 'color') || $.v.config.color;
           var lang = $.f.getData(img, 'lang') || $.v.config.localImage;
-        
+
           // size > 80x80 and source is not a data: uri?
           if (img.height > $.a.minImgSize && img.width > $.a.minImgSize && !img.src.match(/^data/)) {
-            
+
             // kill it if it's already floating out there
             if ($.s.floatingButton) {
               $.f.kill($.s.floatingButton);
             }
-            
+
             // make it fresh each time; this pays attention to individual image config options
             $.s.floatingButton = $.f.make({'A': {'className': $.a.k + '_pin_it_button_' + height + ' ' + $.a.k + '_pin_it_button_' + lang + '_' + height + '_' + color + ' ' + $.a.k + '_pin_it_button_floating_' + height, 'title': 'Pin it!', 'target': '_blank'}});
             $.f.set($.s.floatingButton, $.a.dataAttributePrefix + 'log', 'button_pinit_floating');
@@ -301,7 +306,7 @@
           if ($.v.config.hover) {
             $.f.listen($.d.b, 'mouseover', $.f.over);
           }
-          
+
           // log calls may be dropped on the floor by the server; clean them up
           var cleanLog = function () {
             var s = $.d.getElementsByTagName('SCRIPT');
@@ -310,12 +315,12 @@
                 $.f.kill(s[i]);
               }
             }
-            $.w.setTimeout(function () { 
-              cleanLog(); 
+            $.w.setTimeout(function () {
+              cleanLog();
             }, 2000);
           };
           cleanLog();
-          
+
         },
 
         getPinCount: function (url) {
@@ -337,7 +342,7 @@
           }
           return n;
         },
-        
+
         // make an avatar for board header
         avatar: function (url, href) {
           var src = url.replace(/_30.jpg/, '_60.jpg');
@@ -384,7 +389,7 @@
           var c = 0;
           var h = [];
           for (var i = 0, n = data.length; i < n; i = i + 1) {
-            
+
             // converts HTML entities to unicode for thumb titles
             var temp = $.f.make({'SPAN':{'innerHTML': data[i].description}});
             var thumb = $.f.make({'A': {'className': $.a.k + '_embed_grid_th', 'title': temp.innerHTML}});
@@ -430,8 +435,8 @@
           }
           return bd;
         },
-        
-        // make a board header - takes data, parent element, string to log, and true/false for showing board 
+
+        // make a board header - takes data, parent element, string to log, and true/false for showing board
         makeHeader: function (r, parent, log, showSecond) {
           var hd = $.f.make({'SPAN': { 'className': $.a.k + '_embed_grid_hd'}});
           var avatar = $.f.avatar(r.data.user.image_small_url, parent.href);
@@ -443,7 +448,7 @@
             var first = $.f.make({'A': {'className': $.a.k + '_embed_grid_first', 'innerHTML': $.f.filter(r.data.user.full_name), 'target': '_blank', 'href': parent.href }});
             first.style.width = ($.v.renderedWidth) - 45 + 'px';
             $.f.set(first, $.a.dataAttributePrefix + 'log', log);
-            hd.appendChild(first);   
+            hd.appendChild(first);
             var second = $.f.make({'A': {'className': $.a.k + '_embed_grid_second', 'innerHTML':  $.f.filter(r.data.board.name), 'target': '_blank', 'href': parent.href}});
             second.style.width = ($.v.renderedWidth) - 45 + 'px';
             $.f.set(second, $.a.dataAttributePrefix + 'log', log);
@@ -453,25 +458,25 @@
             var mid = $.f.make({'A': {'className': $.a.k + '_embed_grid_mid', 'innerHTML': $.f.filter(r.data.user.full_name), 'target': '_blank', 'href': parent.href }});
             mid.style.width = ($.v.renderedWidth) - 45 + 'px';
             $.f.set(mid, $.a.dataAttributePrefix + 'log', log);
-            hd.appendChild(mid);               
+            hd.appendChild(mid);
           }
 
-          return hd;   
+          return hd;
         },
 
         // make a board footer
         makeFooter: function (a, type, lang) {
           var ft, logo, see;
-          
+
           ft = $.f.make({'A': { 'className': $.a.k + '_embed_grid_ft', 'href': a.href, 'target': '_blank'}});
-          
+
           logo = $.f.make({'SPAN': { 'className': $.a.k + '_embed_grid_ft_logo'}});
 
           var strings = $.v.strings;
           if (lang && $.a.strings[lang]) {
             strings = $.a.strings[lang];
           }
-  
+
           if ($.v.renderedWidth > $.a.tile.minWidthToShowAuxText) {
             see = $.f.make({'SPAN':{'innerHTML': strings.seeOn }});
             if (strings.seeOnTextAfterLogo) {
@@ -566,16 +571,16 @@
 
               if (pin && pin.id && pin.description && thumb.url && thumb.width && thumb.height) {
                 $.f.debug('Found enough data to embed a pin');
-                
+
                 var strings = $.v.strings;
-                
+
                 // overridden language?
                 var lang = $.f.getData(parent, 'lang') || $.v.config.lang;
-                
+
                 if ($.a.strings[lang]) {
                   strings = $.a.strings[lang];
                 }
-                
+
                 // container
                 var container = $.f.make({'SPAN': { 'className': $.a.k + '_embed_pin', 'data-pin-id': pin.id }});
                 var style = $.f.getData(parent, 'style');
@@ -595,12 +600,12 @@
 
                 // pin it button
                 var rpc = $.a.k + '_repin';
-                
+
                 // gross hack
                 if (lang === 'ja') {
                   rpc = rpc + '_ja';
                 }
-                
+
                 var repin = $.f.make({'I': {'className': rpc, 'data-pin-id': pin.id }});
                 $.f.set(repin, $.a.dataAttributePrefix + 'log', 'repin');
                 $.f.set(repin, $.a.dataAttributePrefix + 'href', $.a.endpoint.repin.replace(/%s/, pin.id));
@@ -716,7 +721,7 @@
             if (parent && r.data && r.data.pins && r.data.pins.length) {
 
               var lang = $.f.getData(parent, 'lang') || $.v.config.lang;
-              
+
               $.f.debug('API replied with a user');
               var container = $.f.make({'SPAN': { 'className': $.a.k + '_embed_grid'}});
               var style = $.f.getData(parent, 'style');
@@ -865,11 +870,11 @@
         render: {
           buttonBookmark: function (el) {
             $.f.debug('build bookmarklet button');
-            
+
             var height = $.f.getData(el, 'height') || $.v.config.height;
             var color = $.f.getData(el, 'color') || $.v.config.color;
             var lang = $.f.getData(el, 'lang') || $.v.config.localImage;
-            
+
             var a = $.f.make({'A': {'href': el.href, 'className': $.a.k + '_pin_it_button_' + height + ' ' + $.a.k + '_pin_it_button_' + lang + '_' + height + '_'  + color + ' ' + $.a.k + '_pin_it_button_inline_' + height + ' ' + $.a.k + '_pin_it_none'}});
 
             if ($.f.getData(el, 'zero') || $.v.config.zero) {
@@ -883,9 +888,9 @@
             } else {
               a.className = a.className + ' ' + $.a.k + '_pin_it_none';
             }
-            
+
             $.f.set(a, $.a.dataAttributePrefix + 'log', 'button_pinit_bookmarklet');
-            
+
             // fire the bookmarklet
             a.onclick = function () {
               $.f.fireBookmark();
@@ -901,7 +906,7 @@
           },
           buttonPin: function (el) {
             $.f.debug('build Pin It button');
-            
+
             var height = $.f.getData(el, 'height') || $.v.config.height;
             var color = $.f.getData(el, 'color') || $.v.config.color;
             var lang = $.f.getData(el, 'lang') || $.v.config.localImage;
@@ -949,7 +954,15 @@
             }
 
             // validate and log on click
-            a.onclick = function () {
+            // a.onclick = function () {
+            // RAE: [2013-12-06 Fri 11:57]
+            // originally the onclick handler is bound to the generated a elem
+            // but we want to use our existing button appearance
+            // instead of pinterest's button (which they annoyingly
+            // force you to use)
+            // so, we bind the onclick handler to our existing link
+
+            el.onclick = function () {
               // search for url and media in this button's href
               var q = $.f.parse(this.href, {'url': true, 'media': true, 'description': true});
               // log if no default description was specified
@@ -980,7 +993,10 @@
               var span = $.f.make({'SPAN': {'className': $.a.k + '_hidden', 'id': $.a.k + '_pin_count_' + $.f.callback.length, 'innerHTML': '<i></i>'}});
               a.appendChild(span);
               $.f.getPinCount(q.url);
-              $.f.replace(el, a);
+
+              // RAE: [2013-12-06 Fri 11:59]
+              // And here, we don't replace our link with the pinterest one
+              // $.f.replace(el, a);
             }
           },
           buttonFollow: function (el) {
@@ -1101,7 +1117,7 @@
               $.f.log('&type=pidget');
             }
           }, 1000);
-          
+
         },
         // send logging information
         log: function (str, endpoint) {
@@ -1143,8 +1159,8 @@
             'protocol': $.w.location.protocol,
             'userAgent': $.w.navigator.userAgent
           };
-          
-          
+
+
 
           // are we testing by dragging a file into a browser?
           if ($.v.protocol === 'file:') {
@@ -1175,17 +1191,17 @@
           // find the script node we are running now
           // remove it and set config options if we find any
           $.f.config();
-          
+
           var lang = $.a.defaultLang;
-          
+
           // do we have a valid global language request in script node
           if ($.v.config.lang && typeof $.a.strings[$.v.config.lang] === 'object') {
             lang = $.v.config.lang;
           } else {
-          
+
             // do we need to switch languages from en to something else?
             var lang = $.d.getElementsByTagName('HTML')[0].getAttribute('lang');
-               
+
             if (!lang) {
               var meta = $.d.getElementsByTagName('META');
               // check for Content-Language meta
@@ -1206,7 +1222,7 @@
                 }
               }
             }
-            
+
             if (lang) {
               lang = lang.toLowerCase();
               // direct match for pt-br
@@ -1225,7 +1241,7 @@
           if ($.a.localImage[lang] === true) {
             $.v.config.localImage = lang;
           }
-          
+
           $.v.lang = lang;
 
           if ($.w.devicePixelRatio && $.w.devicePixelRatio >= 2) {
@@ -1386,7 +1402,7 @@
     'a._pin_it_button_ja_20_red { background-image: url(_cdn/images/pidgets/pinit_bg_ja_rect_red_20__rez.png); }',
     'a._pin_it_button_ja_20_white { background-image: url(_cdn/images/pidgets/pinit_bg_ja_rect_white_20__rez.png); }',
     'a._pin_it_button_ja_20_gray { background-image: url(_cdn/images/pidgets/pinit_bg_ja_rect_gray_20__rez.png); }',
-    
+
     // the count
     'a._pin_it_above_20 span._pin_it_button_count { background: transparent url(_cdn/images/pidgets/count_north_white_rect_20__rez.png) 0 0 no-repeat; background-size: 40px 29px; position: absolute; bottom: 21px; left: 0px; height: 29px; width: 40px; font: 12px Arial, Helvetica, sans-serif; line-height: 24px; text-indent: 0;}',
     'a._pin_it_button_20 span._pin_it_button_count { position: absolute; color: #777; text-align: center; text-indent: 0; }',
@@ -1411,7 +1427,7 @@
     'a._pin_it_button_ja_28_red { background-image: url(_cdn/images/pidgets/pinit_bg_ja_rect_red_28__rez.png); }',
     'a._pin_it_button_ja_28_white { background-image: url(_cdn/images/pidgets/pinit_bg_ja_rect_white_28__rez.png); }',
     'a._pin_it_button_ja_28_gray { background-image: url(_cdn/images/pidgets/pinit_bg_ja_rect_gray_28__rez.png); }',
-    
+
     // the count
     'a._pin_it_button_28 span._pin_it_button_count { position: absolute; color: #777; text-align: center; text-indent: 0; }',
     'a._pin_it_above_28 span._pin_it_button_count { background: transparent url(_cdn/images/pidgets/count_north_white_rect_28__rez.png) 0 0 no-repeat; background-size: 56px 37px; position: absolute; bottom: 29px; left: 0px; height: 37px; width: 56px; font: 15px Arial, Helvetica, sans-serif; line-height: 28px; text-indent: 0;}',
@@ -1451,7 +1467,7 @@
     'a._follow_me_button_tall i { position: absolute; top: 0; right: -10px; height: 28px; width: 10px; background-position: 100% 0px; }',
     'a._follow_me_button_tall:hover i { background-position: 100% -28px;  }',
     'a._follow_me_button_tall:active i { background-position: 100% -56px; }',
-    
+
     // EMBEDDED PIN
 
     // main container
@@ -1509,7 +1525,7 @@
     // header container
     'span._embed_grid span._embed_grid_hd { display: block; margin: 0 10px; padding: 0; height: 45px; position: relative; background: #fff}',
 
-    // avatar 
+    // avatar
     'span._embed_grid span._embed_grid_hd a._avatar { position: absolute; top: 0; left: 0; height: 36px; width: 36px; }',
     'span._embed_grid span._embed_grid_hd a._avatar::before { position: absolute; content:""; z-index: 2; top: 0; left: 0; right: 0; bottom: 0; box-shadow: inset 0 0 2px #888;  border-radius: 3px; }',
     'span._embed_grid span._embed_grid_hd a._avatar img { position: relative; height: 36px; width: 36px; margin: 0; padding: 0; border-radius: 3px; border: none;}',
@@ -1533,7 +1549,7 @@
 
     // grid container -- allows us to halt scrolling before we get to the ragged bottom
     'span._embed_grid span._embed_grid_bd span._embed_grid_ct { display:block; position: relative; overflow: hidden; }',
-    
+
     // each thumbnail
     'span._embed_grid span._embed_grid_bd a._embed_grid_th { cursor: pointer; display: inline-block; position: absolute; overflow: hidden; }',
     // inset shadow mask
