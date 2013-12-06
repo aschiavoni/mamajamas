@@ -143,4 +143,9 @@ class ApplicationController < ActionController::Base
     end
     path
   end
+  helper_method :asset_url
+
+  def pinnable
+    @pinterest_js = true
+  end
 end

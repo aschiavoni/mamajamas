@@ -67,9 +67,19 @@
       <a href="#" class="nav-drop-link"><span class="ss-action"></span><em>Share</em></a>
       <ul class="nav-drop">
         <li class="hed">Share:</li>
-        <li><a href="#" class="ss-icon ss-social-circle" title="Pinterest">Pinterest</a></li>
-        <li><a href="#" class="ss-icon ss-social-circle" title="Twitter">Twitter</a></li>
-        <li><a href="#" class="ss-icon ss-social-circle" title="Facebook">Facebook</a></li>
+        <li>
+          <a class="ss-icon ss-social-circle" title="Pinterest" href="<%= pinterest_pin_url(media: asset_url("nest.jpg"), description: @view.list.title ) %>"
+             data-pin-do="buttonPin"
+             data-pin-config="none">
+            Pinterest
+          </a>
+        </li>
+        <li>
+          <a href="#" class="ss-icon ss-social-circle" title="Twitter">Twitter</a>
+        </li>
+        <li>
+          <a href="#" class="ss-icon ss-social-circle" title="Facebook">Facebook</a>
+        </li>
       </ul>
     </li>
   </ul>

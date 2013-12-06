@@ -165,7 +165,7 @@
 <!-- loader graphic -->
 <div id="loader-wrap" class="modal-wrap" style="display:none;">
   <div class="modal-overlay"> &nbsp; </div>
-	<div class="vertical-offset"></div>
+  <div class="vertical-offset"></div>
   <div id="loader">
     <%= image_tag "loader.gif", alt: "Please wait..." %>
   </div>
@@ -175,5 +175,8 @@
 <!-- Google Analytics -->
 <%= render partial: "shared/context" %>
 <%= render partial: "shared/facebook" %>
+<% if pinnable? -%>
+  <%= javascript_include_tag "pinterest" %>
+<% end -%>
 </body>
 </html>

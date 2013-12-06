@@ -12,14 +12,13 @@ Mamajamas.Views.SocialLinks = Backbone.View.extend({
   },
 
   shareDispatch: function(event) {
-    event.preventDefault();
     var socialPlatform = $(event.currentTarget).attr("title").toLowerCase();
     switch (socialPlatform) {
       case "facebook":
         this.shareFacebook();
         break;
       default:
-        // do nothing
+        return true;
     }
     return false;
   },

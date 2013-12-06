@@ -79,6 +79,16 @@ module ApplicationHelper
     page_context.tertiary_class
   end
 
+  def pinnable?
+    @pinterest_js == true
+  end
+
+  def pinterest_pin_url(options = {})
+    query_params = options.slice(:url, :media, :description)
+    query_params[:url] = request.original_url if query_params[:url].blank?
+    "http://pinterest.com/pin/create/button/?#{query_params.to_query}"
+  end
+
   private
 
   def notification_config

@@ -2,6 +2,7 @@ class PublicListsController < ApplicationController
   before_filter :authenticate_user!, only: [ :preview, :publish ]
   before_filter :find_list, only: [ :preview, :publish ]
   before_filter :find_shared_list, only: [ :show ]
+  before_filter :pinnable, only: [ :show ]
   before_filter :init_view
 
   def show
