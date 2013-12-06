@@ -43,7 +43,7 @@ Mamajamas.Views.SocialLinks = Backbone.View.extend({
   shareTwitter: function(event) {
     var url = $(event.currentTarget).attr("href");
     var w = 550;
-    var h = 250;
+    var h = 400;
     var left = (screen.width) ? (screen.width-w) / 2 : 0;
     var top = (screen.height) ? (screen.height-h) / 2 : 0;
     popupWindow = window.open(
