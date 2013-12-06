@@ -90,7 +90,7 @@ module ApplicationHelper
   end
 
   def tweet_url(options = {})
-    query_params = options.slice(:url, :text, :hashtags)
+    query_params = options.slice(:url, :text, :hashtags, :via)
     query_params[:url] = default_share_url if query_params[:url].blank?
     "https://twitter.com/share?#{query_params.to_query}"
   end
