@@ -85,8 +85,18 @@ module ApplicationHelper
 
   def pinterest_pin_url(options = {})
     query_params = options.slice(:url, :media, :description)
-    query_params[:url] = request.original_url if query_params[:url].blank?
+    query_params[:url] = default_share_url if query_params[:url].blank?
     "http://pinterest.com/pin/create/button/?#{query_params.to_query}"
+  end
+
+  def tweet_url(options = {})
+    query_params = options.slice(:url, :text, :hashtags)
+    query_params[:url] = default_share_url if query_params[:url].blank?
+    "https://twitter.com/share?#{query_params.to_query}"
+  end
+
+  def default_share_url
+    request.original_url
   end
 
   private

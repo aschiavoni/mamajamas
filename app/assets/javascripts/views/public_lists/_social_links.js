@@ -15,7 +15,10 @@ Mamajamas.Views.SocialLinks = Backbone.View.extend({
     var socialPlatform = $(event.currentTarget).attr("title").toLowerCase();
     switch (socialPlatform) {
       case "facebook":
-        this.shareFacebook();
+        this.shareFacebook(event);
+        break;
+      case "twitter":
+        this.shareTwitter(event);
         break;
       default:
         return true;
@@ -23,7 +26,7 @@ Mamajamas.Views.SocialLinks = Backbone.View.extend({
     return false;
   },
 
-  shareFacebook: function() {
+  shareFacebook: function(event) {
     FB.ui({
       method: "feed",
       link: window.location.href,
@@ -32,6 +35,19 @@ Mamajamas.Views.SocialLinks = Backbone.View.extend({
     }, function(response) {
       // do nothing for now
     });
+    return true;
   },
 
+  shareTwitter: function(event) {
+    var url = $(event.currentTarget).attr("href");
+    var w = 550;
+    var h = 250;
+    var left = (screen.width) ? (screen.width-w) / 2 : 0;
+    var top = (screen.height) ? (screen.height-h) / 2 : 0;
+    popupWindow = window.open(
+      url,
+      'popUpWindow',
+      'height=' + h + ',width=' + w + ',left=' + left + ',top=' + top + ',resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no,addressbar=no')
+    return false;
+  },
 });
