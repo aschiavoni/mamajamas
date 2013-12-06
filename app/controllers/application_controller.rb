@@ -2,7 +2,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :require_basic_auth_maybe
+  # before_filter :require_basic_auth_maybe
   before_filter :set_meta
 
   # Convenience accessor for flash[:error]
