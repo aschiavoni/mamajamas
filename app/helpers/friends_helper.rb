@@ -19,7 +19,7 @@ module FriendsHelper
   end
 
   def follower_count(friend)
-    fc = friend.followers.count
+    fc = friend.follower_count
     content_tag(:strong, "#{fc}") + " " + "follower".pluralize(fc)
   end
 
