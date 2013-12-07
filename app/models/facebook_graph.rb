@@ -73,7 +73,7 @@ class FacebookGraph
       joins(:authentications).
       where("authentications.uid" => uids).
       where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
-      order(:first_name)
+      order("follower_count DESC")
   end
   memoize :all_mamajamas_friends
 end

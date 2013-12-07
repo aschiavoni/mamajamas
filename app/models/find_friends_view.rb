@@ -64,7 +64,7 @@ class FindFriendsView
       where("users.email" => google_friends_emails).
       where("users.email <> ?", user.email).
       where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
-      order(:first_name)
+      order("follower_count DESC")
   end
   memoize :mamajamas_google_friends
 
