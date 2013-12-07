@@ -32,8 +32,8 @@ Mamajamas.Views.SocialLinks = Backbone.View.extend({
       link: window.location.href,
       // link: "http://www.mamajamas.com",
       caption: Mamajamas.Context.List.get("title"),
-      picture: "http://mamajamas.s3.amazonaws.com/assets/nest-0d49dbe7a61258b6396432c662f4e648.jpg",
-      description: "This is a test description",
+      picture: "http://mamajamas.s3.amazonaws.com/assets/mamajamas_bird.jpg",
+      description: "Check out my list of baby gear on Mamajamas.",
     }, function(response) {
       // do nothing for now
     });
