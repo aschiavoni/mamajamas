@@ -17,4 +17,17 @@ module FriendsHelper
     end
     new_friend_path
   end
+
+  def follower_count(friend)
+    fc = friend.followers.count
+    content_tag(:strong, "#{fc}") + " " + "follower".pluralize(fc)
+  end
+
+  def list_updated_at(friend)
+    if friend.list.present?
+      "#{time_ago_in_words(friend.list.updated_at)} ago"
+    else
+      "never"
+    end
+  end
 end
