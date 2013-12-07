@@ -71,6 +71,10 @@ module ApplicationHelper
     page_context.show_mainnav
   end
 
+  def skip_secondary_content?
+    page_context.skip_secondary_content?
+  end
+
   def body_class
     page_context.body_class
   end

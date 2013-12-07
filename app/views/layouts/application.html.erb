@@ -112,13 +112,21 @@
     </div>
   </div>
   <div id="secondary">
-    <div class="content">
+    <% if skip_secondary_content? -%>
       <!-- notification ***** -->
       <div id="notifications">
         <%= notifications %>
       </div>
       <%= yield %>
-    </div>
+    <% else -%>
+      <div class="content">
+        <!-- notification ***** -->
+        <div id="notifications">
+          <%= notifications %>
+        </div>
+        <%= yield %>
+      </div>
+    <% end -%>
   </div>
   <div id="tertiary"<%= " class=#{tertiary_class}" if tertiary_class.present? %>>
     <div class="content">

@@ -11,4 +11,9 @@ class PageContext
   attr_accessor :preheader
   attr_accessor :show_header
   attr_accessor :show_mainnav
+  attr_accessor :skip_secondary_content
+
+  def skip_secondary_content?
+    skip_secondary_content == true
+  end
 end

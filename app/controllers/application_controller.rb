@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
     @page_context ||= PageContext.new do
       page_id = nil
       subheader = "Welcome to Mamajamas!"
+      skip_secondary_content = false
     end
   end
   helper_method :page_context
@@ -61,6 +62,10 @@ class ApplicationController < ActionController::Base
 
   def hide_mainnav
     page_context.show_mainnav = false
+  end
+
+  def skip_secondary_content
+    page_context.skip_secondary_content = true
   end
 
   protected

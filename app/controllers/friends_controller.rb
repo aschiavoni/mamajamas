@@ -39,7 +39,9 @@ class FriendsController < ApplicationController
 
   def init_view
     set_body_class "layout_2-7-3"
-    set_subheader "My Friends' Lists"
+    # set_subheader "My Friends' Lists"
+    hide_header
+    skip_secondary_content
   end
 
   def init_index_view
