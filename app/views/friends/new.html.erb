@@ -34,7 +34,7 @@
         <%= render partial: 'invite', collection: @view.facebook_invites, locals: { prefix: "fb" } %>
       </ul>
     <% else  -%>
-      <%= render 'prompt' %>
+      <%= render 'prompt', provider: "Facebook", button_class: "bt-authfb" %>
     <% end -%>
   </div>
   <!-- end tab: Facebook -->
@@ -57,7 +57,7 @@
         </div>
       <% end -%>
     <% else  -%>
-      <%= render 'prompt' %>
+      <%= render 'prompt', provider: "Gmail", button_class: "bt-authgoogle" %>
     <% end -%>
   </div>
   <!-- end tab: Gmail -->

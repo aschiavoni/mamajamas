@@ -25,8 +25,8 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
   },
 
   events: {
-    "click #facebookfriends": "selectFacebookFriends",
-    "click #gmailfriends": "selectGmailFriends",
+    "click .bt-authfb": "authorizeFacebook",
+    "click .bt-authgoogle": "authorizeGmail",
     "click button.follow": "follow",
     "click button.unfollow": "unfollow",
     "click button.fb-invite": "facebookInvite",
@@ -57,13 +57,13 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     return $('.tabs ul > li.current > a').attr('id');
   },
 
-  selectFacebookFriends: function(event) {
+  authorizeFacebook: function(event) {
     if (!Mamajamas.Context.User.get('is_facebook_connected')) {
       Mamajamas.Context.LoginSession.facebook_connect();
     }
   },
 
-  selectGmailFriends: function(event) {
+  authorizeGmail: function(event) {
     if (!Mamajamas.Context.User.get("is_google_connected")) {
       window.location = "/users/auth/google"
     }
