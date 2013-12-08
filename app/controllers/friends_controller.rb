@@ -2,7 +2,7 @@ class FriendsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :no_guests
   before_filter :init_index_view, only: [ :index ]
-  before_filter :init_view, only: [ :list, :new ]
+  before_filter :init_view, only: [ :following, :followers, :new ]
 
   def index
     all_fb_friends = current_user.facebook.mamajamas_friends
@@ -15,8 +15,12 @@ class FriendsController < ApplicationController
     end
   end
 
-  def list
-    @friends = current_user.followed_users.order("first_name asc")
+  def following
+    @friends = current_user.followed_users.order("follower_count desc")
+  end
+
+  def followers
+    @friends = current_user.followers.order("follower_count desc")
   end
 
   def new
@@ -38,8 +42,8 @@ class FriendsController < ApplicationController
   protected
 
   def init_view
+    set_body_id "p-browse"
     set_body_class "layout_2-7-3"
-    # set_subheader "My Friends' Lists"
     hide_header
     skip_secondary_content
   end

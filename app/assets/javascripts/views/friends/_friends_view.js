@@ -1,9 +1,9 @@
 Mamajamas.Views.FriendsView = function (options) {
-    this.padHeight = "20";
-    this.targetElement = "",
-    $(window).resize($.proxy(this.sizeContent, this));
+  this.padHeight = "20";
+  this.targetElement = "",
+  $(window).resize($.proxy(this.sizeContent, this));
 
-    Backbone.View.apply(this, [options]);
+  Backbone.View.apply(this, [options]);
 };
 
 _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
@@ -35,6 +35,21 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
       li.replaceWith(response);
     })
     return false;
+  },
+
+  // this doesn't seem to work yet
+  initializeScrolling: function() {
+    // keep header, primary nav and list nav fixed and scroll the rest
+    // of the page
+    $("#hed-wrap").scrollToFixed();
+
+    $("#primary").scrollToFixed({
+      margintop: $('#hed-wrap').outerHeight(true)
+    });
+
+    $(".menu").scrollToFixed({
+      margintop: $('#hed-wrap').outerHeight(true)
+    });
   },
 
 });

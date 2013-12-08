@@ -44,6 +44,10 @@ class ApplicationController < ActionController::Base
     page_context.body_class = css_class
   end
 
+  def set_body_id(body_id)
+    page_context.body_id = body_id
+  end
+
   def set_tertiary_class(css_class)
     page_context.tertiary_class = css_class
   end

@@ -75,6 +75,10 @@ module ApplicationHelper
     page_context.skip_secondary_content?
   end
 
+  def body_id
+    page_context.body_id
+  end
+
   def body_class
     page_context.body_class
   end

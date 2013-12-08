@@ -1,10 +1,13 @@
 <%= content_for :nav do %>
   <ul class="sidemenu">
-    <li>
-      <%= link_to "My Friends", list_friends_path %>
-    </li>
     <li class="current">
-      <%= link_to "Find Friends", new_friend_path %>
+      <%= link_to "Discover", new_friend_path %>
+    </li>
+    <li>
+      <%= link_to "Following", following_friends_path %>
+    </li>
+    <li>
+      <%= link_to "Followers", followers_friends_path %>
     </li>
   </ul>
 <% end -%>
@@ -17,7 +20,7 @@
     <!-- Friends list (Mamajamas) -->
     <ul class="clearfix friends-list findfriends-lists">
       <% @view.recommended_friends.each do |friend| -%>
-        <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+        <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend), follow_text: "Follow" } %>
       <% end -%>
     </ul>
   </div>
@@ -29,7 +32,7 @@
       <!-- Friends list (Facebook) -->
       <ul class="clearfix friends-list findfriends-lists">
         <% @view.mamajamas_facebook_friends.each do |friend| -%>
-          <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+          <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend), follow_text: "Follow" } %>
         <% end -%>
         <%= render partial: 'invite', collection: @view.facebook_invites, locals: { prefix: "fb" } %>
       </ul>
@@ -46,7 +49,7 @@
         <!-- Friends list (Google) -->
         <ul class="clearfix friends-list findfriends-lists">
           <% @view.mamajamas_google_friends.each do |friend| -%>
-            <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+            <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend), follow_text: "Follow" } %>
         <% end -%>
         <%= render partial: 'invite', collection: @view.google_invites, locals: { prefix: "google" } %>
         </ul>

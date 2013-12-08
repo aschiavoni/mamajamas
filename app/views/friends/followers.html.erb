@@ -1,0 +1,25 @@
+<%= content_for :nav do %>
+  <ul class="sidemenu">
+    <li>
+      <%= link_to "Discover", new_friend_path %>
+    </li>
+    <li>
+      <%= link_to "Following", following_friends_path %>
+    </li>
+    <li class="current">
+      <%= link_to "Followers", followers_friends_path %>
+    </li>
+  </ul>
+<% end -%>
+<h2 class="visuallyhidden">My Friends</h2>
+<!-- friends list -->
+<ul id="friendslist" class="clearfix friends-list">
+  <% if @friends.size > 0 -%>
+    <% @friends.each do |friend| -%>
+      <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend), follow_text: "Follow Back" } %>
+    <% end -%>
+  <% else -%>
+    <p>You haven't followed any lists yet. You can find friends to follow <%= link_to "here", new_friend_path %>.
+  <% end -%>
+</ul>
+<!-- end friends list -->
