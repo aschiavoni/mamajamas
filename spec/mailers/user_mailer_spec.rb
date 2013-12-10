@@ -16,23 +16,15 @@ describe UserMailer do
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("beginning of Mamajamas")
+      mail.body.encoded.should match("Thanks for signing up")
     end
 
     it "includes a greeting" do
       mail.body.encoded.should match("Hi #{user.first_name}")
     end
 
-    it "includes a link to the friends page" do
-      mail.body.encoded.should match("/friends")
-    end
-
     it "includes a link to angie's list page" do
       mail.body.encoded.should match("http://www.mamajamas.com/angie")
-    end
-
-    it "includes a link to user's list page" do
-      mail.body.encoded.should match("/list")
     end
 
   end
