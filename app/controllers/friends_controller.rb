@@ -20,7 +20,9 @@ class FriendsController < ApplicationController
   end
 
   def followers
-    @friends = current_user.followers.order("follower_count desc")
+    @friends = current_user.followers.includes(:list).
+      where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
+      order("follower_count desc")
   end
 
   def new
