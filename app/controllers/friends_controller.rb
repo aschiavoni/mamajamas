@@ -36,7 +36,7 @@ class FriendsController < ApplicationController
         RelationshipMailer.delay.follower_notification(relationship)
       end
     end
-    redirect_to list_path
+    redirect_to post_notify_redirect_path
   end
 
   protected
@@ -50,5 +50,13 @@ class FriendsController < ApplicationController
 
   def init_index_view
     set_subheader "Follow Friends"
+  end
+
+  def post_notify_redirect_path
+    if current_user.list.present? && !current_user.list.private?
+      path = public_list_path(current_user)
+    else
+      redirect_path = list_path
+    end
   end
 end
