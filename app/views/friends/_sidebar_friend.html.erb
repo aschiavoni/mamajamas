@@ -1,4 +1,5 @@
 <% show_names = true if show_names.nil? -%>
+<% cache [ sidebar_friend, show_names, "sidebar_friend"] do -%>
 <li>
   <%= link_to public_list_path(sidebar_friend.slug), title: sidebar_friend.display_name do %>
     <%= image_tag sidebar_friend.profile_picture.friend, alt: sidebar_friend.display_name %>
@@ -10,3 +11,4 @@
     <% end -%>
   <% end -%>
 </li>
+<% end -%>
