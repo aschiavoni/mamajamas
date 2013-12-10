@@ -10,7 +10,7 @@
     </p>
     <ul class="follow-moms clearfix">
       <% @fb_friends.each do |friend| -%>
-        <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+        <%= render partial: 'follow_friend', locals: { friend: friend, following: current_user.following?(friend) } %>
       <% end -%>
     </ul>
     <% if has_recommended_friends? -%>
@@ -20,7 +20,7 @@
       </p>
       <ul class="follow-moms clearfix">
         <% @recommended_friends.each do |friend| -%>
-          <%= render partial: 'friend', locals: { friend: friend, following: current_user.following?(friend) } %>
+          <%= render partial: 'follow_friend', locals: { friend: friend, following: current_user.following?(friend) } %>
         <% end -%>
       </ul>
     <% end -%>

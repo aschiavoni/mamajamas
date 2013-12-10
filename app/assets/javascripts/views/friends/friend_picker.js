@@ -19,7 +19,8 @@ window.Mamajamas.Views.FriendPicker = Backbone.View.extend({
 
     var data = {
       relationship: { followed_id: followedId },
-      no_notification: true
+      no_notification: true,
+      follow_friend: 1
     };
     $.post('/relationships', data, function(response) {
       li.replaceWith(response);
@@ -32,7 +33,7 @@ window.Mamajamas.Views.FriendPicker = Backbone.View.extend({
     var li = btn.parent("li");
     var relationshipId = li.data("relationship-id");
 
-    var data = { _method: "delete" };
+    var data = { _method: "delete", follow_friend: 1 };
     $.post("/relationships/" + relationshipId, data, function(response) {
       li.replaceWith(response);
     })

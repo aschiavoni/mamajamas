@@ -14,7 +14,8 @@ class RelationshipsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        render(partial: 'friends/friend', locals: { friend: @friend, following: relationship })
+        render(partial: partial_to_render,
+               locals: { friend: @friend, following: relationship })
       end
       format.json do
         render json: { relationship_id: relationship.id }
@@ -25,6 +26,20 @@ class RelationshipsController < ApplicationController
   def destroy
     @friend = Relationship.find(params[:id]).followed
     current_user.unfollow!(@friend)
-    render(partial: 'friends/friend', locals: { friend: @friend, following: current_user.following?(@friend) })
+    render(partial: partial_to_render,
+           locals: {
+             friend: @friend,
+             following: current_user.following?(@friend)
+           })
+  end
+
+  private
+
+  def partial_to_render
+    partial_to_render = "friends/friend"
+    if params[:follow_friend] == "1"
+      partial_to_render = "friends/follow_friend"
+    end
+    partial_to_render
   end
 end
