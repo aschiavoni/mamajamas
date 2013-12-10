@@ -23,10 +23,12 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
       return this.reverseSortByField(listEntry, compareTo, "name");
     },
     rating: function(listEntry, compareTo) {
-      return this.sortByField(listEntry, compareTo, "rating");
+      // flip things around for ratings
+      return this.sortByField(listEntry, compareTo, "rating") * - 1;
     },
     rating_desc: function(listEntry, compareTo) {
-      return this.reverseSortByField(listEntry, compareTo, "rating");
+      // flip things around for ratings
+      return this.reverseSortByField(listEntry, compareTo, "rating") * - 1;
     },
     age: function(listEntry, compareTo) {
       return this.sortByField(listEntry, compareTo, "age_position");
@@ -64,6 +66,10 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
 
     if (isPlaceholder && fieldName == "name")
       fieldName = "product_type_name";
+
+    // flip things around for ratings
+    if (fieldName == "rating")
+      type = type == 1 ? 0 : 1;
 
     var val = listEntry.get(fieldName);
     return type + "-" + val;
