@@ -1,13 +1,23 @@
 <li class="<%= "following" if following %>" id="<%= "friend_#{friend.id}" %>" data-friend-id="<%= friend.id %>" data-relationship-id="<%= following.id unless following.blank? %>">
-  <%= link_to public_list_path(friend.slug), target: "_blank" do %>
+  <% if friend.has_shared_list? %>
+    <%= link_to public_list_path(friend.slug), target: "_blank" do %>
+      <%= image_tag friend.profile_picture.friend, alt: friend.display_name %>
+    <% end -%>
+  <% else -%>
     <%= image_tag friend.profile_picture.friend, alt: friend.display_name %>
   <% end -%>
   <div class="friend-info">
-    <%= link_to public_list_path(friend.slug), target: "_blank" do %>
+    <% if friend.has_shared_list? %>
+      <%= link_to public_list_path(friend.slug), target: "_blank" do %>
+        <strong class="mom"><%= friend.display_name %></strong>
+      <% end -%>
+    <% else -%>
       <strong class="mom"><%= friend.display_name %></strong>
     <% end -%>
     <div class="friend-followers"><%= follower_count(friend) %></div>
+    <% if friend.has_shared_list? %>
     <div class="friend-updated">Updated list <strong><%= list_updated_at(friend)%></strong></div>
+    <% end -%>
     <% if following -%>
       <em class="ss-icon check">checked</em>
     <% end -%>

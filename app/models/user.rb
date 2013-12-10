@@ -218,6 +218,10 @@ class User < ActiveRecord::Base
     list.present?
   end
 
+  def has_shared_list?
+    has_list? && !list.private?
+  end
+
   def build_list!
     kid = self.kids.order('created_at ASC').first
     ListBuilder.new(self, kid).build! if list.blank?
