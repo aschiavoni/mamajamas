@@ -1,8 +1,8 @@
 class FriendsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :no_guests
+  before_filter :authenticate_user!, except: [ :browse ]
+  before_filter :no_guests, except: [ :browse ]
   before_filter :init_index_view, only: [ :index ]
-  before_filter :init_view, only: [ :following, :followers, :new ]
+  before_filter :init_view, only: [ :following, :followers, :new, :browse ]
 
   def index
     all_fb_friends = current_user.facebook.mamajamas_friends
@@ -23,6 +23,10 @@ class FriendsController < ApplicationController
     @friends = current_user.followers.includes(:list).
       where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
       order("follower_count desc")
+  end
+
+  def browse
+    @view = BrowseListsView.new
   end
 
   def new

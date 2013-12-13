@@ -1,0 +1,27 @@
+<%= content_for :logged_out_header_buttons do %>
+  <li id="startlist">
+    <%= link_to "Start Your List", quiz_path, class: "button bt-color" %>
+  </li>
+<% end -%>
+<h2 class="visuallyhidden">Find Friends</h2>
+<!-- tabs -->
+<div id="findfriends" class="tabs">
+  <!-- tab: Mamajamas -->
+  <h2 id="mamajamasfriends">Mamajamas</h2>
+  <div class="tabbody">
+    <!-- Friends list (Mamajamas) -->
+    <ul class="clearfix friends-list findfriends-lists">
+      <% @view.recommended.each do |friend| -%>
+        <%= render partial: 'list_friend', locals: { friend: friend, following: false, follow_text: "Follow" } %>
+      <% end -%>
+    </ul>
+  </div>
+  <!-- end tab: Mamajamas -->
+  <!-- tab: Facebook -->
+  <h2 id="facebookfriends">Facebook</h2>
+  <div class="tabbody">
+    <%= render 'prompt', provider: "Facebook", button_class: "bt-authfb" %>
+  </div>
+  <!-- end tab: Facebook -->
+</div>
+<!-- end tabs -->
