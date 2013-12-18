@@ -7,6 +7,7 @@ Mamajamas.Views.UserProfile = Backbone.View.extend({
       changeMonth: true,
       changeYear: true,
       defaultDate: "-25y",
+      yearRange: "-53:-15",
       onChangeMonthYear: function(year, month, inst) {
         var date = $(this).datepicker('getDate');
         date.setFullYear(year);
