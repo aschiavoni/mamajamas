@@ -39,7 +39,6 @@ Mamajamas::Application.routes.draw do
   get '/test/error' => 'home#error'
   get '/robots.txt' => 'robots#show'
 
-  get '/browse' => "friends#browse", :as => "browse_lists"
   resources :friends, only: [ :index, :new ], path_names: { new: "find" } do
     collection do
       get 'following'

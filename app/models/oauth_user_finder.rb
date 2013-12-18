@@ -1,9 +1,9 @@
-class FacebookUserFinder
+class OauthUserFinder
   attr_reader :oauth
 
   def initialize(oauth, user_class = User)
     @oauth = oauth
-    @user_class = User
+    @user_class = user_class
   end
 
   def self.find(oauth)
@@ -11,20 +11,16 @@ class FacebookUserFinder
   end
 
   def find
-    find_user_by_facebook_uid || find_user_by_facebook_email
+    find_user_by_uid || find_user_by_email
   end
 
   private
-
-  def oauth
-    @oauth
-  end
 
   def user_class
     @user_class
   end
 
-  def find_user_by_facebook_uid
+  def find_user_by_uid
     user_class.joins(:authentications).
       where("authentications.provider" => oauth.provider).
       where("authentications.uid" => oauth.uid).
@@ -32,7 +28,7 @@ class FacebookUserFinder
       first
   end
 
-  def find_user_by_facebook_email
+  def find_user_by_email
     user_class.where(email: oauth.email).first
   end
 end

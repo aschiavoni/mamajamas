@@ -4,7 +4,7 @@ class FindFriendsView
 
   extend Memoist
 
-  def initialize(user)
+  def initialize(user = nil)
     @user = user
   end
 
@@ -16,7 +16,11 @@ class FindFriendsView
   end
 
   def recommended_friends
-    RecommendedFriend.new(user, mamajamas_facebook_friends).not_following
+    if user.present?
+      RecommendedFriend.new(user, mamajamas_facebook_friends).not_following
+    else
+      BrowseLists.recommended
+    end
   end
   memoize :recommended_friends
 

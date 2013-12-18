@@ -30,4 +30,11 @@ module FriendsHelper
       "never"
     end
   end
+
+  def list_items_count(friend)
+    if friend.list.present?
+      c = friend.list.list_items.user_items.count
+      content_tag(:strong, "#{c}") + " list " + "item".pluralize(c)
+    end
+  end
 end

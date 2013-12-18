@@ -15,8 +15,7 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
       saveState:true
     });
 
-    if (!window.location.hash &&
-        !Mamajamas.Context.User.get("is_facebook_connected")) {
+    if (!window.location.hash && !this.isFacebookConnected()) {
       this.tabs.showAccessibleTab(0);
     }
 
@@ -59,13 +58,14 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
   },
 
   authorizeFacebook: function(event) {
-    if (!Mamajamas.Context.User.get('is_facebook_connected')) {
+    if (!this.isFacebookConnected()) {
       Mamajamas.Context.LoginSession.facebook_connect();
     }
   },
 
   authorizeGmail: function(event) {
-    if (!Mamajamas.Context.User.get("is_google_connected")) {
+    if (!this.isGoogleConnected()) {
+      $.cookies.set("after_sign_in_path", window.location.href, { path: "/" });
       window.location = "/users/auth/google"
     }
   },

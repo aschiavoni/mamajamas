@@ -37,7 +37,7 @@ describe Users::OmniauthCallbacksController do
                provider: "facebook")
         sign_in guest
         AddsAuthentication.should_not_receive(:new)
-        FacebookUserCreator.should_receive(:from_oauth) { u }
+        OauthUserCreator.should_receive(:from_oauth) { u }
         get :facebook
       end
 
@@ -86,7 +86,7 @@ describe Users::OmniauthCallbacksController do
     describe "user creation fails" do
 
       before(:each) do
-        FacebookUserCreator.should_receive(:from_oauth).and_return(build(:user))
+        OauthUserCreator.should_receive(:from_oauth).and_return(build(:user))
       end
 
       describe "html request" do
@@ -124,9 +124,9 @@ describe Users::OmniauthCallbacksController do
 
     describe "unauthenticated" do
 
-      it "requires an authenticated user" do
+      it "sends an unauthenticated user to their list (or quiz)" do
         get :google
-        response.should redirect_to(new_user_session_path)
+        response.should redirect_to(list_path)
       end
 
     end
@@ -139,7 +139,7 @@ describe Users::OmniauthCallbacksController do
 
       it "returns a successful response" do
         get :google
-        response.should redirect_to(new_friend_path(anchor: "gmailfriends"))
+        response.should redirect_to(list_path)
       end
 
       it "adds an authentication" do

@@ -1,15 +1,23 @@
-<%= content_for :nav do %>
-  <ul class="sidemenu">
-    <li class="current">
-      <%= link_to "Discover", new_friend_path %>
+<% if current_user.present? -%>
+  <%= content_for :nav do %>
+    <ul class="sidemenu">
+      <li class="current">
+        <%= link_to "Discover", new_friend_path %>
+      </li>
+      <li>
+        <%= link_to "Following", following_friends_path %>
+      </li>
+      <li>
+        <%= link_to "Followers", followers_friends_path %>
+      </li>
+    </ul>
+  <% end -%>
+<% else -%>
+  <%= content_for :logged_out_header_buttons do %>
+    <li id="startlist">
+      <%= link_to "Start Your List", quiz_path, class: "button bt-color" %>
     </li>
-    <li>
-      <%= link_to "Following", following_friends_path %>
-    </li>
-    <li>
-      <%= link_to "Followers", followers_friends_path %>
-    </li>
-  </ul>
+  <% end -%>
 <% end -%>
 <h2 class="visuallyhidden">Find Friends</h2>
 <!-- tabs -->
@@ -20,7 +28,7 @@
     <!-- Friends list (Mamajamas) -->
     <ul class="clearfix friends-list findfriends-lists">
       <% @view.recommended_friends.each do |friend| -%>
-        <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend), follow_text: "Follow" } %>
+        <%= render partial: 'list_friend', locals: { friend: friend, following: (current_user ? current_user.following?(friend) : false), follow_text: "Follow" } %>
       <% end -%>
     </ul>
   </div>
@@ -28,7 +36,7 @@
   <!-- tab: Facebook -->
   <h2 id="facebookfriends">Facebook</h2>
   <div class="tabbody">
-    <% if current_user.facebook_connected? -%>
+    <% if current_user.present? && current_user.facebook_connected? -%>
       <!-- Friends list (Facebook) -->
       <ul class="clearfix friends-list findfriends-lists">
         <% @view.mamajamas_facebook_friends.each do |friend| -%>
@@ -44,7 +52,7 @@
   <!-- begin tab: Gmail -->
   <h2 id="gmailfriends">Gmail</h2>
   <div class="tabbody">
-    <% if current_user.google_connected? -%>
+    <% if current_user.present? && current_user.google_connected? -%>
       <% if @view.mamajamas_google_friends.any? || @view.google_invites.any? -%>
         <!-- Friends list (Google) -->
         <ul class="clearfix friends-list findfriends-lists">
@@ -64,11 +72,13 @@
     <% end -%>
   </div>
   <!-- end tab: Gmail -->
-  <!-- begin tab: Invite a Friend -->
-  <h2 id="invitefriend">Invite a Friend</h2>
-  <div class="tabbody form-page">
-    <%= render partial: 'email_invite', locals: { email_invite: @view.email_invite } %>
-  </div>
-  <!-- end tab: Invite a Friend -->
+  <% if current_user.present? -%>
+    <!-- begin tab: Invite a Friend -->
+    <h2 id="invitefriend">Invite a Friend</h2>
+    <div class="tabbody form-page">
+      <%= render partial: 'email_invite', locals: { email_invite: @view.email_invite } %>
+    </div>
+    <!-- end tab: Invite a Friend -->
+  <% end -%>
 </div>
 <!-- end tabs -->

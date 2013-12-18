@@ -1,6 +1,6 @@
 class FriendsController < ApplicationController
-  before_filter :authenticate_user!, except: [ :browse ]
-  before_filter :no_guests, except: [ :browse ]
+  before_filter :authenticate_user!, except: [ :new ]
+  before_filter :no_guests, except: [ :new ]
   before_filter :init_index_view, only: [ :index ]
   before_filter :init_view, only: [ :following, :followers, :new, :browse ]
 
@@ -25,13 +25,11 @@ class FriendsController < ApplicationController
       order("follower_count desc")
   end
 
-  def browse
-    @view = BrowseListsView.new
-  end
-
   def new
-    if current_user.google_connected? && current_user.google_friends.empty?
-      GoogleContactsWorker.perform_async(current_user.id)
+    if current_user.present?
+      if current_user.google_connected? && current_user.google_friends.empty?
+        GoogleContactsWorker.perform_async(current_user.id)
+      end
     end
     @view = FindFriendsView.new(current_user)
   end

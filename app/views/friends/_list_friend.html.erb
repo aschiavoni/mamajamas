@@ -16,18 +16,23 @@
     <% end -%>
     <div class="friend-followers"><%= follower_count(friend) %></div>
     <% if friend.has_shared_list? %>
+      <div class="friend-followers"><%= list_items_count(friend)%></div>
       <div class="friend-updated">Updated list <strong><%= list_updated_at(friend)%></strong></div>
     <% end -%>
     <% if following -%>
       <em class="ss-icon check">checked</em>
     <% end -%>
   </div>
-  <% if following -%>
-    <!-- button: state 1: Follow, state 2: Following, state 2 hover: Unfollow  -->
-    <button class="button bt-color bt-follow bt-active unfollow" type="submit">
-      <span class="bt-text1"><span class="ss-check"></span>Following</span><em class="bt-text2"><span class="ss-delete"></span>Unfollow</em>
-    </button>
+  <% if current_user.present? %>
+    <% if following -%>
+      <!-- button: state 1: Follow, state 2: Following, state 2 hover: Unfollow  -->
+      <button class="button bt-color bt-follow bt-active unfollow" type="submit">
+        <span class="bt-text1"><span class="ss-check"></span>Following</span><em class="bt-text2"><span class="ss-delete"></span>Unfollow</em>
+      </button>
+    <% else -%>
+      <button class="button bt-color bt-follow follow" type="submit"><span class="ss-plus"></span><%= follow_text %></button>
+    <% end -%>
   <% else -%>
-    <button class="button bt-color bt-follow follow" type="submit"><span class="ss-plus"></span><%= follow_text %></button>
+    <%= link_to "View", public_list_path(friend.slug), class: "button bt-color bt-follow", target: "_blank" -%>
   <% end -%>
 </li>

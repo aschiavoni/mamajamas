@@ -16,7 +16,8 @@
     <% end -%>
     <div class="friend-followers"><%= follower_count(friend) %></div>
     <% if friend.has_shared_list? %>
-    <div class="friend-updated">Updated list <strong><%= list_updated_at(friend)%></strong></div>
+      <div class="friend-followers"><%= list_items_count(friend)%></div>
+      <div class="friend-updated">Updated list <strong><%= list_updated_at(friend)%></strong></div>
     <% end -%>
     <% if following -%>
       <em class="ss-icon check">checked</em>

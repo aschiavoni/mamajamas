@@ -1,10 +1,12 @@
 require 'spec_helper'
 
-describe FacebookUserFinder do
+describe OauthUserFinder do
+
+  let(:provider) { "facebook" }
 
   let(:auth_hash) do
     {
-      "provider"  => "facebook",
+      "provider"  => provider,
       "uid"       => 12345,
       "info" => {
         "email" => "12345@example.com",
@@ -32,17 +34,20 @@ describe FacebookUserFinder do
 
   it "finds a user from a uid in the auth hash" do
     user = create(:user)
-    authentication = create(:authentication, uid: auth_hash['uid'], user: user)
-    FacebookUserFinder.new(auth).find.should == user
+    authentication = create(:authentication,
+                            uid: auth_hash['uid'],
+                            user: user,
+                            provider: provider)
+    OauthUserFinder.new(auth).find.should == user
   end
 
   it "finds a user from the email in the auth hash" do
     user = create(:user, email: auth_hash['info']['email'])
-    FacebookUserFinder.new(auth).find.should == user
+    OauthUserFinder.new(auth).find.should == user
   end
 
   it "does not find a facebook user" do
-    FacebookUserFinder.new(auth).find.should == nil
+    OauthUserFinder.new(auth).find.should == nil
   end
 
 end

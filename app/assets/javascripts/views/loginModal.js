@@ -89,7 +89,7 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
       window.location = "/friends";
     }
     else {
-      window.location = this.signInPath;
+      window.location = this.afterSignInPath();
     }
   },
 
@@ -110,6 +110,14 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
 
   setAfterSigninPath: function() {
     this.signInPath = window.location.pathname;
+  },
+
+  afterSignInPath: function() {
+    var grp = $.cookies.get("after_sign_in_path");
+    if (grp != null) {
+      this.signInPath = grp;
+    }
+    return this.signInPath;
   },
 
   submit: function(event) {

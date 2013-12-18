@@ -1,4 +1,4 @@
-class FacebookUserCreator
+class OauthUserCreator
 
   attr_reader :oauth
 
@@ -12,7 +12,7 @@ class FacebookUserCreator
   end
 
   def update_or_create
-    user = FacebookUserFinder.find(oauth)
+    user = OauthUserFinder.find(oauth)
     user = (user.present? ? update_user(user, oauth) : create_user(oauth))
     user
   end

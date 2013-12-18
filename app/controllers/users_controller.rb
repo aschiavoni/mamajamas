@@ -65,8 +65,8 @@ class UsersController < ApplicationController
   end
 
   def complete_redirect_path
-    path = cookies[:guest_redirect_path] || friends_path
-    cookies.delete(:guest_redirect_path)
+    path = cookies[:after_sign_in_path] || friends_path
+    cookies.delete(:after_sign_in_path)
     path
   end
 end
