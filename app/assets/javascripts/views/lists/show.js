@@ -16,8 +16,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       }
 
       if (_view.isGuestUser()) {
-        var link = $(event.currentTarget).attr("href");
-        _view.unauthorized(link);
+        _view.unauthorized("/profile");
         return false;
       }
       return true;

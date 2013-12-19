@@ -51,8 +51,8 @@ feature "guest visitor", js: true do
       mock_facebook_omniauth('9993883', "guestfacebook@example.com")
       page.execute_script("Mamajamas.Context.LoginSession.saveSession(true);")
 
-      expect(page).to have_content("Follow Friends")
-      current_path.should == friends_path
+      expect(page).to have_content("Create my profile")
+      current_path.should == profile_path
     end
   end
 end

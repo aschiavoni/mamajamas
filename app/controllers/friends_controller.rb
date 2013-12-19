@@ -58,9 +58,9 @@ class FriendsController < ApplicationController
 
   def post_notify_redirect_path
     if current_user.list.present? && !current_user.list.private?
-      path = public_list_path(current_user)
+      public_list_path(current_user)
     else
-      redirect_path = list_path
+      cookies.delete(:after_sign_in_path) || list_path
     end
   end
 end

@@ -85,11 +85,13 @@ window.Mamajamas.Views.LoginModal = Backbone.View.extend({
   },
 
   onAuthenticated: function() {
-    if (this.model.get("sign_in_count") <= 1) {
+    var redirectPath = this.afterSignInPath();
+
+    if (redirectPath != "/profile" && this.model.get("sign_in_count") <= 1) {
       window.location = "/friends";
     }
     else {
-      window.location = this.afterSignInPath();
+      window.location = redirectPath;
     }
   },
 
