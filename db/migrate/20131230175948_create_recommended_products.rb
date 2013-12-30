@@ -2,6 +2,7 @@ class CreateRecommendedProducts < ActiveRecord::Migration
   def change
     create_table :recommended_products do |t|
       t.references :product_type
+      t.string :name
       t.string :link
       t.string :vendor
       t.string :vendor_id

@@ -590,6 +590,7 @@ ALTER SEQUENCE quiz_answers_id_seq OWNED BY quiz_answers.id;
 CREATE TABLE recommended_products (
     id integer NOT NULL,
     product_type_id integer,
+    name character varying(255),
     link character varying(255),
     vendor character varying(255),
     vendor_id character varying(255),
