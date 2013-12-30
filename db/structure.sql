@@ -584,6 +584,42 @@ ALTER SEQUENCE quiz_answers_id_seq OWNED BY quiz_answers.id;
 
 
 --
+-- Name: recommended_products; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE recommended_products (
+    id integer NOT NULL,
+    product_type_id integer,
+    link character varying(255),
+    vendor character varying(255),
+    vendor_id character varying(255),
+    image_url character varying(255),
+    tag character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: recommended_products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE recommended_products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: recommended_products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE recommended_products_id_seq OWNED BY recommended_products.id;
+
+
+--
 -- Name: relationships; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -829,6 +865,13 @@ ALTER TABLE ONLY quiz_answers ALTER COLUMN id SET DEFAULT nextval('quiz_answers_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY recommended_products ALTER COLUMN id SET DEFAULT nextval('recommended_products_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY relationships ALTER COLUMN id SET DEFAULT nextval('relationships_id_seq'::regclass);
 
 
@@ -844,14 +887,6 @@ ALTER TABLE ONLY social_friends ALTER COLUMN id SET DEFAULT nextval('social_frie
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
-
-
---
--- Name: age_ranges_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY age_ranges
-    ADD CONSTRAINT age_ranges_pkey PRIMARY KEY (id);
 
 
 --
@@ -967,6 +1002,14 @@ ALTER TABLE ONLY quiz_answers
 
 
 --
+-- Name: recommended_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY recommended_products
+    ADD CONSTRAINT recommended_products_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: relationships_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -988,6 +1031,14 @@ ALTER TABLE ONLY social_friends
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: when_to_buy_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY age_ranges
+    ADD CONSTRAINT when_to_buy_suggestions_pkey PRIMARY KEY (id);
 
 
 --
@@ -1100,6 +1151,13 @@ CREATE INDEX index_product_types_on_category_id ON product_types USING btree (ca
 --
 
 CREATE UNIQUE INDEX index_product_types_on_slug ON product_types USING btree (slug);
+
+
+--
+-- Name: index_recommended_products_on_product_type_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_recommended_products_on_product_type_id ON recommended_products USING btree (product_type_id);
 
 
 --
@@ -1356,3 +1414,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131115222228');
 INSERT INTO schema_migrations (version) VALUES ('20131117145900');
 
 INSERT INTO schema_migrations (version) VALUES ('20131207163130');
+
+INSERT INTO schema_migrations (version) VALUES ('20131230175948');
