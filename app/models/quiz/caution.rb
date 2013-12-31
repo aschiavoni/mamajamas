@@ -5,7 +5,6 @@ class Quiz::Caution < Quiz::Question
 
   def rules
     if included('4', '5')
-      set_priority('Bath Tub', 1)
       set_priority('Bath Stool or Kneeler', 2)
       set_priority('Faucet Cover', 2)
       set_priority('Bath Thermometer', 2)
@@ -26,7 +25,6 @@ class Quiz::Caution < Quiz::Question
     end
 
     if included('5')
-      set_priority('Bath Tub', 1)
       set_priority('Bath Seat', 2)
       set_priority('Bath Mat', 2)
       set_priority('Bath Rail or Handle', 2)
@@ -35,7 +33,6 @@ class Quiz::Caution < Quiz::Question
     end
 
     if included('1', '2', '3')
-      set_priority('Bath Tub', 2)
       set_priority('Bath Stool or Kneeler', 3)
       set_priority('Faucet Cover', 3)
       set_priority('Bath Thermometer', 3)
@@ -64,4 +61,3 @@ class Quiz::Caution < Quiz::Question
     end
   end
 end
-

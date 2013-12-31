@@ -1,6 +1,6 @@
 Bathing (default pre-birth),Plural,,Default Priority,Default When to Buy,Image Name,High Res Image,Queries,Contingencies
 Shampoo or Body Wash,Shampoos or Body Washes,Baby Shampoo,2,0-3 mo,shampoo.png,shampoo@2x.png,shampoo; body wash; baby wash,
-Bath Tub,Bath Tubs,,2,Pre-birth,bath_tub.png,bath_tub@2x.png,tub; bather; bath pad; bath center; bathtub; bath tub,-Moves to 1 for Cautious
+Bath Tub,Bath Tubs,,1,Pre-birth,bath_tub.png,bath_tub@2x.png,tub; bather; bath pad; bath center; bathtub; bath tub,-Moves to 1 for Cautious
 Washcloth,Washcloths,Baby Washcloth,2,Pre-birth,washcloth_png,washcloth@2x.png,"washcloth; washcloths; wash cloths, wash cloth; ",
 Towel,Towels,Baby Towel,2,Pre-birth,towel.png,towel@2x.png,towel; towels; terry robe,
 Bath Seat,Bath Seats,,3,7-12 mo,bath_seat.png,bath_seat@2x.png,bath seat; bath ring; bathing seat; seat,-Moves to 2 for Super Cautious
