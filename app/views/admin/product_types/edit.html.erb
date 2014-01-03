@@ -1,22 +1,22 @@
-<%= render partial: 'categories', locals: { current_category: @product_type.category, categories: @view.categories } %>
+<%= render partial: 'categories', locals: { current_category: @view.product_type.category, categories: @categories_view.categories } %>
 
 <%= content_for :tertiary do %>
   <div id="admin-nav">
     <%= link_to "admin", "/admin" %> &gt;
-    <%= link_to "product types", admin_category_product_types_path(@product_type.category) %> &gt;
-    <%= @product_type.name %>
+    <%= link_to "product types", admin_category_product_types_path(@view.product_type.category) %> &gt;
+    <%= @view.product_type.name %>
   </div>
-  <%= render 'actions', category: @product_type.category %>
-  <% if @product_type.admin_deleteable? -%>
+  <%= render 'actions', category: @view.product_type.category %>
+  <% if @view.product_type.admin_deleteable? -%>
     <div class="action-nav">
-      <%= link_to admin_product_type_path(@product_type), class: "button bt-color", method: "delete" do %>
+      <%= link_to admin_product_type_path(@view.product_type), class: "button bt-color", method: "delete" do %>
         <span class="ss-delete"></span> Delete
     <% end -%>
   </div>
   <% end -%>
 <% end -%>
 
-<%= form_for([ :admin, @product_type ], html: { id: "product-type-form", class: "label-infield" }) do |f| %>
-  <h3><%= @product_type.name %></h3>
-  <%= render partial: 'form', locals: { f: f } %>
+<%= form_for([ :admin, @view.product_type ], html: { id: "product-type-form", class: "label-infield" }) do |f| %>
+  <h3><%= @view.product_type.name %></h3>
+  <%= render partial: 'form', locals: { f: f, product_type: @view.product_type } %>
 <% end -%>

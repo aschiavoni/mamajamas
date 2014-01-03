@@ -10,8 +10,8 @@ class Admin::ProductTypesController < Admin::BaseController
   end
 
   def edit
-    @product_type = ProductType.find(params[:id])
-    @view = Admin::ProductTypesView.new @product_type.category
+    @view = Admin::ProductTypeView.new ProductType.find(params[:id])
+    @categories_view = Admin::ProductTypesView.new @view.product_type.category
   end
 
   def update
@@ -26,8 +26,9 @@ class Admin::ProductTypesController < Admin::BaseController
   end
 
   def new
-    @product_type = ProductType.new(category_id: @category.id)
-    @view = Admin::ProductTypesView.new @product_type.category
+    @view =
+      Admin::ProductTypeView.new(ProductType.new(category_id: @category.id))
+    @categories_view = Admin::ProductTypesView.new @view.product_type.category
   end
 
   def create

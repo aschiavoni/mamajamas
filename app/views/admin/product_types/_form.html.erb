@@ -6,31 +6,31 @@
         <%= f.label :name %>
         <br />
         <%= f.text_field :name %>
-        <%= field_error @product_type, :name %>
+        <%= field_error product_type, :name %>
       </p>
     </dd>
     <dt>Category<strong class="required">*</strong></dt>
     <dd>
       <p>
-        <%= f.select :category_id, options_for_select(@view.categories.map { |c| [ c.name, c.id ] }, @product_type.category.id) %>
+        <%= f.select :category_id, options_for_select(@categories_view.categories.map { |c| [ c.name, c.id ] }, product_type.category.id) %>
       </p>
     </dd>
     <dt>Priority<strong class="required">*</strong></dt>
     <dd>
       <p>
-        <%= f.select :priority, options_for_select([[ "Get it", 1 ], [ "Consider it", 2 ], [ "Don't bother", 3 ]], @product_type.priority) %>
+        <%= f.select :priority, options_for_select([[ "Get it", 1 ], [ "Consider it", 2 ], [ "Don't bother", 3 ]], product_type.priority) %>
       </p>
     </dd>
     <dt>Age range<strong class="required">*</strong></dt>
     <dd>
       <p>
-      <%= f.select :age_range_id, options_for_select(AgeRange.scoped.order(:position).map { |a| [ a.name, a.id ] }, @product_type.age_range_id) %>
+      <%= f.select :age_range_id, options_for_select(AgeRange.scoped.order(:position).map { |a| [ a.name, a.id ] }, product_type.age_range_id) %>
       </p>
     </dd>
     <dt>Quantity<strong class="required">*</strong></dt>
     <dd>
       <p>
-      <%= f.select :recommended_quantity, options_for_select((1..10).to_a, @product_type.recommended_quantity) %>
+      <%= f.select :recommended_quantity, options_for_select((1..10).to_a, product_type.recommended_quantity) %>
       </p>
     </dd>
     <dt>Plural name<strong class="required">*</strong></dt>
@@ -39,7 +39,7 @@
         <%= f.label :plural_name %>
         <br />
         <%= f.text_field :plural_name %>
-        <%= field_error @product_type, :plural_name %>
+        <%= field_error product_type, :plural_name %>
       </p>
     </dd>
     <dt>Image name<strong class="required">*</strong></dt>
@@ -48,13 +48,13 @@
         <%= f.label :image_name %>
         <br />
         <%= f.text_field :image_name %>
-        <%= field_error @product_type, :image_name %>
+        <%= field_error product_type, :image_name %>
       </p>
     </dd>
     <dt>Search index<strong class="required">*</strong></dt>
     <dd>
       <p>
-        <%= f.select :search_index, options_for_select(@view.amazon_search_indexes.map { |i| [ i, i ] }, @product_type.search_index) %>
+        <%= f.select :search_index, options_for_select(@categories_view.amazon_search_indexes.map { |i| [ i, i ] }, product_type.search_index) %>
       </p>
     </dd>
     <dt>Search query</dt>
@@ -67,9 +67,24 @@
     </dd>
   </fieldset>
 </dl>
+<h3>Recommended Products</h3>
+<h4>Eco Mom</h4>
+<dl class="clearfix">
+  <fieldset>
+    <dt>Name</dt>
+    <dd>
+      <p>
+        <%= f.label :name %>
+        <br />
+        <%= f.text_field :name %>
+        <%= field_error product_type, :name %>
+      </p>
+    </dd>
+  </fieldset>
+</dl>
 <div class="button-row">
   <div class="progress-container">
-    <%= link_to "Cancel", admin_category_product_types_path(@product_type.category), class: "button" %>
+    <%= link_to "Cancel", admin_category_product_types_path(product_type.category), class: "button" %>
     <button type="submit" class="button bt-color">Save</button>
     <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
   </div>
