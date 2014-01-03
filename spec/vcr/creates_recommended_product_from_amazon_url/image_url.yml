@@ -1,0 +1,82 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://ecs.amazonaws.com/onca/xml?AWSAccessKeyId=AKIAIXAEIBVZBZEU56MQ&AssociateTag=mamajamas-20&ItemId=B000BNCA4K&Operation=ItemLookup&ResponseGroup=Large&Signature=RYvkji0leZu6y%2Blhk12G2Ls4VkmnYCrSnbk0QvphHKA=&Timestamp=2014-01-03T04:23:12Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 03 Jan 2014 04:23:13 GMT
+      Server:
+      - Server
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Vary:
+      - Accept-Encoding,User-Agent
+      Nncoection:
+      - close
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: <?xml version="1.0" ?><ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01"><OperationRequest><HTTPHeaders><Header
+        Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>e5e4df8d-5c8c-4203-a30b-5662a88cf381</RequestId><Arguments><Argument
+        Name="Operation" Value="ItemLookup"></Argument><Argument Name="AssociateTag"
+        Value="mamajamas-20"></Argument><Argument Name="Signature" Value="RYvkji0leZu6y+lhk12G2Ls4VkmnYCrSnbk0QvphHKA="></Argument><Argument
+        Name="ItemId" Value="B000BNCA4K"></Argument><Argument Name="AWSAccessKeyId"
+        Value="AKIAIXAEIBVZBZEU56MQ"></Argument><Argument Name="Timestamp" Value="2014-01-03T04:23:12Z"></Argument><Argument
+        Name="ResponseGroup" Value="Large"></Argument><Argument Name="Service" Value="AWSECommerceService"></Argument></Arguments><RequestProcessingTime>0.0317980000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><IdType>ASIN</IdType><ItemId>B000BNCA4K</ItemId><ResponseGroup>Large</ResponseGroup><VariationPage>All</VariationPage></ItemLookupRequest></Request><Item><ASIN>B000BNCA4K</ASIN><DetailPageURL>http://www.amazon.com/Manhattan-Toy-200940-Winkel/dp/B000BNCA4K%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB000BNCA4K</DetailPageURL><ItemLinks><ItemLink><Description>Technical
+        Details</Description><URL>http://www.amazon.com/Manhattan-Toy-200940-Winkel/dp/tech-data/B000BNCA4K%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000BNCA4K</URL></ItemLink><ItemLink><Description>Add
+        To Baby Registry</Description><URL>http://www.amazon.com/gp/registry/baby/add-item.html%3Fasin.0%3DB000BNCA4K%26SubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000BNCA4K</URL></ItemLink><ItemLink><Description>Add
+        To Wedding Registry</Description><URL>http://www.amazon.com/gp/registry/wedding/add-item.html%3Fasin.0%3DB000BNCA4K%26SubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000BNCA4K</URL></ItemLink><ItemLink><Description>Add
+        To Wishlist</Description><URL>http://www.amazon.com/gp/registry/wishlist/add-item.html%3Fasin.0%3DB000BNCA4K%26SubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000BNCA4K</URL></ItemLink><ItemLink><Description>Tell
+        A Friend</Description><URL>http://www.amazon.com/gp/pdp/taf/B000BNCA4K%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000BNCA4K</URL></ItemLink><ItemLink><Description>All
+        Customer Reviews</Description><URL>http://www.amazon.com/review/product/B000BNCA4K%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000BNCA4K</URL></ItemLink><ItemLink><Description>All
+        Offers</Description><URL>http://www.amazon.com/gp/offer-listing/B000BNCA4K%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000BNCA4K</URL></ItemLink></ItemLinks><SalesRank>147</SalesRank><SmallImage><URL>http://ecx.images-amazon.com/images/I/51ZD7HT88FL._SL75_.jpg</URL><Height
+        Units="pixels">66</Height><Width Units="pixels">75</Width></SmallImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/51ZD7HT88FL._SL160_.jpg</URL><Height
+        Units="pixels">142</Height><Width Units="pixels">160</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/51ZD7HT88FL.jpg</URL><Height
+        Units="pixels">443</Height><Width Units="pixels">500</Width></LargeImage><ImageSets><ImageSet
+        Category="primary"><SwatchImage><URL>http://ecx.images-amazon.com/images/I/51ZD7HT88FL._SL30_.jpg</URL><Height
+        Units="pixels">27</Height><Width Units="pixels">30</Width></SwatchImage><SmallImage><URL>http://ecx.images-amazon.com/images/I/51ZD7HT88FL._SL75_.jpg</URL><Height
+        Units="pixels">66</Height><Width Units="pixels">75</Width></SmallImage><ThumbnailImage><URL>http://ecx.images-amazon.com/images/I/51ZD7HT88FL._SL75_.jpg</URL><Height
+        Units="pixels">66</Height><Width Units="pixels">75</Width></ThumbnailImage><TinyImage><URL>http://ecx.images-amazon.com/images/I/51ZD7HT88FL._SL110_.jpg</URL><Height
+        Units="pixels">97</Height><Width Units="pixels">110</Width></TinyImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/51ZD7HT88FL._SL160_.jpg</URL><Height
+        Units="pixels">142</Height><Width Units="pixels">160</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/51ZD7HT88FL.jpg</URL><Height
+        Units="pixels">443</Height><Width Units="pixels">500</Width></LargeImage></ImageSet></ImageSets><ItemAttributes><Binding>Baby
+        Product</Binding><Brand>Manhattan Toy</Brand><CatalogNumberList><CatalogNumberListElement>10-3527-01</CatalogNumberListElement><CatalogNumberListElement>200940</CatalogNumberListElement><CatalogNumberListElement>IN200940</CatalogNumberListElement></CatalogNumberList><EAN>0810973002426</EAN><EANList><EANListElement>0810973002426</EANListElement><EANListElement>2500001357700</EANListElement><EANListElement>0011964408474</EANListElement><EANListElement>0011964419647</EANListElement></EANList><Feature>4.5"</Feature><Feature>This
+        mesmerizing maze of safe, soft, continuous tubes is perfect for a teething
+        baby to chew on</Feature><Feature>For ages 0-24 months</Feature><Feature>Safe,
+        teethable plastic loop</Feature><IsAutographed>0</IsAutographed><IsMemorabilia>0</IsMemorabilia><ItemDimensions><Height
+        Units="hundredths-inches">0</Height><Length Units="hundredths-inches">0</Length><Weight
+        Units="hundredths-pounds">11</Weight><Width Units="hundredths-inches">0</Width></ItemDimensions><Label>Manhattan
+        Toy</Label><LegalDisclaimer>no_warning_applicable</LegalDisclaimer><ListPrice><Amount>1400</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$14.00</FormattedPrice></ListPrice><Manufacturer>Manhattan
+        Toy</Manufacturer><ManufacturerMaximumAge Units="months">12</ManufacturerMaximumAge><ManufacturerMinimumAge
+        Units="months">3</ManufacturerMinimumAge><Model>200940</Model><MPN>200930</MPN><NumberOfItems>1</NumberOfItems><PackageDimensions><Height
+        Units="hundredths-inches">362</Height><Length Units="hundredths-inches">551</Length><Weight
+        Units="hundredths-pounds">18</Weight><Width Units="hundredths-inches">543</Width></PackageDimensions><PackageQuantity>1</PackageQuantity><PartNumber>200930</PartNumber><ProductGroup>Toy</ProductGroup><ProductTypeName>TOYS_AND_GAMES</ProductTypeName><Publisher>Manhattan
+        Toy</Publisher><ReleaseDate>2013-07-28</ReleaseDate><Studio>Manhattan Toy</Studio><Title>Manhattan
+        Toy Winkel</Title><UPC>011964408474</UPC><UPCList><UPCListElement>011964408474</UPCListElement><UPCListElement>810973002426</UPCListElement><UPCListElement>011964419647</UPCListElement></UPCList></ItemAttributes><OfferSummary><LowestNewPrice><Amount>753</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$7.53</FormattedPrice></LowestNewPrice><LowestCollectiblePrice><Amount>1399</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$13.99</FormattedPrice></LowestCollectiblePrice><TotalNew>35</TotalNew><TotalUsed>0</TotalUsed><TotalCollectible>1</TotalCollectible><TotalRefurbished>0</TotalRefurbished></OfferSummary><Offers><TotalOffers>1</TotalOffers><TotalOfferPages>1</TotalOfferPages><MoreOffersUrl>http://www.amazon.com/gp/offer-listing/B000BNCA4K%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000BNCA4K</MoreOffersUrl><Offer><OfferAttributes><Condition>New</Condition></OfferAttributes><OfferListing><OfferListingId>whY5xeU6JyHQyiw4mGXuRDUCDLC1yvplHxKtU2p5H510uyZNx%2BZ2%2BkLJIt3f29VC7GMdgZSMGX4rAh%2BHYPtI4kmStRttFkbeOArvlskUYsA%3D</OfferListingId><Price><Amount>1239</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$12.39</FormattedPrice></Price><AmountSaved><Amount>161</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$1.61</FormattedPrice></AmountSaved><PercentageSaved>12</PercentageSaved><Availability>Usually
+        ships in 24 hours</Availability><AvailabilityAttributes><AvailabilityType>now</AvailabilityType><MinimumHours>0</MinimumHours><MaximumHours>0</MaximumHours></AvailabilityAttributes><IsEligibleForSuperSaverShipping>1</IsEligibleForSuperSaverShipping></OfferListing></Offer></Offers><CustomerReviews><IFrameURL>http://www.amazon.com/reviews/iframe?akid=AKIAIXAEIBVZBZEU56MQ&amp;alinkCode=xm2&amp;asin=B000BNCA4K&amp;atag=mamajamas-20&amp;exp=2014-01-04T04%3A23%3A13Z&amp;v=2&amp;sig=Q%2BfvacVRpJwR%2BurZZhzsAE6Y5r8ZuCAWp06TkSSUHxM%3D</IFrameURL><HasReviews>true</HasReviews></CustomerReviews><EditorialReviews><EditorialReview><Source>Product
+        Description</Source><Content>Manhattan Toy Winkel</Content><IsLinkSuppressed>0</IsLinkSuppressed></EditorialReview></EditorialReviews><SimilarProducts><SimilarProduct><ASIN>B001UF8BL4</ASIN><Title>Baby
+        Einstein Bendy Ball</Title></SimilarProduct><SimilarProduct><ASIN>B0000A1Z3X</ASIN><Title>Manhattan
+        Toy Baby Whoozit 6 Inch</Title></SimilarProduct><SimilarProduct><ASIN>B0043D28B4</ASIN><Title>Lamaze
+        Cloth Book, Peek-A-Boo Forest</Title></SimilarProduct><SimilarProduct><ASIN>B002QYW8LW</ASIN><Title>Baby
+        Banana Bendable Training Toothbrush, Infant</Title></SimilarProduct><SimilarProduct><ASIN>B000YDDF6O</ASIN><Title>Baby
+        Einstein Take Along Tunes</Title></SimilarProduct></SimilarProducts><Accessories><Accessory><ASIN>B0000A1Z3X</ASIN><Title>Manhattan
+        Toy Baby Whoozit 6 Inch</Title></Accessory></Accessories><BrowseNodes><BrowseNode><BrowseNodeId>166861011</BrowseNodeId><Name>Teethers</Name><Ancestors><BrowseNode><BrowseNodeId>166856011</BrowseNodeId><Name>Health
+        &amp; Baby Care</Name><Ancestors><BrowseNode><BrowseNodeId>165797011</BrowseNodeId><Name>Categories</Name><IsCategoryRoot>1</IsCategoryRoot><Ancestors><BrowseNode><BrowseNodeId>165796011</BrowseNodeId><Name>Baby
+        Products</Name></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode></BrowseNodes></Item></Items></ItemLookupResponse>
+    http_version: 
+  recorded_at: Fri, 03 Jan 2014 04:23:13 GMT
+recorded_with: VCR 2.5.0

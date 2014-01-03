@@ -15,7 +15,7 @@ describe GoogleContactsFetcher do
     end
   end
 
-  it "only includes contacts with a nme" do
+  it "only includes contacts with a name" do
     VCR.use_cassette('google/contacts') do
       auth = create(:authentication, access_token: access_token)
       fetcher = GoogleContactsFetcher.new(auth,
