@@ -3,6 +3,7 @@
 --
 
 SET statement_timeout = 0;
+SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -336,13 +337,13 @@ CREATE TABLE lists (
     user_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
+    public boolean DEFAULT false NOT NULL,
     view_count integer DEFAULT 0 NOT NULL,
     public_view_count integer DEFAULT 0 NOT NULL,
     shared_list_notification_sent_at timestamp without time zone,
     completed_at timestamp without time zone,
     built_at timestamp without time zone,
-    privacy integer DEFAULT 0 NOT NULL,
-    public boolean DEFAULT false NOT NULL
+    privacy integer DEFAULT 0 NOT NULL
 );
 
 
