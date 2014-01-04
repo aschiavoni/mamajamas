@@ -14,7 +14,7 @@ We are using the thin web server in development and production.
 2. Create the role for the development and test environments.
 
         $ psql -d postgres
-        postgres=# create role mamajamas login createdb;
+        postgres=# create role mamajamas login superuser;
         postgres=# CREATE EXTENSION IF NOT EXISTS hstore;
         postgres=# \q
 
