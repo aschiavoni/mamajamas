@@ -21,7 +21,6 @@ describe CreatesRecommendedProductFromAmazonUrl do
 
   let(:ecs_config) { ProductFetcherConfiguration.for('amazon') }
 
-
   it "finds vendor id in url" do
     VCR.use_cassette(cs_name("vendor_id"), vcr_opts) do
       c = CreatesRecommendedProductFromAmazonUrl.new(url, ecs_config)

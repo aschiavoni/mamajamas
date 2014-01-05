@@ -14,6 +14,7 @@ class ProductType < ActiveRecord::Base
   has_many :queries, class_name: "ProductTypeQuery", dependent: :destroy
   has_many :list_items
   has_and_belongs_to_many :products
+  has_many :recommended_products
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
   validates :plural_name, presence: true

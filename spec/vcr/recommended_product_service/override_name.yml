@@ -1,0 +1,111 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://ecs.amazonaws.com/onca/xml?AWSAccessKeyId=AKIAIXAEIBVZBZEU56MQ&AssociateTag=mamajamas-20&ItemId=B000HZEQSU&Operation=ItemLookup&ResponseGroup=Large&Signature=c6hMnN9XsZDc0LO4ZE9YxSJZUpuFKUt1apTjuMUzqw8=&Timestamp=2014-01-05T18:07:56Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 05 Jan 2014 18:07:56 GMT
+      Server:
+      - Server
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Vary:
+      - Accept-Encoding,User-Agent
+      Nncoection:
+      - close
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '<?xml version="1.0" ?><ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01"><OperationRequest><HTTPHeaders><Header
+        Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>d5b5f38b-9983-4cb6-a10a-a2626edbca96</RequestId><Arguments><Argument
+        Name="Operation" Value="ItemLookup"></Argument><Argument Name="AssociateTag"
+        Value="mamajamas-20"></Argument><Argument Name="Signature" Value="c6hMnN9XsZDc0LO4ZE9YxSJZUpuFKUt1apTjuMUzqw8="></Argument><Argument
+        Name="ItemId" Value="B000HZEQSU"></Argument><Argument Name="AWSAccessKeyId"
+        Value="AKIAIXAEIBVZBZEU56MQ"></Argument><Argument Name="Timestamp" Value="2014-01-05T18:07:56Z"></Argument><Argument
+        Name="ResponseGroup" Value="Large"></Argument><Argument Name="Service" Value="AWSECommerceService"></Argument></Arguments><RequestProcessingTime>0.0277460000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><IdType>ASIN</IdType><ItemId>B000HZEQSU</ItemId><ResponseGroup>Large</ResponseGroup><VariationPage>All</VariationPage></ItemLookupRequest></Request><Item><ASIN>B000HZEQSU</ASIN><ParentASIN>B002GKC3X4</ParentASIN><DetailPageURL>http://www.amazon.com/My-Brest-Friend-Pillow-Sunburst/dp/B000HZEQSU%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB000HZEQSU</DetailPageURL><ItemLinks><ItemLink><Description>Technical
+        Details</Description><URL>http://www.amazon.com/My-Brest-Friend-Pillow-Sunburst/dp/tech-data/B000HZEQSU%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000HZEQSU</URL></ItemLink><ItemLink><Description>Add
+        To Baby Registry</Description><URL>http://www.amazon.com/gp/registry/baby/add-item.html%3Fasin.0%3DB000HZEQSU%26SubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000HZEQSU</URL></ItemLink><ItemLink><Description>Add
+        To Wedding Registry</Description><URL>http://www.amazon.com/gp/registry/wedding/add-item.html%3Fasin.0%3DB000HZEQSU%26SubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000HZEQSU</URL></ItemLink><ItemLink><Description>Add
+        To Wishlist</Description><URL>http://www.amazon.com/gp/registry/wishlist/add-item.html%3Fasin.0%3DB000HZEQSU%26SubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000HZEQSU</URL></ItemLink><ItemLink><Description>Tell
+        A Friend</Description><URL>http://www.amazon.com/gp/pdp/taf/B000HZEQSU%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000HZEQSU</URL></ItemLink><ItemLink><Description>All
+        Customer Reviews</Description><URL>http://www.amazon.com/review/product/B000HZEQSU%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000HZEQSU</URL></ItemLink><ItemLink><Description>All
+        Offers</Description><URL>http://www.amazon.com/gp/offer-listing/B000HZEQSU%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000HZEQSU</URL></ItemLink></ItemLinks><SalesRank>1744</SalesRank><SmallImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL._SL75_.jpg</URL><Height
+        Units="pixels">50</Height><Width Units="pixels">75</Width></SmallImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL._SL160_.jpg</URL><Height
+        Units="pixels">106</Height><Width Units="pixels">160</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL.jpg</URL><Height
+        Units="pixels">332</Height><Width Units="pixels">500</Width></LargeImage><ImageSets><ImageSet
+        Category="primary"><SwatchImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL._SL30_.jpg</URL><Height
+        Units="pixels">20</Height><Width Units="pixels">30</Width></SwatchImage><SmallImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL._SL75_.jpg</URL><Height
+        Units="pixels">50</Height><Width Units="pixels">75</Width></SmallImage><ThumbnailImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL._SL75_.jpg</URL><Height
+        Units="pixels">50</Height><Width Units="pixels">75</Width></ThumbnailImage><TinyImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL._SL110_.jpg</URL><Height
+        Units="pixels">73</Height><Width Units="pixels">110</Width></TinyImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL._SL160_.jpg</URL><Height
+        Units="pixels">106</Height><Width Units="pixels">160</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL.jpg</URL><Height
+        Units="pixels">332</Height><Width Units="pixels">500</Width></LargeImage></ImageSet><ImageSet
+        Category="swatch"><SwatchImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL._SL30_.jpg</URL><Height
+        Units="pixels">20</Height><Width Units="pixels">30</Width></SwatchImage><SmallImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL._SL75_.jpg</URL><Height
+        Units="pixels">50</Height><Width Units="pixels">75</Width></SmallImage><ThumbnailImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL._SL75_.jpg</URL><Height
+        Units="pixels">50</Height><Width Units="pixels">75</Width></ThumbnailImage><TinyImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL._SL110_.jpg</URL><Height
+        Units="pixels">73</Height><Width Units="pixels">110</Width></TinyImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL._SL160_.jpg</URL><Height
+        Units="pixels">106</Height><Width Units="pixels">160</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/41zhDXTl%2BfL.jpg</URL><Height
+        Units="pixels">332</Height><Width Units="pixels">500</Width></LargeImage></ImageSet></ImageSets><ItemAttributes><Binding>Baby
+        Product</Binding><Brand>My Brest Friend</Brand><CatalogNumberList><CatalogNumberListElement>10-2239-01</CatalogNumberListElement><CatalogNumberListElement>000000000803</CatalogNumberListElement><CatalogNumberListElement>MBF-803</CatalogNumberListElement><CatalogNumberListElement>10-2239-02</CatalogNumberListElement><CatalogNumberListElement>803</CatalogNumberListElement></CatalogNumberList><Color>Sunburst</Color><EAN>0705873008039</EAN><EANList><EANListElement>0705873008039</EANListElement><EANListElement>0705873007018</EANListElement><EANListElement>0705873007087</EANListElement></EANList><Feature>Adjustable
+        silent-release strap</Feature><Feature>Features wrap around design</Feature><Feature>Machine
+        washable in the gentle cycle in warm water</Feature><Feature>Breastfeeding;
+        nursing; feeding, pillow; support; breast</Feature><IsAdultProduct>0</IsAdultProduct><ItemDimensions><Height
+        Units="hundredths-inches">590</Height><Length Units="hundredths-inches">2300</Length><Weight
+        Units="hundredths-pounds">140</Weight><Width Units="hundredths-inches">1570</Width></ItemDimensions><Label>Zenoff
+        Products</Label><LegalDisclaimer>These statements have not been evaluated
+        by the Food &amp; Drug Administration. This products is not intended to diagnose,
+        cure, mitigate, treat, or prevent any disease.</LegalDisclaimer><ListPrice><Amount>4200</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$42.00</FormattedPrice></ListPrice><Manufacturer>Zenoff
+        Products</Manufacturer><ManufacturerMaximumAge Units="months">18</ManufacturerMaximumAge><ManufacturerMinimumAge
+        Units="months">2</ManufacturerMinimumAge><Model>803</Model><MPN>11374</MPN><PackageDimensions><Height
+        Units="hundredths-inches">530</Height><Length Units="hundredths-inches">2210</Length><Weight
+        Units="hundredths-pounds">260</Weight><Width Units="hundredths-inches">1640</Width></PackageDimensions><PackageQuantity>1</PackageQuantity><PartNumber>11374</PartNumber><ProductGroup>Baby
+        Product</ProductGroup><ProductTypeName>BABY_PRODUCT</ProductTypeName><Publisher>Zenoff
+        Products</Publisher><Size>1.5 lb</Size><SKU>705873008039</SKU><Studio>Zenoff
+        Products</Studio><Title>My Brest Friend Pillow, Sunburst</Title><UPC>705873008039</UPC><UPCList><UPCListElement>705873008039</UPCListElement><UPCListElement>705873007018</UPCListElement><UPCListElement>705873007087</UPCListElement></UPCList></ItemAttributes><OfferSummary><LowestNewPrice><Amount>3299</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$32.99</FormattedPrice></LowestNewPrice><LowestUsedPrice><Amount>2435</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$24.35</FormattedPrice></LowestUsedPrice><TotalNew>3</TotalNew><TotalUsed>1</TotalUsed><TotalCollectible>0</TotalCollectible><TotalRefurbished>0</TotalRefurbished></OfferSummary><Offers><TotalOffers>1</TotalOffers><TotalOfferPages>1</TotalOfferPages><MoreOffersUrl>http://www.amazon.com/gp/offer-listing/B000HZEQSU%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB000HZEQSU</MoreOffersUrl><Offer><OfferAttributes><Condition>New</Condition></OfferAttributes><OfferListing><OfferListingId>3Rnid55xEvznQ%2FCljDSa54NTxZzR0fX8pNsIn1GNCHAjJl4LHGDC3PPjnUG9M74eJQBjDMaetiRp%2FXs2g8Gv0CXzy0J0LAr4xq15qaFszXU%3D</OfferListingId><Price><Amount>3499</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$34.99</FormattedPrice></Price><AmountSaved><Amount>701</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$7.01</FormattedPrice></AmountSaved><PercentageSaved>17</PercentageSaved><Availability>Usually
+        ships in 24 hours</Availability><AvailabilityAttributes><AvailabilityType>now</AvailabilityType><MinimumHours>0</MinimumHours><MaximumHours>0</MaximumHours></AvailabilityAttributes><IsEligibleForSuperSaverShipping>1</IsEligibleForSuperSaverShipping></OfferListing></Offer></Offers><CustomerReviews><IFrameURL>http://www.amazon.com/reviews/iframe?akid=AKIAIXAEIBVZBZEU56MQ&amp;alinkCode=xm2&amp;asin=B000HZEQSU&amp;atag=mamajamas-20&amp;exp=2014-01-06T18%3A07%3A56Z&amp;v=2&amp;sig=%2BJU9znpz3hxlLnoUp9smM73SnOvE4bynxdwpoW2f6Cg%3D</IFrameURL><HasReviews>true</HasReviews></CustomerReviews><EditorialReviews><EditorialReview><Source>Product
+        Description</Source><Content>The No.1 Breastfeeding Support Pillow with Lactation
+        Consultants. My Brest Friend is the only pillow that stays securely in place
+        and does not shift or slide like other crescent shaped pillows. It provides
+        support, comfort and security to both mom and baby, making breastfeeding more
+        enjoyable and successful. Features: Deluxe Fabric extra soft plush material
+        back rest. Helps you maintain good posture during feeding, preventing sore
+        backs and necks wrap around design. Secures to the body, helping mom and baby
+        maintain ideal positioning and latch on Arm and Elbow Rests. Eliminate shoulder
+        stress Convenient Pocket. For nursing and other accessories Firm, Flat Front
+        Cushion. Eliminates gap between you and your baby, which keeps the baby from
+        rolling in or away during breastfeeding Breastfeeding Ease. Flat top firmness
+        ideal for positioning baby Adjustable, Silent Release Strap. Deluxe strap
+        has Velcro and silent release buckle for easy, one hand use Includes pillow
+        insert and one slipcover. Additional slipcovers sold separately.</Content><IsLinkSuppressed>0</IsLinkSuppressed></EditorialReview></EditorialReviews><SimilarProducts><SimilarProduct><ASIN>B005RVYC4C</ASIN><Title>My
+        Brest Friend Slipcover, Orange Marina</Title></SimilarProduct><SimilarProduct><ASIN>B0012OR9ES</ASIN><Title>My
+        Brest Friend Slipcover, Leaf</Title></SimilarProduct><SimilarProduct><ASIN>B005MI648C</ASIN><Title>Lansinoh
+        HPA Lanolin for Breastfeeding Mothers, 40 Grams</Title></SimilarProduct><SimilarProduct><ASIN>B009EDSWJA</ASIN><Title>Summer
+        Infant Contoured Changing Pad Amazon Frustration Free Packaging</Title></SimilarProduct><SimilarProduct><ASIN>B0000BYAG0</ASIN><Title>Lansinoh
+        20265 Disposable Nursing Pads, 60-pack</Title></SimilarProduct></SimilarProducts><Accessories><Accessory><ASIN>B000MEB3GE</ASIN><Title>Itzbeen
+        Pocket Nanny Baby Care Timer, Blue</Title></Accessory></Accessories><BrowseNodes><BrowseNode><BrowseNodeId>677981011</BrowseNodeId><Name>Pillow
+        Covers</Name><Ancestors><BrowseNode><BrowseNodeId>166798011</BrowseNodeId><Name>Pillows
+        &amp; Stools</Name><Ancestors><BrowseNode><BrowseNodeId>166777011</BrowseNodeId><Name>Feeding</Name><Ancestors><BrowseNode><BrowseNodeId>165797011</BrowseNodeId><Name>Categories</Name><IsCategoryRoot>1</IsCategoryRoot><Ancestors><BrowseNode><BrowseNodeId>165796011</BrowseNodeId><Name>Baby
+        Products</Name></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode><BrowseNode><BrowseNodeId>1288264011</BrowseNodeId><Name>All
+        Products</Name><Ancestors><BrowseNode><BrowseNodeId>1267878011</BrowseNodeId><Name>Products</Name><IsCategoryRoot>1</IsCategoryRoot><Ancestors><BrowseNode><BrowseNodeId>1267877011</BrowseNodeId></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode><BrowseNode><BrowseNodeId>3547114011</BrowseNodeId><Name>Baby</Name><Children><BrowseNode><BrowseNodeId>3547123011</BrowseNodeId><Name>Furniture</Name></BrowseNode><BrowseNode><BrowseNodeId>3547124011</BrowseNodeId><Name>Care
+        &amp; Safety</Name></BrowseNode></Children><Ancestors><BrowseNode><BrowseNodeId>1267878011</BrowseNodeId><Name>Products</Name><IsCategoryRoot>1</IsCategoryRoot><Ancestors><BrowseNode><BrowseNodeId>1267877011</BrowseNodeId></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode><BrowseNode><BrowseNodeId>3561418011</BrowseNodeId><Name>Toys
+        and Baby</Name><Ancestors><BrowseNode><BrowseNodeId>1267879011</BrowseNodeId><Name>Special
+        Features</Name><Ancestors><BrowseNode><BrowseNodeId>1267877011</BrowseNodeId></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode><BrowseNode><BrowseNodeId>3326664011</BrowseNodeId><Name>Breastfeeding</Name><Ancestors><BrowseNode><BrowseNodeId>3326599011</BrowseNodeId><Name>Feeding
+        &amp; Nursing</Name><Ancestors><BrowseNode><BrowseNodeId>3223961011</BrowseNodeId><Name>Products</Name><IsCategoryRoot>1</IsCategoryRoot><Ancestors><BrowseNode><BrowseNodeId>3223960011</BrowseNodeId></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode></BrowseNodes></Item></Items></ItemLookupResponse>'
+    http_version: 
+  recorded_at: Sun, 05 Jan 2014 18:07:57 GMT
+recorded_with: VCR 2.5.0

@@ -112,4 +112,14 @@ FactoryGirl.define do
     provider "facebook"
     friends []
   end
+
+  factory :recommended_product do
+    product_type
+    name "Sample Product Name"
+    link "http://amazon.com"
+    vendor "amazon"
+    vendor_id "12345"
+    image_url "http://amazon.com/image"
+    tag "eco"
+  end
 end

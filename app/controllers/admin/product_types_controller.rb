@@ -17,6 +17,10 @@ class Admin::ProductTypesController < Admin::BaseController
   def update
     @product_type = ProductType.find(params[:id])
     @product_type.update_attributes!(params[:product_type])
+    recommended_products = params.delete(:recommended_products)
+    if recommended_products.present?
+      RecommendedProductService.create_or_update!(recommended_products)
+    end
     flash[:notice] = "Updated #{@product_type.name}"
     redirect_to edit_admin_product_type_path(@product_type)
   rescue ActiveRecord::RecordInvalid

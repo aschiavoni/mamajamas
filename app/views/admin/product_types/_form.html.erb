@@ -68,20 +68,35 @@
   </fieldset>
 </dl>
 <h3>Recommended Products</h3>
-<h4>Eco Mom</h4>
-<dl class="clearfix">
-  <fieldset>
-    <dt>Name</dt>
-    <dd>
-      <p>
-        <%= f.label :name %>
-        <br />
-        <%= f.text_field :name %>
-        <%= field_error product_type, :name %>
-      </p>
-    </dd>
-  </fieldset>
-</dl>
+<% @view.recommended_products.sort.each do |tag, rp| -%>
+  <h4><%= tag.to_s.titleize %></h4>
+  <dl class="clearfix">
+    <fieldset>
+      <%= fields_for "recommended_products" do |builder| -%>
+        <%= builder.fields_for tag, rp do |rpf| -%>
+          <%= rpf.hidden_field :product_type_id %>
+          <%= rpf.hidden_field :tag %>
+          <dt>Link<strong class="required">*</strong></dt>
+          <dd>
+            <p>
+              <%= rpf.label :link, "If not specified, no recommended product will be added" %>
+              <br />
+              <%= rpf.text_field :link %>
+            </p>
+          </dd>
+          <dt>Name</dt>
+          <dd>
+            <p>
+              <%= rpf.label :name, "Optional, if not specified, it will use the name from Amazon" %>
+              <br />
+              <%= rpf.text_field :name %>
+            </p>
+          </dd>
+        <% end -%>
+      <% end -%>
+    </fieldset>
+  </dl>
+<% end -%>
 <div class="button-row">
   <div class="progress-container">
     <%= link_to "Cancel", admin_category_product_types_path(product_type.category), class: "button" %>
