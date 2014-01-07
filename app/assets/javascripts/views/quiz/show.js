@@ -39,15 +39,19 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
       ],
 
       [
-        Mamajamas.Views.QuizCaution, new Mamajamas.Models.QuizQuestion({
-          complete_list: true
-        })
+        Mamajamas.Views.QuizCaution, new Mamajamas.Models.QuizQuestion()
       ],
 
       [
         Mamajamas.Views.QuizZipCode, new Mamajamas.Models.QuizQuestion()
       ],
 
+      [
+        Mamajamas.Views.QuizCustomList, new Mamajamas.Models.QuizQuestion({
+          answers: [ "false" ],
+          complete_list: true
+        })
+      ],
   ],
 
   render: function() {

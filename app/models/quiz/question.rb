@@ -1,6 +1,6 @@
 class Quiz::Question
   def self.by_name(name, list)
-    Quiz.const_get(name.titleize).new(list)
+    Quiz.const_get(name.titleize.gsub(" ", "")).new(list)
   end
 
   def initialize(list)
