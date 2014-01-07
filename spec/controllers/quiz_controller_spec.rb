@@ -50,6 +50,20 @@ describe QuizController do
       }
     end
 
+    it "marks the quiz complete" do
+      answers = [ 'Pump', 'Bottle Feed' ]
+      Quiz::Answer.should_receive(:save_answer!).
+        with(user, 'feeding', answers)
+      CompleteListWorker.should_receive(:perform_async).with(user.id)
+      User.any_instance.should_receive(:complete_quiz!)
+
+      put 'update', {
+        question: 'Feeding',
+        answers: answers,
+        complete_list: true
+      }
+    end
+
   end
 
   describe "POST 'update' kid" do
@@ -125,17 +139,6 @@ describe QuizController do
         country: 'United Kingdom',
         format: :json
       JSON.parse(response.body)['errors'].should_not be_empty
-    end
-
-    it "marks that the user has taken the quiz" do
-      User.any_instance.should_receive(:update_attributes).
-        with({ zip_code: 'sl41eg', country_code: 'GB' }).
-        and_return(true)
-      User.any_instance.should_receive(:complete_quiz!)
-      put 'update_zip_code',
-        zip_code: 'sl41eg',
-        country: 'GB',
-        format: :json
     end
 
   end

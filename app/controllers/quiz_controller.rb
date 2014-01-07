@@ -14,7 +14,10 @@ class QuizController < ApplicationController
     answers = params[:answers] || []
     Quiz::Answer.save_answer!(current_user, question_name, answers)
 
-    CompleteListWorker.perform_async(current_user.id) if params[:complete_list]
+    if params[:complete_list]
+      current_user.complete_quiz!
+      CompleteListWorker.perform_async(current_user.id)
+    end
 
     render json: { status: 'ok' }
   end
@@ -36,9 +39,7 @@ class QuizController < ApplicationController
   def update_zip_code
     zip_code = params[:zip_code].present? ? params[:zip_code].strip : nil
     country = params[:country].present? ? params[:country].strip : 'US'
-    if current_user.update_attributes(zip_code: zip_code, country_code: country)
-      current_user.complete_quiz!
-    end
+    current_user.update_attributes(zip_code: zip_code, country_code: country)
 
     respond_with current_user
   end
