@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   has_one :list, dependent: :destroy
   has_many :kids, dependent: :destroy
   has_many :list_item_images, dependent: :destroy
-  has_many :quiz_answers, class_name: "Quiz::Answer"
+  has_many :quiz_answers, class_name: "Quiz::Answer", dependent: :destroy
   has_many :invites, dependent: :destroy
   has_many :authentications, dependent: :destroy
   has_many :social_friends, dependent: :destroy, class_name: "SocialFriends"
@@ -225,6 +225,12 @@ class User < ActiveRecord::Base
   def build_list!
     kid = self.kids.order('created_at ASC').first
     ListBuilder.new(self, kid).build! if list.blank?
+  end
+
+  def build_custom_list?
+    answer = Quiz::Answer.most_recent_answers(self.id).
+      select { |a| a.question == "custom list" }.first
+    answer.present? && answer.answers.first == "true"
   end
 
   def reset_list!

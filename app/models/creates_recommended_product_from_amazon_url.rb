@@ -15,6 +15,7 @@ class CreatesRecommendedProductFromAmazonUrl
 
   def product
     product = {}
+    return product if vendor_id == :not_found
     item = Amazon::Ecs.item_lookup(vendor_id, {
                                      :response_group => "Large",
                                    }).items.first
@@ -38,7 +39,7 @@ class CreatesRecommendedProductFromAmazonUrl
 
   def parse_url(url)
     u = URI(url)
-    if u.path =~ /\/dp\/(.*)%3F/
+    if u.path =~ /\/dp\/(.*)(%3F|\/)/
       @vendor_id = $1
     end
     url
