@@ -10,7 +10,7 @@ class ListQuizUpdater # this name sucks
       begin
         q.process_answers!(*answer.answers)
       rescue ArgumentError
-        just ignore invalid answers
+        # just ignore invalid answers
       end
     end
   end

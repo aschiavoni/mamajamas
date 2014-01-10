@@ -5,8 +5,7 @@ module Features
       expect(page).to have_content("Tell us a little bit about you")
 
       click_link "Start"
-      expect(page).to have_content("mom/dad to be")
-      # wait_until{ page.has_content?("dad to be") }
+      expect(page).to have_content("am expecting")
 
       click_link "Next"
       expect(page).to have_content("When it comes to feeding")

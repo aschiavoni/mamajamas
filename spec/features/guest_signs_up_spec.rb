@@ -3,35 +3,37 @@ require 'spec_helper'
 feature "guest visitor", js: true do
 
   scenario "takes quiz and signs up with email" do
-    visit root_path
-    expect(page).to have_content("Mamajamas")
+    VCR.use_cassette('guest/signs_up_email') do
+      visit root_path
+      expect(page).to have_content("Mamajamas")
 
-    take_quiz
+      take_quiz
 
-    click_link "Done"
+      click_link "Done"
 
-    add_manual_item "Bath Tub", "http://google.com"
+      add_manual_item "Bath Tub", "http://google.com"
 
-    # HACK: force there to be an item
-    page.execute_script("Mamajamas.Context.List.set('item_count', 1)")
-    click_link "Save"
-    page.should have_selector("#signup-modal", visible: true)
+      # HACK: force there to be an item
+      page.execute_script("Mamajamas.Context.List.set('item_count', 1)")
+      click_link "Save"
+      page.should have_selector("#signup-modal", visible: true)
 
-    find("#signup-collapsible").click
-    page.should have_selector("#user_email", visible: true)
+      find("#signup-collapsible").click
+      page.should have_selector("#user_email", visible: true)
 
-    # fill out signup form
-    fill_in "First and last name", with: "Guest UserSignup"
-    fill_in "Email", with: "guestsignup@example.com"
-    fill_in "Password", with: "test12345!"
-    fill_in "Confirm password", with: "test12345!"
-    sleep 0.5
+      # fill out signup form
+      fill_in "First and last name", with: "Guest UserSignup"
+      fill_in "Email", with: "guestsignup@example.com"
+      fill_in "Password", with: "test12345!"
+      fill_in "Confirm password", with: "test12345!"
+      sleep 0.5
 
-    page.should have_selector("#bt-create-account", visible: true)
-    click_button "bt-create-account"
+      page.should have_selector("#bt-create-account", visible: true)
+      click_button "bt-create-account"
 
-    expect(page).to have_content("Create my profile")
-    current_path.should == profile_path
+      expect(page).to have_content("Create my profile")
+      current_path.should == profile_path
+    end
   end
 
   scenario "takes quiz and signs up with facebook" do
