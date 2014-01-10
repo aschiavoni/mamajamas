@@ -30,7 +30,8 @@ class PublicListsController < ApplicationController
   end
 
   def preview
-    @view = PublicListView.new(@list, params[:category], true)
+    cat = params[:category] || 'all'
+    @view = PublicListView.new(@list, cat, true)
     @list_entries_json = render_list_entries(@view.list_entries)
     render 'show', formats: :html
   end
