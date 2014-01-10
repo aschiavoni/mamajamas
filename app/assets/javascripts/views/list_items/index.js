@@ -48,7 +48,7 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     var _view = this;
     $("div.collapsible-content", this.el).sortable({
       axis: "y",
-      handle: ".drag",
+      // handle: ".drag",
       connectWith: "div.collapsible-content",
       dropOnEmpty: true,
       opacity: 1.0,
