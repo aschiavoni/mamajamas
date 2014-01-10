@@ -70,7 +70,7 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
         if (newPriority != listItem.get("priority"))
           listItem.save({ priority: newPriority });
       }
-    }).disableSelection();
+    });
   },
 
   initExpandables: function() {
