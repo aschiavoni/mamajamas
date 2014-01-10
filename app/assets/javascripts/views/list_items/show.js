@@ -11,6 +11,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     this.model.on("change:rating", this.update, this);
     this.model.on("change:owned", this.update, this);
     this.model.on("change:quantity", this.update, this);
+    this.model.on("search:product:update_item", this.updateItem, this);
     this.$el.attr("id", this.model.get("id"));
   },
 
@@ -19,6 +20,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     "click .prod-edit-menu .delete": "delete",
     "click .prod-edit-menu .drag": "doNothing",
     "click .bt-addanother": "addAnother",
+    "click .bt-change": "change",
   },
 
   render: function() {
@@ -56,6 +58,26 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     this.$el.hide();
 
     return false;
+  },
+
+  change: function(event) {
+    event.preventDefault();
+    var _view = this;
+    var search = new Mamajamas.Views.ListItemSearch({
+      model: _view.model
+    });
+
+    $('#buildlist').after(search.render().$el);
+    search.show();
+
+    return false;
+  },
+
+  updateItem: function() {
+    // clear the notes field
+    this.model.set("notes", null);
+    this.update();
+    this.render();
   },
 
   addAnother: function(event) {

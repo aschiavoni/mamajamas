@@ -223,6 +223,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
     };
 
     this.model.set(attributes);
+    this.model.trigger("search:product:update_item");
     this.close();
   },
 
