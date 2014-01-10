@@ -24,6 +24,7 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
     'click #baby-age': 'showBabyAges',
     'click .baby-age': 'selectBabyAge',
     'change input[name=twins]': "toggleMultiples",
+    'click .skip': "skipQuiz",
   },
 
   render: function() {
@@ -43,7 +44,19 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
   },
 
   next: function() {
-    this.quizView.next();
+    if (this.model.get("skipped") == true)
+      window.location = "/list";
+    else
+      this.quizView.next();
+  },
+
+  skipQuiz: function(event) {
+    event.preventDefault();
+    this.model.set("answers", []);
+    this.model.set("complete_list", true);
+    this.model.set("skipped", true);
+    this.save(event);
+    return false;
   },
 
   initQuestion: function(answerText) {
