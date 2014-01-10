@@ -3,6 +3,7 @@ class Kid < ActiveRecord::Base
   belongs_to :user
 
   attr_accessible :birthday, :gender, :name, :age_range_name
+  attr_accessible :due_date, :multiples
 
   def age_range_name
     return nil if age_range.blank?

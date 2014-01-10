@@ -2,32 +2,55 @@
 <a href="#" class="bt-close ss-icon">Close</a>
 <!-- modal window content -->
 <div class="content">
-  <!-- question q02-01 ***** -->
-  <div id="q02-01" class="q-question">
-  I’m a
-    <!-- drop-down menu -->
-    <div class="choicedrop">
-      <a href="#" id="mom-type">
-        <span id="mom-type-desc">{{answers.[0]}}</span>
+  <form class="label-infield">
+    <!-- question q02-01 ***** -->
+    <div id="q02-01" class="q-question">
+      I
+      <!-- drop-down menu -->
+      <div class="choicedrop">
+        <a id="mom-type" href="#">
+          <span id="mom-type-desc">{{answers.[0]}}</span>
         <span class="ss-dropdown"></span>
       </a>
-      <ol style="display:none;">
-        <li><a class="mom-type" href="#">mom/dad to be.</a></li>
-        <li><a class="mom-type" href="#">new mom/dad.</a></li>
-        <li><a class="mom-type" href="#">veteran mom/dad.</a></li>
+      <ol style="display:none; width:19.5em;">
+        <li><a class="mom-type" href="#">am expecting my first child.</a></li>
+        <li><a class="mom-type" href="#">am already a parent.</a></li>
+        <li><a class="mom-type" href="#">am already a parent and expecting again.</a></li>
+        <li><a class="mom-type" href="#">am just browsing or have advice.</a></li>
       </ol>
     </div>
     <!-- end drop-down menu -->
-    </div>
+  </div>
   <!-- / question q02-01 ***** -->
 
   <!-- question q02-02 ***** -->
-  <div id="q02-02" class="q-question" style="display:none;">
+  <div id="q02-02" class="q-question" style="display:block;">
+    <label for="twins"><input type="checkbox" name="twins" {{#if answers.[1]}}checked{{/if}}> with twins or multiples!</label>
+  </div>
+  <!-- / question q02-02 ***** -->
+
+  <!-- question q02-03 ***** -->
+  <div id="q02-03" class="q-question clearfix" style="display:none;">
+    <div class="col35 float-l left">
+      My due date is:</div>
+    <div class="col60 float-l right">
+      <fieldset>
+        <p>
+          <label for="field-bdate">mm/dd/yyyy</label>
+          <br />
+          <input type="text" value="{{answers.[2]}}" size="30" name="child[birthday]" id="field-bdate" class=""></p>
+      </fieldset>
+    </div>
+  </div>
+  <!-- / question q02-03 ***** -->
+
+  <!-- question q02-04 ***** -->
+  <div id="q02-04" class="q-question clearfix" style="display:none;">
     My youngest child is:
     <!-- drop-down menu -->
     <div class="choicedrop">
       <a href="#" id="baby-age">
-        <span id="baby-age-desc">{{answers.[1]}}</span>
+        <span id="baby-age-desc">{{answers.[3]}}</span>
         <span class="ss-dropdown"></span>
       </a>
       <ol style="display:none;">
@@ -44,16 +67,19 @@
     </div>
     <!-- end drop-down menu -->
   </div>
-  <!-- / question q02-02 ***** -->
+  <!-- / question q02-04 ***** -->
 
+  </form>
 </div>
 <!-- end modal window content -->
 <div class="button-row clearfix">
+  <!-- instructions -->
+  <p>Skip the quiz and <a href="#" class="skip">go to my list</a></p>
   <div class="col50 float-l left">
-  <a href="#" class="button" id="bt-prev"><span class="ss-navigateleft"></span>Previous</a>
+    <a href="#" class="button" id="bt-prev"><span class="ss-navigateleft"></span>Previous</a>
   </div>
   <div class="col50 float-r right">
-  <a href="#" class="button bt-color" id="bt-next">Next<span class="ss-navigateright"></span></a>
+    <a href="#" class="button bt-color" id="bt-next">Next<span class="ss-navigateright"></span></a>
   </div>
 </div>
 <!-- quiz progress bar -->

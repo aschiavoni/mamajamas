@@ -225,7 +225,9 @@ CREATE TABLE kids (
     age_range_id integer,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    due_date date,
+    multiples boolean DEFAULT false
 );
 
 
@@ -1418,3 +1420,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131117145900');
 INSERT INTO schema_migrations (version) VALUES ('20131207163130');
 
 INSERT INTO schema_migrations (version) VALUES ('20131230175948');
+
+INSERT INTO schema_migrations (version) VALUES ('20140110200316');

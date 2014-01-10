@@ -2,30 +2,37 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
 
   template: HandlebarsTemplates['quiz/baby_age'],
 
+  questionName: 'Age',
+
   initialize: function() {
     this.$el.attr('id', 'quiz02');
     this.$el.addClass('large');
-    this.kid = new Mamajamas.Models.Kid();
-    this.kid.set('age_range', 'Pre-birth');
-    this.on('quiz:baby_age:saved', this.next);
+    this.kid = new Mamajamas.Models.Kid({
+      age_range: 'Pre-birth',
+      due_date: null,
+      multiples: false,
+    });
+    this.on('quiz:question:saved', this.next);
   },
 
   events: {
     'click .bt-close': 'closeQuiz',
     'click #bt-prev': 'previous',
-    'click #bt-next': 'save',
+    'click #bt-next': 'saveKid',
     'click #mom-type': 'showMomTypes',
     'click .mom-type': 'selectMomType',
     'click #baby-age': 'showBabyAges',
     'click .baby-age': 'selectBabyAge',
+    'change input[name=twins]': "toggleMultiples",
   },
 
   render: function() {
+    var _view = this;
     var $questionView = $(this.template(this.model.toJSON()));
-    if (this.model.get('answers')[0] != 'mom/dad to be.') {
-      $('#q02-02', $questionView).show();
-    }
+    var answerText = this.model.get("answers")[0];
+    _.defer(function () { _view.initQuestion(answerText) });
     this.$el.html($questionView);
+
     return this;
   },
 
@@ -39,11 +46,35 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
     this.quizView.next();
   },
 
+  initQuestion: function(answerText) {
+    switch (answerText) {
+    case 'am expecting my first child.':
+      this.hideBabyAgeQuestion();
+      this.showDueDateQuestion();
+      this.showTwinsQuestion();
+      break;
+    case 'am already a parent.':
+      this.showBabyAgeQuestion();
+      this.hideDueDateQuestion();
+      this.showTwinsQuestion();
+      break;
+    case 'am already a parent and expecting again.':
+      this.showBabyAgeQuestion();
+      this.showDueDateQuestion();
+      this.showTwinsQuestion();
+      break;
+    case 'am just browsing or have advice.':
+      this.hideBabyAgeQuestion();
+      this.hideDueDateQuestion();
+      this.hideTwinsQuestion();
+      break;
+    }
+  },
+
   showMomTypes: function(event) {
     event.preventDefault();
 
     var answerList = $(event.target, this.$el).parents('a').siblings('ol');
-    answerList.css('width', '9em');
     answerList.show();
 
     return false;
@@ -62,13 +93,34 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
 
     var answers = this.model.get('answers');
     answers[0] = answerText;
-    if (answerText == 'mom/dad to be.') {
-      this.kid.set('age_range', 'Pre-birth');
-      this.hideBabyAgeQuestion();
-    } else {
-      answers[1] = '0-3 mo';
-      this.kid.set('age_range', '0-3 mo');
-      this.showBabyAgeQuestion();
+    switch (answerText) {
+      case 'am expecting my first child.':
+        this.kid.set('age_range', 'Pre-birth');
+        this.hideBabyAgeQuestion();
+        this.showDueDateQuestion();
+        this.showTwinsQuestion();
+        break;
+      case 'am already a parent.':
+        answers[3] = '0-3 mo';
+        this.kid.set('age_range', '0-3 mo');
+        this.showBabyAgeQuestion();
+        this.hideDueDateQuestion();
+        this.showTwinsQuestion();
+        break;
+      case 'am already a parent and expecting again.':
+        answers[3] = '0-3 mo';
+        this.kid.set('age_range', '0-3 mo');
+        this.showBabyAgeQuestion();
+        this.showDueDateQuestion();
+        this.showTwinsQuestion();
+        break;
+      case 'am just browsing or have advice.':
+        answers[3] = '0-3 mo';
+        this.kid.set('age_range', '0-3 mo');
+        this.hideBabyAgeQuestion();
+        this.hideDueDateQuestion();
+        this.hideTwinsQuestion();
+        break;
     }
 
     this.model.set('answers', answers);
@@ -77,10 +129,29 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
   },
 
   showBabyAgeQuestion: function() {
-    $('#q02-02', this.$el).show();
+    $('#q02-04', this.$el).show();
   },
 
   hideBabyAgeQuestion: function() {
+    $('#q02-04', this.$el).hide();
+  },
+
+  showDueDateQuestion: function() {
+    $('#q02-03', this.$el).show(function() {
+      $("label", $(this)).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
+      $("#field-bdate").datepicker();
+    });
+  },
+
+  hideDueDateQuestion: function() {
+    $('#q02-03', this.$el).hide();
+  },
+
+  showTwinsQuestion: function() {
+    $('#q02-02', this.$el).show();
+  },
+
+  hideTwinsQuestion: function() {
     $('#q02-02', this.$el).hide();
   },
 
@@ -110,20 +181,35 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
     $('#baby-age-desc', this.$el).html(answerText);
     this.kid.set('age_range', answerText.replace('.', ''));
     var answers = this.model.get('answers');
-    answers[1] = answerText;
+    answers[3] = answerText;
     this.model.set('answers', answers);
 
     return false;
   },
 
-  save: function(event) {
+  toggleMultiples: function(event) {
+    var answers = this.model.get('answers');
+    var checked = $(event.currentTarget).is(":checked");
+    answers[1] = checked;
+    this.kid.set('multiples', checked);
+    this.model.set('answers', answers);
+  },
+
+  saveKid: function(event) {
     event.preventDefault();
 
     Mamajamas.Context.Progress.show();
     var _view = this;
+    var answers = this.model.get('answers');
+    var dueDate = $("#field-bdate").val();
+    answers[2] = dueDate;
+    this.kid.set('due_date', dueDate);
+    this.model.set('answers', answers);
     Mamajamas.Context.Kids.create({
       kid: {
-        age_range_name: this.kid.get('age_range')
+        age_range_name: this.kid.get('age_range'),
+        due_date: dueDate,
+        multiples: this.kid.get('multiples')
       }
     }, {
       wait: true,
@@ -134,7 +220,7 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
         Mamajamas.Context.Notifications.error('Please try again later.');
       },
       complete: function() {
-        Mamajamas.Context.Progress.hide();
+        _view.save(event);
       }
     });
 

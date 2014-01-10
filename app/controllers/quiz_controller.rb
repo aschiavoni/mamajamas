@@ -23,6 +23,13 @@ class QuizController < ApplicationController
   end
 
   def update_kid
+    due_date = params[:kid][:due_date]
+    if due_date.is_a?(String) && !due_date.empty?
+      due_date = Date.strptime(due_date,
+                               I18n.t("date.formats.default")) rescue nil
+      params[:kid][:due_date] = due_date
+    end
+
     @kid = current_user.kids.first
     if @kid.present?
       @kid.update_attributes!(params[:kid])
