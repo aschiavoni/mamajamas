@@ -8,7 +8,7 @@
       <% end -%>
     </li>
     <li>
-      <%= link_to "View", public_list_path(current_user), id: "bt-view", class: "button" + (@view.list.has_items? && !@view.list.private? ? "" : " disabled") %>
+      <%= link_to "View Shared List", public_list_path(current_user), id: "bt-view", class: "button" + (@view.list.has_items? && !@view.list.private? ? "" : " disabled") %>
     </li>
   </ul>
 <% end if completed_list? -%>
