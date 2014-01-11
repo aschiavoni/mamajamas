@@ -23,8 +23,11 @@ feature "guest visitor", js: true do
 
       # fill out signup form
       fill_in "First and last name", with: "Guest UserSignup"
+      sleep 0.5
       fill_in "Email", with: "guestsignup@example.com"
+      sleep 0.5
       fill_in "Password", with: "test12345!"
+      sleep 0.5
       fill_in "Confirm password", with: "test12345!"
       sleep 0.5
 
