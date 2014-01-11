@@ -49,9 +49,13 @@ module Features
 
       # fill out signup form
       fill_in "First and last name", with: full_name
+      sleep 0.5
       fill_in "Email", with: email
+      sleep 0.5
       fill_in "Password", with: password
+      sleep 0.5
       fill_in "Confirm password", with: password
+      sleep 0.5
       # i don't like this but I think the collapsible is interfering otherwise
       sleep 0.5
 
