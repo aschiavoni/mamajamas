@@ -16,24 +16,30 @@ feature "Visitor signs up", js: true do
   end
 
   scenario "with invalid email" do
-    @tempuser = build(:user)
-    sign_up_with nil, "really!good$password"
-    sleep 0.5
-    expect(page).to have_selector(".status-msg.error", text: "email")
+    VCR.use_cassette('signup/invalid_email') do
+      @tempuser = build(:user)
+      sign_up_with nil, "really!good$password"
+      sleep 0.5
+      expect(page).to have_selector(".status-msg.error", text: "email")
+    end
   end
 
   scenario "with invalid password" do
-    @tempuser = build(:user)
-    sign_up_with @tempuser.email, nil
-    sleep 0.5
-    expect(page).to have_selector(".status-msg.error", text: "password")
+    VCR.use_cassette('signup/invalid_password') do
+      @tempuser = build(:user)
+      sign_up_with @tempuser.email, nil
+      sleep 0.5
+      expect(page).to have_selector(".status-msg.error", text: "password")
+    end
   end
 
   scenario "with invalid name" do
-    @tempuser = build(:user)
-    sign_up_with @tempuser.email, "really!good$password", nil
-    sleep 0.5
-    expect(page).to have_selector(".status-msg.error", text: "name")
+    VCR.use_cassette('signup/invalid_name') do
+      @tempuser = build(:user)
+      sign_up_with @tempuser.email, "really!good$password", nil
+      sleep 0.5
+      expect(page).to have_selector(".status-msg.error", text: "name")
+    end
   end
 
   scenario "with valid facebook account" do
