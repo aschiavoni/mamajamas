@@ -1,6 +1,8 @@
 Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
 
-  template: HandlebarsTemplates['lists/help_modals'],
+  defaultTemplate: HandlebarsTemplates['lists/help_modals'],
+
+  recommendedTemplate: HandlebarsTemplates['lists/help_modals_recommended'],
 
   className: "modal-dark",
 
@@ -14,12 +16,18 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
   },
 
   render: function() {
-    this.$el.html(this.template);
+    var template = this.defaultTemplate;
+    if (Mamajamas.Context.User.get("build_custom_list") != true) {
+      template = this.recommendedTemplate;
+      $("#listintro-container").css("top", "160px");
+    }
+    this.$el.html(template);
     return this;
   },
 
   show: function() {
     var _view = this;
+    $(".bt-change:first").css("display", "inline");
     $("#bt-share").removeClass("disabled");
     this.$el.modal({
       containerId:'listintro-container',

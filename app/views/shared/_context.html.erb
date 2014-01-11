@@ -15,7 +15,8 @@ Mamajamas.Context.User = new Mamajamas.Models.User({
   has_list: <%= current_user.list.present? %>,
   is_google_connected: <%= current_user.google_connected? %>,
   is_facebook_connected: <%= current_user.facebook_connected? %>,
-  friends_updated_at: new Date(<%= current_user.facebook_friends_updated_at.to_i * 1000 %>)
+  friends_updated_at: new Date(<%= current_user.facebook_friends_updated_at.to_i * 1000 %>),
+  build_custom_list: <%= current_user.build_custom_list? %>
 });
 <% end -%>
 
