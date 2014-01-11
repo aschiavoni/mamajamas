@@ -29,17 +29,21 @@ feature "Visitor logs in", js: true do
   end
 
   scenario "with invalid email" do
-    sign_in_with @testuser.username, nil, @password, :email
+    VCR.use_cassette('login/invalid_email') do
+      sign_in_with @testuser.username, nil, @password, :email
 
-    sleep 0.5
-    expect(page).to have_selector(".instruction.error", text: "login")
+      sleep 0.5
+      expect(page).to have_selector(".instruction.error", text: "login")
+    end
   end
 
   scenario "with invalid password" do
-    sign_in_with @testuser.username, nil, nil, :email
+    VCR.use_cassette('login/invalid_password') do
+      sign_in_with @testuser.username, nil, nil, :email
 
-    sleep 0.5
-    expect(page).to have_selector(".instruction.error", text: "login")
+      sleep 0.5
+      expect(page).to have_selector(".instruction.error", text: "login")
+    end
   end
 
   describe "with facebook" do
