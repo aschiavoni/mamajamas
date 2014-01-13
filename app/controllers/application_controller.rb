@@ -112,12 +112,11 @@ class ApplicationController < ActionController::Base
         user == "mamajamas" && password == "mamab1rd"
       end
     end
-
-    if Rails.env.production?
-      authenticate_or_request_with_http_basic do |user, password|
-        user == "mamajamas" && password == "welcome123"
-      end
-    end
+    # if Rails.env.production?
+    #   authenticate_or_request_with_http_basic do |user, password|
+    #     user == "mamajamas" && password == "welcome123"
+    #   end
+    # end
   end
 
   def not_found
