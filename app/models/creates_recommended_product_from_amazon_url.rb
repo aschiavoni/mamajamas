@@ -41,6 +41,8 @@ class CreatesRecommendedProductFromAmazonUrl
     u = URI(url)
     if u.path =~ /\/dp\/(.*)(%3F|\/)/
       @vendor_id = $1
+    elsif u.path =~ /\/gp\/product\/(.*)\//
+      @vendor_id = $1
     end
     url
   end

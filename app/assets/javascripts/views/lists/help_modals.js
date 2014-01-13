@@ -19,7 +19,7 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
     var template = this.defaultTemplate;
     if (Mamajamas.Context.User.get("build_custom_list") != true) {
       template = this.recommendedTemplate;
-      $("#listintro-container").css("top", "160px");
+      $("#listintro-container").css("top", "225px");
     }
     this.$el.html(template);
     return this;
@@ -42,9 +42,11 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
         $("#listintro").remove();
         if (Mamajamas.Context.List.get("item_count") == 0)
           $("#bt-share").addClass("disabled");
+        $(".bt-change:first").css("display", "");
       }
     });
-    this.showTips();
+    if (Mamajamas.Context.User.get("build_custom_list") == true)
+      this.showTips();
   },
 
   close: function(event) {
