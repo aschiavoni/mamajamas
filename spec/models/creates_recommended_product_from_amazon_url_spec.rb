@@ -36,6 +36,14 @@ describe CreatesRecommendedProductFromAmazonUrl do
     end
   end
 
+  it "finds vendor id in another alternate url" do
+    VCR.use_cassette(cs_name("alternate_vendor_id"), vcr_opts) do
+      u = "http://www.amazon.com/gp/product/B0002DJDJ4/ref=wms_ohs_product?ie=UTF8&psc=1"
+      c = CreatesRecommendedProductFromAmazonUrl.new(u, ecs_config)
+      c.vendor_id.should == "B0002DJDJ4"
+    end
+  end
+
   it "includes amazon asin vendor id" do
     VCR.use_cassette(cs_name("asin"), vcr_opts) do
       c = CreatesRecommendedProductFromAmazonUrl.new(url, ecs_config)
