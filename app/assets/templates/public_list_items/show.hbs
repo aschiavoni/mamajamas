@@ -4,7 +4,7 @@
   </a>
 </div>
 <div class="prod-desc clearfix">
-  <div class="prod-category"> 
+  <div class="prod-category">
     {{listItem.product_type_name}}
   </div>
   <h3>
@@ -15,7 +15,7 @@
   </div>
   <div class="prod-when-own">
     <div class="when">
-      <a href="{{listItem.link}}" target="_blank">Buy</a> at {{listItem.age}}
+      {{buyLink listItem}}
     </div>
     <div class="own">
       <strong>{{publicHaveNeed listItem.owned}}</strong> {{listItem.quantity}} of these
