@@ -1,34 +1,58 @@
+<% content_for :feature do -%>
+  <div id="feature">
+    <a class="sq-button" href="#" id="learn-more">
+      <span class="ss-icon ss-navigatedown"></span>Learn more
+    </a>
+  </div>
+<% end -%>
 <% content_for :nav do -%>
   <h2>Need help setting up your nursery?</h2>
-  <h3>
-    <a id="start-quiz" href="/quiz"><strong>Take the quiz</strong> and get started!</a>
-    <%= button_to 'Get Started', user_registration_path, method: :post, style: "display:none;" %>
-  </h3>
-<% end -%>
-<% content_for :tertiary do -%>
+  <p>Mamajamas gives you a personalized list of baby gear to customize and share with other parents.</p>
   <ul>
-    <li>Get a personalized list of baby gear</li>
-    <li>Customize your list</li>
-    <li>Share it with friends (if you want) </li>
+    <li>
+      <%= link_to "Browse Baby Gear Lists", new_friend_path %>
+    </li>
+    <li>
+      <a id="start-quiz" href="/quiz">Get Started Building My List</a>
+      <%= button_to 'Get Started', user_registration_path, method: :post, style: "display:none;" %>
+    </li>
   </ul>
 <% end -%>
-<p>With so much on your mind right now, who has time to figure out exactly what you will need for the new baby? Mamajamas offers a super-easy way for you to build a personalized, prioritized list of baby gear.</p>
-<p>No more spreadsheets or sifting through epic emails from mom friends! Let us help you figure out exactly what items you need, then customize your list with help from other moms you trust.</p>
-<ul class="screenshots gallery">
-  <li>
-    <%= link_to asset_path("home-screenshot1_quiz.jpg", digest: false) do %>
-      <img src="<%= asset_path("home-screenshot1_quiz_s.jpg", digest: false) %>" alt="Mamajamas preview: Quiz" title="Mamajamas preview: Quiz" />
-    <% end -%>
-  </a>
-  </li>
-  <li>
-    <%= link_to asset_path("home-screenshot2_build-list.jpg", digest: false) do %>
-      <img src="<%= asset_path("home-screenshot2_build-list_s.jpg", digest: false) %>" alt="Mamajamas preview: Baby gear list" title="Mamajamas preview: Baby gear list" />
-    <% end -%>
-  </li>
-  <li>
-    <%= link_to asset_path("home-screenshot3_shared-list.jpg", digest: false) do %>
-      <img src="<%= asset_path("home-screenshot3_shared-list_s.jpg", digest: false) %>" alt="Mamajamas preview: Public shared list" title="Mamajamas preview: Public shared list" />
-    <% end -%>
-  </li>
-</ul>
+<% content_for :tertiary do -%>
+  <ul class="clearfix">
+    <li>
+      <%= link_to new_friend_path do %>
+        <h4>Browse baby gear lists</h4>
+        <p>Get ideas from other parents&#8217; lists.<br>
+          Add products from their lists back to yours.</p>
+      <% end -%>
+    </li>
+    <li>
+      <%= link_to quiz_path do -%>
+        <h4>Get a personalized list of baby gear</h4>
+        <p>Browse other parents&#8217; lists.<br>
+          Track your purchases.<br>
+          Rate the products you try.</p>
+      <% end -%>
+    </li>
+    <li class="last">
+      <%= link_to quiz_path do -%>
+        <h4>Customize your baby gear list</h4>
+        <p>Track your purchases.<br>
+          Rate the products you use.<br>
+          Share your list with others.</p>
+      <% end -%>
+    </li>
+  </ul>
+<% end -%>
+<%= image_tag "about-mamajamas.jpg", alt: "about mamajamas", size: "196x294", class: "float-l" %>
+<p>The idea for Mamajamas was born out of my own experience as an expecting mom three years ago.</p>
+<p>I was overwhelmed by the process of figuring out what to get in  preparation. I spent hours researching products online and emailed mom  friends asking for advice.  They sent me long spreadsheets and emails.  After sifting through everything, I had to then create my own &ldquo;master&rdquo;  spreadsheet to keep myself organized.</p>
+<p>I starting thinking there must be an easier way to get and organize  this kind of information. I wanted to get recommendations from my  friends without having to sift through their spreadsheets or post very  public comments on Facebook.</p>
+<p>Meanwhile, I learned that many of my new mom friends were having the  same experience. I also learned that the long process of figuring out  what to get doesn&rsquo;t end when the baby is born. At each new phase of  their development you need new things. You also buy things you wish you  hadn&rsquo;t.</p>
+<p>The goal of Mamajamas is to help new and expecting parents buy only  stuff they need — to help them spend less time thinking about  stuff and more time enjoying pregnancy and new parenthood.</p>
+<p>I hope Mamajamas is helpful to you during this exciting time!</p>
+<p class="ltr-closing">
+  <%= image_tag "angie-schiavoni_sig.png", alt: "Angie Schiavoni", size: "168x64" %> <br>
+  Angie Schiavoni<br>
+  Founder</p>
