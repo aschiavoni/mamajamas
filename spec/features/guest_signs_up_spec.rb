@@ -16,6 +16,7 @@ feature "guest visitor", js: true do
       # HACK: force there to be an item
       page.execute_script("Mamajamas.Context.List.set('item_count', 1)")
       click_link "Save"
+      sleep 0.5
       page.should have_selector("#signup-modal", visible: true)
 
       find("#signup-collapsible").click
