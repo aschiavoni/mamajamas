@@ -7,7 +7,7 @@ class ProductType < ActiveRecord::Base
 
   attr_accessible :name, :plural_name, :age_range_id, :priority
   attr_accessible :image_name, :search_index, :search_query
-  attr_accessible :recommended_quantity
+  attr_accessible :recommended_quantity, :active
 
   belongs_to :user
   belongs_to :age_range
@@ -23,6 +23,7 @@ class ProductType < ActiveRecord::Base
     numericality: { only_integer: true, greater_than: 0 }
 
   scope :global, where(user_id: nil)
+  scope :global_active, global.where(active: true)
   scope :user, where("user_id IS NOT NULL")
 
   before_save do

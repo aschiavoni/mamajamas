@@ -23,6 +23,7 @@ FactoryGirl.define do
     plural_name { "#{name}.pluralize" }
     age_range
     priority 2
+    active true
   end
 
   factory :product_type_query do

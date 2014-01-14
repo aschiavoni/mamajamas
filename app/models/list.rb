@@ -93,7 +93,7 @@ class List < ActiveRecord::Base
   end
 
   def available_product_types(filter = nil, limit = nil)
-    product_types = ProductType.global.order("name ASC")
+    product_types = ProductType.global_active.order("name ASC")
     if filter.present?
       product_types = product_types.where("lower(name) LIKE ?", "%#{filter.downcase}%")
     end

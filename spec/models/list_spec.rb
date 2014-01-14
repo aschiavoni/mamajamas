@@ -175,6 +175,11 @@ describe List do
       end
     end
 
+    it "does not include inactive product types" do
+      inactive = create(:product_type, active: false)
+      list.available_product_types.should_not include(inactive)
+    end
+
     it "should only include product types with names matching filter" do
       name = "asdfg"
       product_type = create(:product_type, name: name)

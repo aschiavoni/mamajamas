@@ -6,7 +6,6 @@ class Quiz::Travel < Quiz::Question
   def rules
     if included('4', '5')
       set_priority('Back Pack', 2)
-      set_priority('Portable Crib', 2)
       set_priority('Luggage', 2)
       set_priority('Travel Crib', 2)
       set_priority('Travel Booster Seat', 2)
@@ -16,7 +15,6 @@ class Quiz::Travel < Quiz::Question
 
     if included('1', '2', '3')
       set_priority('Back Pack', 3)
-      set_priority('Portable Crib', 3)
       set_priority('Luggage', 3)
       set_priority('Travel Crib', 3)
       set_priority('Travel Booster Seat', 3)
@@ -25,4 +23,3 @@ class Quiz::Travel < Quiz::Question
     end
   end
 end
-

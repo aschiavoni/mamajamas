@@ -9,7 +9,7 @@ class ListBuilder
     @comparer = comparer.new
   end
 
-  def build!(product_types = ProductType.global)
+  def build!(product_types = ProductType.global_active)
     return if list.built_at.present?
     user.list = list
     list.save! if list.id.blank?

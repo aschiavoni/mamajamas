@@ -452,7 +452,8 @@ CREATE TABLE product_types (
     plural_name character varying(255),
     search_index character varying(255) DEFAULT 'All'::character varying,
     search_query character varying(255),
-    recommended_quantity integer DEFAULT 1 NOT NULL
+    recommended_quantity integer DEFAULT 1 NOT NULL,
+    active boolean DEFAULT true NOT NULL
 );
 
 
@@ -1422,3 +1423,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131207163130');
 INSERT INTO schema_migrations (version) VALUES ('20131230175948');
 
 INSERT INTO schema_migrations (version) VALUES ('20140110200316');
+
+INSERT INTO schema_migrations (version) VALUES ('20140114213914');

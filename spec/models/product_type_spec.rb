@@ -16,6 +16,19 @@ describe ProductType do
 
   end
 
+  describe "global active" do
+
+    it "should include global product types" do
+      global_product_type = create(:product_type)
+      ProductType.global_active.should include(global_product_type)
+    end
+
+    it "should not include inactive product types" do
+      inactive_product_type = create(:product_type, active: false)
+      ProductType.global_active.should_not include(inactive_product_type)
+    end
+  end
+
   describe "user" do
 
     it "should include user product types" do
