@@ -47,6 +47,14 @@ describe ProductsController do
       get :index, filter: filter, name: name, format: :json
     end
 
+    it "does not append product type name if filter >= 3 words" do
+      filter = "bottle large white"
+      name = "Bottle"
+      ProductSearcher.should_receive(:search).
+        with("#{filter}", anything, anything)
+      get :index, filter: filter, name: name, format: :json
+    end
+
     it "should not get html product listing" do
       expect {
         get :index, filter: "filter"
