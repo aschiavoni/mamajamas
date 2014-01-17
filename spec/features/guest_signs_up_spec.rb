@@ -16,7 +16,7 @@ feature "guest visitor", js: true do
       # HACK: force there to be an item
       page.execute_script("Mamajamas.Context.List.set('item_count', 1)")
       click_link "Save"
-      sleep 0.5
+      sleep_maybe
       page.should have_selector("#signup-modal", visible: true)
 
       find("#signup-collapsible").click
@@ -24,18 +24,18 @@ feature "guest visitor", js: true do
 
       # fill out signup form
       fill_in "First and last name", with: "Guest UserSignup"
-      sleep 0.5
+      sleep_maybe
       fill_in "Email", with: "guestsignup@example.com"
-      sleep 0.5
+      sleep_maybe
       fill_in "Password", with: "test12345!"
-      sleep 0.5
+      sleep_maybe
       fill_in "Confirm password", with: "test12345!"
-      sleep 0.5
+      sleep_maybe
 
       page.should have_selector("#bt-create-account", visible: true)
       click_button "bt-create-account"
 
-      sleep 0.5
+      sleep_maybe
       expect(page).to have_content("Create my profile")
       current_path.should == profile_path
     end

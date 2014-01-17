@@ -10,5 +10,10 @@ module Features
       system "open #{file}"
     end
     alias_method :page!, :save_and_open_page
+
+    def sleep_maybe
+      t = ENV['MAMAJAMAS_FEATURE_SLEEP'] || "1.6"
+      sleep t.to_f
+    end
   end
 end

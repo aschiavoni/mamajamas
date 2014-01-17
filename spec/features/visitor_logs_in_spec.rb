@@ -32,7 +32,7 @@ feature "Visitor logs in", js: true do
     VCR.use_cassette('login/invalid_email') do
       sign_in_with @testuser.username, nil, @password, :email
 
-      sleep 0.5
+      sleep_maybe
       expect(page).to have_selector(".instruction.error", text: "login")
     end
   end
@@ -41,7 +41,7 @@ feature "Visitor logs in", js: true do
     VCR.use_cassette('login/invalid_password') do
       sign_in_with @testuser.username, nil, nil, :email
 
-      sleep 0.5
+      sleep_maybe
       expect(page).to have_selector(".instruction.error", text: "login")
     end
   end
@@ -55,7 +55,7 @@ feature "Visitor logs in", js: true do
         mock_facebook_omniauth('99999', @testuser.email)
 
         visit root_path
-        sleep 0.5
+        sleep_maybe
         click_link "login-link"
         page.has_css?("#login-window", visible: true)
 

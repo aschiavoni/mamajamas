@@ -7,7 +7,7 @@ feature "Visitor signs up", js: true do
       @tempuser = build(:user)
       sign_up_with @tempuser.email, "really!good$password"
 
-      sleep 0.5
+      sleep_maybe
       expect(page).to have_selector("#logout")
       expect(page).to have_content(@tempuser.username)
       expect(page).to have_content("Follow Friends")
@@ -19,7 +19,7 @@ feature "Visitor signs up", js: true do
     VCR.use_cassette('signup/invalid_email') do
       @tempuser = build(:user)
       sign_up_with nil, "really!good$password"
-      sleep 0.5
+      sleep_maybe
       expect(page).to have_selector(".status-msg.error", text: "email")
     end
   end
@@ -28,7 +28,7 @@ feature "Visitor signs up", js: true do
     VCR.use_cassette('signup/invalid_password') do
       @tempuser = build(:user)
       sign_up_with @tempuser.email, nil
-      sleep 0.5
+      sleep_maybe
       expect(page).to have_selector(".status-msg.error", text: "password")
     end
   end
@@ -37,7 +37,7 @@ feature "Visitor signs up", js: true do
     VCR.use_cassette('signup/invalid_name') do
       @tempuser = build(:user)
       sign_up_with @tempuser.email, "really!good$password", nil
-      sleep 0.5
+      sleep_maybe
       expect(page).to have_selector(".status-msg.error", text: "name")
     end
   end
@@ -47,15 +47,15 @@ feature "Visitor signs up", js: true do
       mock_facebook_omniauth('54321')
       visit root_path
       click_link "signup-link"
-      sleep 0.5
+      sleep_maybe
       page.has_selector?('#create-account-email', visible: true)
 
       # simulate login
       page.execute_script("Mamajamas.Context.LoginSession.saveSession(true);")
-      sleep 0.5
+      sleep_maybe
 
       # should be on the friends page
-      sleep 0.5
+      sleep_maybe
       expect(page).to have_content("Follow Friends")
     end
   end
