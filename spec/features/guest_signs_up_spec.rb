@@ -35,6 +35,7 @@ feature "guest visitor", js: true do
       page.should have_selector("#bt-create-account", visible: true)
       click_button "bt-create-account"
 
+      sleep 0.5
       expect(page).to have_content("Create my profile")
       current_path.should == profile_path
     end
