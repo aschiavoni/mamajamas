@@ -4,6 +4,7 @@ module Features
       # I don't like these sleeps but I can't get this to work under
       # poltergeist any other way
       click_link "Choose"
+      sleep 0.5
       page.should have_selector("#search-modal", visible: true)
       sleep 0.5
       find("#add-your-own-collapsible").click
