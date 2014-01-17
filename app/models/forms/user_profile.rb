@@ -25,7 +25,7 @@ class Forms::UserProfile
 
   validate do
     [user, list].each do |object|
-      unless object.valid?
+      if object.present? && !object.valid?
         object.errors.each do |key, values|
           errors[key] = values
         end
