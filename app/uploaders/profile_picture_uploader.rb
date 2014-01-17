@@ -32,7 +32,12 @@ class ProfilePictureUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
   def default_url
-    ActionController::Base.helpers.asset_path("/assets/profile_photo-default-l.png")
+    ActionController::Base.helpers.asset_path("/assets/avatars/#{default_avatar}")
+  end
+
+  def default_avatar
+    idx = model.id % MAMAJAMAS_PROFILE_PICTURE_AVATARS.size
+    MAMAJAMAS_PROFILE_PICTURE_AVATARS[idx]
   end
 
   # Process files as they are uploaded:
