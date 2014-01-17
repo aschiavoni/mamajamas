@@ -49,15 +49,15 @@ module Features
 
       # fill out signup form
       fill_in "First and last name", with: full_name
-      sleep 0.5
+      sleep_maybe
       fill_in "Email", with: email
-      sleep 0.5
+      sleep_maybe
       fill_in "Password", with: password
-      sleep 0.5
+      sleep_maybe
       fill_in "Confirm password", with: password
-      sleep 0.5
+      sleep_maybe
       # i don't like this but I think the collapsible is interfering otherwise
-      sleep 0.5
+      sleep_maybe
 
       page.should have_selector("#bt-create-account", visible: true)
       click_button "bt-create-account"
@@ -86,11 +86,16 @@ module Features
       # email login
       login = with == :username ? username : email
       fill_in "Email address", with: login
-      sleep 0.5
+      sleep_maybe
       fill_in "Password", with: password
-      sleep 0.5
+      sleep_maybe
 
       click_button "Log in"
+    end
+
+    def sleep_maybe
+      t = ENV['MAMAJAMAS_FEATURE_SLEEP'] || "1.6"
+      sleep t.to_f
     end
   end
 end
