@@ -1,0 +1,33 @@
+<%= content_for :title_links do %>
+  <ul>
+    <li>
+      <%= link_to "Save", list_path, id: "bt-share", class: "button bt-color disabled" %>
+    </li>
+    <li>
+      <%= link_to "View Shared List", list_path, id: "bt-view", class: "button disabled" %>
+    </li>
+  </ul>
+<% end -%>
+<%= content_for :nav do %>
+  <% cache [ 'wait_categories' ] do -%>
+    <nav id="categories">
+      <h3>Categories</h3>
+      <ul>
+        <li>
+        <%= link_to "All", list_path %>
+        </li>
+        <% Category.all.each do |category| -%>
+          <li class="<%= "cat-selected" if category.name == "Bathing" %>">
+          <%= link_to category.name, list_path %>
+          </li>
+      <% end -%>
+      </ul>
+    </nav>
+  <% end -%>
+<% end -%>
+<div id="my-list" class="center">
+  <h1>Please wait while we create your list</h1>
+  <p>
+    <%= image_tag "loader36-f.gif" %>
+  </p>
+</div>

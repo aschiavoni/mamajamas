@@ -13,6 +13,7 @@ class ListsController < ApplicationController
     end
 
     if @list.present? && @list.completed?
+      template = "show"
       cat = params[:category]
       @view = ListView.new(@list, cat)
       @list_entries_json = Rails.cache.fetch [@list, cat, 'entries'] do
@@ -22,10 +23,12 @@ class ListsController < ApplicationController
           locals: { list_entries: @view.list_entries })
       end
       @list.increment_view_count
+    else
+      template = "wait"
     end
 
     respond_to do |format|
-      format.html
+      format.html { render template }
     end
   end
 

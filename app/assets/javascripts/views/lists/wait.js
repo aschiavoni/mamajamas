@@ -3,6 +3,9 @@ Mamajamas.Views.ListWait = Mamajamas.Views.Base.extend({
 
   initialize: function() {
     this.check(this);
+    $('#categories a, #bt-share, #bt-view').click(function(event) {
+      return false;
+    });
   },
 
   events: {

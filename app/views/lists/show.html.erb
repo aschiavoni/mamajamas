@@ -11,7 +11,7 @@
       <%= link_to "View Shared List", public_list_path(current_user), id: "bt-view", class: "button" + (@view.list.has_items? && !@view.list.private? ? "" : " disabled") %>
     </li>
   </ul>
-<% end if completed_list? -%>
+<% end -%>
 <%= content_for :nav do %>
   <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
     <nav id="categories">
@@ -28,36 +28,27 @@
       </ul>
     </nav>
   <% end -%>
-<% end if completed_list? -%>
-<% if completed_list? -%>
-  <% cache [ @view.list, @view.category_slug, 'list' ] do -%>
-    <form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>" data-list-entries-loaded-at="<%= Time.now.utc %>">
-    </form>
-    <% if @add_list_item_json.present? -%>
-      <div id="add-list-item" data-add-list-item="<%= @add_list_item_json %>" style="display:none;"></div>
-    <% end -%>
-    <script type="text/javascript">
-    Mamajamas.Context.List = new Mamajamas.Models.List({
-      title: '<%= @view.list.title %>',
-      <% if @view.category.present? -%>
-      category_id: '<%= @view.category.id %>',
-      category: '<%= @view.category.slug %>',
-      category_name: '<%= @view.category.name %>',
-      <% end -%>
-      current_position: 0,
-      item_count: <%= @view.list.item_count %>
-    })
-    </script>
+<% end -%>
+<% cache [ @view.list, @view.category_slug, 'list' ] do -%>
+  <form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>" data-list-entries-loaded-at="<%= Time.now.utc %>">
+  </form>
+  <% if @add_list_item_json.present? -%>
+    <div id="add-list-item" data-add-list-item="<%= @add_list_item_json %>" style="display:none;"></div>
   <% end -%>
   <script type="text/javascript">
-    Mamajamas.Context.List.set("view_count", <%= @view.list.view_count %>);
-    Mamajamas.Context.List.set("public_view_count", <%= @view.list.public_view_count %>);
+   Mamajamas.Context.List = new Mamajamas.Models.List({
+     title: '<%= @view.list.title %>',
+     <% if @view.category.present? -%>
+     category_id: '<%= @view.category.id %>',
+     category: '<%= @view.category.slug %>',
+     category_name: '<%= @view.category.name %>',
+     <% end -%>
+     current_position: 0,
+     item_count: <%= @view.list.item_count %>
+                     })
   </script>
-<% else -%>
-  <div id="my-list" class="center">
-    <h1>Please wait while we create your list</h1>
-    <p>
-    <%= image_tag "loader.gif" %>
-    </p>
-  </div>
 <% end -%>
+<script type="text/javascript">
+ Mamajamas.Context.List.set("view_count", <%= @view.list.view_count %>);
+ Mamajamas.Context.List.set("public_view_count", <%= @view.list.public_view_count %>);
+</script>
