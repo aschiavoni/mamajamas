@@ -83,4 +83,23 @@ describe ListItem do
 
   end
 
+  describe "no image url" do
+
+    it "returns product type image name" do
+      list_item = build(:list_item, image_url: nil)
+      list_item.image_url.should == list_item.product_type.image_name
+    end
+
+    it "returns product type image name when image url empty" do
+      list_item = build(:list_item, image_url: "")
+      list_item.image_url.should == list_item.product_type.image_name
+    end
+
+    it "returns unknown image name if product type not found" do
+      list_item = build(:list_item, product_type: nil, image_url: nil)
+      list_item.image_url.should == "products/icons/unknown.png"
+    end
+
+  end
+
 end

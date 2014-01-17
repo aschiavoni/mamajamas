@@ -28,4 +28,21 @@ class ListItem < ActiveRecord::Base
       [ list_item.vendor_id, list_item.vendor ]
     end
   end
+
+  def image_url
+    u = read_attribute(:image_url)
+    u = base_image_url if u.blank?
+    u
+  end
+
+  private
+
+  def base_image_url
+    product_type = self.product_type
+    if product_type.present? && product_type.image_name.present?
+      product_type.image_name
+    else
+      "products/icons/unknown.png"
+    end
+  end
 end
