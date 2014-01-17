@@ -47,12 +47,15 @@ feature "Visitor signs up", js: true do
       mock_facebook_omniauth('54321')
       visit root_path
       click_link "signup-link"
+      sleep 0.5
       page.has_selector?('#create-account-email', visible: true)
 
       # simulate login
       page.execute_script("Mamajamas.Context.LoginSession.saveSession(true);")
+      sleep 0.5
 
       # should be on the friends page
+      sleep 0.5
       expect(page).to have_content("Follow Friends")
     end
   end
