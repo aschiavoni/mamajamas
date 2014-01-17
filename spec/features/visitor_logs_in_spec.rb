@@ -55,6 +55,7 @@ feature "Visitor logs in", js: true do
         mock_facebook_omniauth('99999', @testuser.email)
 
         visit root_path
+        sleep 0.5
         click_link "login-link"
         page.has_css?("#login-window", visible: true)
 
