@@ -2,11 +2,15 @@
 	background: #ecf1f4;
 }
 
+#adminpage #primary {
+  display: none;
+}
+
 #adminpage #secondary {
 	background: #fff;
 	border-left: 1px solid #d1d1d1;
 	border-right: 1px solid #d1d1d1;
-        width: 65.625%;
+        width: 80.625%;
 }
 
 #adminpage #secondary .content {
@@ -137,6 +141,9 @@
   border-bottom: 0px !important;
 }
 
+#adminpage .table tr th.col-sortable {
+  cursor: pointer;
+}
 #adminpage .table tr td {
   font-size: 13px;
   padding: 8px;

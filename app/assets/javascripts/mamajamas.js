@@ -1,7 +1,7 @@
 window.Mamajamas = {
   Models: {},
   Collections: {},
-  Views: {},
+  Views: { Admin: {} },
   Routers: {},
   Context: {
   },

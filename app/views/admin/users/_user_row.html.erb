@@ -25,6 +25,9 @@
   <td>
     <%= user.last_sign_in %>
   </td>
+  <td>
+    <%= user.list.present? ? user.list.list_items.user_items.count : 0 %>
+  </td>
   <td class="user-actions">
     <%= link_to admin_become_path(user.username), class: "button bt-become" do %>
       <span class="ss-users"> Impersonate</span>

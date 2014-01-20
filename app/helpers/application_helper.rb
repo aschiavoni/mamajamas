@@ -24,6 +24,10 @@ module ApplicationHelper
     current_user && current_user.admin?
   end
 
+  def admin_page?
+    admin_user? && params[:controller] =~ /^admin\//
+  end
+
   def user_has_list?
     current_user && current_user.list.present?
   end

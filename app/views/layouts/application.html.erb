@@ -20,10 +20,11 @@
 <!-- for iPhone: -->
 <link rel="apple-touch-icon-precomposed" href="<%= asset_path("apple-touch-icon-57.png") %>">
 <%= stylesheet_link_tag    "application", :media => "all" %>
-<% if admin_user? -%>
-  <%= stylesheet_link_tag    "admin", :media => "all" %>
-<% end -%>
 <%= javascript_include_tag "application" %>
+<% if admin_page? -%>
+  <%= stylesheet_link_tag    "admin", :media => "all" %>
+  <%= javascript_include_tag "admin" %>
+<% end -%>
 <%= csrf_meta_tags %>
 </head>
 <body id="<%= body_id if body_id.present? %>" class="<%= body_class if body_class.present? %>">
