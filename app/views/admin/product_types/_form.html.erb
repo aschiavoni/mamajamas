@@ -75,7 +75,7 @@
 </dl>
 <h3>Recommended Products</h3>
 <% @view.recommended_products.sort.each do |tag, rp| -%>
-  <h4><%= tag.to_s.titleize %></h4>
+  <h4><%= recommended_product_tag_label(tag) %></h4>
   <dl class="clearfix">
     <fieldset>
       <%= fields_for "recommended_products" do |builder| -%>

@@ -11,7 +11,7 @@ class Admin::ProductTypeView
       h[rp.tag.to_sym] = rp
     end
 
-    [ :eco, :upscale, :cost_conscious, :extra, :twins ].each do |t|
+    [ :eco, :upscale, :cost, :extra, :twins ].each do |t|
       if h[t].blank?
         h[t] = product_type.recommended_products.build(tag: t.to_s)
       end
