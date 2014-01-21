@@ -96,8 +96,11 @@ class PublicListsController < ApplicationController
   private
 
   def shareable?(list)
-    return false if @list.blank? || @list.private?
-    return true
+    if @list.blank? || (@list.private? && current_user != @list.user)
+      false
+    else
+      true
+    end
   end
 
   def allowed_user?
