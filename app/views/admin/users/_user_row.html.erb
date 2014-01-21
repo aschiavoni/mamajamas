@@ -1,4 +1,4 @@
-<tr>
+<tr class="user-row" id="user-<%= user.id %>" data-user-id="<%= user.id %>">
   <td>
     <%= image_tag user.profile_picture, size: "45x45", class: "avatar" %>
     <span class="name">
@@ -38,7 +38,7 @@
   </td>
 </tr>
 <% if user.admin_notes.present? -%>
-  <tr class="no-border">
+  <tr class="no-border user-notes-row">
     <td colspan="5" class="admin-notes">
       <span class="subtext">Notes</span>
       <br/>
