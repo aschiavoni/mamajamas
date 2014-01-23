@@ -345,7 +345,8 @@ CREATE TABLE lists (
     shared_list_notification_sent_at timestamp without time zone,
     completed_at timestamp without time zone,
     built_at timestamp without time zone,
-    privacy integer DEFAULT 0 NOT NULL
+    privacy integer DEFAULT 0 NOT NULL,
+    saved boolean DEFAULT false NOT NULL
 );
 
 
@@ -1425,3 +1426,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131230175948');
 INSERT INTO schema_migrations (version) VALUES ('20140110200316');
 
 INSERT INTO schema_migrations (version) VALUES ('20140114213914');
+
+INSERT INTO schema_migrations (version) VALUES ('20140123222244');

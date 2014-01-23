@@ -6,6 +6,7 @@ class List < ActiveRecord::Base
 
   attr_accessible :title
   attr_accessible :privacy
+  attr_accessible :saved
 
   belongs_to :user
   has_many :categories, through: :list_items, uniq: true do

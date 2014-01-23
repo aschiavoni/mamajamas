@@ -42,7 +42,7 @@ class PublicListsController < ApplicationController
       # from a private list
       cookies[:friends_prompt] = @list.private?
 
-      @list.update_attributes!(privacy: params[:privacy])
+      @list.update_attributes!(saved: true, privacy: params[:privacy])
 
       unless @list.private?
         SharedListNotifier.send_shared_list_notification(@list)
