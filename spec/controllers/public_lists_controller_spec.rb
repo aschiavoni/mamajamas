@@ -159,6 +159,11 @@ describe PublicListsController do
       post 'publish', privacy: List::PRIVACY_PUBLIC
     end
 
+    it 'should not send notification if user set list to private' do
+      SharedListNotifier.should_not_receive(:send_shared_list_notification)
+      post 'publish', privacy: List::PRIVACY_PRIVATE
+    end
+
   end
 
 end
