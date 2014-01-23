@@ -2,7 +2,7 @@
   <ul>
     <li>
       <% if @view.list.private? %>
-        <%= link_to "Save", profile_path, id: "bt-share", class: "button bt-color" + (@view.list.has_items? ? "" : " disabled") %>
+        <%= link_to save_button_text(@view.list), profile_path, id: "bt-share", class: "button bt-color" + (@view.list.has_items? ? "" : " disabled") %>
       <% else -%>
         &nbsp;
       <% end -%>
