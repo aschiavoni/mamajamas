@@ -45,7 +45,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     var ratingView = new Mamajamas.Views.ListItemRating({
       model: this.model
     });
-    $("td.rating", this.$el).append(ratingView.render().$el);
+    $("div.rating", this.$el).append(ratingView.render().$el);
 
     var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
       model: this.model
