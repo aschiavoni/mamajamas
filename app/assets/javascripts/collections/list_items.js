@@ -97,9 +97,28 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
     return this.where({ placeholder: false }).length;
   },
 
-  clearPlaceholders: function(productTypeId) {
+  clearPlaceholders: function(productTypeId, productTypeName) {
+    if (productTypeId == null || productTypeId.toString().length == 0) {
+      this.clearPlaceholdersByName(productTypeName);
+    } else {
+      this.clearPlaceholdersById(productTypeId);
+    }
+  },
+
+  clearPlaceholdersById: function(productTypeId) {
     var query = {
       product_type_id: parseInt(productTypeId),
+      placeholder: true
+    };
+    var placeholders = Mamajamas.Context.ListItems.where(query);
+    _.each(placeholders, function(placeholder) {
+      placeholder.destroy();
+    });
+  },
+
+  clearPlaceholdersByName: function(productTypeName) {
+    var query = {
+      product_type_name: productTypeName,
       placeholder: true
     };
     var placeholders = Mamajamas.Context.ListItems.where(query);

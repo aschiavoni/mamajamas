@@ -202,7 +202,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       success: function() {
         var currentItemCount = Mamajamas.Context.List.get('item_count');
         Mamajamas.Context.List.set('item_count', currentItemCount + 1);
-        Mamajamas.Context.ListItems.clearPlaceholders(_view.model.get('product_type_id'));
+        Mamajamas.Context.ListItems.clearPlaceholders(_view.model.get('product_type_id'), _view.model.get('product_type_name'));
       },
       error: function(model, response) {
         Mamajamas.Context.Notifications.error("We're sorry but we could not add this product at this time.");

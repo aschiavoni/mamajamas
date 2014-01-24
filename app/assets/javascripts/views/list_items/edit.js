@@ -210,7 +210,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
       });
     }
 
-    Mamajamas.Context.ListItems.clearPlaceholders(_view.model.get('product_type_id'));
+    Mamajamas.Context.ListItems.clearPlaceholders(_view.model.get('product_type_id'), _view.model.get('product_type_name'));
     return false;
   },
 
