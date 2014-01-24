@@ -17,7 +17,10 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :username
+  attr_accessible :email
+  attr_accessible :password, :password_confirmation
+  attr_accessible :remember_me
   attr_accessible :login
   attr_accessible :first_name, :last_name, :birthday
   attr_accessible :facebook_friends, :facebook_friends_updated_at
@@ -94,6 +97,11 @@ class User < ActiveRecord::Base
       u.remember_me = true
       u.guest = true
     end
+  end
+
+  def username=(username)
+    username = username.downcase if username.present?
+    write_attribute(:username, username)
   end
 
   def full_name

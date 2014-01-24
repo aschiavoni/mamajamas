@@ -45,6 +45,11 @@ describe User do
       }.should raise_error(ActiveRecord::RecordInvalid)
     end
 
+    it "downcases usernames" do
+      new_user = create(:user, username: "JackDoe")
+      new_user.username.should == "jackdoe"
+    end
+
   end
 
   describe "facebook connected" do
