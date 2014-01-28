@@ -14,12 +14,13 @@ class Quiz::Feeding < Quiz::Question
     end
 
     if included("Bottle Feed", "Pump")
-      set_priority("Bottle Warmer", 1)
+      set_priority("Bottle Warmer", 2)
       set_priority("Bottle Sterilizer", 2)
     end
 
     if only("Breast Feed")
       set_priority("Bottle Drying Rack", 3)
+      set_priority("Bottles", 2)
     end
 
     if only("Bottle Feed")
@@ -29,6 +30,7 @@ class Quiz::Feeding < Quiz::Question
       set_priority("Nursing Book", 3)
       set_priority("Nursing Tea", 3)
       set_priority("Formula", 1)
+      set_priority("Pumping Bra", 3)
     end
 
     if excluded("Breast Feed")

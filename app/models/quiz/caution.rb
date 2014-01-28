@@ -9,7 +9,7 @@ class Quiz::Caution < Quiz::Question
       set_priority('Faucet Cover', 2)
       set_priority('Bath Thermometer', 2)
       set_priority('Wipes Warmer', 2)
-      set_priority('Fetal Doppler', 2)
+      set_priority('Fetal Heart Monitor', 2)
       set_priority('Outdoor Blanket or Mat', 2)
       set_priority('Shopping Cart Cover', 2)
       set_priority('Baby Monitor', 1)
