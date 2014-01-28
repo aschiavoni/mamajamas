@@ -111,6 +111,31 @@ module ApplicationHelper
     request.original_url
   end
 
+  def adwords_event(label, value)
+    js = <<-JS
+    <!-- Google Code for www.mamajamas.com/list Conversion Page -->
+    <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1014300698;
+    var google_conversion_language = "en";
+    var google_conversion_format = "2";
+    var google_conversion_color = "ffffff";
+    var google_conversion_label = "#{label}";
+    var google_conversion_value = #{value};
+    var google_remarketing_only = false;
+    /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+    <div style="display:inline;">
+    <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1014300698/?value=#{value}&amp;label=#{label}&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+    JS
+    js.html_safe
+  end
+
   private
 
   def notification_config
