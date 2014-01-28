@@ -37,7 +37,7 @@ describe Quiz::Feeding do
   it "sets priority if a multiple options are included" do
     subject.as_null_object.
       should_receive(:set_priority).
-      with("Bottle Warmer", 1)
+      with("Bottle Warmer", 2)
 
     subject.process_answers!("Pump", "Breast Feed")
   end
