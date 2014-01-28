@@ -3,14 +3,14 @@
 }
 
 #adminpage #primary {
-  display: none;
+  /* display: none; */
 }
 
 #adminpage #secondary {
 	background: #fff;
 	border-left: 1px solid #d1d1d1;
 	border-right: 1px solid #d1d1d1;
-        width: 80.625%;
+        width: 65.625%;
 }
 
 #adminpage #secondary .content {
