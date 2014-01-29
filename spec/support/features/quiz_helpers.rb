@@ -23,10 +23,10 @@ module Features
       expect(page).to have_content("comes to safety")
 
       click_link "Next"
-      expect(page).to have_content("My zip code")
+      expect(page).to have_content("suggest products")
 
       click_link "Next"
-      expect(page).to have_content("suggest products")
+      expect(page).to have_content("My zip code")
 
       click_link "Build My List"
       expect(page).to have_content("Your baby gear list")
