@@ -22,7 +22,7 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
   events: {
     'click .bt-close': 'closeQuiz',
     'click #bt-prev': 'previous',
-    'click #bt-next': 'save',
+    'click #bt-build': 'save',
     'click .skip': 'skip',
     'click #country-select': 'showCountries',
     'click .country-name': 'selectCountry',
@@ -66,7 +66,6 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
         }
       },
       complete: function() {
-        Mamajamas.Context.Progress.hide();
       }
     });
 
