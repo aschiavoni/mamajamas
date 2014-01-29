@@ -90,8 +90,12 @@ Mamajamas::Application.routes.draw do
     end
   end
 
+  get "home" => "home#index"
   get ":slug" => "public_lists#show", as: :public_list
   get ":slug/:category" => "public_lists#show", as: :public_list_category
 
+  authenticated do
+    root :to => 'lists#show'
+  end
   root :to => 'home#index'
 end
