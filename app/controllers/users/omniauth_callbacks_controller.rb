@@ -12,6 +12,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           # facebook to an existing user and we do not want to
           # process the rest of the action
           @user = current_user
+          # TODO: background this?
+          FacebookProfilePictureUpdater.new(@user, oauth.uid).update!
           (render && return) if request.xhr?
           redirect_to registrations_facebook_path and return
         end
