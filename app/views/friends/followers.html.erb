@@ -1,13 +1,13 @@
 <%= content_for :nav do %>
   <ul class="sidemenu">
     <li>
-      <%= link_to "Discover", new_friend_path %>
-    </li>
-    <li>
       <%= link_to "Following", following_friends_path %>
     </li>
     <li class="current">
       <%= link_to "Followers", followers_friends_path %>
+    </li>
+    <li>
+      <%= link_to "Discover", new_friend_path %>
     </li>
   </ul>
 <% end -%>

@@ -48,7 +48,7 @@
               <%= link_to "Edit List", list_path %>
             </li>
             <li class="<%= "active" if params[:controller] == "friends" %>">
-              <%= link_to "Browse Lists", find_friends_path(current_user), class: "find-moms" %>
+              <%= link_to "Browse Lists", following_friends_path, class: "find-moms" %>
             </li>
           </ul>
         <% end -%>
