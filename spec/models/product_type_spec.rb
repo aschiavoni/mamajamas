@@ -43,23 +43,6 @@ describe ProductType do
 
   end
 
-  describe "available products" do
-
-    let(:product_type) { build(:product_type) }
-
-    it "should return active products for product type" do
-      active_products = [ stub ]
-      product_type.stub_chain(:products, :active).and_return(active_products)
-      product_type.available_products.should == active_products
-    end
-
-    it "should return all active products for product type without products" do
-      product_type.stub_chain(:products, :active).and_return([])
-      Product.should_receive(:active)
-      product_type.available_products
-    end
-  end
-
   describe "by category" do
 
     it "should query by category if specified" do

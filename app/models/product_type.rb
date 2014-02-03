@@ -44,14 +44,6 @@ class ProductType < ActiveRecord::Base
     queries.create!(query: query) unless has_query?(query)
   end
 
-  def available_products
-    available_products = products.active
-    if available_products.size == 0
-      available_products = Product.active
-    end
-    available_products
-  end
-
   def admin_deleteable?
     user == nil && list_items.count == 0 && products.count == 0
   end
