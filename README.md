@@ -141,7 +141,5 @@ variables. For example:
     heroku config:set FOG_DIRECTORY="mamajamas" --app mamajamas
     heroku config:set FOG_PROVIDER="AWS" --app mamajamas
 
-CachedProductFetcher -> ProductFetcher -> ProductFetcherFactory -> AmazonProductFetcher
-
 ---
 [2013-10-04 Fri 16:07]
