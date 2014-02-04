@@ -1,7 +1,7 @@
 describe RecommendedFriend do
 
   let(:user) { create(:user) }
-  let(:list) { create(:list, user: user, public: true) }
+  let(:list) { create(:list, user: user) }
 
   before(:all) do
     # unshare all existing lists (this sucks)
