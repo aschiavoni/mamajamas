@@ -9,10 +9,6 @@ describe ProductTypeRow do
     CSV.parse("#{name},#{plural_name},Baby #{plural_name},1,Pre-birth,bodysuit.png,bodysuit@2x.png,bodysuit; body suit;body suits,,x,x,,,").flatten
   end
 
-  def row_csv_no_queries(name = "Bodysuit", plural_name = "Bodysuits")
-    CSV.parse("#{name},#{plural_name},Baby #{plural_name},1,Pre-birth,bodysuit.png,bodysuit@2x.png,,,x,x,,,").flatten
-  end
-
   def row_csv_no_name
    CSV.parse(',,,,,,,,').flatten
   end
@@ -53,10 +49,6 @@ describe ProductTypeRow do
     product_type_row.image_name.should == 'bodysuit@2x.png'
   end
 
-  it "finds queries" do
-    product_type_row.queries.should == [ 'bodysuit', 'body suit', 'body suits' ]
-  end
-
   it "finds age range" do
     product_type_row.age_range.should_not be_nil
   end
@@ -79,17 +71,7 @@ describe ProductTypeRow do
   it "saves product types" do
     ptrow = ProductTypeRow.new(category, row_csv('whatever'))
     product_type = ptrow.product_type
-
-    ptrow.queries.each do |query|
-      product_type.should_receive(:add_query).with(query)
-    end
-
     ptrow.save!
-  end
-
-  it "handles rows without queries" do
-    ptrow = ProductTypeRow.new(category, row_csv_no_queries)
-    ptrow.queries.should == [ ptrow.name ]
   end
 
   it "should be a valid row" do
@@ -113,4 +95,3 @@ describe ProductTypeRow do
   end
 
 end
-

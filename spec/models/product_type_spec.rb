@@ -141,50 +141,6 @@ describe ProductType do
 
   end
 
-  describe "product type queries" do
-
-    before(:all) do
-      @product_type = create(:product_type)
-      @product_type_queries = create_list(:product_type_query, 3, product_type: @product_type)
-    end
-
-    it "should have many product type queries" do
-      @product_type.queries.size.should == @product_type_queries.size
-    end
-
-  end
-
-  describe "queries" do
-
-    before(:all) do
-      @product_type = create(:product_type)
-      @included_query = create(:product_type_query, product_type: @product_type)
-      @excluded_query = create(:product_type_query)
-    end
-
-    it "has query" do
-      @product_type.has_query?(@included_query.query).should be_true
-    end
-
-    it "does not have query" do
-      @product_type.has_query?(@excluded_query.query).should be_false
-    end
-
-    it "adds a query that does not already exist" do
-      lambda do
-        @product_type.add_query('some stuff')
-      end.should change(@product_type.queries, :count).by(1)
-    end
-
-    it "doesn't add a query that exist" do
-      query_name = @included_query.query
-      lambda do
-        @product_type.add_query(query_name)
-      end.should_not change(@product_type.queries, :count)
-    end
-
-  end
-
   describe "admin_deleteable?" do
 
     it "can be deleted" do

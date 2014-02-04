@@ -11,7 +11,6 @@ class ProductType < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :age_range
-  has_many :queries, class_name: "ProductTypeQuery", dependent: :destroy
   has_many :list_items
   has_and_belongs_to_many :products
   has_many :recommended_products
@@ -34,14 +33,6 @@ class ProductType < ActiveRecord::Base
   # temporary accessor for product types without image names
   def image_name
     read_attribute(:image_name) || "unknown.png"
-  end
-
-  def has_query?(query)
-    !queries.where(query: query).blank?
-  end
-
-  def add_query(query)
-    queries.create!(query: query) unless has_query?(query)
   end
 
   def admin_deleteable?

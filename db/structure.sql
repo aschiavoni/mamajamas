@@ -404,38 +404,6 @@ ALTER SEQUENCE product_ratings_id_seq OWNED BY product_ratings.id;
 
 
 --
--- Name: product_type_queries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE product_type_queries (
-    id integer NOT NULL,
-    product_type_id integer,
-    query character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: product_type_queries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE product_type_queries_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: product_type_queries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE product_type_queries_id_seq OWNED BY product_type_queries.id;
-
-
---
 -- Name: product_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -836,13 +804,6 @@ ALTER TABLE ONLY product_ratings ALTER COLUMN id SET DEFAULT nextval('product_ra
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_type_queries ALTER COLUMN id SET DEFAULT nextval('product_type_queries_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY product_types ALTER COLUMN id SET DEFAULT nextval('product_types_id_seq'::regclass);
 
 
@@ -965,14 +926,6 @@ ALTER TABLE ONLY lists
 
 ALTER TABLE ONLY product_ratings
     ADD CONSTRAINT product_ratings_pkey PRIMARY KEY (id);
-
-
---
--- Name: product_type_queries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY product_type_queries
-    ADD CONSTRAINT product_type_queries_pkey PRIMARY KEY (id);
 
 
 --
@@ -1136,13 +1089,6 @@ CREATE INDEX index_product_ratings_on_vendor ON product_ratings USING btree (ven
 --
 
 CREATE INDEX index_product_ratings_on_vendor_id ON product_ratings USING btree (vendor_id);
-
-
---
--- Name: index_product_type_queries_on_product_type_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_product_type_queries_on_product_type_id ON product_type_queries USING btree (product_type_id);
 
 
 --
@@ -1428,3 +1374,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140110200316');
 INSERT INTO schema_migrations (version) VALUES ('20140114213914');
 
 INSERT INTO schema_migrations (version) VALUES ('20140123222244');
+
+INSERT INTO schema_migrations (version) VALUES ('20140204000141');

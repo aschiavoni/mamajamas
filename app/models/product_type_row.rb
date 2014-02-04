@@ -38,12 +38,6 @@ class ProductTypeRow
     row[2]
   end
 
-  def queries
-    queries = row[7].present? ? row[7].split(/;\s*/) : []
-    queries = [ name ] if queries.empty?
-    queries
-  end
-
   def product_type
     @product_type ||= build_product_type
   end
@@ -51,7 +45,6 @@ class ProductTypeRow
   def save!
     if valid?
       product_type.save!
-      queries.each { |query| product_type.add_query(query) }
     end
   end
 
