@@ -445,84 +445,6 @@ ALTER SEQUENCE product_types_id_seq OWNED BY product_types.id;
 
 
 --
--- Name: product_types_products; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE product_types_products (
-    id integer NOT NULL,
-    product_type_id integer,
-    product_id integer
-);
-
-
---
--- Name: product_types_products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE product_types_products_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: product_types_products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE product_types_products_id_seq OWNED BY product_types_products.id;
-
-
---
--- Name: products; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE products (
-    id integer NOT NULL,
-    vendor_id character varying(255),
-    vendor character varying(255),
-    name character varying(255),
-    url character varying(255),
-    rating integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    image_url character varying(255),
-    sales_rank integer,
-    brand character varying(255),
-    manufacturer character varying(255),
-    model character varying(255),
-    department character varying(255),
-    categories character varying(255),
-    price character varying(255),
-    medium_image_url character varying(255),
-    large_image_url character varying(255),
-    mamajamas_rating double precision,
-    rating_count integer DEFAULT 0 NOT NULL,
-    mamajamas_rating_count integer DEFAULT 0 NOT NULL
-);
-
-
---
--- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE products_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE products_id_seq OWNED BY products.id;
-
-
---
 -- Name: quiz_answers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -810,20 +732,6 @@ ALTER TABLE ONLY product_types ALTER COLUMN id SET DEFAULT nextval('product_type
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_types_products ALTER COLUMN id SET DEFAULT nextval('product_types_products_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY products ALTER COLUMN id SET DEFAULT nextval('products_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY quiz_answers ALTER COLUMN id SET DEFAULT nextval('quiz_answers_id_seq'::regclass);
 
 
@@ -933,22 +841,6 @@ ALTER TABLE ONLY product_ratings
 
 ALTER TABLE ONLY product_types
     ADD CONSTRAINT product_types_pkey PRIMARY KEY (id);
-
-
---
--- Name: product_types_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY product_types_products
-    ADD CONSTRAINT product_types_products_pkey PRIMARY KEY (id);
-
-
---
--- Name: products_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY products
-    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
 
 
 --
@@ -1377,3 +1269,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140123222244');
 INSERT INTO schema_migrations (version) VALUES ('20140204000141');
 
 INSERT INTO schema_migrations (version) VALUES ('20140204001956');
+
+INSERT INTO schema_migrations (version) VALUES ('20140206013731');
