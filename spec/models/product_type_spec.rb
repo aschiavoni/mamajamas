@@ -118,29 +118,6 @@ describe ProductType do
 
   end
 
-  describe "products" do
-
-    before(:all) do
-      @product_type = create(:product_type)
-      @products = create_list(:product, 3)
-
-      @products.each do |product|
-        @product_type.products << product
-      end
-    end
-
-    it "should return all products" do
-      @product_type.products.size.should == @products.size
-    end
-
-    it "should include all products" do
-      @products.each do |product|
-        @product_type.products.should include(product)
-      end
-    end
-
-  end
-
   describe "admin_deleteable?" do
 
     it "can be deleted" do
@@ -157,12 +134,6 @@ describe ProductType do
     it "can't be deleted if it is owned by a user" do
       product_type = build(:product_type, user: build(:user))
       product_type.list_items << build(:list_item)
-      product_type.should_not be_admin_deleteable
-    end
-
-    it "can't be deleted if there are associated products" do
-      product_type = create(:product_type)
-      product_type.products << create(:product)
       product_type.should_not be_admin_deleteable
     end
 

@@ -12,7 +12,6 @@ class ProductType < ActiveRecord::Base
   belongs_to :user
   belongs_to :age_range
   has_many :list_items
-  has_and_belongs_to_many :products
   has_many :recommended_products
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
@@ -36,6 +35,6 @@ class ProductType < ActiveRecord::Base
   end
 
   def admin_deleteable?
-    user == nil && list_items.count == 0 && products.count == 0
+    user == nil && list_items.count == 0
   end
 end
