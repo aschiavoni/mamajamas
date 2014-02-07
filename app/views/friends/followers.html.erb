@@ -19,7 +19,7 @@
       <%= render partial: 'list_friend', locals: { friend: friend, following: current_user.following?(friend), follow_text: "Follow Back" } %>
     <% end -%>
   <% else -%>
-    <p>You don't have any followers yet. You should try sharing your list.</p>
+    <p>No followers yet!</p>
   <% end -%>
 </ul>
 <!-- end friends list -->
