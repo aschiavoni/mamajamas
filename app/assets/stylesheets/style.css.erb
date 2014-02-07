@@ -49,14 +49,14 @@ strong {
 }
 /* mainnav */
 #mainnav li {
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 16px;
+        font-weight: 400;
         line-height: 16px;
         float: left;
 }
 #mainnav a {
         display: block;
-        padding: 36px 10px 12px;
+        padding: 31px 10px 16px;
 }
 #mainnav .active a,
 #mainnav a:hover {
@@ -75,7 +75,7 @@ strong {
         background: url(<%= asset_path("icon_search.png") %>) no-repeat 5px 50%;
         background-size: 18px 18px;
         position: absolute;
-        right: -115px;
+        right: 10px;
 }
 #search input[type=text]:focus {
         color: #333;
@@ -90,14 +90,15 @@ strong {
 #login > ul {
         text-align: right;
         font-size: .923em;
-        margin-top: 28px;
+        margin-top: 23px;
+        margin-right: 13px;
 }
 #login > ul > li {
-        display: inline;
-        margin: 0 10px 0 0;
+        float: right;
+        margin: 0 0 0 10px;
 }
 #login a {
-        color: #ea7526;
+        color: #6BB36E;
         text-decoration: none;
 }
 #login a:hover,
@@ -105,40 +106,44 @@ strong {
 #login a:active {
         color: #000;
 }
+#login .button {
+        background: #FFF;
+        border-color: #97CA99;
+    padding: 3px 6px;
+}
+#login a.button:hover {
+        color: #fff;
+        /*background: #F5F5F5 !important;
+        border-color: #d9d9d9 !important;*/
+}
 /* "start your list" button */
 #login #startlist {
         position: absolute;
-        top: 23px;
         left: 181px;
 }
 #login #startlist a {
         color: #fff;
 }
-/* my account link */
-#login li#myaccount {
+/* my account, sitelinks */
+#myaccount,
+#sitelinks {
         display: block;
         position: relative;
         padding-bottom: 2px; /* keeps dropdown open when jumping the gap */
         text-align: right;
-        top: -3px;
 }
 #myaccount img { /* small profile photo */
         width: 24px;
         height: auto;
-        margin-right: 1px;
 }
 #myaccount .ss-dropdown { /* style the down arrow */
         font-size: .846em;
-        color: #777;
-        margin-left: 4px;
+        margin-left: 2px;
 }
-#myaccount:hover a { /* hover state (even when over dropdown menu) */
-        color: #000;
-        background: #fff;
-}
-#myaccount:hover .nav-drop { /* move dropdown into view */
+#myaccount:hover .nav-drop,
+#sitelinks:hover .nav-drop { /* move dropdown into view */
         left: auto;
-        right: -1px;
+        right: -3px;
 }
 /* drop down menus */
 .nav-drop-trigger {
@@ -146,11 +151,14 @@ strong {
         cursor: pointer;
 }
 a.nav-drop-link {
-        font-size: 18px;
-        color: #a6a6a6;
+        display: block;
+}
+.nav-drop-link .ss-icon {
+        color: #A6A6A6;
 }
 .nav-drop-trigger:hover a.nav-drop-link,
-a.nav-drop-link:hover {
+a.nav-drop-link:hover,
+a.nav-drop-link:hover span {
         text-decoration: none;
         color: #000;
 }
@@ -211,7 +219,12 @@ ul.nav-drop {
         border-right-color: #aaa;
         border-bottom-color: #999;
 }
-/* specific to my account dropdown */
+/* specific to my account / sitelinks dropdowns */
+#myaccount:hover a,
+#myaccount:hover .nav-drop-link > .ss-icon { /* hover state (even when over dropdown menu) */
+        color: #000;
+        background: #fff;
+}
 #myaccount .nav-drop li:first-child + li a,
 #myaccount .nav-drop li:first-child + li span {
         border-color: #ddd; /* darker border under first link */
@@ -235,6 +248,24 @@ ul.nav-drop {
 #login .nav-drop a:focus,
 #login .nav-drop a:active {  /*link hover colors */
         background: #f5f5f5;
+}
+#login li#sitelinks {
+        margin-right: 2px;
+}
+li#myaccount + li#sitelinks {
+        margin-right: 5px;
+}
+#sitelinks .nav-drop a {
+        color: #333;  /* overrides link color of parent menu */
+}
+#sitelinks .nav-drop-link > .ss-icon {
+        font-size: 22px;
+    line-height: 1.045em;
+        position: relative;
+    top: 4px;
+}
+#sitelinks:hover .nav-drop-link > .ss-icon {
+        color: #000;
 }
 /* sub-headers ------ */
 #title p.prehed {
@@ -447,10 +478,10 @@ form.label-infield fieldset p {
 }
 form.label-infield label {
         color: #AAA;
-        font-weight: 300;
+        /*font-weight: 300;*/
 }
 form.label-infield label strong {
-        font-weight: 300;
+        /*font-weight: 300;*/
         color: #222;
 }
 form.label-infield p label {
@@ -553,7 +584,8 @@ a.button:active,
 input[type=text] + .button {
         margin-top: -.27em;
 }
-.bt-color {
+.bt-color,
+#login .bt-color {
         border-color: #5daf5d;
         background: #6BB36E;
 }
@@ -1291,12 +1323,38 @@ ul.friends-list {
 #private-modal .collapsible.ss-dropdown em {
         display: none;
 }
+#needhave-modal.simplemodal-data,
 #rate-modal.simplemodal-data {
         width: 380px;
 }
+#needhave-modal.simplemodal-data h2 {
+        text-transform: none;
+        letter-spacing: 0;
+}
+#needhave-modal .content {
+        font-size: 1.33em;
+        padding: 20px 20px 10px;
+}
+#needhave-modal.simplemodal-data .button-row {
+        margin-top: 5px;
+}
+#needhave-modal .content .button-row .button {
+        font-size: 0.8125em;
+}
+#needhave-modal .own {
+    text-align: center;
+        margin-bottom: 15px;
+        padding-right: 0;
+}
+#needhave-modal .rating,
 #rate-modal .rating {
         text-align: center;
 }
+#needhave-modal .rating em,
+#rate-modal .rating em {
+        color: #777;
+}
+#needhave-modal .star,
 #rate-modal .star {
         width: 24px;
         height: 28px;
@@ -1306,11 +1364,43 @@ ul.friends-list {
         background-size: 24px 90px;
         cursor: pointer;
 }
+#needhave-modal .star-half,
 #rate-modal .star-half {
         background-position: 0 -32px;
 }
+#needhave-modal .star-full,
 #rate-modal .star-full {
         background-position: 0 -64px;
+}
+#needhave-modal .prod-note {
+        font-size: 0.8125em;
+        margin: 20px 49px 5px;
+}
+#needhave-modal .prod-note label {
+        font-size: 1em;
+        width: auto;
+        text-align: left;
+}
+#needhave-modal .prod-note textarea {
+    height: 5.5em;
+}
+#needhave-modal .prod-links ul {
+        text-align: center;
+}
+#needhave-modal .content form p.instruction,
+#rate-modal .content form p.instruction {
+        font-size: .75em;
+        color: #939393;
+        margin: 25px 0 15px;
+}
+#needhave-modal span.arrow {
+        position: absolute;
+        top: 40px;
+        left: -13px;
+        width: 14px;
+        height: 26px;
+        background: url(<%= asset_path("pop-arrow.png") %>) no-repeat 0 0;
+        background-size: 14px 26px;
 }
 /* alert modals */
 .m-alert {
@@ -2104,19 +2194,16 @@ a[title="Pinterest"]:hover {
         border-bottom: solid 1px #D9D9D9;
 }
 .listhed {
-        width: 66.75%;
         float: left;
 }
 .listhed h3 {
         font-size: 1.0769em;
         font-weight: 400;
-        color: #a6a6a6;
         margin: 0;
         padding: 9px 10px 7px;
-        color: #333;
 }
 .listsort {
-        width: 31.25%;
+        width: 31%;
         margin-left: 2%;
         padding: 8px 0 4px;
         float: right;
@@ -2160,10 +2247,6 @@ h4#priority-new-hed {
 h4.collapsible:hover,
 h4.collapsible:focus {
         background-color: #f5f5f5;
-}
-#priority-low-hed.ss-directright,
-div.priority-low {
-/*margin-bottom:10px;*/
 }
 .priority-low .prod {
         border-bottom: solid 1px #d9d9d9;
@@ -2285,15 +2368,11 @@ a.bt-addanother:hover span {
 .prod-desc h3 a.bt-change:hover {
         color: #FFF;
 }
-
 .find-item,
 .new-item,
 .prod-links .button,
 .prod-links button {
         min-width: 64px;
-}
-.prod-desc {
-/* margin-left: 100px;  causes misalignment on left */
 }
 .prod-desc h3 {
         font-size: 1.1539em;
@@ -2318,29 +2397,24 @@ a.bt-addanother:hover span {
         margin-left: 0;
 }
 #buildlist .prod-when-own {
-        float: right;
+        position: absolute;
         width: 29.333%; /* 220/750 */
         line-height: 1.6154em;
-        margin-top: -1.5em; /* move up to align with top */
+        top: 1.1em;
+        right: 15px;
 }
-#buildlist .prod-filled .prod-when-own {
-        margin-top: -4.91em; /* move up to align with top */
+.cat-select {
+        margin-top: .25em;
 }
-#buildlist .edit-mode .prod-when-own {
-        position: relative;
-        top: -4.5em; /* move up to align with top */
-}
-#buildlist .new-mode .prod-when-own {
-        margin-top: -2em; /* move up to align with top */
+.cat-select label {
+        font-weight: 400;
+        color: #777;
 }
 .when,
 .own,
 .priorityset {
         color: #777;
         padding-right: 20px;
-}
-.own {
-        margin-top: -1px;
 }
 .prod-links {
         margin: 7px 0;
@@ -2558,10 +2632,10 @@ form.label-infield .prod-note .ss-chat {
 }
 /* gear list dropdown menus */
 #my-list .choicedrop {
-        border-color: #fff;
+        border-color: #d9d9d9;
 }
 #my-list .choicedrop:hover {
-        border-color: #d9d9d9;
+        border-color: #c3c3c3;
 }
 #my-list .choicedrop a {
         line-height: 1.1em;
@@ -2575,11 +2649,12 @@ form.label-infield .prod-note .ss-chat {
 #my-list .choicedrop a:hover,
 #my-list .choicedrop a:hover .ss-dropdown {
         color: #000;
-        background: #f5f5f5;
+        background: #ffffff;
 }
 #my-list .choicedrop ol,
 #my-list .choicedrop ul {
         z-index: 900;
+        top: -2px;
 }
 #my-list .choicedrop ul li,
 #my-list .choicedrop ol li {
@@ -2589,7 +2664,7 @@ form.label-infield .prod-note .ss-chat {
         text-indent: 0;
 }
 #my-list .choicedrop li a {
-        padding: 1px 2px 2px 4px;
+        padding: 2px 2px 3px 4px;
 }
 #my-list .choicedrop li a:hover {
         color: #000;
@@ -2603,6 +2678,9 @@ form.label-infield .prod-note .ss-chat {
 }
 .new-mode .prod-thumb {
         border-color: #f3f3f3;
+}
+.new-mode input[type=text] {
+        margin-bottom: .25em;
 }
 /* edit mode hidden elements */
 .edit-mode h3,
@@ -2644,7 +2722,12 @@ form.label-infield .edit-mode .prod-note label {
 }
 #my-list .edit-mode .choicedrop,
 #my-list .new-mode .choicedrop {
-        border-color: #f3f3f3;
+        border-color: #d3d3d3;
+}
+#my-list .edit-mode .choicedrop.error,
+#my-list .new-mode .choicedrop.error {
+        border-color: #ea7526;
+        background: #FFF;
 }
 #my-list .edit-mode .choicedrop > a:hover,
 #my-list .edit-mode .choicedrop > a:hover .ss-dropdown,
@@ -2710,6 +2793,23 @@ form.label-infield .edit-mode .prod-note label {
         color: #888;
         margin-right: 3px;
 }
+/* add item */
+#add-new {
+        margin-bottom: 240px;
+}
+@-webkit-keyframes yellow-fade {
+   0% {background: #fff6d2;}
+   100% {background: #FFF;}
+}
+@keyframes yellow-fade {
+   0% {background: #fff6d2;}
+   100% {background: #FFF;}
+}
+.highlight {
+   -webkit-animation: yellow-fade 3s ease-in 1;
+   animation: yellow-fade 3s ease-in 1;
+}
+
 /* published list ------ */
 
 /* page colors ---- */
@@ -3690,6 +3790,9 @@ input[type=text]#field-search {
 }
 .prod-detail-pop span.arrow {
         background-image: url(<%= asset_path("pop-arrow-r@2x.png") %>); /* product carousel detail arrow */
+}
+#needhave-modal span.arrow {
+        background-image: url(<%= asset_path("pop-arrow@2x.png") %>); /* need/have modal arrow */
 }
 .preview-msg .col1 {
         background-image: url(<%= asset_path("arrow-dwn-sketch@2x.png") %>);
