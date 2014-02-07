@@ -1,9 +1,13 @@
 class RemovePublicFromListAgain < ActiveRecord::Migration
   def up
-    remove_column :lists, :public
+    if column_exists? :lists, :public
+      remove_column :lists, :public
+    end
   end
 
   def down
-    add_column :lists, :public, :boolean, default: false, null: false
+    unless column_exists? :lists, :public
+      add_column :lists, :public, :boolean, default: false, null: false
+    end
   end
 end
