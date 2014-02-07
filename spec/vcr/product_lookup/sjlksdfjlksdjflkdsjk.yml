@@ -1,0 +1,36 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://ecs.amazonaws.com/onca/xml?AWSAccessKeyId=AKIAIXAEIBVZBZEU56MQ&AssociateTag=mamajamas-20&ItemId=sjlksdfjlksdjflkdsjk&Operation=ItemLookup&ResponseGroup=Large&Signature=k5F%2BEDVTg0r8VUYNaSDiH7jlCyRlnl3glqoxNRvBF/M=&Timestamp=2014-02-07T19:29:42Z
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Accept: 
+      - "*/*"
+      User-Agent: 
+      - Ruby
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Date: 
+      - Fri, 07 Feb 2014 19:29:41 GMT
+      Server: 
+      - Server
+      Content-Type: 
+      - text/xml;charset=UTF-8
+      Vary: 
+      - Accept-Encoding,User-Agent
+      Nncoection: 
+      - close
+      Transfer-Encoding: 
+      - chunked
+    body: 
+      encoding: US-ASCII
+      string: <?xml version="1.0" ?><ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01"><OperationRequest><HTTPHeaders><Header Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>139f0d00-dfb6-49e2-a35e-7dbe99b2b8ff</RequestId><Arguments><Argument Name="Operation" Value="ItemLookup"></Argument><Argument Name="AssociateTag" Value="mamajamas-20"></Argument><Argument Name="Signature" Value="k5F+EDVTg0r8VUYNaSDiH7jlCyRlnl3glqoxNRvBF/M="></Argument><Argument Name="ItemId" Value="sjlksdfjlksdjflkdsjk"></Argument><Argument Name="AWSAccessKeyId" Value="AKIAIXAEIBVZBZEU56MQ"></Argument><Argument Name="Timestamp" Value="2014-02-07T19:29:42Z"></Argument><Argument Name="ResponseGroup" Value="Large"></Argument><Argument Name="Service" Value="AWSECommerceService"></Argument></Arguments><RequestProcessingTime>0.0451070000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><IdType>ASIN</IdType><ItemId>SJLKSDFJLKSDJFLKDSJK</ItemId><ResponseGroup>Large</ResponseGroup><VariationPage>All</VariationPage></ItemLookupRequest><Errors><Error><Code>AWS.InvalidParameterValue</Code><Message>SJLKSDFJLKSDJFLKDSJK is not a valid value for ItemId. Please change this value and retry your request.</Message></Error></Errors></Request></Items></ItemLookupResponse>
+    http_version: 
+  recorded_at: Fri, 07 Feb 2014 19:29:42 GMT
+recorded_with: VCR 2.5.0
