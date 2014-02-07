@@ -34,6 +34,24 @@ class AmazonProductFetcher
     JSON.parse(json).map(&:symbolize_keys)
   end
 
+  def lookup(ids, options = {})
+    default_options = {}
+    options = default_options.merge(options)
+    ids = [ ids ].flatten
+    results = []
+
+    ids.each_slice(10) do |slice|
+      # simple throttle so we don't abuse the api
+      sleep sleep_time
+      query = slice.join(",")
+      info "Looking up #{query}..."
+      res = perform_lookup(query)
+      results << map_items(res.items)
+    end
+
+    results.flatten
+  end
+
   def fetch(query, options = {})
     default_options = { pages: 1, search_index: 'All' }
     options = default_options.merge(options)
@@ -47,35 +65,7 @@ class AmazonProductFetcher
       info "Searching for #{query}, page #{page}..."
       res = perform_fetch(page, query, options[:search_index])
 
-      results << res.items.each_with_index.map do |item, idx|
-        vendor_id = item.get('ASIN')
-        mamajamas_rating = get_mamajamas_rating(vendor_id, VENDOR_NAME)
-        item_attributes = item.get_element('ItemAttributes')
-        browse_nodes = item.get_array('BrowseNodes/BrowseNode/Name')
-        small_image = item.get_element('SmallImage')
-        medium_image = item.get_element('MediumImage')
-        large_image = item.get_element('LargeImage')
-        {
-          vendor_id: vendor_id,
-          vendor: VENDOR_NAME,
-          name: HTMLEntities.new.decode(item_attributes.get('Title')),
-          url: item.get('DetailPageURL'),
-          image_url: small_image.blank? ? nil : small_image.get('URL'),
-          medium_image_url: medium_image.blank? ? nil : medium_image.get('URL'),
-          large_image_url: large_image.blank? ? nil : large_image.get('URL'),
-          rating: nil,
-          rating_count: 0,
-          price: get_offer_price(item),
-          sales_rank: item.get('SalesRank'),
-          brand: item_attributes.get('Brand'),
-          department: item_attributes.get('Department'),
-          manufacturer: item_attributes.get('Manufacturer'),
-          model: item_attributes.get('Model'),
-          categories: browse_nodes.join(', '),
-          mamajamas_rating: mamajamas_rating.present? ? mamajamas_rating.rating : nil,
-          mamajamas_rating_count: mamajamas_rating.present? ? mamajamas_rating.rating_count : 0
-        }
-      end
+      results << map_items(res.items)
     end
 
     results.flatten
@@ -130,6 +120,22 @@ class AmazonProductFetcher
     end
   end
 
+  def perform_lookup(query)
+    tries ||= 2
+    Amazon::Ecs.item_lookup(query, {
+      :response_group => 'Large'
+    })
+  rescue Exception => e
+    if (tries -= 1) > 0
+      info "Retrying lookup for #{query}..."
+      sleep sleep_time
+      retry
+    else
+      error "Error looking up #{query}: #{e}"
+      FailedSearch.new e
+    end
+  end
+
   def options_sig(options)
     Digest::MD5.hexdigest(options.inspect)
   end
@@ -138,5 +144,37 @@ class AmazonProductFetcher
     conditions = { vendor_id: vendor_id, vendor: vendor }
     product_rating = ProductRating.where(conditions).first
     product_rating.present? ? product_rating : nil
+  end
+
+  def map_items(items)
+    items.each_with_index.map do |item, idx|
+      vendor_id = item.get('ASIN')
+      mamajamas_rating = get_mamajamas_rating(vendor_id, VENDOR_NAME)
+      item_attributes = item.get_element('ItemAttributes')
+      browse_nodes = item.get_array('BrowseNodes/BrowseNode/Name')
+      small_image = item.get_element('SmallImage')
+      medium_image = item.get_element('MediumImage')
+      large_image = item.get_element('LargeImage')
+      {
+        vendor_id: vendor_id,
+        vendor: VENDOR_NAME,
+        name: HTMLEntities.new.decode(item_attributes.get('Title')),
+        url: item.get('DetailPageURL'),
+        image_url: small_image.blank? ? nil : small_image.get('URL'),
+        medium_image_url: medium_image.blank? ? nil : medium_image.get('URL'),
+        large_image_url: large_image.blank? ? nil : large_image.get('URL'),
+        rating: nil,
+        rating_count: 0,
+        price: get_offer_price(item),
+        sales_rank: item.get('SalesRank'),
+        brand: item_attributes.get('Brand'),
+        department: item_attributes.get('Department'),
+        manufacturer: item_attributes.get('Manufacturer'),
+        model: item_attributes.get('Model'),
+        categories: browse_nodes.join(', '),
+        mamajamas_rating: mamajamas_rating.present? ? mamajamas_rating.rating : nil,
+        mamajamas_rating_count: mamajamas_rating.present? ? mamajamas_rating.rating_count : 0
+      }
+    end
   end
 end

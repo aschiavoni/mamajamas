@@ -1,14 +1,12 @@
-identifier = ARGV[0] || '0062235893'
+identifier = ARGV[0] || '0062235893,B000056OV0'
 
 config = ProductFetcherConfiguration.for('amazon')
+fetcher = AmazonProductFetcher.new(ProductFetcherLogger, {
+  "associate_tag" => config['associate_tag'],
+  "access_key_id" => config['access_key_id'],
+  "secret_key" => config['secret_key']
+})
 
-puts config
-Amazon::Ecs.options = {
-  associate_tag: config["associate_tag"],
-  AWS_access_key_id: config["access_key_id"],
-  AWS_secret_key: config["secret_key"]
-}
-
-puts Amazon::Ecs.item_lookup(identifier, {
-  :response_group => 'Large',
-}).items
+results = fetcher.lookup identifier.split(",")
+puts results.inspect
+puts results.size

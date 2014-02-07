@@ -7,3 +7,4 @@ fetcher = AmazonProductFetcher.new(ProductFetcherLogger, {
 
 results = fetcher.fetch ARGV[0] || "Baby Shampoo"
 puts results.inspect
+puts results.size
