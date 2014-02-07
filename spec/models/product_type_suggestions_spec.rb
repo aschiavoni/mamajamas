@@ -1,61 +1,56 @@
 require 'spec_helper'
 
-class FakeProductSearcher
-  def self.search(query, search_index, limit); end
-end
-
 describe ProductTypeSuggestions do
+  let(:product_type) { build(:product_type) }
 
-  matcher = [
-    :method,
-    VCR.request_matchers.uri_without_param(:Timestamp, :Signature)
-  ]
+  it "returns a hash with product type id" do
+    ProductLookup.should_receive(:lookup).exactly(2).times { [] }
+    ProductTypeSearcher.should_receive(:search).with(product_type) {
+      [ Product.new, Product.new ]
+    }
 
-  it "finds suggestions for a product name" do
-    VCR.use_cassette('product_searcher/shampoo',
-                     serialize_with: :syck,
-                     match_requests_on: matcher) do
-      product_type = create(:product_type, name: 'Shampoo')
-      suggestions = ProductTypeSuggestions.find(product_type)
-      suggestions[:id].should == product_type.id
-      suggestions[:suggestions].size.should be > 1
-    end
+    ProductTypeSuggestions.find(product_type)[:id].should == product_type.id
   end
 
-  it "uses product type search index for searching" do
-    product_type = build(:product_type, search_index: 'Baby')
-    FakeProductSearcher.should_receive(:search).
-      with(anything(), 'Baby', anything()).
-      and_return([])
+  it "returns a hash with suggestions" do
+    ProductLookup.should_receive(:lookup).exactly(2).times { [] }
+    ProductTypeSearcher.should_receive(:search).with(product_type) {
+      [ Product.new(vendor_id: "one"), Product.new(vendor_id: "two") ]
+    }
 
-    ProductTypeSuggestions.new(FakeProductSearcher).find(product_type)
+    ProductTypeSuggestions.find(product_type)[:suggestions].size.should == 2
   end
 
-  it "uses 'All' search index for searching when product type has none" do
-    product_type = build(:product_type, search_index: nil)
-    FakeProductSearcher.should_receive(:search).
-      with(anything(), 'All', anything()).
-      and_return([])
+  it "returns only products with a unique vendor id" do
+    ProductLookup.should_receive(:lookup).exactly(2).times { [] }
+    ProductTypeSearcher.should_receive(:search).with(product_type) {
+      [ Product.new(vendor_id: "one"), Product.new(vendor_id: "one") ]
+    }
 
-    ProductTypeSuggestions.new(FakeProductSearcher).find(product_type)
+    ProductTypeSuggestions.find(product_type)[:suggestions].size.should == 1
   end
 
-  it "uses search query for searching" do
-    product_type = build(:product_type, search_query: 'Baby Towel')
-    FakeProductSearcher.should_receive(:search).
-      with(product_type.search_query, 'All', anything()).
-      and_return([])
-
-    ProductTypeSuggestions.new(FakeProductSearcher).find(product_type)
+  it "looks up recommended products" do
+    recids = [ "1", "2" ]
+    RecommendedProduct.should_receive(:suggestable_vendor_ids) { recids }
+    ProductLookup.should_receive(:lookup).with(recids) { [] }
+    ProductLookup.should_receive(:lookup) { [] }
+    ProductTypeSearcher.should_receive(:search).with(product_type) { [] }
+    ProductTypeSuggestions.find(product_type)
   end
 
-  it "uses product type name for query when no search query specified" do
-    product_type = build(:product_type)
-    FakeProductSearcher.should_receive(:search).
-      with(product_type.name, 'All', anything()).
-      and_return([])
-
-    ProductTypeSuggestions.new(FakeProductSearcher).find(product_type)
+  it "looks up rated products" do
+    ids = [ "1", "2" ]
+    ProductRating.should_receive(:suggestable_vendor_ids) { ids }
+    ProductLookup.should_receive(:lookup) { [] }
+    ProductLookup.should_receive(:lookup).with(ids) { [] }
+    ProductTypeSearcher.should_receive(:search).with(product_type) { [] }
+    ProductTypeSuggestions.find(product_type)
   end
 
+  it "searches for product type" do
+    ProductLookup.should_receive(:lookup).exactly(2).times { [] }
+    ProductTypeSearcher.should_receive(:search).with(product_type) { [] }
+    ProductTypeSuggestions.find(product_type)
+  end
 end

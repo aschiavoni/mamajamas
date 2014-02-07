@@ -8,6 +8,7 @@ class ProductLookup
   end
 
   def lookup(ids)
+    return [] if ids.blank?
     ids = [ ids ].flatten
     fetcher = ProductFetcherFactory.create('amazon')
     results = fetcher.lookup(ids)

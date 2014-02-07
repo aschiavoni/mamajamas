@@ -8,32 +8,27 @@ class ProductTypeSuggestions
   end
 
   def find(product_type)
-    search_index = search_index(product_type)
-    search_query = search_query(product_type)
+    suggestions = recommended_product_lookup(product_type)
+    suggestions.concat popular_product_lookup(product_type)
+    suggestions.concat search_results(product_type)
 
-    suggestions = searcher.search(search_query, search_index, 8).
-                  map do |product|
-      product.attributes
-    end
-
+    suggestions = suggestions.uniq { |s| s.vendor_id }
     { id: product_type.id, suggestions: suggestions }
   end
 
+
   private
 
-  def searcher
-    @searcher
+  def recommended_product_lookup(product_type)
+    ProductLookup.lookup(RecommendedProduct.
+                         suggestable_vendor_ids(product_type))
   end
 
-  def search_index(product_type)
-    product_type.search_index.present? ? product_type.search_index : 'All'
+  def popular_product_lookup(product_type)
+    ProductLookup.lookup(ProductRating.suggestable_vendor_ids(product_type))
   end
 
-  def search_query(product_type)
-    if product_type.search_query.present?
-      product_type.search_query
-    else
-      product_type.name
-    end
+  def search_results(product_type)
+    ProductTypeSearcher.search(product_type)
   end
 end
