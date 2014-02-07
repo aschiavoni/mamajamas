@@ -10,6 +10,7 @@ class ProductTypeSuggestionsController < ApplicationController
     else
       suggestions = { suggestions: [] }
     end
-    respond_with suggestions[:suggestions]
+    respond_with UserSuggestions.suggestions(current_user,
+                                             suggestions[:suggestions])
   end
 end

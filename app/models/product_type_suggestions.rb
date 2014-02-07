@@ -13,7 +13,7 @@ class ProductTypeSuggestions
     suggestions.concat search_results(product_type)
 
     suggestions = suggestions.uniq { |s| s.vendor_id }
-    { id: product_type.id, suggestions: suggestions }
+    { id: product_type.id, suggestions: suggestions.map(&:attributes) }
   end
 
 
