@@ -13,7 +13,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
   events: {
     "submit .new-placeholder": "save",
     "click .save-item": "save",
-    "click .cancel-item": "cancel"
+    "click .cancel-item": "cancel",
   },
 
   render: function(event) {
@@ -36,6 +36,13 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
       model: this.model
     });
     $(".prod-when-own", this.$el).append(quantityView.render().$el);
+
+    if (Mamajamas.Context.List.isAllCategory()) {
+      var categoryView = new Mamajamas.Views.ListItemCategory({
+        model: this.model
+      });
+      $(".prod-category", this.$el).append(categoryView.render().$el);
+    }
 
     this.initializeAutocomplete();
 
@@ -79,12 +86,14 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
       show_chooser: true
     };
 
+    _view.oldModel = _view.model;
     _view.model = Mamajamas.Context.ListItems.create(attributes, {
       wait: true,
       success: function(model) {
         _view.close();
       },
       error: function(model, response) {
+        _view.model = _view.oldModel;
         _view.handleError(model, response);
       }
     });
@@ -96,6 +105,9 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
     if (response.status == 422) {
       var errors = $.parseJSON(response.responseText).errors;
       for (var err in errors) {
+        if (err == "category_id")
+          _view.showCategoryError(errors, err);
+        else
         _view.showError(errors, err);
       }
     }
@@ -108,6 +120,13 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
     $errSpan.html(errors[field]);
     $field.after($errSpan);
     $field.focus();
+  },
+
+  showCategoryError: function(errors, field) {
+    var $errSpan = $("<span/>");
+    $errSpan.addClass("status-msg").addClass("error");
+    $errSpan.html(errors[field]);
+    $(".cat-select", this.$el).append($errSpan);
   },
 
   clearErrors: function() {

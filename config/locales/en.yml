@@ -56,7 +56,7 @@ en:
             link:
               blank: "Please link to a website where you can buy this item."
             category_id:
-              blank: "Sorry, but an item must belong to a category."
+              blank: "Please select a category."
             notes:
               too_long: "Sorry, but your notes are too long (max %{count} characters)."
             product_type_name:

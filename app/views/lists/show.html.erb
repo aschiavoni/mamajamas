@@ -45,7 +45,10 @@
      <% end -%>
      current_position: 0,
      item_count: <%= @view.list.item_count %>
-                     })
+  });
+   <% if @view.all_category? -%>
+   Mamajamas.Context.Categories = <%= @view.categories.to_json.html_safe %>;
+   <% end -%>
   </script>
 <% end -%>
 <script type="text/javascript">

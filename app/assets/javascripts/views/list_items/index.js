@@ -195,11 +195,6 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
   addProductType: function(event) {
     event.preventDefault();
 
-    // no-op if we are in the all category
-    if (Mamajamas.Context.List.isAllCategory()) {
-      return false;
-    }
-
     var addItem = new Mamajamas.Views.ListItemNew({
       model: new Mamajamas.Models.ListItem({
         category_id: Mamajamas.Context.List.get("category_id"),

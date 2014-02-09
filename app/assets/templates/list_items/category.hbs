@@ -1,0 +1,9 @@
+Item Category:
+<div class="choicedrop">
+  <a href="#"><span class="current-category">Select</span><span class="ss-dropdown"></span></a>
+  <ul style="display:none; width:10em; max-height: 9.5em; overflow: auto; top:-4.3em">
+    {{#each categories}}
+    <li> <a href="#" data-category-id="{{this.id}}">{{this.name}}</a> </li>
+    {{/each}}
+  </ul>
+</div>
