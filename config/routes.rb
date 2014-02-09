@@ -94,7 +94,7 @@ Mamajamas::Application.routes.draw do
   get ":slug" => "public_lists#show", as: :public_list
   get ":slug/:category" => "public_lists#show", as: :public_list_category
 
-  authenticated do
+  authenticated :user, lambda { |u| !u.guest? } do
     root :to => 'lists#show'
   end
   root :to => 'home#index'
