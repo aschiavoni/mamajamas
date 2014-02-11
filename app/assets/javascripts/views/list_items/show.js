@@ -108,6 +108,8 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
   },
 
   delete: function() {
+    var _view = this;
+    _view.setCurrentPosition();
     if (confirm("Are you sure you want to delete this item?")) {
       this.model.destroy({
         wait: true,
@@ -115,6 +117,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
           Mamajamas.Context.ListItems.remove(this.model);
           var currentItemCount = Mamajamas.Context.List.get('item_count');
           Mamajamas.Context.List.set('item_count', currentItemCount - 1);
+          _view.replaceWithPlaceholder();
         },
         error: function(model, response, options) {
           Mamajamas.Context.Notifications.error("We could not remove this list item at this time. Please try again later.");
@@ -122,6 +125,33 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
       });
     }
     return false;
+  },
+
+  replaceWithPlaceholder: function() {
+    var _view = this;
+    var attributes = {
+      category_id: this.model.get("category_id"),
+      priority: this.model.get("priority"),
+      age: this.model.get("age"),
+      product_type_id: this.model.get("product_type_id"),
+      quantity: this.model.get("quantity"),
+      owned: this.model.get("owned"),
+      image_url: this.model.get("product_type_image_name"),
+      product_type_image_name: this.model.get("product_type_image_name"),
+      product_type_name: this.model.get("product_type_name"),
+      product_type_plural_name: this.model.get("product_type_plural_name"),
+      owned: false,
+      placeholder: true,
+      show_chooser: false,
+    };
+
+    Mamajamas.Context.ListItems.create(attributes, {
+      wait: false,
+      success: function(model) {
+      },
+      error: function(model, response) {
+      }
+    });
   },
 
   update: function() {
