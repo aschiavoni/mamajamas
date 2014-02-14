@@ -13,6 +13,10 @@ class ProductTypeSuggestions
     suggestions.concat search_results(product_type)
 
     suggestions = suggestions.uniq { |s| s.vendor_id }
+    suggestions = suggestions.reject do |s|
+      s.mamajamas_rating.present? && s.mamajamas_rating_count.present? &&
+        s.mamajamas_rating < 3.0 && s.mamajamas_rating_count > 5
+    end
     { id: product_type.id, suggestions: suggestions.map(&:attributes) }
   end
 
