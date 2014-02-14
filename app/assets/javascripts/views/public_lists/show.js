@@ -14,6 +14,8 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
 
   privacyRegistry: 3,
 
+  filter: null,
+
   initialize: function() {
     Mamajamas.Context.Test = this.collection;
     this.collection.on('reset', this.render, this);
@@ -41,8 +43,10 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
   },
 
   events: {
-    "click .listsort .choicedrop a": "toggleSortList",
-    "click .listsort .choicedrop ol li a": "sort",
+    "click .listsort .choicedrop.list-sort a": "toggleSortList",
+    "click .listsort .choicedrop.list-sort ol li a": "sort",
+    "click .listsort .choicedrop.list-age-filter a": "toggleAgeFilterList",
+    "click .listsort .choicedrop.list-age-filter ul li a": "ageFilter",
   },
 
   render: function() {
@@ -60,6 +64,9 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
     var priority = item.get("priority");
     if (this.hideOwned && item.get("owned"))
       return;
+    if (this.filter && item.get("age") != this.filter) {
+      return;
+    }
     var view = new Mamajamas.Views.PublicListItemShow({
       model: item
     });
@@ -88,6 +95,30 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
     $sortDisplay.html(sortName + " <span class=\"ss-dropdown\"></span>");
     this.collection.changeSort(sortBy);
     this.collection.sort();
+  },
+
+  toggleAgeFilterList: function(event) {
+    var $target = $(event.currentTarget);
+    var $choiceDrop = $target.parents(".choicedrop");
+    var $list = $choiceDrop.find("ul");
+
+    if ($list.is(":visible")) {
+      $list.hide();
+    } else {
+      $list.show();
+    }
+
+    return false;
+  },
+
+  ageFilter: function(event) {
+    var $filterLink = $(event.currentTarget);
+    var filterName = $filterLink.html();
+    var $filterDisplay = $filterLink.parents(".choicedrop").children("a");
+    $filterDisplay.html(filterName + " <span class=\"ss-dropdown\"></span>");
+    (filterName === "All ages") ? this.filter = null : this.filter = filterName;
+
+    this.render();
   },
 
   initCollapsibles: function() {
