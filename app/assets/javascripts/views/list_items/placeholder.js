@@ -8,6 +8,7 @@ Mamajamas.Views.ListItemPlaceholder = Mamajamas.Views.ListItem.extend({
 
   initialize: function() {
     this.$el.attr("id", this.model.get("id"));
+    this.model.on("change:priority", this.render, this);
   },
 
   events: {

@@ -69,8 +69,9 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
         var $priorityContainer = $prod.parents(".collapsible-content");
         var newPriority = parseInt($priorityContainer.data("priority"));
         var listItem = _view.collection.get($prod.attr("id"));
-        if (newPriority != listItem.get("priority"))
+        if (newPriority != listItem.get("priority")) {
           listItem.save({ priority: newPriority });
+        }
       }
     });
   },
