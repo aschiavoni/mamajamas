@@ -12,10 +12,12 @@
   </div>
 
   <!-- when to buy, need vs. have -->
+  {{#ifNotLowPriority listItem}}
   <div class="prod-when-own">
     <div class="when"> {{buyText listItem}} </div>
     <div class="own"> I {{haveNeed listItem.owned}} {{listItem.quantity}} of these. </div>
   </div>
+  {{/ifNotLowPriority}}
   <!-- end when to buy, need vs. have -->
 
   <!-- choose button -->

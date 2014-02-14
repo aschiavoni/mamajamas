@@ -23,9 +23,11 @@
   <!-- end product category, name, rating -->
 
   <!-- when to buy, need vs. have -->
+  {{#ifNotLowPriority listItem}}
   <div class="prod-when-own">
     <div class="when"> {{buyLink listItem}} </div>
   </div>
+  {{/ifNotLowPriority}}
   <!-- end when to buy, need vs. have -->
   <!-- menu: delete, drag, edit -->
   <div class="prod-edit-menu">

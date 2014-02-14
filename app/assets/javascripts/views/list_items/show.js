@@ -32,11 +32,12 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     });
     $("div.rating", this.$el).append(ratingView.render().$el);
 
-    var quantityView = new Mamajamas.Views.ListItemQuantity({
-      model: this.model
-    });
-    $(".prod-when-own", this.$el).append(quantityView.render().$el);
-
+    if (this.model.get("priority") != 3) {
+      var quantityView = new Mamajamas.Views.ListItemQuantity({
+        model: this.model
+      });
+      $(".prod-when-own", this.$el).append(quantityView.render().$el);
+    }
 
     var notesView = new Mamajamas.Views.ListItemNotes({
       model: this.model

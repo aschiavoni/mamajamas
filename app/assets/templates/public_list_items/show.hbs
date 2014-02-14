@@ -13,6 +13,7 @@
   {{addToMyListButton}}
   <div class="rating"> <em>My rating:</em>
   </div>
+  {{#ifNotLowPriority listItem}}
   <div class="prod-when-own">
     <div class="when">
       {{buyLink listItem}}
@@ -21,6 +22,7 @@
       <strong>{{publicHaveNeed listItem.owned}}</strong> {{listItem.quantity}} of these
     </div>
   </div>
+  {{/ifNotLowPriority}}
   <div class="prod-note">
     {{#if listItem.notes}}
       <div class="prod-note-content expandable">
