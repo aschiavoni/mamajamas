@@ -2,7 +2,11 @@ Hi <%= @followed_display_name %>,
 
 <%= @follower_display_name %> is now following your Mamajamas list.
 
+<% if @follower.list.private? -%>
+They have chosen to keep their list private for now, so you can't follow them back at this time, but they may decide to share it later.
+<% else -%>
 You can follow them back by going to their list here: <%= public_list_url(@follower) %>
+<% end -%>
 
 You may also want to make sure your list is up to date by editing it here: <%= list_url %>
 

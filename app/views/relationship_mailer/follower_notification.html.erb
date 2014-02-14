@@ -1,6 +1,10 @@
 <p>Hi <%= @followed_display_name %>,</p>
 <p><%= @follower_display_name %> is now following your Mamajamas list.</p>
-<p>You can follow them back by going to their list <%= link_to "here", public_list_url(@follower) %>.</p>
-<p>You may also want to make sure your list is up to date by editing it <%= link_to "here", list_url %>.</p>
+<% if @follower.list.private? -%>
+  <p>They have chosen to keep their list private for now, so you can't follow them back at this time, but they may decide to share it later.</p>
+<% else -%>
+  <p>You can follow them back by going to their list <%= link_to "here", public_list_url(@follower) %>.</p>
+<% end -%>
+  <p>You may also want to make sure your list is up to date by editing it <%= link_to "here", list_url %>.</p>
 <p>Best,</p>
 <p>The Mamajamas Team</p>
