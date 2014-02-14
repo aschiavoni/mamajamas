@@ -16,6 +16,8 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
 
   collapsiblesToReset: [],
 
+  filter: null,
+
   initialize: function() {
     this.collection.on("reset", this.render, this);
     this.collection.on("add", this.insertItem, this);
@@ -138,6 +140,9 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
   },
 
   appendItem: function(item) {
+    if (this.filter && item.get("age") != this.filter) {
+      return;
+    }
     var $itemView = this.itemView(item).render().$el;
     var priority = item.get("priority");
     $(this.$priorityContainer(priority)).append($itemView);
@@ -164,6 +169,13 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     var sortBy = $target.data("sort");
     this.collection.changeSort(sortBy);
     this.collection.sort();
+  },
+
+  ageFilter: function(event) {
+    var $target = $(event.target);
+    var filterBy = $target.html();
+    (filterBy === "All ages") ? this.filter = null : this.filter = filterBy;
+    this.render();
   },
 
   itemView: function(item) {
