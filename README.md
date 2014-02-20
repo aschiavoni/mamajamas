@@ -8,6 +8,16 @@
 
 We are using the thin web server in development and production.
 
+#### Foreman
+
+To launch both the web and background processes in development, use
+
+    `bundle exec foreman start -f ./Procfile.development `
+    
+#### Redis
+
+A local Redis server is required. The default settings should be fine (`apt-get install redis-server`).
+
 #### Postgresql
 
 1. Install the postgresql database on your development machine.
