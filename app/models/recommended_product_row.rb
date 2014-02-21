@@ -81,9 +81,9 @@ class RecommendedProductRow
         name: name.strip
       }
     else
-      if product_type.blank?
-        puts "Could not find product type for #{name}."
-      end
+      # if product_type.blank?
+      #   puts "Could not find product type for #{name}."
+      # end
       nil
     end
   end
