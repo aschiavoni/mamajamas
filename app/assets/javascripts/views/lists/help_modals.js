@@ -27,7 +27,6 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
 
   show: function() {
     var _view = this;
-    $(".bt-change:first").css("display", "inline");
     $("#bt-share").removeClass("disabled");
     this.$el.modal({
       containerId:'listintro-container',
@@ -42,7 +41,6 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
         $("#listintro").remove();
         if (Mamajamas.Context.List.get("item_count") == 0)
           $("#bt-share").addClass("disabled");
-        $(".bt-change:first").css("display", "");
       }
     });
     if (Mamajamas.Context.User.get("build_custom_list") == true)
