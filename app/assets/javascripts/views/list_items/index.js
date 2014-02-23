@@ -141,7 +141,7 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
       var selector = this.prioritySelectors[priority];
       $(selector + " div.prod:nth-child(" + insertAt + ")").after($itemView);
     }
-    if (!item.get("placeholder"))
+    if (!item.get("placeholder") && $.cookies.get("no_show_added") != true)
       itemView.showAddedModal(this.addedView);
   },
 

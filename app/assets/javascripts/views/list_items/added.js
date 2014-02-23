@@ -81,6 +81,7 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
       rating: _view.model.get("rating"),
       notes: $("textarea", _view.$el).val(),
     }
+    _view.setNoShow();
     _view.listItem.set(attribs);
     _view.saved = true;
     _view.close(event);
@@ -110,6 +111,11 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
       $(".rating", this.$el).hide();
       $(".prod-note", this.$el).hide();
     }
+  },
+
+  setNoShow: function() {
+    var $target = $("#needhave-noshow", this.$el);
+    $.cookies.set("no_show_added", $target.is(":checked"), { path: "/" });
   },
 
   position: function() {
