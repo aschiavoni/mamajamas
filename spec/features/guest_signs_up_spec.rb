@@ -9,8 +9,9 @@ feature "guest visitor", js: true do
 
       take_quiz
 
-      click_link "Done"
+      click_link "Close"
 
+      page.execute_script("$.cookies.set('no_show_added', true, {path: '/'});")
       add_manual_item "Bath Tub", "http://google.com"
 
       # HACK: force there to be an item
@@ -50,6 +51,7 @@ feature "guest visitor", js: true do
 
       click_link "Done"
 
+      page.execute_script("$.cookies.set('no_show_added', true, {path: '/'});")
       add_manual_item "Bath Tub", "http://google.com"
 
       click_link "Save"
