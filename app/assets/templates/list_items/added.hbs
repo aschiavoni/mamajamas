@@ -1,0 +1,52 @@
+<!-- modal window header -->
+<h2>Add new product details?</h2>
+<!-- modal window content -->
+<div class="content">
+  <span class="arrow"></span>
+  <form class="frm-added" class="label-infield">
+    <div class="own">
+    </div>
+    <div class="rating" style="display:none;"> <em>My rating:</em>
+    </div>
+    <!-- prod note [filled] *** -->
+    <div class="prod-note prod-note_edit" style="display:none;">
+
+      <!-- note input link -->
+      <p class="prod-note-trigger"><span class="ss-chat"></span> <strong>Review/comment</strong></p>
+      <!-- end note input link -->
+
+      <!-- note input area [shown in note edit state] -->
+      <div class="prod-note-input">
+        <fieldset>
+          <p>
+            <label for="list_item_notes_added"><span class="ss-chat"></span> Review/comment</label>
+            <br />
+            <textarea name="list_item[notes]" value="" id="list_item_notes_added"></textarea>
+          </p>
+        </fieldset>
+      </div>
+      <!-- end note input area -->
+
+      <!-- save-cancel buttons [hidden when note editing] -->
+      <div class="prod-links">
+        <ul>
+          <li>
+            <button class="cancel-item button bt-light" value="Reset" type="reset">Clear</button>
+          </li>
+        </ul>
+      </div>
+      <!-- end save-cancel buttons -->
+
+    </div>
+    <!-- end prod note *** -->
+
+    <p class="center instruction"><input type="checkbox" id="needhave-noshow"> Don’t show this window again.</p>
+
+    <!-- window bottom buttons -->
+    <div class="button-row">
+      <button class="button cancel-modal">Not Now</button>
+      <button class="button save-added-item bt-color">Save</button>
+    </div>
+  </form>
+</div>
+<!-- end modal window content -->

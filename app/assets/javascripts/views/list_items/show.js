@@ -6,7 +6,10 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
 
   className: "prod prod-filled clearfix",
 
+  saveModelHandler: null,
+
   initialize: function() {
+    this.saveModelHandler = _.debounce(this.doSave, 1000, false);
     this.editing = false;
     this.model.on("change:rating", this.update, this);
     this.model.on("change:owned", this.update, this);
@@ -159,7 +162,24 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
   update: function() {
     if (this.editing)
       return;
-    this.model.save();
+    this.saveModelHandler(this);
   },
+
+  showAddedModal: function(addedView) {
+    this.editing = true;
+    addedView.on("list_item:added:closed", this.addedModalClosed, this);
+    addedView.show(this.model);
+  },
+
+  addedModalClosed:function(addedView, saved) {
+    addedView.off("list_item:added:closed", this.addedModalClosed, this);
+    this.editing = false;
+    this.update();
+    this.render();
+  },
+
+  doSave: function(_view) {
+    _view.model.save(null, { silent: true });
+  }
 
 });

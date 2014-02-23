@@ -18,6 +18,8 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
 
   filter: null,
 
+  addedView: new Mamajamas.Views.ListItemAdded(),
+
   initialize: function() {
     this.collection.on("reset", this.render, this);
     this.collection.on("add", this.insertItem, this);
@@ -129,7 +131,8 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
   },
 
   insertItem: function(item, collection, options) {
-    var $itemView = this.itemView(item).render().$el;
+    var itemView = this.itemView(item).render();
+    var $itemView = itemView.$el;
     var priority = item.get("priority");
     var insertAt = Mamajamas.Context.List.get("current_position");
     if (insertAt == 0) {
@@ -138,6 +141,8 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
       var selector = this.prioritySelectors[priority];
       $(selector + " div.prod:nth-child(" + insertAt + ")").after($itemView);
     }
+    if (!item.get("placeholder"))
+      itemView.showAddedModal(this.addedView);
   },
 
   appendItem: function(item) {
