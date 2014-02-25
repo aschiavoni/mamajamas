@@ -58,6 +58,13 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     if ($("#add-list-item").length > 0)
       _.defer(this.addToMyList, this);
 
+    // Dock the header to the top of the window when scrolled past the
+    // banner.
+    $('#title').scrollToFixed();
+    $('#primary').scrollToFixed({
+      marginTop: $('#title').outerHeight(true)
+    });
+
     return this;
   },
 
