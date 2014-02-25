@@ -1,6 +1,7 @@
 window.Mamajamas.Views.FriendPicker = Backbone.View.extend({
 
   initialize: function() {
+    this.initializeScrolling();
   },
 
   events: {

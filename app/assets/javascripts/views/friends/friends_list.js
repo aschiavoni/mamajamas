@@ -4,6 +4,7 @@ window.Mamajamas.Views.FriendsList = Mamajamas.Views.FriendsView.extend({
     this.padHeight = "28";
     this.targetElement = ".friends-list";
     this.sizeContent();
+    this.initializeScrolling();
   },
 
   events: {
