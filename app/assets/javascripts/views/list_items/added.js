@@ -88,13 +88,6 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
     return false;
   },
 
-  clearNotes: function(event) {
-    event.preventDefault();
-    var _view = event.data;
-    $("textarea", _view.$el).val("");
-    return false;
-  },
-
   initializeState: function() {
     this.bindEvents();
     this.toggleRatingAndNotes();
@@ -145,7 +138,6 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
     // bind events manually since the element behind this view can
     // often be destroyed and recreated
     $(window).on("scroll", null, this, this.updateOffsets);
-    $(".cancel-item", this.$el).on('click', null, this, this.clearNotes);
     $(".cancel-modal", this.$el).on('click', null, this, this.close);
     $(".save-added-item", this.$el).on('click', null, this, this.save);
     $(".frm-added", this.$el).on('submit', null, this, this.save);
@@ -154,7 +146,6 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
   },
 
   unbindEvents: function() {
-    $(".cancel-item", this.$el).off('click', null, this.clearNotes);
     $(".cancel-modal", this.$el).off('click', null, this.close);
     $(".save-added-item", this.$el).off('click', null, this.save);
     $(".frm-added", this.$el).off('submit', null, this.save);
