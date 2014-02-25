@@ -4,7 +4,10 @@ window.Mamajamas.Views.FriendsList = Mamajamas.Views.FriendsView.extend({
     this.padHeight = "28";
     this.targetElement = ".friends-list";
     this.sizeContent();
-    this.initializeScrolling();
+    // have to check that initializeScrolling is defined
+    // otherwise, this blows up under phantomjs in test
+    if (this.initializeScrolling)
+      this.initializeScrolling();
   },
 
   events: {

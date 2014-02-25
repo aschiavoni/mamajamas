@@ -1,7 +1,10 @@
 window.Mamajamas.Views.FriendPicker = Backbone.View.extend({
 
   initialize: function() {
-    this.initializeScrolling();
+    // have to check that initializeScrolling is defined
+    // otherwise, this blows up under phantomjs in test
+    if (this.initializeScrolling)
+      this.initializeScrolling();
   },
 
   events: {

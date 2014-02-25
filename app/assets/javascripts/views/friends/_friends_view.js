@@ -1,3 +1,7 @@
+// This 'inheritance' structure is a little flaky, especially under
+// phantomjs in test mode. not sure why but it might be worth a
+// refactor at some point
+
 Mamajamas.Views.FriendsView = function (options) {
   this.padHeight = "20";
   this.targetElement = "",
@@ -68,7 +72,6 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
     return false;
   },
 
-  // this doesn't seem to work yet
   initializeScrolling: function() {
     // keep header, primary nav and list nav fixed and scroll the rest
     // of the page
