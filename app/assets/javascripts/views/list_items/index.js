@@ -20,6 +20,8 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
 
   addedView: new Mamajamas.Views.ListItemAdded(),
 
+  titleHeight: null,
+
   initialize: function() {
     this.collection.on("reset", this.render, this);
     this.collection.on("add", this.insertItem, this);
@@ -38,6 +40,7 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     this.initCollapsibles();
     this.initExpandables();
     this.initDraggables();
+    this.titleHeight = $("#title").outerHeight(true);
 
     if (Mamajamas.Context.List.get('view_count') == 0) {
       var helpModals = new Mamajamas.Views.ListHelpModals();
@@ -143,6 +146,11 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     }
     if (!item.get("placeholder") && $.cookies.get("no_show_added") != true)
       itemView.showAddedModal(this.addedView);
+
+    // scroll to the item
+    _.defer(function(_view) {
+      $('body').scrollTo($itemView.offset().top - _view.titleHeight);
+    }, this);
   },
 
   appendItem: function(item) {
