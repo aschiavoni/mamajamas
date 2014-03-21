@@ -271,6 +271,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def parent_status
+    quiz_age_answer.present? ? quiz_age_answer.answers.first : "unknown"
+  end
+
+  def due_date
+    quiz_age_answer.present? ? quiz_age_answer.answers[2] : "n/a"
+  end
+
+  def quiz_age_answer
+    @age_answer ||= Quiz::Answer.most_recent_answers(id).select { |q|
+      q.question == "age"
+    }.first
+  end
+
   protected
 
   def password_required?

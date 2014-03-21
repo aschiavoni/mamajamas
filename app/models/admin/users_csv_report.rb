@@ -39,6 +39,8 @@ class Admin::UsersCsvReport
                 :notes,
                 :zip_code,
                 :country_code,
+                :parent_status,
+                :due_date,
                 :admin,
                 :admin_notes
     ]
