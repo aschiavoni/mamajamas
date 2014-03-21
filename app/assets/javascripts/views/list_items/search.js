@@ -158,7 +158,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   addManualItem: function(searchResult) {
     var attributes = {
       name: searchResult.get('name'),
-      link: searchResult.get('url'),
+      link: " ", // need to use a space to allow infieldlabels to work
       vendor: searchResult.get('vendor'),
       vendor_id: searchResult.get('vendor_id'),
       product_type_id: this.model.get('product_type_id'),
