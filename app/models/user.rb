@@ -245,6 +245,7 @@ class User < ActiveRecord::Base
     if has_list?
       list.destroy
     end
+    reload
     build_list!
     ListQuizUpdater.new(self).update!
     ListPruner.prune!(list)
