@@ -28,6 +28,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
   },
 
   render: function() {
+    var _view = this;
     this.$el.html(this.template({ listItem: this.model.toJSON() }));
 
     // subviews
@@ -47,6 +48,13 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
       model: this.model
     });
     $("div.prod-when-own", this.$el).after(notesView.render().$el);
+
+    if (this.changed && $.cookies.get("no_show_added") != true) {
+      this.changed = false;
+      _.defer(function() {
+        _view.showAddedModal(Mamajamas.Context.ListItemAdded);
+      });
+    }
 
     return this;
   },
@@ -81,6 +89,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
   updateItem: function() {
     // clear the notes field
     this.model.set("notes", null);
+    this.changed = true;
     this.update();
     this.render();
   },

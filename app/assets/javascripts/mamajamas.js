@@ -15,6 +15,7 @@ window.Mamajamas = {
 
     Mamajamas.Context.Progress = new Mamajamas.Views.Progress();
 
+
     // globally wire infield labels
     var $infieldLabelForms = $('form.label-infield');
     if ($infieldLabelForms.length > 0) {
@@ -58,6 +59,7 @@ window.Mamajamas = {
     // list
     if ($('#my-list').length > 0) {
       new Mamajamas.Routers.ListItems();
+      Mamajamas.Context.ListItemAdded = new Mamajamas.Views.ListItemAdded();
       Backbone.history.start();
     }
 
