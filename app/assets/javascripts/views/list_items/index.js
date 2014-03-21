@@ -144,7 +144,7 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
       var selector = this.prioritySelectors[priority];
       $(selector + " div.prod:nth-child(" + insertAt + ")").after($itemView);
     }
-    if (!item.get("placeholder") && $.cookies.get("no_show_added") != true)
+    if (!item.get("placeholder") && item.get("edit_mode") != true && $.cookies.get("no_show_added") != true)
       itemView.showAddedModal(this.addedView);
 
     // scroll to the item

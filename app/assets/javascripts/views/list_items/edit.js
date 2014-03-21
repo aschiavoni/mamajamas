@@ -30,6 +30,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     "submit .new-list-item": "save",
     "click .cancel-item.button": "cancel",
     "click .find-item.button": "findItemClicked",
+    "keyup textarea": "autoSaveNotes",
   },
 
   render: function() {
@@ -152,16 +153,47 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     };
   },
 
+  doSave: function(attributes, createHandler, updateHandler) {
+    var _view = this;
+    _view.clearErrors();
+
+    if (_view.model.isNew()) {
+      // creating a new list item
+      _view.model = Mamajamas.Context.ListItems.create(attributes, {
+        wait: true,
+        success: function() {
+          if (createHandler)
+            createHandler();
+          var currentItemCount = Mamajamas.Context.List.get('item_count');
+          Mamajamas.Context.List.set('item_count', currentItemCount + 1);
+        },
+        error: function(model, response) {
+          _view.handleError(model, response);
+        }
+      });
+    } else {
+      _view.model.save(attributes, {
+        wait: true,
+        silent: true, // don't fire change events for this save
+        success: function() {
+          if (updateHandler)
+            updateHandler();
+        },
+        error: function(model, response) {
+          _view.handleError(model, response);
+        }
+      });
+    }
+  },
+
   save: function(event) {
     if (event)
       event.preventDefault();
 
+    var _view = this;
     this.setCurrentPosition();
 
-    var _view = this;
-    _view.clearErrors();
-
-    attributes = {
+    var attributes = {
       name: this.itemField("name").val(),
       link: this.itemField("link").val(),
       notes: this.itemField("edit_notes").val(),
@@ -181,44 +213,41 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
       idSuffix: _view.model.get("idSuffix"),
     };
 
-    if (_view.model.isNew()) {
-      // creating a new list item
-      _view.model = Mamajamas.Context.ListItems.create(attributes, {
-        wait: true,
-        success: function() {
-          _view.$el.remove();
-          if (_view.options.parent)
-            _view.options.parent.remove();
-          if (_view.shouldShareOnFacebook())
-            _view.shareOnFacebook();
-          var currentItemCount = Mamajamas.Context.List.get('item_count');
-          Mamajamas.Context.List.set('item_count', currentItemCount + 1);
-        },
-        error: function(model, response) {
-          _view.handleError(model, response);
-        }
-      });
-    } else {
-      _view.model.save(attributes, {
-        wait: true,
-        silent: true, // don't fire change events for this save
-        success: function() {
-          _view.$el.remove();
-          if (_view.options.parent) {
-            _view.options.parent.render();
-            _view.options.parent.editing = false;
-            _view.options.parent.$el.show();
-          }
-        },
-        error: function(model, response) {
-          _view.handleError(model, response);
-        }
-      });
-    }
+    this.doSave(attributes, function() {
+      _view.$el.remove();
+      if (_view.options.parent)
+        _view.options.parent.remove();
+      if (_view.shouldShareOnFacebook())
+        _view.shareOnFacebook();
+    }, function() {
+      _view.$el.remove();
+      if (_view.options.parent) {
+        _view.options.parent.render();
+        _view.options.parent.editing = false;
+        _view.options.parent.$el.show();
+      }
+    });
+    Mamajamas.Context.ListItems.clearPlaceholders(
+      this.model.get('product_type_id'),
+      this.model.get('product_type_name'));
 
-    Mamajamas.Context.ListItems.clearPlaceholders(_view.model.get('product_type_id'), _view.model.get('product_type_name'));
     return false;
   },
+
+  autoSaveNotes: function(event) {
+    var _view = this;
+    var attributes = {
+      notes: this.itemField("edit_notes").val()
+    }
+    if (!_view.model.isNew()) {
+      _view.autoSave(_view, attributes);
+    }
+    return true;
+  },
+
+  autoSave: _.debounce(function(_view, attributes) {
+    _view.doSave(attributes, null, null);
+  }, 3000, false),
 
   updateMaybe: function() {
     var requiresUpdateAttribs = [ 'name', 'link', 'image_url', 'vendor_id' ];
@@ -263,6 +292,15 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
       this.options.parent.editing = false;
     }
     this.$el.remove();
+
+    // notes might have auto-saved - let's revert
+    if (this.model.get("notes") != this.itemField("edit_notes").val()) {
+      var attributes = {
+        notes: this.model.get("notes")
+      }
+      this.doSave(attributes, null, null);
+    }
+
     return true;
   },
 
