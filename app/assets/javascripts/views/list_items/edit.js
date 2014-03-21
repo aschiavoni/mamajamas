@@ -357,4 +357,9 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     return (BrowserDetect.browser == 'Explorer' && BrowserDetect.version <= 9);
   },
 
+  showAddedModal: function(addedView) {
+    // no-op - interface implementation for any item view
+    // ListItemsIndex.insertItem may call this
+  },
+
 });

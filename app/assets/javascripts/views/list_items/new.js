@@ -175,4 +175,9 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
   },
 
+  showAddedModal: function(addedView) {
+    // no-op - interface implementation for any item view
+    // ListItemsIndex.insertItem may call this
+  },
+
 });
