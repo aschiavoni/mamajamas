@@ -1,40 +1,87 @@
-<!-- modal window content -->
-<div class="content">
-    <!-- question q09-01 ***** -->
-    <div class="q-question" id="q09-01">
-      <fieldset>
-        <ul>
-          <li>
-            <label>
-              <input type="radio" name="prodrecc-radio" value="radio" id="recommended-list" checked>
-              I would like Mamajamas to suggest products for me.
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="radio" name="prodrecc-radio" value="radio" id="custom-list">
-              I would like to build my list from scratch.
-            </label>
-          </li>
-        </ul>
-
-      </fieldset>
+<div class="question-content">
+  <!-- modal window content -->
+  <div class="content">
+    <form id="frm-prodrecc">
+      <!-- question q09-01 ***** -->
+      <div class="q-question" id="q09-01">
+        <fieldset>
+          <ul>
+            <li>
+              <div>
+                <label>
+                  <input type="radio" name="prodrecc-radio" value="radio" id="recommended-list" checked>
+                  Suggest products for me.
+                </label>
+                <a href="#" class="float-r small gallery-a"><span class="ss-icon ss-view"></span> Preview</a>
+              </div>
+              We’ll start your list pre-filled with products that Mamajamas recommends, but you’ll still be able to add your own and delete ours.
+              <img src="{{assetPath 'list-preview_recommendations-t.png'}}" class="thumb" alt="" width="229" height="217" />
+            </li>
+            <li>
+              <div>
+                <label>
+                  <input type="radio" name="prodrecc-radio" value="radio" id="prodrecc-radio_1">
+                  Give me a blank slate.
+                </label>
+                <a href="#" class="float-r small gallery-b"><span class="ss-icon ss-view"></span> Preview</a>
+              </div>
+              We’ll give you an empty list of baby gear categories and let you fill in your own products. Choose this if you want to give advice or copy from other members’ lists.
+              <img src="{{assetPath 'list-preview_blank-t.png'}}" class="thumb" alt="" width="229" height="217" />
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+      <!-- / question q09-01 ***** -->
+    </form>
+  </div>
+  <!-- end modal window content -->
+  <div class="button-row clearfix">
+    <!-- instructions -->
+    <!-- previous and next buttons -->
+    <div class="col50 float-l left">
+      <a href="#" class="button" id="bt-prev"><span class="ss-navigateleft"></span>Previous</a>
     </div>
-    <!-- / question q09-01 ***** -->
-</div>
-<!-- end modal window content -->
-<div class="button-row clearfix">
-  <!-- instructions -->
-  <!-- previous and next buttons -->
-  <div class="col50 float-l left">
-    <a href="#" class="button" id="bt-prev"><span class="ss-navigateleft"></span>Previous</a>
+    <div class="col50 float-r right">
+      <a href="#" class="button bt-color" id="bt-next">Next<span class="ss-navigateright"></span></a>
+    </div>
   </div>
-  <div class="col50 float-r right">
-    <a href="#" class="button bt-color" id="bt-next">Next<span class="ss-navigateright"></span></a>
+  <!-- quiz progress bar -->
+  <div title="Step 8 of 9" id="q-progress">
+    <div class="bar"></div>
   </div>
+  <!-- end quiz progress bar -->
 </div>
-<!-- quiz progress bar -->
-<div title="Step 8 of 9" id="q-progress">
-  <div class="bar"></div>
+
+<div id="gallery-modal-a" class="quiz-modal" style="display: none;">
+
+  <div class="quiz-box-s gallery">
+    <!-- modal window content -->
+    <div class="content">
+      <h2><span class="ss-icon ss-view"></span> Recommended Products list option</h2>
+      <p>You’ll get an editable list pre-filled with baby gear products that Mamajamas recommends. <a data-toggle-preview-target="#gallery-modal-b" class="toggle-preview gallery-b" href="#">See the other option</a></p>
+      <p><a class="quiz-return" href="#">Return to quiz question</a></p>
+      <div class="gallery-img">
+        <img src="{{assetPath 'list-preview_recommendations.png'}}" title="Baby gear list pre-filled with products recommended by Mamajamas" alt=""/>
+      </div>
+    </div>
+    <!-- end modal window content -->
+  </div>
+
 </div>
-<!-- end quiz progress bar -->
+
+<div id="gallery-modal-b" class="quiz-modal" style="display: none;">
+
+  <div class="quiz-box-s gallery">
+    <!-- modal window content -->
+    <div class="content">
+      <h2><span class="ss-icon ss-view"></span>“Blank slate” list option</h2>
+      <p>You’ll get a “blank” list of baby gear categories that you can fill in with specific products. <a data-toggle-preview-target="#gallery-modal-a" class="toggle-preview gallery-a" href="#">See the other option</a></p>
+      <p><a class="quiz-return" href="#">Return to quiz question</a></p>
+      <div class="gallery-img">
+        <img src="{{assetPath 'list-preview_blank.png'}}" title="Baby gear list of item categories, to be filled with specific product listings" alt=""/>
+      </div>
+    </div>
+    <!-- end modal window content -->
+  </div>
+
+</div>

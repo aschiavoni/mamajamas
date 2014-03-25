@@ -18,7 +18,9 @@ Mamajamas.Views.QuizCustomList = Mamajamas.Views.QuizQuestion.extend({
     'click #bt-next': 'save',
     'click .skip': 'save',
     'click #bt-build': 'save',
-    'change input[name=prodrecc-radio]': 'customListToggle'
+    'change input[name=prodrecc-radio]': 'customListToggle',
+    'click .gallery-a': 'showPreviewA',
+    'click .gallery-b': 'showPreviewB',
   },
 
   customListToggle: function(event) {
@@ -32,6 +34,58 @@ Mamajamas.Views.QuizCustomList = Mamajamas.Views.QuizQuestion.extend({
     this.model.set("answers", [ answer ]);
 
     return true;
+  },
+
+  showPreviewA: function(event) {
+    if (event)
+      event.preventDefault();
+    this.showPreview('#gallery-modal-a');
+    return false;
+  },
+
+  showPreviewB: function(event) {
+    if (event)
+      event.preventDefault();
+    this.showPreview('#gallery-modal-b');
+    return false;
+  },
+
+  returnToQuiz: function(event) {
+    event.preventDefault();
+    $(".question-content").show();
+    $("a.simplemodal-close").show();
+    var _view = event.data;
+    _view.hidePreview("#gallery-modal-a");
+    _view.hidePreview("#gallery-modal-b");
+    return false;
+  },
+
+  showPreview: function(selector) {
+    var $preview = $(selector);
+    $(".question-content").hide();
+    $(".quiz-return", $preview).on("click", this, this.returnToQuiz);
+    $(".toggle-preview", $preview).on("click", this, this.togglePreview);
+    $("a.simplemodal-close").hide();
+    $preview.show();
+  },
+
+  hidePreview: function(selector) {
+    var $preview = $(selector);
+    $preview.hide();
+    $(".quiz-return", $preview).off("click", this, this.returnToQuiz);
+    $(".toggle-preview", $preview).off("click", this, this.togglePreview);
+  },
+
+  togglePreview: function(event) {
+    event.preventDefault();
+    var $currentPreview = $(event.currentTarget);
+    var targetPreviewSelector = $currentPreview.data("toggle-preview-target");
+    var currentPreviewSelector =
+      "#" + $currentPreview.parents(".quiz-modal").attr("id");
+    var _view = event.data;
+    _view.showPreview(targetPreviewSelector);
+    _view.hidePreview(currentPreviewSelector);
+    return false;
   },
 
 });

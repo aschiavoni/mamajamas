@@ -64,6 +64,8 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
     $('#quiz-modal').modal({
       closeHTML:'<a class="bt-close ss-icon" href="#">Close</a>',
       focus: false,
+      escClose: false,
+      overlayClose: false,
       onClose: _view.closeQuiz
     });
     return this;
