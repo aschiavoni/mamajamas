@@ -10,6 +10,9 @@
  *
  *= require_self
  *= require jquery.ui.autocomplete
+
+ *= require boilerplate
+ *= require fluid-layout
  *= require style
  *= require quiz
  *= require_tree .

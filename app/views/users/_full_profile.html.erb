@@ -18,6 +18,9 @@
   </div>
 <% end -%>
 <%= form_for @profile, url: profile_path, as: :profile, method: :put, html: { class: "label-infield", id: "frm-create-profile", multipart: true } do |f| %>
+  <div class="button-row right">
+    <button id="bt-save" class="button bt-color" type="submit"><span class="ss-check"></span>Save and Preview</button>
+  </div>
   <div id="profile-photo-file" style="display: none;">
     <h3>Profile Picture</h3>
     <fieldset>
@@ -25,7 +28,7 @@
       <%= f.hidden_field :profile_picture_cache %>
     </fieldset>
   </div>
-  <h3>My Basics</h3>
+  <h3 class="margintop0">My Basics</h3>
   <dl class="clearfix">
     <fieldset>
       <!-- username -->
@@ -102,8 +105,8 @@
       </dd>
     </fieldset>
   </dl>
-  <div class="button-row">
-    <button type="submit" class="button bt-color" id="bt-save"><span class="ss-check"></span>Save and Preview</button>
+  <div class="button-row right">
+    <button type="submit" class="button bt-color" id="bt-save2"><span class="ss-check"></span>Save and Preview</button>
   </div>
 <% end %>
 <%= adwords_event "n3GICNbCzAcQmoDU4wM", "3.00" %>
