@@ -22,7 +22,7 @@ class Forms::UserProfile
   delegate :title, :title=, :to => :list, :prefix => true, :allow_nil => true
 
   validates(:username, presence: true, format: { :with => /^[A-Za-z\d_]+$/ })
-  validates(:list_title, length: { maximum: 35 })
+  validates(:list_title, length: { maximum: 45 })
 
   validate do
     [user, list].each do |object|
