@@ -337,16 +337,22 @@ li#myaccount + li#sitelinks {
 p {
         margin: 0 0 1em;
 }
-.inline li {
-        list-style-type: none;
-        display: inline;
-        margin: 0 1em 0 0;
+.address {
+        margin-left: 1.5em;
+}
+.fixed {
+        position: fixed;
 }
 .float-l {
         float: left;
 }
 .float-r {
         float: right;
+}
+.inline li {
+        list-style-type: none;
+        display: inline;
+        margin: 0 1em 0 0;
 }
 img.float-l {
         margin: 4px 15px 0 0;
@@ -382,14 +388,14 @@ img.float-r {
 .light {
         color: #a6a6a6;
 }
+.margintop0 {
+        margin-top: 0 !important;
+}
 .small {
         font-size: .923em;
 }
-.fixed {
-        position: fixed;
-}
-.address {
-        margin-left: 1.5em;
+.thumb {
+        border: solid 1px #ddd;
 }
 /* links ------ */
 a {
@@ -659,6 +665,9 @@ a.button.disabled:active { /* disabled buttons */
         padding: 20px;
         text-align: center;
         border-top: 1px solid #CCC;
+}
+.button-row.right {
+        text-align: right;
 }
 .oldie .button-row button,
 .oldie .button-row .button {
@@ -1043,7 +1052,7 @@ ul.friends-list {
 }
 /* modal windows ------ */
 .modal-wrap {
-        position: absolute;
+        position: fixed;
         top: 0px;
         left: 0px;
         right: 0px;
@@ -1052,7 +1061,7 @@ ul.friends-list {
         display: none;
 }
 .modal-overlay {
-        position: absolute;
+        position: fixed;
         top: 0px;
         left: 0px;
         right: 0px;
@@ -1127,9 +1136,11 @@ ul.friends-list {
         right: 11px;
 }
 /* modal box typography, colors and spacing */
+.modal-box {
+        font-size: .92em; /* used on old login and sign in  modals */
+}
 .modal-box,
 .simplemodal-data {
-        font-size: .92em;
         color: #7c7c7c;
 }
 .modal-box h2,
@@ -1207,7 +1218,7 @@ ul.friends-list {
 .modal-box .button-row .button,
 .simplemodal-data .button-row button,
 .simplemodal-data .button-row .button {
-        font-size: 1.083em;
+        font-size: 13px;
 }
 .modal-box .content .button-row,
 .simplemodal-data .content .button-row {
@@ -2034,34 +2045,25 @@ a.tooltip-b:hover span,
 
 
 /* loading graphic and overlay ------ */
-#loader-wrap.modal-wrap {
-        z-index: 4051;
-}
-#loader-wrap .modal-overlay {
-        z-index: 4052;
-        background: #999;
-        opacity: .55;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=55)";
-        filter: alpha(opacity=55);
-}
-#loader-wrap .vertical-offset {
-        margin-bottom: -150px;
+#loader-wrap {
+        background: none repeat scroll 0 0 rgba(255, 255, 255, 0.85);
+    height: 378px;
+    position: absolute;
+    top: 0;
+    width: 740px;
 }
 #loader {
-        clear: both;
+        /*clear: both;*/
         width: 36px;
         padding: 40px;
         position: relative;
-        z-index: 4053;
+        top: 50%;
         left: 50%;
+        margin-top: -64px;
         margin-left: -58px;
         background: #fff;
-        border: 1px solid #d9d9d9;
-        border-radius: 7px;
-}
-.oldie #loader {
-        top: 210px;
-        border-color: #c9c9c9;
+        border: 1px solid #eee;
+        border-radius: 50%;
 }
 /* edit list ------ */
 #my-list {
@@ -2409,7 +2411,7 @@ a.bt-addanother:hover span {
         margin: 0;
         padding: 3px;
 }
-.prod-desc h3 a.bt-change:hover {
+.prod-desc h3 a.bt-change:hover  {
         text-decoration: none;
         color: #FFF;
         background: #6BB36E;
@@ -3176,9 +3178,6 @@ a.bt-gift:hover {
         padding-bottom: 4px;
         border-bottom: 2px solid #8cb58c;
 }
-#create-profile h3:first-child {
-        margin-top: .75em;
-}
 #create-profile #title .instruction {
         font-size: .923em;
         margin-bottom: 1em;
@@ -3252,6 +3251,10 @@ a.bt-gift:hover {
 #create-profile #top-tags {
         font-size: .857em;
         color: #808080;
+}
+#create-profile .button-row {
+        border-top: none;
+        padding: 10px 20px 0  0;
 }
 /* create profile: custom checkboxes ---- */
 /* (based on work by Wufoo, Ryan Seddon and Lea Verou) */
