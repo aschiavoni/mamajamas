@@ -60,16 +60,37 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
   ],
 
   render: function() {
+    var _view = this;
+    $('#quiz-modal').modal({
+      closeHTML:'<a class="bt-close ss-icon" href="#">Close</a>',
+      focus: false,
+      onClose: _view.closeQuiz
+    });
     return this;
   },
 
+  closeQuiz: function(dialog) {
+    if (confirm("Are you sure you want to quit the quiz?")) {
+      window.location = '/';
+    } else {
+      // this is pretty tied to the internal implementation of simplemodal
+      // beware of this breaking if we update simplemodal
+      this.occb = false;
+      this.bindEvents();
+    }
+  },
+
   next: function() {
+    var _view = this;
     this.currentQuestion++;
     if (this.currentQuestion > this.questions.length - 1) {
       this.currentQuestion = this.questions.length - 1;
       this.done();
     } else {
-      this.renderCurrentQuestion();
+      _.delay(function() {
+        Mamajamas.Context.Progress.hide();
+        _view.renderCurrentQuestion();
+      }, 200);
     }
   },
 

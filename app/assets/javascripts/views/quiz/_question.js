@@ -1,6 +1,6 @@
 Mamajamas.Views.QuizQuestion = Backbone.View.extend({
 
-  className: 'quiz-box',
+  className: 'quiz-box-s',
 
   questionName: '',
 
@@ -18,14 +18,6 @@ Mamajamas.Views.QuizQuestion = Backbone.View.extend({
     this.$el.html(this.template(this.model.toJSON()));
     this.trigger('quiz:question:rendered');
     return this;
-  },
-
-  closeQuiz: function(event) {
-    event.preventDefault();
-    if (confirm("Are you sure you want to quit the quiz?")) {
-      window.location = '/';
-    }
-    return false;
   },
 
   previous: function(event) {
@@ -66,7 +58,6 @@ Mamajamas.Views.QuizQuestion = Backbone.View.extend({
         Mamajamas.Context.Notifications.error('Please try again later.');
       },
       complete: function() {
-        Mamajamas.Context.Progress.hide();
       }
     });
 
@@ -85,7 +76,6 @@ Mamajamas.Views.QuizMultiChoiceImageQuestion = Mamajamas.Views.QuizQuestion.exte
   selectedClass: 'q-selected',
 
   events: {
-    'click .bt-close': 'closeQuiz',
     'click #bt-prev': 'previous',
     'click #bt-next': 'save',
     'click .skip': 'skip',
@@ -159,7 +149,6 @@ Mamajamas.Views.QuizSliderQuestion = Mamajamas.Views.QuizQuestion.extend({
   },
 
   events: {
-    'click .bt-close': 'closeQuiz',
     'click #bt-prev': 'previous',
     'click #bt-next': 'save',
     'click .skip': 'skip',

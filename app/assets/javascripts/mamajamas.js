@@ -75,7 +75,7 @@ window.Mamajamas = {
     }
 
     // quiz
-    if ($('#quiz').length > 0) {
+    if ($('#quiz-modal').length > 0) {
       new Mamajamas.Routers.Quiz();
       Backbone.history.start();
     }

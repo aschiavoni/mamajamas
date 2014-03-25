@@ -14,7 +14,6 @@ Mamajamas.Views.QuizCustomList = Mamajamas.Views.QuizQuestion.extend({
   },
 
   events: {
-    'click .bt-close': 'closeQuiz',
     'click #bt-prev': 'previous',
     'click #bt-next': 'save',
     'click .skip': 'save',

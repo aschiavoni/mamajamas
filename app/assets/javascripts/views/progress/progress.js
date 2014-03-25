@@ -1,4 +1,7 @@
+// this should be called QuizProgress
 Mamajamas.Views.Progress = Backbone.View.extend({
+
+  template: HandlebarsTemplates['progress/progress'],
 
   initialize: function() {
   },
@@ -8,13 +11,11 @@ Mamajamas.Views.Progress = Backbone.View.extend({
   },
 
   show: function() {
-    $('#loader-wrap').show();
+    $("#quiz-modal .quiz-box-s").append(this.template());
   },
 
   hide: function() {
-    _.delay(function() {
-      $('#loader-wrap').hide();
-    }, 200);
+    $('#loader-wrap').remove();
   },
 
 });

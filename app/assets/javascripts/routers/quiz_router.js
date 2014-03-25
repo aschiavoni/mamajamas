@@ -10,8 +10,9 @@ Mamajamas.Routers.Quiz = Backbone.Router.extend({
 
   index: function() {
     var quizView = new Mamajamas.Views.QuizShow({
-      el: '#quiz'
+      el: '#quiz-modal'
     });
+    quizView.render();
   }
 
 })

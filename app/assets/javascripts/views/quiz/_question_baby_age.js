@@ -16,7 +16,6 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
   },
 
   events: {
-    'click .bt-close': 'closeQuiz',
     'click #bt-prev': 'previous',
     'click #bt-next': 'saveKid',
     'click #mom-type': 'showMomTypes',
