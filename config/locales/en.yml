@@ -17,6 +17,8 @@ en:
             username:
               blank: "Sorry, but you must provide a username."
               invalid: "Sorry, but your username must be alphanumeric and cannot contain any spaces."
+            list_title:
+              too_long: "Sorry, but this is too long. Try to keep it under 35 characters."
         forms/complete_profile:
           attributes:
             password:
