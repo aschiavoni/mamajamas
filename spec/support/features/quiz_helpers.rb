@@ -23,7 +23,8 @@ module Features
       expect(page).to have_content("comes to safety")
 
       click_link "Next"
-      expect(page).to have_content("suggest products")
+      sleep 1
+      expect(page).to have_content("Suggest products")
 
       click_link "Next"
       expect(page).to have_content("My zip code")
