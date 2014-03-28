@@ -81,7 +81,6 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
       owned: this.model.get("owned"),
       product_type_name: itemName,
       product_type_plural_name: pluralName,
-      owned: false,
       placeholder: true,
       show_chooser: true
     };
