@@ -1,14 +1,14 @@
 <%= content_for :title_links do %>
   <ul>
     <li>
+        &nbsp;
+    </li>
+    <li>
       <% if @view.list.private? %>
         <%= link_to save_button_text(@view.list), profile_path, id: "bt-share", class: "button bt-color" + (@view.list.has_items? ? "" : " disabled") %>
       <% else -%>
-        &nbsp;
+        <%= link_to "View Shared List", public_list_path(current_user), id: "bt-view", class: "button" + (@view.list.has_items? && !@view.list.private? ? "" : " disabled") %>
       <% end -%>
-    </li>
-    <li>
-      <%= link_to "View Shared List", public_list_path(current_user), id: "bt-view", class: "button" + (@view.list.has_items? && !@view.list.private? ? "" : " disabled") %>
     </li>
   </ul>
 <% end -%>
