@@ -15,6 +15,7 @@ class RelationshipMailer < ActionMailer::Base
     relationship.save!
 
     @subject = "#{@follower_display_name} is now following your Mamajamas List!"
+    @hide_salutation = true
 
     mail(to: "#{@followed_display_name} <#{@followed.email}>",
          subject: @subject)

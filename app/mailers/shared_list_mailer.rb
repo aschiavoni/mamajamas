@@ -8,6 +8,7 @@ class SharedListMailer < ActionMailer::Base
     @user = User.find(user_id)
     @display_name = first_name(@user)
     @subject = "Your List is Saved!"
+    @hide_salutation = true
 
     mail to: @user.email,
       bcc: "angie@mamajamas.com",
