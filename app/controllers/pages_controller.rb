@@ -13,4 +13,9 @@ class PagesController < ApplicationController
     set_body_class "text-page"
     set_subheader "About Mamajamas"
   end
+
+  def faq
+    set_body_class "text-page"
+    set_subheader "Frequently Asked Questions"
+  end
 end
