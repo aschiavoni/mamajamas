@@ -30,6 +30,11 @@ Mamajamas.Views.QuizCustomList = Mamajamas.Views.QuizQuestion.extend({
     var answer = "false";
     if (selectedId == "custom-list") {
       answer = "true";
+      $('li:first-child .thumb').css("z-index", "");
+      $('li:last-child .thumb').css("z-index", 40051);
+    } else {
+      $('li:first-child .thumb').css("z-index", 40051);
+      $('li:last-child .thumb').css("z-index", "");
     }
     this.model.set("answers", [ answer ]);
 
