@@ -2,6 +2,8 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
 
   currentQuestion: 0,
 
+  previousQuestion: 0,
+
   initialize: function() {
     this.renderCurrentQuestion();
     this.preloadImages();
@@ -84,6 +86,7 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
 
   next: function() {
     var _view = this;
+    this.previousQuestion = this.currentQuestion;
     this.currentQuestion++;
     if (this.currentQuestion > this.questions.length - 1) {
       this.currentQuestion = this.questions.length - 1;
@@ -96,8 +99,24 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
     }
   },
 
+  goTo: function(step) {
+    var _view = this;
+    this.previousQuestion = this.currentQuestion;
+    this.currentQuestion = step - 1;
+    if (this.currentQuestion > this.questions.length - 1) {
+      this.currentQuestion = this.questions.length - 1;
+      this.done();
+    } else {
+      _.delay(function() {
+        Mamajamas.Context.Progress.hide();
+        _view.renderCurrentQuestion();
+      }, 200);
+    }
+  },
+
   previous: function() {
-    this.currentQuestion--;
+    this.currentQuestion = this.previousQuestion;
+    this.previousQuestion = this.currentQuestion - 1;
     if (this.currentQuestion < 0) this.currentQuestion = 0;
     this.renderCurrentQuestion();
   },

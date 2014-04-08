@@ -36,6 +36,10 @@ Mamajamas.Views.QuizQuestion = Backbone.View.extend({
     return false;
   },
 
+  goTo: function(step) {
+    this.quizView.goTo(step);
+  },
+
   save: function(event) {
     event.preventDefault();
     Mamajamas.Context.Progress.show();

@@ -45,6 +45,9 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
   next: function() {
     if (this.model.get("skipped") == true)
       window.location = "/list";
+    else if (this.justBrowsing()) {
+      this.quizView.goTo(8);
+    }
     else
       this.quizView.next();
   },
@@ -237,6 +240,11 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
     });
 
     return false;
+  },
+
+  justBrowsing: function() {
+    var status = this.model.get("answers")[0];
+    return (status === "am just browsing or have advice.");
   },
 
 });
