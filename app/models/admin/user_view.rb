@@ -43,12 +43,4 @@ class Admin::UserView
   def quiz_answers
     @answers ||= Quiz::Answer.most_recent_answers(user.id)
   end
-
-  def featured_list?
-    list.featured?
-  end
-
-  def expert_list?
-    list.expert?
-  end
 end

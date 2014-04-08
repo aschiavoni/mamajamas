@@ -42,7 +42,9 @@ class Admin::UsersCsvReport
                 :parent_status,
                 :due_date,
                 :admin,
-                :admin_notes
+                :admin_notes,
+                :featured_list?,
+                :expert_list?
     ]
   end
 

@@ -48,11 +48,19 @@ module UserDecorator
     formatted_date(last_sign_in_at)
   end
 
+  def featured_list?
+    list.present? && list.featured?
+  end
+
+  def expert_list?
+    list.present? && list.expert?
+  end
+
   def list_tags
     tags = []
     if list.present?
-      tags << "featured" if list.featured?
-      tags << "expert" if list.expert?
+      tags << "featured" if featured_list?
+      tags << "expert" if expert_list?
     end
     tags.join(", ")
   end
