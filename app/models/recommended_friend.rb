@@ -45,6 +45,6 @@ class RecommendedFriend
       users = users.where("profile_picture IS NOT NULL")
     end
 
-    users.order("follower_count DESC")
+    users.order("lists.featured DESC, users.follower_count DESC")
   end
 end

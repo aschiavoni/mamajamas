@@ -4,6 +4,6 @@ class BrowseLists
       includes(:list).
       where(guest: false).
       where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
-      order("follower_count DESC")
+      order("lists.featured DESC, users.follower_count DESC")
   end
 end

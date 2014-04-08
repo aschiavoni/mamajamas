@@ -16,13 +16,14 @@ class FriendsController < ApplicationController
   end
 
   def following
-    @friends = current_user.followed_users.order("follower_count desc")
+    @friends = current_user.followed_users.includes(:list).
+      order("lists.featured DESC, users.follower_count DESC")
   end
 
   def followers
     @friends = current_user.followers.includes(:list).
       where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
-      order("follower_count desc")
+      order("lists.featured DESC, users.follower_count DESC")
   end
 
   def new
