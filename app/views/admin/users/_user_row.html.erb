@@ -8,6 +8,9 @@
     <span class="subtext">
       <%= mail_to(user.email) %>
     </span>
+    <% if user.list && user.list_tags.present? -%>
+      <div class="list-tags"><%= user.list_tags %></div>
+    <% end -%>
   </td>
   <td>
     <% if user.shared_list? -%>

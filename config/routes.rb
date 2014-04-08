@@ -72,7 +72,11 @@ Mamajamas::Application.routes.draw do
     resources :categories, only: [ :index ], shallow: true do
       resources :product_types, except: [ :show ]
     end
-    resources :users, only: [ :index, :show, :update, :destroy ]
+    resources :users, only: [ :index, :show, :update, :destroy ] do
+      member do
+        put 'update_notes'
+      end
+    end
   end
 
   scope "api" do

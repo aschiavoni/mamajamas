@@ -345,7 +345,9 @@ CREATE TABLE lists (
     completed_at timestamp without time zone,
     built_at timestamp without time zone,
     privacy integer DEFAULT 0 NOT NULL,
-    saved boolean DEFAULT false NOT NULL
+    saved boolean DEFAULT false NOT NULL,
+    featured boolean DEFAULT false NOT NULL,
+    expert boolean DEFAULT false NOT NULL
 );
 
 
@@ -1271,3 +1273,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140204000141');
 INSERT INTO schema_migrations (version) VALUES ('20140204001956');
 
 INSERT INTO schema_migrations (version) VALUES ('20140206013731');
+
+INSERT INTO schema_migrations (version) VALUES ('20140408135419');

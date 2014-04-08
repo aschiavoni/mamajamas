@@ -14,6 +14,17 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def update
+    user = User.find(params[:id])
+    user.update_attributes!(params[:user])
+    user.list.update_attributes!(params[:list], as: :admin)
+    if request.xhr?
+      render json: user
+    else
+      redirect_to admin_user_path(params[:id])
+    end
+  end
+
+  def update_notes
     admin_notes = params[:user][:admin_notes]
     user = User.find(params[:id])
     user.update_attributes!(admin_notes: admin_notes)

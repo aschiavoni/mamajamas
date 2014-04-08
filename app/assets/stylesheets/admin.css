@@ -227,3 +227,7 @@
 
 #adminpage .user-list #user-notes-form input[type=submit] {
 }
+
+#adminpage .list-tags {
+  font-weight: bold;
+}

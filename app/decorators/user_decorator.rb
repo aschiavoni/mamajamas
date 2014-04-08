@@ -48,6 +48,15 @@ module UserDecorator
     formatted_date(last_sign_in_at)
   end
 
+  def list_tags
+    tags = []
+    if list.present?
+      tags << "featured" if list.featured?
+      tags << "expert" if list.expert?
+    end
+    tags.join(", ")
+  end
+
   private
 
   def formatted_date(ts)
