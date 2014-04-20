@@ -12,6 +12,7 @@ class ListItem < ActiveRecord::Base
   attr_accessible :category_id, :product_type_id, :product_type_name
   attr_accessible :placeholder, :list_item_image_id
   attr_accessible :vendor, :vendor_id
+  attr_accessible :age_range_id
 
   validates :name, :link, presence: true, unless: :placeholder?
   validates :product_type_name, presence: true
