@@ -73,10 +73,5 @@ module Mamajamas
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       "#{html_tag}".html_safe
     }
-
-    # middleware
-    if Rails.env.production?
-      config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-27329366-1'
-    end
   end
 end
