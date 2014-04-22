@@ -279,6 +279,10 @@ class User < ActiveRecord::Base
     quiz_age_answer.present? ? quiz_age_answer.answers[2] : "n/a"
   end
 
+  def has_multiples?
+    quiz_age_answer.present? && quiz_age_answer.answers[1] == "true"
+  end
+
   def quiz_age_answer
     @age_answer ||= Quiz::Answer.most_recent_answers(id).select { |q|
       q.question == "age"

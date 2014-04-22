@@ -8,7 +8,15 @@ class ListRecommendationService
     conditions = "priority < 3"
     list.list_items.placeholders.where(conditions).each do |placeholder|
       rps = recommended_products[placeholder.product_type_id]
-      replace_placeholder(placeholder, rps.sample) if rps.size > 0
+
+      if rps.size > 0
+        if user.has_multiples? &&
+            (twins_rec = rps.select { |rp| rp.tag == "twins" }.first).present?
+          replace_placeholder(placeholder, twins_rec)
+        else
+          replace_placeholder(placeholder, rps.sample)
+        end
+      end
     end
   end
 
@@ -33,10 +41,9 @@ class ListRecommendationService
     @recommended_products ||= build_recommended_products_hash
   end
 
-  # we are only using 3 tags for recommended products for now
   def build_recommended_products_hash
     h = Hash.new { |hsh, key| hsh[key] = [] }
-    tags = [ "eco", "cost", "extra" ]
+    tags = [ "eco", "cost", "extra", "twins" ]
     RecommendedProduct.where(tag: tags).each do |rp|
       h[rp.product_type_id] << rp
     end
