@@ -1,9 +1,9 @@
 class PublicListsController < ApplicationController
-  before_filter :authenticate_user!, only: [ :preview, :publish ]
+  before_filter :authenticate_user!, only: [ :preview, :publish, :copy ]
   before_filter :find_list, only: [ :preview, :publish ]
   before_filter :find_shared_list, only: [ :show ]
   before_filter :pinnable, only: [ :show ]
-  before_filter :init_view
+  before_filter :init_view, except: [ :copy ]
 
   def show
     cat = params[:category] || 'all'
@@ -54,6 +54,19 @@ class PublicListsController < ApplicationController
     end
   end
 
+  def copy
+    source_id = params[:source]
+    not_found and return if source_id.blank?
+
+    source = List.find(source_id)
+    not_found and return unless shareable?(source)
+
+    copier = ListCopier.new source, current_user.list
+    copier.copy
+
+    render json: current_user.list.id
+  end
+
   private
 
   def render_list_entries(list_entries)
@@ -87,7 +100,7 @@ class PublicListsController < ApplicationController
   end
 
   def find_list
-   @list = current_user.list
+    @list = current_user.list
     not_found if @list.blank?
   end
 
@@ -100,7 +113,7 @@ class PublicListsController < ApplicationController
   private
 
   def shareable?(list)
-    if @list.blank? || (@list.private? && current_user != @list.user)
+    if list.blank? || (list.private? && current_user != list.user)
       false
     else
       true

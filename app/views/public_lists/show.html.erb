@@ -206,7 +206,9 @@
   </form>
   <script type="text/javascript">
    Mamajamas.Context.List = new Mamajamas.Models.List({
+     id: <%= @view.list.id %>,
      title: '<%= @view.list.title %>',
+     owner_id: <%= @view.list.user.id %>,
      <% if @view.category.present? -%>
      category_id: '<%= @view.category.id %>',
      category: '<%= @view.category.slug %>',

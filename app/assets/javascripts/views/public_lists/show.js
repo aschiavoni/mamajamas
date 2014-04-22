@@ -1,4 +1,4 @@
-Mamajamas.Views.PublicListShow = Backbone.View.extend({
+Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
 
   priorityContainers: {},
 
@@ -17,10 +17,10 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
   filter: null,
 
   initialize: function() {
-    Mamajamas.Context.Test = this.collection;
     this.collection.on('reset', this.render, this);
 
     this.initCollapsibles();
+    this.initCopier();
 
     // since the privacy options are not contained in this.$el, we
     // will wire the events up manually
@@ -153,6 +153,30 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
     });
   },
 
+  initCopier: function() {
+    var _view = this;
+    if (_view.isAuthenticated() &&
+        _view.model.get("owner_id") != Mamajamas.Context.User.get("id")) {
+      var $a = $("<a>").attr("href", "#").addClass("button").html("Copy List")
+      $("#subhed h2").after($a);
+      $a.click(function(event) {
+        event.preventDefault();
+        _view.showProgress();
+
+        $.post("/list/copy", {
+          source: _view.model.get("id")
+        }).done(function(result) {
+          window.location = "/list";
+        }).fail(function() {
+          Mamajamas.Context.Notifications.error("We could not copy this list right now. Please try again later.");
+        }).always(function() {
+          _view.hideProgress();
+        });
+        return false;
+      });
+    }
+  },
+
   updatePrivacy: function(event) {
     var $selected = $(event.currentTarget);
     var newPrivacy = parseInt($selected.val());
@@ -167,6 +191,25 @@ Mamajamas.Views.PublicListShow = Backbone.View.extend({
       }
       this.currentPrivacy = newPrivacy;
     }
+  },
+
+  // TODO: refactor this into a standalone component if needed anywhere else
+  showProgress: function() {
+    var assetPath = Mamajamas.Context.AssetPath;
+    var src = assetPath + "loader36-f.gif";
+
+    var $d = $("<div>").attr("id", "full-loader-wrap");
+    var $loader = $("<div>").attr("id", "loader");
+    var $img = $("<img>").attr("src", src).attr("alt", "Please wait...");
+    $loader.append($img);
+    $d.append($loader);
+    $("body").append($d);
+  },
+
+  hideProgress: function() {
+    _.delay(function() {
+      $("#full-loader-wrap").remove();
+    }, 1000);
   },
 
   $priorityContainer: function(priority) {

@@ -50,6 +50,19 @@ describe ListCopier do
     target.reload.list_items.user_items.count.should == 3
   end
 
+  it "does not copy items that already exist on list" do
+    target.add_list_item(build(:list_item, list: nil,
+                               vendor: "amazon",
+                               vendor_id: "12345"), false)
+    source.add_list_item(build(:list_item, list: nil,
+                               vendor: "amazon",
+                               vendor_id: "12345"), false)
+
+    copier = ListCopier.new source, target
+    copier.copy
+    target.reload.list_items.user_items.count.should == 1
+  end
+
   context "replacing placeholders" do
 
     before(:each) do

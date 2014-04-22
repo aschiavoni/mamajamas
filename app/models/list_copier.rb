@@ -8,6 +8,10 @@ class ListCopier
     ActiveRecord::Base.transaction do
       source.list_items.user_items.each do |list_item|
         next if list_item.priority >= 3
+        if list_item.vendor_id.present? && target.list_items.user_items.
+            where(vendor: list_item.vendor, vendor_id: list_item.vendor_id).any?
+          next
+        end
 
         target.list_items.placeholders.
           where(product_type_id: list_item.product_type_id).
