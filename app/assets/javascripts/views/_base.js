@@ -7,6 +7,10 @@ Mamajamas.Views.Base = Backbone.View.extend({
     return Mamajamas.Context.User != null;
   },
 
+  userHasList: function() {
+    return Mamajamas.Context.User.get("has_list") == true;
+  },
+
   isFacebookConnected: function() {
     return this.isAuthenticated() &&
       Mamajamas.Context.User.get("is_facebook_connected");
