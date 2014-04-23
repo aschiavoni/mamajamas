@@ -17,18 +17,18 @@
     <div class="collapsible-content">
       <fieldset>
         <p>
-        <%= f.label :full_name, "First and last name" %>
-        <br />
-        <%= f.text_field :full_name %>
-        <%= field_error resource, :full_name %>
+          <%= f.label :full_name, "First and last name" %>
+          <br />
+          <%= f.text_field :full_name %>
+          <%= field_error resource, :full_name %>
         </p>
       </fieldset>
       <fieldset>
         <p>
-        <%= f.label :email, "Email address" %>
-        <br />
-        <%= f.email_field :email %>
-        <%= field_error resource, :email %>
+          <%= f.label :email, "Email address" %>
+          <br />
+          <%= f.email_field :email %>
+          <%= field_error resource, :email %>
         </p>
       </fieldset>
       <div style="display: none;">
@@ -43,17 +43,17 @@
       </div>
       <fieldset>
         <p>
-        <%= f.label :password %>
-        <br />
-        <%= f.password_field :password %>
-        <strong id="password-strength" class="status-msg pw-weak"></strong>
-        <%= field_error resource, :password %>
+          <%= f.label :password %>
+          <br />
+          <%= f.password_field :password %>
+          <strong id="password-strength" class="status-msg pw-weak"></strong>
+          <%= field_error resource, :password %>
         </p>
         <p>
-        <%= f.label :password_confirmation, "Confirm password" %>
-        <br />
-        <%= f.password_field :password_confirmation %>
-        <%= field_error resource, :password_confirmation %>
+          <%= f.label :password_confirmation, "Confirm password" %>
+          <br />
+          <%= f.password_field :password_confirmation %>
+          <%= field_error resource, :password_confirmation %>
         </p>
       </fieldset>
       <!-- button row -->
