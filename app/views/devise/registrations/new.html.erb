@@ -30,6 +30,17 @@
           <%= field_error resource, :email %>
         </p>
       </dd>
+      <div style="display: none;">
+        <dt>Username<strong class="required">*</strong></dt>
+        <dd>
+          <p>
+            <%= f.label :username, "Please leave this blank" %>
+            <br />
+            <%= f.text_field :username %>
+            <%= field_error resource, :user_name %>
+          </p>
+        </dd>
+      </div>
       <dt>Password<strong class="required">*</strong></dt>
       <dd>
         <p>

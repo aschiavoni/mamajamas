@@ -31,6 +31,16 @@
         <%= field_error resource, :email %>
         </p>
       </fieldset>
+      <div style="display: none;">
+        <fieldset>
+          <p>
+            <%= f.label :username, "Please leave this blank" %>
+            <br />
+            <%= f.text_field :username %>
+            <%= field_error resource, :username %>
+          </p>
+        </fieldset>
+      </div>
       <fieldset>
         <p>
         <%= f.label :password %>
@@ -56,5 +66,5 @@
       </div>
     </div>
   </div>
-  <!-- end modal window content --> 
+  <!-- end modal window content -->
 <% end %>

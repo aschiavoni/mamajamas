@@ -16,31 +16,38 @@ class RegistrationsController < Devise::RegistrationsController
         redirect_to new_user_registration_path
       end
     else
-      # create real user
-      build_resource
-
-      # manually default guest to false, I only have to do this
-      # in the heroku environment, not sure why
-      resource.guest = false if resource.respond_to?(:guest)
-
-      # always remember password
-      resource.remember_me = true if resource.respond_to?(:remember_me)
-
-      if resource.save
-        if resource.active_for_authentication?
-          flash_message = :signed_up
-          @redirect_path = after_sign_up_path_for(resource)
-        else
-          flash_message = "signed_up_but_#{resource.inactive_message}"
-          @redirect_path = after_inactive_sign_up_path_for(resource)
-        end
-
-        resource.send_welcome_email if resource.respond_to?(:send_welcome_email)
-        set_flash_message :notice, flash_message if is_navigational_format?
-        sign_in(resource_name, resource)
+      # handle honeypot value
+      # if username is included, don't do anything and redirect to
+      # root
+      if params[resource_name.to_sym][:username].present?
+        @redirect_path = root_path
       else
-        clean_up_passwords resource
-        init_view
+        # create real user
+        build_resource
+
+        # manually default guest to false, I only have to do this
+        # in the heroku environment, not sure why
+        resource.guest = false if resource.respond_to?(:guest)
+
+        # always remember password
+        resource.remember_me = true if resource.respond_to?(:remember_me)
+
+        if resource.save
+          if resource.active_for_authentication?
+            flash_message = :signed_up
+            @redirect_path = after_sign_up_path_for(resource)
+          else
+            flash_message = "signed_up_but_#{resource.inactive_message}"
+            @redirect_path = after_inactive_sign_up_path_for(resource)
+          end
+
+          resource.send_welcome_email if resource.respond_to?(:send_welcome_email)
+          set_flash_message :notice, flash_message if is_navigational_format?
+          sign_in(resource_name, resource)
+        else
+          clean_up_passwords resource
+          init_view
+        end
       end
 
       respond_to do |format|
