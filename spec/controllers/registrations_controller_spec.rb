@@ -12,7 +12,6 @@ describe RegistrationsController do
 
     let(:registration) do
       {
-        username: user.username,
         email: user.email,
         password: "p@ssw0rd!",
         password_confirmation: "p@ssw0rd!"

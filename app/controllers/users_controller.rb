@@ -34,6 +34,7 @@ class UsersController < ApplicationController
     @redirect_path = complete_redirect_path
     @profile = Forms::CompleteProfile.new(current_user)
     uparams = params[:profile] || params[:user]
+    uparams.delete(:username) # username is a honeypot field
 
     respond_to do |format|
       if @profile.update!(uparams)
