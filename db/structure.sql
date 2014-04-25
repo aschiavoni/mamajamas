@@ -24,6 +24,20 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
+-- Name: hstore; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
+
+
+--
 -- Name: unaccent; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -630,7 +644,8 @@ CREATE TABLE users (
     welcome_sent_at timestamp without time zone,
     quiz_taken_at timestamp without time zone,
     admin_notes text,
-    follower_count integer DEFAULT 0 NOT NULL
+    follower_count integer DEFAULT 0 NOT NULL,
+    email_preferences hstore DEFAULT ''::hstore NOT NULL
 );
 
 
@@ -1083,6 +1098,13 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
+-- Name: users_email_preferences; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX users_email_preferences ON users USING gin (email_preferences);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -1275,3 +1297,9 @@ INSERT INTO schema_migrations (version) VALUES ('20140204001956');
 INSERT INTO schema_migrations (version) VALUES ('20140206013731');
 
 INSERT INTO schema_migrations (version) VALUES ('20140408135419');
+
+INSERT INTO schema_migrations (version) VALUES ('20140425155000');
+
+INSERT INTO schema_migrations (version) VALUES ('20140425155141');
+
+INSERT INTO schema_migrations (version) VALUES ('20140425155248');

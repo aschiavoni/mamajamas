@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   # cache facebook friends in the database
   serialize :facebook_friends, Array
 
+  serialize :email_preferences, ActiveRecord::Coders::Hstore
+
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login
 
@@ -54,6 +56,9 @@ class User < ActiveRecord::Base
   validate :valid_country_code
 
   before_validation :set_username
+  before_validation(on: :create) do
+    self.email_preferences = {}
+  end
 
   scope :guests, lambda { where(guest: true) }
   scope :registered, lambda { where(guest: false) }
@@ -287,6 +292,31 @@ class User < ActiveRecord::Base
     @age_answer ||= Quiz::Answer.most_recent_answers(id).select { |q|
       q.question == "age"
     }.first
+  end
+
+  # email preferences
+  def followed_user_updates_disabled
+    email_preferences &&
+      email_preferences['followed_user_updates_disabled']
+  end
+
+  def followed_user_updates_disabled?
+    self.followed_user_updates_disabled == "true"
+  end
+
+  def followed_user_updates_disabled=(val)
+    self.email_preferences = (self.email_preferences || {}).
+      merge('followed_user_updates_disabled' => !!val)
+  end
+
+  def followed_user_updates_sent_at
+    email_preferences &&
+      email_preferences['followed_user_updates_sent_at']
+  end
+
+  def followed_user_updates_sent_at=(val)
+    self.email_preferences = (self.email_preferences || {}).
+      merge('followed_user_updates_sent_at' => val)
   end
 
   protected

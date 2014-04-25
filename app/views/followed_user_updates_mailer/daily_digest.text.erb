@@ -1,0 +1,11 @@
+<% @updates.each do |followed, items| -%>
+<%= followed.full_name %> has added new gear to their Mamajamas list:
+
+<% items.each do |list_item| -%>
+<%= list_item.name %> <%= public_list_category_url(followed.slug, list_item.category.slug) %>
+
+<% end -%>
+See more at: <%= public_list_url(followed.slug) %>
+---
+
+<% end -%>
