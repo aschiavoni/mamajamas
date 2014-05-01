@@ -7,6 +7,9 @@ class RelationshipMailer < ActionMailer::Base
   def follower_notification(relationship_id)
     relationship = Relationship.find(relationship_id)
     @followed = relationship.followed
+
+    return if @followed.new_follower_notifications_disabled?
+
     @follower = relationship.follower
     @display_name = @followed_display_name = full_name(@followed)
     @follower_display_name = full_name(@follower)

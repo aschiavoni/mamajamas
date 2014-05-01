@@ -38,7 +38,9 @@ class FriendsController < ApplicationController
   def notify
     if params[:notify] == "1"
       current_user.relationships.pending_notification.each do |relationship|
-        RelationshipMailer.delay.follower_notification(relationship)
+        unless relationship.followed.new_follower_notifications_disabled?
+          RelationshipMailer.delay.follower_notification(relationship)
+        end
       end
     end
     redirect_to post_notify_redirect_path
