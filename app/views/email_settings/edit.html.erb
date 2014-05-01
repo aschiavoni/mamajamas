@@ -11,25 +11,27 @@
 
 <%= form_for @settings, url: email_path, as: :settings, method: :put, html: { id: "frm-list-settings" } do |f| %>
   <h3>Email Settings</h3>
-  <div class="settings-select">
+  <div id="email-settings" class="settings-select">
     <p> Send me an email when: </p>
     <fieldset>
       <ul>
-        <li>
-          <label>
-            <%= f.check_box :new_follower_notifications_enabled %>
-            Someone follows my list
-          </label>
-        </li>
-        <li>
-          <label>
-            <%= f.check_box :followed_user_updates_enabled %>
-            Someone I’m following adds something to their list
-          </label>
-        </li>
+        <div id="ind-emails">
+          <li>
+            <label>
+              <%= f.check_box :new_follower_notifications_enabled %>
+              Someone follows my list
+            </label>
+          </li>
+          <li>
+            <label>
+              <%= f.check_box :followed_user_updates_enabled %>
+              Someone I’m following adds something to their list
+            </label>
+          </li>
+        </div>
         <li class="separator">
           <label>
-            <%= check_box_tag "unsubscribe_all"%>
+            <%= check_box_tag "settings[unsubscribe_all]"%>
             Don’t send me any emails, please.
           </label>
         </li>

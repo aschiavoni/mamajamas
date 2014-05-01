@@ -16,7 +16,7 @@ module EmailPreferences
       end
 
       define_method "#{disabled_name}?" do
-        send(disabled_name)
+        public_send(disabled_name)
       end
 
       define_method "#{disabled_name}=" do |val|
@@ -25,15 +25,15 @@ module EmailPreferences
       end
 
       define_method enabled_name do
-        !send(disabled_name)
+        !public_send(disabled_name)
       end
 
       define_method "#{enabled_name}?" do
-        !send("#{disabled_name}?")
+        !public_send("#{disabled_name}?")
       end
 
       define_method "#{enabled_name}=" do |val|
-        send("#{disabled_name}=", !val)
+        public_send("#{disabled_name}=", !val)
       end
     end
   end

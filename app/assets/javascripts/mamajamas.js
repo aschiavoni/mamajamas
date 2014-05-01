@@ -56,6 +56,13 @@ window.Mamajamas = {
       });
     }
 
+    // email settings
+    if ($('#email-settings').length > 0) {
+      new Mamajamas.Views.EmailSettings({
+        el: '#frm-list-settings'
+      });
+    }
+
     // list
     if ($('#my-list').length > 0) {
       new Mamajamas.Routers.ListItems();

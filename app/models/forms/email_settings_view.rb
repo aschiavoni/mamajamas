@@ -5,6 +5,11 @@ class Forms::EmailSettingsView
   include ActiveModel::Validations
   extend ActiveModel::Translation
 
+  PREFERENCES = [
+                 :followed_user_updates_enabled,
+                 :new_follower_notifications_enabled
+                ]
+
   def persisted?
     false
   end
@@ -22,20 +27,23 @@ class Forms::EmailSettingsView
   def process_atrributes(attributes)
     attrs = attributes.with_indifferent_access
 
-    [
-     'followed_user_updates_enabled',
-     'new_follower_notifications_enabled'
-    ].each do |e|
-      if attrs.has_key?(e)
-        curval = attrs[e].to_s
-        attrs[e] = (curval == "true" || curval == "1")
+    unsub_all = attrs.delete(:unsubscribe_all)
+    if truthy?(unsub_all)
+      attrs.merge!(Hash[PREFERENCES.map { |p| [p, false] }])
+    else
+      PREFERENCES.each do |e|
+        if attrs.has_key?(e)
+          curval = attrs[e].to_s
+          attrs[e] = truthy?(curval)
+        end
       end
     end
     attrs
   end
 
   def update!(attributes = {})
-    update_attributes(process_atrributes(attributes))
+    attrs = process_atrributes(attributes)
+    update_attributes(attrs)
     return false unless valid?
     save
   end
@@ -56,5 +64,9 @@ class Forms::EmailSettingsView
 
   def user
     @user
+  end
+
+  def truthy?(val)
+    val == "true" || val == "1"
   end
 end
