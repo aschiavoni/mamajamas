@@ -17,6 +17,10 @@ class FollowedUserUpdatesMailer < ActionMailer::Base
     @user.update_attributes!({ followed_user_updates_sent_at: Time.now.utc },
                              { without_protection: true })
 
+    sig = EmailAccessToken.
+      create_access_token(@user, "followed_user_updates")
+    @unsub_url = unsubscribe_url(signature: sig)
+
     @display_name = first_name(@user)
     @subject = "Mamajamas updates from your friends"
     mail to: @user.email, subject: @subject

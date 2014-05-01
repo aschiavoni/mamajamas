@@ -20,6 +20,10 @@ class RelationshipMailer < ActionMailer::Base
     @subject = "#{@follower_display_name} is now following your Mamajamas List!"
     @hide_salutation = true
 
+    sig = EmailAccessToken.
+      create_access_token(@followed, "new_follower_notifications")
+    @unsub_url = unsubscribe_url(signature: sig)
+
     mail(to: "#{@followed_display_name} <#{@followed.email}>",
          subject: @subject)
   end

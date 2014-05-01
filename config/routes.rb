@@ -31,6 +31,8 @@ Mamajamas::Application.routes.draw do
   put "/settings" => "list_settings#update"
   get "/email" => "email_settings#edit"
   put "/email" => "email_settings#update"
+  get("/email/unsubscribe/:signature" => "email_settings#unsubscribe",
+      as: "unsubscribe")
   get "/profile" => "users#edit"
   put "/profile" => "users#update"
   put "/account/complete" => "users#complete"
