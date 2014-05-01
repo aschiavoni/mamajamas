@@ -375,4 +375,68 @@ describe User do
 
   end
 
+  describe "email preferences" do
+
+    let(:user) { build(:user, email_preferences: nil) }
+
+    context "email preference null" do
+
+      it "treats email as enabled when not set" do
+        user.new_follower_notifications_enabled?.should be_true
+      end
+
+      it "returns false for disabled" do
+        user.new_follower_notifications_disabled?.should be_false
+      end
+
+      it "sets email preference as disabled" do
+        user.new_follower_notifications_disabled = true
+        user.email_preferences.should == {
+          "new_follower_notifications_disabled" => true
+        }
+      end
+
+      it "sets email preference as enabled" do
+        user.new_follower_notifications_enabled = true
+        user.email_preferences.should == {
+          "new_follower_notifications_disabled" => false
+        }
+      end
+
+    end
+
+    context "email preference disabled" do
+
+      before(:each) {
+        user.new_follower_notifications_disabled = true
+      }
+
+      it "returns false for enabled" do
+        user.new_follower_notifications_enabled?.should be_false
+      end
+
+      it "returns true for disabled" do
+        user.new_follower_notifications_disabled?.should be_true
+      end
+
+    end
+
+    context "email preference enabled" do
+
+      before(:each) {
+        user.new_follower_notifications_disabled = false
+      }
+
+      it "returns true for enabled" do
+        user.new_follower_notifications_enabled?.should be_true
+      end
+
+      it "returns false for disabled" do
+        user.new_follower_notifications_disabled?.should be_false
+      end
+
+    end
+
+  end
+
 end

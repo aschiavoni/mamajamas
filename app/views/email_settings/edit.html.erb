@@ -1,0 +1,42 @@
+<%= content_for :nav do -%>
+  <ul class="sidemenu">
+    <li>
+      <%= link_to "List", settings_path %>
+    </li>
+    <li class="current">
+      <%= link_to "Email", email_path %>
+    </li>
+  </ul>
+<% end -%>
+
+<%= form_for @settings, url: email_path, as: :settings, method: :put, html: { id: "frm-list-settings" } do |f| %>
+  <h3>Email Settings</h3>
+  <div class="settings-select">
+    <p> Send me an email when: </p>
+    <fieldset>
+      <ul>
+        <li>
+          <label>
+            <%= f.check_box :new_follower_notifications_enabled %>
+            Someone follows my list
+          </label>
+        </li>
+        <li>
+          <label>
+            <%= f.check_box :followed_user_updates_enabled %>
+            Someone I’m following adds something to their list
+          </label>
+        </li>
+        <li class="separator">
+          <label>
+            <%= check_box_tag "unsubscribe_all"%>
+            Don’t send me any emails, please.
+          </label>
+        </li>
+      </ul>
+    </fieldset>
+  </div>
+  <div class="button-row">
+    <button type="submit" class="button bt-color" id="bt-save">Update</button>
+  </div>
+<% end -%>

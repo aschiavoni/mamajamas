@@ -29,6 +29,8 @@ Mamajamas::Application.routes.draw do
 
   get "/settings" => "list_settings#edit"
   put "/settings" => "list_settings#update"
+  get "/email" => "email_settings#edit"
+  put "/email" => "email_settings#update"
   get "/profile" => "users#edit"
   put "/profile" => "users#update"
   put "/account/complete" => "users#complete"

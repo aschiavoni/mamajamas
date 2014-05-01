@@ -3,6 +3,9 @@
     <li class="current">
       <%= link_to "List", settings_path %>
     </li>
+    <li>
+      <%= link_to "Email", email_path %>
+    </li>
   </ul>
 <% end -%>
 <% if @settings.has_list? -%>
@@ -17,28 +20,28 @@
     <div id="listprivacy-select">
       <p>Who would you like to see your list?</p>
       <fieldset>
-	<ul>
-	  <li>
-	    <label>
+        <ul>
+          <li>
+            <label>
               <%= f.radio_button :privacy, List::PRIVACY_PRIVATE %>
-	      Just you</label> — Only you can see your list. 
-	  </li>
-	  <li>
-	    <label>
+              Just you</label> — Only you can see your list.
+          </li>
+          <li>
+            <label>
               <%= f.radio_button :privacy, List::PRIVACY_PUBLIC %>
-	      Anyone</label> — Everyone who visits Mamajamas. 
-	  </li>
-	  <li>
-	    <label>
+              Anyone</label> — Everyone who visits Mamajamas.
+          </li>
+          <li>
+            <label>
               <%= f.radio_button :privacy, List::PRIVACY_REGISTERED %>
-	      Mamajamas users</label> — Only logged-in Mamajamas users.
-	  </li>
-	  <li>
-	    <label>
+              Mamajamas users</label> — Only logged-in Mamajamas users.
+          </li>
+          <li>
+            <label>
               <%= f.radio_button :privacy, List::PRIVACY_REGISTRY %>
-	      Registry option</label> — Everyone can see only items you need.
-	  </li>
-	</ul>
+              Registry option</label> — Everyone can see only items you need.
+          </li>
+        </ul>
       </fieldset>
     </div>
     <div class="button-row">

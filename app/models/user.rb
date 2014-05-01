@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include EmailPreferences
+
   extend FriendlyId
   friendly_id :username, use: [ :slugged, :history ]
 
@@ -295,19 +297,8 @@ class User < ActiveRecord::Base
   end
 
   # email preferences
-  def followed_user_updates_disabled
-    email_preferences &&
-      email_preferences['followed_user_updates_disabled']
-  end
-
-  def followed_user_updates_disabled?
-    self.followed_user_updates_disabled == "true"
-  end
-
-  def followed_user_updates_disabled=(val)
-    self.email_preferences = (self.email_preferences || {}).
-      merge('followed_user_updates_disabled' => !!val)
-  end
+  email_preference :new_follower_notifications
+  email_preference :followed_user_updates
 
   def followed_user_updates_sent_at
     email_preferences &&
