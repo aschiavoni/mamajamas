@@ -21,8 +21,10 @@ class FollowedUserUpdatesMailer < ActionMailer::Base
       create_access_token(@user, "followed_user_updates")
     @unsub_url = unsubscribe_url(signature: sig)
 
+    @hide_salutation = true
     @display_name = first_name(@user)
-    @subject = "Mamajamas updates from your friends"
+    @first_followed = first_name(@updates.first.first)
+    @subject = "New Gear Has Been Added to #{@first_followed.possessive} List!"
     mail to: @user.email, subject: @subject
   end
 end

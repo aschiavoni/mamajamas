@@ -1,5 +1,5 @@
 <% @updates.each do |followed, items| -%>
-  <p><b><%= followed.full_name %> has added new gear to their Mamajamas list:</b></p>
+  <p><b>Check out what gear has been added to <%= followed.full_name.possessive %> Mamajamas List:</b></p>
   <table border="0" cellpadding="0" cellspacing="0" id="productstable" width="100%" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
     <tr>
       <td style="-ms-text-size-adjust: 67%;-webkit-text-size-adjust: 67%;">&nbsp;</td>
@@ -23,5 +23,14 @@
     <tr>
       <td style="-ms-text-size-adjust: 67%;-webkit-text-size-adjust: 67%;">&nbsp;</td>
     </tr>
+    <tr>
+      <td colspan="2">
+        Click on the links above to get more information, like ratings or reviews of these products.
+      </td>
+    </tr>
   </table>
 <% end -%>
+Thanks!
+<br/>
+The Mamajamas Team
+</p>
