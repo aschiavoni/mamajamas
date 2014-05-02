@@ -156,4 +156,12 @@ class ApplicationController < ActionController::Base
   def pinnable
     @pinterest_js = true
   end
+
+  def set_facebook_ad_conversion_params(pixel_id, value = 0.0, currency = "USD")
+    @facebook_ad_conversion_params = {
+      pixel_id: pixel_id,
+      value: value,
+      currency: currency
+    }
+  end
 end

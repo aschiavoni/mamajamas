@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
+  before_filter { |c| c.set_facebook_ad_conversion_params '6014528473678' }
 
   def edit
     if current_user.guest?

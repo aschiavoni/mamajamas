@@ -2,6 +2,9 @@ class QuizController < ApplicationController
   before_filter :authenticate_user!, except: [ :show ]
   before_filter :allow_guest!, only: [ :show ]
   before_filter :init_view, only: [ :show ]
+  before_filter only: [:show] { |c|
+    c.set_facebook_ad_conversion_params '6014528490878'
+  }
 
   respond_to :json
 

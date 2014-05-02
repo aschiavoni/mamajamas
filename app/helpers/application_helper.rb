@@ -136,6 +136,24 @@ module ApplicationHelper
     js.html_safe
   end
 
+  def facebook_ad_conversion
+    if Rails.env.production? && @facebook_ad_conversion_params
+      js = <<-JS
+        <!-- Facebook Conversion Code for Get to List Page -->
+        <script type="text/javascript">
+        var fb_param = {};
+        fb_param.pixel_id = '#{@facebook_ad_conversion_params[:pixel_id]}';
+        fb_param.value = '#{@facebook_ad_conversion_params[:value]}';
+        fb_param.currency = '#{@facebook_ad_conversion_params[:currency]}';
+        (function()
+        { var fpw = document.createElement('script'); fpw.async = true; fpw.src = '//connect.facebook.net/en_US/fp.js'; var ref = document.getElementsByTagName('script')[0]; ref.parentNode.insertBefore(fpw, ref); })();
+        </script>
+        <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=#{@facebook_ad_conversion_params[:pixel_id]}&value=#{@facebook_ad_conversion_params[:value].to_i}&currency=#{@facebook_ad_conversion_params[:currency]}" /></noscript>
+      JS
+      js.html_safe
+    end
+  end
+
   private
 
   def notification_config

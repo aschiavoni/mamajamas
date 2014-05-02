@@ -3,6 +3,9 @@ class FriendsController < ApplicationController
   before_filter :no_guests, except: [ :new ]
   before_filter :init_index_view, only: [ :index ]
   before_filter :init_view, only: [ :following, :followers, :new, :browse ]
+  before_filter only: [:new] { |c|
+    c.set_facebook_ad_conversion_params '6014528521078'
+  }
 
   def index
     all_fb_friends = current_user.facebook.mamajamas_friends
