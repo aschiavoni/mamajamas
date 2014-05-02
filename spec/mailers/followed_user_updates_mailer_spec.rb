@@ -16,13 +16,13 @@ describe FollowedUserUpdatesMailer do
     end
 
     it "renders the headers" do
-      mail.subject.should eq("Mamajamas updates from your friends")
+      mail.subject.should eq("New Gear Has Been Added to #{'John'.possessive} List!")
       mail.to.should eq([ user.email ])
       mail.from.should eq(["automom@mamajamas.com"])
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("has added new gear")
+      mail.body.encoded.should match("Check out what gear")
     end
 
     it "includes a greeting" do
