@@ -11,6 +11,7 @@ Mamajamas.Views.QuizCustomList = Mamajamas.Views.QuizQuestion.extend({
   initialize: function() {
     this.$el.attr('id', this.quizId);
     this.on('quiz:question:saved', this.next, this);
+    this.on('quiz:question:rendered', this.rendered, this);
   },
 
   events: {
@@ -21,6 +22,15 @@ Mamajamas.Views.QuizCustomList = Mamajamas.Views.QuizQuestion.extend({
     'change input[name=prodrecc-radio]': 'customListToggle',
     'click .gallery-a': 'showPreviewA',
     'click .gallery-b': 'showPreviewB',
+  },
+
+  rendered: function() {
+    var _view = this;
+    if (this.model.get("answers")[0] === "true") {
+      _.defer(function() {
+        $('#custom-list').prop('checked', true);
+      });
+    }
   },
 
   customListToggle: function(event) {
