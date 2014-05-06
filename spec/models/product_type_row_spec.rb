@@ -46,7 +46,7 @@ describe ProductTypeRow do
   end
 
   it "finds image name" do
-    product_type_row.image_name.should == 'bodysuit@2x.png'
+    product_type_row.image_name.should == 'products/icons/bodysuit@2x.png'
   end
 
   it "finds age range" do
