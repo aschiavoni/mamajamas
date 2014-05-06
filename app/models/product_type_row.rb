@@ -31,7 +31,7 @@ class ProductTypeRow
   end
 
   def image_name
-    row[6]
+    "products/icons/#{row[6]}"
   end
 
   def search_query
