@@ -23,7 +23,7 @@
       <em class="ss-icon check">checked</em>
     <% end -%>
   </div>
-  <% if current_user.present? %>
+  <% if current_user.present? && !current_user.guest? %>
     <% if following -%>
       <!-- button: state 1: Follow, state 2: Following, state 2 hover: Unfollow  -->
       <button class="button bt-color bt-follow bt-active unfollow" type="submit">

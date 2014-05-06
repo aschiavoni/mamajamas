@@ -22,15 +22,6 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       return true;
     });
 
-    $('#find-moms, .find-moms').click(function(event) {
-      if (_view.isGuestUser()) {
-        var link = $(event.currentTarget).attr("href");
-        _view.unauthorized(link);
-        return false
-      }
-      return true;
-    });
-
     this.model.on('change:item_count', function() {
       var shareButton = $('#bt-share');
       var shareButonHeader = $('#bt-share-header');

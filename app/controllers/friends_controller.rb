@@ -30,7 +30,7 @@ class FriendsController < ApplicationController
   end
 
   def new
-    if current_user.present?
+    if current_user.present? && !current_user.guest?
       if current_user.google_connected? && current_user.google_friends.empty?
         GoogleContactsWorker.perform_async(current_user.id)
       end
