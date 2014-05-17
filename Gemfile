@@ -103,6 +103,8 @@ gem 'dalli'
 gem 'dalli-delete-matched'
 gem 'sentry-raven', :git => "https://github.com/getsentry/raven-ruby.git"
 gem 'newrelic_rpm'
+# mailchimp api wrapper
+gem 'gibbon', :git => "https://github.com/ryane/gibbon.git"
 
 # background processing
 gem 'sidekiq'

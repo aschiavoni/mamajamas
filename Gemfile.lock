@@ -8,6 +8,14 @@ GIT
       multi_json (~> 1.0)
       uuidtools
 
+GIT
+  remote: https://github.com/ryane/gibbon.git
+  revision: bfa2827a191ef05ad257a4dad1dec49fa06aedc3
+  specs:
+    gibbon (1.1.2)
+      httparty
+      multi_json (>= 1.3.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -180,6 +188,9 @@ GEM
     hike (1.2.1)
     htmlentities (4.3.1)
     http_parser.rb (0.5.3)
+    httparty (0.11.0)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     httpauth (0.2.0)
     i18n (0.6.1)
     interactive_editor (0.0.10)
@@ -228,6 +239,7 @@ GEM
     mini_magick (3.4)
       subexec (~> 0.2.1)
     multi_json (1.7.1)
+    multi_xml (0.5.5)
     multipart-post (1.1.5)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -445,6 +457,7 @@ DEPENDENCIES
   fog
   foreman
   friendly_id
+  gibbon!
   going_postal
   google_contacts_api
   guard
