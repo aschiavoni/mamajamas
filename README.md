@@ -13,7 +13,7 @@ We are using the thin web server in development and production.
 To launch both the web and background processes in development, use
 
     `bundle exec foreman start -f ./Procfile.development `
-    
+
 #### Redis
 
 A local Redis server is required. The default settings should be fine (`apt-get install redis-server`).
@@ -105,6 +105,24 @@ being sent so make sure you are working with appropriate test data.
 
 Remember, making any of the changes described above requires a restart
 of the rails server before they will take effect.
+
+##### Mailchimp
+
+We integrate with Mailchimp to keep an accurate and configurable mailing list. At minimum, you must configure a valid Mailchimp API key in your environment:
+
+  MAILCHIMP_API_KEY
+
+This will assume you have a list called  "Mamajamas Development". You can change this by setting
+
+  MAILCHIMP_MAILING_LIST_NAME
+
+in your environment. You can also change the interest grouping name (default: "Preferences") by setting:
+
+  MAILCHIMP_MAILING_LIST_GROUPING
+
+When deploying, use heroku config:set to configure the environment variables. For example:
+
+    heroku config:set MAILCHIMP_API_KEY="XXXX" --app mamajamas
 
 ### Testing Environment
 
