@@ -22,7 +22,7 @@ module Email
     end
 
     def members(status = nil)
-      api.lists.members(id: id, status: status)
+      api.lists.members(id: id, status: status)["data"]
     end
 
     def interest_groupings

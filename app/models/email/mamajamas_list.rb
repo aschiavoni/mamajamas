@@ -5,12 +5,12 @@ module Email
     PREFERENCES_GROUPS = %w(Blog Product)
 
     def self.configure
-      list = List.find(list_name)
+      list = Email::List.find(list_name)
       list.add_interest_grouping(interest_grouping_name, PREFERENCES_GROUPS)
     end
 
     def initialize
-      @list = List.find(self.class.list_name)
+      @list = Email::List.find(self.class.list_name)
     end
 
     def subscribe(user, groups = PREFERENCES_GROUPS)
@@ -40,11 +40,11 @@ module Email
     end
 
     def subscribed
-      @list.members["data"]
+      @list.members
     end
 
     def unsubscribed
-      @list.members(:unsubscribed)["data"]
+      @list.members(:unsubscribed)
     end
 
     private
