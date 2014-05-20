@@ -108,6 +108,7 @@ gem 'gibbon', :git => "https://github.com/ryane/gibbon.git"
 
 # background processing
 gem 'sidekiq'
+gem 'sidekiq-middleware'
 gem 'slim', '>= 1.1.0'
 gem 'sinatra', '>= 1.3.0', :require => nil
 
