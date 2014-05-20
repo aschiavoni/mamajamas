@@ -2,6 +2,8 @@ class EmailSubscriptionUpdaterWorker
   include Sidekiq::Worker
   include WorkerLogger
 
+  sidekiq_options({ unique: :all })
+
   def perform(user_id)
     log "Looking for user #{user_id}..."
     user = User.find(user_id)

@@ -52,7 +52,7 @@ class Forms::EmailSettingsView
     update_attributes(attrs)
     return false unless valid?
     saved = save
-    EmailSubscriptionUpdaterWorker.perform_async(user.id) if saved
+    EmailSubscriptionUpdaterWorker.perform_in(5.minutes, user.id) if saved
     saved
   end
 
