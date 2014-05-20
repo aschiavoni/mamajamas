@@ -51,7 +51,9 @@ class Forms::EmailSettingsView
     attrs = process_atrributes(attributes)
     update_attributes(attrs)
     return false unless valid?
-    save
+    saved = save
+    EmailSubscriptionUpdaterWorker.perform_async(user.id) if saved
+    saved
   end
 
   private

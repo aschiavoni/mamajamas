@@ -5,6 +5,14 @@ module EmailPreferences
     def email_preference(name)
       sym = name.to_sym
 
+      @email_preference_attrs ||= []
+      @email_preference_attrs << sym
+      class << self
+        def email_preference_attributes
+          @email_preference_attrs
+        end
+      end
+
       enabled_name = "#{sym}_enabled"
       disabled_name = "#{sym}_disabled"
 
@@ -34,6 +42,12 @@ module EmailPreferences
 
       define_method "#{enabled_name}=" do |val|
         public_send("#{disabled_name}=", !val)
+      end
+
+      define_method "unsubscribed_all?" do
+        self.class.email_preference_attributes.map { |attr|
+          public_send("#{attr}_enabled?")
+        }.none?
       end
     end
   end

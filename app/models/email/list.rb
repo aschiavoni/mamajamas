@@ -41,6 +41,7 @@ module Email
       update = options.fetch(:update_existing, false)
       replace_interests = options.fetch(:replace_interests, true)
       send_welcome = options.fetch(:send_welcome, false)
+      email_type = options.delete(:email_type) == :text ? :text : :html
 
       params = {
         id: self.id,
@@ -69,7 +70,11 @@ module Email
         send_notify: send_notify
       }
 
-      api.lists.unsubscribe(params)
+      begin
+        api.lists.unsubscribe(params)
+      rescue Gibbon::MailChimpError => e
+        raise e unless e.name == "List_NotSubscribed"
+      end
     end
 
     private
