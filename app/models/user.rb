@@ -299,6 +299,8 @@ class User < ActiveRecord::Base
   # email preferences
   email_preference :new_follower_notifications
   email_preference :followed_user_updates
+  email_preference :blog_updates
+  email_preference :product_updates
 
   def followed_user_updates_sent_at
     email_preferences &&

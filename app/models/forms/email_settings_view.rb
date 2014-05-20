@@ -7,7 +7,9 @@ class Forms::EmailSettingsView
 
   PREFERENCES = [
                  :followed_user_updates_enabled,
-                 :new_follower_notifications_enabled
+                 :new_follower_notifications_enabled,
+                 :blog_updates_enabled,
+                 :product_updates_enabled
                 ]
 
   def persisted?
@@ -19,6 +21,10 @@ class Forms::EmailSettingsView
   delegate :followed_user_updates_enabled=, to: :user
   delegate :new_follower_notifications_enabled, to: :user
   delegate :new_follower_notifications_enabled=, to: :user
+  delegate :blog_updates_enabled, to: :user
+  delegate :blog_updates_enabled=, to: :user
+  delegate :product_updates_enabled, to: :user
+  delegate :product_updates_enabled=, to: :user
 
   def initialize(user)
     @user = user
