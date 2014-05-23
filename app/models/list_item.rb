@@ -13,6 +13,7 @@ class ListItem < ActiveRecord::Base
   attr_accessible :placeholder, :list_item_image_id
   attr_accessible :vendor, :vendor_id
   attr_accessible :age_range_id
+  attr_accessible :recommended
 
   validates :name, :link, presence: true, unless: :placeholder?
   validates :product_type_name, presence: true
@@ -24,6 +25,7 @@ class ListItem < ActiveRecord::Base
   scope :user_items, where(placeholder: false)
   scope :vendored_items, where("vendor IS NOT NULL")
   scope :added_since, ->(time) { user_items.where("created_at > ?", time) }
+  scope :recommended, where(recommended: true)
 
   def self.unique_products
     vendored_items.select("DISTINCT vendor_id, vendor").map do |list_item|

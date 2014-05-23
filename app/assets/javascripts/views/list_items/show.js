@@ -17,6 +17,9 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     this.model.on("change:priority", this.render, this);
     this.model.on("search:product:update_item", this.updateItem, this);
     this.$el.attr("id", this.model.get("id"));
+
+    if (this.model.get('recommended'))
+      this.$el.addClass('prod-rec')
   },
 
   events: {

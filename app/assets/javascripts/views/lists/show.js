@@ -40,6 +40,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     "click .listsort .choicedrop.list-sort ol li a": "sort",
     "click .listsort .choicedrop.list-age-filter a": "toggleAgeFilterList",
     "click .listsort .choicedrop.list-age-filter ul li a": "ageFilter",
+    "click #prod-rec": "clearRecommendedItems",
   },
 
   render: function() {
@@ -108,6 +109,20 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     var $filterDisplay = $filterLink.parents(".choicedrop").children("a");
     $filterDisplay.html(filterName + " <span class=\"ss-dropdown\"></span>");
     return this.indexView.ageFilter(event);
+  },
+
+  clearRecommendedItems: function(event) {
+    event.preventDefault();
+    m = "Are you sure you want to clear all recommended items from your list?";
+    if (confirm(m)) {
+      var $target = $(event.currentTarget);
+      var $form = $target.parents('form.clear-recommended');
+      var authToken = $("meta[name=csrf-token]").attr('content');
+      $('input', $form).val(authToken);
+      $form.submit();
+    }
+
+    return false;
   },
 
 });

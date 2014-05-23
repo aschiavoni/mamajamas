@@ -19,6 +19,10 @@ class ListView
     @list_entries ||= list.list_entries(category)
   end
 
+  def recommended_items?
+    list_entries.recommended.any?
+  end
+
   def list_entries_by_priority(priority)
     list_items_by_priority[priority]
   end

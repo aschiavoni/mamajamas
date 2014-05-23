@@ -20,6 +20,13 @@ class ListRecommendationService
     end
   end
 
+  def clear_recommendations!
+    list = user.list
+    list.list_items.recommended.each do |list_item|
+      restore_placeholder(list_item)
+    end
+  end
+
   def replace_placeholder(placeholder, recommended_product)
     placeholder.update_attributes!({
                                      name: recommended_product.name,
@@ -27,8 +34,23 @@ class ListRecommendationService
                                      vendor: recommended_product.vendor,
                                      vendor_id: recommended_product.vendor_id,
                                      image_url: recommended_product.image_url,
-                                     placeholder: false
+                                     placeholder: false,
+                                     recommended: true
                                    })
+  end
+
+  def restore_placeholder(list_item)
+    product_type = list_item.product_type
+    list_item.update_attributes!({
+                                   name: nil,
+                                   link: nil,
+                                   owned: false,
+                                   rating: 0,
+                                   notes: nil,
+                                   image_url: product_type.image_name,
+                                   placeholder: true,
+                                   recommended: false
+                                 })
   end
 
   private

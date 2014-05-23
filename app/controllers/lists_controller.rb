@@ -1,7 +1,8 @@
 class ListsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :init_view, only: [ :show ]
-  before_filter :find_list, only: [ :show, :product_types, :check ]
+  before_filter :find_list, only: [ :show, :product_types,
+                                    :check, :clear_recommended ]
   before_filter :set_cache_buster, only: [ :show ]
   before_filter :set_add_to_list, only: [ :show ]
   before_filter only: [:show] { |c|
@@ -47,6 +48,12 @@ class ListsController < ApplicationController
 
   def check
     render json: { complete: ( @list.present? && @list.completed? ) }
+  end
+
+  def clear_recommended
+    flash[:notice] = "We have cleared all recommended items from your list."
+    ListRecommendationService.new(current_user).clear_recommendations!
+    redirect_to list_path
   end
 
   private

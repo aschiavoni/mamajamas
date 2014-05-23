@@ -156,7 +156,7 @@ describe ListItemsController do
 
     let(:list_item) do
       list_item = @list.list_items.first
-      list_item.update_attributes!(owned: false, rating: 1)
+      list_item.update_attributes!(owned: false, rating: 1, recommended: true)
       list_item
     end
 
@@ -174,6 +174,10 @@ describe ListItemsController do
 
     it "should update list item rating" do
       assigns(:list_entry).rating.should == 3
+    end
+
+    it "should clear list item recommended flag" do
+      assigns(:list_entry).should_not be_recommended
     end
 
   end

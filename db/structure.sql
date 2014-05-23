@@ -320,7 +320,8 @@ CREATE TABLE list_items (
     list_item_image_id integer,
     vendor character varying(255),
     vendor_id character varying(255),
-    quantity integer DEFAULT 1 NOT NULL
+    quantity integer DEFAULT 1 NOT NULL,
+    recommended boolean DEFAULT false NOT NULL
 );
 
 
@@ -1303,3 +1304,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140425155000');
 INSERT INTO schema_migrations (version) VALUES ('20140425155141');
 
 INSERT INTO schema_migrations (version) VALUES ('20140425155248');
+
+INSERT INTO schema_migrations (version) VALUES ('20140523132122');

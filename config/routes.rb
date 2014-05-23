@@ -62,6 +62,7 @@ Mamajamas::Application.routes.draw do
     get 'preview/:category' => "public_lists#preview", as: :public_list_preview_category
     post 'publish' => "public_lists#publish", as: :public_list_publish
     post 'copy' => "public_lists#copy", as: :public_list_copy
+    post "clear_recommended" => "lists#clear_recommended", as: :clear_recommended
   end
   get "/list/:category" => "lists#show", as: :list_category
 

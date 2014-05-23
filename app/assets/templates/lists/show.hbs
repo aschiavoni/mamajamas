@@ -2,6 +2,16 @@
   <div class="listhed">
     <h3>{{category_name}}</h3>
   </div>
+  {{#if has_recommended_items}}
+    <form method="POST" action="/list/clear_recommended" class="clear-recommended">
+      <input type="hidden" name="authenticity_token">
+      <div id="prod-rec" class="menu-icon">
+        <a href="#" class="tooltip">
+          <span>Clear Mamajamas-recommended items<em></em></span>
+        </a>
+      </div>
+    </form>
+  {{/if}}
   <div class="listsort">Sort by:
     <div class="choicedrop list-sort"> <a href="#">When to buy <span class="ss-dropdown"></span></a>
       <ol style="display:none; width:7.5em;">
