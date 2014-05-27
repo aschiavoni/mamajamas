@@ -8,7 +8,6 @@ class FollowedUserUpdatesMailer < ActionMailer::Base
     @user = User.find(user_id)
     return if @user.followed_user_updates_disabled?
 
-
     since = @user.followed_user_updates_sent_at || 1.day.ago
 
     @updates = FollowedUserUpdates.new(@user).updates_since(since, 5)
@@ -24,7 +23,7 @@ class FollowedUserUpdatesMailer < ActionMailer::Base
     @hide_salutation = true
     @display_name = first_name(@user)
     @first_followed = first_name(@updates.first.first)
-    @subject = "New Gear Has Been Added to #{@first_followed.possessive} List!"
+    @subject = "New gear has been added to #{@first_followed.possessive} list!"
     mail to: @user.email, subject: @subject
   end
 end
