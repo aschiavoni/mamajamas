@@ -24,4 +24,3 @@ doc/spec_info.txt
 public/uploads/
 Session.vim
 spec/reports
-/.env
