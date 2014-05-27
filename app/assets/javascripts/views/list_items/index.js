@@ -31,9 +31,11 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     var _view = this;
     if (Mamajamas.Context.List.get('view_count') == 0) {
       _view.showHelpModals = true;
-      _.delay(function() {
-        _view.unauthorized();
-      }, 120000);
+      if (_view.isGuestUser()) {
+        _.delay(function() {
+          _view.unauthorized();
+        }, 120000);
+      }
     }
   },
 
