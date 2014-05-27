@@ -1,4 +1,4 @@
-Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
+Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
 
   template: HandlebarsTemplates['list_items/index'],
 
@@ -20,11 +20,21 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
 
   titleHeight: null,
 
+  showHelpModals: false,
+
   initialize: function() {
     this.collection.on("reset", this.render, this);
     this.collection.on("add", this.insertItem, this);
     this.collection.on("remove", this.removeItem, this);
     this.$el.attr("id", "list-items");
+
+    var _view = this;
+    if (Mamajamas.Context.List.get('view_count') == 0) {
+      _view.showHelpModals = true;
+      _.delay(function() {
+        _view.unauthorized();
+      }, 120000);
+    }
   },
 
   events: {
@@ -40,7 +50,7 @@ Mamajamas.Views.ListItemsIndex = Backbone.View.extend({
     this.initDraggables();
     this.titleHeight = $("#title").outerHeight(true);
 
-    if (Mamajamas.Context.List.get('view_count') == 0) {
+    if (this.showHelpModals) {
       var helpModals = new Mamajamas.Views.ListHelpModals();
       $('body').append(helpModals.render().$el);
       helpModals.show();
