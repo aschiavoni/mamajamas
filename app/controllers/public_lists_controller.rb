@@ -64,6 +64,11 @@ class PublicListsController < ApplicationController
     copier = ListCopier.new source, current_user.list
     copier.copy
 
+    source_user = source.user
+    source_user.class.send(:include, UserDecorator)
+    flash[:notice] =
+      "You have successfully copied #{source_user.possessive_name} List!"
+
     render json: current_user.list.id
   end
 
