@@ -40,14 +40,18 @@ class ListRecommendationService
   end
 
   def restore_placeholder(list_item)
-    product_type = list_item.product_type
+    image_name = if list_item.product_type.present?
+                   list_item.product_type.image_name
+                 else
+                   'products/icons/unknown.png'
+                 end
     list_item.update_attributes!({
                                    name: nil,
                                    link: nil,
                                    owned: false,
                                    rating: 0,
                                    notes: nil,
-                                   image_url: product_type.image_name,
+                                   image_url: image_name,
                                    placeholder: true,
                                    recommended: false
                                  })

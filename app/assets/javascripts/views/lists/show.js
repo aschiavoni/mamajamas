@@ -113,14 +113,21 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 
   clearRecommendedItems: function(event) {
     event.preventDefault();
+    var view = this;
+    view.showProgress();
     m = "This will clear all Mamajamas recommendations that you have not added, rated, or edited. You cannot get recommendations back once you clear them.\n\nAre you sure you want to clear all recommended items from your list?"
-    if (confirm(m)) {
-      var $target = $(event.currentTarget);
-      var $form = $target.parents('form.clear-recommended');
-      var authToken = $("meta[name=csrf-token]").attr('content');
-      $('input', $form).val(authToken);
-      $form.submit();
-    }
+
+    _.delay(function() {
+      if (confirm(m)) {
+        var $target = $(event.currentTarget);
+        var $form = $target.parents('form.clear-recommended');
+        var authToken = $("meta[name=csrf-token]").attr('content');
+        $('input', $form).val(authToken);
+        $form.submit();
+      } else {
+        view.hideProgress();
+      }
+    }, 600);
 
     return false;
   },
