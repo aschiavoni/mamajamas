@@ -22,6 +22,8 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
 
   showHelpModals: false,
 
+  showClearRecommendedTooltip: false,
+
   initialize: function() {
     this.collection.on("reset", this.render, this);
     this.collection.on("add", this.insertItem, this);
@@ -31,6 +33,7 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     var _view = this;
     if (Mamajamas.Context.List.get('view_count') == 0) {
       _view.showHelpModals = true;
+      _view.showClearRecommendedTooltip = true;
     }
 
     if (_view.isGuestUser()) {
@@ -57,6 +60,15 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
       var helpModals = new Mamajamas.Views.ListHelpModals();
       $('body').append(helpModals.render().$el);
       helpModals.show();
+    }
+
+    if (this.showClearRecommendedTooltip) {
+      // show clear recommended items tooltip for one minute
+      var $clearRec = $('#prod-rec.menu-icon .tooltip span');
+      $clearRec.css('display', 'block').css('cursor: pointer');
+      _.delay(function() {
+        $clearRec.css('display', '').css('cursor: default');
+      }, 60000);
     }
 
     return this;
