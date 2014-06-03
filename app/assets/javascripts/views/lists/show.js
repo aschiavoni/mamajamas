@@ -113,6 +113,12 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 
   clearRecommendedItems: function(event) {
     event.preventDefault();
+
+    var $target = $(event.target);
+    if ($target.prop('tagName').toLowerCase() == 'span') {
+      $target.css('display', '').css('cursor: default');
+      return false;
+    }
     var view = this;
     view.showProgress();
     m = "This will clear all Mamajamas recommendations that you have not added, rated, or edited. You cannot get recommendations back once you clear them.\n\nAre you sure you want to clear all recommended items from your list?"

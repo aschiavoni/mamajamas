@@ -66,9 +66,6 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
       // show clear recommended items tooltip for one minute
       var $clearRec = $('#prod-rec.menu-icon .tooltip span');
       $clearRec.css('display', 'block').css('cursor: pointer');
-      _.delay(function() {
-        $clearRec.css('display', '').css('cursor: default');
-      }, 60000);
     }
 
     return this;
