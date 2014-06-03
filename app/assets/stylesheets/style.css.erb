@@ -913,12 +913,16 @@ a.more-friends:focus {
 #p-browse.layout_2-7-3 #secondary > .content {
         padding-top: 0;
 }
-.friends-sort {
+.friends-sort,
+.friends-key {
         position: fixed;
         top: 151px;
-        padding: 4px 0;
-        color: #777;
+        padding: 8px 0 0;
+        color: #a6a6a6;
         z-index: 1100;
+}
+.friends-key {
+        margin: 1px 0 0 200px;
 }
 ul.friends-list {
         margin: 31px 0 0 0;
@@ -942,29 +946,51 @@ ul.friends-list {
         border-top: none;
 }
 .friends-list img {
+        float: left;
         width: 84px;
         margin: 0 20px 0 0;
         border: solid 1px #BEBEBE;
         cursor: pointer;
+}
+.friend-data {
         float: left;
+        width: 100%;
+}
+.friend-followers,
+.friend-listitems,
+.friend-updated {
+        float: left;
+        width: 22%;
+        margin: 0.38em 2.9% 0.46em 0;
+}
+.friends-list .friend-followers {
+        clear: left;
+}
+.friend-updated {
+        width: 47%;
 }
 .friends-list .friend-info {
-        float: left;
+        margin-left: 106px;
         padding-top: 0;
         color: #a6a6a6;
 }
 .friends-list .friend-info strong.mom  {
         font-size: 16px;
         font-weight: 600;
+        line-height: 1.125em;
         color: #000;
 }
 .friends-list .friend-info strong {
         color: #555;
 }
+.friends-list .profile p {
+        color: #777;
+        margin-bottom: 0;
+}
 .friends-list .bt-follow {
+        display: block;
         min-width: 98px; /* also see .bt-follow button styles, grouped with #bt-follow styles */
-        float: right;
-        margin-top: 28px;
+        margin-top: 1em;
         margin-right: 10px;
 }
 .friends-list .check {
@@ -975,12 +1001,32 @@ ul.friends-list {
 .friends-list li:first-child .check {
         top: 67px;
 }
+#findfriends .ss-icon {
+        position: relative;
+        top: 1px;
+        font-size: 1.08em;
+}
+.friends-list span.fa {
+        display: inline;
+}
+.friends-list .expert em {
+        display: block;
+    height: 1px;
+    overflow: hidden;
+    text-indent: -9999px;
+}
+.expert {
+        color: #f2b24c;
+        margin-left: 3px;
+        cursor: pointer;
+}
 #findfriends .content {
         padding: 0;
 }
 #findfriends .form-page {
         padding: 20px 0 0;
 }
+
 /* invite buttons */
 .fb-invite,
 .google-invite {
@@ -993,13 +1039,14 @@ ul.friends-list {
 /* Discover menu and button images ------ */
 #findfriends .menu {
         background:url(<%= asset_path("bg_fade-w.png") %>) repeat-x 0 bottom;
-        padding: 47px 0 58px;
+        padding: 46px 0 57px;
 }
 #findfriends .menu a {
-        padding-left: 45px;
+        padding-left: 44px;
         background-image: url(<%= asset_path("icons_find-friends.png") %>);
         background-repeat: no-repeat;
         background-size: 480px 96px;
+        border: 1px solid #EEEEEE;
 }
 #accessibletabsnavigation0-0 a {
         background-position: 0 0;
@@ -1016,18 +1063,22 @@ ul.friends-list {
 #accessibletabsnavigation0-0 a:hover,
 #accessibletabsnavigation0-0.current a {
         background-position: 0 -48px;
+        border-color: #FFF;
 }
 #accessibletabsnavigation0-1 a:hover,
 #accessibletabsnavigation0-1.current a {
         background-position: -126px -48px;
+        border-color: #FFF;
 }
 #accessibletabsnavigation0-2 a:hover,
 #accessibletabsnavigation0-2.current a {
         background-position: -252px -48px;
+        border-color: #FFF;
 }
 #accessibletabsnavigation0-3 a:hover,
 #accessibletabsnavigation0-3.current a {
         background-position: -378px -48px;
+        border-color: #FFF;
 }
 /* Discover prompt ------ */
 #findfriends-prompt {
@@ -1110,9 +1161,10 @@ ul.friends-list {
 .bt-close {
         font-size: 13px;
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 11px;
+        right: 11px;
         color: #c9c9c9;
+        z-index: 2000;
 }
 .oldie .bt-close,
 .ie9 .bt-close {
@@ -1428,6 +1480,135 @@ ul.friends-list {
         height: 26px;
         background: url(<%= asset_path("pop-arrow.png") %>) no-repeat 0 0;
         background-size: 14px 26px;
+}
+#bookmark-modal,
+#bookmark-modal-help {
+        background-image: url(<%= asset_path("bookmark-widget_feature.png") %>);
+        background-repeat: no-repeat;
+        background-size: 542px 241px;
+}
+#bookmark-modal-help {
+        background-image: url(<%= asset_path("bookmark-modal-help.jpg") %>);
+}
+#bookmark-modal.simplemodal-data,
+#bookmark-modal-help.simplemodal-data {
+        width: 540px;
+}
+#bookmark-modal.simplemodal-data .content {
+        padding-left: 35.5%;
+        position: relative;
+}
+#bookmark-modal.simplemodal-data h2,
+#bookmark-modal-help.simplemodal-data h2 { /* overrides default modal h2 style */
+        font-size: 1.69em;
+        font-weight: 400;
+        line-height: 1.18em;
+        letter-spacing: normal;
+        text-transform: none;
+        margin: 1em 0;
+        padding: 0;
+        background-color: transparent;
+}
+#bookmark-modal.simplemodal-data h2 {
+        color: #995e9a;
+        padding: 3px 0 153px;
+}
+#bookmark-modal-help.simplemodal-data h2 {
+        color: #5bb0ce;
+        margin-bottom: 0;
+        padding: 222px 0 0;
+}
+#bookmark-modal.simplemodal-data h3,
+#bookmark-modal-help.simplemodal-data h3 { /* overrides default modal h3 style */
+        font-size: 1.231em;
+        font-weight: 400;
+        color: #222;
+        border-bottom: none;
+}
+#bookmark-modal-help.simplemodal-data h3 {
+        margin-top: .25em;
+}
+#bookmark-modal.simplemodal-data h3 strong {
+        color: #000;
+        font-weight: 600;
+}
+#bookmark-modal ol {
+        margin-bottom: 2em;
+        padding-left: 1.5em;
+}
+#bookmark-modal ol li {
+        margin: 0 0 1em 0;
+        padding-left: 0;
+}
+#bookmark-modal-help ul {
+        padding-left: 1.25em;
+}
+#bookmark-modal-help ul li {
+        margin: 0 0 .75em 0;
+        padding-left: 0;
+}
+#bookmark-modal-help strong {
+        color: #222;
+}
+#bookmark-modal #btbookmark {
+        position: absolute;
+        width: 83px;
+        height: 150px;
+        top: 184px;
+        left: 53px;
+        text-indent: -9999px;
+        overflow: hidden;
+        background:url(<%= asset_path("bookmark_button.png") %>) no-repeat 0 0;
+        background-size: 83px 150px;
+        cursor: move;
+}
+#bookmark-arrow {
+        background:url(<%= asset_path("arrow_blue.png") %>) no-repeat;
+        background-size: 49px 32px;
+        position: absolute;
+    top: 274px;
+        left: 139px;
+        width: 49px;
+        height: 32px;
+}
+#bookmark-arrow2 {
+        background: url(<%= asset_path("arrow_blue2.png") %>) no-repeat;
+        background-size: 52px 111px;
+        position: absolute;
+    top: 68px;
+        left: 150px;
+        width: 53px;
+        height: 111px;
+}
+.bookmark-modal-left {
+        position: absolute;
+        width:30%;
+        text-align: center;
+    position: absolute;
+        left: 6%;
+    width: 22%;
+}
+#bookmark-modal .bookmark-modal-left {
+    top: 28.5em;
+}
+.bookmark-help {
+        font-size: .846em;
+}
+#bookmark-modal-help.simplemodal-data .content {
+        position: relative;
+        padding-left: 30px;
+}
+#bookmark-modal-help .help-label {
+  background : #5BB0CE;
+  background : rgba(91, 176, 206, 1);
+  box-shadow : 1px 2px 2px rgba(0, 0, 0, 0.2);
+  filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=1, OffY=2, Color='#000000') ;
+  position: absolute;
+  font-size: 1.231em;
+  padding: 7px 15px;
+  color: #fff;
+  top: 165px;
+  left: 53px;
 }
 /* alert modals */
 .m-alert {
@@ -3970,6 +4151,15 @@ a.bt-gift {
 .privacy-status span.icon-gift {
         background-image: url(<%= asset_path("icons_privacy-status@2x.png") %>); /* privacy settings */
 }
+#bookmark-modal #btbookmark {
+        background-image:url(<%= asset_path("bookmark_button@2x.png") %>);
+}
+#bookmark-arrow {
+        background-image:url(<%= asset_path("arrow_blue@2x.png") %>);
+}
+#bookmark-arrow2 {
+        background-image: url(<%= asset_path("arrow_blue2@2x.png") %>);
+}
 }
 /* standalone forms */
 #user-login .divider,
@@ -3986,145 +4176,7 @@ a.bt-gift {
         top: -.7em;
         color: #8c8c8c;
 }
-/*
- * Based on
- * SimpleModal Image Gallery (http://simplemodal.com)
- *
- * Original copyright (c) 2013 Eric Martin - http://ericmmartin.com
- *
- * Licensed under the MIT license:
- *   http://www.opensource.org/licenses/mit-license.php
- */
 
-#gallery {
-        background: #fff url(../img/gallery/loading.gif) center 100px no-repeat;
-        color: #999;
-        display: none;
-        margin: 0 auto;
-        padding: 0 0 85px 0;
-        position: relative;
-        width: 900px;
-        border: 1px solid #d9d9d9;
-        box-shadow: 1px 1px 4px rgba(0,0,0,0.35);
-        -moz-box-shadow: 1px 1px 4px rgba(0,0,0,0.35);
-        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.35);
-}
-#gallery-close {
-        text-align: right;
-        padding: 10px;
-}
-#gallery-close a {
-        font-size: 12px;
-        outline-style: none;
-        text-decoration: none;
-}
-#gallery-close .bt-close {
-        position: static;
-}
-.oldie #gallery-close,
-.ie9 #gallery-close {
-        text-align: left;
-        height: 17px;
-}
-.oldie #gallery-close .bt-close,
-.ie9 #gallery-close .bt-close {
-        display: block;
-        width: 12px;
-        height: 17px;
-        text-indent: -9999px;
-        overflow: hidden;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: #fff url(<%= asset_path("icon_close.png") %>) no-repeat 0 0;
-}
-#gallery-image-container {
-        display: none;
-        height: 100%;
-        position: relative;
-}
-#gallery-loading {
-        padding: 8px;
-}
-#gallery-controls {
-        display: none;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-}
-#gallery-controls div {
-        float: left;
-        height: 100%;
-        width: 50%;
-}
-#gallery-controls a {
-        background: #fff;
-        color: #555;
-        font-size: 36px;
-        line-height: 1;
-        outline-style: none;
-        position: absolute;
-        text-decoration: none;
-        top: 200px;
-}
-#gallery-previous-link {
-        left: 0;
-        padding: 15px 10px 6px 4px;
-        border-radius: 0 6px 6px 0;
-        -moz-border-radius-bottomright: 6px;
-        -webkit-border-bottom-right-radius: 6px;
-        -moz-border-radius-topright: 6px;
-        -webkit-border-top-right-radius: 6px;
-}
-#gallery-next-link {
-        padding: 15px 4px 6px 10px;
-        right: 0;
-        border-radius: 6px 0 0 6px;
-        -moz-border-radius-bottomleft: 6px;
-        -webkit-border-bottom-left-radius: 6px;
-        -moz-border-radius-topleft: 6px;
-        -webkit-border-top-left-radius: 6px;
-}
-#gallery-meta-container {
-        color: #999;
-        display: none;
-        margin: 0 auto;
-        overflow: auto;
-}
-#gallery-image {
-        padding: 0 10px 10px;
-}
-#gallery-meta {
-        display: none;
-        height: 40px;
-        padding: 5px 15px 0;
-}
-#gallery-meta div {
-        float: left;
-}
-#gallery-info {
-        text-align: left;
-        width: 80%;
-}
-#gallery-title a,
-#gallery-title a:link,
-#gallery-title a:visited {
-        color: #666;
-        font-size: 14px;
-        font-weight: bold;
-        line-height: 14px;
-}
-#gallery-title a:visited:hover {
-        color: #999;
-}
-#gallery-pages {
-        color: #999;
-        display: block;
-        font-size: 11px;
-        line-height: 14px;
-}
 /* Tabs (based on work by Dirk Ginader (ginader.de) and Dirk Jesse (http://www.yaml.de) ---------------- */
 .js ul.tabs-list {
         margin: 0;
@@ -4303,7 +4355,7 @@ ul.menu {
 }
 ul.menu li {
         display: inline;
-        margin-right: 15px;
+        margin-right: 10px;
 }
 ul.menu li a {
         padding: 15px 9px 12px;
