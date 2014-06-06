@@ -86,6 +86,18 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
     });
   },
 
+  initExpandables: function() {
+    $('div.expandable', this.$el).expander({
+      expandPrefix:     '... ',
+      expandText:       'Expand', // default is 'read more'
+      userCollapseText: 'Collapse',  // default is 'read less'
+      expandEffect: 'show',
+      expandSpeed: 0,
+      collapseEffect: 'hide',
+      collapseSpeed: 0
+    });
+  },
+
 });
 
 Mamajamas.Views.FriendsView.extend = Backbone.View.extend;

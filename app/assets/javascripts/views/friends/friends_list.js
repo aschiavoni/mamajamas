@@ -8,6 +8,9 @@ window.Mamajamas.Views.FriendsList = Mamajamas.Views.FriendsView.extend({
     // otherwise, this blows up under phantomjs in test
     if (this.initializeScrolling)
       this.initializeScrolling();
+
+    if (this.initExpandables)
+      this.initExpandables();
   },
 
   events: {

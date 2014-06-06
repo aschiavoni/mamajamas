@@ -22,6 +22,14 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     if ($('.google-friends-progress').length > 0) {
       this.waitForFriends(this, "google");
     }
+
+    if (this.initExpandables)
+      this.initExpandables();
+
+    // have to check that initializeScrolling is defined
+    // otherwise, this blows up under phantomjs in test
+    if (this.initializeScrolling)
+      this.initializeScrolling();
   },
 
   events: {
