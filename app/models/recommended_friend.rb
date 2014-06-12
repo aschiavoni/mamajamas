@@ -1,10 +1,13 @@
 class RecommendedFriend
+  include FriendsSort
+
   attr_reader :user
   attr_reader :excluded
 
-  def initialize(user, excluded = [])
+  def initialize(user, excluded = [], sort = nil)
     @user = user
     @excluded = excluded
+    @sort = sort
   end
 
   def all(limit = nil)
@@ -45,6 +48,6 @@ class RecommendedFriend
       users = users.where("profile_picture IS NOT NULL")
     end
 
-    users.order("lists.featured DESC, users.follower_count DESC")
+    users.order(sort_by(@sort))
   end
 end

@@ -3,9 +3,11 @@ class FindFriendsView
   GOOGLE_PROVIDER = "google"
 
   extend Memoist
+  include FriendListsSortNames
 
-  def initialize(user = nil)
+  def initialize(user = nil, sort = nil)
     @user = user
+    @sort = sort.present? ? sort.to_sym : nil
   end
 
   def email_invite
@@ -17,9 +19,10 @@ class FindFriendsView
 
   def recommended_friends
     if user.present?
-      RecommendedFriend.new(user, mamajamas_facebook_friends).not_following
+      RecommendedFriend.new(user, mamajamas_facebook_friends, @sort).
+        not_following
     else
-      BrowseLists.recommended
+      BrowseLists.new(@sort).recommended
     end
   end
   memoize :recommended_friends

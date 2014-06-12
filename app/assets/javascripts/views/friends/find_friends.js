@@ -40,6 +40,8 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     "click button.fb-invite": "facebookInvite",
     "click button.google-invite": "googleInvite",
     "submit #frm-create-email-invite": "emailInvite",
+    "click .friends-sort .choicedrop a": "toggleSortList",
+    "click .friends-sort .choicedrop ul li a": "sort",
   },
 
   render: function(event) {

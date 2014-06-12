@@ -102,6 +102,45 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
     });
   },
 
+  toggleSortList: function(event) {
+    var $target = $(event.currentTarget);
+    var $choiceDrop = $target.parents(".choicedrop");
+    var $list = $choiceDrop.find("ul");
+
+    if ($list.is(":visible")) {
+      $list.hide();
+    } else {
+      $list.show();
+    }
+
+    return false;
+  },
+
+  sort: function(event) {
+    var $sortLink = $(event.currentTarget);
+    var sortDisplayName = $sortLink.html();
+    var sortName = $sortLink.data("sort");
+    var $sortDisplay = $sortLink.parents(".choicedrop").children("a");
+    $sortDisplay.html(sortDisplayName + " <span class=\"ss-dropdown\"></span>");
+    window.location = this.sortRedirectPath(sortName);
+    return false;
+  },
+
+  sortRedirectPath: function(sortName) {
+    var path = window.location.pathname;
+
+    var redirectPath;
+    if (path.match(/\/followers/)) {
+      redirectPath = "/friends/followers/" + sortName;
+    } else if (path.match(/\/following/)) {
+      redirectPath = "/friends/following/" + sortName;
+    } else {
+      redirectPath = "/friends/find/" + sortName;
+    }
+
+    return redirectPath;
+  },
+
 });
 
 Mamajamas.Views.FriendsView.extend = Backbone.View.extend;

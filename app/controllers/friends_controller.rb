@@ -19,14 +19,11 @@ class FriendsController < ApplicationController
   end
 
   def following
-    @friends = current_user.followed_users.includes(:list).
-      order("lists.featured DESC, users.follower_count DESC")
+    @view = FriendsListView.new(current_user, params[:sort])
   end
 
   def followers
-    @friends = current_user.followers.includes(:list).
-      where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
-      order("lists.featured DESC, users.follower_count DESC")
+    @view = FriendsListView.new(current_user, params[:sort])
   end
 
   def new
@@ -35,7 +32,7 @@ class FriendsController < ApplicationController
         GoogleContactsWorker.perform_async(current_user.id)
       end
     end
-    @view = FindFriendsView.new(current_user)
+    @view = FindFriendsView.new(current_user, params[:sort])
   end
 
   def notify

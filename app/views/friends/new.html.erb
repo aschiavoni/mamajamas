@@ -29,12 +29,12 @@
   <div class="tabbody">
     <div class="friends-sort" style="top: 151px">Sort by:
       <!-- drop-down menu -->
-      <div class="choicedrop"> <a href="#">Popularity <span class="ss-dropdown"></span></a>
+      <div class="choicedrop"> <a href="#"><%= @view.sort_name %> <span class="ss-dropdown"></span></a>
         <ul style="display:none; width:7.5em;">
-          <li><a href="#">Popularity</a></li>
-          <li><a href="#">Name</a></li>
-          <li><a href="#">Last updated</a></li>
-          <li><a href="#">Expert Lists</a></li>
+          <li><a href="#" data-sort="popular">Popularity</a></li>
+          <li><a href="#" data-sort="name">Name</a></li>
+          <li><a href="#" data-sort="recent">Last updated</a></li>
+          <li><a href="#" data-sort="expert">Expert Lists</a></li>
         </ul>
       </div>
       <!-- /drop-down menu -->

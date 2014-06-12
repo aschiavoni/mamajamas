@@ -11,11 +11,14 @@ window.Mamajamas.Views.FriendsList = Mamajamas.Views.FriendsView.extend({
 
     if (this.initExpandables)
       this.initExpandables();
+
+    $(".friends-sort .choicedrop a").click($.proxy(this.toggleSortList, this));
+    $(".friends-sort .choicedrop ul li a").click($.proxy(this.sort, this));
   },
 
   events: {
     "click button.follow": "follow",
-    "click button.unfollow": "unfollow"
+    "click button.unfollow": "unfollow",
   },
 
   render: function(event) {
