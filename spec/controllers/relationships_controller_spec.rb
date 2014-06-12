@@ -26,9 +26,9 @@ describe RelationshipsController do
       user_to_follow.followers.should include(current_user)
     end
 
-    it "should render friend template" do
+    it "should render list friend template" do
       post :create, relationship: { followed_id: user_to_follow.id }
-      response.should render_template("friends/_friend")
+      response.should render_template("friends/_list_friend")
     end
 
     it "sends notification email" do
@@ -75,8 +75,8 @@ describe RelationshipsController do
       user_to_follow.followers.should_not include(current_user)
     end
 
-    it "should render friend template" do
-      response.should render_template("friends/_friend")
+    it "should render list friend template" do
+      response.should render_template("friends/_list_friend")
     end
 
   end
