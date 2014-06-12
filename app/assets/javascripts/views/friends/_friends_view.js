@@ -43,12 +43,14 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
   follow: function(view) {
     if (this.isAuthenticated()) {
       var btn = $(view.currentTarget);
-      var li = btn.parent("li");
+      var li = btn.parents("li");
       var followedId = li.data("friend-id");
+      var view = this;
 
       var data = { relationship: { followed_id: followedId } };
       $.post('/relationships', data, function(response) {
         li.replaceWith(response);
+        view.initExpandables();
       });
     } else {
       this.unauthorized("/friends/find");
@@ -59,12 +61,14 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
   unfollow: function(view) {
     if (this.isAuthenticated()) {
       var btn = $(view.currentTarget);
-      var li = btn.parent("li");
+      var li = btn.parents("li");
       var relationshipId = li.data("relationship-id");
+      var view = this;
 
       var data = { _method: "delete" };
       $.post("/relationships/" + relationshipId, data, function(response) {
         li.replaceWith(response);
+        view.initExpandables();
       });
     } else {
       this.unauthorized("/friends/find");
