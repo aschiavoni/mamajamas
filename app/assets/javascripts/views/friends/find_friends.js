@@ -14,6 +14,7 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
       autoAnchor:true,
       saveState:true
     });
+    $('.friends-sort, .friends-key').show();
 
     if (!window.location.hash && !this.isFacebookConnected()) {
       this.tabs.showAccessibleTab(0);

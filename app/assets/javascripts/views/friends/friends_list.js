@@ -12,6 +12,7 @@ window.Mamajamas.Views.FriendsList = Mamajamas.Views.FriendsView.extend({
     if (this.initExpandables)
       this.initExpandables();
 
+    $('.friends-sort, .friends-key').show();
     $(".friends-sort .choicedrop a").click($.proxy(this.toggleSortList, this));
     $(".friends-sort .choicedrop ul li a").click($.proxy(this.sort, this));
   },
