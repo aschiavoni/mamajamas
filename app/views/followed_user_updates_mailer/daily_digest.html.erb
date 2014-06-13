@@ -9,7 +9,7 @@
       <td width="80" align="center" style="text-align:center;border:solid 1px #ccc;">
         <%= image_tag list_item.image_url, size: "78x78", alt: list_item.name, style: "width: 78px !important; height: 78px !important;" %>
       </td>
-      <td style="padding-left:10px;"><%= list_item.name %> <%= link_to "details", public_list_category_url(followed.slug, list_item.category.slug) %></td>
+      <td style="padding-left:10px;"><%= list_item.name %> <%= link_to "details", public_list_category_url(followed.slug, list_item.category.slug, anchor: list_item.id) %></td>
     </tr>
     <tr>
       <td style="-ms-text-size-adjust: 67%;-webkit-text-size-adjust: 67%;">&nbsp;</td>
