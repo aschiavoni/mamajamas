@@ -10,6 +10,8 @@ Mamajamas.Views.ListItemNotes = Mamajamas.Views.Base.extend({
 
   editClass: "prod-note_edit",
 
+  cancelAutoSave: false,
+
   initialize: function() {
     if (!this.hasNotes())
       this.$el.addClass(this.emptyClass);
@@ -59,6 +61,9 @@ Mamajamas.Views.ListItemNotes = Mamajamas.Views.Base.extend({
     this.model.set("notes", notes);
     this.model.save({ notes: notes }, {
       wait: true,
+      beforeSend: function() {
+        _view.cancelAutoSave = true;
+      },
       success: function() {
         if (rerender) {
           _view.viewMode();
@@ -79,7 +84,10 @@ Mamajamas.Views.ListItemNotes = Mamajamas.Views.Base.extend({
   },
 
   autoSave: _.debounce(function(_view) {
-    _view.save(null, false);
+    if (!_view.cancelAutoSave)
+      _view.save(null, false);
+    else
+      _view.cancelAutoSave = false;
   }, 3000, false),
 
   cancel: function(event) {
