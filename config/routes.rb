@@ -41,6 +41,7 @@ Mamajamas::Application.routes.draw do
   get '/faq' => 'pages#faq', :as => :faq
   get '/terms-of-service' => 'pages#terms', :as => :terms
   get '/privacy-policy' => 'pages#privacy', :as => :privacy
+  get '/mjsb' => 'pages#mjsb', :as => :bookmarklet
   get '/test/error' => 'home#error'
   get '/robots.txt' => 'robots#show'
 

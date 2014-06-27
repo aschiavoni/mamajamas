@@ -15,5 +15,5 @@
  *= require fluid-layout
  *= require style
  *= require quiz
- *= require_tree .
+ *= require_directory .
  */

@@ -18,4 +18,8 @@ class PagesController < ApplicationController
     set_body_class "text-page"
     set_subheader "Frequently Asked Questions"
   end
+
+  def mjsb
+    render layout: false
+  end
 end
