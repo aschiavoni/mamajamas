@@ -28,6 +28,16 @@ $(function() {
     e.preventDefault();
   });
 
+  $('body').on('populate', function(e, d) {
+    $('#additem-name').val(d.title);
+    $('#additem-field-price').val(d.price);
+
+    // show the frame
+    $('body').trigger('post-message', [{
+      event: 'resize-iframe'
+    }]);
+  });
+
 });
 
 $(document).on('post-message', 'body', function(e, d) {
@@ -38,6 +48,6 @@ $(document).on('post-message', 'body', function(e, d) {
 // show the bookmarklet the first time
 $(document).ready(function() {
   $('body').trigger('post-message', [{
-    event: 'resize-iframe'
+    event: 'populate-iframe'
   }]);
 });

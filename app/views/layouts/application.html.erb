@@ -153,6 +153,16 @@
   </div>
   <div id="footer">
     <div class="content">
+      <a style="padding-left:110px;" href="javascript:
+         (function () {
+           if (!window.mamajamas) {
+             var jsCode = document.createElement('script');
+             jsCode.setAttribute('src', '<%= asset_url('b/mjsb.js') %>');
+             document.body.appendChild(jsCode);
+           } else {
+             mamajamas.show();
+           }
+         }());">Bookmarklet</a>
     </div>
   </div>
 </div>
