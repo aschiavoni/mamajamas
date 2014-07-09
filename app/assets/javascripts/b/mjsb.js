@@ -57,7 +57,8 @@ var mamajamas = (function() {
     this.data = function() {
       return {
         title: findTitle(),
-        price: findPrice()
+        price: findPrice(),
+        images: findImages()
       }
     };
 
@@ -100,6 +101,20 @@ var mamajamas = (function() {
       }
 
       return price;
+    }
+
+    function findImages() {
+      var images = $.map($('img:visible'), function(img, i) {
+        var $img = $(img);
+        if ($img.height() >= 144 && $img.width() >= 144)
+          return $img.attr('src').trim();
+      });
+
+      fbimg = $('meta[property="og:image"]').attr('content');
+      if (fbimg)
+        images.unshift(fbimg);
+
+      return images;
     }
 
     return this;

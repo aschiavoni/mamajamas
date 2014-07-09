@@ -32,6 +32,18 @@ $(function() {
     $('#additem-name').val(d.title);
     $('#additem-field-price').val(d.price);
 
+    var sliderContainer = $('.bxslider');
+    $.each(d.images, function(i, v) {
+      sliderContainer.append($('<li>').
+                             append($('<img>').
+                                    attr('src', v)));
+    });
+
+    sliderContainer.bxSlider({
+      touchEnabled: true,
+      pager: false
+    });
+
     // show the frame
     $('body').trigger('post-message', [{
       event: 'resize-iframe'

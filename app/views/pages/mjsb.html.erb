@@ -15,14 +15,6 @@
 <!-- bxslider (for product image selector) -->
 <%= javascript_include_tag "b/jquery.bxslider.min.js" %>
 <%= javascript_include_tag "b/server.js" %>
-<script>
- $(document).ready(function(){
-   $('.bxslider').bxSlider({
-     touchEnabled: true,
-     pager: false
-   });
- });
-</script>
 <%= stylesheet_link_tag    "application", :media => "all" %>
 </head>
 <body class="addto-mamajamas">
@@ -37,8 +29,6 @@
         <div class="col1">
           <div class="prod-image-frame">
             <ul class="bxslider">
-              <li><img src="/assets/b/amzn_sample1.jpg" alt=""/></li>
-              <li><img src="/assets/b/amzn_sample2.jpg" alt=""/></li>
             </ul>
           </div>
         </div>
