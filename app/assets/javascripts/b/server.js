@@ -1,39 +1,51 @@
-// this is the interface for the parent window
-// and the bookmarklet
+var Mamajamas = Mamajamas || {};
 
-$(function() {
+Mamajamas.bookmarklet = (function() {
 
-  // when client sends message
-  window.addEventListener('message', function(e) {
+  var initialize = function() {
+    initializeMessaging();
 
-    var data = e.data;
+    // wire up close button
+    $('a.bt-close').click(close);
 
-    // it's trying to trigger
-    // an arbitrary custom event
-    if(!!data && data.event) {
-      $('body').trigger(data.event, data.args);
-    }
+    // populate from parent window
+    $('body').on('populate', populate);
 
-  }, false);
+    trigger('populate-iframe');
+  };
 
-});
+  var initializeMessaging = function() {
+    // when client sends message
+    window.addEventListener('message', function(e) {
 
-// example close button, which can communicate back with the bookmarklet code
-$(function() {
+      var data = e.data;
 
-  $('a.bt-close').click(function(e) {
-    $(this).trigger('post-message', [{
-      event: 'unload-bookmarklet'
+      // it's trying to trigger
+      // an arbitrary custom event
+      if(!!data && data.event) {
+        $('body').trigger(data.event, data.args);
+      }
+
+    }, false);
+
+    // proxy messages to the parent
+    $(document).on('post-message', 'body', function(e, d) {
+      window.parent.postMessage(d, '*');
+    });
+  };
+
+  var trigger = function(eventName) {
+    $('body').trigger('post-message', [{
+      event: eventName
     }]);
-    e.preventDefault();
-  });
+  };
 
-  $('body').on('populate', function(e, d) {
-    $('#additem-name').val(d.title);
-    $('#additem-field-price').val(d.price);
+  var populate = function(event, data) {
+    $('#additem-name').val(data.title);
+    $('#additem-field-price').val(data.price);
 
     var sliderContainer = $('.bxslider');
-    $.each(d.images, function(i, v) {
+    $.each(data.images, function(i, v) {
       sliderContainer.append($('<li>').
                              append($('<img>').
                                     attr('src', v)));
@@ -45,21 +57,20 @@ $(function() {
     });
 
     // show the frame
-    $('body').trigger('post-message', [{
-      event: 'resize-iframe'
-    }]);
-  });
+    trigger('resize-iframe');
+  };
 
-});
+  var close = function(event) {
+    event.preventDefault();
+    trigger('unload-bookmarklet');
+  };
 
-$(document).on('post-message', 'body', function(e, d) {
-  window.parent.postMessage(d, '*');
-});
+  return {
+    init: initialize
+  };
 
+})();
 
-// show the bookmarklet the first time
 $(document).ready(function() {
-  $('body').trigger('post-message', [{
-    event: 'populate-iframe'
-  }]);
+  Mamajamas.bookmarklet.init();
 });
