@@ -13,8 +13,7 @@
 <!-- jquery -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <!-- bxslider (for product image selector) -->
-<%= javascript_include_tag "b/jquery.bxslider.min.js" %>
-<%= javascript_include_tag "b/server.js" %>
+<%= javascript_include_tag "b/application.js" %>
 <%= stylesheet_link_tag    "application", :media => "all" %>
 </head>
 <body class="addto-mamajamas">
@@ -26,6 +25,7 @@
     <div class="content clearfix">
       <div class="logo">&nbsp;</div>
       <form>
+        <div id="categories" style="display: none" data-categories="<%= @categories %>"></div>
         <div class="col1">
           <div class="prod-image-frame">
             <ul class="bxslider">
@@ -53,19 +53,7 @@
               <label for="additem-field-cat">Category</label>
               <!-- drop-down menu: item category -->
               <select id="additem-field-cat">
-                <option>Uncategorized </option>
-                <option>Bathing </option>
-                <option>Changing </option>
-                <option>Clothing </option>
-                <option>Decorating </option>
-                <option>Expecting </option>
-                <option>Feeding </option>
-                <option selected> Getting Around </option>
-                <option>Nursing </option>
-                <option>Playing </option>
-                <option>Reading </option>
-                <option>Sleeping </option>
-                <option>Staying Healthy </option>
+                <option>Uncategorized</option>
               </select>
               <!-- / drop-down menu: item category -->
             </div>
@@ -73,11 +61,7 @@
               <label for="additem-field-type">Type</label>
               <!-- drop-down menu: item type -->
               <select id="additem-field-type">
-                <option>Select an Item Type </option>
-                <option>Infant Car Seat</option>
-                <option>Convertible Car Seat </option>
-                <option>Stroller </option>
-                <option>Carrier or Wrap </option>
+                <option>Select an Item Type</option>
               </select>
               <!-- / drop-down menu: item type -->
             </div>

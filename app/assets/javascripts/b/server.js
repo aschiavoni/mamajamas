@@ -4,6 +4,10 @@ Mamajamas.bookmarklet = (function() {
 
   var initialize = function() {
     initializeMessaging();
+    initializeCategories();
+
+    // update product types dropdown when category selection changes
+    $('#additem-field-cat').change(updateProductTypes);
 
     // wire up close button
     $('a.bt-close').click(close);
@@ -12,6 +16,25 @@ Mamajamas.bookmarklet = (function() {
     $('body').on('populate', populate);
 
     trigger('populate-iframe');
+  };
+
+  var populateSelect = function($select, options) {
+    $select.find('option').remove();
+    _.each(options, function(element, index, list) {
+      var $opt = $('<option/>').val(element.id).text(element.name);
+      if (index === 0) $opt.prop('selected', true);
+      $select.append($opt);
+    });
+  };
+
+  var getCategories = function() {
+    return $('#categories').data('categories');
+  };
+
+  var trigger = function(eventName) {
+    $('body').trigger('post-message', [{
+      event: eventName
+    }]);
   };
 
   var initializeMessaging = function() {
@@ -34,10 +57,25 @@ Mamajamas.bookmarklet = (function() {
     });
   };
 
-  var trigger = function(eventName) {
-    $('body').trigger('post-message', [{
-      event: eventName
-    }]);
+  var initializeCategories = function() {
+    var categories = getCategories();
+    var category = _.first(categories);
+
+    populateSelect($('#additem-field-cat'), categories);
+    populateSelect($('#additem-field-type'), category.product_types);
+  };
+
+  var updateProductTypes = function(event) {
+    var $select = $(event.target);
+    var categoryId = $select.val();
+    var categories = getCategories();
+
+    var category = _.find(categories, function(c) {
+      return c.id.toString() === categoryId.toString();
+    });
+
+    if (category)
+      populateSelect($('#additem-field-type'), category.product_types);
   };
 
   var populate = function(event, data) {

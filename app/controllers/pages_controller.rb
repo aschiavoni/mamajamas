@@ -19,7 +19,18 @@ class PagesController < ApplicationController
     set_subheader "Frequently Asked Questions"
   end
 
+  # TODO: cache page
   def mjsb
+    @categories = Category.includes(:product_types).map { |c|
+      {
+        name: c.name,
+        id: c.id,
+        product_types: c.product_types.map { |pt|
+          { id: pt.id, name: pt.name }
+        }
+      }
+    }.to_json
+
     render layout: false
   end
 end
