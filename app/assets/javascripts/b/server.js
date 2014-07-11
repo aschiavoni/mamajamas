@@ -2,20 +2,27 @@ var Mamajamas = Mamajamas || {};
 
 Mamajamas.bookmarklet = (function() {
 
+  var signedIn = function() {
+    return (typeof Mamajamas.Context.User != 'undefined');
+  };
+
   var initialize = function() {
     initializeMessaging();
-    initializeCategories();
+    if (signedIn()) {
+      initializeCategories();
 
-    // update product types dropdown when category selection changes
-    $('#additem-field-cat').change(updateProductTypes);
+      // update product types dropdown when category selection changes
+      $('#additem-field-cat').change(updateProductTypes);
+
+      // populate from parent window
+      $('body').on('populate', populate);
+      trigger('populate-iframe');
+    } else {
+      trigger('resize-iframe');
+    }
 
     // wire up close button
     $('a.bt-close').click(close);
-
-    // populate from parent window
-    $('body').on('populate', populate);
-
-    trigger('populate-iframe');
   };
 
   var populateSelect = function($select, options) {

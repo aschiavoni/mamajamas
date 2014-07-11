@@ -157,6 +157,7 @@
          (function () {
            if (!window.mamajamas) {
              var jsCode = document.createElement('script');
+             jsCode.setAttribute('id', 'mamajamasBookmarkletS');
              jsCode.setAttribute('src', '<%= asset_url('b/mjsb.js') %>');
              document.body.appendChild(jsCode);
            } else {

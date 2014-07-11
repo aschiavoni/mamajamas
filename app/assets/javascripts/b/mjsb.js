@@ -124,6 +124,9 @@ var mamajamas = (function() {
 
     hide: function() {
       container.fadeOut('fast');
+      $('#mamajamasBookmarkletS').remove();
+      container.remove();
+      window.mamajamas = null;
     },
 
     show: function(dimensions) {
@@ -205,6 +208,7 @@ var mamajamas = (function() {
 
     function createContainer(i) {
       var d = $('<div />').
+        attr('id', 'mamajamasBookmarkletC').
         css('background', 'none rgba(0, 0, 0, 0)').
         css('border', 'none').
         css('cursor', 'pointer').
