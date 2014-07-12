@@ -42,6 +42,7 @@ Mamajamas::Application.routes.draw do
   get '/terms-of-service' => 'pages#terms', :as => :terms
   get '/privacy-policy' => 'pages#privacy', :as => :privacy
   get '/mjsb' => 'bookmarklet#index', :as => :bookmarklet
+  post '/mjsb' => 'bookmarklet#create', :as => :bookmarklet
   get '/test/error' => 'home#error'
   get '/robots.txt' => 'robots#show'
 

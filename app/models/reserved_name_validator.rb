@@ -16,6 +16,7 @@ class ReservedNameValidator < ActiveModel::EachValidator
     list list_item list_items lists
     log-in log-out log_in log_out login logout logs
     map maps
+    mjsb mjsbs
     oauth oauth_clients omniauth omniauth_callbacks openid
     password passwords
     privacy product product_type product_types profile profiles

@@ -1,6 +1,7 @@
 var Mamajamas = Mamajamas || {};
 
 Mamajamas.bookmarklet = (function() {
+  var sliderContainer = null;
 
   var signedIn = function() {
     return (typeof Mamajamas.Context.User != 'undefined');
@@ -9,10 +10,9 @@ Mamajamas.bookmarklet = (function() {
   var initialize = function() {
     initializeMessaging();
     if (signedIn()) {
-      initializeCategories();
-
       // update product types dropdown when category selection changes
       $('#additem-field-cat').change(updateProductTypes);
+      $('form').submit(beforeSubmit);
 
       // populate from parent window
       $('body').on('populate', populate);
@@ -64,14 +64,6 @@ Mamajamas.bookmarklet = (function() {
     });
   };
 
-  var initializeCategories = function() {
-    var categories = getCategories();
-    var category = _.first(categories);
-
-    populateSelect($('#additem-field-cat'), categories);
-    populateSelect($('#additem-field-type'), category.product_types);
-  };
-
   var updateProductTypes = function(event) {
     var $select = $(event.target);
     var categoryId = $select.val();
@@ -85,11 +77,25 @@ Mamajamas.bookmarklet = (function() {
       populateSelect($('#additem-field-type'), category.product_types);
   };
 
+  var setProductTypeName = function() {
+    var $select = $('#additem-field-type');
+    var selected = $select.children('option:selected').text();
+    $('#list_item_product_type_name').val(selected)
+  };
+
+  var setImageUrl = function() {
+    var idx = sliderContainer.getCurrentSlide();
+    var $img = sliderContainer.find('li:nth-child(' + (idx + 1) + ') img');
+
+    $('#list_item_image_url').val($img.attr('src'));
+  };
+
   var populate = function(event, data) {
     $('#additem-name').val(data.title);
     $('#additem-field-price').val(data.price);
+    $('#list_item_link').val(data.url);
 
-    var sliderContainer = $('.bxslider');
+    sliderContainer = $('.bxslider');
     $.each(data.images, function(i, v) {
       sliderContainer.append($('<li>').
                              append($('<img>').
@@ -108,6 +114,12 @@ Mamajamas.bookmarklet = (function() {
   var close = function(event) {
     event.preventDefault();
     trigger('unload-bookmarklet');
+  };
+
+  var beforeSubmit = function(event) {
+    setProductTypeName();
+    setImageUrl();
+    return true;
   };
 
   return {

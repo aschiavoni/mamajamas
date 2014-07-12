@@ -1,0 +1,20 @@
+<h2>Thanks!</h2>
+<div class="content clearfix">
+  <div class="logo">&nbsp;</div>
+  <div>
+    <% if @list_item.errors.present? -%>
+      <p>
+        Sorry, we could not add this item right now. You can go to <a href="http://www.mamajamas.com" target="_blank">Mamajamas</a> to add the item directly.
+        <br/>
+        <%= @list_item.errors.full_messages.to_sentence %>
+      </p>
+    <% else -%>
+      <p>
+        This item has been added to your list.
+      </p>
+      <p>
+        <%= link_to "View this item on Mamajamas", list_category_path(@list_item.category.slug), target: '_blank' %>
+      </p>
+    <% end -%>
+  </div>
+</div>

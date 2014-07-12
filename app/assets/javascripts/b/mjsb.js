@@ -58,7 +58,8 @@ var mamajamas = (function() {
       return {
         title: findTitle(),
         price: findPrice(),
-        images: findImages()
+        images: findImages(),
+        url: window.location.toString()
       }
     };
 
@@ -201,8 +202,8 @@ var mamajamas = (function() {
         .attr('frameborder', 0)
         .attr('name', '')
         .attr('scrolling', 'no')
-        .css('width', '886px')
-        .css('height', '560px');
+        .css('width', '546px')
+        .css('height', '478px');
       return i;
     }
 

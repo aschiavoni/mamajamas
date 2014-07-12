@@ -321,7 +321,8 @@ CREATE TABLE list_items (
     vendor character varying(255),
     vendor_id character varying(255),
     quantity integer DEFAULT 1 NOT NULL,
-    recommended boolean DEFAULT false NOT NULL
+    recommended boolean DEFAULT false NOT NULL,
+    price character varying(255)
 );
 
 
@@ -1306,3 +1307,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140425155141');
 INSERT INTO schema_migrations (version) VALUES ('20140425155248');
 
 INSERT INTO schema_migrations (version) VALUES ('20140523132122');
+
+INSERT INTO schema_migrations (version) VALUES ('20140711205508');
