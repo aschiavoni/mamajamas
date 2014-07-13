@@ -35,7 +35,7 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
       zIndex: 3000,
       closeHTML:'<a class="bt-close ss-icon" href="#">Close</a>',
       onClose: function(dialog) {
-        this.close(); // this is the modal
+        _view.close(); // this is the modal
         $(".info-balloon").remove();
         _view.$el.remove();
         $("#listintro").remove();
@@ -48,9 +48,14 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
   },
 
   close: function(event) {
-    if (event)
-      event.preventDefault();
+    if (event) event.preventDefault();
     $.modal.close();
+
+    // show the bookmarklet prompt
+    var bookmarkletPrompt = new Mamajamas.Views.ListBookmarkletPrompt();
+    $('body').append(bookmarkletPrompt.render().$el);
+    bookmarkletPrompt.show();
+
     return false;
   },
 
