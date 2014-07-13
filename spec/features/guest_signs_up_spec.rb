@@ -11,6 +11,8 @@ feature "guest visitor", js: true do
 
       click_link "Close"
 
+      click_link "close-drag"
+
       page.execute_script("$.cookies.set('no_show_added', true, {path: '/'});")
       add_manual_item "Bath Tub", "http://google.com"
 
@@ -50,6 +52,8 @@ feature "guest visitor", js: true do
       take_quiz
 
       click_link "Done"
+
+      click_link "close-drag"
 
       page.execute_script("$.cookies.set('no_show_added', true, {path: '/'});")
       add_manual_item "Bath Tub", "http://google.com"

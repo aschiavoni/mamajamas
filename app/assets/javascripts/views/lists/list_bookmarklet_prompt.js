@@ -28,7 +28,7 @@ Mamajamas.Views.ListBookmarkletPrompt = Mamajamas.Views.Base.extend({
     this.showDrag();
 
     this.$el.modal({
-      closeHTML:'<a class="bt-close ss-icon" href="#">Close</a>',
+      closeHTML:'<a id="close-drag" class="bt-close ss-icon" href="#">Close</a>',
       overlayClose: true,
       onClose: function(dialog) {
         this.close(); // this is the modal

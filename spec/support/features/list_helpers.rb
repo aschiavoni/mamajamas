@@ -3,6 +3,7 @@ module Features
     def add_manual_item(name, link)
       # I don't like these sleeps but I can't get this to work under
       # poltergeist any other way
+      sleep_maybe
       click_link "Choose"
       sleep_maybe
       page.should have_selector("#search-modal", visible: true)
