@@ -12,11 +12,11 @@ class BookmarkletController < ApplicationController
   def create
     @list = current_user.list
     @list_item = @list.add_list_item(ListItem.new(params[:list_item]))
-    unless @list.save
-      fixable_errors = [ :name, :price, :notes ]
-      if (@list_item.errors.keys & fixable_errors).any?
-        render 'index'
-      end
+    if @list.save
+      render json: @list_item.attributes.
+        merge(view_url: list_category_url(@list_item.category.slug))
+    else
+      render json: { errors: @list_item.errors }
     end
   end
 

@@ -18,8 +18,11 @@
   </head>
   <body class="addto-mamajamas">
     <!-- mamajamas bookmark window -->
-    <div id="addto-mamajamas"> <a class="bt-close ss-icon" href="#">Close</a>
-      <%= yield %>
+    <div id="addto-mamajamas">
+      <a class="bt-close ss-icon" href="#">Close</a>
+      <div id="addto-mamajamas-container">
+        <%= yield %>
+      </div>
     </div>
     <!-- end window -->
     <script type="text/javascript">

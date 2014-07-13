@@ -3,6 +3,20 @@
 <!-- window content -->
 <div class="content clearfix">
   <div class="logo">&nbsp;</div>
+  <div id="thanks" style="display:none">
+    <p>This item has been added to your list.</p>
+    <p>
+      <a id="view-link" href="#" target="_blank">View this item on Mamajamas</a>
+    </p>
+  </div>
+  <div id="errors" style="display:none">
+    <p>
+      Sorry, we could not add this item right now. You can go to <a href="http://www.mamajamas.com" target="_blank">Mamajamas</a> to add the item directly.
+    </p>
+  </div>
+  <div id="loading" style="display: none; text-align: center; width: 100%">
+    <%= image_tag 'loader36-f.gif' %>
+  </div>
   <%= form_for @list_item, url: bookmarklet_path do |f| -%>
     <%= f.hidden_field :link %>
     <%= f.hidden_field :image_url %>
