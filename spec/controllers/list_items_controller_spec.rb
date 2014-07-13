@@ -97,6 +97,7 @@ describe ListItemsController do
     context "list item" do
 
       let(:product_type) { create(:product_type) }
+      let(:age_range) { create(:age_range, name: 'Pre-Birth') }
 
       let(:create_params) do
         {
@@ -105,6 +106,7 @@ describe ListItemsController do
           link: "http://domain.com/newproduct",
           rating: 3,
           age: "Pre-Birth",
+          age_range_id: age_range.id,
           priority: 2,
           notes: "these are notes",
           image_url: "http://domain.com/newproduct.png",
