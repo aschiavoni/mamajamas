@@ -1,8 +1,8 @@
 var mamajamas = (function() {
 
   // some things we need in here
-  var host = 'http://localhost:3000/',
-  iframeUrl = host + 'mjsb',
+  var host,
+  iframeUrl,
   $ = false,
   doc = document,
   head = doc.getElementsByTagName('head')[0],
@@ -237,6 +237,8 @@ var mamajamas = (function() {
 
       // when jquery is loaded,
       // create bookmarklet channel
+      host = document.location.protocol + '//' + $('#mamajamasBookmarkletS').data('host') + '/';
+      iframeUrl = host + 'mjsb';
       channel = new Channel(iframeUrl);
     });
 
