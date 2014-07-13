@@ -153,18 +153,6 @@
   </div>
   <div id="footer">
     <div class="content">
-      <a style="padding-left:110px;" href="javascript:
-         (function () {
-           if (!window.mamajamas) {
-             var jsCode = document.createElement('script');
-             jsCode.setAttribute('id', 'mamajamasBookmarkletS');
-             jsCode.setAttribute('src', '//<%= request.host_with_port %><%= asset_path('b/mjsb.js') %>');
-             jsCode.setAttribute('data-host', '<%= request.host_with_port %>');
-             document.body.appendChild(jsCode);
-           } else {
-             mamajamas.show();
-           }
-         }());">Bookmarklet</a>
     </div>
   </div>
 </div>
@@ -219,5 +207,6 @@
 <% if pinnable? -%>
   <%= javascript_include_tag "pinterest" %>
 <% end -%>
+<%= render partial: "shared/bookmarklet_link" %>
 </body>
 </html>
