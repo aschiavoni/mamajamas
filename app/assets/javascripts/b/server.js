@@ -36,6 +36,9 @@ Mamajamas.bookmarklet = (function() {
       $('#additem-field-cat').change(updateProductTypes);
       $('form').submit(beforeSubmit);
 
+      // init rating
+      $('.rating').rating();
+
       // populate from parent window
       $('body').on('populate', populate);
       trigger('populate-iframe');
@@ -103,6 +106,11 @@ Mamajamas.bookmarklet = (function() {
     var $select = $('#additem-field-type');
     var selected = $select.children('option:selected').text();
     $('#list_item_product_type_name').val(selected)
+  };
+
+  var setRating = function() {
+    var rating = $('.rating').data('rating');
+    $('#list_item_rating').val(rating);
   };
 
   var setImageUrl = function() {
@@ -185,6 +193,7 @@ Mamajamas.bookmarklet = (function() {
     event.preventDefault();
 
     setProductTypeName();
+    setRating();
     setImageUrl();
 
     if (valid()) {

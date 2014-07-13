@@ -14,3 +14,72 @@ jQuery.fn.highlight = function () {
       }).appendTo('body').fadeOut(1000).queue(function () { $(this).remove(); });
   });
 }
+
+jQuery.fn.rating = function() {
+  var ratingEnabled = false;
+  var readOnly = false;
+  var $rating = $(this);
+
+  var getRating = function() {
+    return $rating.data('rating');
+  };
+
+  var setRating = function(rating) {
+    $rating.data('rating', rating);
+  };
+
+  var enableRating = function(event) {
+    ratingEnabled = true;
+  };
+
+  var restoreRating = function() {
+    var rating = getRating();
+    if (rating) {
+      $(".star", $rating).each(function(idx, el) {
+        var $star = $(el);
+        if ($star.data("rating").toString() === rating.toString()) {
+          $star.prevAll().andSelf().addClass("star-full");
+          $star.nextAll().removeClass("star-full");
+          return false;
+        }
+      });
+    }
+  };
+
+  var disableRating = function(event) {
+    ratingEnabled = false;
+    restoreRating();
+  };
+
+  var highlight = function(event) {
+    if (!ratingEnabled || readOnly)
+      return true;
+
+    var $star = $(event.target);
+    $star.prevAll().andSelf().addClass("star-full");
+    $star.nextAll().removeClass("star-full");
+  };
+
+  var unhighlight = function(event) {
+    if (!ratingEnabled || readOnly)
+      return true;
+    var $star = $(event.target);
+    $star.prevAll().andSelf().removeClass("star-full");
+  };
+
+  var rate = function(event) {
+    if (readOnly)
+      return true;
+    var $star = $(event.target);
+    var rating = $star.data("rating");
+    setRating(rating);
+  };
+
+  $rating.mouseenter(enableRating);
+  $rating.mouseleave(disableRating);
+  $('.star', $rating).mouseenter(highlight);
+  $('.star', $rating).mouseleave(unhighlight);
+  $('.star', $rating).click(rate);
+
+  return $rating;
+}
