@@ -305,7 +305,7 @@ CREATE TABLE list_items (
     list_id integer,
     name character varying(255),
     owned boolean DEFAULT false NOT NULL,
-    link character varying(255),
+    link character varying(1999),
     rating integer DEFAULT 0,
     priority integer,
     notes text,
@@ -1309,3 +1309,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140425155248');
 INSERT INTO schema_migrations (version) VALUES ('20140523132122');
 
 INSERT INTO schema_migrations (version) VALUES ('20140711205508');
+
+INSERT INTO schema_migrations (version) VALUES ('20140714131509');
