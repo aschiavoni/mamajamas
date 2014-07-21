@@ -41,7 +41,13 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
     },
     priority_desc: function(listEntry, compareTo) {
       return this.reverseSortByField(listEntry, compareTo, "priority");
-    }
+    },
+    updated_at: function(listEntry, compareTo) {
+      return this.sortByField(listEntry, compareTo, "updated_at");
+    },
+    updated_at_desc: function(listEntry, compareTo) {
+      return this.reverseSortByField(listEntry, compareTo, "updated_at");
+    },
   },
 
   sortByField: function(listEntry, compareTo, fieldName) {

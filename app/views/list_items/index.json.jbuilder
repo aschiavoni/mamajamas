@@ -23,4 +23,5 @@ json.array!(list_entries) do |list_entry|
   json.vendor list_entry.vendor
   json.vendor_id list_entry.vendor_id
   json.recommended list_entry.recommended
+  json.updated_at list_entry.updated_at
 end
