@@ -16,7 +16,8 @@ Mamajamas.Views.ListBookmarkletPrompt = Mamajamas.Views.Base.extend({
 
   events: {
     'click .bookmark-help': 'showHelp',
-    'click .bookmark-modal-return': 'showDrag'
+    'click .bookmark-modal-return': 'showDrag',
+    'click .bt-done': 'close'
   },
 
   show: function() {
@@ -45,13 +46,13 @@ Mamajamas.Views.ListBookmarkletPrompt = Mamajamas.Views.Base.extend({
 
   showDrag: function(event) {
     if (event) event.preventDefault();
-    this.setContent('drag-target', 'bookmark-modal', 435);
+    this.setContent('drag-target', 'bookmark-modal', 475);
     return false;
   },
 
   showHelp: function() {
     if (event) event.preventDefault();
-    this.setContent('help-target', 'bookmark-modal-help', 478);
+    this.setContent('help-target', 'bookmark-modal-help', 518);
     return false;
   },
 
