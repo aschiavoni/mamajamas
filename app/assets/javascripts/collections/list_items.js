@@ -89,11 +89,16 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
     this.sortDirection = this.isAscending() ? "DESC" : "ASC";
   },
 
-  changeSort: function(sortField) {
-    if (this.sortField === sortField) {
-      this.toggleSortDirection();
-    }
+  changeSort: function(sortField, direction) {
     this.sortField = sortField;
+
+    if (direction) {
+      this.sortDirection = direction;
+    } else {
+      if (this.sortField === sortField) {
+        this.toggleSortDirection();
+      }
+    }
 
     var sortFunction = this.isAscending() ? sortField : (sortField + "_desc");
     this.comparator = this.sortStrategies[sortFunction];

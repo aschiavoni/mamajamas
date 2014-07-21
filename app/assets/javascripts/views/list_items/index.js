@@ -201,7 +201,11 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
   sort: function(event) {
     var $target = $(event.target);
     var sortBy = $target.data("sort");
-    this.collection.changeSort(sortBy);
+    this.sortCollection(sortBy);
+  },
+
+  sortCollection: function(sortBy, direction) {
+    this.collection.changeSort(sortBy, direction);
     this.collection.sort();
   },
 

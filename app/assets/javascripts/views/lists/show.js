@@ -45,6 +45,9 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
+
+    this.initializeSorting();
+
     $(this.$el).append(this.indexView.render().$el);
 
     if ($("#add-list-item").length > 0)
@@ -84,9 +87,66 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
   sort: function(event) {
     var $sortLink = $(event.currentTarget);
     var sortName = $sortLink.html();
-    var $sortDisplay = $sortLink.parents(".choicedrop").children("a");
-    $sortDisplay.html(sortName + " <span class=\"ss-dropdown\"></span>");
+    this.setSortDisplay(sortName);
     return this.indexView.sort(event);
+  },
+
+  setSortDisplay: function(name) {
+    var $sortDisplay = $('.listsort .list-sort.choicedrop').children("a");
+    $sortDisplay.html(name + " <span class=\"ss-dropdown\"></span>");
+  },
+
+  initializeSorting: function() {
+    if (window.location.search.length > 0) {
+      var params = {};
+      window.location.search.substring(1).split('&').forEach(function(item) {
+        var parts = item.split('=');
+        params[parts[0]] = parts[1];
+      });
+
+      if (params.s) {
+        var parts = params.s.split('');
+        var sortDisplay = null;
+        var sortBy = parts[0];
+        var direction = parts[1];
+
+        switch (sortBy) {
+        case 'n':
+          sortBy = 'name';
+          sortDisplay = 'Name (A - Z)'
+          break;
+        case 'u':
+          sortBy = 'updated_at';
+          sortDisplay = 'Last Updated'
+          break;
+        case 'r':
+          sortBy = 'rating';
+          sortDisplay = 'Rating'
+          break;
+        case 'o':
+          sortBy = 'owned';
+          sortDisplay = 'Owned'
+          break;
+        case 'a':
+          sortBy = 'age';
+          sortDisplay = 'When to buy'
+          break;
+        case 'p':
+          sortBy = 'priority';
+          sortDisplay = 'Priority'
+          break;
+        default:
+          sortBy = null;
+          sortDisplay = null;
+        }
+
+        if (sortBy) {
+          direction = direction == 'd' ? 'DESC' : 'ASC';
+          this.indexView.sortCollection(sortBy, direction);
+          _.defer(this.setSortDisplay, sortDisplay);
+        }
+      }
+    }
   },
 
   toggleAgeFilterList: function(event) {
