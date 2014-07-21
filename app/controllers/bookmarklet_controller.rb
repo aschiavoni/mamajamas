@@ -13,7 +13,7 @@ class BookmarkletController < ApplicationController
     @list_item = @list.add_list_item(ListItem.new(params[:list_item]))
     if @list.save
       render json: @list_item.attributes.
-        merge(view_url: list_category_url(@list_item.category.slug))
+        merge(view_url: list_category_url(@list_item.category.slug, s: 'ud'))
     else
       render json: { errors: @list_item.errors }
     end
