@@ -30,7 +30,7 @@ class BookmarkletController < ApplicationController
           id: c.id,
           product_types: c.product_types.map { |pt|
             { id: pt.id, name: pt.name }
-          }
+          }.push(ProductType.find_by_name('Other'))
         }
       }
     end
