@@ -4,9 +4,8 @@ class BookmarkletController < ApplicationController
   before_filter :authenticate_user!, only: [ :create ]
   before_filter :init_view
 
-  # TODO: cache page
   def index
-    @list_item = ListItem.new(priority: 2)
+    @list_item = ListItem.new(priority: 1)
   end
 
   def create
@@ -23,18 +22,26 @@ class BookmarkletController < ApplicationController
   private
 
   def init_view
-    @categories = Category.includes(:product_types).map { |c|
-      {
-        name: c.name,
-        id: c.id,
-        product_types: c.product_types.map { |pt|
-          { id: pt.id, name: pt.name }
+    e = 24.hours
+    @categories = Rails.cache.fetch('bookmarklet-categories', expire_in: e) do
+      Category.includes(:product_types).map { |c|
+        {
+          name: c.name,
+          id: c.id,
+          product_types: c.product_types.map { |pt|
+            { id: pt.id, name: pt.name }
+          }
         }
       }
-    }
+    end
 
-    @categories_json = @categories.to_json
+    @categories_json = Rails.cache.fetch('bookmarklet-categories-json',
+                                         expire_in: e) do
+      @categories.to_json
+    end
 
-    @age_ranges = AgeRange.all
+    @age_ranges = Rails.cache.fetch('bookmarklet-age-ranges', expire_in: e) do
+      AgeRange.all
+    end
   end
 end
