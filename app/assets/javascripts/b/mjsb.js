@@ -203,7 +203,7 @@ var mamajamas = (function() {
         .attr('name', '')
         .attr('scrolling', 'no')
         .css('width', '546px')
-        .css('height', '478px');
+        .css('height', '520px');
       return i;
     }
 
