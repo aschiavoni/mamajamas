@@ -148,7 +148,7 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
 
     FB.ui({
       method: 'send',
-      link: 'http://mamajamas-meta.herokuapp.com/',
+      link: 'http://www.mamajamas.com/',
       to: uid,
     }, function(response) {
       if (response && response.success)  {
