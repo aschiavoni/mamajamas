@@ -34,6 +34,9 @@ Mamajamas.Views.ListBookmarkletPrompt = Mamajamas.Views.Base.extend({
       onClose: function(dialog) {
         this.close(); // this is the modal
         _view.$el.remove();
+        $.post('/account/acknowledge_bookmarklet_prompt', function(data) {
+          // do nothing
+        });
       }
     });
   },

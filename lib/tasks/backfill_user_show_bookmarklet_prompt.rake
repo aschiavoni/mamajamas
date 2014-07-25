@@ -5,9 +5,7 @@ namespace :mamajamas do
     desc "Update show_bookmarklet_prompt on users"
     task backfill_show_bookmarklet_prompt: :environment do
       User.registered.each do |user|
-        user.update_attributes!({ show_bookmarklet_prompt: true }, {
-                                  without_protection: true
-                                })
+        user.update_attributes!(show_bookmarklet_prompt: true)
       end
     end
   end

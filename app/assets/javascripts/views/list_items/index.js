@@ -34,6 +34,11 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     if (Mamajamas.Context.List.get('view_count') == 0) {
       _view.showHelpModals = true;
       _view.showClearRecommendedTooltip = true;
+    } else if (Mamajamas.Context.User.get('show_bookmarklet_prompt') == true) {
+      // show the bookmarklet prompt
+      var bookmarkletPrompt = new Mamajamas.Views.ListBookmarkletPrompt();
+      $('body').append(bookmarkletPrompt.render().$el);
+      bookmarkletPrompt.show();
     }
 
     if (_view.isGuestUser()) {

@@ -53,6 +53,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def acknowledge_bookmarklet_prompt
+    current_user.update_attributes!(show_bookmarklet_prompt: false)
+    render json: "ok"
+  end
+
   private
 
   def init_view(page_id, subheader, progress_step)

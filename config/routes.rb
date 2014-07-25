@@ -37,6 +37,7 @@ Mamajamas::Application.routes.draw do
   put "/profile" => "users#update"
   put "/account/complete" => "users#complete"
   post "/account/complete" => "users#complete"
+  post "/account/acknowledge_bookmarklet_prompt" => "users#acknowledge_bookmarklet_prompt"
   get '/about' => 'pages#about', :as => :about
   get '/faq' => 'pages#faq', :as => :faq
   get '/terms-of-service' => 'pages#terms', :as => :terms

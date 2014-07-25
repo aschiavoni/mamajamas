@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   attr_accessible :welcome_sent_at
   attr_accessible :guest
   attr_accessible :admin_notes
+  attr_accessible :show_bookmarklet_prompt
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
@@ -318,6 +319,7 @@ class User < ActiveRecord::Base
     settings && settings['show_bookmarklet_prompt'].present? &&
       settings['show_bookmarklet_prompt'].to_s == 'true'
   end
+  alias_method :show_bookmarklet_prompt?, :show_bookmarklet_prompt
 
   def show_bookmarklet_prompt=(show)
     self.settings = (self.settings || {}).
