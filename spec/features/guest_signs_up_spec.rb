@@ -11,7 +11,7 @@ feature "guest visitor", js: true do
 
       click_link "Close"
 
-      click_link "close-drag"
+      click_link "Done"
 
       page.execute_script("$.cookies.set('no_show_added', true, {path: '/'});")
       add_manual_item "Bath Tub", "http://google.com"

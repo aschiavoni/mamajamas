@@ -35,6 +35,8 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
       _view.showHelpModals = true;
       _view.showClearRecommendedTooltip = true;
     } else if (Mamajamas.Context.User.get('show_bookmarklet_prompt') == true) {
+      if (Mamajamas.Context.User.get('guest'))
+        return;
       // show the bookmarklet prompt
       var bookmarkletPrompt = new Mamajamas.Views.ListBookmarkletPrompt();
       $('body').append(bookmarkletPrompt.render().$el);
