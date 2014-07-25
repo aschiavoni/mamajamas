@@ -439,4 +439,19 @@ describe User do
 
   end
 
+  describe "user settings" do
+
+    let(:user) { create(:user) }
+
+    it "defaults show_bookmarklet_prompt to true" do
+      user.show_bookmarklet_prompt.should be_true
+    end
+
+    it "sets show_bookmarklet_prompt" do
+      user.show_bookmarklet_prompt = false
+      user.show_bookmarklet_prompt.should be_false
+    end
+
+  end
+
 end

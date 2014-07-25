@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   serialize :facebook_friends, Array
 
   serialize :email_preferences, ActiveRecord::Coders::Hstore
+  serialize :settings, ActiveRecord::Coders::Hstore
 
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login
@@ -60,6 +61,7 @@ class User < ActiveRecord::Base
   before_validation :set_username
   before_validation(on: :create) do
     self.email_preferences = {}
+    self.settings = { show_bookmarklet_prompt: true }
   end
 
   scope :guests, lambda { where(guest: true) }
@@ -310,6 +312,15 @@ class User < ActiveRecord::Base
   def followed_user_updates_sent_at=(val)
     self.email_preferences = (self.email_preferences || {}).
       merge('followed_user_updates_sent_at' => val)
+  end
+
+  def show_bookmarklet_prompt
+    settings && settings['show_bookmarklet_prompt']
+  end
+
+  def show_bookmarklet_prompt=(show)
+    self.settings = (self.settings || {}).
+      merge('show_bookmarklet_prompt' => show)
   end
 
   protected

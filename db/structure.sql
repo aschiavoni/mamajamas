@@ -647,7 +647,8 @@ CREATE TABLE users (
     quiz_taken_at timestamp without time zone,
     admin_notes text,
     follower_count integer DEFAULT 0 NOT NULL,
-    email_preferences hstore DEFAULT ''::hstore NOT NULL
+    email_preferences hstore DEFAULT ''::hstore NOT NULL,
+    settings hstore DEFAULT ''::hstore NOT NULL
 );
 
 
@@ -1107,8 +1108,17 @@ CREATE INDEX users_email_preferences ON users USING gin (email_preferences);
 
 
 --
+-- Name: users_settings; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX users_settings ON users USING gin (settings);
+
+
+--
 -- PostgreSQL database dump complete
 --
+
+SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('20121005151529');
 
@@ -1311,3 +1321,7 @@ INSERT INTO schema_migrations (version) VALUES ('20140523132122');
 INSERT INTO schema_migrations (version) VALUES ('20140711205508');
 
 INSERT INTO schema_migrations (version) VALUES ('20140714131509');
+
+INSERT INTO schema_migrations (version) VALUES ('20140725220006');
+
+INSERT INTO schema_migrations (version) VALUES ('20140725220049');
