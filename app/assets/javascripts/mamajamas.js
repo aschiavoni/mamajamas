@@ -21,8 +21,8 @@ window.Mamajamas = {
       $("label", $infieldLabelForms).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
     }
 
-    if ($('#get-bookmark').length > 0) {
-      $('#get-bookmark').click(function(event) {
+    if ($('.get-bookmark').length > 0) {
+      $('.get-bookmark').click(function(event) {
         event.preventDefault();
         // show the bookmarklet prompt
         var bookmarkletPrompt = new Mamajamas.Views.ListBookmarkletPrompt();
