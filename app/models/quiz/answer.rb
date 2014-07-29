@@ -18,11 +18,12 @@ class Quiz::Answer < ActiveRecord::Base
     find_by_sql([ %q{
       select quiz_answers.* from quiz_answers
       join (
-        select max(created_at) mt, question from quiz_answers group by question
+        select max(created_at) mt, question
+        from quiz_answers where user_id = ? group by question
       ) md on (
         md.question = quiz_answers.question and md.mt = quiz_answers.created_at
       )
       where quiz_answers.user_id = ?
-      }, user_id ])
+      }, user_id, user_id ])
   end
 end
