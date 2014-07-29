@@ -24,13 +24,15 @@ class BookmarkletController < ApplicationController
   def init_view
     e = 24.hours
     @categories = Rails.cache.fetch('bookmarklet-categories', expire_in: e) do
-      Category.includes(:product_types).map { |c|
+      Category.includes(:product_types).order(:name).map { |c|
         {
           name: c.name,
           id: c.id,
           product_types: c.product_types.map { |pt|
             { id: pt.id, name: pt.name }
-          }.push(ProductType.find_by_name('Other'))
+          }.push(ProductType.find_by_name('Other')).sort { |x, y|
+            x[:name] <=> y[:name]
+          }
         }
       }
     end
