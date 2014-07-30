@@ -68,7 +68,8 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
       _view.inFieldLabels();
       // the following is a bit of hack to trigger display of inFieldLabels
       // it would be great to lose the inFieldLabels dependency
-      if (_view.model.isNew()) {
+      var linkVal = _view.itemField("link").val();
+      if (_view.model.isNew() && (!linkVal || linkVal.trim().length == 0)) {
         _view.itemField("link").val(null);
         _view.itemField("link").focus();
       }
