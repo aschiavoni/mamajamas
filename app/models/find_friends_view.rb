@@ -19,7 +19,7 @@ class FindFriendsView
 
   def recommended_friends
     if user.present?
-      RecommendedFriend.new(user, mamajamas_facebook_friends, @sort).
+      RecommendedFriend.new(user, [], @sort).
         not_following
     else
       BrowseLists.new(@sort).recommended
