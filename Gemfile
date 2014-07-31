@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '1.9.3'
+ruby '2.1.2'
 
 gem 'rails', '3.2.19'
 
@@ -119,13 +119,12 @@ group :development do
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
   gem 'terminal-notifier-guard', :require => false # if RUBY_PLATFORM =~ /darwin/i
-  gem 'therubyracer'
   gem 'mailcatcher'
   gem 'quiet_assets'
 
   # use pry in development
   gem 'pry-rails'
-  gem 'pry-debugger'
+  gem 'pry-byebug'
   gem 'interactive_editor'
 
   # better errors
