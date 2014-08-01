@@ -10,8 +10,8 @@ feature "Visitor signs up", js: true do
       sleep_maybe
       expect(page).to have_selector("#logout")
       expect(page).to have_content(@tempuser.username)
-      expect(page).to have_content("My Basics")
-      current_path.should == profile_path
+      expect(page).to have_content("Tell us a little")
+      current_path.should == quiz_path
     end
   end
 

@@ -93,11 +93,11 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def after_sign_up_path_for(resource)
-    profile_path
+    resource.quiz_taken_at? ? profile_path : quiz_path
   end
 
   def after_inactive_sign_up_path_for(resource)
-    profile_path
+    resource.quiz_taken_at? ? profile_path : quiz_path
   end
 
   private
