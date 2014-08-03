@@ -26,7 +26,6 @@ namespace :mamajamas do
       desc "Imports recommended products from a csv"
       task csv: :environment do
         file = ENV["FILE"]
-        puts file
 
         raise "File does not exist" unless file.present? && File.exist?(file)
 

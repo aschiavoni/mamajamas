@@ -21,7 +21,7 @@ class FacebookProfilePicture
   end
 
   def url
-    url = "http://graph.facebook.com/#{uid}/picture?"
+    url = "https://graph.facebook.com/#{uid}/picture?"
     url += dimensions_specified? ? dimensions_query_string : type_query_string
     url
   end
