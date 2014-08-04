@@ -26,12 +26,13 @@ namespace :mamajamas do
       desc "Imports recommended products from a csv"
       task csv: :environment do
         file = ENV["FILE"]
+        continue_on_error = ENV["CONTINUE_ON_ERROR"] == true.to_s
 
         raise "File does not exist" unless file.present? && File.exist?(file)
 
         importer = RecommendedProductImporter.new(file, 0.5)
         puts "Importing #{File.basename(file)}..."
-        importer.import
+        continue_on_error ? importer.import : importer.import!
         puts "Done."
       end
 

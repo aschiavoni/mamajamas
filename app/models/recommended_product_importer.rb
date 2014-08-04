@@ -6,14 +6,28 @@ class RecommendedProductImporter
     @sleep_time = sleep_time
   end
 
+  def import!
+    CSV.foreach(file_name, headers: true) do |row|
+      import_row(row)
+    end
+  end
+
   def import
     CSV.foreach(file_name, headers: true) do |row|
-      RecommendedProductRow.new(row).save!
-      sleep sleep_time
+      begin
+        import_row(row)
+      rescue Exception => e
+        puts "Error importing row (#{row}): #{e}"
+      end
     end
   end
 
   private
+
+  def import_row(row)
+    RecommendedProductRow.new(row).save!
+    sleep sleep_time
+  end
 
   def file_name
     @file_name
