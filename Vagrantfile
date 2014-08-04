@@ -65,12 +65,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                   username: "mamajamas",
                   password: "",
                   createdb: true,
-                  login: true
+                  login: true,
+                  superuser: true
                 }
                ],
         databases: [
                     {
                       name: "mamajamas_development",
+                      owner: "mamajamas",
+                      extensions: [ "hstore", "unaccent" ]
+                    },
+                    {
+                      name: "mamajamas_test",
                       owner: "mamajamas",
                       extensions: [ "hstore", "unaccent" ]
                     }
