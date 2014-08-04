@@ -25,6 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "chef_solo" do |chef|
     chef.add_recipe "apt"
     chef.add_recipe "nodejs"
+    chef.add_recipe "phantomjs"
     chef.add_recipe "ruby_build"
     chef.add_recipe "rbenv::user"
     chef.add_recipe "rbenv::vagrant"
