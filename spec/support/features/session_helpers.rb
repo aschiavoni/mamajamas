@@ -19,7 +19,8 @@ module Features
         email: "#{TEST_USER_NAME_WITH_LIST}@test.com",
         password: TEST_USER_PASSWORD,
         password_confirmation: TEST_USER_PASSWORD,
-        quiz_taken_at: Time.now.utc
+        quiz_taken_at: Time.now.utc,
+        sign_in_count: 2
       }, { without_protection: true })
       user.build_list!
       user
