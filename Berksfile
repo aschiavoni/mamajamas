@@ -10,5 +10,7 @@ cookbook 'postgresql', git: 'https://github.com/phlipper/chef-postgresql.git'
 cookbook 'redis', git: 'https://github.com/phlipper/chef-redis.git'
 cookbook 'imagemagick'
 
+cookbook 'mamajamas', path: 'cookbooks/mamajamas'
+
 # optional
 cookbook 'dotfiles', git: 'https://github.com/ryane/chef-dotfiles.git'

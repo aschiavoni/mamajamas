@@ -4,6 +4,8 @@ DEPENDENCIES
   dotfiles
     path: ../../chef-repo/dotfiles
   imagemagick
+  mamajamas
+    path: cookbooks/mamajamas
   nodejs
     git: https://github.com/mdxp/nodejs-cookbook
     revision: e2415cd8c4e03dccf21d7ef6ca31e1c5c81467ca
@@ -34,6 +36,8 @@ GRAPH
     yum-epel (>= 0.0.0)
   imagemagick (0.2.3)
   java (1.25.0)
+  mamajamas (0.0.0)
+    rbenv (>= 0.0.0)
   nodejs (1.3.0)
     apt (>= 0.0.0)
     build-essential (>= 0.0.0)

@@ -1,13 +1,16 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+APP_DIR = "/vagrant"
+RUBY_VER = "2.1.2"
+VAGRANT_USER = "vagrant"
+VAGRANT_GROUP = "vagrant"
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
-  # config.vm.network "public_network"
   config.vm.network "private_network", type: "dhcp"
-  config.vm.synced_folder ".", "/vagrant", type: "nfs"
+  config.vm.synced_folder ".", APP_DIR, type: "nfs"
   config.vm.network "forwarded_port", guest: 3000, host: 3000
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
@@ -31,17 +34,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "redis::server"
     chef.add_recipe "redis::client"
     chef.add_recipe "imagemagick"
+    chef.add_recipe "mamajamas::development"
+
     chef.add_recipe "dotfiles"
 
     chef.json = {
       rbenv: {
         user_installs: [{
-                          user: "vagrant",
-                          rubies: [ "2.1.2" ],
-                          global: "2.1.2",
+                          user: VAGRANT_USER,
+                          rubies: [ RUBY_VER ],
+                          global: RUBY_VER,
                           gems: {
-                            "2.1.2" => [ { name: "bundler" } ]
-                            # "1.9.3-p327" => [ { name: "bundler" } ]
+                            RUBY_VER => [ { name: "bundler" } ]
                           }
                         }]
       },
@@ -71,11 +75,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                     }
                    ]
       },
-      dotfiles: { user: "vagrant", group: "vagrant" }
+      mamajamas: {
+        app_dir: APP_DIR,
+        ruby_version: RUBY_VER,
+        user: VAGRANT_USER,
+        group: VAGRANT_GROUP
+      },
+      dotfiles: { user: VAGRANT_USER, group: VAGRANT_GROUP }
     }
-  end
-
-  config.vm.provision "shell", run: "always", privileged: false do |s|
-    s.inline = "cd /vagrant && bundle && bundle exec rake db:migrate"
   end
 end

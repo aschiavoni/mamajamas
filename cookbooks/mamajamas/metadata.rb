@@ -1,0 +1,3 @@
+name 'mamajamas'
+
+depends 'rbenv'
