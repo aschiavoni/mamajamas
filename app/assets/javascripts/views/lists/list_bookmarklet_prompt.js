@@ -55,7 +55,7 @@ Mamajamas.Views.ListBookmarkletPrompt = Mamajamas.Views.Base.extend({
     return false;
   },
 
-  showHelp: function() {
+  showHelp: function(event) {
     if (event) event.preventDefault();
     this.setContent('help-target', 'bookmark-modal-help', 518);
     return false;

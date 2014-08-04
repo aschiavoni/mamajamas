@@ -13,7 +13,7 @@ describe ProductTypeSearcher do
 
   it "finds suggestions for a product name" do
     VCR.use_cassette('product_type_searcher/shampoo',
-                     serialize_with: :syck,
+                     serialize_with: :psych,
                      match_requests_on: matcher) do
       product_type = create(:product_type, name: 'Shampoo')
       suggestions = ProductTypeSearcher.search(product_type)

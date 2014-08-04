@@ -213,10 +213,25 @@ Devise.setup do |config|
   if Rails.env.production? || Rails.env.staging?
     # ryanesc - MJs Staging
     # ssl client options are necessary on heroku
-    config.omniauth :facebook, FACEBOOK_CONFIG["app_id"], FACEBOOK_CONFIG["secret_key"], { :scope => FACEBOOK_CONFIG["scope"], :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
+    config.omniauth(:facebook,
+                    FACEBOOK_CONFIG["app_id"],
+                    FACEBOOK_CONFIG["secret_key"], {
+                      :scope => FACEBOOK_CONFIG["scope"],
+                      :secure_image_url => FACEBOOK_CONFIG["secure_image_url"],
+                      :client_options => {
+                        :ssl => {
+                          :ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'
+                        }
+                      }
+                    })
   else
     # ryanesc - MJs Development
-    config.omniauth :facebook, FACEBOOK_CONFIG["app_id"], FACEBOOK_CONFIG["secret_key"], { :scope => FACEBOOK_CONFIG["scope"] }
+    config.omniauth(:facebook,
+                    FACEBOOK_CONFIG["app_id"],
+                    FACEBOOK_CONFIG["secret_key"], {
+                      :scope => FACEBOOK_CONFIG["scope"],
+                      :secure_image_url => FACEBOOK_CONFIG["secure_image_url"]
+                    })
   end
   config.omniauth(:google_oauth2,
                   GOOGLE_AUTH_CONFIG["app_id"],

@@ -1,6 +1,6 @@
 class RecommendedProductService
   def self.create_or_update!(attrs)
-    # { tag => { product attrs }, tag2 => { product attrs }}
+    # { tag => { product attrs }, tag2 => { product attrs } }
     attrs.values.each do |product_attrs|
       product_attrs = product_attrs.symbolize_keys
       conditions = {

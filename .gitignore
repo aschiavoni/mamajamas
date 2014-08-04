@@ -17,10 +17,10 @@ pickle-email-*.html
 tags
 .rvmrc
 .rbenv*
-Vagrantfile
 .vagrant
 doc/spec_info.txt
 .idea
 public/uploads/
 Session.vim
 spec/reports
+.DS_Store
