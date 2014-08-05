@@ -121,7 +121,7 @@
               <em class="bt-text2"><span class="ss-delete"></span>Unfollow</em>
             </a>
           <% else -%>
-            <a href="#" id="bt-follow" class="button bt-color" data-owner-id="<%= @view.owner.id %>">
+            <a href="#" id="bt-follow" class="button bt-color" data-owner-name="<%= @view.owner.full_name %>" data-owner-id="<%= @view.owner.id %>">
               <span class="ss-check"></span>Follow
             </a>
           <% end -%>

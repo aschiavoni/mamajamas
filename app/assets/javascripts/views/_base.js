@@ -20,11 +20,11 @@ Mamajamas.Views.Base = Backbone.View.extend({
     return Mamajamas.Context.User.get('guest');
   },
 
-  unauthorized: function(redirect_path) {
+  unauthorized: function(redirect_path, signupPrompt) {
     if (redirect_path) {
       $.cookies.set("after_sign_in_path", redirect_path, { path: "/" });
     }
-    Mamajamas.Context.AppAuth.signup();
+    Mamajamas.Context.AppAuth.signup(signupPrompt);
   },
 
   showProgress: function() {

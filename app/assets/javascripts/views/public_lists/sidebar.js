@@ -28,7 +28,7 @@ Mamajamas.Views.PublicListSidebar = Mamajamas.Views.Base.extend({
     event.preventDefault();
 
     if (!this.isAuthenticated() || this.isGuestUser()) {
-      this.unauthorized(window.location.pathname);
+      this.unauthorized(window.location.pathname, this.signupPrompt());
       return false;
     }
 
@@ -38,6 +38,13 @@ Mamajamas.Views.PublicListSidebar = Mamajamas.Views.Base.extend({
       this.follow();
     }
     return false;
+  },
+
+  signupPrompt: function() {
+    var name = this.$followButton.data("owner-name");
+    var prompt = "Sign up to follow " + name;
+    prompt += " and get started keeping track of your baby gear."
+    return prompt;
   },
 
   follow: function() {

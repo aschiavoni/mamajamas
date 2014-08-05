@@ -2,11 +2,14 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
 
   url: '/users.json',
 
+  defaultSignupPrompt: null,
+
   initialize: function() {
     this.pwStrength = $("#password-strength");
     $("label", this.$el).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
     this.initializeCollapsible();
 
+    this.defaultSignupPrompt = $('.signup-prompt', this.$el).html();
     this.model.on('server:authenticating', this.showProgress, this)
   },
 
@@ -42,8 +45,19 @@ window.Mamajamas.Views.SignupModal = Backbone.View.extend({
     this.$el.progressIndicator('hide');
   },
 
-  show: function() {
+  show: function(event, signupPrompt) {
+    // don't love this
+    var newPrompt = this.defaultSignupPrompt;
+    if (typeof signupPrompt == 'string' || signupPrompt instanceof String) {
+      newPrompt = signupPrompt;
+    }
+    this.setPrompt(newPrompt);
     this.$el.show();
+  },
+
+  setPrompt: function(prompt) {
+    if (prompt)
+      $('.signup-prompt', this.$el).html(prompt);
   },
 
   hide: function() {
