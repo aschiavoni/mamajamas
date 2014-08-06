@@ -9,6 +9,7 @@ cookbook 'phantomjs'
 cookbook 'rbenv', git: 'https://github.com/fnichol/chef-rbenv'
 cookbook 'postgresql', git: 'https://github.com/phlipper/chef-postgresql.git'
 cookbook 'redis', git: 'https://github.com/phlipper/chef-redis.git'
+cookbook 'memcached'
 cookbook 'imagemagick'
 
 cookbook 'mamajamas', path: 'cookbooks/mamajamas'

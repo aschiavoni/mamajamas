@@ -6,6 +6,7 @@ DEPENDENCIES
   imagemagick
   mamajamas
     path: cookbooks/mamajamas
+  memcached
   nodejs
     git: https://github.com/mdxp/nodejs-cookbook
     revision: e2415cd8c4e03dccf21d7ef6ca31e1c5c81467ca
@@ -41,6 +42,10 @@ GRAPH
   java (1.25.0)
   mamajamas (0.0.0)
     rbenv (>= 0.0.0)
+  memcached (1.7.2)
+    runit (~> 1.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
   ms_dotnet2 (1.0.0)
     windows (>= 0.0.0)
   ms_dotnet4 (1.0.2)
