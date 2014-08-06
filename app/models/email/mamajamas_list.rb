@@ -17,6 +17,7 @@ module Email
       merge_vars = {
         fname: user.first_name,
         lname: user.last_name,
+        duedate: user.due_date_for_mailing_list,
         groupings: [
                     {
                       name: self.class.interest_grouping_name,

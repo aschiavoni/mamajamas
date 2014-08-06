@@ -289,6 +289,16 @@ class User < ActiveRecord::Base
     quiz_age_answer.present? ? quiz_age_answer.answers[2] : "n/a"
   end
 
+  def due_date_for_mailing_list
+    if quiz_age_answer.present?
+      # attempt to format this in a way mailchimp prefers
+      d = quiz_age_answer.answers[2]
+      Date.strptime(d, '%m/%d/%Y').strftime('%Y-%m-%d') rescue d
+    else
+      nil
+    end
+  end
+
   def has_multiples?
     quiz_age_answer.present? && quiz_age_answer.answers[1] == "true"
   end
