@@ -42,6 +42,7 @@ class UsersController < ApplicationController
         sign_in @profile.user, bypass: true
         @profile.user.send_welcome_email
         reremember_me!(@profile.user)
+        EmailSubscriptionUpdaterWorker.perform_in(5.minutes, @profile.user.id)
         format.html do
           redirect_to @redirect_path
         end

@@ -25,6 +25,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.persisted?
       # TODO: background this?
       FacebookProfilePictureUpdater.new(@user, oauth.uid).update!
+      EmailSubscriptionUpdaterWorker.perform_in(5.minutes, @user.id)
 
       sign_in @user, :event => :authentication #this will throw if @user is not activated
       # set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?

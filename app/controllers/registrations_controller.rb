@@ -42,6 +42,7 @@ class RegistrationsController < Devise::RegistrationsController
           end
 
           resource.send_welcome_email if resource.respond_to?(:send_welcome_email)
+          EmailSubscriptionUpdaterWorker.perform_in(5.minutes, resource.id)
           set_flash_message :notice, flash_message if is_navigational_format?
           sign_in(resource_name, resource)
         else
