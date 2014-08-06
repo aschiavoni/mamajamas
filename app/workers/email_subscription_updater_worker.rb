@@ -5,6 +5,8 @@ class EmailSubscriptionUpdaterWorker
   sidekiq_options({ unique: :all })
 
   def perform(user_id)
+    return if Rails.env.test?
+
     log "Looking for user #{user_id}..."
     user = User.find(user_id)
 

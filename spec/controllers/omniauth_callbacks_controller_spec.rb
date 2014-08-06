@@ -14,6 +14,7 @@ describe Users::OmniauthCallbacksController do
 
     before do
       ProfilePictureUploader.any_instance.stub(:download! => false)
+      EmailSubscriptionUpdaterWorker.stub(:perform_in)
     end
 
     before(:each) do

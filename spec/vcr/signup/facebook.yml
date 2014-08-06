@@ -29,15 +29,15 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       X-Fb-Rev:
-      - '1355441'
+      - '1358170'
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
       X-Fb-Debug:
-      - F9nhbtIc511o/lU/rzdu3m+OLDgKNxphf9eLw9GWonQcIngw9B1Gfrj28jSyicuzodXkRNujSnTm/x3L6prTfw==
+      - 9utlDZB0g6boPF8rvwMYudRBXiouXXBKEMOV9J8COBgvXWf7x3OuMTjupeMyJOJXyYzNs9NA3ZBxqPyx7i5LBA==
       Date:
-      - Mon, 04 Aug 2014 21:36:35 GMT
+      - Wed, 06 Aug 2014 14:34:48 GMT
       Connection:
       - keep-alive
       Content-Length:
@@ -46,7 +46,7 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Mon, 04 Aug 2014 21:36:35 GMT
+  recorded_at: Wed, 06 Aug 2014 14:34:48 GMT
 - request:
     method: get
     uri: https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/HsTZSDw4avx.gif
@@ -80,11 +80,11 @@ http_interactions:
       Content-Length:
       - '978'
       Cache-Control:
-      - public, max-age=11131648
+      - public, max-age=10984128
       Expires:
-      - Thu, 11 Dec 2014 17:44:04 GMT
+      - Thu, 11 Dec 2014 17:43:36 GMT
       Date:
-      - Mon, 04 Aug 2014 21:36:36 GMT
+      - Wed, 06 Aug 2014 14:34:48 GMT
       Connection:
       - keep-alive
     body:
@@ -113,5 +113,5 @@ http_interactions:
         BSYyAlSZ7WatxjLmt4sFkIuq5P41kyZQpnuoA2kqAoG7ujakSWr0xkpkIMfl
         u2pykYDo76r/KQLrwKMCHEgGCAe7bSC8NTzqhEGEAAA7
     http_version: 
-  recorded_at: Mon, 04 Aug 2014 21:36:36 GMT
+  recorded_at: Wed, 06 Aug 2014 14:34:48 GMT
 recorded_with: VCR 2.5.0
