@@ -175,9 +175,10 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
 
     var answerList = $(event.target, this.$el).parents('a').siblings('ol');
     answerList.css('width', '5.5em');
-    answerList.css('max-height', '4.5em');
+    answerList.css('max-height', '5.1em');
     answerList.css('overflow', 'auto');
     answerList.show();
+    answerList.scrollTop(1).scrollTop(0);
 
     return false;
   },
