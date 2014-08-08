@@ -70,6 +70,7 @@ class ListsController < ApplicationController
   def set_add_to_list
     list_item_id = cookies[:add_to_my_list]
     if list_item_id.present?
+      @list.touch # we want to bust the cache at this point
       add_list_item = @list.clone_list_item(list_item_id)
       @add_list_item_json = add_list_item.to_json(methods: [ :age ])
     end
