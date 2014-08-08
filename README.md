@@ -124,6 +124,24 @@ When deploying, use heroku config:set to configure the environment variables. Fo
 
     heroku config:set MAILCHIMP_API_KEY="XXXX" --app mamajamas
 
+### Vagrant Development Environment (experimental)
+
+You can also use a vagrant virtual machine for running the application in development.
+
+#### Dependencies
+
+* VirtualBox (https://www.virtualbox.org/)
+* ChefDK (http://getchef.com/downloads/chef-dk)
+* Vagrant (http://www.vagrantup.com/)
+
+#### Instructions
+
+1. Install dependencies
+2. Install vagrant plugins:
+
+    vagrant plugin install vagrant-berkshelf
+    vagrant plugin install vagrant-omnibus
+
 ### Testing Environment
 
 #### Stack
