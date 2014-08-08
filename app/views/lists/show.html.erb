@@ -32,9 +32,6 @@
 <% cache [ @view.list, @view.category_slug, 'list' ] do -%>
   <form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>" data-list-entries-loaded-at="<%= Time.now.utc %>">
   </form>
-  <% if @add_list_item_json.present? -%>
-    <div id="add-list-item" data-add-list-item="<%= @add_list_item_json %>" style="display:none;"></div>
-  <% end -%>
   <script type="text/javascript">
    Mamajamas.Context.List = new Mamajamas.Models.List({
      title: '<%= @view.list.title %>',
@@ -51,6 +48,9 @@
    Mamajamas.Context.Categories = <%= @view.categories.to_json.html_safe %>;
    <% end -%>
   </script>
+<% end -%>
+<% if @add_list_item_json.present? -%>
+  <div id="add-list-item" data-add-list-item="<%= @add_list_item_json %>" style="display:none;"></div>
 <% end -%>
 <script type="text/javascript">
  Mamajamas.Context.List.set("view_count", <%= @view.list.view_count %>);
