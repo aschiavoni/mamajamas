@@ -21,16 +21,15 @@ window.Mamajamas = {
       $("label", $infieldLabelForms).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
     }
 
-    if ($('.get-bookmark').length > 0) {
-      $('.get-bookmark').click(function(event) {
-        event.preventDefault();
-        // show the bookmarklet prompt
-        var bookmarkletPrompt = new Mamajamas.Views.ListBookmarkletPrompt();
-        $('body').append(bookmarkletPrompt.render().$el);
-        bookmarkletPrompt.show();
-        return false;
-      });
-    }
+    $('body').on('click', '.get-bookmark', function(event) {
+      event.preventDefault();
+      $.modal.close();
+      // show the bookmarklet prompt
+      var bookmarkletPrompt = new Mamajamas.Views.ListBookmarkletPrompt();
+      $('body').append(bookmarkletPrompt.render().$el);
+      bookmarkletPrompt.show();
+      return false;
+    });
 
     // home page
     if ($("body.home").length > 0) {
