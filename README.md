@@ -49,8 +49,13 @@ successfully run 'bundle install'.
 
 ##### mailcatcher
 
-In development, we can use the [mailcatcher](http://mailcatcher.me/) gem
-to test email. First you need to make sure email delivery is enabled in
+In development, we can use the [mailcatcher](http://mailcatcher.me/)
+gem to test email. First, you need to make sure you have the
+mailcatcher gem installed. Run:
+
+    gem install mailcatcher
+
+Then, you need to make sure email delivery is enabled in
 config/environments/development.rb:
 
     config.action_mailer.perform_deliveries = true
