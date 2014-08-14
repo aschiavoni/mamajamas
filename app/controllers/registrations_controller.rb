@@ -23,7 +23,7 @@ class RegistrationsController < Devise::RegistrationsController
         @redirect_path = root_path
       else
         # create real user
-        build_resource
+        build_resource(sign_up_params)
 
         # manually default guest to false, I only have to do this
         # in the heroku environment, not sure why

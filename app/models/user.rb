@@ -90,7 +90,6 @@ class User < ActiveRecord::Base
   end
 
   # hook devise to login a facebook user from the session
-  # TODO: verify that this is actually used
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]

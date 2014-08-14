@@ -22,7 +22,6 @@ describe RegistrationsController do
       lambda {
         post :create, user: registration
       }.should change(User, :count).by(1)
-
     end
 
     it "should send confirmation email for new user" do

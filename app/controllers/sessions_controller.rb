@@ -4,7 +4,7 @@ class SessionsController < Devise::SessionsController
   prepend_before_filter :logout_guest, only: [ :new ]
 
   def new
-    self.resource = build_resource(nil, :unsafe => true)
+    self.resource = build_resource sign_in_params
 
     # if we are in the create action, this means the login failed and we are
     # rendering the new view. there may be a better way to do this but this
@@ -81,5 +81,9 @@ class SessionsController < Devise::SessionsController
     set_subheader = "Login"
     set_body_class "form-page"
     hide_header
+  end
+
+  def build_resource(hash=nil)
+    self.resource = resource_class.new_with_session(hash || {}, session)
   end
 end
