@@ -1,8 +1,18 @@
 source 'https://rubygems.org'
 ruby '2.1.2'
 
-gem 'rails', '3.2.19'
+gem 'rails', '~>4.0.0'
 gem 'rails4_upgrade'
+
+gem 'actionpack-action_caching', '~>1.0.0'
+gem 'actionpack-page_caching', '~>1.0.0'
+gem 'actionpack-xml_parser', '~>1.0.0'
+gem 'actionview-encoded_mail_to', '~>1.0.4'
+gem 'activerecord-session_store', '~>0.0.1'
+gem 'activeresource', '~>4.0.0'
+gem 'protected_attributes', '~>1.0.1'
+gem 'rails-observers', '~>0.1.1'
+gem 'rails-perftest', '~>0.0.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -12,21 +22,17 @@ gem 'activerecord-postgres-hstore'
 gem 'redis'
 gem 'redis-rails'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  # going to stick with javascript in this app
-  # gem 'coffee-rails', '~> 3.2.1'
+gem 'sass-rails',   '~>4.0.0'
+# going to stick with javascript in this app
+# gem 'coffee-rails', '~> 3.2.1'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
-  # and handlebars
-  gem 'handlebars_assets'
-  gem 'asset_sync'
-end
+gem 'uglifier', '>= 1.3.0'
+# and handlebars
+gem 'handlebars_assets'
+gem 'asset_sync'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
