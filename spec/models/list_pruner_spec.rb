@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ListPruner do
+describe ListPruner, :type => :model do
 
   let(:user) { create(:user) }
   let(:list) { user.build_list! }
@@ -23,7 +23,7 @@ describe ListPruner do
       }))
     end
     ListPruner.prune!(list)
-    list.list_items.user_items.count.should == 2
+    expect(list.list_items.user_items.count).to eq(2)
   end
 
 end

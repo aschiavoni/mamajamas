@@ -16,7 +16,7 @@ class ProductTypeImporter
   end
 
   def category
-    @category ||= Category.find_or_create_by_name!(category_name)
+    @category ||= Category.find_or_create_by!(name: category_name)
   end
 
   private

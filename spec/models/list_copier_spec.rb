@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ListCopier do
+describe ListCopier, :type => :model do
   let(:source) {
     create(:list)
   }
@@ -20,9 +20,9 @@ describe ListCopier do
     add_items source, 3
     copier = ListCopier.new source, target
 
-    lambda do
+    expect do
       copier.copy
-    end.should change(target.list_items, :count).by(3)
+    end.to change(target.list_items, :count).by(3)
   end
 
   it "removes rating from copied items" do
@@ -30,7 +30,7 @@ describe ListCopier do
     copier = ListCopier.new source, target
 
     copier.copy
-    target.reload.list_items.pluck(:rating).uniq.should == [ 0 ]
+    expect(target.reload.list_items.pluck(:rating).uniq).to eq([ 0 ])
   end
 
   it "sets all copied items to not owned" do
@@ -38,7 +38,7 @@ describe ListCopier do
     copier = ListCopier.new source, target
 
     copier.copy
-    target.reload.list_items.pluck(:owned).uniq.should == [ false ]
+    expect(target.reload.list_items.pluck(:owned).uniq).to eq([ false ])
   end
 
   it "does not copy low priority items" do
@@ -47,7 +47,7 @@ describe ListCopier do
                                rating: 4, owned: true)
     copier = ListCopier.new source, target
     copier.copy
-    target.reload.list_items.user_items.count.should == 3
+    expect(target.reload.list_items.user_items.count).to eq(3)
   end
 
   it "does not copy items that already exist on list" do
@@ -60,7 +60,7 @@ describe ListCopier do
 
     copier = ListCopier.new source, target
     copier.copy
-    target.reload.list_items.user_items.count.should == 1
+    expect(target.reload.list_items.user_items.count).to eq(1)
   end
 
   context "replacing placeholders" do
@@ -77,19 +77,19 @@ describe ListCopier do
     end
 
     it "does not change count of list items" do
-      lambda {
+      expect {
         @copier.copy
-      }.should_not change(target.reload.list_items, :count)
+      }.not_to change(target.reload.list_items, :count)
     end
 
     it "removes placeholder from target" do
       @copier.copy
-      target.reload.list_items.placeholders.count.should == 0
+      expect(target.reload.list_items.placeholders.count).to eq(0)
     end
 
     it "adds source list item to target" do
       @copier.copy
-      target.reload.list_items.user_items.first.name.should == @li.name
+      expect(target.reload.list_items.user_items.first.name).to eq(@li.name)
     end
 
   end

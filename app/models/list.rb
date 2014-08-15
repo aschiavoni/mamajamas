@@ -51,6 +51,9 @@ class List < ActiveRecord::Base
       includes(:product_type).
       includes(:category).
       includes(:age_range).
+      references(:categories).
+      references(:age_ranges).
+      references(:list_items).
       order(list_entries_sort_order)
   end
 
@@ -58,7 +61,10 @@ class List < ActiveRecord::Base
     shared_items = list_items.user_items.
       by_category(category).
       includes(:category).
-      includes(:age_range)
+      includes(:age_range).
+      references(:categories).
+      references(:age_ranges).
+      references(:list_items)
 
     if !ignore_privacy && registry?
       shared_items = shared_items.where(owned: false)

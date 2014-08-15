@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Relationship do
+describe Relationship, :type => :model do
 
   describe "a valid Relationship" do
 
@@ -11,23 +11,23 @@ describe Relationship do
     let(:relationship) { follower.relationships.build(followed_id: followed.id) }
 
     it "should be valid" do
-      relationship.should be_valid
+      expect(relationship).to be_valid
     end
 
     it "should respond to follower" do
-      relationship.should respond_to(:follower)
+      expect(relationship).to respond_to(:follower)
     end
 
     it "should respond to followed" do
-      relationship.should respond_to(:follower)
+      expect(relationship).to respond_to(:follower)
     end
 
     it "relationship follower should be follower" do
-      relationship.follower.should == follower
+      expect(relationship.follower).to eq(follower)
     end
 
     it "relationship followed should be followed" do
-      relationship.followed.should == followed
+      expect(relationship.followed).to eq(followed)
     end
 
   end
@@ -37,12 +37,12 @@ describe Relationship do
     it "followed_id should be present" do
       relationship = Relationship.new
       relationship.follower_id = 1
-      relationship.should_not be_valid
+      expect(relationship).not_to be_valid
     end
 
     it "follower_id should be present" do
       relationship = Relationship.new(followed_id: 1)
-      relationship.should_not be_valid
+      expect(relationship).not_to be_valid
     end
 
   end
@@ -70,11 +70,11 @@ describe Relationship do
     end
 
     it "should not return relationships that have already had a notification delivered" do
-      @follower.relationships.pending_notification.should_not include(@notified)
+      expect(@follower.relationships.pending_notification).not_to include(@notified)
     end
 
     it "should not return relationships that have not already had a notification delivered" do
-      @follower.relationships.pending_notification.should include(@not_notified)
+      expect(@follower.relationships.pending_notification).to include(@not_notified)
     end
 
   end

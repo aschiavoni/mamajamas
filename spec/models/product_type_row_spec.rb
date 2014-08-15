@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'csv'
 
-describe ProductTypeRow do
+describe ProductTypeRow, :type => :model do
 
   let(:category) { create(:category) }
 
@@ -38,34 +38,34 @@ describe ProductTypeRow do
   end
 
   it "finds age range name" do
-    product_type_row.age_range_name.should == 'Pre-birth'
+    expect(product_type_row.age_range_name).to eq('Pre-birth')
   end
 
   it "finds priority" do
-    product_type_row.priority.should == 1
+    expect(product_type_row.priority).to eq(1)
   end
 
   it "finds image name" do
-    product_type_row.image_name.should == 'products/icons/bodysuit@2x.png'
+    expect(product_type_row.image_name).to eq('products/icons/bodysuit@2x.png')
   end
 
   it "finds age range" do
-    product_type_row.age_range.should_not be_nil
+    expect(product_type_row.age_range).not_to be_nil
   end
 
   it "finds search query" do
-    product_type_row.search_query.should == "Baby Bodysuits"
+    expect(product_type_row.search_query).to eq("Baby Bodysuits")
   end
 
   it "updates a product type if it does exist" do
     create_product_type('Shampoo or Body Wash')
-    ProductType.any_instance.should_receive(:assign_attributes)
-    product_type_row.product_type.should_not be_nil
+    expect_any_instance_of(ProductType).to receive(:assign_attributes)
+    expect(product_type_row.product_type).not_to be_nil
   end
 
   it "creates a product type if it does not exist" do
     ptrow = ProductTypeRow.new(category, row_csv('whatever'))
-    ptrow.product_type.should_not be_nil
+    expect(ptrow.product_type).not_to be_nil
   end
 
   it "saves product types" do
@@ -76,22 +76,22 @@ describe ProductTypeRow do
 
   it "should be a valid row" do
     ptrow = ProductTypeRow.new(category, row_csv)
-    ptrow.should be_valid
+    expect(ptrow).to be_valid
   end
 
   it "is invalid if row does not contain a name" do
     ptrow = ProductTypeRow.new(category, row_csv_no_name)
-    ptrow.should_not be_valid
+    expect(ptrow).not_to be_valid
   end
 
   it "is invalid if row does not contain an age range" do
     ptrow = ProductTypeRow.new(category, row_csv_no_age_range)
-    ptrow.should_not be_valid
+    expect(ptrow).not_to be_valid
   end
 
   it "is invalid if row does not contain a priority" do
     ptrow = ProductTypeRow.new(category, row_csv_no_priority)
-    ptrow.should_not be_valid
+    expect(ptrow).not_to be_valid
   end
 
 end

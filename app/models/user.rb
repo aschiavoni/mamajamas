@@ -79,6 +79,10 @@ class User < ActiveRecord::Base
     where("authentications.uid IS NOT NULL")
   }
 
+  def should_generate_new_friendly_id?
+    username_changed? || super
+  end
+
   # hook devise to support logging in by email or username
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -325,14 +329,14 @@ class User < ActiveRecord::Base
   end
 
   def show_bookmarklet_prompt
-    settings && settings['show_bookmarklet_prompt'].present? &&
-      settings['show_bookmarklet_prompt'].to_s == 'true'
+    settings && settings[:show_bookmarklet_prompt].present? &&
+      settings[:show_bookmarklet_prompt].to_s == 'true'
   end
   alias_method :show_bookmarklet_prompt?, :show_bookmarklet_prompt
 
   def show_bookmarklet_prompt=(show)
     self.settings = (self.settings || {}).
-      merge('show_bookmarklet_prompt' => show)
+      merge(:show_bookmarklet_prompt => show)
   end
 
   protected

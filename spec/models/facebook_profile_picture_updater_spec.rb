@@ -1,4 +1,4 @@
-describe FacebookProfilePictureUpdater do
+describe FacebookProfilePictureUpdater, :type => :model do
 
   it "should update facebook profile picture if it does not exist" do
     uploader = double("profile_picture_uploader", blank?: true)
@@ -6,8 +6,8 @@ describe FacebookProfilePictureUpdater do
     user = double("user", profile_picture: uploader)
     updater = FacebookProfilePictureUpdater.new(user, uid)
 
-    user.should_receive(:save!)
-    uploader.should_receive(:download!)
+    expect(user).to receive(:save!)
+    expect(uploader).to receive(:download!)
 
     updater.update!
   end
@@ -17,7 +17,7 @@ describe FacebookProfilePictureUpdater do
     user = double("user", :profile_picture => uploader)
     updater = FacebookProfilePictureUpdater.new(user, "12345")
 
-    user.should_not_receive(:save!)
+    expect(user).not_to receive(:save!)
 
     updater.update!
   end

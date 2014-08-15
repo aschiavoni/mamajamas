@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe OauthUserFinder do
+describe OauthUserFinder, :type => :model do
 
   let(:provider) { "facebook" }
 
@@ -38,16 +38,16 @@ describe OauthUserFinder do
                             uid: auth_hash['uid'],
                             user: user,
                             provider: provider)
-    OauthUserFinder.new(auth).find.should == user
+    expect(OauthUserFinder.new(auth).find).to eq(user)
   end
 
   it "finds a user from the email in the auth hash" do
     user = create(:user, email: auth_hash['info']['email'])
-    OauthUserFinder.new(auth).find.should == user
+    expect(OauthUserFinder.new(auth).find).to eq(user)
   end
 
   it "does not find a facebook user" do
-    OauthUserFinder.new(auth).find.should == nil
+    expect(OauthUserFinder.new(auth).find).to eq(nil)
   end
 
 end

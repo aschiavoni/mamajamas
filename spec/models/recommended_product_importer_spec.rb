@@ -1,6 +1,6 @@
 # require 'spec_helper'
 
-describe RecommendedProductImporter do
+describe RecommendedProductImporter, :type => :model do
 
   let(:csv_file) do
     File.join(Dir.pwd, 'spec', 'data',

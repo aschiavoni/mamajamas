@@ -1,5 +1,5 @@
 class AgeRange < ActiveRecord::Base
-  acts_as_list
+  acts_as_list top_of_list: 0
 
   attr_accessible :name, :position
 

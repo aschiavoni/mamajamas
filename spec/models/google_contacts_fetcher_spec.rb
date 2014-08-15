@@ -1,4 +1,4 @@
-describe GoogleContactsFetcher do
+describe GoogleContactsFetcher, :type => :model do
 
   let (:access_token) {
     "ya29.AHES6ZTZy6lCQxUaBAPba67wtXbQkJXy7NMYvMTIlNUYmxasthBJcw"
@@ -11,7 +11,7 @@ describe GoogleContactsFetcher do
       fetcher = GoogleContactsFetcher.new(auth, GOOGLE_AUTH_CONFIG["app_id"],
                                           GOOGLE_AUTH_CONFIG["secret_key"],
                                           GOOGLE_AUTH_CONFIG["scope"])
-      fetcher.contacts.size.should > 0
+      expect(fetcher.contacts.size).to be > 0
     end
   end
 
@@ -22,9 +22,9 @@ describe GoogleContactsFetcher do
                                           GOOGLE_AUTH_CONFIG["app_id"],
                                           GOOGLE_AUTH_CONFIG["secret_key"],
                                           GOOGLE_AUTH_CONFIG["scope"])
-      fetcher.contacts.map do |c|
+      expect(fetcher.contacts.map do |c|
         c[:name]
-      end.select { |n| n.blank? }.size.should == 0
+      end.select { |n| n.blank? }.size).to eq(0)
     end
   end
 
@@ -35,9 +35,9 @@ describe GoogleContactsFetcher do
                                           GOOGLE_AUTH_CONFIG["app_id"],
                                           GOOGLE_AUTH_CONFIG["secret_key"],
                                           GOOGLE_AUTH_CONFIG["scope"])
-      fetcher.contacts.map do |c|
+      expect(fetcher.contacts.map do |c|
         c[:email]
-      end.select { |e| e.blank? }.size.should == 0
+      end.select { |e| e.blank? }.size).to eq(0)
     end
   end
 

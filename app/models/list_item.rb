@@ -25,10 +25,10 @@ class ListItem < ActiveRecord::Base
 
   scope :placeholders, -> { where(placeholder: true) }
   scope :user_items, -> { where(placeholder: false) }
-  scope :vendored_items, -> { where("vendor IS NOT NULL") }
+  scope :vendored_items, -> { where.not(vendor: nil) }
   scope :added_since, ->(time) { user_items.where("created_at > ?", time) }
   scope :recommended, -> { where(recommended: true) }
-  scope :not_recommended, -> { where("recommended <> ?", true) }
+  scope :not_recommended, -> { where.not(recommended: true) }
 
   def self.unique_products
     vendored_items.select("DISTINCT vendor_id, vendor").map do |list_item|

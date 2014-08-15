@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe User, :type => :model do
 
   let(:user) { create(:user, quiz_taken_at: nil) }
 
@@ -8,13 +8,13 @@ describe User do
 
     it "should have slugged value" do
       new_user = create(:user)
-      new_user.slug.should == new_user.username
+      expect(new_user.slug).to eq(new_user.username)
     end
 
     it "should update slug when username changes" do
       new_user = create(:user)
       new_user.update_attributes!(username: "testxxx1199")
-      new_user.slug.should == "testxxx1199"
+      expect(new_user.slug).to eq("testxxx1199")
     end
   end
 
@@ -22,32 +22,32 @@ describe User do
 
     it "sets a username from email if name not provided" do
       new_user = create(:user, email: "jackdoe@example.com", username: nil)
-      new_user.username.should == "jackdoe"
+      expect(new_user.username).to eq("jackdoe")
     end
 
     it "sets a username from full name" do
       new_user = create(:user,
                         first_name: "Jonathan", last_name: "Doe", username: nil)
-      new_user.username.should == "jonathandoe"
+      expect(new_user.username).to eq("jonathandoe")
     end
 
     it "sets a username from first name" do
       new_user = create(:user,
                         first_name: "Jane", last_name: nil, username: nil)
-      new_user.username.should == "jane"
+      expect(new_user.username).to eq("jane")
     end
 
     it "fails to create user if a username cannot be generated" do
-      lambda {
+      expect {
         new_user = create(:user,
                           first_name: nil, last_name: nil,
                           username: nil, email: nil)
-      }.should raise_error(ActiveRecord::RecordInvalid)
+      }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
     it "downcases usernames" do
       new_user = create(:user, username: "JackDoe")
-      new_user.username.should == "jackdoe"
+      expect(new_user.username).to eq("jackdoe")
     end
 
   end
@@ -56,12 +56,12 @@ describe User do
 
     it "should be facebook connected" do
       create(:authentication, user: user, provider: "facebook")
-      user.should be_facebook_connected
+      expect(user).to be_facebook_connected
     end
 
     it "should not be facebook connected" do
       user.clear_facebook!
-      user.should_not be_facebook_connected
+      expect(user).not_to be_facebook_connected
     end
 
   end
@@ -70,31 +70,31 @@ describe User do
 
     it "is connected to google" do
       create(:authentication, user: user, provider: "google")
-      user.should be_google_connected
+      expect(user).to be_google_connected
     end
 
     it "is not connected to google" do
       user.clear_google!
-      user.should_not be_google_connected
+      expect(user).not_to be_google_connected
     end
 
     it "has expired google access token" do
       user.clear_google!
       create(:authentication, user: user,
              provider: "google", access_token_expires_at: 2.days.ago)
-      user.should_not be_google_connected
+      expect(user).not_to be_google_connected
     end
 
     it "returns empty array when user does not have google friends" do
       user.clear_google!
-      user.google_friends.should be_empty
+      expect(user.google_friends).to be_empty
     end
 
     it "retrieves google friends" do
       create(:authentication, user: user, provider: "google")
       create(:social_friends, user: user,
              provider: "google", friends: [ { id: 10 } ])
-      user.google_friends.should_not be_empty
+      expect(user.google_friends).not_to be_empty
     end
 
   end
@@ -107,11 +107,11 @@ describe User do
         user.relationships_created_at = Time.now.utc
         user.save!
 
-        user.auto_created_relationships?.should be_true
+        expect(user.auto_created_relationships?).to be_truthy
       end
 
       it "return false if relationships have been created" do
-        user.auto_created_relationships?.should be_false
+        expect(user.auto_created_relationships?).to be_falsey
       end
 
     end
@@ -125,15 +125,15 @@ describe User do
       end
 
       it "should be following other user" do
-        user.should be_following(other_user)
+        expect(user).to be_following(other_user)
       end
 
       it "should include other user in followed users list" do
-        user.followed_users.should include(other_user)
+        expect(user.followed_users).to include(other_user)
       end
 
       it "should be in other user's followers list" do
-        other_user.followers.should include(user)
+        expect(other_user.followers).to include(user)
       end
 
       describe "unfollow other user" do
@@ -143,11 +143,11 @@ describe User do
         end
 
         it "should not be following other user" do
-          user.should_not be_following(other_user)
+          expect(user).not_to be_following(other_user)
         end
 
         it "should not include other user in followed users list" do
-          user.followed_users.should_not include(other_user)
+          expect(user.followed_users).not_to include(other_user)
         end
 
       end
@@ -155,31 +155,31 @@ describe User do
     end
 
     it "should respond to relationships" do
-      user.should respond_to :relationships
+      expect(user).to respond_to :relationships
     end
 
     it "should respond to followed_users" do
-      user.should respond_to :followed_users
+      expect(user).to respond_to :followed_users
     end
 
     it "should respond to reverse_relationships" do
-      user.should respond_to :reverse_relationships
+      expect(user).to respond_to :reverse_relationships
     end
 
     it "should respond to followers" do
-      user.should respond_to :followers
+      expect(user).to respond_to :followers
     end
 
     it "should respond to following?" do
-      user.should respond_to :following?
+      expect(user).to respond_to :following?
     end
 
     it "should respond to follow!" do
-      user.should respond_to :follow!
+      expect(user).to respond_to :follow!
     end
 
     it "should respond to unfollow!" do
-      user.should respond_to :unfollow!
+      expect(user).to respond_to :unfollow!
     end
 
   end
@@ -188,13 +188,13 @@ describe User do
 
     it "should return nil if no birthday specified" do
       user.birthday = nil
-      user.age.should be_nil
+      expect(user.age).to be_nil
     end
 
     it "should return a user's age" do
       now = Date.new(2013, 2, 7)
       user.birthday = Date.new(1977, 5, 11)
-      user.age(now).should == 35
+      expect(user.age(now)).to eq(35)
     end
 
   end
@@ -202,11 +202,11 @@ describe User do
   describe "email" do
 
     it "displays user's email address" do
-      user.display_email.should == user.email
+      expect(user.display_email).to eq(user.email)
     end
 
     it "displays 'Guest' for email address for guest users" do
-      User.new_guest.display_email.should == 'Guest'
+      expect(User.new_guest.display_email).to eq('Guest')
     end
 
   end
@@ -214,17 +214,17 @@ describe User do
   describe "guest users" do
 
     it "creates a new valid guest user" do
-      User.new_guest.should be_valid
+      expect(User.new_guest).to be_valid
     end
 
     it "creates a guest user" do
-      User.new_guest.should be_guest
+      expect(User.new_guest).to be_guest
     end
 
     it "saves guest user to the database" do
-      lambda {
+      expect {
         User.new_guest
-      }.should change(User, :count).by(1)
+      }.to change(User, :count).by(1)
     end
 
   end
@@ -233,27 +233,27 @@ describe User do
 
     it "validates a correct us zip code" do
       u = build(:user, zip_code: '11201', country_code: 'US')
-      u.should be_valid
+      expect(u).to be_valid
     end
 
     it "validates an incorrect us zip code" do
       u = build(:user, zip_code: 'sl41eg', country_code: 'US')
-      u.should_not be_valid
+      expect(u).not_to be_valid
     end
 
     it "validates a correct uk zip code" do
       u = build(:user, zip_code: 'sl41eg', country_code: 'GB')
-      u.should be_valid
+      expect(u).to be_valid
     end
 
     it "validates an incorrect uk zip code" do
       u = build(:user, zip_code: '11201', country_code: 'GB')
-      u.should_not be_valid
+      expect(u).not_to be_valid
     end
 
     it "doesn't care about zip code validations in other countries" do
       u = build(:user, zip_code: '11201', country_code: 'BB')
-      u.should be_valid
+      expect(u).to be_valid
     end
 
   end
@@ -262,22 +262,22 @@ describe User do
 
     it "validates a correct country code" do
       u = build(:user, country_code: 'US')
-      u.should be_valid
+      expect(u).to be_valid
     end
 
     it "validates an incorrect country code" do
       u = build(:user, country_code: 'UU')
-      u.should_not be_valid
+      expect(u).not_to be_valid
     end
 
     it "returns a country name from a country code" do
       user.country_code = 'US'
-      user.country_name.should == 'United States'
+      expect(user.country_name).to eq('United States')
     end
 
     it "returns nil if the country code is unknown" do
       user.country_code = "UU"
-      user.country_name.should be_nil
+      expect(user.country_name).to be_nil
     end
 
   end
@@ -286,13 +286,13 @@ describe User do
 
     it "returns false if the user does not have a list" do
       u = build(:user)
-      u.should_not have_list
+      expect(u).not_to have_list
     end
 
     it "returns true if the user does have a list" do
       u = create(:user)
       u.build_list!
-      u.should have_list
+      expect(u).to have_list
     end
 
   end
@@ -300,9 +300,9 @@ describe User do
   describe "complete_quiz!" do
 
     it "marks quiz as completed" do
-      user.quiz_taken_at.should be_blank
+      expect(user.quiz_taken_at).to be_blank
       user.complete_quiz!
-      user.quiz_taken_at.should be_present
+      expect(user.quiz_taken_at).to be_present
     end
   end
 
@@ -310,67 +310,67 @@ describe User do
 
     it "returns full name" do
       user = build(:user, first_name: "John", last_name: "Doe")
-      user.full_name.should == "John Doe"
+      expect(user.full_name).to eq("John Doe")
     end
 
     it "returns first name if user does not have a last name" do
       user = build(:user, first_name: "John", last_name: nil)
-      user.full_name.should == "John"
+      expect(user.full_name).to eq("John")
     end
 
     it "returns nil if user does not have first and last name" do
       user = build(:user, first_name: nil, last_name: nil)
-      user.full_name.should be_nil
+      expect(user.full_name).to be_nil
     end
 
     it "sets first name from full name" do
       user = build(:user, first_name: nil, last_name: nil)
       user.full_name = "John Doe"
-      user.first_name.should == "John"
+      expect(user.first_name).to eq("John")
     end
 
     it "sets last name from full name" do
       user = build(:user, first_name: nil, last_name: nil)
       user.full_name = "John Doe"
-      user.last_name.should == "Doe"
+      expect(user.last_name).to eq("Doe")
     end
 
     it "sets first name for a user with more than two names" do
       user = build(:user, first_name: nil, last_name: nil)
       user.full_name = "John Seymour Doe"
-      user.first_name.should == "John"
+      expect(user.first_name).to eq("John")
     end
 
     it "sets last name for a user with more than two names" do
       user = build(:user, first_name: nil, last_name: nil)
       user.full_name = "John Seymour Doe"
-      user.last_name.should == "Seymour Doe"
+      expect(user.last_name).to eq("Seymour Doe")
     end
 
     it "sets a first name even if no last name is specified" do
       user = build(:user, first_name: nil, last_name: nil)
       user.full_name = "John"
-      user.first_name.should == "John"
+      expect(user.first_name).to eq("John")
     end
 
     it "does not set a last name if full name does not include one" do
       user = build(:user, first_name: nil, last_name: nil)
       user.full_name = "John"
-      user.last_name.should be_nil
+      expect(user.last_name).to be_nil
     end
 
     it "handles a nil value" do
       user = build(:user, first_name: nil, last_name: nil)
       user.full_name = nil
-      user.first_name.should be_nil
-      user.last_name.should be_nil
+      expect(user.first_name).to be_nil
+      expect(user.last_name).to be_nil
     end
 
     it "handles an empty value" do
       user = build(:user, first_name: nil, last_name: nil)
       user.full_name = nil
-      user.first_name.should be_nil
-      user.last_name.should be_nil
+      expect(user.first_name).to be_nil
+      expect(user.last_name).to be_nil
     end
 
   end
@@ -382,25 +382,25 @@ describe User do
     context "email preference null" do
 
       it "treats email as enabled when not set" do
-        user.new_follower_notifications_enabled?.should be_true
+        expect(user.new_follower_notifications_enabled?).to be_truthy
       end
 
       it "returns false for disabled" do
-        user.new_follower_notifications_disabled?.should be_false
+        expect(user.new_follower_notifications_disabled?).to be_falsey
       end
 
       it "sets email preference as disabled" do
         user.new_follower_notifications_disabled = true
-        user.email_preferences.should == {
+        expect(user.email_preferences).to eq({
           "new_follower_notifications_disabled" => true
-        }
+        })
       end
 
       it "sets email preference as enabled" do
         user.new_follower_notifications_enabled = true
-        user.email_preferences.should == {
+        expect(user.email_preferences).to eq({
           "new_follower_notifications_disabled" => false
-        }
+        })
       end
 
     end
@@ -412,11 +412,11 @@ describe User do
       }
 
       it "returns false for enabled" do
-        user.new_follower_notifications_enabled?.should be_false
+        expect(user.new_follower_notifications_enabled?).to be_falsey
       end
 
       it "returns true for disabled" do
-        user.new_follower_notifications_disabled?.should be_true
+        expect(user.new_follower_notifications_disabled?).to be_truthy
       end
 
     end
@@ -428,11 +428,11 @@ describe User do
       }
 
       it "returns true for enabled" do
-        user.new_follower_notifications_enabled?.should be_true
+        expect(user.new_follower_notifications_enabled?).to be_truthy
       end
 
       it "returns false for disabled" do
-        user.new_follower_notifications_disabled?.should be_false
+        expect(user.new_follower_notifications_disabled?).to be_falsey
       end
 
     end
@@ -444,12 +444,12 @@ describe User do
     let(:user) { create(:user) }
 
     it "defaults show_bookmarklet_prompt to true" do
-      user.show_bookmarklet_prompt.should be_true
+      expect(user.show_bookmarklet_prompt).to be_truthy
     end
 
     it "sets show_bookmarklet_prompt" do
       user.show_bookmarklet_prompt = false
-      user.show_bookmarklet_prompt.should be_false
+      expect(user.show_bookmarklet_prompt).to be_falsey
     end
 
   end

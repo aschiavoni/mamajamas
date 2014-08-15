@@ -1,6 +1,6 @@
 # require 'spec_helper'
 
-describe ProductTypeImporter do
+describe ProductTypeImporter, :type => :model do
 
   let(:csv_file) do
     File.join(Dir.pwd, 'db', 'seeds', 'Clothing.csv')
@@ -15,11 +15,11 @@ describe ProductTypeImporter do
   end
 
   it "finds category name" do
-    importer.category_name.should == 'Clothing'
+    expect(importer.category_name).to eq('Clothing')
   end
 
   it "finds category" do
-    importer.category.should_not be_nil
+    expect(importer.category).not_to be_nil
   end
 
   it "imports csv" do

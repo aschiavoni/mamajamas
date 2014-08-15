@@ -2,29 +2,29 @@
 
 require 'spec_helper'
 
-describe Product do
+describe Product, :type => :model do
 
   describe "is valid" do
 
     it "must have a name" do
       product = build(:product, name: nil)
-      product.should_not be_valid
+      expect(product).not_to be_valid
     end
 
     it "must have a url" do
       product = build(:product, url: nil)
-      product.should_not be_valid
+      expect(product).not_to be_valid
     end
 
     it "must have a vendor id" do
       product = build(:product, vendor_id: nil)
-      product.should_not be_valid
+      expect(product).not_to be_valid
     end
 
     it "does not accept unknown atrributes" do
-      lambda do
+      expect do
         product = Product.new(nada: "value")
-      end.should raise_error(NoMethodError)
+      end.to raise_error(NoMethodError)
     end
 
   end

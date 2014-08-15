@@ -1,4 +1,4 @@
-describe ListItemRatingFinder do
+describe ListItemRatingFinder, :type => :model do
 
   let(:vendor_id) { "B002PLU912" }
   let(:vendor) { "amazon" }
@@ -15,23 +15,23 @@ describe ListItemRatingFinder do
   end
 
   it "queries the database by the vendor and vendor id" do
-    ListItem.should_receive(:where).
+    expect(ListItem).to receive(:where).
       with(hash_including(vendor_id: vendor_id, vendor: vendor))
     ListItemRatingFinder.find(vendor_id, vendor)
   end
 
   it "returns a list of ratings for a vendor and vendor id combo" do
-    ListItem.should_receive(:where).
+    expect(ListItem).to receive(:where).
       with(hash_including(vendor_id: vendor_id, vendor: vendor)).
       and_return(list_items)
-    ListItemRatingFinder.find(vendor_id, vendor).should == [ 3, 2 ]
+    expect(ListItemRatingFinder.find(vendor_id, vendor)).to eq([ 3, 2 ])
   end
 
   it "excludes nil ratings" do
-    ListItem.should_receive(:where).
+    expect(ListItem).to receive(:where).
       with(hash_including(vendor_id: vendor_id, vendor: vendor)).
       and_return(list_items(true))
-    ListItemRatingFinder.find(vendor_id, vendor).should == [ 3, 2 ]
+    expect(ListItemRatingFinder.find(vendor_id, vendor)).to eq([ 3, 2 ])
   end
 
 end

@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe SocialFriends do
+describe SocialFriends, :type => :model do
 end

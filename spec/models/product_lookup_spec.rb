@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ProductLookup do
+describe ProductLookup, :type => :model do
 
   matcher = [
     :method,
@@ -22,7 +22,7 @@ describe ProductLookup do
                      serialize_with: :psych,
                      match_requests_on: matcher) do
       asins = [ "sjlksdfjlksdjflkdsjk" ]
-      ProductLookup.lookup(asins).should be_empty
+      expect(ProductLookup.lookup(asins)).to be_empty
     end
   end
 

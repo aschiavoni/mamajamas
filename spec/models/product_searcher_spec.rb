@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ProductSearcher do
+describe ProductSearcher, :type => :model do
 
   matcher = [
     :method,
@@ -11,7 +11,7 @@ describe ProductSearcher do
     VCR.use_cassette('product_searcher/goodnight moon',
                      serialize_with: :psych,
                      match_requests_on: matcher) do
-      ProductSearcher.search('goodnight moon').should have_at_least(1).product
+      expect(ProductSearcher.search('goodnight moon').size).to be >= 1
     end
   end
 
@@ -19,7 +19,7 @@ describe ProductSearcher do
     VCR.use_cassette('product_searcher/sjlksdfjlksdjflkdsjk',
                      serialize_with: :psych,
                      match_requests_on: matcher) do
-      ProductSearcher.search('sjlksdfjlksdjflkdsjk').should be_empty
+      expect(ProductSearcher.search('sjlksdfjlksdjflkdsjk')).to be_empty
     end
   end
 
@@ -27,7 +27,7 @@ describe ProductSearcher do
     VCR.use_cassette('product_searcher/baby',
                      serialize_with: :psych,
                      match_requests_on: matcher) do
-      ProductSearcher.search('baby', nil, 1).should have(1).products
+      expect(ProductSearcher.search('baby', nil, 1).size).to eq(1)
     end
   end
 

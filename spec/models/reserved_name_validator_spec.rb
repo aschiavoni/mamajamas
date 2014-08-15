@@ -1,16 +1,16 @@
-describe ReservedNameValidator do
+describe ReservedNameValidator, :type => :model do
 
-  let(:validator) { ReservedNameValidator.new(attributes: {}) }
+  let(:validator) { ReservedNameValidator.new(attributes: [:name]) }
 
-  let(:model) { stub(:errors => stub(:add)) }
+  let(:model) { double(:errors => double(:add)) }
 
   it "should validate valid name" do
-    model.should_not_receive(:errors)
+    expect(model).not_to receive(:errors)
     validator.validate_each(model, "name", "allowedname")
   end
 
   it "should validate invalid name" do
-    model.errors.should_receive(:add).with("name", :reserved_name)
+    expect(model.errors).to receive(:add).with("name", :reserved_name)
     validator.validate_each(model, "name", "user")
   end
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RecommendedProductService do
+describe RecommendedProductService, :type => :model do
 
   matcher = [
     :method,
@@ -35,9 +35,9 @@ describe RecommendedProductService do
 
   it "creates a recommended product from an attribute hash" do
     VCR.use_cassette(cs_name("create"), vcr_opts) do
-      lambda do
+      expect do
         RecommendedProductService.create_or_update!(attrs)
-      end.should change(RecommendedProduct, :count).by(2)
+      end.to change(RecommendedProduct, :count).by(2)
     end
   end
 
@@ -49,8 +49,8 @@ describe RecommendedProductService do
       RecommendedProductService.create_or_update!(attrs)
       rp.reload
 
-      rp.link.should == "http://www.amazon.com/My-Brest-Friend-Pillow-Sunburst/dp/B000HZEQSU%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB000HZEQSU"
-      rp.name.should == "My Brest Friend Pillow, Sunburst"
+      expect(rp.link).to eq("http://www.amazon.com/My-Brest-Friend-Pillow-Sunburst/dp/B000HZEQSU%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB000HZEQSU")
+      expect(rp.name).to eq("My Brest Friend Pillow, Sunburst")
     end
   end
 
@@ -58,12 +58,12 @@ describe RecommendedProductService do
     params = {
       "eco" => { "link" => "", "tag" => "eco" }
     }
-    lambda do
-      RecommendedProduct.any_instance.should_not_receive(:update_attributes!)
-      RecommendedProduct.any_instance.should_not_receive(:create!)
-      CreatesRecommendedProductFromAmazonUrl.should_not_receive(:new)
+    expect do
+      expect_any_instance_of(RecommendedProduct).not_to receive(:update_attributes!)
+      expect_any_instance_of(RecommendedProduct).not_to receive(:create!)
+      expect(CreatesRecommendedProductFromAmazonUrl).not_to receive(:new)
       RecommendedProductService.create_or_update!(params)
-    end.should_not change(RecommendedProduct, :count)
+    end.not_to change(RecommendedProduct, :count)
   end
 
   it "deletes an existing product if a blank link is specified" do
@@ -74,12 +74,12 @@ describe RecommendedProductService do
         "product_type_id" => rp.product_type_id,
         "tag" => "eco" }
     }
-    lambda do
-      RecommendedProduct.any_instance.should_not_receive(:update_attributes!)
-      RecommendedProduct.any_instance.should_not_receive(:create!)
-      CreatesRecommendedProductFromAmazonUrl.should_not_receive(:new)
+    expect do
+      expect_any_instance_of(RecommendedProduct).not_to receive(:update_attributes!)
+      expect_any_instance_of(RecommendedProduct).not_to receive(:create!)
+      expect(CreatesRecommendedProductFromAmazonUrl).not_to receive(:new)
       RecommendedProductService.create_or_update!(params)
-    end.should change(RecommendedProduct, :count).by(-1)
+    end.to change(RecommendedProduct, :count).by(-1)
   end
 
   it "overrides amazon name" do
@@ -94,7 +94,7 @@ describe RecommendedProductService do
 
     VCR.use_cassette(cs_name("override_name"), vcr_opts) do
       RecommendedProductService.create_or_update!(params)
-      RecommendedProduct.first.name.should == "My Product Name"
+      expect(RecommendedProduct.first.name).to eq("My Product Name")
     end
   end
 

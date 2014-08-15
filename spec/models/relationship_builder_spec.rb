@@ -1,24 +1,24 @@
-describe RelationshipBuilder do
+describe RelationshipBuilder, :type => :model do
 
   let(:user) { create(:user) }
   let(:builder) { builder = RelationshipBuilder.new(user) }
 
   it "follows a friend" do
-    friend = stub
-    user.should_receive(:follow!).with(friend)
+    friend = double
+    expect(user).to receive(:follow!).with(friend)
     builder.build_relationships([ friend ])
   end
 
   it "follows every friend" do
-    friends = [ stub, stub, stub ]
-    user.should_receive(:follow!).exactly(friends.size).times
+    friends = [ double, double, double ]
+    expect(user).to receive(:follow!).exactly(friends.size).times
     builder.build_relationships(friends)
   end
 
   it "should set relationships created at timestamp" do
-    friend = stub(:id => 1)
+    friend = double(:id => 1)
     builder.build_relationships([ friend ])
-    user.relationships_created_at.should be_present
+    expect(user.relationships_created_at).to be_present
   end
 
 end

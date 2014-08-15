@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe Invite do
+describe Invite, :type => :model do
 end

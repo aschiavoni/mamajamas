@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CreatesRecommendedProductFromAmazonUrl do
+describe CreatesRecommendedProductFromAmazonUrl, :type => :model do
 
   matcher = [
     :method,
@@ -24,7 +24,7 @@ describe CreatesRecommendedProductFromAmazonUrl do
   it "finds vendor id in url" do
     VCR.use_cassette(cs_name("vendor_id"), vcr_opts) do
       c = CreatesRecommendedProductFromAmazonUrl.new(url, ecs_config)
-      c.vendor_id.should == asin
+      expect(c.vendor_id).to eq(asin)
     end
   end
 
@@ -32,7 +32,7 @@ describe CreatesRecommendedProductFromAmazonUrl do
     VCR.use_cassette(cs_name("alternate_vendor_id"), vcr_opts) do
       u = "http://www.amazon.com/Johnsons-Nursing-Pads-60-ct/dp/B000GCJO1I/ref=sr_1_1?s=baby-products&ie=UTF8&qid=1386045528&sr=1-1&keywords=johnson%27s+nursing+pads"
       c = CreatesRecommendedProductFromAmazonUrl.new(u, ecs_config)
-      c.vendor_id.should == "B000GCJO1I"
+      expect(c.vendor_id).to eq("B000GCJO1I")
     end
   end
 
@@ -40,35 +40,35 @@ describe CreatesRecommendedProductFromAmazonUrl do
     VCR.use_cassette(cs_name("alternate_vendor_id"), vcr_opts) do
       u = "http://www.amazon.com/gp/product/B0002DJDJ4/ref=wms_ohs_product?ie=UTF8&psc=1"
       c = CreatesRecommendedProductFromAmazonUrl.new(u, ecs_config)
-      c.vendor_id.should == "B0002DJDJ4"
+      expect(c.vendor_id).to eq("B0002DJDJ4")
     end
   end
 
   it "includes amazon asin vendor id" do
     VCR.use_cassette(cs_name("asin"), vcr_opts) do
       c = CreatesRecommendedProductFromAmazonUrl.new(url, ecs_config)
-      c.product.should include(vendor_id: asin)
+      expect(c.product).to include(vendor_id: asin)
     end
   end
 
   it "includes amazon affiliate link" do
     VCR.use_cassette(cs_name("affiliate"), vcr_opts) do
       c = CreatesRecommendedProductFromAmazonUrl.new(url, ecs_config)
-      c.product[:link].should include("mamajamas-20")
+      expect(c.product[:link]).to include("mamajamas-20")
     end
   end
 
   it "includes image url" do
     VCR.use_cassette(cs_name("image_url"), vcr_opts) do
       c = CreatesRecommendedProductFromAmazonUrl.new(url, ecs_config)
-      c.product[:image_url].should include("http://ecx.images-amazon.com")
+      expect(c.product[:image_url]).to include("http://ecx.images-amazon.com")
     end
   end
 
   it "retrieves product name from amazon" do
     VCR.use_cassette(cs_name("name"), vcr_opts) do
       c = CreatesRecommendedProductFromAmazonUrl.new(url, ecs_config)
-      c.product.should include(name: "Manhattan Toy Winkel")
+      expect(c.product).to include(name: "Manhattan Toy Winkel")
     end
   end
 

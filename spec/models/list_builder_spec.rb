@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ListBuilder do
+describe ListBuilder, :type => :model do
 
   let(:user) { create(:user) }
 
@@ -12,16 +12,16 @@ describe ListBuilder do
   end
 
   it "should build list" do
-    builder.build!.should be_an_instance_of(List)
+    expect(builder.build!).to be_an_instance_of(List)
   end
 
   it "should assign list to user" do
-    user.should_receive(:list=).with(builder.list)
+    expect(user).to receive(:list=).with(builder.list)
     builder.build!
   end
 
   it "should save list" do
-    List.any_instance.should_receive(:save!)
+    expect_any_instance_of(List).to receive(:save!)
     builder.build!
   end
 
@@ -60,7 +60,7 @@ describe ListBuilder do
 
         ages = list.list_items.map(&:age_range)
         [ comparer.two_years, comparer.three_years, comparer.four_years ].each do |age|
-          ages.should_not include(age)
+          expect(ages).not_to include(age)
         end
       end
 
@@ -72,7 +72,7 @@ describe ListBuilder do
 
         ages = list.list_items.map(&:age_range)
         [ comparer.three_years, comparer.four_years ].each do |age|
-          ages.should_not include(age)
+          expect(ages).not_to include(age)
         end
       end
 
@@ -83,7 +83,7 @@ describe ListBuilder do
         list = builder.build!(product_types)
 
         categories = list.list_items.map(&:category)
-        categories.should_not include(potty_training)
+        expect(categories).not_to include(potty_training)
       end
 
     end
@@ -94,8 +94,8 @@ describe ListBuilder do
 
     it "should add list item placeholders" do
       product_types = create_list(:product_type, 3)
-      List.connection.
-        should_receive(:execute).
+      expect(List.connection).
+        to receive(:execute).
         at_least(product_types.size).times
       list = builder.build!(product_types)
     end

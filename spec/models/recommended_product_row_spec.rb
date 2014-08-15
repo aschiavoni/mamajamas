@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'csv'
 
-describe RecommendedProductRow do
+describe RecommendedProductRow, :type => :model do
 
   def default_link(tag)
     "http://www.amazon.com/My-Brest-Friend-Pillow-Sunburst-#{tag}/dp/B000HZEQSU%3FSubscriptionId%3DAKIAIXAEIBVZBZEU56MQ%26tag%3Dmamajamas-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB000HZEQSU"
@@ -32,72 +32,73 @@ describe RecommendedProductRow do
   end
 
   it "finds product type name" do
-    recommended_product_row.name.should == 'Nursing Pillow'
+    expect(recommended_product_row.name).to eq('Nursing Pillow')
   end
 
   it "finds eco name" do
-    recommended_product_row.eco_name.should == "Nursing Pillow Eco Name"
+    expect(recommended_product_row.eco_name).to eq("Nursing Pillow Eco Name")
   end
 
   it "finds eco link" do
-    recommended_product_row.eco_link.should == default_link("eco")
+    expect(recommended_product_row.eco_link).to eq(default_link("eco"))
   end
 
   it "finds upscale name" do
-    recommended_product_row.upscale_name.should == "My Brest Friend Pillow"
+    expect(recommended_product_row.upscale_name).to eq("My Brest Friend Pillow")
   end
 
   it "finds upscale link" do
-    recommended_product_row.upscale_link.should == default_link("upscale")
+    expect(recommended_product_row.upscale_link).to eq(default_link("upscale"))
   end
 
   it "finds cost conscious name" do
-    recommended_product_row.cost_name.should ==
+    expect(recommended_product_row.cost_name).to eq(
       "Nursing Pillow Cost Conscious Name"
+    )
   end
 
   it "finds cost conscious link" do
-    recommended_product_row.cost_link.should == default_link("cost")
+    expect(recommended_product_row.cost_link).to eq(default_link("cost"))
   end
 
   it "finds extra name" do
-    recommended_product_row.extra_name.should == "Nursing Pillow Extra Name"
+    expect(recommended_product_row.extra_name).to eq("Nursing Pillow Extra Name")
   end
 
   it "finds extra link" do
-    recommended_product_row.extra_link.should == default_link("extra")
+    expect(recommended_product_row.extra_link).to eq(default_link("extra"))
   end
 
   it "finds twins name" do
-    recommended_product_row.twins_name.should == "Nursing Pillow Twins Name"
+    expect(recommended_product_row.twins_name).to eq("Nursing Pillow Twins Name")
   end
 
   it "finds twins link" do
-    recommended_product_row.twins_link.should == default_link("twins")
+    expect(recommended_product_row.twins_link).to eq(default_link("twins"))
   end
 
   it "retrieves product type associated with row" do
     pt = create_product_type("Nursing Pillow")
-    recommended_product_row.product_type.should == pt
+    expect(recommended_product_row.product_type).to eq(pt)
   end
 
   it "builds recommended product service update hash" do
     create_product_type("Nursing Pillow")
     expected = [ :eco, :upscale, :cost, :extra, :twins ]
-    recommended_product_row.update_hash.keys.should include(*expected)
+    expect(recommended_product_row.update_hash.keys).to include(*expected)
   end
 
   it "builds recommended product service update hash without upscale link" do
     create_product_type("Nursing Pillow")
     expected = [ :eco, :cost, :extra, :twins ]
-    recommended_product_row(row_csv_no_upscale).
-      update_hash.keys.should include(*expected)
+    expect(recommended_product_row(row_csv_no_upscale).
+      update_hash.keys).to include(*expected)
   end
 
   it "saves recommended products" do
     create_product_type("Nursing Pillow")
-    RecommendedProductService.
-      should_receive(:create_or_update!).
+    expect(RecommendedProductService).
+      to receive(:create_or_update!).
       with(recommended_product_row.update_hash)
     recommended_product_row.save!
   end

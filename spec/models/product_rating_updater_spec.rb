@@ -1,4 +1,4 @@
-describe ProductRatingUpdater do
+describe ProductRatingUpdater, :type => :model do
 
   class MockCalculator
     class NoRating; end
@@ -15,21 +15,21 @@ describe ProductRatingUpdater do
   end
 
   it "creates new product ratings" do
-    ListItem.should_receive(:unique_products) {
+    expect(ListItem).to receive(:unique_products) {
       [
         [ "12345", "amazon" ],
         [ "54321", "soap.com" ],
       ]
     }
 
-    lambda {
+    expect {
       ProductRatingUpdater.new(MockCalculator).update
-    }.should change(ProductRating, :count).by(2)
+    }.to change(ProductRating, :count).by(2)
   end
 
   it "updates product ratings" do
     product_rating = create(:product_rating, rating: 5.0)
-    ListItem.should_receive(:unique_products) {
+    expect(ListItem).to receive(:unique_products) {
       [
         [ product_rating.vendor_id, product_rating.vendor ]
       ]
@@ -37,12 +37,12 @@ describe ProductRatingUpdater do
 
     ProductRatingUpdater.new(MockCalculator).update
     product_rating.reload
-    product_rating.rating.should == 3.0
+    expect(product_rating.rating).to eq(3.0)
   end
 
   it "includes the number of ratings" do
     product_rating = create(:product_rating, rating: 5.0)
-    ListItem.should_receive(:unique_products) {
+    expect(ListItem).to receive(:unique_products) {
       [
         [ product_rating.vendor_id, product_rating.vendor ]
       ]
@@ -50,22 +50,22 @@ describe ProductRatingUpdater do
 
     ProductRatingUpdater.new(MockCalculator).update
     product_rating.reload
-    product_rating.rating_count.should == 3
+    expect(product_rating.rating_count).to eq(3)
 
   end
 
   it "removes a product rating if the calculator finds no rating" do
     product_rating = create(:product_rating)
 
-    ListItem.should_receive(:unique_products) {
+    expect(ListItem).to receive(:unique_products) {
       [
         [ product_rating.vendor_id, product_rating.vendor ]
       ]
     }
 
-    lambda {
+    expect {
       ProductRatingUpdater.new(MockNoRatingCalculator).update
-    }.should change(ProductRating, :count).by(-1)
+    }.to change(ProductRating, :count).by(-1)
   end
 
 end

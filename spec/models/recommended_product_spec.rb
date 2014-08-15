@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe RecommendedProduct do
+describe RecommendedProduct, :type => :model do
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe List do
+describe List, :type => :model do
 
   describe "title" do
 
@@ -14,69 +14,65 @@ describe List do
     end
 
     it "should have a default title" do
-      list.title.should == default_title
+      expect(list.title).to eq(default_title)
     end
 
     it "uses username in default title if first name not present" do
       u = build(:user, username: "testu", first_name: nil)
       l = build(:list, title: nil, user: u)
       default = "testu#{Possessive::APOSTROPHE_CHAR}s List"
-      l.title.should == default
+      expect(l.title).to eq(default)
     end
 
     it "uses List as default title if list does not have a user" do
       l = List.new
-      l.title.should == "List"
+      expect(l.title).to eq("List")
     end
 
     it "should not overwrite title if it matches the default title" do
       list.title = default_title
-      list.read_attribute(:title).should be_nil
+      expect(list.read_attribute(:title)).to be_nil
     end
 
     it "should overwrite title" do
       list.title = "new title"
-      list.title.should == "new title"
+      expect(list.title).to eq("new title")
     end
 
     it "should default a blank title to the default title" do
       list.title = ""
-      list.title.should == default_title
+      expect(list.title).to eq(default_title)
     end
 
   end
 
   describe "list with populated list item placeholders" do
 
-    let(:list) { create(:list) }
-
-    let(:product_types) do
-      [
+    before(:all) do
+      @list = create(:list)
+      @product_types = [
         create(:product_type),
         create(:product_type),
         create(:product_type)
       ]
-    end
-
-    before(:all) do
-      product_types.each do |product_type|
-        list.add_list_item_placeholder(product_type)
+      @product_types.each do |product_type|
+        @list.add_list_item_placeholder(product_type)
       end
     end
 
     it "should have many product types" do
-      list.list_items.size.should == product_types.size
+      expect(@list.list_items.size).to eq(@product_types.size)
     end
 
     it "should include all product types" do
-      product_types.each do |product_type|
-        list.list_items.map(&:product_type).should include(product_type)
+      @product_types.each do |product_type|
+        expect(@list.list_items.map(&:product_type)).to include(product_type)
       end
     end
 
     it "should have categories" do
       # in the specs, each product_type has a unique category
-      list.categories.size.should == list.list_items.size
+      expect(@list.categories.size).to eq(@list.list_items.size)
     end
 
   end
@@ -89,48 +85,48 @@ describe List do
 
     it "should return a new list item" do
       list_item = list.add_list_item_placeholder(product_type)
-      list_item.should be_an_instance_of(ListItem)
+      expect(list_item).to be_an_instance_of(ListItem)
     end
 
     it "should return a placeholder list item" do
       list_item = list.add_list_item_placeholder(product_type)
-      list_item.placeholder?.should be_truthy
+      expect(list_item.placeholder?).to be_truthy
     end
 
     it "should add the list item to the list" do
-      lambda do
+      expect do
         list.add_list_item_placeholder(product_type)
-      end.should change(list.list_items, :count).by(1)
+      end.to change(list.list_items, :count).by(1)
     end
 
     it "should have a list item with the correct product type" do
       list_item = list.add_list_item_placeholder(product_type)
-      list_item.product_type.should == product_type
+      expect(list_item.product_type).to eq(product_type)
     end
 
     it "should have a list item with the correct category" do
       list_item = list.add_list_item_placeholder(product_type)
-      list_item.category.should == product_type.category
+      expect(list_item.category).to eq(product_type.category)
     end
 
     it "should have a list item with the correct priority" do
       list_item = list.add_list_item_placeholder(product_type)
-      list_item.priority.should == product_type.priority
+      expect(list_item.priority).to eq(product_type.priority)
     end
 
     it "should have a list item with the correct image url" do
       list_item = list.add_list_item_placeholder(product_type)
-      list_item.image_url.should == product_type.image_name
+      expect(list_item.image_url).to eq(product_type.image_name)
     end
 
     it "should have a list item with the correct age range" do
       list_item = list.add_list_item_placeholder(product_type)
-      list_item.age_range.should == product_type.age_range
+      expect(list_item.age_range).to eq(product_type.age_range)
     end
 
     it "should have a list item with the correct quantity" do
       list_item = list.add_list_item_placeholder(product_type)
-      list_item.quantity.should == product_type.recommended_quantity
+      expect(list_item.quantity).to eq(product_type.recommended_quantity)
     end
 
   end
@@ -142,19 +138,19 @@ describe List do
     let(:list) { create(:list) }
 
     it "should add a new list item" do
-      lambda do
+      expect do
         list.add_list_item(build(:list_item, list_id: nil))
-      end.should change(list.list_items, :count).by(1)
+      end.to change(list.list_items, :count).by(1)
     end
 
     it "should not add a placeholder by default" do
       list_item = list.add_list_item(build(:list_item, list_id: nil))
-      list_item.should_not be_placeholder
+      expect(list_item).not_to be_placeholder
     end
 
     it "should add a placeholder list item" do
       list_item = list.add_list_item(build(:list_item, list_id: nil), true)
-      list_item.should be_placeholder
+      expect(list_item).to be_placeholder
     end
 
   end
@@ -171,40 +167,38 @@ describe List do
 
     it "should include global product types" do
       @product_types.each do |product_type|
-        list.available_product_types.should include(product_type)
+        expect(list.available_product_types).to include(product_type)
       end
     end
 
     it "does not include inactive product types" do
       inactive = create(:product_type, active: false)
-      list.available_product_types.should_not include(inactive)
+      expect(list.available_product_types).not_to include(inactive)
     end
 
     it "should only include product types with names matching filter" do
       name = "asdfg"
       product_type = create(:product_type, name: name)
-      list.available_product_types(name).should include(product_type)
+      expect(list.available_product_types(name)).to include(product_type)
     end
 
     it "should not include product types with names not matching filter" do
       name = "asdfg"
-      list.available_product_types(name).should be_empty
+      expect(list.available_product_types(name)).to be_empty
     end
 
     it "should limit the number of product types returned" do
-      list.available_product_types(nil, 1).size.should == 1
+      expect(list.available_product_types(nil, 1).size).to eq(1)
     end
 
   end
 
   describe "list entries" do
 
-    let(:current_user) { create(:user) }
-
-    let(:category) { create(:category) }
-
     before(:all) do
       ProductType.destroy_all
+      @category = create(:category)
+      @current_user = create(:user)
       @product_types = [
         create(:product_type),
         create(:product_type),
@@ -213,14 +207,14 @@ describe List do
 
       # create the list
       # and add some list items
-      @list = current_user.build_list!
+      @list = @current_user.build_list!
 
       list_item_params = {
         list_id: @list.id,
         product_type_id: @product_types.first.id
       }
       @list_items = [
-        create(:list_item, list_item_params.merge(category_id: category.id)),
+        create(:list_item, list_item_params.merge(category_id: @category.id)),
         create(:list_item, list_item_params),
         create(:list_item, list_item_params)
       ]
@@ -228,12 +222,12 @@ describe List do
     end
 
     it "should include all list entries" do
-      @list.list_entries.size.should == @list_items.size + @product_types.size
+      expect(@list.list_entries.size).to eq(@list_items.size + @product_types.size)
     end
 
     it "should include all list items" do
       @list_items.each do |list_item|
-        @list.list_entries.should include(list_item)
+        expect(@list.list_entries).to include(list_item)
       end
     end
 
@@ -241,24 +235,24 @@ describe List do
 
       before(:all) do
         @filtered_list_items = @list_items.select do |list_item|
-          list_item.category_id == category.id
+          list_item.category_id == @category.id
         end
       end
 
       it "should include only entries in category" do
-        @list.list_entries(category).size.should == @filtered_list_items.size
+        expect(@list.list_entries(@category).size).to eq(@filtered_list_items.size)
       end
 
       it "should include only list items in category" do
         @filtered_list_items.each do |list_item|
-          @list.list_entries(category).should include(list_item)
+          expect(@list.list_entries(@category)).to include(list_item)
         end
       end
 
       it "should not include list items in other categories" do
         excluded = @list_items - @filtered_list_items
         excluded.each do |list_item|
-          @list.list_entries(category).should_not include(list_item)
+          expect(@list.list_entries(@category)).not_to include(list_item)
         end
       end
 
@@ -268,10 +262,9 @@ describe List do
 
   describe "shared list entries" do
 
-    let(:current_user) { create(:user) }
-
     before(:all) do
-      @list = current_user.build_list!
+      @current_user = create(:user)
+      @list = @current_user.build_list!
       @list.add_list_item(build(:list_item, list_id: nil))
       @list.add_list_item(build(:list_item,
                                 list_id: nil, owned: true))
@@ -279,31 +272,35 @@ describe List do
 
     it "has all user items shared when list is private" do
       @list.privacy = List::PRIVACY_PRIVATE
-      @list.shared_list_entries.count.should ==
+      expect(@list.shared_list_entries.count).to eq(
         @list.list_items.user_items.count
+      )
     end
 
     it "has all user items shared when list is public" do
       @list.privacy = List::PRIVACY_PUBLIC
-      @list.shared_list_entries.count.should ==
+      expect(@list.shared_list_entries.count).to eq(
         @list.list_items.user_items.count
+      )
     end
 
     it "has all user items shared when list is authenticated only" do
       @list.privacy = List::PRIVACY_REGISTERED
-      @list.shared_list_entries.count.should ==
+      expect(@list.shared_list_entries.count).to eq(
         @list.list_items.user_items.count
+      )
     end
 
     it "has only needed shared entries when list is registry" do
       @list.privacy = List::PRIVACY_REGISTRY
-      @list.shared_list_entries.map(&:owned).uniq.should == [ false ]
+      expect(@list.shared_list_entries.map(&:owned).uniq).to eq([ false ])
     end
 
     it "has all user items shared when ignoring privacy" do
       @list.privacy = List::PRIVACY_REGISTRY
-      @list.shared_list_entries(nil, true).count.should ==
+      expect(@list.shared_list_entries(nil, true).count).to eq(
         @list.list_items.user_items.count
+      )
     end
 
   end
@@ -313,17 +310,17 @@ describe List do
     let(:list) { create(:list) }
 
     it "should increment view count" do
-      lambda do
+      expect do
         list.increment_view_count
         list.reload
-      end.should change(list, :view_count).by(1)
+      end.to change(list, :view_count).by(1)
     end
 
     it "should increment public view count" do
-      lambda do
+      expect do
         list.increment_public_view_count
         list.reload
-      end.should change(list, :public_view_count).by(1)
+      end.to change(list, :public_view_count).by(1)
     end
 
   end
@@ -334,11 +331,11 @@ describe List do
 
     it "indicates if a user has added any list items" do
       list_item = create(:list_item, list: list)
-      list.should have_items
+      expect(list).to have_items
     end
 
     it "indicates that user has not added any list items" do
-      list.should_not have_items
+      expect(list).not_to have_items
     end
 
   end

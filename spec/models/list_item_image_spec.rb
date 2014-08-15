@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe ListItemImage do
+describe ListItemImage, :type => :model do
 end

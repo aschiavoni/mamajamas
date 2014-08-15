@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Category do
+describe Category, :type => :model do
 
   describe "slugs" do
 
     it "should have slugged value" do
       category = create(:category, name: "Test Category 1")
-      category.slug.should == "test-category-1"
+      expect(category.slug).to eq("test-category-1")
     end
 
   end

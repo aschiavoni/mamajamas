@@ -1,4 +1,4 @@
-describe RecommendedFriend do
+describe RecommendedFriend, :type => :model do
 
   let(:user) { create(:user) }
   let(:list) { create(:list, user: user) }
@@ -15,28 +15,28 @@ describe RecommendedFriend do
 
   it "returns all recommended users" do
     rf = RecommendedFriend.new(user)
-    rf.all.size.should == 4
+    expect(rf.all.size).to eq(4)
   end
 
   it "returns limited number of recommended users" do
     rf = RecommendedFriend.new(user)
-    rf.all(3).size.should == 3
+    expect(rf.all(3).size).to eq(3)
   end
 
   it "excludes current user" do
     rf = RecommendedFriend.new(user)
-    rf.all.should_not include(user)
+    expect(rf.all).not_to include(user)
   end
 
   it "excludes user's facebook friends" do
     fb_user = create(:user)
     rf = RecommendedFriend.new(user, [ fb_user ])
-    rf.all.should_not include(fb_user)
+    expect(rf.all).not_to include(fb_user)
   end
 
   it "excludes users without public lists" do
     rf = RecommendedFriend.new(user)
-    rf.all.should_not include(@user_with_unshared_list)
+    expect(rf.all).not_to include(@user_with_unshared_list)
   end
 
 end
