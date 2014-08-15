@@ -65,7 +65,7 @@ FactoryGirl.define do
   end
 
   factory :age_range do
-    sequence(:name) { |m| "#{n} mo" }
+    sequence(:name) { |n| "#{n} mo" }
     sequence(:position) { |n| n }
   end
 

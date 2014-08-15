@@ -12,7 +12,8 @@ describe ProductLookup do
                      serialize_with: :psych,
                      match_requests_on: matcher) do
       asins = [ "0062235893", "B000056OV0" ]
-      ProductLookup.lookup(asins).should have(2).products
+      # ProductLookup.lookup(asins).should have(2).products
+      expect(ProductLookup.lookup(asins).size).to eq(2)
     end
   end
 

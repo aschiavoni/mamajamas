@@ -94,7 +94,7 @@ describe List do
 
     it "should return a placeholder list item" do
       list_item = list.add_list_item_placeholder(product_type)
-      list_item.placeholder?.should be_true
+      list_item.placeholder?.should be_truthy
     end
 
     it "should add the list item to the list" do

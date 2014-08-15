@@ -21,7 +21,7 @@ class Forms::UserProfile
   delegate :profile_picture_cache, :profile_picture_cache=, :to => :user
   delegate :title, :title=, :to => :list, :prefix => true, :allow_nil => true
 
-  validates(:username, presence: true, format: { :with => /^[A-Za-z\d_]+$/ })
+  validates(:username, presence: true, format: { :with => /\A[A-Za-z\d_]+\z/ })
   validates(:list_title, length: { maximum: 45 })
 
   validate do

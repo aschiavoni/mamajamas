@@ -15,8 +15,8 @@ class User < ActiveRecord::Base
   # cache facebook friends in the database
   serialize :facebook_friends, Array
 
-  serialize :email_preferences, ActiveRecord::Coders::Hstore
-  serialize :settings, ActiveRecord::Coders::Hstore
+  store_accessor :email_preferences
+  store_accessor :settings
 
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login

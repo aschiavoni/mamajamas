@@ -37,10 +37,6 @@ GEM
       activesupport (= 4.0.8)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
-    activerecord-postgres-hstore (0.7.7)
-      activerecord (>= 3.1)
-      pg-hstore (>= 1.1.5)
-      rake
     activeresource (4.0.0)
       activemodel (~> 4.0)
       activesupport (~> 4.0)
@@ -289,7 +285,6 @@ GEM
       omniauth (~> 1.0)
     orm_adapter (0.5.0)
     pg (0.17.1)
-    pg-hstore (1.2.0)
     pg_search (0.7.6)
       activerecord (>= 3.1)
       activesupport (>= 3.1)
@@ -301,6 +296,8 @@ GEM
       websocket-driver (>= 0.2.0)
     polyglot (0.3.5)
     possessive (1.0.1)
+    protected_attributes (1.0.8)
+      activemodel (>= 4.0.1, < 5.0)
     pry (0.10.0)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -466,7 +463,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_decorator
-  activerecord-postgres-hstore
   acts_as_list
   amazon-ecs
   asset_sync
@@ -514,6 +510,7 @@ DEPENDENCIES
   pg_search
   poltergeist
   possessive
+  protected_attributes
   pry-byebug
   pry-rails
   quiet_assets

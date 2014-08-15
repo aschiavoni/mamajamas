@@ -45,6 +45,7 @@ class FindFriendsView
   def mamajamas_facebook_friend_ids
     mamajamas_facebook_friends.includes(:authentications).
       where("authentications.provider" => "facebook").
+      references(:authentications).
       map(&:authentications).flatten.map(&:uid)
   end
   memoize :mamajamas_facebook_friend_ids
@@ -71,6 +72,7 @@ class FindFriendsView
       where("users.email" => google_friends_emails).
       where("users.email <> ?", user.email).
       where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
+      references(:lists).
       order("lists.featured DESC, users.follower_count DESC")
   end
   memoize :mamajamas_google_friends

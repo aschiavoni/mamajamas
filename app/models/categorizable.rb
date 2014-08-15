@@ -8,7 +8,7 @@ module Categorizable
 
   module ClassMethods
     def by_category(category)
-      category.blank? ? scoped : where(category_id: category.id)
+      category.blank? ? all : where(category_id: category.id)
     end
   end
 end

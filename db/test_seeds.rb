@@ -25,7 +25,7 @@ product_types = {
 }
 
 product_types.each do |category, product_type_hash|
-  category = Category.find_or_create_by_name!(category)
+  category = Category.find_or_create_by!(name: category)
   product_type_hash.each do |product_type_attrs|
     age_range = AgeRange.find_by_name(product_type_attrs.delete(:age_range))
     product_type = ProductType.find_by_name(product_type_attrs[:name])

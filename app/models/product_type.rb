@@ -20,9 +20,9 @@ class ProductType < ActiveRecord::Base
   validates :recommended_quantity,
     numericality: { only_integer: true, greater_than: 0 }
 
-  scope :global, where(user_id: nil)
-  scope :global_active, global.where(active: true)
-  scope :user, where("user_id IS NOT NULL")
+  scope :global, -> { where(user_id: nil) }
+  scope :global_active, -> { global.where(active: true) }
+  scope :user, -> { where("user_id IS NOT NULL") }
 
   before_save do
     self.image_name.downcase!

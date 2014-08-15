@@ -11,7 +11,7 @@ class List < ActiveRecord::Base
   attr_accessible :expert, as: :admin
 
   belongs_to :user
-  has_many :categories, through: :list_items, uniq: true do
+  has_many :categories, -> { uniq }, through: :list_items do
     def for_list
       order(:name)
     end

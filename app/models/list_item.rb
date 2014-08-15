@@ -23,12 +23,12 @@ class ListItem < ActiveRecord::Base
   validates :age_range_id, presence: true
   validates :quantity, numericality: { only_integer: true, greater_than: 0 }
 
-  scope :placeholders, where(placeholder: true)
-  scope :user_items, where(placeholder: false)
-  scope :vendored_items, where("vendor IS NOT NULL")
+  scope :placeholders, -> { where(placeholder: true) }
+  scope :user_items, -> { where(placeholder: false) }
+  scope :vendored_items, -> { where("vendor IS NOT NULL") }
   scope :added_since, ->(time) { user_items.where("created_at > ?", time) }
-  scope :recommended, where(recommended: true)
-  scope :not_recommended, where("recommended <> ?", true)
+  scope :recommended, -> { where(recommended: true) }
+  scope :not_recommended, -> { where("recommended <> ?", true) }
 
   def self.unique_products
     vendored_items.select("DISTINCT vendor_id, vendor").map do |list_item|

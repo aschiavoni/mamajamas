@@ -10,6 +10,7 @@ class BrowseLists
       includes(:list).
       where(guest: false).
       where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
+      references(:lists).
       order(sort_by(@sort))
   end
 end

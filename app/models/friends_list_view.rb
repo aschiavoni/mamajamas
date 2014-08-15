@@ -17,6 +17,7 @@ class FriendsListView
   def followers
     @followers = user.followers.includes(:list).
       where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
+      references(:lists).
       order(sort_by(@sort))
   end
 end

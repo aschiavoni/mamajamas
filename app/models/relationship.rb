@@ -13,5 +13,5 @@ class Relationship < ActiveRecord::Base
   validates :follower_id, presence: true
   validates :followed_id, presence: true
 
-  scope :pending_notification, where("delivered_notification_at IS NULL")
+  scope :pending_notification, -> { where("delivered_notification_at IS NULL") }
 end
