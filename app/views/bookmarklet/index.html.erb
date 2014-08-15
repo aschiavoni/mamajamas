@@ -17,7 +17,7 @@
   <div id="loading" style="display: none; text-align: center; width: 100%">
     <%= image_tag 'loader36-f.gif' %>
   </div>
-  <%= form_for @list_item, url: bookmarklet_path do |f| -%>
+  <%= form_for @list_item, url: bookmarklet_add_path do |f| -%>
     <%= f.hidden_field :link %>
     <%= f.hidden_field :image_url %>
     <%= f.hidden_field :priority %>

@@ -43,7 +43,7 @@ Mamajamas::Application.routes.draw do
   get '/terms-of-service' => 'pages#terms', :as => :terms
   get '/privacy-policy' => 'pages#privacy', :as => :privacy
   get '/mjsb' => 'bookmarklet#index', :as => :bookmarklet
-  post '/mjsb' => 'bookmarklet#create', :as => :bookmarklet
+  post '/mjsb' => 'bookmarklet#create', :as => :bookmarklet_add
   get '/test/error' => 'home#error'
   get '/robots.txt' => 'robots#show'
 
@@ -112,7 +112,7 @@ Mamajamas::Application.routes.draw do
   get ":slug/:category" => "public_lists#show", as: :public_list_category
 
   authenticated :user, lambda { |u| !u.guest? } do
-    root :to => 'lists#show'
+    root :to => 'lists#show', as: :authenticated_root
   end
   root :to => 'home#index'
 end
