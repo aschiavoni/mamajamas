@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include EmailPreferences
 
   extend FriendlyId
-  friendly_id :username, use: [ :slugged, :history ]
+  friendly_id :username, use: [ :slugged, :history, :finders ]
 
   include GoingPostal
 

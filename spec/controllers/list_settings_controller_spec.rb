@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ListSettingsController do
+describe ListSettingsController, :type => :controller do
 
   let(:user) { create(:user) }
 
@@ -10,12 +10,12 @@ describe ListSettingsController do
 
     it "returns http success" do
       get 'edit'
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns view" do
       get 'edit'
-      assigns(:settings).should be_an_instance_of(Forms::ListSettingsView)
+      expect(assigns(:settings)).to be_an_instance_of(Forms::ListSettingsView)
     end
 
   end
@@ -23,17 +23,17 @@ describe ListSettingsController do
   describe "update" do
 
     it "redirects to settings after update" do
-      Forms::ListSettingsView.any_instance.
-        should_receive(:update!).and_return(true)
+      expect_any_instance_of(Forms::ListSettingsView).
+        to receive(:update!).and_return(true)
       put :update, settings: { privacy: 0 }
-      response.should redirect_to(settings_path)
+      expect(response).to redirect_to(settings_path)
     end
 
     it "renders edit template if update fails" do
-      Forms::ListSettingsView.any_instance.
-        should_receive(:update!).and_return(false)
+      expect_any_instance_of(Forms::ListSettingsView).
+        to receive(:update!).and_return(false)
       put :update, settings: { privacy: 0 }
-      response.should render_template("edit")
+      expect(response).to render_template("edit")
     end
   end
 

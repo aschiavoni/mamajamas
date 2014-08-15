@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ProductTypesController do
+describe ProductTypesController, :type => :controller do
 
   describe "index" do
 
@@ -12,7 +12,7 @@ describe ProductTypesController do
 
     it "should get json product types" do
       get :index, category_id: create(:category).id, format: :json
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "should not get html product types" do

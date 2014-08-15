@@ -22,7 +22,7 @@ gem 'handlebars_assets'
 gem 'asset_sync'
 
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '3.0.1'
 
 # authentication
 gem 'devise'
@@ -47,7 +47,7 @@ gem 'google_contacts_api'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # let's use backbone
-gem 'backbone-on-rails'
+gem 'backbone-on-rails', '0.9.2.3'
 
 # To use Jbuilder templates for JSON
 gem 'jbuilder'
@@ -94,7 +94,6 @@ gem 'heroku'
 gem 'rack-mini-profiler'
 gem 'memcachier'
 gem 'dalli'
-gem 'dalli-delete-matched'
 gem 'sentry-raven', :git => "https://github.com/getsentry/raven-ruby.git"
 gem 'newrelic_rpm'
 # mailchimp api wrapper

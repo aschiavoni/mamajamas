@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ProductsController do
+describe ProductsController, :type => :controller do
 
   describe "index" do
 
@@ -17,24 +17,24 @@ describe ProductsController do
 
     it "should get json product listing" do
       get :index, format: :json
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "returns empty hash when query is not found" do
       get :index, format: :json
-      response.body.should == {}.to_json
+      expect(response.body).to eq("")
     end
 
     it "searches for specified filter" do
       filter = "baby bottle"
-      ProductSearcher.should_receive(:search).with(filter, anything(), anything())
+      expect(ProductSearcher).to receive(:search).with(filter, anything(), anything())
       get :index, filter: filter, format: :json
     end
 
     it "searches for filter + name" do
       filter = "medela product"
       name = "Bottle"
-      ProductSearcher.should_receive(:search).
+      expect(ProductSearcher).to receive(:search).
         with("#{filter} #{name.downcase}", anything, anything)
       get :index, filter: filter, name: name, format: :json
     end
@@ -42,7 +42,7 @@ describe ProductsController do
     it "does not append product type name if filter == name" do
       filter = "bottle"
       name = "Bottle"
-      ProductSearcher.should_receive(:search).
+      expect(ProductSearcher).to receive(:search).
         with("#{filter}", anything, anything)
       get :index, filter: filter, name: name, format: :json
     end
@@ -50,7 +50,7 @@ describe ProductsController do
     it "does not append product type name if filter >= 3 words" do
       filter = "bottle large white"
       name = "Bottle"
-      ProductSearcher.should_receive(:search).
+      expect(ProductSearcher).to receive(:search).
         with("#{filter}", anything, anything)
       get :index, filter: filter, name: name, format: :json
     end

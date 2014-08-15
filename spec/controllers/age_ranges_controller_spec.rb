@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AgeRangesController do
+describe AgeRangesController, :type => :controller do
 
   before(:all) do
     3.times do
@@ -16,11 +16,11 @@ describe AgeRangesController do
     end
 
     it "returns http success" do
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns age ranges" do
-      assigns(:age_ranges).should_not be_blank
+      expect(assigns(:age_ranges)).not_to be_blank
     end
   end
 

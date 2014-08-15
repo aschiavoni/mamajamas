@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ListsController do
+describe ListsController, :type => :controller do
 
   let(:user) { create(:user) }
 
@@ -14,7 +14,7 @@ describe ListsController do
 
       it "redirects to quiz" do
         get :show
-        response.should redirect_to(quiz_path)
+        expect(response).to redirect_to(quiz_path)
       end
 
     end
@@ -31,11 +31,11 @@ describe ListsController do
 
       it "should get list page" do
         get :show
-        response.should be_success
+        expect(response).to be_success
       end
 
       it "should increment view count" do
-        List.any_instance.should_receive(:increment_view_count)
+        expect_any_instance_of(List).to receive(:increment_view_count)
         get :show
       end
 
@@ -54,8 +54,8 @@ describe ListsController do
     end
 
     it "should call available product types" do
-      List.any_instance.
-        should_receive(:available_product_types).
+      expect_any_instance_of(List).
+        to receive(:available_product_types).
         with("filter", 20).and_return([])
 
       get :product_types, format: :json, filter: "filter"

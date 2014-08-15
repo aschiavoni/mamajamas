@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CategoriesController do
+describe CategoriesController, :type => :controller do
 
   describe "index" do
 
@@ -12,7 +12,7 @@ describe CategoriesController do
 
     it "should get json category listing" do
       get :index, format: :json
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "should not get html category listing" do

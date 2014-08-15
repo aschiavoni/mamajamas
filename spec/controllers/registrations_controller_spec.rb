@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RegistrationsController do
+describe RegistrationsController, :type => :controller do
 
   before(:each) do
     @request.env["devise.mapping"] = Devise.mappings[:user]
@@ -19,55 +19,55 @@ describe RegistrationsController do
     end
 
     it "should create user" do
-      lambda {
+      expect {
         post :create, user: registration
-      }.should change(User, :count).by(1)
+      }.to change(User, :count).by(1)
     end
 
     it "should send confirmation email for new user" do
-      lambda {
+      expect {
         post :create, user: registration
-      }.should change(ActionMailer::Base.deliveries, :size).by(1)
+      }.to change(ActionMailer::Base.deliveries, :size).by(1)
     end
 
     it "should create guest user" do
-      user_stub = stub(:persisted? => true)
-      User.should_receive(:new_guest).and_return(user_stub)
-      RegistrationsController.any_instance.should_receive(:sign_in).
+      user_stub = double(:persisted? => true)
+      expect(User).to receive(:new_guest).and_return(user_stub)
+      expect_any_instance_of(RegistrationsController).to receive(:sign_in).
         with(:user, user_stub)
 
       post :create
     end
 
     it "should not send confirmation email for new guest user" do
-      lambda {
+      expect {
         post :create
-      }.should_not change(ActionMailer::Base.deliveries, :size)
+      }.not_to change(ActionMailer::Base.deliveries, :size)
     end
 
     it "redirects to quiz when guest user is created" do
-      User.should_receive(:new_guest).and_return(stub(:persisted? => true))
-      RegistrationsController.any_instance.should_receive(:sign_in)
+      expect(User).to receive(:new_guest).and_return(double(:persisted? => true))
+      expect_any_instance_of(RegistrationsController).to receive(:sign_in)
 
       post :create
-      response.should redirect_to(quiz_path)
+      expect(response).to redirect_to(quiz_path)
     end
 
     it "redirects to signup when guest user cannot be created" do
-      User.should_receive(:new_guest).and_return(stub(:persisted? => false))
+      expect(User).to receive(:new_guest).and_return(double(:persisted? => false))
       post :create
-      response.should redirect_to(new_user_registration_path)
+      expect(response).to redirect_to(new_user_registration_path)
     end
 
     # this is testing devise functionality but I am dependent on it
     it "should incremement sign in count" do
       post :create, user: registration
-      assigns(:user).sign_in_count.should == 1
+      expect(assigns(:user).sign_in_count).to eq(1)
     end
 
     it "redirects to quiz after signup" do
       post :create, user: registration
-      response.should redirect_to(quiz_path)
+      expect(response).to redirect_to(quiz_path)
     end
 
   end

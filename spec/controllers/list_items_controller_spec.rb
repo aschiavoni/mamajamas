@@ -31,21 +31,21 @@ describe ListItemsController, type: :controller do
       before(:each) { get :index, format: :json }
 
       it "should assign list" do
-        assigns(:list).should == @list
+        expect(assigns(:list)).to eq(@list)
       end
 
       it "should use nil @category" do
-        assigns(:category).should be_nil
+        expect(assigns(:category)).to be_nil
       end
 
       it "should assign list entries" do
-        assigns(:list_entries).size.should > 0
+        expect(assigns(:list_entries).size).to be > 0
       end
 
       it "should create list entries for all list items and product types" do
         list_items_size = @list.list_items.size
 
-        assigns(:list_entries).size.should == list_items_size
+        expect(assigns(:list_entries).size).to eq(list_items_size)
       end
 
     end
@@ -69,21 +69,21 @@ describe ListItemsController, type: :controller do
       end
 
       it "should assign list" do
-        assigns(:list).should == @list
+        expect(assigns(:list)).to eq(@list)
       end
 
       it "should use assign category" do
-        assigns(:category).should == @my_category
+        expect(assigns(:category)).to eq(@my_category)
       end
 
       it "should assign list entries" do
-        assigns(:list_entries).size.should > 0
+        expect(assigns(:list_entries).size).to be > 0
       end
 
       it "should create list entries for list items and product types in current category" do
         list_items_size = @list.list_items.where(category_id: @my_category.id).size
 
-        assigns(:list_entries).size.should == list_items_size
+        expect(assigns(:list_entries).size).to eq(list_items_size)
       end
 
     end
@@ -116,29 +116,29 @@ describe ListItemsController, type: :controller do
       end
 
       it "should create list item" do
-        lambda do
+        expect do
           post :create, list_item: create_params, format: :json
-        end.should change(@list.list_items, :count).by(1)
+        end.to change(@list.list_items, :count).by(1)
       end
 
       it "should assign list entry" do
         post :create, list_item: create_params, format: :json
-        assigns(:list_entry).should_not be_blank
+        expect(assigns(:list_entry)).not_to be_blank
       end
 
       it "list entry should be a list item" do
         post :create, list_item: create_params, format: :json
-        assigns(:list_entry).should be_kind_of(ListItem)
+        expect(assigns(:list_entry)).to be_kind_of(ListItem)
       end
 
       it "should create a list item placeholder" do
         post :create, list_item: create_params.merge(placeholder: true), format: :json
-        assigns(:list_entry).should be_placeholder
+        expect(assigns(:list_entry)).to be_placeholder
       end
 
       it "should render json list item" do
         post :create, list_item: create_params, format: :json
-        response.should render_template("create")
+        expect(response).to render_template("create")
       end
 
     end
@@ -165,19 +165,19 @@ describe ListItemsController, type: :controller do
     end
 
     it "should assign list entry" do
-      assigns(:list_entry).should == list_item
+      expect(assigns(:list_entry)).to eq(list_item)
     end
 
     it "should update list entry owned" do
-      assigns(:list_entry).owned.should be_truthy
+      expect(assigns(:list_entry).owned).to be_truthy
     end
 
     it "should update list item rating" do
-      assigns(:list_entry).rating.should == 3
+      expect(assigns(:list_entry).rating).to eq(3)
     end
 
     it "should clear list item recommended flag" do
-      assigns(:list_entry).should_not be_recommended
+      expect(assigns(:list_entry)).not_to be_recommended
     end
 
   end
@@ -192,13 +192,13 @@ describe ListItemsController, type: :controller do
 
     it "should assign list entry" do
       delete :destroy, id: @list_item.id, format: :json
-      assigns(:list_entry).should == @list_item
+      expect(assigns(:list_entry)).to eq(@list_item)
     end
 
     it "should delete list item" do
-      lambda do
+      expect do
         delete :destroy, id: @list_item.id, format: :json
-      end.should change(@list.list_items, :count).by(-1)
+      end.to change(@list.list_items, :count).by(-1)
     end
 
   end

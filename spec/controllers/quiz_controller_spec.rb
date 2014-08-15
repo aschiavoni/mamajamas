@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe QuizController do
+describe QuizController, :type => :controller do
 
   let(:user) { create(:user, quiz_taken_at: nil) }
 
@@ -12,13 +12,13 @@ describe QuizController do
 
     it "returns http success" do
       get 'show'
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns countries" do
-      Country.stub(:all => [ ["US", "United States"], ["BB", "Barbados"] ])
+      allow(Country).to receive_messages(:all => [ ["US", "United States"], ["BB", "Barbados"] ])
       get 'show'
-      assigns(:countries).should_not be_nil
+      expect(assigns(:countries)).not_to be_nil
     end
 
   end
@@ -27,10 +27,10 @@ describe QuizController do
 
     it "answers question" do
       answers = [ 'Pump', 'Bottle Feed' ]
-      Quiz::Answer.should_receive(:save_answer!).
+      expect(Quiz::Answer).to receive(:save_answer!).
         with(user, 'feeding', answers)
 
-      CompleteListWorker.should_not_receive(:perform_async)
+      expect(CompleteListWorker).not_to receive(:perform_async)
       put 'update', {
         question: 'Feeding',
         answers: answers
@@ -39,9 +39,9 @@ describe QuizController do
 
     it "completes list if complete list set" do
       answers = [ 'Pump', 'Bottle Feed' ]
-      Quiz::Answer.should_receive(:save_answer!).
+      expect(Quiz::Answer).to receive(:save_answer!).
         with(user, 'feeding', answers)
-      CompleteListWorker.should_receive(:perform_async).with(user.id)
+      expect(CompleteListWorker).to receive(:perform_async).with(user.id)
 
       put 'update', {
         question: 'Feeding',
@@ -52,10 +52,10 @@ describe QuizController do
 
     it "marks the quiz complete" do
       answers = [ 'Pump', 'Bottle Feed' ]
-      Quiz::Answer.should_receive(:save_answer!).
+      expect(Quiz::Answer).to receive(:save_answer!).
         with(user, 'feeding', answers)
-      CompleteListWorker.should_receive(:perform_async).with(user.id)
-      User.any_instance.should_receive(:complete_quiz!)
+      expect(CompleteListWorker).to receive(:perform_async).with(user.id)
+      expect_any_instance_of(User).to receive(:complete_quiz!)
 
       put 'update', {
         question: 'Feeding',
@@ -75,28 +75,28 @@ describe QuizController do
     end
 
     it "finds the user's first kid" do
-      kids = [ stub.as_null_object ]
-      User.any_instance.should_receive(:kids).and_return(kids)
-      post 'update_kid', kid: kid_params
+      kids = [ double.as_null_object ]
+      expect_any_instance_of(User).to receive(:kids).and_return(kids)
+      post 'update_kid', kid: kid_params, format: :json
     end
 
     it "updates the user's first kid" do
       kids = [ Kid.new ]
-      User.any_instance.should_receive(:kids).and_return(kids)
-      kids.first.should_receive(:update_attributes!).with(kid_params)
-      post 'update_kid', kid: kid_params
+      expect_any_instance_of(User).to receive(:kids).and_return(kids)
+      expect(kids.first).to receive(:update_attributes!).with(kid_params)
+      post 'update_kid', kid: kid_params, format: :json
     end
 
     it "creates the user's first kid" do
-      User.any_instance.should_receive(:kids).and_return([])
-      Kid.should_receive(:create!).with(kid_params)
-      post 'update_kid', kid: kid_params
+      expect_any_instance_of(User).to receive(:kids).and_return([])
+      expect(Kid).to receive(:create!).with(kid_params)
+      post 'update_kid', kid: kid_params, format: :json
     end
 
     it "builds the user's list if it does not exist" do
-      kids = [ stub.as_null_object ]
-      User.any_instance.should_receive(:kids).and_return(kids)
-      post 'update_kid', kid: kid_params
+      kids = [ double.as_null_object ]
+      expect_any_instance_of(User).to receive(:kids).and_return(kids)
+      post 'update_kid', kid: kid_params, format: :json
     end
 
   end
@@ -104,21 +104,21 @@ describe QuizController do
   describe "PUT 'update' zip code" do
 
     it "updates zip code and country on the current user" do
-      User.any_instance.should_receive(:update_attributes).
+      expect_any_instance_of(User).to receive(:update_attributes).
         with({ zip_code: '12345', country_code: 'GB' })
-      put 'update_zip_code', zip_code: '12345', country: 'GB'
+      put 'update_zip_code', zip_code: '12345', country: 'GB', format: :json
     end
 
     it "sets zip code to nil if blank zip code provided" do
-      User.any_instance.should_receive(:update_attributes).
+      expect_any_instance_of(User).to receive(:update_attributes).
         with({ zip_code: nil, country_code: 'US' })
-      put 'update_zip_code'
+      put 'update_zip_code', format: :json
     end
 
     it "sets country to 'US' if blank country provided" do
-      User.any_instance.should_receive(:update_attributes).
+      expect_any_instance_of(User).to receive(:update_attributes).
         with({ zip_code: nil, country_code: 'US' })
-      put 'update_zip_code'
+      put 'update_zip_code', format: :json
     end
 
     it "updates the zip code and country" do
@@ -126,7 +126,7 @@ describe QuizController do
         zip_code: 'sl41eg',
         country: 'GB',
         format: :json
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "returns errors if it cannot update the zip code and country" do
@@ -134,7 +134,7 @@ describe QuizController do
         zip_code: '11201',
         country: 'United Kingdom',
         format: :json
-      JSON.parse(response.body)['errors'].should_not be_empty
+      expect(JSON.parse(response.body)['errors']).not_to be_empty
     end
 
   end

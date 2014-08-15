@@ -2,6 +2,7 @@ class RegistrationsController < Devise::RegistrationsController
   prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy, :facebook, :facebook_update]
   prepend_before_filter :logout_guest, only: [ :new ]
   before_filter :init_view, only: [ :new ]
+  before_filter :configure_permitted_parameters
 
   # fix for facebook friends update
   protect_from_forgery(with: :null_session,
@@ -115,5 +116,12 @@ class RegistrationsController < Devise::RegistrationsController
     set_subheader = "Signup"
     set_body_class "form-page"
     hide_header
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(:username, :full_name,
+               :email, :password, :password_confirmation)
+    end
   end
 end

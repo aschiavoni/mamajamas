@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe ListItemImagesController do
+describe ListItemImagesController, :type => :controller do
 
 end

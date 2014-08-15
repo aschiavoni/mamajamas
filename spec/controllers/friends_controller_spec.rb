@@ -1,38 +1,42 @@
 require 'spec_helper'
 
-describe FriendsController do
-
-  let(:user) { create(:user) }
-
-  before(:each) do
-    sign_in user
-  end
+describe FriendsController, :type => :controller do
 
   describe "index" do
 
+    before(:each) do
+      @user = create(:user)
+      sign_in @user
+    end
+
     it "should get friends list" do
       get :index
-      response.should be_success
+      expect(response).to be_success
     end
 
   end
 
   describe "new" do
 
+    before(:each) do
+      @user = create(:user)
+      sign_in @user
+    end
+
     it "assigns friends view" do
       get :new
-      assigns(:view).should be_an_instance_of(FindFriendsView)
+      expect(assigns(:view)).to be_an_instance_of(FindFriendsView)
     end
 
     it "calls GoogleContactsWorker if google connected with no friends" do
-      create(:authentication, provider: "google", user: user)
-      GoogleContactsWorker.should_receive(:perform_async).with(user.id)
+      create(:authentication, provider: "google", user: @user)
+      expect(GoogleContactsWorker).to receive(:perform_async).with(@user.id)
       get :new
     end
 
     it "does not call GoogleContactsWorker" do
-      user.clear_google!
-      GoogleContactsWorker.should_not_receive(:perform_async)
+      @user.clear_google!
+      expect(GoogleContactsWorker).not_to receive(:perform_async)
       get :new
     end
 
@@ -40,39 +44,44 @@ describe FriendsController do
 
   describe "notify" do
 
+
     it "should redirect to list" do
+      @user = create(:user)
+      sign_in @user
       post :notify
-      response.should redirect_to(list_path)
+      expect(response).to redirect_to(list_path)
     end
 
     describe "notifications enabled" do
 
-      before(:all) do
+      before(:each) do
         # setup some relationships
+        @user = create(:user)
+        sign_in @user
         @following = create_list(:user, 2)
         @following.each do |following|
-          user.follow!(following)
+          @user.follow!(following)
         end
       end
 
       it "should send notifications" do
-        lambda {
+        expect {
           post :notify, notify: "1"
-        }.should change(ActionMailer::Base.deliveries, :size).by(@following.size)
+        }.to change(ActionMailer::Base.deliveries, :size).by(@following.size)
       end
 
       it "should not re-deliver notifications to followed users" do
         # create new relationship but mark it as already having
         # sent the notification
-        relationship = user.follow!(create(:user))
+        relationship = @user.follow!(create(:user))
         relationship.delivered_notification_at = 3.days.ago
         relationship.save!
 
         # it should only deliver notifications for the relationships
         # that do not have delivered_notification_at set
-        lambda {
+        expect {
           post :notify, notify: "1"
-        }.should change(ActionMailer::Base.deliveries, :size).by(@following.size)
+        }.to change(ActionMailer::Base.deliveries, :size).by(@following.size)
       end
 
     end

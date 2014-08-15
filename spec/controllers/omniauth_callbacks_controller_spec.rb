@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Users::OmniauthCallbacksController do
+describe Users::OmniauthCallbacksController, :type => :controller do
 
   describe "facebook" do
 
@@ -13,8 +13,8 @@ describe Users::OmniauthCallbacksController do
     }
 
     before do
-      ProfilePictureUploader.any_instance.stub(:download! => false)
-      EmailSubscriptionUpdaterWorker.stub(:perform_in)
+      allow_any_instance_of(ProfilePictureUploader).to receive_messages(:download! => false)
+      allow(EmailSubscriptionUpdaterWorker).to receive(:perform_in)
     end
 
     before(:each) do
@@ -28,7 +28,7 @@ describe Users::OmniauthCallbacksController do
       it "updates a guest user from facebook" do
         sign_in guest
         get :facebook
-        assigns(:user).should == guest
+        expect(assigns(:user)).to eq(guest)
       end
 
       it "doesn't update guest user if a facebook user exists with uid" do
@@ -37,8 +37,8 @@ describe Users::OmniauthCallbacksController do
                user: u, uid: auth_hash.uid,
                provider: "facebook")
         sign_in guest
-        AddsAuthentication.should_not_receive(:new)
-        OauthUserCreator.should_receive(:from_oauth) { u }
+        expect(AddsAuthentication).not_to receive(:new)
+        expect(OauthUserCreator).to receive(:from_oauth) { u }
         get :facebook
       end
 
@@ -53,13 +53,13 @@ describe Users::OmniauthCallbacksController do
       end
 
       it "should update facebook profile picture" do
-        FacebookProfilePictureUpdater.any_instance.should_receive(:update!)
+        expect_any_instance_of(FacebookProfilePictureUpdater).to receive(:update!)
         get :facebook
       end
 
       it "should redirect to registrations facebook path" do
         get :facebook
-        response.should redirect_to registrations_facebook_path
+        expect(response).to redirect_to registrations_facebook_path
       end
 
     end
@@ -73,13 +73,13 @@ describe Users::OmniauthCallbacksController do
       end
 
       it "should update facebook profile picture" do
-        FacebookProfilePictureUpdater.any_instance.should_receive(:update!)
+        expect_any_instance_of(FacebookProfilePictureUpdater).to receive(:update!)
         get :facebook
       end
 
       it "should render user json" do
         xhr :get, :facebook
-        response.should render_template("facebook")
+        expect(response).to render_template("facebook")
       end
 
     end
@@ -87,14 +87,14 @@ describe Users::OmniauthCallbacksController do
     describe "user creation fails" do
 
       before(:each) do
-        OauthUserCreator.should_receive(:from_oauth).and_return(build(:user))
+        expect(OauthUserCreator).to receive(:from_oauth).and_return(build(:user))
       end
 
       describe "html request" do
 
         it "should redirect to new user registration url" do
           get :facebook
-          response.should redirect_to(new_user_registration_url)
+          expect(response).to redirect_to(new_user_registration_url)
         end
 
       end
@@ -103,7 +103,7 @@ describe Users::OmniauthCallbacksController do
 
         it "should render user json" do
           xhr :get, :facebook
-          response.should render_template("facebook")
+          expect(response).to render_template("facebook")
         end
 
       end
@@ -127,7 +127,7 @@ describe Users::OmniauthCallbacksController do
 
       it "sends an unauthenticated user to their list (or quiz)" do
         get :google
-        response.should redirect_to(list_path)
+        expect(response).to redirect_to(list_path)
       end
 
     end
@@ -140,11 +140,11 @@ describe Users::OmniauthCallbacksController do
 
       it "returns a successful response" do
         get :google
-        response.should redirect_to(list_path)
+        expect(response).to redirect_to(list_path)
       end
 
       it "adds an authentication" do
-        AddsAuthentication.any_instance.should_receive(:from_oauth)
+        expect_any_instance_of(AddsAuthentication).to receive(:from_oauth)
         get :google
       end
 

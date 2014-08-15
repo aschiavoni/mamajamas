@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe RobotsController do
+describe RobotsController, :type => :controller do
 
   describe "show" do
 
     it "should get robots.txt" do
       get :show
-      response.should be_success
+      expect(response).to be_success
     end
 
   end
