@@ -12,6 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "private_network", type: "dhcp"
   config.vm.synced_folder ".", APP_DIR, type: "nfs"
   config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 1080, host: 1080
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
     v.cpus = 4

@@ -7,9 +7,6 @@ GOOGLE_AUTH_CONFIG = YAML.load_file(Rails.root.join("config", "google.yml"))[Rai
 Devise.setup do |config|
   config.secret_key = ENV['DEVISE_SECRET_KEY']
 
-  # TODO: remove this in 30 days [2014-08-14 Thu 09:29]
-  config.allow_insecure_token_lookup = true
-
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.

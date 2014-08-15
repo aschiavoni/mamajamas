@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include Devise::Controllers::Rememberable
+
   before_filter :authenticate_user!
   before_filter { |c| c.set_facebook_ad_conversion_params '6014528473678' }
 
@@ -68,8 +70,8 @@ class UsersController < ApplicationController
 
   def reremember_me!(user)
     cookies.delete :remember_user_token
-    Devise::Controllers::Rememberable::Proxy.new(request.env['warden']).remember_me(user)
-    user.remember_me!
+    remember_me(user)
+    user.remember_me!(true)
   end
 
   def complete_redirect_path

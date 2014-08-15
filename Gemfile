@@ -32,7 +32,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
 # authentication
-gem 'devise', '~> 3.0'
+gem 'devise'
 gem 'devise-async'
 
 # for facebook auth
