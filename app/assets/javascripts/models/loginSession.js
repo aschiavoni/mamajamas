@@ -134,7 +134,17 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
     var opts = { fields: fields, type: "square" };
     FB.api("/me/friends", opts, function(response) {
       var data = { uid: fbresponse.authResponse.userID, friends: response.data };
-      $.post("/registrations/facebook/friends", data, function(response) {
+      var tokenElems = _session.getAuthenticityToken();
+      data[tokenElems[0]] = tokenElems[1];
+      $.ajax({
+        type: 'POST',
+        url: '/registrations/facebook/friends',
+        data: data,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader('X-CSRF-Token',
+                               $('meta[name="csrf-token"]').attr('content'))
+        },
+      }).done(function(response) {
         _session.trigger('server:facebook:friends:updated');
       });
     });
@@ -186,5 +196,12 @@ window.Mamajamas.Models.LoginSession = Backbone.Model.extend({
         _session.trigger('server:unauthorized');
       }
     });
-  }
+  },
+
+  getAuthenticityToken: function() {
+    var paramName = $('meta[name=csrf-param]').attr('content');
+    var token = $('meta[name=csrf-token]').attr('content');
+    return [ paramName, token ];
+  },
+
 });

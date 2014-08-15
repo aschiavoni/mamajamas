@@ -3,6 +3,13 @@ class RegistrationsController < Devise::RegistrationsController
   prepend_before_filter :logout_guest, only: [ :new ]
   before_filter :init_view, only: [ :new ]
 
+  # fix for facebook friends update
+  protect_from_forgery(with: :null_session,
+                       only: [ :facebook_friends_update ],
+                       if: Proc.new { |c|
+                         c.request.format == 'application/json'
+                       })
+
   respond_to :json
 
   def create
@@ -86,7 +93,7 @@ class RegistrationsController < Devise::RegistrationsController
       self.resource = resource_class.to_adapter.get!(current_resource.to_key)
     else
       conditions = { uid: params.delete("uid"), provider: "facebook" }
-      self.resource = resource_class.to_adapter.find_first(conditions)
+      self.resource = Authentication.where(conditions).first!.user
     end
     render json: { success: self.resource.update_attributes(resource_params) }
   end
