@@ -35,30 +35,30 @@ describe ProfilePictureUploader do
 
   it "should upload file" do
     uploader.store!(File.open(profile_picture))
-    uploader.length.should > 0
+    expect(uploader.length).to be > 0
   end
 
   it "should only accept images" do
-    lambda {
+    expect {
       uploader.store!(File.open(invalid_profile_picture))
-    }.should raise_error(CarrierWave::IntegrityError)
+    }.to raise_error(CarrierWave::IntegrityError)
   end
 
   context "the account version" do
 
     it "should scale the account image to 24 by 24 pixels" do
       uploader.store!(File.open(profile_picture))
-      uploader.account.should be_no_larger_than(24, 24)
+      expect(uploader.account).to be_no_larger_than(24, 24)
     end
 
     it "should scale the profile image to 142 by 142 pixels" do
       uploader.store!(File.open(profile_picture))
-      uploader.account.should be_no_larger_than(142, 142)
+      expect(uploader.account).to be_no_larger_than(142, 142)
     end
 
     it "should scale the friend image to 84 by 84 pixels" do
       uploader.store!(File.open(profile_picture))
-      uploader.account.should be_no_larger_than(84, 84)
+      expect(uploader.account).to be_no_larger_than(84, 84)
     end
 
   end

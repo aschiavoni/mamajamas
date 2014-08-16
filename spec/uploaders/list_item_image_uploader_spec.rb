@@ -35,23 +35,21 @@ describe ListItemImageUploader do
 
   it "should upload file" do
     uploader.store!(File.open(list_item_image))
-    uploader.length.should > 0
+    expect(uploader.length).to be > 0
   end
 
   it "should only accept images" do
-    lambda {
+    expect {
       uploader.store!(File.open(invalid_list_item_image))
-    }.should raise_error(CarrierWave::IntegrityError)
+    }.to raise_error(CarrierWave::IntegrityError)
   end
 
   context "the thumb version" do
 
     it "should scale the thumb image to 60 by 60 pixels" do
       uploader.store!(File.open(list_item_image))
-      uploader.thumb.should be_no_larger_than(60, 60)
+      expect(uploader.thumb).to be_no_larger_than(60, 60)
     end
 
   end
-
 end
-

@@ -60,7 +60,7 @@ gem 'htmlentities'
 
 # file attachments
 gem 'jquery-fileupload-rails'
-gem 'carrierwave'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', ref: 'c2ee2e8'
 gem 'fog'
 gem 'mini_magick'
 

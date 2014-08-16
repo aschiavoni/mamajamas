@@ -10,8 +10,8 @@ describe GoogleContactsWorker do
   it "updates existing social friends" do
     create(:social_friends, provider: "google", user: @user)
 
-    GoogleContactsFetcher.any_instance.should_receive(:contacts) { [] }
-    SocialFriends.any_instance.should_receive(:update_attributes!).
+    expect_any_instance_of(GoogleContactsFetcher).to receive(:contacts) { [] }
+    expect_any_instance_of(SocialFriends).to receive(:update_attributes!).
       with(friends: [])
 
     worker = GoogleContactsWorker.new
@@ -19,12 +19,12 @@ describe GoogleContactsWorker do
   end
 
   it "creates new social friends" do
-    GoogleContactsFetcher.any_instance.should_receive(:contacts) { [] }
+    expect_any_instance_of(GoogleContactsFetcher).to receive(:contacts) { [] }
 
-    sf = stub
-    User.any_instance.should_receive(:social_friends).exactly(2).times { sf }
-    sf.should_receive(:google) { [] }
-    sf.should_receive(:create!).with(provider: "google", friends: [])
+    sf = double
+    expect_any_instance_of(User).to receive(:social_friends).exactly(2).times { sf }
+    expect(sf).to receive(:google) { [] }
+    expect(sf).to receive(:create!).with(provider: "google", friends: [])
 
     worker = GoogleContactsWorker.new
     worker.perform(@user.id)
