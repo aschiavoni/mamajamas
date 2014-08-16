@@ -9,7 +9,7 @@ class CreateRecommendedProducts < ActiveRecord::Migration
       t.string :image_url
       t.string :tag
 
-      t.timestamps
+      t.timestamps null: false
     end
     add_index :recommended_products, :product_type_id
   end

@@ -8,7 +8,7 @@ class CreateInvites < ActiveRecord::Migration
       t.string :picture_url
       t.datetime :invite_sent_at
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

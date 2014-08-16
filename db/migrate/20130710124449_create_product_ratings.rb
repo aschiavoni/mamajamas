@@ -5,7 +5,7 @@ class CreateProductRatings < ActiveRecord::Migration
       t.string :vendor_id
       t.float :rating, null: false, default: 0.0
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index :product_ratings, :vendor_id

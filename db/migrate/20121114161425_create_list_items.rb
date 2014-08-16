@@ -11,7 +11,7 @@ class CreateListItems < ActiveRecord::Migration
       t.string :notes
       t.string :image_url
 
-      t.timestamps
+      t.timestamps null: false
     end
     add_index :list_items, :list_id
   end

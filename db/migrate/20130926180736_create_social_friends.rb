@@ -5,7 +5,7 @@ class CreateSocialFriends < ActiveRecord::Migration
       t.string :provider
       t.text :friends
 
-      t.timestamps
+      t.timestamps null: false
     end
     add_index :social_friends, :user_id
     add_index :social_friends, :provider

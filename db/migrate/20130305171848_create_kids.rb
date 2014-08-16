@@ -7,7 +7,7 @@ class CreateKids < ActiveRecord::Migration
       t.references :age_range
       t.references :user
 
-      t.timestamps
+      t.timestamps null: false
     end
     add_index :kids, :age_range_id
     add_index :kids, :user_id

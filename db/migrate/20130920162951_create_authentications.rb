@@ -7,7 +7,7 @@ class CreateAuthentications < ActiveRecord::Migration
       t.string :access_token
       t.datetime :access_token_expires_at
 
-      t.timestamps
+      t.timestamps null: false
     end
     add_index :authentications, :user_id
   end

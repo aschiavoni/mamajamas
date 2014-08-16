@@ -8,7 +8,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :url
       t.integer :rating
 
-      t.timestamps
+      t.timestamps null: false
     end
     add_index :products, :product_type_id
   end

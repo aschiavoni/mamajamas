@@ -5,7 +5,7 @@ class CreateProductTypes < ActiveRecord::Migration
       t.string :name
       t.string :buy_before
       t.integer :priority
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

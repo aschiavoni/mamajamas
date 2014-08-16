@@ -5,7 +5,7 @@ class CreateQuizAnswers < ActiveRecord::Migration
       t.string :question
       t.text :answers
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end
