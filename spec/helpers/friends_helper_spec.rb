@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe FriendsHelper do
+describe FriendsHelper, :type => :helper do
 end

@@ -1,20 +1,20 @@
-describe MailerHelper do
+describe MailerHelper, :type => :helper do
 
   describe "full_name" do
 
     it "returns user full name" do
-      user = stub(first_name: "John", last_name: "Doe")
-      full_name(user).should == "John Doe"
+      user = double(first_name: "John", last_name: "Doe")
+      expect(full_name(user)).to eq("John Doe")
     end
 
     it "returns first name if last name not present" do
-      user = stub(first_name: "John").as_null_object
-      full_name(user).should == "John"
+      user = double(first_name: "John").as_null_object
+      expect(full_name(user)).to eq("John")
     end
 
     it "returns username if first name not present" do
-      user = stub(username: "jj").as_null_object
-      full_name(user).should == "jj"
+      user = double(username: "jj").as_null_object
+      expect(full_name(user)).to eq("jj")
     end
 
   end
@@ -23,13 +23,13 @@ describe MailerHelper do
   describe "first_name" do
 
     it "returns user first name" do
-      user = stub(first_name: "John")
-      first_name(user).should == "John"
+      user = double(first_name: "John")
+      expect(first_name(user)).to eq("John")
     end
 
     it "returns username if first name not present" do
-      user = stub(username: "jj").as_null_object
-      first_name(user).should == "jj"
+      user = double(username: "jj").as_null_object
+      expect(first_name(user)).to eq("jj")
     end
 
   end
