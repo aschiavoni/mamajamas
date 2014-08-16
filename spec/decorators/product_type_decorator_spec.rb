@@ -6,12 +6,12 @@ describe ProductTypeDecorator do
 
   subject { product_type }
 
-  it { should be_a ProductType }
+  it { is_expected.to be_a ProductType }
 
   describe "cagtegory name" do
 
     it "knows category name" do
-      product_type.category_name.should == product_type.category.name
+      expect(product_type.category_name).to eq(product_type.category.name)
     end
 
   end

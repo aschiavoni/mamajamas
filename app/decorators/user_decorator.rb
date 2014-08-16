@@ -26,6 +26,7 @@ module UserDecorator
     followed_users.
       includes(:list).
       where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
+      references(:lists).
       order(:first_name)
   end
   memoize :followed_users_with_shared_lists

@@ -7,32 +7,32 @@ describe UserDecorator do
 
   subject { user }
 
-  it { should be_a User }
+  it { is_expected.to be_a User }
 
   describe "display name" do
 
     it "should show first and last name" do
       user.first_name = "John"
       user.last_name = "Doe"
-      user.display_name.should == "John Doe"
+      expect(user.display_name).to eq("John Doe")
     end
 
 
     it "should show user name for user with no names" do
       user.username = "johndoe"
-      user.display_name.should == "johndoe"
+      expect(user.display_name).to eq("johndoe")
     end
 
     it "should show user name for user with only first name" do
       user.username = "johndoe"
       user.first_name = "John"
-      user.display_name.should == "johndoe"
+      expect(user.display_name).to eq("johndoe")
     end
 
     it "should show user name for user with only last name" do
       user.username = "johndoe"
       user.last_name = "Doe"
-      user.display_name.should == "johndoe"
+      expect(user.display_name).to eq("johndoe")
     end
 
   end
@@ -41,12 +41,12 @@ describe UserDecorator do
 
     it "should display first name if not blank" do
       user.first_name = "Joe"
-      user.display_first_name_or_username.should == "Joe"
+      expect(user.display_first_name_or_username).to eq("Joe")
     end
 
     it "should display username if first name is blank" do
       user.username = "johndoe"
-      user.display_first_name_or_username.should == "johndoe"
+      expect(user.display_first_name_or_username).to eq("johndoe")
     end
 
   end
@@ -59,7 +59,7 @@ describe UserDecorator do
     end
 
     it "should return nothing if last name is blank" do
-      user.display_last_name.should be_blank
+      expect(user.display_last_name).to be_blank
     end
 
   end
@@ -77,7 +77,7 @@ describe UserDecorator do
       user.follow!(user2)
       user.follow!(user3)
 
-      user.followed_users_with_shared_lists.should == [ user2 ]
+      expect(user.followed_users_with_shared_lists).to eq([ user2 ])
     end
 
   end
