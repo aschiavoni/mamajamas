@@ -3,12 +3,12 @@ AgeRangeCreator.create!
 product_types = {
   "Bathing" =>
   [
-    { name: "Shampoo or Body Wash", age_range: "0-3 mo", priority: 2, image_name: "shampoo.png" }
+    { name: "Shampoo or Body Wash", age_range: "0-3 mo", priority: 2, image_name: "products/icons/shampoo@2x.png" }
   ],
 
   "Birthing / Pregnancy" =>
   [
-    { name: "Pregnancy Book", age_range: "Pre-birth", priority: 2, image_name: "pregnancy_book@2x.png" }
+    { name: "Pregnancy Book", age_range: "Pre-birth", priority: 2, image_name: "products/icons/pregnancy_book@2x.png" }
   ],
 
   "Changing" =>
@@ -18,7 +18,7 @@ product_types = {
 
   "Feeding" =>
   [
-    { name: "Wipeable Bib", age_range: "7-12 mo", priority: 1, image_name: "wipeable_bib@2x.png" }
+    { name: "Wipeable Bib", age_range: "7-12 mo", priority: 1, image_name: "products/icons/wipeable_bib@2x.png" }
   ],
 
   "Potty Training" => []

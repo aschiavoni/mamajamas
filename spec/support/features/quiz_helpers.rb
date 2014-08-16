@@ -31,7 +31,7 @@ module Features
 
       click_link "Build My List"
       expect(page).to have_content("Your baby gear list")
-      current_path.should == list_path
+      expect(current_path).to eq(list_path)
     end
   end
 end

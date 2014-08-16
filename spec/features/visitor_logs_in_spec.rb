@@ -14,7 +14,7 @@ feature "Visitor logs in", js: true do
 
       expect(page).to have_content("Signed in")
       expect(page).to have_content("Your baby gear list")
-      current_path.should == list_path
+      expect(current_path).to eq(list_path)
     end
   end
 
@@ -24,7 +24,7 @@ feature "Visitor logs in", js: true do
 
       expect(page).to have_content("Signed in")
       expect(page).to have_content("Your baby gear list")
-      current_path.should == list_path
+      expect(current_path).to eq(list_path)
     end
   end
 
@@ -64,7 +64,7 @@ feature "Visitor logs in", js: true do
 
         # should be on the list page
         expect(page).to have_content("Your baby gear list")
-        current_path.should == list_path
+        expect(current_path).to eq(list_path)
       end
     end
 

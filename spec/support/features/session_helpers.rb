@@ -46,7 +46,7 @@ module Features
 
       # expand email signup form
       find(".collapsible").click
-      page.should have_selector("#user_email", visible: true)
+      expect(page).to have_selector("#user_email", visible: true)
 
       # fill out signup form
       fill_in "First and last name", with: full_name
@@ -60,13 +60,13 @@ module Features
       # i don't like this but I think the collapsible is interfering otherwise
       sleep_maybe
 
-      page.should have_selector("#bt-create-account", visible: true)
+      expect(page).to have_selector("#bt-create-account", visible: true)
       click_button "bt-create-account"
     end
 
     def sign_up_with_and_logout(email, password)
       sign_up_with email, password
-      page.should have_selector("#logout", visible: true)
+      expect(page).to have_selector("#logout", visible: true)
       click_link "Logout"
       expect(page).to have_content("Signed out")
     end
@@ -78,11 +78,11 @@ module Features
 
       # login dialog
       click_link "login-link"
-      page.should have_selector("#login-window", visible: true)
+      expect(page).to have_selector("#login-window", visible: true)
 
       # expand email login form
       find(".collapsible").click
-      page.should have_selector("#user_login", visible: true)
+      expect(page).to have_selector("#user_login", visible: true)
 
       # email login
       login = with == :username ? username : email

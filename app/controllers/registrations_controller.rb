@@ -121,6 +121,7 @@ class RegistrationsController < Devise::RegistrationsController
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(:username, :full_name,
+               :signup_registration,
                :email, :password, :password_confirmation)
     end
   end

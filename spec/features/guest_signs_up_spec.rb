@@ -20,10 +20,10 @@ feature "guest visitor", js: true do
       page.execute_script("Mamajamas.Context.List.set('item_count', 1)")
       click_link "Save"
       sleep_maybe
-      page.should have_selector("#signup-modal", visible: true)
+      expect(page).to have_selector("#signup-modal", visible: true)
 
       find("#signup-collapsible").click
-      page.should have_selector("#user_email", visible: true)
+      expect(page).to have_selector("#user_email", visible: true)
 
       # fill out signup form
       fill_in "First and last name", with: "Guest UserSignup"
@@ -35,12 +35,12 @@ feature "guest visitor", js: true do
       fill_in "Confirm password", with: "test12345!"
       sleep_maybe
 
-      page.should have_selector("#bt-create-account", visible: true)
+      expect(page).to have_selector("#bt-create-account", visible: true)
       click_button "bt-create-account"
 
       sleep_maybe
       expect(page).to have_content("Create my profile")
-      current_path.should == profile_path
+      expect(current_path).to eq(profile_path)
     end
   end
 
@@ -65,7 +65,7 @@ feature "guest visitor", js: true do
       page.execute_script("Mamajamas.Context.LoginSession.saveSession(true);")
 
       expect(page).to have_content("Create my profile")
-      current_path.should == profile_path
+      expect(current_path).to eq(profile_path)
     end
   end
 end

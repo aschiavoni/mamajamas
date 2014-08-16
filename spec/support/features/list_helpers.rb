@@ -6,20 +6,20 @@ module Features
       sleep_maybe
       click_link "Choose"
       sleep_maybe
-      page.should have_selector("#search-modal", visible: true)
+      expect(page).to have_selector("#search-modal", visible: true)
       sleep_maybe
       find("#add-your-own-collapsible").click
       sleep_maybe
-      page.should have_selector("#frm-addown", visible: true)
+      expect(page).to have_selector("#frm-addown", visible: true)
       fill_in "field-prodname", with: name
       sleep_maybe
       click_link "Add"
       sleep_maybe
-      page.should have_selector(".new-list-item", visible: true)
+      expect(page).to have_selector(".new-list-item", visible: true)
       fill_in "list_item[link]", with: link
       sleep_maybe
       click_button "Save"
-      page.should have_content(name)
+      expect(page).to have_content(name)
       sleep_maybe
     end
 
