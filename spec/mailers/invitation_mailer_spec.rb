@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe InvitationMailer do
+describe InvitationMailer, :type => :mailer do
 
   describe "invitation" do
 
@@ -9,29 +9,29 @@ describe InvitationMailer do
     let(:mail) { InvitationMailer.invitation(invite.id) }
 
     it "renders the headers" do
-      mail.subject.should eq("Check out Mamajamas.com")
-      mail.to.should eq([invite.email])
-      mail.from.should eq([invite.user.email])
+      expect(mail.subject).to eq("Check out Mamajamas.com")
+      expect(mail.to).to eq([invite.email])
+      expect(mail.from).to eq([invite.user.email])
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("Create your own baby gear list at Mamajamas:")
+      expect(mail.body.encoded).to match("Create your own baby gear list at Mamajamas:")
     end
 
     it "includes a link to mamajamas" do
-      mail.body.encoded.should match("http://www.mamajamas.com")
+      expect(mail.body.encoded).to match("http://www.mamajamas.com")
     end
 
     it "includes a greeting" do
-      mail.body.encoded.should match("Hello #{invite.name},")
+      expect(mail.body.encoded).to match("Hello #{invite.name},")
     end
 
     it "includes a message" do
-      mail.body.encoded.should match(invite.message)
+      expect(mail.body.encoded).to match(invite.message)
     end
 
     it "includes the sender name" do
-      mail.body.encoded.should match(invite.from)
+      expect(mail.body.encoded).to match(invite.from)
     end
 
     it "sets invite sent at timestamp" do

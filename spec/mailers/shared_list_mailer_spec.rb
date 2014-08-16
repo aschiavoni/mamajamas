@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe SharedListMailer do
+describe SharedListMailer, :type => :mailer do
 
   describe "shared" do
 
@@ -9,14 +9,14 @@ describe SharedListMailer do
     let(:mail) { SharedListMailer.shared(user.id) }
 
     it "renders the headers" do
-      mail.subject.should eq("Your List is Saved!")
-      mail.to.should eq([ user.email ])
-      mail.from.should eq([ "automom@mamajamas.com" ])
-      mail.bcc.should eq([ "angie@mamajamas.com" ])
+      expect(mail.subject).to eq("Your List is Saved!")
+      expect(mail.to).to eq([ user.email ])
+      expect(mail.from).to eq([ "automom@mamajamas.com" ])
+      expect(mail.bcc).to eq([ "angie@mamajamas.com" ])
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("Your Mamajamas list has been saved.")
+      expect(mail.body.encoded).to match("Your Mamajamas list has been saved.")
     end
 
     # it "includes a greeting" do
@@ -24,7 +24,7 @@ describe SharedListMailer do
     # end
 
     it "includes a link to the shared list" do
-      mail.body.encoded.should match("http://.*/#{user.username}")
+      expect(mail.body.encoded).to match("http://.*/#{user.username}")
     end
 
   end

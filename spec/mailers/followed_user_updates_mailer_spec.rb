@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FollowedUserUpdatesMailer do
+describe FollowedUserUpdatesMailer, :type => :mailer do
 
   describe "daily digest" do
 
@@ -16,17 +16,17 @@ describe FollowedUserUpdatesMailer do
     end
 
     it "renders the headers" do
-      mail.subject.should eq("New gear has been added to #{'John'.possessive} list!")
-      mail.to.should eq([ user.email ])
-      mail.from.should eq(["automom@mamajamas.com"])
+      expect(mail.subject).to eq("New gear has been added to #{'John'.possessive} list!")
+      expect(mail.to).to eq([ user.email ])
+      expect(mail.from).to eq(["automom@mamajamas.com"])
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("New gear has been added")
+      expect(mail.body.encoded).to match("New gear has been added")
     end
 
     it "includes a greeting" do
-      mail.body.encoded.should match("Hi #{user.first_name}")
+      expect(mail.body.encoded).to match("Hi #{user.first_name}")
     end
 
   end

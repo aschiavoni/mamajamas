@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe UserMailer do
+describe UserMailer, :type => :mailer do
 
   describe "welcome" do
 
@@ -9,22 +9,22 @@ describe UserMailer do
     let(:mail) { UserMailer.welcome(user.id) }
 
     it "renders the headers" do
-      mail.subject.should eq("Welcome to Mamajamas!")
-      mail.to.should eq([ user.email ])
-      mail.bcc.should eq([ "angie@mamajamas.com" ])
-      mail.from.should eq(["angie@mamajamas.com"])
+      expect(mail.subject).to eq("Welcome to Mamajamas!")
+      expect(mail.to).to eq([ user.email ])
+      expect(mail.bcc).to eq([ "angie@mamajamas.com" ])
+      expect(mail.from).to eq(["angie@mamajamas.com"])
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("Thanks for signing up")
+      expect(mail.body.encoded).to match("Thanks for signing up")
     end
 
     it "includes a greeting" do
-      mail.body.encoded.should match("Hi #{user.first_name}")
+      expect(mail.body.encoded).to match("Hi #{user.first_name}")
     end
 
     it "includes a link to angie's list page" do
-      mail.body.encoded.should match("http://www.mamajamas.com/angie")
+      expect(mail.body.encoded).to match("http://www.mamajamas.com/angie")
     end
 
   end

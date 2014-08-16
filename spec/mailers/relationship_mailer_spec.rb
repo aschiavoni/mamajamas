@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe RelationshipMailer do
+describe RelationshipMailer, :type => :mailer do
 
   describe 'follower notification' do
 
@@ -10,23 +10,23 @@ describe RelationshipMailer do
     let(:mail) { RelationshipMailer.follower_notification(relationship.id) }
 
     it "renders the subject" do
-      mail.subject.should =~ /#{follower.username}/
+      expect(mail.subject).to match(/#{follower.username}/)
     end
 
     it "sends to the followed user" do
-      mail.to.should include(followed.email)
+      expect(mail.to).to include(followed.email)
     end
 
     it "sends from the correct email address" do
-      mail.from.should include("automom@mamajamas.com")
+      expect(mail.from).to include("automom@mamajamas.com")
     end
 
     it "includes followed username" do
-      mail.body.encoded.should match(followed.username)
+      expect(mail.body.encoded).to match(followed.username)
     end
 
     it "includes follower username" do
-      mail.body.encoded.should match(follower.username)
+      expect(mail.body.encoded).to match(follower.username)
     end
 
     it "sets notification delivered at timestamp" do
@@ -41,7 +41,7 @@ describe RelationshipMailer do
       let(:follower) { create(:user, first_name: "John", last_name: "Doe") }
 
       it "includes follower full name" do
-        mail.body.encoded.should match("John Doe")
+        expect(mail.body.encoded).to match("John Doe")
       end
 
     end
@@ -51,7 +51,7 @@ describe RelationshipMailer do
       let(:followed) { create(:user, first_name: "Jane", last_name: "Doe") }
 
       it "includes followed full name" do
-        mail.body.encoded.should match("Jane Doe")
+        expect(mail.body.encoded).to match("Jane Doe")
       end
 
     end
