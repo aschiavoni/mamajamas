@@ -69,7 +69,7 @@ describe ProductType, :type => :model do
 
     it "should return unknown image name when image name is blank" do
       pt = build(:product_type, image_name: nil)
-      expect(pt.image_name).to eq("unknown.png")
+      expect(pt.image_name).to eq("products/icons/unknown.png")
     end
 
     it "downcases image name when saved" do

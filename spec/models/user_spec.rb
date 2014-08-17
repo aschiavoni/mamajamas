@@ -392,14 +392,14 @@ describe User, :type => :model do
       it "sets email preference as disabled" do
         user.new_follower_notifications_disabled = true
         expect(user.email_preferences).to eq({
-          "new_follower_notifications_disabled" => true
+          "new_follower_notifications_disabled" => "true"
         })
       end
 
       it "sets email preference as enabled" do
         user.new_follower_notifications_enabled = true
         expect(user.email_preferences).to eq({
-          "new_follower_notifications_disabled" => false
+          "new_follower_notifications_disabled" => "false"
         })
       end
 

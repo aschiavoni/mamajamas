@@ -28,10 +28,8 @@ class ProductType < ActiveRecord::Base
     self.image_name.downcase!
   end
 
-  # TODO: remove this when we have all product images available
-  # temporary accessor for product types without image names
   def image_name
-    read_attribute(:image_name) || "unknown.png"
+    read_attribute(:image_name) || "products/icons/unknown.png"
   end
 
   def admin_deleteable?

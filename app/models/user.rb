@@ -329,8 +329,8 @@ class User < ActiveRecord::Base
   end
 
   def show_bookmarklet_prompt
-    settings && settings[:show_bookmarklet_prompt].present? &&
-      settings[:show_bookmarklet_prompt].to_s == 'true'
+    settings && settings['show_bookmarklet_prompt'].present? &&
+      settings['show_bookmarklet_prompt'].to_s == 'true'
   end
   alias_method :show_bookmarklet_prompt?, :show_bookmarklet_prompt
 
