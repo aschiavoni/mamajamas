@@ -2,6 +2,7 @@ class BookmarkletController < ApplicationController
   layout 'bookmarklet'
 
   before_filter :authenticate_user!, only: [ :create ]
+  before_filter :allow_iframe_requests
   before_filter :init_view
 
   def index
