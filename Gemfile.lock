@@ -1,10 +1,13 @@
 GIT
-  remote: https://github.com/ryane/gibbon.git
-  revision: bfa2827a191ef05ad257a4dad1dec49fa06aedc3
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: c2ee2e89d3aa447c6b81186be6d627202d33a97f
+  ref: c2ee2e8
   specs:
-    gibbon (1.1.2)
-      httparty
-      multi_json (>= 1.3.4)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
 
 GIT
   remote: https://github.com/getsentry/raven-ruby.git
@@ -16,15 +19,12 @@ GIT
       uuidtools
 
 GIT
-  remote: git://github.com/carrierwaveuploader/carrierwave.git
-  revision: c2ee2e89d3aa447c6b81186be6d627202d33a97f
-  ref: c2ee2e8
+  remote: https://github.com/ryane/gibbon.git
+  revision: bfa2827a191ef05ad257a4dad1dec49fa06aedc3
   specs:
-    carrierwave (0.10.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
+    gibbon (1.1.2)
+      httparty
+      multi_json (>= 1.3.4)
 
 GEM
   remote: https://rubygems.org/
