@@ -1,0 +1,16 @@
+{{#if list.category_id}}
+  <div class="choicedrop product-type">
+    <a href="#">{{listItem.product_type_name}}
+      <span class="ss-dropdown"></span>
+    </a>
+    <ul style="display:none; width:200px;">
+      {{#each list.product_types}}
+        <li>
+          <a href="#" data-product-type-id="{{id}}">{{name}}</a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+{{else}}
+  {{listItem.product_type_name}}
+{{/if}}

@@ -45,7 +45,8 @@
      <% end -%>
      current_position: 0,
      item_count: <%= @view.list.item_count %>,
-     has_recommended_items: <%= @view.recommended_items? %>
+     has_recommended_items: <%= @view.recommended_items? %>,
+     product_types: JSON.parse('<%= @view.product_types.to_json.html_safe %>')
   });
    <% if @view.all_category? -%>
    Mamajamas.Context.Categories = <%= @view.categories.to_json.html_safe %>;

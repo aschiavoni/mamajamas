@@ -14,6 +14,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     this.model.on("change:rating", this.update, this);
     this.model.on("change:owned", this.update, this);
     this.model.on("change:quantity", this.update, this);
+    this.model.on("change:product_type_id", this.update, this);
     this.model.on("change:priority", this.render, this);
     this.model.on("search:product:update_item", this.updateItem, this);
     this.$el.attr("id", this.model.get("id"));
@@ -32,9 +33,21 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
 
   render: function() {
     var _view = this;
-    this.$el.html(this.template({ listItem: this.model.toJSON() }));
+
+    this.$el.html(this.template({
+      listItem: this.model.toJSON()
+    }));
 
     // subviews
+    var productTypeView = new Mamajamas.Views.ProductType({
+      model: {
+        listItem: this.model,
+        list: Mamajamas.Context.List
+      }
+    });
+    $('.prod-category', this.$el).prepend(productTypeView.render().$el);
+
+
     var ratingView = new Mamajamas.Views.ListItemRating({
       model: this.model
     });

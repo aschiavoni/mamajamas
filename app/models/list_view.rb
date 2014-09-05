@@ -43,6 +43,10 @@ class ListView
     @category_slug == 'all'
   end
 
+  def product_types
+    @product_types ||= product_types_hash
+  end
+
   private
 
   def find_category
@@ -70,5 +74,15 @@ class ListView
       by_priority[list_entry.priority] << list_entry
     end
     by_priority
+  end
+
+  def product_types_hash
+    if category.present?
+      category.product_types.order(:name).map { |pt|
+        { name: pt.name, id: pt.id }
+      }
+    else
+      []
+    end
   end
 end
