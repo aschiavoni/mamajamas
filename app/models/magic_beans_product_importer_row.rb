@@ -67,12 +67,20 @@ class MagicBeansProductImporterRow
     row[23]
   end
 
-  def product_type_name
+  def vendor_product_type_name
     specific_category || sub_category || main_category
   end
 
   def details
     row
+  end
+
+  def product_type_id
+    product_type.present? ? product_type.id : nil
+  end
+
+  def product_type_name
+    product_type.present? ? product_type.name : nil
   end
 
   def save!
@@ -106,6 +114,11 @@ class MagicBeansProductImporterRow
     product
   end
 
+  def product_type
+    @product_type ||=
+      ProductType.find_by_name_or_alias(vendor_product_type_name)
+  end
+
   def product_attributes
     {
      name: name,
@@ -128,6 +141,8 @@ class MagicBeansProductImporterRow
      mamajamas_rating_count: 0,
      description: description,
      short_description: short_description,
+     product_type_id: product_type_id,
+     vendor_product_type_name: vendor_product_type_name,
      product_type_name: product_type_name
     }
   end

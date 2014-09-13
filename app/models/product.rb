@@ -17,7 +17,9 @@ class Product < ActiveRecord::Base
   attr_accessible :price
   attr_accessible :mamajamas_rating
   attr_accessible :mamajamas_rating_count
+  attr_accessible :vendor_product_type_name
   attr_accessible :product_type_name
+  attr_accessible :product_type_id
   attr_accessible :description
   attr_accessible :short_description
 

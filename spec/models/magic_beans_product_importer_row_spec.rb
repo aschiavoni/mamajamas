@@ -38,8 +38,8 @@ describe MagicBeansProductImporterRow do
     expect(product_row.name).to eq("Infant Bearhands")
   end
 
-  it "finds product type name" do
-    expect(product_row.product_type_name).to eq("Gloves & Mittens")
+  it "finds vendor product type name" do
+    expect(product_row.vendor_product_type_name).to eq("Gloves & Mittens")
   end
 
   it "finds main category" do
@@ -68,6 +68,16 @@ describe MagicBeansProductImporterRow do
 
   it "finds the short description" do
     expect(product_row.short_description).to eq("Camel")
+  end
+
+  it "finds the matching product type id" do
+    pt = create(:product_type, aliases: ["Gloves & Mittens", "Gloves"])
+    expect(product_row.product_type_id).to eq(pt.id)
+  end
+
+  it "finds the matching product type name" do
+    pt = create(:product_type, aliases: ["Gloves & Mittens", "Gloves"])
+    expect(product_row.product_type_name).to eq(pt.name)
   end
 
   it "saves row to the database" do

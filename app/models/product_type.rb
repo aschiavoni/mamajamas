@@ -29,6 +29,10 @@ class ProductType < ActiveRecord::Base
     self.image_name.downcase!
   end
 
+  def self.find_by_name_or_alias(val)
+    where("name = ? OR ? = ANY (aliases)", val, val).first
+  end
+
   def image_name
     read_attribute(:image_name) || "products/icons/unknown.png"
   end
