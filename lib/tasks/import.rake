@@ -40,4 +40,19 @@ namespace :mamajamas do
 
   end
 
+  namespace :products do
+
+    desc "Imports Magic Beans Products from their datafeed"
+    task magic_beans: :environment do
+      file = ENV["FILE"]
+
+      raise "File does not exist" unless file.present? && File.exist?(file)
+
+      importer = MagicBeansProductImporter.new(file)
+      puts "Importing #{File.basename(file)}..."
+      importer.import
+      puts "Done."
+    end
+  end
+
 end
