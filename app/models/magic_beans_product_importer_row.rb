@@ -1,6 +1,7 @@
 class MagicBeansProductImporterRow
   SHAREASALE_USERID = '984701'
   VENDOR = "magic_beans"
+  REQUIRED_ATTRS = [ :name, :vendor, :vendor_id, :url, :image_url ]
 
   def initialize(csv_row)
     @row = csv_row
@@ -79,7 +80,7 @@ class MagicBeansProductImporterRow
   end
 
   def valid?
-    [ :name, :vendor, :vendor_id, :url, :image_url ].each do |attr|
+    REQUIRED_ATTRS.each do |attr|
       return false if public_send(attr).blank?
     end
     true

@@ -3,11 +3,12 @@ class ProductType < ActiveRecord::Base
   include AgeRangeAccessors
 
   extend FriendlyId
-  friendly_id :name, use: [ :slugged ]
+  friendly_id :name, use: [ :slugged, :finders ]
 
   attr_accessible :name, :plural_name, :age_range_id, :priority
   attr_accessible :image_name, :search_index, :search_query
   attr_accessible :recommended_quantity, :active
+  attr_accessible :alias_list
 
   belongs_to :user
   belongs_to :age_range
@@ -34,5 +35,17 @@ class ProductType < ActiveRecord::Base
 
   def admin_deleteable?
     user == nil && list_items.count == 0
+  end
+
+  def alias_list
+    (self.aliases || []).join(', ')
+  end
+
+  def alias_list=(val)
+    new_aliases = []
+    if val.present?
+      new_aliases = Set.new(val.split(/,\s*/).map(&:strip))
+    end
+    self.aliases = new_aliases.to_a
   end
 end

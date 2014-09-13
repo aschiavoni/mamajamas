@@ -9,7 +9,7 @@ namespace :mamajamas do
 
         puts
         questions = %w(feeding diapering sleeping travel caution)
-        User.scoped.each do |user|
+        User.all.each do |user|
           answers = user.quiz_answers
           if user.quiz_answers.count > 0
             answers = Hash.new { |h, k| h[k] = [] }

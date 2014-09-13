@@ -8,7 +8,7 @@ class Admin::ProductTypesView
   end
 
   def categories
-    @categories ||= Category.scoped.order(:name)
+    @categories ||= Category.all.order(:name)
   end
 
   def category
@@ -81,7 +81,7 @@ class Admin::ProductTypesView
   end
 
   def csv
-    product_types = ProductType.scoped.order(:category_id)
+    product_types = ProductType.all.order(:category_id)
     Admin::ProductTypesCsvReport.new(product_types).generate
   end
 end

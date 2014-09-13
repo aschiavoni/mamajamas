@@ -21,6 +21,8 @@ class Product < ActiveRecord::Base
   attr_accessible :description
   attr_accessible :short_description
 
+  belongs_to :product_type
+
   validates :name, :vendor, :url, :image_url, presence: true
   validates :vendor_id, presence: true, uniqueness: { scope: :vendor }
 end

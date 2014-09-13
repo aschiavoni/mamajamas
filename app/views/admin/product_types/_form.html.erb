@@ -24,7 +24,7 @@
     <dt>Age range<strong class="required">*</strong></dt>
     <dd>
       <p>
-      <%= f.select :age_range_id, options_for_select(AgeRange.scoped.order(:position).map { |a| [ a.name, a.id ] }, product_type.age_range_id) %>
+      <%= f.select :age_range_id, options_for_select(AgeRange.all.order(:position).map { |a| [ a.name, a.id ] }, product_type.age_range_id) %>
       </p>
     </dd>
     <dt>Quantity<strong class="required">*</strong></dt>
@@ -63,6 +63,14 @@
         <%= f.label :search_query %>
         <br />
         <%= f.text_field :search_query %>
+      </p>
+    </dd>
+    <dt>Aliases</dt>
+    <dd>
+      <p>
+        <%= f.label :alias_list, "Aliases (comma separated)" %>
+        <br />
+        <%= f.text_field :alias_list %>
       </p>
     </dd>
     <dt>Active?</dt>
