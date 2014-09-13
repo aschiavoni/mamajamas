@@ -17,26 +17,5 @@ namespace :mamajamas do
     task calculate_ratings: :environment do
       ProductRatingUpdater.new.update
     end
-
-    desc "Clear product fetcher cache"
-    task clear_fetcher_cache: :environment do
-      REDIS.keys("product:fetcher:*").each do |key|
-        REDIS.del(key)
-      end
-    end
-
-    desc "Clear product searcher cache"
-    task clear_searcher_cache: :environment do
-      REDIS.keys("product:searcher:*").each do |key|
-        REDIS.del(key)
-      end
-    end
-
-    desc "Clear product suggestions cache"
-    task clear_suggestions_cache: :environment do
-      REDIS.keys("product:suggestions:*").each do |key|
-        REDIS.del(key)
-      end
-    end
   end
 end
