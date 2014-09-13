@@ -439,7 +439,8 @@ CREATE TABLE product_types (
     search_index character varying(255) DEFAULT 'All'::character varying,
     search_query character varying(255),
     recommended_quantity integer DEFAULT 1 NOT NULL,
-    active boolean DEFAULT true NOT NULL
+    active boolean DEFAULT true NOT NULL,
+    aliases text[] DEFAULT '{}'::text[]
 );
 
 
@@ -1394,4 +1395,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140725220006');
 INSERT INTO schema_migrations (version) VALUES ('20140725220049');
 
 INSERT INTO schema_migrations (version) VALUES ('20140912231225');
+
+INSERT INTO schema_migrations (version) VALUES ('20140913165827');
 
