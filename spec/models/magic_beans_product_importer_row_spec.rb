@@ -15,6 +15,10 @@ describe MagicBeansProductImporterRow do
     expect(product_row.vendor_id).to eq("471374289")
   end
 
+  it "finds vendor name" do
+    expect(product_row.vendor_name).to eq("Magic Beans")
+  end
+
   it "finds url" do
     expect(product_row.url).to eq("http://www.shareasale.com/m-pr.cfm?merchantID=27456&userID=984701&productID=471374289")
   end
@@ -81,6 +85,7 @@ describe MagicBeansProductImporterRow do
   end
 
   it "saves row to the database" do
+    create(:product_type, aliases: ["Gloves & Mittens", "Gloves"])
     expect { product_row.save! }.to change { Product.count }.by(1)
   end
 

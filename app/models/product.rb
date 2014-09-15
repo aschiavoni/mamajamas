@@ -10,6 +10,7 @@ class Product < ActiveRecord::Base
   attr_accessible :large_image_url
   attr_accessible :vendor
   attr_accessible :vendor_id
+  attr_accessible :vendor_name
   attr_accessible :sales_rank
   attr_accessible :brand
   attr_accessible :manufacturer
@@ -27,7 +28,7 @@ class Product < ActiveRecord::Base
 
   belongs_to :product_type
 
-  validates :name, :vendor, :url, :image_url, presence: true
+  validates :name, :vendor, :vendor_name, :url, :image_url, presence: true
   validates :vendor_id, presence: true, uniqueness: { scope: :vendor }
 
   pg_search_scope(:search_by_name,

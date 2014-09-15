@@ -1,8 +1,9 @@
 class MagicBeansProductImporterRow
   SHAREASALE_USERID = '984701'
   VENDOR = "magic_beans"
+  VENDOR_NAME = "Magic Beans"
   REQUIRED_ATTRS = [
-                    :name, :vendor, :vendor_id,
+                    :name, :vendor, :vendor_id, :vendor_name,
                     :url, :image_url, :product_type_id
                    ]
 
@@ -16,6 +17,10 @@ class MagicBeansProductImporterRow
 
   def vendor
     VENDOR
+  end
+
+  def vendor_name
+    VENDOR_NAME
   end
 
   def name
@@ -133,6 +138,7 @@ class MagicBeansProductImporterRow
      large_image_url: large_image_url,
      vendor: vendor,
      vendor_id: vendor_id,
+     vendor_name: vendor_name,
      sales_rank: nil,
      brand: brand,
      manufacturer: manufacturer,

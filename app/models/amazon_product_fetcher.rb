@@ -13,7 +13,8 @@ class AmazonProductFetcher
     end
   end
 
-  VENDOR_NAME = "amazon"
+  VENDOR = "amazon"
+  VENDOR_NAME = "Amazon.com"
 
   def initialize(logger = ProductFetcherLogger, options = {})
     @logger = logger
@@ -149,7 +150,7 @@ class AmazonProductFetcher
   def map_items(items)
     items.each_with_index.map do |item, idx|
       vendor_id = item.get('ASIN')
-      mamajamas_rating = get_mamajamas_rating(vendor_id, VENDOR_NAME)
+      mamajamas_rating = get_mamajamas_rating(vendor_id, VENDOR)
       item_attributes = item.get_element('ItemAttributes')
       browse_nodes = item.get_array('BrowseNodes/BrowseNode/Name')
       small_image = item.get_element('SmallImage')
@@ -157,7 +158,8 @@ class AmazonProductFetcher
       large_image = item.get_element('LargeImage')
       {
         vendor_id: vendor_id,
-        vendor: VENDOR_NAME,
+        vendor: VENDOR,
+        vendor_name: VENDOR_NAME,
         name: HTMLEntities.new.decode(item_attributes.get('Title')),
         url: item.get('DetailPageURL'),
         image_url: small_image.blank? ? nil : small_image.get('URL'),

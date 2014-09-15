@@ -493,7 +493,8 @@ CREATE TABLE products (
     mamajamas_rating_count integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    vendor_product_type_name character varying(255)
+    vendor_product_type_name character varying(255),
+    vendor_name character varying(255)
 );
 
 
@@ -1400,4 +1401,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140912231225');
 INSERT INTO schema_migrations (version) VALUES ('20140913165827');
 
 INSERT INTO schema_migrations (version) VALUES ('20140913212346');
+
+INSERT INTO schema_migrations (version) VALUES ('20140915130249');
 
