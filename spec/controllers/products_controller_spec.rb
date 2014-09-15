@@ -27,7 +27,9 @@ describe ProductsController, :type => :controller do
 
     it "searches for specified filter" do
       filter = "baby bottle"
-      expect(ProductSearcher).to receive(:search).with(filter, anything(), anything())
+      expect(ProductSearcher).to receive(:search).
+        with(filter, anything(), anything()).
+        and_return([])
       get :index, filter: filter, format: :json
     end
 
@@ -35,7 +37,8 @@ describe ProductsController, :type => :controller do
       filter = "medela product"
       name = "Bottle"
       expect(ProductSearcher).to receive(:search).
-        with("#{filter} #{name.downcase}", anything, anything)
+        with("#{filter} #{name.downcase}", anything, anything).
+        and_return([])
       get :index, filter: filter, name: name, format: :json
     end
 
@@ -43,7 +46,7 @@ describe ProductsController, :type => :controller do
       filter = "bottle"
       name = "Bottle"
       expect(ProductSearcher).to receive(:search).
-        with("#{filter}", anything, anything)
+        with("#{filter}", anything, anything).and_return([])
       get :index, filter: filter, name: name, format: :json
     end
 
@@ -51,7 +54,8 @@ describe ProductsController, :type => :controller do
       filter = "bottle large white"
       name = "Bottle"
       expect(ProductSearcher).to receive(:search).
-        with("#{filter}", anything, anything)
+        with("#{filter}", anything, anything).
+        and_return([])
       get :index, filter: filter, name: name, format: :json
     end
 

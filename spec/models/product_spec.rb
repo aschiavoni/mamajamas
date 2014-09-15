@@ -23,8 +23,8 @@ describe Product, :type => :model do
 
     it "does not accept unknown atrributes" do
       expect do
-        product = Product.new(nada: "value")
-      end.to raise_error(NoMethodError)
+        Product.new(nada: "value")
+      end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end
 
   end
