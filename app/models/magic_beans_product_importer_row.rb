@@ -1,7 +1,10 @@
 class MagicBeansProductImporterRow
   SHAREASALE_USERID = '984701'
   VENDOR = "magic_beans"
-  REQUIRED_ATTRS = [ :name, :vendor, :vendor_id, :url, :image_url ]
+  REQUIRED_ATTRS = [
+                    :name, :vendor, :vendor_id,
+                    :url, :image_url, :product_type_id
+                   ]
 
   def initialize(csv_row)
     @row = csv_row
