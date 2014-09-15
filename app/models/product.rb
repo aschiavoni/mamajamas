@@ -1,4 +1,6 @@
 class Product < ActiveRecord::Base
+  include PgSearch
+
   attr_accessible :name
   attr_accessible :rating
   attr_accessible :rating_count
@@ -27,4 +29,8 @@ class Product < ActiveRecord::Base
 
   validates :name, :vendor, :url, :image_url, presence: true
   validates :vendor_id, presence: true, uniqueness: { scope: :vendor }
+
+  pg_search_scope(:search_by_name,
+                  against: :name,
+                  using: { tsearch: { prefix: true } })
 end

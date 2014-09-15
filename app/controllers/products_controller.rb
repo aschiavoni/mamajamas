@@ -5,12 +5,17 @@ class ProductsController < ApplicationController
 
   def index
     @products = []
-    query = search_query(params[:filter], params[:name])
+    raw_query = params[:filter]
+    query = search_query(raw_query, params[:name])
 
     if query.present?
       cache_id = "product:searcher:#{query.parameterize}"
       @products = Rails.cache.fetch(cache_id, expire_in: 24.hours) do
         ProductSearcher.search(query, 'All', 4)
+      end
+
+      if @products.size == 0
+        @products = Product.search_by_name(raw_query).limit(4)
       end
     end
 
