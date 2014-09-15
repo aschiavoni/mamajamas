@@ -4,12 +4,17 @@ class UserSuggestions
   def self.suggestions(user, products)
     return products if products.blank?
 
+    original = products.clone
     if products.size > MAX_SUGGESTIONS
       existing = existing_vendor_ids(user)
       products.reject! { |p| existing.include?(p[:vendor_id])}
     end
 
-    products.slice(0, 8)
+    if products.size < MAX_SUGGESTIONS
+      products + original.slice(0, MAX_SUGGESTIONS - products.size)
+    else
+      products.slice(0, MAX_SUGGESTIONS)
+    end
   end
 
   def self.existing_vendor_ids(user)
