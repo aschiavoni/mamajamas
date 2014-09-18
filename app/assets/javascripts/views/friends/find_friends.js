@@ -21,6 +21,13 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     if (this.initializeScrolling)
       this.initializeScrolling();
 
+    this.on("find_friends:tab:changed", function(tabId) {
+      if (tabId === 'invitefriend')
+        this.hideSearch();
+      else
+        this.showSearch();
+    }, this);
+
     // load correct tab
     switch (window.location.hash) {
     case "#facebook":
@@ -91,6 +98,14 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
       event.preventDefault();
     this._showTab('#invitefriend')
     return false;
+  },
+
+  hideSearch: function() {
+    $('#friendssearch input').hide();
+  },
+
+  showSearch: function() {
+    $('#friendssearch input').show();
   },
 
   waitForFriends: function(_view, provider) {
@@ -287,6 +302,8 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
       $(this.tabs[elem], this.$el).hide();
       $(elem, this.$el).parent().removeClass("current");
     }, this);
+
+    this.trigger("find_friends:tab:changed", this.currentTab());
   },
 
 });
