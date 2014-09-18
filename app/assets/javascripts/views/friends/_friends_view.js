@@ -85,7 +85,7 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
       marginTop: $('#hed-wrap').outerHeight(true)
     });
 
-    $(".menu").scrollToFixed({
+    $("#findfriendsmenu").scrollToFixed({
       marginTop: $('#hed-wrap').outerHeight(true)
     });
   },

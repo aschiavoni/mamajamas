@@ -7,18 +7,7 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     this.sizeContent();
     this._errMap = this.errorFieldMap();
 
-    this.tabs = $(".tabs").accessibleTabs({
-      tabhead:'h2',
-      fx:"fadeIn",
-      tabsListClass:'menu',
-      autoAnchor:true,
-      saveState:true
-    });
     $('.friends-sort, .friends-key').show();
-
-    if (!window.location.hash && !this.isFacebookConnected()) {
-      this.tabs.showAccessibleTab(0);
-    }
 
     if ($('.google-friends-progress').length > 0) {
       this.waitForFriends(this, "google");
@@ -31,9 +20,29 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     // otherwise, this blows up under phantomjs in test
     if (this.initializeScrolling)
       this.initializeScrolling();
+
+    // load correct tab
+    switch (window.location.hash) {
+    case "#facebook":
+      this.showFacebook();
+      break;
+    case "#gmail":
+      this.showGmail();
+      break;
+    case "#invite":
+      this.showEmailInvite();
+      break;
+    default:
+      this.showMamajamas();
+    }
   },
 
   events: {
+    "click #mamajamasfriends": "showMamajamas",
+    "click #facebookfriends": "showFacebook",
+    "click #gmailfriends": "showGmail",
+    "click #invitefriend": "showEmailInvite",
+
     "click .bt-authfb": "authorizeFacebook",
     "click .bt-authgoogle": "authorizeGmail",
     "click button.follow": "follow",
@@ -47,6 +56,41 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
 
   render: function(event) {
     return this;
+  },
+
+  tabs: {
+    '#mamajamasfriends': '#mamajamasfriends-tab',
+    '#facebookfriends': '#facebookfriends-tab',
+    '#gmailfriends': '#gmailfriends-tab',
+    '#invitefriend': '#invitefriends-tab'
+  },
+
+  showMamajamas: function(event) {
+    if (event)
+      event.preventDefault();
+    this._showTab('#mamajamasfriends')
+    return false;
+  },
+
+  showFacebook: function(event) {
+    if (event)
+      event.preventDefault();
+    this._showTab('#facebookfriends')
+    return false;
+  },
+
+  showGmail: function(event) {
+    if (event)
+      event.preventDefault();
+    this._showTab('#gmailfriends')
+    return false;
+  },
+
+  showEmailInvite: function(event) {
+    if (event)
+      event.preventDefault();
+    this._showTab('#invitefriend')
+    return false;
   },
 
   waitForFriends: function(_view, provider) {
@@ -65,7 +109,7 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
   },
 
   currentTab: function() {
-    return $('.tabs ul > li.current > a').attr('id');
+    return $('#findfriendsmenu ul.menu li.current a').attr('id');
   },
 
   authorizeFacebook: function(event) {
@@ -229,6 +273,20 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
 
   clearErrors: function() {
     $(".status-msg.error").remove();
+  },
+
+  _showTab: function(tabId) {
+    $(this.tabs[tabId], this.$el).show();
+    $(tabId, this.$el).parent().addClass("current");
+
+    var tabLinkIds = _.map(this.tabs, function(v, k, l) {
+      return k;
+    });
+
+    _.each(_.difference(tabLinkIds, [tabId]), function(elem, idx, list) {
+      $(this.tabs[elem], this.$el).hide();
+      $(elem, this.$el).parent().removeClass("current");
+    }, this);
   },
 
 });

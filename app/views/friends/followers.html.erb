@@ -11,21 +11,27 @@
     </li>
   </ul>
 <% end -%>
-<h2 class="visuallyhidden">My Friends</h2>
-<div class="friendslistmenu">
-  <div class="friends-sort">Sort by:
-    <!-- drop-down menu -->
-    <div class="choicedrop"> <a href="#"><%= @view.sort_name %> <span class="ss-dropdown"></span></a>
-      <ul style="display:none; width:7.5em;">
-        <li><a href="#" data-sort="popular">Popularity</a></li>
-        <li><a href="#" data-sort="name">Name</a></li>
-        <li><a href="#" data-sort="recent">Last updated</a></li>
-        <li><a href="#" data-sort="expert">Expert Lists</a></li>
-      </ul>
-    </div>
-    <!-- /drop-down menu -->
+<!-- sorting / key -->
+<div id="findfriendsmenu" class="clearfix">
+  <div id="friendssearch">
+    <input type="text" placeholder="Search by first or last name">
+    <input type="submit" value="Search">
   </div>
-  <div class="friends-key"> <span class="ss-icon ss-target expert"></span> = Expert List </div>
+  <div id="findfriendsfilter" class="clearfix">
+    <div class="friends-sort">Sort by:
+      <!-- drop-down menu -->
+      <div class="choicedrop"> <a href="#"><%= @view.sort_name %> <span class="ss-dropdown"></span></a>
+        <ul style="display:none; width:7.5em;">
+          <li><a href="#" data-sort="popular">Popularity</a></li>
+          <li><a href="#" data-sort="name">Name</a></li>
+          <li><a href="#" data-sort="recent">Last updated</a></li>
+          <li><a href="#" data-sort="expert">Expert Lists</a></li>
+        </ul>
+      </div>
+      <!-- /drop-down menu -->
+    </div>
+    <div class="friends-key"> <span class="ss-icon ss-target expert"></span> = Expert List </div>
+  </div>
 </div>
 <!-- friends list -->
 <ul id="friendslist" class="clearfix friends-list">

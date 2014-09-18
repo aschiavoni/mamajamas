@@ -50,9 +50,7 @@ class FriendsController < ApplicationController
 
   def init_view
     set_body_id "p-browse"
-    set_body_class "layout_2-7-3"
     hide_header
-    skip_secondary_content
   end
 
   def init_index_view
