@@ -59,6 +59,8 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     "submit #frm-create-email-invite": "emailInvite",
     "click .friends-sort .choicedrop a": "toggleSortList",
     "click .friends-sort .choicedrop ul li a": "sort",
+
+    "submit #frm-friendssearch": "filterFriends",
   },
 
   render: function(event) {
@@ -75,28 +77,28 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
   showMamajamas: function(event) {
     if (event)
       event.preventDefault();
-    this._showTab('#mamajamasfriends')
+    this.showTab('#mamajamasfriends')
     return false;
   },
 
   showFacebook: function(event) {
     if (event)
       event.preventDefault();
-    this._showTab('#facebookfriends')
+    this.showTab('#facebookfriends')
     return false;
   },
 
   showGmail: function(event) {
     if (event)
       event.preventDefault();
-    this._showTab('#gmailfriends')
+    this.showTab('#gmailfriends')
     return false;
   },
 
   showEmailInvite: function(event) {
     if (event)
       event.preventDefault();
-    this._showTab('#invitefriend')
+    this.showTab('#invitefriend')
     return false;
   },
 
@@ -290,7 +292,7 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     $(".status-msg.error").remove();
   },
 
-  _showTab: function(tabId) {
+  showTab: function(tabId) {
     $(this.tabs[tabId], this.$el).show();
     $(tabId, this.$el).parent().addClass("current");
 

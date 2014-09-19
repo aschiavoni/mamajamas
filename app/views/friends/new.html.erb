@@ -25,6 +25,7 @@
 <div id="findfriendsapp">
   <!-- sorting / key -->
   <div id="findfriendsmenu" class="clearfix">
+    <div id="list-search" data-query="<%= @view.query %>"></div>
     <ul class="clearfix menu">
       <li class="current first"><a href="#" id="mamajamasfriends">Mamajamas</a></li>
       <li><a href="#" id="facebookfriends">Facebook</a></li>
@@ -34,8 +35,10 @@
       <% end -%>
     </ul>
     <div id="friendssearch" style="height: 26px;">
-      <input type="text" placeholder="Search by first or last name">
-      <input type="submit" value="Search">
+      <%= form_tag new_friend_path, id: "frm-friendssearch" do -%>
+        <%= text_field_tag :query, params[:query], placeholder: "Search by first or last name" %>
+        <%= submit_tag "Search" %>
+      <% end %>
     </div>
     <div id="findfriendsfilter" class="clearfix">
       <div class="friends-sort">Sort by:

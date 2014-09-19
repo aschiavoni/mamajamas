@@ -32,7 +32,7 @@ class FriendsController < ApplicationController
         GoogleContactsWorker.perform_async(current_user.id)
       end
     end
-    @view = FindFriendsView.new(current_user, params[:sort])
+    @view = FindFriendsView.new(current_user, params[:sort], params[:query])
   end
 
   def notify

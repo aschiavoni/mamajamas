@@ -50,6 +50,7 @@ Mamajamas::Application.routes.draw do
   resources :friends, only: [ :index, :new ], path_names: { new: "find" } do
     collection do
       get 'find/:sort', to: 'friends#new'
+      post 'find', to: 'friends#new'
       get 'following'
       get 'following/:sort', to: 'friends#following'
       get 'followers'
