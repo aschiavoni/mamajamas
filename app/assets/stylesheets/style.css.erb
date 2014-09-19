@@ -640,11 +640,13 @@ input[type=text] + .button {
 }
 .bt-buy em {
         display: inline-block;
+        width: 53px;
+        height: 16px;
+}
+.bt-buy.amazon em {
         vertical-align: middle;
         text-indent: -9999px;
         overflow: hidden;
-        width: 53px;
-        height: 16px;
         background: url(<%= asset_path("logo_amazon-s.png") %>) no-repeat 0 0;
 }
 a.bt-buy:hover {
