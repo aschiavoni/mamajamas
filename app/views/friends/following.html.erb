@@ -12,35 +12,40 @@
   </ul>
 <% end -%>
 <!-- sorting / key -->
-<div id="findfriendsmenu" class="clearfix">
-  <div id="friendssearch">
-    <input type="text" placeholder="Search by first or last name">
-    <input type="submit" value="Search">
-  </div>
-  <div id="findfriendsfilter" class="clearfix">
-    <div class="friends-sort">Sort by:
-      <!-- drop-down menu -->
-      <div class="choicedrop"> <a href="#"><%= @view.sort_name %> <span class="ss-dropdown"></span></a>
-        <ul style="display:none; width:7.5em;">
-          <li><a href="#" data-sort="popular">Popularity</a></li>
-          <li><a href="#" data-sort="name">Name</a></li>
-          <li><a href="#" data-sort="recent">Last updated</a></li>
-          <li><a href="#" data-sort="expert">Expert Lists</a></li>
-        </ul>
-      </div>
-      <!-- /drop-down menu -->
+<div id="friendslistapp">
+  <div id="findfriendsmenu" class="clearfix">
+    <div id="list-search" data-query="<%= @view.query %>"></div>
+    <div id="friendssearch">
+      <%= form_tag following_friends_path, id: "frm-friendssearch" do -%>
+        <%= text_field_tag :query, params[:query], placeholder: "Search by first or last name" %>
+        <%= submit_tag "Search" %>
+      <% end %>
     </div>
-    <div class="friends-key"> <span class="ss-icon ss-target expert"></span> = Expert List </div>
+    <div id="findfriendsfilter" class="clearfix">
+      <div class="friends-sort">Sort by:
+        <!-- drop-down menu -->
+        <div class="choicedrop"> <a href="#"><%= @view.sort_name %> <span class="ss-dropdown"></span></a>
+          <ul style="display:none; width:7.5em;">
+            <li><a href="#" data-sort="popular">Popularity</a></li>
+            <li><a href="#" data-sort="name">Name</a></li>
+            <li><a href="#" data-sort="recent">Last updated</a></li>
+            <li><a href="#" data-sort="expert">Expert Lists</a></li>
+          </ul>
+        </div>
+        <!-- /drop-down menu -->
+      </div>
+      <div class="friends-key"> <span class="ss-icon ss-target expert"></span> = Expert List </div>
+    </div>
   </div>
-</div>
-<!-- friends list -->
-<ul id="friendslist" class="clearfix friends-list">
-  <% if @view.following.size > 0 -%>
-    <% @view.following.each do |friend| -%>
-      <%= render partial: 'list_friend', locals: { friend: friend, following: @view.user.following?(friend), follow_text: "Follow" } %>
+  <!-- friends list -->
+  <ul id="friendslist" class="clearfix friends-list">
+    <% if @view.following.size > 0 -%>
+      <% @view.following.each do |friend| -%>
+        <%= render partial: 'list_friend', locals: { friend: friend, following: @view.user.following?(friend), follow_text: "Follow" } %>
+      <% end -%>
+    <% else -%>
+      <p>You haven't followed any lists yet. You can find friends to follow <%= link_to "here", new_friend_path %>.
     <% end -%>
-  <% else -%>
-    <p>You haven't followed any lists yet. You can find friends to follow <%= link_to "here", new_friend_path %>.
-  <% end -%>
-</ul>
-<!-- end friends list -->
+  </ul>
+  <!-- end friends list -->
+</div>

@@ -44,9 +44,9 @@ window.Mamajamas = {
     }
 
     // friends list
-    if ($('#friendslist').length > 0) {
+    if ($('#friendslistapp').length > 0) {
       new Mamajamas.Views.FriendsList({
-        el: '#friendslist'
+        el: '#friendslistapp'
       });
     }
 

@@ -3,10 +3,12 @@ class FriendsListView
   include FriendListsSortNames
 
   attr_reader :user
+  attr_reader :query
 
-  def initialize(user = nil, sort = nil)
+  def initialize(user = nil, sort = nil, query = nil)
     @user = user
     @sort = sort.present? ? sort.to_sym : nil
+    @query = query
   end
 
   def following

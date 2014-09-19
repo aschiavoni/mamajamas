@@ -19,11 +19,11 @@ class FriendsController < ApplicationController
   end
 
   def following
-    @view = FriendsListView.new(current_user, params[:sort])
+    @view = FriendsListView.new(current_user, params[:sort], params[:query])
   end
 
   def followers
-    @view = FriendsListView.new(current_user, params[:sort])
+    @view = FriendsListView.new(current_user, params[:sort], params[:query])
   end
 
   def new

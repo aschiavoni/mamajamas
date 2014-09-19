@@ -20,6 +20,7 @@ window.Mamajamas.Views.FriendsList = Mamajamas.Views.FriendsView.extend({
   events: {
     "click button.follow": "follow",
     "click button.unfollow": "unfollow",
+    "submit #frm-friendssearch": "filterFriends",
   },
 
   render: function(event) {

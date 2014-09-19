@@ -7,7 +7,10 @@ Mamajamas.Views.FriendsView = function (options) {
   this.targetElement = "",
   $(window).resize($.proxy(this.sizeContent, this));
 
-  this.filter($('#list-search').data('query'));
+  var query = $('#list-search').data('query');
+  if (query && query.length > 0)
+    this.filter(query);
+
   _.defer(this.initClearFilter, this);
 
   Backbone.View.apply(this, [options]);
