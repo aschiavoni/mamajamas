@@ -52,7 +52,7 @@
 
 .bx-wrapper .bx-loading {
         min-height: 36px;
-        background: url(/assets/bx_loader.gif) center center no-repeat #fff;
+        background: url(<%= asset_path("loader36-f.gif") %>) center center no-repeat #fff;
         height: 100%;
         width: 100%;
         position: absolute;
@@ -101,12 +101,12 @@
 
 .bx-wrapper .bx-prev {
         left: 10px;
-        background: url(/assets/bx_controls.png) no-repeat 0 -39px;
+        background: url(<%= asset_path("bx_controls.png") %>) no-repeat 0 -39px;
 }
 
 .bx-wrapper .bx-next {
         right: 10px;
-        background: url(/assets/bx_controls.png) no-repeat -51px -39px;
+        background: url(<%= asset_path("bx_controls.png") %>) no-repeat -51px -39px;
 }
 
 .bx-wrapper .bx-prev:hover {
@@ -144,7 +144,7 @@
         width: 10px;
         height: 11px;
         outline: 0;
-        background: url(/assets/bx_controls.png) -86px -11px no-repeat;
+        background: url(<%= asset_path("bx_controls.png") %>) -86px -11px no-repeat;
         margin: 0 3px;
 }
 
@@ -159,7 +159,7 @@
         width: 9px;
         height: 11px;
         outline: 0;
-        background: url(/assets/bx_controls.png) -86px -44px no-repeat;
+        background: url(<%= asset_path("bx_controls.png") %>) -86px -44px no-repeat;
         margin: 0 3px;
 }
 

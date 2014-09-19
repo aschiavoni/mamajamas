@@ -7,10 +7,22 @@ Mamajamas.Views.FriendsView = function (options) {
   this.targetElement = "",
   $(window).resize($.proxy(this.sizeContent, this));
 
+  var query = $('#list-search').data('query');
+  if (query && query.length > 0)
+    this.filter(query);
+
+  _.defer(this.initClearFilter, this);
+
   Backbone.View.apply(this, [options]);
 };
 
 _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
+
+  initClearFilter: function(view) {
+    view.$el.on('click',
+                '.clear-list-search',
+                $.proxy(view.clearFilter, view));
+  },
 
   // TODO: duplicate code from _base.js
   // need to figure out a multi-inheritance thing or refactor into a helper
@@ -85,7 +97,7 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
       marginTop: $('#hed-wrap').outerHeight(true)
     });
 
-    $(".menu").scrollToFixed({
+    $("#findfriendsmenu").scrollToFixed({
       marginTop: $('#hed-wrap').outerHeight(true)
     });
   },
@@ -139,6 +151,54 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
     }
 
     return redirectPath;
+  },
+
+  filterFriends: function(event) {
+    if (event) event.preventDefault();
+    var query = $('input[name=query]', this.$el).val();
+    this.filter(query);
+    return false;
+  },
+
+  filter: function(query) {
+    if (!query) query = "";
+    $('input[name=query]', this.$el).val(query);
+
+    _.each($('ul.friends-list'), function(ul) {
+      var foundMatch = false;
+      var $ul = $(ul);
+      var $items = $('li', $ul);
+      _.each($items, function(item) {
+        var $item = $(item);
+        if (query === "") {
+          $item.show();
+          foundMatch = true;
+        } else {
+          var name = $item.data('name');
+          var pattern = new RegExp(query, "ig")
+          if (!pattern.test(name))
+            $item.hide();
+          else {
+            $item.show();
+            foundMatch = true;
+          }
+        }
+      }, this);
+
+      if (!foundMatch) {
+        if ($('.list-search-no-results', $ul).length == 0)
+          $ul.prepend("<p class=\"list-search-no-results\">No lists found. Click <a class=\"clear-list-search\" href=\"#\">here</a> to clear your search.</p>");
+      } else {
+        $('.list-search-no-results', $ul).remove();
+      }
+
+    }, this);
+  },
+
+  clearFilter: function(event) {
+    if (event) event.preventDefault();
+    this.filter("");
+    return false;
   },
 
 });

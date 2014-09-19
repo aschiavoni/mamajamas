@@ -5,9 +5,12 @@ class FindFriendsView
   extend Memoist
   include FriendListsSortNames
 
-  def initialize(user = nil, sort = nil)
+  attr_reader :query
+
+  def initialize(user = nil, sort = nil, query = nil)
     @user = user
     @sort = sort.present? ? sort.to_sym : nil
+    @query = query
   end
 
   def email_invite

@@ -19,11 +19,11 @@ class FriendsController < ApplicationController
   end
 
   def following
-    @view = FriendsListView.new(current_user, params[:sort])
+    @view = FriendsListView.new(current_user, params[:sort], params[:query])
   end
 
   def followers
-    @view = FriendsListView.new(current_user, params[:sort])
+    @view = FriendsListView.new(current_user, params[:sort], params[:query])
   end
 
   def new
@@ -32,7 +32,7 @@ class FriendsController < ApplicationController
         GoogleContactsWorker.perform_async(current_user.id)
       end
     end
-    @view = FindFriendsView.new(current_user, params[:sort])
+    @view = FindFriendsView.new(current_user, params[:sort], params[:query])
   end
 
   def notify
@@ -50,9 +50,7 @@ class FriendsController < ApplicationController
 
   def init_view
     set_body_id "p-browse"
-    set_body_class "layout_2-7-3"
     hide_header
-    skip_secondary_content
   end
 
   def init_index_view

@@ -44,17 +44,17 @@ window.Mamajamas = {
     }
 
     // friends list
-    if ($('#friendslist').length > 0) {
+    if ($('#friendslistapp').length > 0) {
       new Mamajamas.Views.FriendsList({
-        el: '#friendslist'
+        el: '#friendslistapp'
       });
     }
 
     // find friends
-    if ($('#findfriends').length > 0) {
+    if ($('#findfriendsapp').length > 0) {
       Mamajamas.Context.Invites = new Mamajamas.Collections.Invites();
       new Mamajamas.Views.FindFriends({
-        el: '#findfriends'
+        el: '#findfriendsapp'
       });
     }
 
