@@ -1,5 +1,5 @@
 <div class="prod-thumb">
-  <a target="_blank" href="{{listItem.link}}">
+  <a target="_blank" href="{{affiliateLink listItem.link}}">
     <img src="{{assetPath listItem.image_url}}" alt="{{listItem.name}}">
   </a>
 </div>
@@ -8,7 +8,7 @@
     {{listItem.product_type_name}}
   </div>
   <h3>
-    <a href="{{listItem.link}}" target="_blank">{{listItem.name}}</a>
+    <a href="{{affiliateLink listItem.link}}" target="_blank">{{listItem.name}}</a>
   </h3>
   {{addToMyListButton}}
   <div class="rating"> <em>My rating:</em>

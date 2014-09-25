@@ -3,7 +3,7 @@
 {{/if}}
 <!-- product image -->
 <div class="prod-thumb">
-  <a target="_blank" href="{{listItem.link}}">
+  <a target="_blank" href="{{affiliateLink listItem.link}}">
     <img alt="{{listItem.product_type_name}}" src="{{assetPath listItem.image_url}}">
   </a>
 </div>
@@ -20,7 +20,7 @@
       </a>
     </div>
     <h3>
-      <a target="_blank" href="{{listItem.link}}">{{listItem.name}}</a>
+      <a target="_blank" href="{{affiliateLink listItem.link}}">{{listItem.name}}</a>
       <a class="bt-change" href="#">
         <span class="ss-icon ss-search"></span><span>Change</span>
       </a>
