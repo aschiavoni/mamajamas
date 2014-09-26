@@ -2,17 +2,18 @@ require 'spec_helper'
 
 describe FollowedUserUpdatesMailer, :type => :mailer do
 
-  describe "daily digest" do
+  describe "notify" do
 
     let(:user) { create(:user, first_name: "Jane") }
     let(:followed) { create(:user, first_name: "John") }
-    let(:mail) { FollowedUserUpdatesMailer.daily_digest(user.id) }
+    let(:mail) { FollowedUserUpdatesMailer.notify(user.id, followed, @updates) }
 
     before(:each) do
       user.follow!(followed)
       list = create(:list, user: followed)
-      create(:list_item, list: list)
-      create(:list_item, list: list)
+      @updates = []
+      @updates << create(:list_item, list: list)
+      @updates << create(:list_item, list: list)
     end
 
     it "renders the headers" do
