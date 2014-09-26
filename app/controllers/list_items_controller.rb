@@ -15,6 +15,9 @@ class ListItemsController < ApplicationController
     placeholder = params[:list_item].delete(:placeholder)
     item_params = clean_params(params[:list_item])
     @list_entry = @list.add_list_item(ListItem.new(item_params), placeholder)
+    if @list_entry.persisted? && !current_user.guest?
+      FollowerNotificationWorker.perform_in(4.hours, current_user.id)
+    end
     respond_with @list_entry
   end
 
