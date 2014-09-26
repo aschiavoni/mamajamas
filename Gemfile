@@ -113,6 +113,7 @@ group :development do
   gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
   gem 'terminal-notifier-guard', :require => false # if RUBY_PLATFORM =~ /darwin/i
   gem 'quiet_assets'
+  gem 'letter_opener'
 
   # use pry in development
   gem 'pry-rails'
