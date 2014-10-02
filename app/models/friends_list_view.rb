@@ -13,6 +13,7 @@ class FriendsListView
 
   def following
     @following ||= user.followed_users.includes(:list).
+      references(:lists).
       order(sort_by(@sort))
   end
 
