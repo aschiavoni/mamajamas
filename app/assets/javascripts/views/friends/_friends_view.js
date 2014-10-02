@@ -18,7 +18,10 @@ Mamajamas.Views.FriendsView = function (options) {
 
 _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
 
+  activeFilter: false,
+
   initClearFilter: function(view) {
+    view.$el.on('keyup', '#query', $.proxy(view.handleSearch, view));
     view.$el.on('click',
                 '.clear-list-search',
                 $.proxy(view.clearFilter, view));
@@ -162,6 +165,8 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
 
   filter: function(query) {
     if (!query) query = "";
+    this.activeFilter = query.length > 0;
+
     $('input[name=query]', this.$el).val(query);
 
     _.each($('ul.friends-list'), function(ul) {
@@ -197,8 +202,15 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
 
   clearFilter: function(event) {
     if (event) event.preventDefault();
-    this.filter("");
+    if (this.activeFilter)
+      this.filter("");
     return false;
+  },
+
+  handleSearch: function(event) {
+    var $input = $(event.currentTarget);
+    if (!$input.val())
+      this.clearFilter();
   },
 
 });
