@@ -2,22 +2,29 @@
 # vi: set ft=ruby :
 
 APP_DIR = "/vagrant"
-RUBY_VER = "2.1.2"
+RUBY_VER = "2.1.3"
 VAGRANT_USER = "vagrant"
 VAGRANT_GROUP = "vagrant"
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu/trusty64"
+  # config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "hashicorp/precise64"
   config.vm.network "private_network", type: "dhcp"
   config.vm.synced_folder ".", APP_DIR, type: "nfs"
   config.vm.network "forwarded_port", guest: 3000, host: 3000
   config.vm.network "forwarded_port", guest: 1080, host: 1080
+
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
     v.cpus = 4
     # v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     # v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+  end
+
+  config.vm.provider "vmware_fusion" do |v|
+    v.vmx["memsize"] = "2048"
+    v.vmx["numvcpus"] = "4"
   end
 
   config.omnibus.chef_version = :latest
@@ -40,6 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "mamajamas::development"
 
     chef.add_recipe "dotfiles"
+    chef.add_recipe "emacs"
 
     chef.json = {
       rbenv: {
