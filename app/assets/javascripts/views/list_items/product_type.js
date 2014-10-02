@@ -15,7 +15,8 @@ Mamajamas.Views.ProductType = Mamajamas.Views.ListItemDropdown.extend({
   render: function() {
     this.$el.html(this.template({
       listItem: this.model.listItem.toJSON(),
-      list: this.model.list.toJSON()
+      list: this.model.list.toJSON(),
+      allowChange: this.model.allowChange
     }));
     return this;
   },
@@ -31,6 +32,7 @@ Mamajamas.Views.ProductType = Mamajamas.Views.ListItemDropdown.extend({
 
     this.model.listItem.set("product_type_name", value);
     this.model.listItem.set("product_type_id", productTypeId);
+    this.model.allowChange = false;
     $list.hide();
     this.render();
 
