@@ -91,7 +91,7 @@ class PublicListsController < ApplicationController
   end
 
   def redirect_destination(list_view)
-    if list_view.all_category?
+    if list_view.all_category? || list_view.category.blank?
       public_list_path(list_view.owner)
     else
       public_list_category_path(list_view.owner, list_view.category)
