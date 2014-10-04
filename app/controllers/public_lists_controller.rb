@@ -110,8 +110,7 @@ class PublicListsController < ApplicationController
   end
 
   def find_shared_list
-    owner = User.find(params[:slug])
-    @list = owner.list if owner.present?
+    @list = List.includes(:user).find_by(users: { slug: params[:slug] })
     not_found unless shareable?(@list)
   end
 
