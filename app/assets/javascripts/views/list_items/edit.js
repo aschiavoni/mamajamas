@@ -43,6 +43,16 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     }
 
     // subviews
+    var allowChange = Mamajamas.Context.List.get('category_id');
+    var productTypeView = new Mamajamas.Views.ProductType({
+      model: {
+        listItem: this.model,
+        list: Mamajamas.Context.List,
+        allowChange: allowChange
+      }
+    });
+    $('.prod-category', this.$el).prepend(productTypeView.render().$el);
+
     var ratingView = new Mamajamas.Views.ListItemRating({
       model: this.model
     });
