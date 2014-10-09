@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   mount_uploader :profile_picture, ProfilePictureUploader
 
   validates(:username, presence: true, reserved_name: true,
-            length: { minimum: 4 }, uniqueness: true,
+            length: { minimum: 3 }, uniqueness: true,
             format: { :with => /\A[A-Za-z\d_]+\z/ })
   validates :full_name, presence: true, if: Proc.new { |u| u.signup_registration? }
   validate :valid_zip_code

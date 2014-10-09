@@ -20,6 +20,7 @@ class UsernameGenerator
     username_part = name.parameterize("")
     username = username_part.dup
     num = 2
+    username = "#{username}_#{num}" if username.size < 3
 
     while(User.find_by_username(username).present?)
       username = "#{username_part}_#{num}"
