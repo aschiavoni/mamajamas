@@ -163,6 +163,10 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
     return false;
   },
 
+  filterMaybe: _.debounce(function(query) {
+    this.filter(query);
+  }, 500, false),
+
   filter: function(query) {
     if (!query) query = "";
     this.activeFilter = query.length > 0;
@@ -208,9 +212,8 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
   },
 
   handleSearch: function(event) {
-    var $input = $(event.currentTarget);
-    if (!$input.val())
-      this.clearFilter();
+    var query = $(event.currentTarget).val().trim();
+    this.filterMaybe(query);
   },
 
 });
