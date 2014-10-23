@@ -742,7 +742,8 @@ CREATE TABLE users (
     admin_notes text,
     follower_count integer DEFAULT 0 NOT NULL,
     email_preferences hstore DEFAULT ''::hstore NOT NULL,
-    settings hstore DEFAULT ''::hstore NOT NULL
+    settings hstore DEFAULT ''::hstore NOT NULL,
+    partner_full_name character varying(255)
 );
 
 
@@ -1461,4 +1462,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140915130249');
 INSERT INTO schema_migrations (version) VALUES ('20141023161629');
 
 INSERT INTO schema_migrations (version) VALUES ('20141023165144');
+
+INSERT INTO schema_migrations (version) VALUES ('20141023165223');
 
