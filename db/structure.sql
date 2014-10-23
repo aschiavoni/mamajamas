@@ -401,7 +401,8 @@ CREATE TABLE lists (
     privacy integer DEFAULT 0 NOT NULL,
     saved boolean DEFAULT false NOT NULL,
     featured boolean DEFAULT false NOT NULL,
-    expert boolean DEFAULT false NOT NULL
+    expert boolean DEFAULT false NOT NULL,
+    registry boolean DEFAULT false NOT NULL
 );
 
 
@@ -1458,4 +1459,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140913212346');
 INSERT INTO schema_migrations (version) VALUES ('20140915130249');
 
 INSERT INTO schema_migrations (version) VALUES ('20141023161629');
+
+INSERT INTO schema_migrations (version) VALUES ('20141023165144');
 
