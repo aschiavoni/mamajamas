@@ -142,9 +142,9 @@ describe PublicListsController, :type => :controller do
       expect(assigns(:list)).to be_registered_users_only
     end
 
-    it 'should make list registry on publish' do
-      post 'publish', privacy: List::PRIVACY_REGISTRY
-      expect(assigns(:list)).to be_registry
+    it 'should make list want only on publish' do
+      post 'publish', privacy: List::PRIVACY_WANT_ONLY
+      expect(assigns(:list)).to be_want_only
     end
 
     it 'should redirect to profile path when cancelled' do

@@ -9,7 +9,7 @@
             <p id="listprivacy-hed" class="collapsible ss-directright"><strong>Privacy Setting: </strong>
               <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_PUBLIC || @view.list.privacy == List::PRIVACY_PRIVATE ? "inline" : "none" %>;"><span class="icon-globe"></span> Anyone can see your list.</em>
               <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_REGISTERED ? "inline" : "none" %>;"><span class="icon-bird"></span> Mamajamas users can see your list.</em>
-              <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_REGISTRY ? "inline" : "none" %>;"><span class="icon-gift"></span> Registry: anyone can see items you need.</em>
+              <em class="privacy-status" style="display: <%= @view.list.privacy == List::PRIVACY_WANT_ONLY ? "inline" : "none" %>;"><span class="icon-gift"></span> Registry: anyone can see items you need.</em>
               <span class="helper">(click to edit)</span>
             </p>
             <div id="listprivacy-select" class="collapsible-content" style="display: none;">
@@ -28,7 +28,7 @@
                   </li>
                   <li>
                     <label>
-                      <%= radio_button_tag :privacy, List::PRIVACY_REGISTRY, @view.list.privacy == List::PRIVACY_REGISTRY %>
+                      <%= radio_button_tag :privacy, List::PRIVACY_WANT_ONLY, @view.list.privacy == List::PRIVACY_WANT_ONLY %>
                       Registry option</label> — Everyone can see only items you need.
                   </li>
                   <li>

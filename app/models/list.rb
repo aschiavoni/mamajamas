@@ -2,7 +2,7 @@ class List < ActiveRecord::Base
   PRIVACY_PRIVATE       = 0
   PRIVACY_PUBLIC        = 1
   PRIVACY_REGISTERED    = 2
-  PRIVACY_REGISTRY      = 3
+  PRIVACY_WANT_ONLY      = 3
 
   attr_accessible :title
   attr_accessible :privacy
@@ -41,8 +41,8 @@ class List < ActiveRecord::Base
     privacy == PRIVACY_REGISTERED
   end
 
-  def registry?
-    privacy == PRIVACY_REGISTRY
+  def want_only?
+    privacy == PRIVACY_WANT_ONLY
   end
 
   def list_entries(category = nil)
@@ -66,7 +66,7 @@ class List < ActiveRecord::Base
       references(:age_ranges).
       references(:list_items)
 
-    if !ignore_privacy && registry?
+    if !ignore_privacy && want_only?
       shared_items = shared_items.where(owned: false)
     end
 

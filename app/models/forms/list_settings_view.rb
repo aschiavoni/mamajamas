@@ -11,7 +11,7 @@ class Forms::ListSettingsView
 
   # app code
   delegate :has_list?, to: :user
-  delegate :private?, :public?, :registered_users_only?, :registry?, to: :list
+  delegate :private?, :public?, :registered_users_only?, :want_only?, to: :list
   delegate :privacy, :privacy=, to: :list
 
   def initialize(user)

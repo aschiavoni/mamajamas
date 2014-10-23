@@ -12,7 +12,7 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
 
   hideOwned: false,
 
-  privacyRegistry: 3,
+  privacyWantOnly: 3,
 
   filter: null,
 
@@ -25,7 +25,7 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
     // since the privacy options are not contained in this.$el, we
     // will wire the events up manually
     this.currentPrivacy = parseInt($("input[name=privacy]:checked").val());
-    this.hideOwned = this.currentPrivacy == this.privacyRegistry;
+    this.hideOwned = this.currentPrivacy == this.privacyWantOnly;
     $("input[name=privacy]").on("change", $.proxy(this.updatePrivacy, this));
 
     if ($("#friends-modal").length > 0) {
@@ -182,10 +182,10 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
     var newPrivacy = parseInt($selected.val());
 
     if (this.currentPrivacy != newPrivacy) {
-      if (newPrivacy == this.privacyRegistry) {
+      if (newPrivacy == this.privacyWantOnly) {
         this.hideOwned = true;
         this.render();
-      } else if (this.currentPrivacy == this.privacyRegistry) {
+      } else if (this.currentPrivacy == this.privacyWantOnly) {
         this.hideOwned = false;
         this.render();
       }
