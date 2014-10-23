@@ -49,6 +49,7 @@ class User < ActiveRecord::Base
   has_many :invites, dependent: :destroy
   has_many :authentications, dependent: :destroy
   has_many :social_friends, dependent: :destroy, class_name: "SocialFriends"
+  has_one  :address, as: :addressable, dependent: :destroy
 
   mount_uploader :profile_picture, ProfilePictureUploader
 

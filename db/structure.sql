@@ -58,6 +58,44 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: addresses; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE addresses (
+    id integer NOT NULL,
+    street character varying(255),
+    street2 character varying(255),
+    city character varying(255),
+    region character varying(255),
+    postal_code character varying(255),
+    country_code character varying(255),
+    addressable_id integer,
+    addressable_type character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE addresses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE addresses_id_seq OWNED BY addresses.id;
+
+
+--
 -- Name: age_ranges; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -730,6 +768,13 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY addresses ALTER COLUMN id SET DEFAULT nextval('addresses_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY age_ranges ALTER COLUMN id SET DEFAULT nextval('age_ranges_id_seq'::regclass);
 
 
@@ -843,6 +888,14 @@ ALTER TABLE ONLY social_friends ALTER COLUMN id SET DEFAULT nextval('social_frie
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY addresses
+    ADD CONSTRAINT addresses_pkey PRIMARY KEY (id);
 
 
 --
@@ -1403,4 +1456,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140913165827');
 INSERT INTO schema_migrations (version) VALUES ('20140913212346');
 
 INSERT INTO schema_migrations (version) VALUES ('20140915130249');
+
+INSERT INTO schema_migrations (version) VALUES ('20141023161629');
 

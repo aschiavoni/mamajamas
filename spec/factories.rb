@@ -123,4 +123,13 @@ FactoryGirl.define do
     image_url "http://amazon.com/image"
     tag "eco"
   end
+
+  factory :address do
+    street "123 Main St"
+    street2 nil
+    city "Pleasantville"
+    region "FL"
+    postal_code "33444"
+    country_code "US"
+  end
 end
