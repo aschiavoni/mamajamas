@@ -33,7 +33,9 @@ class Admin::UsersController < Admin::BaseController
 
   def destroy
     @user = User.find(params[:id])
+    email = @user.email
     @user.destroy
+    EmailUnsubscribeWorker.perform_in(5.minutes, email)
     redirect_to admin_users_path
   end
 end
