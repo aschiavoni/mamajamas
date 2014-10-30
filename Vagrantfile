@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hashicorp/precise64"
   config.vm.network "private_network", type: "dhcp"
   config.vm.synced_folder ".", APP_DIR, type: "nfs"
-  config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 3000, host: 3001
   config.vm.network "forwarded_port", guest: 1080, host: 1080
 
   config.vm.provider "virtualbox" do |v|
@@ -47,7 +47,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "mamajamas::development"
 
     chef.add_recipe "dotfiles"
-    chef.add_recipe "emacs"
 
     chef.json = {
       rbenv: {
