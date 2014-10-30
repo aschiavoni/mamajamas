@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   attr_accessible :guest
   attr_accessible :admin_notes
   attr_accessible :show_bookmarklet_prompt
+  attr_accessible :show_friends_prompt
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
@@ -63,7 +64,7 @@ class User < ActiveRecord::Base
   before_validation :set_username
   before_validation(on: :create) do
     self.email_preferences = {}
-    self.settings = { show_bookmarklet_prompt: true }
+    self.settings = { show_bookmarklet_prompt: true, show_friends_prompt: true }
   end
 
   scope :guests, lambda { where(guest: true) }
@@ -338,6 +339,17 @@ class User < ActiveRecord::Base
   def show_bookmarklet_prompt=(show)
     self.settings = (self.settings || {}).
       merge(:show_bookmarklet_prompt => show)
+  end
+
+  def show_friends_prompt
+    settings && settings['show_friends_prompt'].present? &&
+      settings['show_friends_prompt'].to_s == 'true'
+  end
+  alias_method :show_friends_prompt?, :show_friends_prompt
+
+  def show_friends_prompt=(show)
+    self.settings = (self.settings || {}).
+      merge(:show_friends_prompt => show)
   end
 
   protected

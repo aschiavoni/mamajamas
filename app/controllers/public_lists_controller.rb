@@ -8,7 +8,6 @@ class PublicListsController < ApplicationController
   def show
     cat = params[:category] || 'all'
     @view = PublicListView.new(@list, cat, false, current_user)
-    @view.friends_prompt = cookies.delete(:friends_prompt) == "true"
 
     # redirect if using an old slug
     if redirect_needed?(@view)
@@ -38,10 +37,6 @@ class PublicListsController < ApplicationController
 
   def publish
     unless params[:cancel] == '1'
-      # only show the friends prompt if it the list is being switched
-      # from a private list
-      cookies[:friends_prompt] = @list.private?
-
       @list.update_attributes!(saved: true, privacy: params[:privacy])
 
       unless @list.private?

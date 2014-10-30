@@ -452,6 +452,15 @@ describe User, :type => :model do
       expect(user.show_bookmarklet_prompt).to be_falsey
     end
 
+    it "defaults show_friends_prompt to true" do
+      expect(user.show_friends_prompt).to be_truthy
+    end
+
+    it "sets show_friends_prompt" do
+      user.show_friends_prompt = false
+      expect(user.show_friends_prompt).to be_falsey
+    end
+
   end
 
 end

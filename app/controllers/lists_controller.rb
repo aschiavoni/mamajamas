@@ -28,6 +28,13 @@ class ListsController < ApplicationController
           locals: { list_entries: @view.list_entries })
       end
       @list.increment_view_count
+
+      if !current_user.guest? &&
+          !current_user.show_bookmarklet_prompt? &&
+          current_user.show_friends_prompt?
+        @view.friends_prompt = true
+        current_user.update_attributes!(show_friends_prompt: false)
+      end
     else
       template = "wait"
     end

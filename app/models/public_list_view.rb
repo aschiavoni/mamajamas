@@ -2,7 +2,6 @@ class PublicListView < ListView
   def initialize(list, category_slug = nil, preview = false, current_user = nil)
     super(list, category_slug, current_user)
     @preview = preview
-    @friends_prompt = false
   end
 
   def preview?
@@ -40,13 +39,5 @@ class PublicListView < ListView
     else
       public_list_path(owner.slug)
     end
-  end
-
-  def friends_prompt?
-    owner == current_user and @friends_prompt
-  end
-
-  def friends_prompt=(val)
-    @friends_prompt = val
   end
 end

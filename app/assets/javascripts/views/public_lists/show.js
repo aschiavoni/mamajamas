@@ -28,14 +28,6 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
     this.hideOwned = this.currentPrivacy == this.privacyWantOnly;
     $("input[name=privacy]").on("change", $.proxy(this.updatePrivacy, this));
 
-    if ($("#friends-modal").length > 0) {
-      $('#friends-modal').modal({
-        position: ["15%", null],
-        closeHTML:'<a class="bt-close ss-icon" href="#">Close</a>',
-        overlayClose: true
-      });
-    }
-
     // setup social links
     new Mamajamas.Views.SocialLinks({
       el: '#social-links'

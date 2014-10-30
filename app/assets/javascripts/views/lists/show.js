@@ -33,6 +33,14 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
         shareButonHeader.attr('href', "/list")
       }
     }, this);
+
+    if ($("#friends-modal").length > 0) {
+      $('#friends-modal').modal({
+        position: ["15%", null],
+        closeHTML:'<a class="bt-close ss-icon" href="#">Close</a>',
+        overlayClose: true
+      });
+    }
   },
 
   events: {

@@ -217,26 +217,3 @@
    })
   </script>
 <% end -%>
-<% if @view.friends_prompt? -%>
-  <!-- modal window box -->
-  <div id="friends-modal" class="modal-win">
-    <!-- modal window header -->
-    <h2>Saved</h2>
-
-    <!-- modal window content -->
-    <div class="content">
-      <p class="intro center larger">Your list has been saved</p>
-      <p class="center">Next up, follow your friends &rsquo; lists!</p>
-
-      <p class="center">
-        <%= link_to friends_path, class: "button bt-color", id: "bt-createlist" do %>
-          <span class="ss-icon ss-users"></span>Find &amp; follow friends
-        <% end -%>
-      </p>
-
-    </div>
-    <!-- end modal window content -->
-
-  </div>
-  <!-- end modal window box -->
-<% end -%>

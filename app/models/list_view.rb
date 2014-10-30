@@ -9,6 +9,7 @@ class ListView
     @list = list
     @category_slug = category_slug
     @current_user = current_user
+    @friends_prompt = false
   end
 
   def categories
@@ -45,6 +46,14 @@ class ListView
 
   def product_types
     @product_types ||= product_types_hash
+  end
+
+  def friends_prompt?
+    @friends_prompt
+  end
+
+  def friends_prompt=(val)
+    @friends_prompt = val
   end
 
   private
