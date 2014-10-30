@@ -1,0 +1,82 @@
+class Forms::RegistrySettings
+  # ActiveModel plumbing for form_for
+  extend ActiveModel::Naming
+  include ActiveModel::Conversion
+  include ActiveModel::Validations
+  extend ActiveModel::Translation
+
+  def persisted?
+    false
+  end
+
+  # app code
+  attr_reader :user
+  attr_reader :address
+  attr_reader :list
+
+  delegate(:full_name, :full_name=,
+           :partner_full_name, :partner_full_name=,
+           to: :user)
+  delegate :registry, :registry=, to: :list
+  delegate(:street, :street2, :city, :region, :phone,
+           to: :address)
+  delegate(:street=, :street2=, :city=, :region=,
+           :postal_code=, :country_code=, :phone=,
+           to: :address)
+
+  validates(:full_name, :street, :city, :region,
+            :postal_code, :country_code,
+            presence: true)
+
+  validate do
+    [ user, address, list ].each do |object|
+      if object.present? && !object.valid?
+        object.errors.each do |key, values|
+          errors[key] = values
+        end
+      end
+    end
+  end
+
+  def initialize(user, list)
+    @user = user
+    @list = list
+    @address = user.address || user.build_address
+  end
+
+  def countries
+    @countries ||= Country.all.sort
+  end
+
+  def postal_code
+    user.zip_code.blank? ? nil : user.zip_code
+  end
+
+  def country_code
+    user.country_code.blank? ? nil : user.country_code
+  end
+
+  def update!(attributes = {})
+    update_attributes(attributes)
+    return false unless valid?
+    save
+  end
+
+  private
+
+  def update_attributes(attributes = {})
+    attributes.each do |name, value|
+      send("#{name}=", value)
+    end
+  end
+
+  def save
+    ActiveRecord::Base.transaction do
+      user.address = address
+      user.save!
+      list.save!
+    end
+  rescue
+    false
+  end
+end

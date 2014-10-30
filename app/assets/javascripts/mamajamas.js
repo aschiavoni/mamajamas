@@ -72,6 +72,14 @@ window.Mamajamas = {
       });
     }
 
+    // registry settings
+    if ($('#registry-settings').length > 0) {
+      new Mamajamas.Views.RegistrySettings({
+        el: '#registry-settings'
+      });
+    }
+
+
     // list
     if ($('#my-list').length > 0) {
       new Mamajamas.Routers.ListItems();

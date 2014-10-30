@@ -42,6 +42,20 @@ en:
             password:
               blank: "Sorry, but you must provide a password."
               confirmation: "Sorry, but the password doesn't match the confirmation."
+        forms/registry_settings:
+          attributes:
+            full_name:
+              blank: "Sorry, but you must provide a name."
+            street:
+              blank: "Sorry, but we need a valid street address."
+            city:
+              blank: "Sorry, a city is required."
+            region:
+              blank: "Sorry, a state or region is required."
+            country_code:
+              blank: "Required"
+            postal_code:
+              blank: "Sorry, a zip or postal code is required."
   activerecord:
     errors:
       models:

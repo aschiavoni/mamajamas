@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
       page_id = nil
       subheader = "Welcome to Mamajamas!"
       skip_secondary_content = false
+      nested_window = false
     end
   end
   helper_method :page_context
@@ -70,6 +71,10 @@ class ApplicationController < ActionController::Base
 
   def skip_secondary_content
     page_context.skip_secondary_content = true
+  end
+
+  def set_nested_window
+    page_context.nested_window = true
   end
 
   protected

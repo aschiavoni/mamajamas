@@ -35,6 +35,8 @@ Mamajamas::Application.routes.draw do
       as: "unsubscribe")
   get "/profile" => "users#edit"
   put "/profile" => "users#update"
+  get "/registry" => "registry#edit"
+  put "/registry" => "registry#update"
   put "/account/complete" => "users#complete"
   post "/account/complete" => "users#complete"
   post "/account/acknowledge_bookmarklet_prompt" => "users#acknowledge_bookmarklet_prompt"

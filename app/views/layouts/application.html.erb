@@ -113,50 +113,54 @@
 <!-- end header area -->
 <!-- body area ***** -->
 <div class="gridContainer clearfix"<%= "id=#{page_id}" unless page_id.blank? %>>
-  <%= content_for?(:feature) ? yield(:feature) : "" %>
-  <% if show_header -%>
-    <div id="title">
-      <div id="subhed">
-        <%= preheader %>
-        <h2><%= subheader %></h2>
+  <% if nested_window? %>
+    <%= yield %>
+  <% else %>
+    <%= content_for?(:feature) ? yield(:feature) : "" %>
+    <% if show_header -%>
+      <div id="title">
+        <div id="subhed">
+          <%= preheader %>
+          <h2><%= subheader %></h2>
+        </div>
+        <%= content_for?(:subheader_content) ? yield(:subheader_content) : "" %>
+        <div id="title-links">
+          <%= yield(:title_links) %>
+        </div>
       </div>
-      <%= content_for?(:subheader_content) ? yield(:subheader_content) : "" %>
-      <div id="title-links">
-        <%= yield(:title_links) %>
-      </div>
-    </div>
-  <% end -%>
-  <div id="primary">
-    <div class="content">
-      <%= content_for?(:nav) ? yield(:nav) : raw("&nbsp;") -%>
-    </div>
-  </div>
-  <div id="secondary">
-    <% if skip_secondary_content? -%>
-      <!-- notification ***** -->
-      <div id="notifications">
-        <%= notifications %>
-      </div>
-      <%= yield %>
-    <% else -%>
+    <% end -%>
+    <div id="primary">
       <div class="content">
+        <%= content_for?(:nav) ? yield(:nav) : raw("&nbsp;") -%>
+      </div>
+    </div>
+    <div id="secondary">
+      <% if skip_secondary_content? -%>
         <!-- notification ***** -->
         <div id="notifications">
           <%= notifications %>
         </div>
         <%= yield %>
+      <% else -%>
+        <div class="content">
+          <!-- notification ***** -->
+          <div id="notifications">
+            <%= notifications %>
+          </div>
+          <%= yield %>
+        </div>
+      <% end -%>
+    </div>
+    <div id="tertiary"<%= " class=#{tertiary_class}" if tertiary_class.present? %>>
+      <div class="content">
+        <%= content_for?(:tertiary) ? yield(:tertiary) : raw("&nbsp;") -%>
       </div>
-    <% end -%>
-  </div>
-  <div id="tertiary"<%= " class=#{tertiary_class}" if tertiary_class.present? %>>
-    <div class="content">
-      <%= content_for?(:tertiary) ? yield(:tertiary) : raw("&nbsp;") -%>
     </div>
-  </div>
-  <div id="footer">
-    <div class="content">
+    <div id="footer">
+      <div class="content">
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
 <!-- end body area -->
 <%= yield(:modal) %>

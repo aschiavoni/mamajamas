@@ -72,7 +72,8 @@ CREATE TABLE addresses (
     addressable_id integer,
     addressable_type character varying(255),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    phone character varying(255)
 );
 
 
@@ -1464,4 +1465,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141023161629');
 INSERT INTO schema_migrations (version) VALUES ('20141023165144');
 
 INSERT INTO schema_migrations (version) VALUES ('20141023165223');
+
+INSERT INTO schema_migrations (version) VALUES ('20141030173759');
 

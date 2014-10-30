@@ -67,6 +67,10 @@ module ApplicationHelper
     end
   end
 
+  def nested_window?
+    page_context.nested_window?
+  end
+
   def show_header
     page_context.show_header
   end
