@@ -39,8 +39,8 @@ feature "guest visitor", js: true do
       click_button "bt-create-account"
 
       sleep_maybe
-      expect(page).to have_content("Create my profile")
-      expect(current_path).to eq(profile_path)
+      expect(page).to have_content("Registry")
+      expect(current_path).to eq(registry_path)
     end
   end
 
@@ -64,8 +64,8 @@ feature "guest visitor", js: true do
       mock_facebook_omniauth('9993883', "guestfacebook@example.com")
       page.execute_script("Mamajamas.Context.LoginSession.saveSession(true);")
 
-      expect(page).to have_content("Create my profile")
-      expect(current_path).to eq(profile_path)
+      expect(page).to have_content("Registry")
+      expect(current_path).to eq(registry_path)
     end
   end
 end

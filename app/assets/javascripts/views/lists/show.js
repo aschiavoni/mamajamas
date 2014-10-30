@@ -16,7 +16,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       }
 
       if (_view.isGuestUser()) {
-        _view.unauthorized("/profile");
+        _view.unauthorized("/registry");
         return false;
       }
       return true;
@@ -27,7 +27,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       var shareButonHeader = $('#bt-share-header');
       if (this.model.get('item_count') > 0) {
         shareButton.removeClass('disabled');
-        shareButonHeader.attr('href', "/profile")
+        shareButonHeader.attr('href', "/registry")
       } else {
         shareButton.addClass('disabled');
         shareButonHeader.attr('href', "/list")

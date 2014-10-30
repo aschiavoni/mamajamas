@@ -134,7 +134,7 @@ class ApplicationController < ActionController::Base
         format.html do
           notice_partial = 'shared/guest_not_authorized'
           flash[:notice] = render_to_string(partial: notice_partial).html_safe
-          redirect_to profile_path
+          redirect_to registry_path
         end
         format.json do
           render json: { status: :unauthorized }, status: :unauthorized
