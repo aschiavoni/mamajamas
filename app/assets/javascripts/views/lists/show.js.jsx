@@ -69,9 +69,10 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       _.defer(this.addToMyList, this);
 
     React.renderComponent((
-      <ListTitle model={this.model}
-                 inFieldLabelDefaults={this.inFieldLabelDefaults}
-                 onSave={this.save} />
+      <Mamajamas.Components.ListTitle
+        model={this.model}
+        inFieldLabelDefaults={this.inFieldLabelDefaults}
+        onSave={this.save} />
     ), $('#subhed').get(0));;
 
     return this;
