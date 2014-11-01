@@ -78,4 +78,7 @@ Mamajamas::Application.configure do
   config.active_support.deprecation = :notify
 
   config.eager_load = true
+
+  # reactjs
+  config.react.variant = :production
 end

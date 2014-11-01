@@ -20,6 +20,7 @@
 //= require underscore
 //= require backbone
 //= require handlebars
+//= require react
 //= require mamajamas
 //= require_tree ./plugins
 //= require_tree ./helpers

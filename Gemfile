@@ -48,6 +48,7 @@ gem 'google_contacts_api'
 
 # let's use backbone
 gem 'backbone-on-rails', '0.9.2.3'
+gem 'react-rails', '~> 0.11.1.0'
 
 # To use Jbuilder templates for JSON
 gem 'jbuilder'
