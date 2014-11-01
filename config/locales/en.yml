@@ -83,6 +83,12 @@ en:
               invalid: "Sorry, but that does not appear to be a valid zip code."
             country_code:
               invalid: "Sorry, but that does not appear to be a valid country."
+        list:
+          attributes:
+            title:
+              blank: "Sorry, but you must provide a title."
+              too_long: "Sorry, but your title is too long (max %{count} characters)."
+              too_short: "Sorry, but your title is too short (minimum is %{count} characters)"
         list_item:
           attributes:
             name:

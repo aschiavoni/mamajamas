@@ -1,6 +1,13 @@
+/** @jsx React.DOM */
+
 Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 
   template: HandlebarsTemplates['lists/show'],
+
+  inFieldLabelDefaults: {
+    fadeDuration:200,
+    fadeOpacity:0.55
+  },
 
   initialize: function() {
     this.indexView = new Mamajamas.Views.ListItemsIndex({
@@ -61,14 +68,27 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     if ($("#add-list-item").length > 0)
       _.defer(this.addToMyList, this);
 
-    // Dock the header to the top of the window when scrolled past the
-    // banner.
-    $('#title').scrollToFixed();
-    $('#primary').scrollToFixed({
-      marginTop: $('#title').outerHeight(true)
-    });
+    React.renderComponent((
+      <ListTitle model={this.model}
+                 inFieldLabelDefaults={this.inFieldLabelDefaults}
+                 onSave={this.save} />
+    ), $('#subhed').get(0));;
 
     return this;
+  },
+
+  save: function(attributes, successCb, errorCb) {
+    this.model.store();
+
+    this.model.save(attributes, {
+      patch: true,
+      success: successCb,
+      error: function(model, response) {
+        model.restore();
+        var errors = $.parseJSON(response.responseText).errors;
+        errorCb(errors);
+      }.bind(this)
+    });
   },
 
   addToMyList: function(_view) {

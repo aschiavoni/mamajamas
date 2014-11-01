@@ -18,7 +18,7 @@ class List < ActiveRecord::Base
   end
   has_many :list_items, dependent: :destroy
 
-  validates :title, length: { maximum: 45 }
+  validates :title, length: { minimum: 3, maximum: 45 }
 
   def title
     read_attribute(:title) || default_title

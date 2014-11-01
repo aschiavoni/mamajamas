@@ -12,6 +12,10 @@ class ListView
     @friends_prompt = false
   end
 
+  def list_id
+    @list_id ||= list.id
+  end
+
   def categories
     @categories ||= list.categories.for_list
   end

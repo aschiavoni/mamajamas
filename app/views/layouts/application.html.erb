@@ -115,6 +115,8 @@
 <div class="gridContainer clearfix"<%= "id=#{page_id}" unless page_id.blank? %>>
   <% if nested_window? %>
     <%= yield %>
+  <% elsif page_id == "registry" %>
+    <%= yield %>
   <% else %>
     <%= content_for?(:feature) ? yield(:feature) : "" %>
     <% if show_header -%>

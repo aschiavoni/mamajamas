@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :init_view, only: [ :show ]
-  before_filter :find_list, only: [ :show, :product_types,
+  before_filter :find_list, only: [ :show, :update, :product_types,
                                     :check, :clear_recommended ]
   before_filter :set_cache_buster, only: [ :show ]
   before_filter :set_add_to_list, only: [ :show ]
@@ -17,7 +17,7 @@ class ListsController < ApplicationController
     end
 
     if @list.present? && @list.completed?
-      template = "show"
+      template = "show2"
       cat = params[:category]
       cat = 'all' if cat.blank? && current_user.sign_in_count > 1
       @view = ListView.new(@list, cat)
@@ -44,6 +44,11 @@ class ListsController < ApplicationController
     end
   end
 
+  def update
+    @list.update_attributes(params[:list])
+    respond_with @list
+  end
+
   def product_types
     @available_product_types = @list.available_product_types(params[:filter], 20)
 
@@ -66,8 +71,7 @@ class ListsController < ApplicationController
   private
 
   def init_view
-    set_subheader "Your baby gear list"
-    set_page_id "buildlist"
+    set_page_id "registry"
   end
 
   def find_list
