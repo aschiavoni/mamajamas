@@ -46,6 +46,14 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       el: '#social-links'
     });
 
+    if ($('#details-link').length > 0) {
+      $('#details-link a').click(function(event) {
+        event.preventDefault();
+        this.toggleDetails();
+        return false;
+      }.bind(this));
+    }
+
     if ($("#friends-modal").length > 0) {
       $('#friends-modal').modal({
         position: ["15%", null],
@@ -230,6 +238,11 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     }, 600);
 
     return false;
+  },
+
+  toggleDetails: function() {
+    var $details = $('#listdetails');
+    $details.toggle();
   },
 
 });

@@ -16,6 +16,14 @@ class ListView
     @list_id ||= list.id
   end
 
+  def created_at
+    list.created_at.strftime('%m/%d/%Y')
+  end
+
+  def updated_at
+    list.updated_at.strftime('%m/%d/%Y')
+  end
+
   def categories
     @categories ||= list.categories.for_list
   end

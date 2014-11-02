@@ -66,6 +66,14 @@ module UserDecorator
     tags.join(", ")
   end
 
+  def full_shipping_address
+    if address.present?
+      simple_format(address.full_address)
+    else
+      "n/a"
+    end
+  end
+
   private
 
   def formatted_date(ts)

@@ -1,36 +1,74 @@
 <div id="listwrap" class="clearfix">
-    <div id="title">
-      <div id="subhed">
-      </div>
-      <div id="title-links">
-        <ul class="iconrow">
-          <li id="details-link">
-            <a href="#" class="icon-link"><span class="ss-icon ss-info"></span>Details</a>
-          </li>
-          <li id="social-links" class="nav-drop-trigger">
-            <a href="#" class="nav-drop-link">
-              <span class="ss-icon ss-redirect"></span>Share
-            </a>
-            <ul class="nav-drop">
-              <li>
-                <a class="ss-icon ss-social-circle" title="Pinterest" href="<%= pinterest_pin_url(media: "http://mamajamas.s3.amazonaws.com/assets/mamajamas_bird_large.png", description: "Check out my list of baby gear on Mamajamas.", url: @view.public_url) %>"
-                   data-pin-do="buttonPin"
-                   data-pin-config="none">
-                  Pinterest
-                </a>
-              </li>
-              <li>
-                <a href="<%= tweet_url(text: "Check out my list of baby gear on Mamajamas.", via: "mamajamasmom", url: @view.public_url) %>" class="ss-icon ss-social-circle" title="Twitter" target="_blank">Twitter</a>
-              </li>
-              <li>
-                <a href="#" class="ss-icon ss-social-circle" title="Facebook">Facebook</a>
-              </li>
-            </ul>
-          </li>
-          <li id="print-link"><a href="#" class="ss-icon icon-link" title="Print">Print</a></li>
-        </ul>
-      </div>
+  <div id="title">
+    <div id="subhed">
     </div>
+    <div id="title-links">
+      <ul class="iconrow">
+        <li id="details-link">
+          <a href="#" class="icon-link"><span class="ss-icon ss-info"></span>Details</a>
+        </li>
+        <li id="social-links" class="nav-drop-trigger">
+          <a href="#" class="nav-drop-link">
+            <span class="ss-icon ss-redirect"></span>Share
+          </a>
+          <ul class="nav-drop">
+            <li>
+              <a class="ss-icon ss-social-circle" title="Pinterest" href="<%= pinterest_pin_url(media: "http://mamajamas.s3.amazonaws.com/assets/mamajamas_bird_large.png", description: "Check out my list of baby gear on Mamajamas.", url: @view.public_url) %>"
+                 data-pin-do="buttonPin"
+                 data-pin-config="none">
+                Pinterest
+              </a>
+            </li>
+            <li>
+              <a href="<%= tweet_url(text: "Check out my list of baby gear on Mamajamas.", via: "mamajamasmom", url: @view.public_url) %>" class="ss-icon ss-social-circle" title="Twitter" target="_blank">Twitter</a>
+            </li>
+            <li>
+              <a href="#" class="ss-icon ss-social-circle" title="Facebook">Facebook</a>
+            </li>
+          </ul>
+        </li>
+        <li id="print-link"><a href="#" class="ss-icon icon-link" title="Print">Print</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="listdetails" style="display: none;">
+    <%= link_to "", registry_path, class: "ss-icon ss-write icon-edit" %>
+    <ul>
+      <li>
+        <em>
+          <i class="fa fa-user"></i> Registrant(s):
+        </em> <%= @view.owner.full_name %><br/>
+        <% if @view.owner.partner_full_name %>
+          <%= @view.owner.partner_full_name %>
+        <% end -%>
+      </li>
+      <li>
+        <em>
+          <i class="fa fa-list-ul"></i> Created:
+        </em> <%= @view.created_at %>
+      </li>
+      <li>
+        <em>
+          <i class="fa fa-refresh"></i> Updated:
+        </em> <%= t @view.updated_at %>
+      </li>
+      <li>
+        <em>
+          <i class="fa fa-calendar-o"></i> Baby due:
+        </em> <%= @view.owner.due_date %>
+      </li>
+      <li>
+        <em>
+          <i class="fa fa-truck"></i> Shipping:
+        </em> <%= @view.owner.full_shipping_address %>
+      </li>
+      <li>
+        <em>
+          <i class="fa fa-envelope"></i> Email:
+        </em> <%= @view.owner.email %></li>
+    </ul>
+    <div class="arrow"><span></span></div>
+  </div>
   <div id="primary">
     <div class="content">
       <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
