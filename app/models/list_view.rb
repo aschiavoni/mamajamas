@@ -60,7 +60,15 @@ class ListView
     @friends_prompt = val
   end
 
+  def public_url
+    @public_url ||= public_list_url(owner.slug)
+  end
+
   private
+
+  def default_url_options
+    { host: 'wwww.mamajamas.com' }
+  end
 
   def find_category
     if @category_slug.present?

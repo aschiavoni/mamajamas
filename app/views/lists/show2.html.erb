@@ -4,12 +4,27 @@
       </div>
       <div id="title-links">
         <ul class="iconrow">
-          <li id="details-link"><a href="#" class="icon-link"><span class="ss-icon ss-info"></span>Details</a></li>
-          <li id="social-links" class="nav-drop-trigger"><a href="#" class="nav-drop-link"><span class="ss-icon ss-redirect"></span>Share</a>
+          <li id="details-link">
+            <a href="#" class="icon-link"><span class="ss-icon ss-info"></span>Details</a>
+          </li>
+          <li id="social-links" class="nav-drop-trigger">
+            <a href="#" class="nav-drop-link">
+              <span class="ss-icon ss-redirect"></span>Share
+            </a>
             <ul class="nav-drop">
-              <li><a href="#" class="ss-icon ss-social-circle" title="Pinterest">Pinterest</a></li>
-              <li><a href="#" class="ss-icon ss-social-circle" title="Twitter">Twitter</a></li>
-              <li><a href="#" class="ss-icon ss-social-circle" title="Facebook">Facebook</a></li>
+              <li>
+                <a class="ss-icon ss-social-circle" title="Pinterest" href="<%= pinterest_pin_url(media: "http://mamajamas.s3.amazonaws.com/assets/mamajamas_bird_large.png", description: "Check out my list of baby gear on Mamajamas.", url: @view.public_url) %>"
+                   data-pin-do="buttonPin"
+                   data-pin-config="none">
+                  Pinterest
+                </a>
+              </li>
+              <li>
+                <a href="<%= tweet_url(text: "Check out my list of baby gear on Mamajamas.", via: "mamajamasmom", url: @view.public_url) %>" class="ss-icon ss-social-circle" title="Twitter" target="_blank">Twitter</a>
+              </li>
+              <li>
+                <a href="#" class="ss-icon ss-social-circle" title="Facebook">Facebook</a>
+              </li>
             </ul>
           </li>
           <li id="print-link"><a href="#" class="ss-icon icon-link" title="Print">Print</a></li>

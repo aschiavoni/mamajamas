@@ -41,6 +41,11 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       }
     }, this);
 
+    // setup social links
+    new Mamajamas.Views.SocialLinks({
+      el: '#social-links'
+    });
+
     if ($("#friends-modal").length > 0) {
       $('#friends-modal').modal({
         position: ["15%", null],
@@ -73,7 +78,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
         model={this.model}
         inFieldLabelDefaults={this.inFieldLabelDefaults}
         onSave={this.save} />
-    ), $('#subhed').get(0));;
+    ), $('#subhed').get(0));
 
     return this;
   },
