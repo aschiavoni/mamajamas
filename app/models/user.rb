@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   attr_accessible :full_name, :signup_registration
   attr_accessible :welcome_sent_at
   attr_accessible :guest
+  attr_accessible :notes
   attr_accessible :admin_notes
   attr_accessible :show_bookmarklet_prompt
   attr_accessible :show_friends_prompt

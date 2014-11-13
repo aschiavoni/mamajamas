@@ -45,7 +45,12 @@ class ListsController < ApplicationController
   end
 
   def update
+    if params[:list].has_key?(:notes)
+      @current_user.update_attributes(notes: params[:list].delete(:notes))
+    end
+
     @list.update_attributes(params[:list])
+
     respond_with @list
   end
 

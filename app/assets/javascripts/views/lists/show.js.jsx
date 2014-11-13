@@ -88,6 +88,13 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
         onSave={this.save} />
     ), $('#subhed').get(0));
 
+    React.renderComponent((
+      <Mamajamas.Components.ListDescription
+        model={this.model}
+        inFieldLabelDefaults={this.inFieldLabelDefaults}
+        onSave={this.save} />
+    ), $('.module-notes').get(0));
+
     return this;
   },
 

@@ -5,6 +5,7 @@ class List < ActiveRecord::Base
   PRIVACY_WANT_ONLY      = 3
 
   attr_accessible :title
+  attr_accessible :notes
   attr_accessible :privacy
   attr_accessible :saved
   attr_accessible :featured, as: :admin
