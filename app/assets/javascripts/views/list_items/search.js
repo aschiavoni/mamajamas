@@ -161,6 +161,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       link: " ", // need to use a space to allow infieldlabels to work
       vendor: searchResult.get('vendor'),
       vendor_id: searchResult.get('vendor_id'),
+      price: searchResult.get('price'),
       product_type_id: this.model.get('product_type_id'),
       product_type: this.model.get('product_type_name'),
       product_type_name: this.model.get('product_type_name'),
@@ -185,6 +186,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       link: searchResult.get('url'),
       vendor: searchResult.get('vendor'),
       vendor_id: searchResult.get('vendor_id'),
+      price: searchResult.get('price'),
       product_type_id: this.model.get('product_type_id'),
       product_type: this.model.get('product_type_name'),
       product_type_name: this.model.get('product_type_name'),
@@ -218,6 +220,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       image_url: searchResult.get('image_url'),
       rating: null,
       owned: false,
+      price: searchResult.get('price'),
       vendor: searchResult.get('vendor'),
       vendor_id: searchResult.get('vendor_id')
     };

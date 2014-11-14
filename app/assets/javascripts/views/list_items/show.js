@@ -132,6 +132,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
         product_type_plural_name: this.model.get('product_type_plural_name'),
         image_url: this.model.get('product_type_image_name'),
         owned: false,
+        price: this.model.get('price')
       })
     });
 
@@ -174,6 +175,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
       product_type_image_name: this.model.get("product_type_image_name"),
       product_type_name: this.model.get("product_type_name"),
       product_type_plural_name: this.model.get("product_type_plural_name"),
+      price: this.model.get('price'),
       owned: false,
       placeholder: true,
       show_chooser: false,

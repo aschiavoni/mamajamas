@@ -61,12 +61,12 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
       model: this.model
     });
-    $(".prod-when-own", this.$el).append(ageRangeView.render().$el);
+    $(".prod-when-own fieldset", this.$el).append(ageRangeView.render().$el);
 
     var quantityView = new Mamajamas.Views.ListItemQuantity({
       model: this.model
     });
-    $(".prod-when-own", this.$el).append(quantityView.render().$el);
+    $(".prod-when-own fieldset", this.$el).append(quantityView.render().$el);
 
     this.initializeAutocomplete();
 
@@ -79,9 +79,13 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
       // the following is a bit of hack to trigger display of inFieldLabels
       // it would be great to lose the inFieldLabels dependency
       var linkVal = _view.itemField("link").val();
+      var priceVal = _view.itemField("price").val();
       if (_view.model.isNew() && (!linkVal || linkVal.trim().length == 0)) {
         _view.itemField("link").val(null);
         _view.itemField("link").focus();
+      }
+      if (_view.model.isNew() || (!priceVal || priceVal.trim().length == 0)) {
+        _view.itemField("price").val("$0.00");
       }
       _view.itemField("name").focus();
     });
@@ -218,6 +222,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
       image_url: this.itemField("image_url").val(),
       owned: _view.model.get("owned"),
       placeholder: false,
+      price: _view.itemField("price").val(),
       vendor_id: this.itemField("vendor_id").val(),
       vendor: this.itemField("vendor").val(),
       list_item_image_id: this.itemField('list_item_image_id').val(),

@@ -10,6 +10,7 @@ json.quantity @list_entry.quantity
 json.vendor @list_entry.vendor
 json.vendor_id @list_entry.vendor_id
 json.recommended @list_entry.recommended
+json.price @list_entry.price
 json.updated_at @list_entry.updated_at
 if @list_entry.product_type.present?
   json.product_type_plural_name @list_entry.product_type.plural_name

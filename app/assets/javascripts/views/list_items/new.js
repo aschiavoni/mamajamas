@@ -79,6 +79,7 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
       product_type_id: this.model.get("product_type_id"),
       quantity: this.model.get("quantity"),
       owned: this.model.get("owned"),
+      price: this.model.get("price"),
       product_type_name: itemName,
       product_type_plural_name: pluralName,
       placeholder: true,

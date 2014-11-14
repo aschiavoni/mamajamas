@@ -33,6 +33,7 @@
   <!-- when to buy, need vs. have -->
   {{#ifNotLowPriority listItem}}
   <div class="prod-when-own">
+    <div class="price"> <strong>{{listItem.price}}</strong></div>
     <div class="when"> {{buyLink listItem}} </div>
   </div>
   {{/ifNotLowPriority}}

@@ -42,6 +42,15 @@ class ListItem < ActiveRecord::Base
     u
   end
 
+  def price=(new_price)
+    p = new_price.dup
+    # treat $.0.00 as nil
+    if p.gsub(/[^0-9]/i, '').chars.map(&:to_i).uniq.all? { |c| c == 0 }
+      p = nil
+    end
+    write_attribute(:price, p)
+  end
+
   private
 
   def base_image_url
