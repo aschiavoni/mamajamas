@@ -111,7 +111,9 @@
            item_count: <%= @view.list.item_count %>,
            has_recommended_items: <%= @view.recommended_items? %>,
            product_types: JSON.parse('<%= @view.product_types.to_json.html_safe %>'),
-           notes: '<%= h(@view.owner.notes) %>'
+           notes: '<%= h(@view.owner.notes) %>',
+           username: '<%= @view.owner.username %>',
+           profile_photo_url: '<%= @view.owner.profile_picture.public_list %>'
          });
          <% if @view.all_category? -%>
          Mamajamas.Context.Categories = <%= @view.categories.to_json.html_safe %>;
@@ -124,43 +126,43 @@
 <div id="tertiary" class="light">
   <div class="content">
     <div id="module-profile">
-        <div class="content">
-          <p id="sharedby"><span></span>Profile</p>
-          <h3><%= @view.owner.display_name %></h3>
-          <div id="profile-photo">
-            <%= image_tag @view.owner.profile_picture.public_list, alt: "#{@view.owner.username} profile photo" %>
-            <div class="progress-container">
-              <a id="bt-upload" class="button bt-light">
-                <span class="ss-camera"></span> Change Photo
-              </a>
-              <%= image_tag "progress-bar.gif", alt: "Progress bar", class: "progress", style: "display: none;" %>
-            </div>
+      <div class="content">
+        <p id="sharedby"><span></span>Profile</p>
+        <h3><%= @view.owner.display_name %></h3>
+        <div id="profile-photo">
+          <%= image_tag @view.owner.profile_picture.public_list, alt: "#{@view.owner.username} profile photo" %>
+          <div class="progress-container">
+            <a id="bt-upload" class="button bt-light">
+              <span class="ss-camera"></span> Change Photo
+            </a>
+            <%= image_tag "progress-bar.gif", alt: "Progress bar", class: "progress", style: "display: none;" %>
           </div>
-          <div class="module-notes">
-            <% if @view.owner.notes.present? -%>
-              <div class="expandable editable">
+        </div>
+        <div class="module-notes">
+          <% if @view.owner.notes.present? -%>
+            <div class="expandable editable">
+              <span class="ss-icon ss-write icon-edit"></span>
+              <p><%= h @view.owner.notes  %></p>
+            </div>
+          <% end -%>
+          <div class="editing" style="<%= "display: none;" if @view.owner.notes.present?  -%>">
+            <fieldset>
+              <p>
                 <span class="ss-icon ss-write icon-edit"></span>
-                <p><%= h @view.owner.notes  %></p>
-              </div>
-            <% end -%>
-            <div class="editing" style="<%= "display: none;" if @view.owner.notes.present?  -%>">
-              <fieldset>
-                <p>
-                  <span class="ss-icon ss-write icon-edit"></span>
-                  <label for="user_profile" style="display: none;">
-                    Care to share a bit about yourself?
-                  </label>
-                  <br/>
-                  <textarea id="user_profile" name="user_profile"><%= @view.owner.notes %></textarea>
-                </p>
-              </fieldset>
-              <div class="progress-container">
-                <button class="cancel-item button bt-light" value="Reset" type="reset">Cancel</button>
-                <button type="submit" value="Save" class="button bt-color">Save</button>
-              </div>
+                <label for="user_profile" style="display: none;">
+                  Care to share a bit about yourself?
+                </label>
+                <br/>
+                <textarea id="user_profile" name="user_profile"><%= @view.owner.notes %></textarea>
+              </p>
+            </fieldset>
+            <div class="progress-container">
+              <button class="cancel-item button bt-light" value="Reset" type="reset">Cancel</button>
+              <button type="submit" value="Save" class="button bt-color">Save</button>
             </div>
           </div>
         </div>
+      </div>
     </div>
     <% if @view.owner.followed_users_with_shared_lists.any? -%>
       <div id="module-friends">

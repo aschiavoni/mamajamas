@@ -88,6 +88,10 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
         onSave={this.save} />
     ), $('#subhed').get(0));
 
+    React.renderComponent(
+      <Mamajamas.Components.ListProfilePhoto model={this.model} />,
+      $('#profile-photo').get(0));
+
     React.renderComponent((
       <Mamajamas.Components.ListDescription
         model={this.model}

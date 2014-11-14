@@ -20,6 +20,8 @@
 //= require underscore
 //= require backbone
 //= require handlebars
+//= require es5-shim
+//= require es5-sham
 //= require react
 //= require mamajamas
 //= require_tree ./plugins
