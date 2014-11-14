@@ -34,6 +34,14 @@ class UsersController < ApplicationController
 
   def complete
     init_view 'create-profile', 'Complete my profile', 3
+
+    # handle honeypot value
+    # if username is included, don't do anything and redirect to
+    # root
+    if params[:user].present? && params[:user][:username].present?
+      redirect_to list_path and return
+    end
+
     @redirect_path = complete_redirect_path
     @profile = Forms::CompleteProfile.new(current_user)
     uparams = params[:profile] || params[:user]
