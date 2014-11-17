@@ -23,6 +23,7 @@ module Features
         sign_in_count: 2
       }, { without_protection: true })
       user.build_list!
+      user.list.complete!
       user
     end
 

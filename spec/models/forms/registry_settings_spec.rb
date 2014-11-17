@@ -28,6 +28,7 @@ describe Forms::RegistrySettings, :type => :model do
   end
 
   it "should update delegated list attributes" do
+    list = List.new
     [ :registry ].each do |attribute|
       expect(list).to receive("#{attribute}=").with(true)
     end

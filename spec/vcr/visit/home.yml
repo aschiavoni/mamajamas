@@ -1,0 +1,70 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/HsTZSDw4avx.gif
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Md5:
+      - J7LaR4kmLjuCio7GWH3Yqg==
+      Content-Type:
+      - image/gif
+      Last-Modified:
+      - Sat, 15 Jun 2013 00:48:44 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Fb-Debug:
+      - f6UDVG9IC342OOmAD/MYnmH9BHzQdvRRm4e5J0cJ4Bo=
+      Content-Length:
+      - '978'
+      Cache-Control:
+      - public, max-age=4574442
+      Expires:
+      - Fri, 09 Jan 2015 19:34:15 GMT
+      Date:
+      - Mon, 17 Nov 2014 20:53:33 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        R0lGODlhyAB+AMQAAM3V5e3w9sXO4dzi7dXc6eXp8vn6/PT1+crS4+ru9PL0
+        +OLm8Nje6t/k7v39/tTa6Nvg7Pb4+tHY5/7+/+/y9+js8/v8/fj5+/z8/cfQ
+        4s/X5uzv9cvT5MzU5P///8TN4CH5BAAAAAAALAAAAADIAH4AAAX/4CeOZGme
+        aKqubOu+cCzPdG3feK7vfO//wKBwSCwaj8ikcslsOp/QqHRKrVptAgABMmhc
+        v2AbAhK4ODxoTyLMbqc4jEp6jl647+5OIULvU/CAVxIFfYVoAIGJUQN8hoYD
+        ipFLC46VaBqSmUQMGJaeDJqhPQgHnqZqoqk3A6etFxmqsTABrbUeBLK5KRkG
+        trZeusEiHb7Fa8K5GsXLf8iqHMvRx86hZ9HLENSalNfRAtqS3dd24Ims4tHl
+        iRTo0YjqeL3txcDwbQjzy9P2Ycr5vgr4tSHwz9cBgWwIFqxlAWGYBgtrYfjm
+        8Aq3iKYsUKxY5SJGSxo5WvH40VFIkVRI/5YsdBKlFJUr6bR0CQViTJMbaT55
+        cNPRRJ1RFPbscwFo0KGFDhrdibSP0qVNiDWd8xTqEn9T0Wyw2gRA1jRbuS7J
+        YC1rWLFJyH71UADtkk5fs7k9IgDChLUBOswtksHC2jly9waR+hdNW8FB1Bb2
+        UA/xD3mFcTkGUmoxh8lAEiz2gBmIzb8YOv8QuraZaB7QCh8+zWMxJNY87v59
+        AJtHo7Xvauc499WAbh4bvjrA9HtH5aYSivMgNBWWch2ke0Z4vgNf033Ub9zu
+        CSp7DuZDveuQgHS6+ByybwY+b0NOT+fsbXi9GTA+ju0fJdu3wSBm0f04KLBS
+        bgDWIEB6C61WoP8N4C20YA79ReTAgziQF1F9FNZg4ULmZUhDhAtN4GENnxUk
+        4ogzNFhQTii6oBlGerUIg4AY0SbjCxd8tN6NKhz4kYI87lISdkGWkAED7HyE
+        QQPEFVmCiiXB56QISd7U5JQflBVTd1gKgFQFWIoQ3Uq+heneUCwG6RdSrzmJ
+        1VBV8cgAZEglcNmNA2iZVQBXPpgBTGspoB+AHdCyWR8WtMkeAzQe6sgCd2a3
+        wJqOekJBn7Bp8GKltUTQmGgM4MdpLRMkgABmAAA6KkBcuvVAo6u2Y0EBUhqV
+        QQN6xppPADbqBIChupZ0wacOMRosUgucihAEdB47VF722OXsX9BqQ0BPs9N+
+        BSYyAlSZ7WatxjLmt4sFkIuq5P41kyZQpnuoA2kqAoG7ujakSWr0xkpkIMfl
+        u2pykYDo76r/KQLrwKMCHEgGCAe7bSC8NTzqhEGEAAA7
+    http_version: 
+  recorded_at: Mon, 17 Nov 2014 20:53:33 GMT
+recorded_with: VCR 2.9.3

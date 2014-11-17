@@ -14,6 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           @user = current_user
           # TODO: background this?
           FacebookProfilePictureUpdater.new(@user, oauth.uid).update!
+          cookies[:after_sign_in_path] = list_path
           (render && return) if request.xhr?
           redirect_to registrations_facebook_path and return
         end
@@ -31,6 +32,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
       session["devise.fb_access_token"] = oauth.access_token
       session["devise.fb_access_token_expiration"] = oauth.access_token_expires_at
+
+      cookies[:after_sign_in_path] = registry_path
 
       (render && return) if request.xhr?
       redirect_to registrations_facebook_path

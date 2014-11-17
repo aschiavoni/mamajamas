@@ -18,7 +18,7 @@ feature "guest visitor", js: true do
 
       # HACK: force there to be an item
       page.execute_script("Mamajamas.Context.List.set('item_count', 1)")
-      click_link "Save"
+      click_link "Sign Up"
       sleep_maybe
       expect(page).to have_selector("#signup-modal", visible: true)
 
@@ -58,7 +58,7 @@ feature "guest visitor", js: true do
       page.execute_script("$.cookies.set('no_show_added', true, {path: '/'});")
       add_manual_item "Bath Tub", "http://google.com"
 
-      click_link "Save"
+      click_link "Sign Up"
       page.has_selector?('#create-account-email', visible: true)
 
       mock_facebook_omniauth('9993883', "guestfacebook@example.com")

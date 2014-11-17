@@ -17,7 +17,6 @@ class Forms::RegistrySettings
   delegate(:full_name, :full_name=,
            :partner_full_name, :partner_full_name=,
            to: :user)
-  delegate :registry, :registry=, to: :list
   delegate(:street, :street2, :city, :region, :phone,
            to: :address)
   delegate(:street=, :street2=, :city=, :region=,
@@ -56,6 +55,16 @@ class Forms::RegistrySettings
     user.country_code.blank? ? nil : user.country_code
   end
 
+  def registry
+    list.present? ? list.registry : true
+  end
+
+  def registry=(on)
+    if list.present?
+      list.registry = on
+    end
+  end
+
   def update!(attributes = {})
     update_attributes(attributes)
     return false unless valid?
@@ -74,7 +83,7 @@ class Forms::RegistrySettings
     ActiveRecord::Base.transaction do
       user.address = address
       user.save!
-      list.save!
+      list.save! if list.present?
     end
   rescue
     false

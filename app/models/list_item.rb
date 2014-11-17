@@ -43,9 +43,13 @@ class ListItem < ActiveRecord::Base
   end
 
   def price=(new_price)
-    p = new_price.dup
-    # treat $.0.00 as nil
-    if p.gsub(/[^0-9]/i, '').chars.map(&:to_i).uniq.all? { |c| c == 0 }
+    if new_price.present?
+      p = new_price.dup
+      # treat $.0.00 as nil
+      if p.gsub(/[^0-9]/i, '').chars.map(&:to_i).uniq.all? { |c| c == 0 }
+        p = nil
+      end
+    else
       p = nil
     end
     write_attribute(:price, p)

@@ -56,7 +56,7 @@ feature "Visitor signs up", js: true do
 
       # should be on the friends page
       sleep_maybe
-      expect(page).to have_content("Follow Friends")
+      expect(page).to have_content("Registry")
     end
   end
 
