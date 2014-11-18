@@ -239,7 +239,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     _.delay(function() {
       if (confirm(m)) {
         var $target = $(event.currentTarget);
-        var $form = $target.parents('form.clear-recommended');
+        var $form = $target.children('form.clear-recommended');
         var authToken = $("meta[name=csrf-token]").attr('content');
         $('input', $form).val(authToken);
         $form.submit();
