@@ -86,6 +86,17 @@ var Mamajamas = Mamajamas || { Components: {} };
       }
     },
 
+    assetPath: function(name) {
+      var path = name;
+      if (!path.match("^http"))
+        path = Mamajamas.Context.AssetPath + name;
+      return path;
+    },
+
+    progressBarImage: function() {
+      return this.assetPath("progress-bar.gif");
+    },
+
     render: function() {
       var hiddenStyle = {
         display: 'none'
@@ -117,7 +128,7 @@ var Mamajamas = Mamajamas || { Components: {} };
                onClick={this.handleChangePhoto}>
               <span className="ss-camera"></span>&nbsp;Change Photo
             </a>
-            <img src="/assets/progress-bar.gif"
+            <img src={this.progressBarImage()}
                  alt="Progress bar"
                  className="progress"
                  style={this.progressStyle()} />
