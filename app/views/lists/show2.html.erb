@@ -92,7 +92,7 @@
     <div class="content">
       <!-- notification ***** -->
       <div id="notifications"><%= notifications %></div>
-      <% cache [ @view.list, @view.category_slug, @view.list.owner, 'list' ] do -%>
+      <% cache [ @view.list, @view.category_slug, @view.owner, 'list' ] do -%>
         <form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>" data-list-entries-loaded-at="<%= Time.now.utc %>">
         </form>
         <% if @add_list_item_json.present? -%>
