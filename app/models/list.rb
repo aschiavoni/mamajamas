@@ -174,12 +174,12 @@ class List < ActiveRecord::Base
   def default_title
     if user.present?
       if user.guest?
-        "Your baby gear list"
+        "Your baby gear registry"
       else
-        "#{(user.first_name || user.username).possessive} List"
+        "#{(user.first_name || user.username).possessive} Registry"
       end
     else
-      "List"
+      "Registry"
     end
   end
 
