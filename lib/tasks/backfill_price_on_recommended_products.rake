@@ -7,15 +7,26 @@ namespace :mamajamas do
       ecs = ProductFetcherConfiguration.for('amazon')
       RecommendedProduct.all.each do |rp|
         next if rp.price.present?
-        amazon = CreatesRecommendedProductFromAmazonUrl.new(rp.link, ecs)
-        product_attrs = amazon.product
-        if (price = product_attrs[:price]).present?
-          puts "Updating #{rp.id} with price: #{price}..."
-          rp.price = price
-          rp.save!
+        tries = 0
+        begin
+          amazon = CreatesRecommendedProductFromAmazonUrl.new(rp.link, ecs)
+          product_attrs = amazon.product
+          if (price = product_attrs[:price]).present?
+            puts "Updating #{rp.id} with price: #{price}..."
+            rp.price = price
+            rp.save!
+          end
+          sleep 2
+        rescue => e
+          tries += 1
+          if tries > 3
+            raise e
+          else
+            sleep(2 + ( tries * 3 ))
+            retry
+          end
         end
       end
-      sleep 1
     end
 
     desc "Add price to existing recommended list items"
