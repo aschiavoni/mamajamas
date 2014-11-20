@@ -604,7 +604,8 @@ CREATE TABLE recommended_products (
     image_url character varying(255),
     tag character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    price character varying(255)
 );
 
 
@@ -1467,4 +1468,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141023165144');
 INSERT INTO schema_migrations (version) VALUES ('20141023165223');
 
 INSERT INTO schema_migrations (version) VALUES ('20141030173759');
+
+INSERT INTO schema_migrations (version) VALUES ('20141120182937');
 
