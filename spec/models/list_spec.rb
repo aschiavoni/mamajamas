@@ -10,7 +10,7 @@ describe List, :type => :model do
     let(:list) { build(:list, title: nil, user: user) }
 
     let(:default_title) do
-      "John#{Possessive::APOSTROPHE_CHAR}s List"
+      "John#{Possessive::APOSTROPHE_CHAR}s Registry"
     end
 
     it "should have a default title" do
@@ -20,13 +20,13 @@ describe List, :type => :model do
     it "uses username in default title if first name not present" do
       u = build(:user, username: "testu", first_name: nil)
       l = build(:list, title: nil, user: u)
-      default = "testu#{Possessive::APOSTROPHE_CHAR}s List"
+      default = "testu#{Possessive::APOSTROPHE_CHAR}s Registry"
       expect(l.title).to eq(default)
     end
 
     it "uses List as default title if list does not have a user" do
       l = List.new
-      expect(l.title).to eq("List")
+      expect(l.title).to eq("Registry")
     end
 
     it "should not overwrite title if it matches the default title" do

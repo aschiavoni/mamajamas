@@ -29,8 +29,8 @@ module Features
       click_link "Next"
       expect(page).to have_content("My zip code")
 
-      click_link "Build My List"
-      expect(page).to have_content("Your baby gear list")
+      click_link "Build My Registry"
+      expect(page).to have_content("Your baby gear registry")
       expect(current_path).to eq(list_path)
     end
   end
