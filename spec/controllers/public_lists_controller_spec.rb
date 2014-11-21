@@ -29,7 +29,7 @@ describe PublicListsController, :type => :controller do
     end
 
     it "returns a 404 if the list is not public" do
-      @list.update_attributes!(privacy: List::PRIVACY_PRIVATE)
+      @list.update_attributes!(registry: false)
 
       expect {
         get 'show', slug: @user.username
@@ -79,88 +79,6 @@ describe PublicListsController, :type => :controller do
     it "should increment public view count" do
       expect_any_instance_of(List).to receive(:increment_public_view_count)
       get 'show', slug: @user.username
-    end
-
-  end
-
-  describe "preview" do
-
-    before(:each) { sign_in @user }
-
-    it "returns a 404 if the list is not found" do
-      new_user = create(:user) # user does not have a list
-      sign_in new_user
-
-      expect {
-        get 'preview'
-      }.to raise_error(ActionController::RoutingError)
-    end
-
-    it "returns http success" do
-      get 'preview'
-      expect(response).to be_success
-    end
-
-    it "renders show template" do
-      get 'preview'
-      expect(response).to render_template("show")
-    end
-
-    it "should assign list" do
-      get 'preview'
-      expect(assigns(:list)).to eq(@list)
-    end
-
-    it "should assign public list view" do
-      get 'preview'
-      expect(assigns(:view)).to be_instance_of(PublicListView)
-    end
-
-  end
-
-  describe 'publish' do
-
-    before(:each) { sign_in @user }
-
-    it "should assign list" do
-      post 'publish', privacy: List::PRIVACY_PUBLIC
-      expect(assigns(:list)).to eq(@list)
-    end
-
-    it 'should redirect to public list path on publish' do
-      post 'publish', privacy: List::PRIVACY_PUBLIC
-      expect(response).to redirect_to(public_list_path(@user.slug))
-    end
-
-    it 'should make list public on publish' do
-      post 'publish', privacy: List::PRIVACY_PUBLIC
-      expect(assigns(:list)).to be_public
-    end
-
-    it 'should make list authenticated on publish' do
-      post 'publish', privacy: List::PRIVACY_REGISTERED
-      expect(assigns(:list)).to be_registered_users_only
-    end
-
-    it 'should make list want only on publish' do
-      post 'publish', privacy: List::PRIVACY_WANT_ONLY
-      expect(assigns(:list)).to be_want_only
-    end
-
-    it 'should redirect to profile path when cancelled' do
-      post 'publish', cancel: '1'
-      expect(response).to redirect_to list_path
-    end
-
-    it 'should send shared list notification' do
-      expect(SharedListNotifier).to receive(:send_shared_list_notification).
-        with(an_instance_of(List))
-      post 'publish', privacy: List::PRIVACY_PUBLIC
-    end
-
-    it 'should not send notification if user set list to private' do
-      expect(SharedListNotifier).not_to receive(:send_shared_list_notification)
-      post 'publish', privacy: List::PRIVACY_PRIVATE
     end
 
   end

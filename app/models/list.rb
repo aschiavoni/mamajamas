@@ -7,6 +7,7 @@ class List < ActiveRecord::Base
   attr_accessible :title
   attr_accessible :notes
   attr_accessible :privacy
+  attr_accessible :registry
   attr_accessible :saved
   attr_accessible :featured, as: :admin
   attr_accessible :expert, as: :admin

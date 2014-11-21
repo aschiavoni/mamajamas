@@ -69,7 +69,6 @@ Mamajamas::Application.routes.draw do
   resource :list, only: [ :show, :update ] do
     resources :list_items, only: [ :index, :create, :update, :destroy ]
     get 'check' => "lists#check", as: :list_check
-    post 'publish' => "public_lists#publish", as: :public_list_publish
     post 'copy' => "public_lists#copy", as: :public_list_copy
     post "clear_recommended" => "lists#clear_recommended", as: :clear_recommended
   end

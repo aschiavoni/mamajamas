@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @profile.update!(params[:profile])
         format.html do
-          redirect_to public_list_preview_list_path
+          redirect_to registry_path
         end
         format.json
       else

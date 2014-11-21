@@ -1,6 +1,5 @@
 class PublicListsController < ApplicationController
-  before_filter :authenticate_user!, only: [ :publish, :copy ]
-  before_filter :find_list, only: [ :publish ]
+  before_filter :authenticate_user!, only: [ :copy ]
   before_filter :find_shared_list, only: [ :show ]
   before_filter :pinnable, only: [ :show ]
   before_filter :init_view, except: [ :copy ]
@@ -25,20 +24,6 @@ class PublicListsController < ApplicationController
           render "show"
         end
       end
-    end
-  end
-
-  def publish
-    unless params[:cancel] == '1'
-      @list.update_attributes!(saved: true, privacy: params[:privacy])
-
-      unless @list.private?
-        SharedListNotifier.send_shared_list_notification(@list)
-      end
-
-      redirect_to public_list_path(current_user.slug)
-    else
-      redirect_to list_path
     end
   end
 
@@ -90,11 +75,6 @@ class PublicListsController < ApplicationController
     set_subheader @list.title
     set_tertiary_class "light"
     set_page_id "registry"
-  end
-
-  def find_list
-    @list = current_user.list
-    not_found if @list.blank?
   end
 
   def find_shared_list
