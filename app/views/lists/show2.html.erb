@@ -169,8 +169,6 @@
           <h3>Following</h3>
           <ul class="clearfix">
             <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_shared_lists, locals: { show_names: false } %>
-            <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_shared_lists, locals: { show_names: false } %>
-            <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_shared_lists, locals: { show_names: false } %>
           </ul>
           <% if @view.owner.followed_users_with_shared_lists.size > 2 -%>
             <div class="border"><a href="#">Show all</a></div>
