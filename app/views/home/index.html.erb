@@ -1,3 +1,11 @@
+<% content_for :search do -%>
+  <div id="friendssearch">
+    <%= form_tag new_friend_path, method: :post do %>
+      <input type="text" name="query" placeholder="Find a registry (by first or last name)">
+      <input type="submit" value="Search">
+    <% end %>
+  </div>
+<% end -%>
 <% content_for :feature do -%>
   <div id="feature">
     <a class="sq-button" href="#" id="learn-more">
@@ -6,78 +14,54 @@
   </div>
 <% end -%>
 <% content_for :nav do -%>
-  <h2>Need help setting up your nursery?</h2>
-  <p>Mamajamas gives you a personalized list of baby gear to customize and share with other parents.</p>
+  <h1>
+    <strong>It’s your baby registry.</strong> Made Simple. <em>(and social!)</em>
+  </h1>
   <ul>
     <li>
-      <%= link_to "Browse Baby Gear Lists", new_friend_path %>
+      <a href="/quiz" class="button">Create your registry</a>
+      <%= button_to 'Create your registry', user_registration_path, method: :post, style: "display:none;" %>
     </li>
-    <li>
-      <a id="start-quiz" href="/quiz">Take Quiz & Get Started</a>
-      <%= button_to 'Take Quiz & Get Started', user_registration_path, method: :post, style: "display:none;" %>
+    <li class="option">
+      <%= link_to new_friend_path do -%>
+        <i class="fa fa-caret-right"></i> Or, browse registries
+      <% end -%>
     </li>
-
-    <li class="playbtn"><a href="#" id="playintro" title="Play an intro video">Play Intro Video</a></li>
   </ul>
 <% end -%>
 <% content_for :tertiary do -%>
-  <ul class="clearfix">
-    <li>
-      <%= link_to new_friend_path do %>
-        <h4>Browse baby gear lists</h4>
-        <p>Get ideas from other parents&#8217; lists.<br>
-          Add products from their lists back to yours.</p>
-      <% end -%>
-    </li>
-    <li>
-      <%= link_to quiz_path do -%>
-        <h4>Take the quiz</h4>
-        <p>Get product recommendations or build your own list of baby gear with help from other parents.</p>
-      <% end -%>
-    </li>
-    <li class="last">
-      <%= link_to quiz_path do -%>
-        <h4>Customize your baby gear list</h4>
-        <p>Track your purchases.<br>
-          Rate the products you use.<br>
-          Share your list with others.</p>
-      <% end -%>
-    </li>
-  </ul>
+  <%= image_tag "about-mamajamas.jpg", alt: "about mamajamas", size: "196x294", class: "float-l" %>
+  <p>The idea for Mamajamas was born out of my own experience as an expecting mom four years ago.</p>
+  <p>I was overwhelmed by the process of figuring out what I needed to prepare for the birth of my son. I also wondered how I could help friends and family get me things I’d need for the baby, when I didn’t even know myself! I spent hours researching products online and emailing mom friends asking for advice. </p>
+  <p>I started thinking that there should be an easier way for expecting parents to build their registries and get baby gear recommendations. I wanted someone to tell me what I would need (and wouldn’t!) based on how I was planning to parent, and I wanted an easy way to get recommendations from my new parent friends.</p>
+  <p>The goal of Mamajamas is to take all of the guesswork out of building your baby registry. I want you to be able to spend less time thinking about stuff, and more time enjoying pregnancy and new parenthood.</p>
+  <p>I hope your Mamajamas baby registry is helpful to you during this exciting time!</p>
+  <p class="ltr-closing">
+    <%= image_tag "angie-schiavoni_sig.png", alt: "Angie Schiavoni", size: "168x64" %>
+    <br>
+    <em>Angie Schiavoni, Founder</em>
+  </p>
 <% end -%>
-<% content_for :modal do -%>
-  <div id="introvid" class="modal-win">
-    <!-- modal window content -->
-    <div class="content">
-      <!-- video embed ***** -->
-      <iframe src="//player.vimeo.com/video/92141802?title=0&amp;byline=0&amp;portrait=0&amp;color=874789" width="720" height="405" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/92141802">Mamajamas</a> on <a href="https://vimeo.com">Vimeo</a>.
-        <!-- / video embed ***** -->
-    </div>
-    <!-- end modal window content -->
+<% content_for :footer do -%>
+  <div class="testimonial">
+    <%= image_tag "arian.jpg", alt: "Arian Hushyar" %>
+  </div>
+  <p>“I was planning to build out my list in Google Docs and share it with friends as they become pregnant, but I'm so happy you have an amazing product like this instead.” <br>
+    <em>Arian Hushyar</em></p>
   </div>
 <% end -%>
-<%= image_tag "about-mamajamas.jpg", alt: "about mamajamas", size: "196x294", class: "float-l" %>
-<p>The idea for Mamajamas was born out of my own experience as an expecting mom three years ago.</p>
-<p>I was overwhelmed by the process of figuring out what to get in preparation. I spent hours researching products online and emailed mom friends asking for advice. They sent me long spreadsheets. After sifting through everything, I had to then create my own “master” spreadsheet to keep myself organized.</p>
-<p>I starting thinking there must be an easier way to get this kind of information. I wanted to get recommendations from my friends without having to sift through their spreadsheets.</p>
-<p>Meanwhile, I found out that many of my new mom friends were having the same experience. I also learned that the long process of figuring out what to get doesn’t end when the baby is born. At each new phase of their development you need new things.</p>
-<p>The goal of Mamajamas is to help new and expecting parents buy only stuff they need — to help them spend less time thinking about stuff and more time enjoying pregnancy and new parenthood.</p>
-<p>I hope Mamajamas is helpful to you during this exciting time!</p>
-<p class="ltr-closing">
-  <%= image_tag "angie-schiavoni_sig.png", alt: "Angie Schiavoni", size: "168x64" %> <br>
-  Angie Schiavoni<br>
-  Founder</p>
-
-<script type="text/javascript">
- jQuery(function ($) {
-   // Load modal on click
-   $('#playintro').click(function (e) {
-     $('#introvid').modal({
-       containerId:'introvid-container',
-       closeHTML:'<a class="bt-close ss-icon" href="#">Close</a>',
-       overlayClose: true
-     });
-     return false;
-   });
- });
-</script>
+<ul class="clearfix">
+  <li>
+    <p>
+      <strong><em>1</em></strong> We’ll tell you what we think you’ll need (and won’t need!) for your registry, based on your preferences.
+    </p>
+  </li>
+  <li>
+    <p><strong><em>2</em></strong> Build your registry with help from other parents and products from anywhere on the Web.
+    </p>
+  </li>
+  <li class="last">
+    <p><strong><em>3</em></strong> Easily share your registry with family and friends.
+    </p>
+  </li>
+</ul>

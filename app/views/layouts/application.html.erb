@@ -44,6 +44,7 @@
         beta <span>&#8220;beta&#8221; means we&#8217;re still working out some of the kinks.<em></em></span>
         <% end -%>
       </div>
+      <%= content_for?(:search) ? yield(:search) : "" %>
       <nav id="mainnav">
         <% if show_mainnav && user_signed_in? -%>
           <ul>
@@ -57,9 +58,6 @@
           </ul>
         <% end -%>
       </nav>
-      <div id="search">
-        <input type="text" placeholder="Search">
-      </div>
       <div id="login">
         <ul>
           <li><a href="mailto:angie@mamajamas.com">Contact</a></li>
@@ -153,6 +151,7 @@
     </div>
     <div id="footer">
       <div class="content">
+        <%= yield :footer %>
       </div>
     </div>
   <% end %>
