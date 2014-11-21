@@ -88,14 +88,27 @@ var Mamajamas = Mamajamas || { Components: {} };
 
     render: function() {
       if (this.props.visible) {
+        var content = null;
+        if (this.props.notes) {
+          content = (
+            <p>
+              {this.props.notes}
+            </p>
+          );
+        } else {
+          content = (
+            <p className="light1">
+              Add some details about yourself or registry (e.g., your feelings about becoming a parent, what types of products you like, etc.)
+            </p>
+          );
+        }
+
         return (
           <div className="expandable editable">
             <span className="ss-icon ss-write icon-edit"
                   onClick={this.props.onEdit}>
             </span>
-            <p>
-              {this.props.notes}
-            </p>
+            {content}
           </div>
         );
       } else {

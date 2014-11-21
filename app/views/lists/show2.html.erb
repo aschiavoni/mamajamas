@@ -167,10 +167,15 @@
       <div id="module-friends">
         <div class="content">
           <h3>Following</h3>
+          <% if @view.owner.followed_users_with_shared_lists.size == 0 -%>
+            <%= link_to new_friend_path, class: "button bt-color", id: "bt-follow" do -%>
+              <span class="ss-icon ss-users"></span>Find &amp; Follow Friends
+            <% end -%>
+          <% end -%>
           <ul class="clearfix">
             <%= render partial: "friends/sidebar_friend", collection: @view.owner.followed_users_with_shared_lists, locals: { show_names: false } %>
           </ul>
-          <% if @view.owner.followed_users_with_shared_lists.size > 2 -%>
+          <% if @view.owner.followed_users_with_shared_lists.size > 12 -%>
             <div class="border"><a href="#">Show all</a></div>
           <% end -%>
         </div>
