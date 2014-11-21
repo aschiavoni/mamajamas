@@ -12,7 +12,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     this.saveModelHandler = _.debounce(this.doSave, 1000, false);
     this.editing = false;
     this.model.on("change:rating", this.update, this);
-    this.model.on("change:owned", this.update, this);
+    this.model.on("change:owned", this.ownedChanged, this);
     this.model.on("change:quantity", this.update, this);
     this.model.on("change:product_type_id", this.update, this);
     this.model.on("change:priority", this.render, this);
@@ -55,7 +55,9 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     var ratingView = new Mamajamas.Views.ListItemRating({
       model: this.model
     });
-    $("div.rating", this.$el).append(ratingView.render().$el);
+    var $ratingContainer = $("div.rating", this.$el);
+    $ratingContainer.toggle(this.model.get('owned'));
+    $ratingContainer.append(ratingView.render().$el);
 
     if (this.model.get("priority") != 3) {
       var quantityView = new Mamajamas.Views.ListItemQuantity({
@@ -188,6 +190,11 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
       error: function(model, response) {
       }
     });
+  },
+
+  ownedChanged: function() {
+    this.update();
+    $('div.rating', this.$el).toggle(this.model.get('owned'));
   },
 
   update: function() {

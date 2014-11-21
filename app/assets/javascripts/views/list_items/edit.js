@@ -56,7 +56,9 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     var ratingView = new Mamajamas.Views.ListItemRating({
       model: this.model
     });
-    $("div.rating", this.$el).append(ratingView.render().$el);
+    var $ratingContainer = $("div.rating", this.$el);
+    $ratingContainer.toggle(this.model.get('owned'));
+    $ratingContainer.append(ratingView.render().$el);
 
     var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
       model: this.model
@@ -128,6 +130,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
 
   updateOwned: function() {
     this.itemField("owned").val(this.model.get("owned"));
+    $('div.rating', this.$el).toggle(this.model.get('owned'));
   },
 
   updateQuantity: function() {
