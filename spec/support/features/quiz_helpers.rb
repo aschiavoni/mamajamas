@@ -1,7 +1,7 @@
 module Features
   module QuizHelpers
     def take_quiz
-      click_link "start-quiz"
+      click_link "Create your registry"
       expect(page).to have_content("Tell us a little bit about you")
 
       click_link "Start"

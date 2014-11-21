@@ -75,7 +75,7 @@ module Features
     def sign_in_with(username, email, password, with = :username)
       # go to the home page
       visit root_path
-      expect(page).to have_content("Take the quiz")
+      expect(page).to have_content("Create your registry")
 
       # login dialog
       click_link "login-link"
