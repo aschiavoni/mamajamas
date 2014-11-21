@@ -17,7 +17,7 @@ class ListsController < ApplicationController
     end
 
     if @list.present? && @list.completed?
-      template = "show2"
+      template = "show"
       cat = params[:category]
       cat = 'all' if cat.blank? && current_user.sign_in_count > 1
       @view = ListView.new(@list, cat)
