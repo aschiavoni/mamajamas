@@ -1,6 +1,6 @@
 class PublicListsController < ApplicationController
-  before_filter :authenticate_user!, only: [ :preview, :publish, :copy ]
-  before_filter :find_list, only: [ :preview, :publish ]
+  before_filter :authenticate_user!, only: [ :publish, :copy ]
+  before_filter :find_list, only: [ :publish ]
   before_filter :find_shared_list, only: [ :show ]
   before_filter :pinnable, only: [ :show ]
   before_filter :init_view, except: [ :copy ]
@@ -26,13 +26,6 @@ class PublicListsController < ApplicationController
         end
       end
     end
-  end
-
-  def preview
-    cat = params[:category] || 'all'
-    @view = PublicListView.new(@list, cat, true)
-    @list_entries_json = render_list_entries(@view.list_entries)
-    render 'show', formats: :html
   end
 
   def publish
@@ -94,9 +87,9 @@ class PublicListsController < ApplicationController
   end
 
   def init_view
-    set_page_id "publist"
     set_subheader @list.title
     set_tertiary_class "light"
+    set_page_id "registry"
   end
 
   def find_list
@@ -113,7 +106,7 @@ class PublicListsController < ApplicationController
   private
 
   def shareable?(list)
-    if list.blank? || (list.private? && current_user != list.user)
+    if list.blank? || (!list.registry? && current_user != list.user)
       false
     else
       true

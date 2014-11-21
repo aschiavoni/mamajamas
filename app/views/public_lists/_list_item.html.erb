@@ -5,29 +5,39 @@
     <% end -%>
   </div>
   <div class="prod-desc clearfix">
-    <div class="prod-category"> <%= list_item.product_type_name %> </div>
-    <h3>
-      <%= link_to list_item.name, list_item.link, target: "_blank" %>
-    </h3>
-    <% if user_has_list? -%>
-      <a href="/list/all" target="_blank" class="button bt-color bt-add" title="Add to my list"><span class="ss-plus"></span><strong>Add</strong></a>
-    <% end -%>
-    <div class="rating"> <em>My rating:</em>
-      <% rating = list_item.rating || 0 -%>
-      <div class="stars">
-        <div class="egg <%= "egg-full" if rating > 0 %>"></div>
-        <div class="egg <%= "egg-full" if rating > 1 %>"></div>
-        <div class="egg <%= "egg-full" if rating > 2 %>"></div>
-        <div class="egg <%= "egg-full" if rating > 3 %>"></div>
-        <div class="egg <%= "egg-full" if rating > 4 %>"></div>
-      </div>
+    <div class="prod-cat-name-rating">
+      <div class="prod-category"> <%= list_item.product_type_name %> </div>
+      <h3>
+        <%= link_to list_item.name, list_item.link, target: "_blank" %>
+      </h3>
+      <% if user_has_list? -%>
+        <a href="/list/all" target="_blank" class="button bt-color bt-add" title="Add to my list"><span class="ss-plus"></span><strong>Add</strong></a>
+      <% end -%>
+      <% if list_item.owned? -%>
+        <div class="rating"> <em>My rating:</em>
+          <% rating = list_item.rating || 0 -%>
+          <div class="stars">
+            <div class="egg <%= "egg-full" if rating > 0 %>"></div>
+            <div class="egg <%= "egg-full" if rating > 1 %>"></div>
+            <div class="egg <%= "egg-full" if rating > 2 %>"></div>
+            <div class="egg <%= "egg-full" if rating > 3 %>"></div>
+            <div class="egg <%= "egg-full" if rating > 4 %>"></div>
+          </div>
+        </div>
+      <% end -%>
     </div>
     <div class="prod-when-own">
+      <% if list_item.price.present? -%>
+        <div class="price"> <strong><%= list_item.price %></strong></div>
+      <% end -%>
+      <% unless list_item.owned? -%>
+        <div class="gift"> <a class="bt-gift" href="#"><span>Gift this to <%= owner_name %></span></a></div>
+      <% end -%>
       <div class="when">
         <%= link_to "Buy", list_item.link, target: "_blank" %> at <%= list_item.age %>
       </div>
       <div class="own">
-        <strong><%= list_item.owned? ? "Has" : "Needs" %></strong> <%= list_item.quantity%> of these
+        <strong><%= list_item.owned? ? "Has" : "Wants" %></strong> <%= list_item.quantity%> of these
       </div>
     </div>
     <div class="prod-note">

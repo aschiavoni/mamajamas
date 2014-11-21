@@ -3,6 +3,7 @@ class ListView
 
   attr_reader :list
   attr_reader :category_slug
+  attr_reader :category
   attr_reader :current_user
 
   def initialize(list, category_slug = nil, current_user = nil)
@@ -10,6 +11,7 @@ class ListView
     @category_slug = category_slug
     @current_user = current_user
     @friends_prompt = false
+    find_category
   end
 
   def list_id
@@ -38,10 +40,6 @@ class ListView
 
   def list_entries_by_priority(priority)
     list_items_by_priority[priority]
-  end
-
-  def category
-    @category ||= find_category
   end
 
   def category_name

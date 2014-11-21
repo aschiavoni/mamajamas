@@ -18,6 +18,7 @@ Mamajamas.Views.PublicListSidebar = Mamajamas.Views.Base.extend({
 
   events: {
     "click #bt-follow": "toggleRelationship",
+    "click .show-all-friends": "showAllFriends"
   },
 
   render: function() {
@@ -77,6 +78,16 @@ Mamajamas.Views.PublicListSidebar = Mamajamas.Views.Base.extend({
   showFollowingButton: function() {
     this.$followButton.addClass("bt-active").empty();
     this.$followButton.html("<span class=\"bt-text1\"><span class=\"ss-check\"></span>Following</span><em class=\"bt-text2\"><span class=\"ss-delete\"></span>Unfollow</em>");
+  },
+
+  showAllFriends: function(event) {
+    event.preventDefault();
+    var $container = $(event.currentTarget).parent();
+    var $ul = $container.siblings('ul');
+    $ul.css("height", null);
+    $container.remove();
+
+    return false;
   },
 
 });

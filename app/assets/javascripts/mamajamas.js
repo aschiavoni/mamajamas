@@ -89,7 +89,7 @@ window.Mamajamas = {
     }
 
     // public list
-    if ($('#publist').length > 0) {
+    if ($('#registry .publist').length > 0) {
       new Mamajamas.Routers.PublicListItems();
       Backbone.history.start();
     }

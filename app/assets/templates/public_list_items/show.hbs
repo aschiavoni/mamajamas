@@ -4,24 +4,32 @@
   </a>
 </div>
 <div class="prod-desc clearfix">
-  <div class="prod-category">
-    {{listItem.product_type_name}}
-  </div>
-  <h3>
-    <a href="{{affiliateLink listItem.link}}" target="_blank">{{listItem.name}}</a>
-  </h3>
-  {{addToMyListButton}}
-  <div class="rating"> <em>My rating:</em>
+  <div class="prod-cat-name-rating">
+    <div class="prod-category">
+      {{listItem.product_type_name}}
+    </div>
+    <h3>
+      <a href="{{affiliateLink listItem.link}}" target="_blank">{{listItem.name}}</a>
+    </h3>
+    {{addToMyListButton}}
+    {{#if listItem.owned}}
+      <div class="rating"> <em>My rating:</em>
+      </div>
+    {{/if}}
   </div>
   {{#ifNotLowPriority listItem}}
-  <div class="prod-when-own">
-    <div class="when">
-      {{buyLink listItem}}
+    <div class="prod-when-own">
+      <div class="price"> <strong>{{listItem.price}}</strong></div>
+      {{#unless listItem.owned}}
+        <div class="gift"> <a class="bt-gift" href="#"><span>Gift this to {{listItem.ownerName}}</span></a></div>
+      {{/unless}}
+      <div class="when">
+        {{buyLink listItem}}
+      </div>
+      <div class="own">
+        <strong>{{publicHaveNeed listItem.owned}}</strong> {{listItem.quantity}} of these
+      </div>
     </div>
-    <div class="own">
-      <strong>{{publicHaveNeed listItem.owned}}</strong> {{listItem.quantity}} of these
-    </div>
-  </div>
   {{/ifNotLowPriority}}
   <div class="prod-note">
     {{#if listItem.notes}}

@@ -61,6 +61,7 @@ class List < ActiveRecord::Base
   def shared_list_entries(category = nil, ignore_privacy = false)
     shared_items = list_items.user_items.
       by_category(category).
+      includes(:product_type).
       includes(:category).
       includes(:age_range).
       references(:categories).

@@ -61,6 +61,10 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
         overlayClose: true
       });
     }
+
+    if ($('.show-all-friends').length > 0) {
+      $('.show-all-friends').click(this.showAllFriends);
+    }
   },
 
   events: {
@@ -254,6 +258,16 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
   toggleDetails: function() {
     var $details = $('#listdetails');
     $details.toggle();
+  },
+
+  showAllFriends: function(event) {
+    event.preventDefault();
+    var $container = $(event.currentTarget).parent();
+    var $ul = $container.siblings('ul');
+    $ul.css("height", null);
+    $container.remove();
+
+    return false;
   },
 
 });

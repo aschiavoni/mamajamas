@@ -16,6 +16,8 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
 
   filter: null,
 
+  ownerName: null,
+
   initialize: function() {
     this.collection.on('reset', this.render, this);
 
@@ -32,6 +34,14 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
     new Mamajamas.Views.SocialLinks({
       el: '#social-links'
     });
+
+    if ($('#details-link').length > 0) {
+      $('#details-link a').click(function(event) {
+        event.preventDefault();
+        this.toggleDetails();
+        return false;
+      }.bind(this));
+    }
   },
 
   events: {
@@ -42,6 +52,7 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
   },
 
   render: function() {
+    this.ownerName = Mamajamas.Context.List.get('owner_name');
     this.clearList();
     this.collection.each(this.appendItem, this);
     this.initExpandables();
@@ -54,11 +65,13 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
 
   appendItem: function(item) {
     var priority = item.get("priority");
+    var ownerName = this.ownerName;
     if (this.hideOwned && item.get("owned"))
       return;
     if (this.filter && item.get("age") != this.filter) {
       return;
     }
+    item.set('ownerName', ownerName);
     var view = new Mamajamas.Views.PublicListItemShow({
       model: item
     });
@@ -183,6 +196,11 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
       }
       this.currentPrivacy = newPrivacy;
     }
+  },
+
+  toggleDetails: function() {
+    var $details = $('#listdetails');
+    $details.toggle();
   },
 
   $priorityContainer: function(priority) {

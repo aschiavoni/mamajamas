@@ -15,14 +15,18 @@ Mamajamas.Views.PublicListItemShow = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template({ listItem: this.model.toJSON() }));
+    this.$el.html(this.template({
+      listItem: this.model.toJSON()
+    }));
 
     // subviews
-    var ratingView = new Mamajamas.Views.ListItemRating({
-      model: this.model,
-    });
-    ratingView.readOnly = true;
-    $("div.rating", this.$el).append(ratingView.render().$el);
+    if (this.model.get('owned')) {
+      var ratingView = new Mamajamas.Views.ListItemRating({
+        model: this.model,
+      });
+      ratingView.readOnly = true;
+      $("div.rating", this.$el).append(ratingView.render().$el);
+    }
 
     return this;
   },
