@@ -22,6 +22,10 @@ module UserDecorator
     display_first_name_or_username.possessive
   end
 
+  def possessive_full_name
+    display_name.possessive
+  end
+
   def followed_users_with_shared_lists
     followed_users.
       includes(:list).
@@ -68,7 +72,7 @@ module UserDecorator
 
   def full_shipping_address
     if address.present?
-      simple_format(address.full_address)
+      address.full_address
     else
       "n/a"
     end

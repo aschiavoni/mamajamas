@@ -59,7 +59,7 @@
       <li>
         <em>
           <i class="fa fa-truck"></i> Shipping:
-        </em> <%= @view.owner.full_shipping_address %>
+        </em> <%= simple_format(@view.owner.full_shipping_address) %>
       </li>
       <li>
         <em>

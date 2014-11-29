@@ -10,6 +10,7 @@ class ReservedNameValidator < ActiveModel::EachValidator
     edit email error
     faq favorites feed feeds fetch fetcher
     follow followers following friend friends
+    gift gifts gifting gifters
     help home
     invitations invite invites
     jobs

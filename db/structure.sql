@@ -228,6 +228,43 @@ ALTER SEQUENCE friendly_id_slugs_id_seq OWNED BY friendly_id_slugs.id;
 
 
 --
+-- Name: gifts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE gifts (
+    id integer NOT NULL,
+    full_name character varying(255) NOT NULL,
+    email character varying(255) NOT NULL,
+    user_id integer,
+    list_item_id integer NOT NULL,
+    quantity integer DEFAULT 0 NOT NULL,
+    purchased boolean DEFAULT false NOT NULL,
+    confirmed boolean DEFAULT false NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: gifts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE gifts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: gifts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE gifts_id_seq OWNED BY gifts.id;
+
+
+--
 -- Name: invites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -807,6 +844,13 @@ ALTER TABLE ONLY friendly_id_slugs ALTER COLUMN id SET DEFAULT nextval('friendly
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY gifts ALTER COLUMN id SET DEFAULT nextval('gifts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY invites ALTER COLUMN id SET DEFAULT nextval('invites_id_seq'::regclass);
 
 
@@ -924,6 +968,14 @@ ALTER TABLE ONLY categories
 
 ALTER TABLE ONLY friendly_id_slugs
     ADD CONSTRAINT friendly_id_slugs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: gifts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY gifts
+    ADD CONSTRAINT gifts_pkey PRIMARY KEY (id);
 
 
 --
@@ -1071,6 +1123,20 @@ CREATE INDEX index_friendly_id_slugs_on_sluggable_id ON friendly_id_slugs USING 
 --
 
 CREATE INDEX index_friendly_id_slugs_on_sluggable_type ON friendly_id_slugs USING btree (sluggable_type);
+
+
+--
+-- Name: index_gifts_on_list_item_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_gifts_on_list_item_id ON gifts USING btree (list_item_id);
+
+
+--
+-- Name: index_gifts_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_gifts_on_user_id ON gifts USING btree (user_id);
 
 
 --
@@ -1470,4 +1536,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141023165223');
 INSERT INTO schema_migrations (version) VALUES ('20141030173759');
 
 INSERT INTO schema_migrations (version) VALUES ('20141120182937');
+
+INSERT INTO schema_migrations (version) VALUES ('20141125170040');
 

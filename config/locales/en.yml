@@ -131,3 +131,10 @@ en:
             provider:
               blank: "Sorry, but you must provide an invite provider."
               inclusion: "Sorry, but we don't recognize that provider."
+        gift:
+          attributes:
+            full_name:
+              blank: "Sorry, but you must provide your name."
+            email:
+              blank: "Sorry, but you must provide a valid email address."
+              invalid: "Sorry, but you must provide a valid email address."

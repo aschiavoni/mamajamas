@@ -1,0 +1,102 @@
+<div class="nestedwin giftingwin clearfix" id="new-gift">
+  <h2><%= @owner.possessive_full_name %> Baby Registry</h2>
+  <h3 class="icon">Give <%= @owner.display_first_name_or_username %> a Gift</h3>
+
+  <!-- product -->
+  <div id="<%= @list_item.id %>" class="prod clearfix">
+    <div class="prod-thumb">
+      <%= image_tag @list_item.image_url, alt: @list_item.name %>
+    </div>
+    <div class="prod-cat-name-rating">
+      <div class="prod-category"><%= @list_item.product_type_name  %></div>
+      <h3>
+        <%= link_to @list_item.name, @list_item.link, target: "_blank" %>
+      </h3>
+      <div class="prod-when-own">
+        <div class="price"> <strong><%= @list_item.price %></strong></div>
+        <div class="own"> <strong><%= @list_item.owned? ? "Has" : "Wants"  %></strong> <%= @list_item.quantity %> of these </div>
+      </div>
+    </div>
+  </div>
+  <!-- /product -->
+
+  <div class="tabs">
+    <%= form_for @gift, url: gift_path, html: { class: "new-gift" } do |f| %>
+      <%= f.hidden_field :list_item_id -%>
+      <h3 id="step1"><strong>Step 1.</strong> Enter your info</h3>
+      <div class="tabbody label-infield">
+        <p class="center">Please provide your name and email so we can send confirmations to you and Angie.</p>
+        <fieldset>
+          <p>
+            <%= f.label :full_name, "First and last name" %>
+            <br />
+            <%= f.text_field :full_name, value: gifter_full_name %>
+            <%= field_error @gift, :full_name %>
+          </p>
+        </fieldset>
+        <fieldset>
+          <p>
+            <%= f.label :full_name, "Email address" %>
+            <br />
+            <%= f.text_field :email, size: "30", value: gifter_email %>
+            <%= field_error @gift, :email %>
+          </p>
+        </fieldset>
+        <p class="center note light">Don’t worry, we won’t send you any marketing emails.</p>
+        <div class="progress-container center">
+          <button id="step1-continue" class="button bt-color">Continue</button>
+          <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
+        </div>
+      </div>
+      <h3 id="step2"><strong>Step 2.</strong> Order the item</h3>
+      <div class="tabbody">
+        <p class="center">Follow the link below to order your gift online:</p>
+        <% if @owner.address.present? -%>
+          <div class="grid padded infobox small">
+            <div class="col col40 light"> <i class="fa fa-truck fa-lg"></i> Use this shipping address: </div>
+            <div class="col col60">
+              <strong>
+                <%= @owner.display_name %><br/>
+                <%= simple_format(@owner.full_shipping_address, wrapper_tag: "div") %>
+              </strong>
+            </div>
+          </div>
+        <% end -%>
+        <p class="center">
+          <%= link_to "Go to Gift Website", @list_item.link, target: "_blank", class: "button bt-color" %>
+        </p>
+        <p class="center note light marginbottom0">Link will open in a new tab or window.</p>
+      </div>
+      <h3 id="step3"><strong>Step 3.</strong> Confirm your order</h3>
+      <div class="tabbody center">
+        <div class="padded infobox">
+          <fieldset>
+            <p><strong>Have you purchased the gift?</strong></p>
+            <p>
+              <label>
+                <%= f.radio_button :purchased, true %>
+                Yes
+              </label>
+              &nbsp;
+              <label>
+                <%= f.radio_button :purchased, false %>
+                Not yet
+              </label>
+            </p>
+            <p><strong>How many did you order?</strong></p>
+            <p><!-- drop-down menu:  -->
+              <%= f.select :quantity, (0..5).to_a %>
+              <!-- / drop-down menu: --> </p>
+          </fieldset>
+        </div>
+        <div class="progress-container center">
+          <button id="" class="button bt-color" type="submit">Done</button>
+          <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
+        </div>
+      </div>
+    <% end -%>
+  </div>
+  <div class="button-row clearfix">
+    <%= link_to "Cancel", public_list_path(@owner), class: "button" %>
+  </div>
+</div>

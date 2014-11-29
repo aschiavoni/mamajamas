@@ -80,6 +80,12 @@ window.Mamajamas = {
       });
     }
 
+    // gifts
+    if ($('#new-gift').length > 0) {
+      new Mamajamas.Views.GiftNew({
+        el: '#new-gift'
+      });
+    }
 
     // list
     if ($('#my-list').length > 0) {
