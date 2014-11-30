@@ -9,6 +9,7 @@ class ListItem < ActiveRecord::Base
 
   attr_accessible :link, :name, :notes, :owned
   attr_accessible :priority, :rating, :age, :image_url, :quantity
+  attr_accessible :desired_quantity, :owned_quantity
   attr_accessible :category_id, :product_type_id, :product_type_name
   attr_accessible :placeholder, :list_item_image_id
   attr_accessible :vendor, :vendor_id
