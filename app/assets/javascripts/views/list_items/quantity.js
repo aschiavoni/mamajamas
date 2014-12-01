@@ -6,30 +6,34 @@ Mamajamas.Views.ListItemQuantity = Mamajamas.Views.ListItemDropdown.extend({
 
   template: HandlebarsTemplates["list_items/quantity"],
 
-  initialize: function() {},
+  minimum: 0,
+
+  initialize: function(options) {
+    _.extend(this,
+             _.pick(options, 'quantityField', 'quantityLabel', 'minimum'));
+  },
 
   events: {
     "click .choicedrop a": "toggleList",
-    "click .choicedrop.have-need ul li a": "selectHaveNeed",
     "click .choicedrop.quantity ul li a": "selectQuantity",
   },
 
   render: function() {
-    this.$el.html(this.template({ listItem: this.model.toJSON() }));
+    this.$el.html(this.template({
+      quantity: this.model.get(this.quantityField),
+      quantityLabel: this.quantityLabel
+    }));
+
+    if (this.minimum > 0) {
+      var min = this.minimum;
+      $('ul li > a', this.$el).each(function(idx, elem) {
+        var $elem = $(elem);
+        var n = parseInt($elem.html());
+        if (n < min)
+          $elem.remove();
+      });
+    }
     return this;
-  },
-
-  selectHaveNeed: function(event) {
-    var $target = $(event.currentTarget);
-    var $list = $target.parents("ul");
-    var value = $target.html();
-    var owned = value === "have";
-
-    this.model.set("owned", owned);
-    $list.hide();
-    this.render();
-
-    return false;
   },
 
   selectQuantity: function(event) {
@@ -37,7 +41,7 @@ Mamajamas.Views.ListItemQuantity = Mamajamas.Views.ListItemDropdown.extend({
     var $list = $target.parents("ul");
     var value = $target.html();
 
-    this.model.set("quantity", value);
+    this.model.set(this.quantityField, value);
     $list.hide();
     this.render();
 

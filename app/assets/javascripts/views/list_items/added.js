@@ -33,10 +33,20 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
     });
     $("div.rating", this.$el).append(ratingView.render().$el);
 
-    var quantityView = new Mamajamas.Views.ListItemQuantity({
-      model: this.model
+    var desiredQuantityView = new Mamajamas.Views.ListItemQuantity({
+      model: this.model,
+      quantityField: "desired_quantity",
+      quantityLabel: "Want",
+      minimum: 1
     });
-    $(".own", this.$el).append(quantityView.render().$el);
+    $(".frm-added > .own", this.$el).append(desiredQuantityView.render().$el);
+
+    var ownedQuantityView = new Mamajamas.Views.ListItemQuantity({
+      model: this.model,
+      quantityField: "owned_quantity",
+      quantityLabel: "Have"
+    });
+    $(".frm-added > .own", this.$el).append(ownedQuantityView.render().$el);
 
     this.initializeState();
     return this;
@@ -77,7 +87,8 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
     var _view = event.data;
     var attribs = {
       owned: _view.model.get("owned"),
-      quantity: _view.model.get("quantity"),
+      desired_quantity: _view.model.get("desired_quantity"),
+      owned_quantity: _view.model.get("owned_quantity"),
       rating: _view.model.get("rating"),
       notes: $("textarea", _view.$el).val(),
     }

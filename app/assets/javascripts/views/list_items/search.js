@@ -170,7 +170,8 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       age: this.model.get('age'),
       rating: this.model.get('rating'),
       image_url: searchResult.get('image_url'),
-      quantity: this.model.get('quantity'),
+      desired_quantity: this.model.get('desired_quantity'),
+      owned_quantity: this.model.get('owned_quantity'),
       owned: this.model.get('owned'),
       placeholder: false,
       edit_mode: true
@@ -195,7 +196,8 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
       age: this.model.get('age'),
       rating: this.model.get('rating'),
       image_url: searchResult.get('image_url'),
-      quantity: this.model.get('quantity'),
+      desired_quantity: this.model.get('desired_quantity'),
+      owned_quantity: this.model.get('owned_quantity'),
       owned: this.model.get('owned'),
       placeholder: false
     };

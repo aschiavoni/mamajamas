@@ -8,7 +8,7 @@ class ListItem < ActiveRecord::Base
   has_one :list_item_image
 
   attr_accessible :link, :name, :notes, :owned
-  attr_accessible :priority, :rating, :age, :image_url, :quantity
+  attr_accessible :priority, :rating, :age, :image_url
   attr_accessible :desired_quantity, :owned_quantity
   attr_accessible :category_id, :product_type_id, :product_type_name
   attr_accessible :placeholder, :list_item_image_id
@@ -23,6 +23,10 @@ class ListItem < ActiveRecord::Base
   validates :category_id, presence: true
   validates :age_range_id, presence: true
   validates :quantity, numericality: { only_integer: true, greater_than: 0 }
+  validates(:desired_quantity,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 })
+  validates(:owned_quantity,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 })
 
   scope :placeholders, -> { where(placeholder: true) }
   scope :user_items, -> { where(placeholder: false) }

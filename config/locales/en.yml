@@ -105,6 +105,14 @@ en:
               only_integer: "Sorry, this is not a valid quantity."
               not_a_number: "Sorry, this is not a valid quantity."
               greater_than: "Sorry, but you must specify a quantity of at least 1."
+            desired_quantity:
+              only_integer: "Sorry, this is not a valid quantity."
+              not_a_number: "Sorry, this is not a valid quantity."
+              greater_than_or_equal: "Sorry, but you must be at least 0."
+            owned_quantity:
+              only_integer: "Sorry, this is not a valid quantity."
+              not_a_number: "Sorry, this is not a valid quantity."
+              greater_than_or_equal: "Sorry, but you must be at least 0."
         product_type:
           attributes:
             name:

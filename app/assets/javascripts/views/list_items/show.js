@@ -13,7 +13,8 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     this.editing = false;
     this.model.on("change:rating", this.update, this);
     this.model.on("change:owned", this.ownedChanged, this);
-    this.model.on("change:quantity", this.update, this);
+    this.model.on("change:desired_quantity", this.update, this);
+    this.model.on("change:owned_quantity", this.update, this);
     this.model.on("change:product_type_id", this.update, this);
     this.model.on("change:priority", this.render, this);
     this.model.on("search:product:update_item", this.updateItem, this);
@@ -60,10 +61,19 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     $ratingContainer.append(ratingView.render().$el);
 
     if (this.model.get("priority") != 3) {
-      var quantityView = new Mamajamas.Views.ListItemQuantity({
-        model: this.model
+      var desiredQuantityView = new Mamajamas.Views.ListItemQuantity({
+        model: this.model,
+        quantityField: "desired_quantity",
+        quantityLabel: "Want"
       });
-      $(".prod-when-own", this.$el).append(quantityView.render().$el);
+      $(".prod-when-own", this.$el).append(desiredQuantityView.render().$el);
+
+      var ownedQuantityView = new Mamajamas.Views.ListItemQuantity({
+        model: this.model,
+        quantityField: "owned_quantity",
+        quantityLabel: "Have"
+      });
+      $(".prod-when-own", this.$el).append(ownedQuantityView.render().$el);
     }
 
     var notesView = new Mamajamas.Views.ListItemNotes({
@@ -171,7 +181,8 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
       priority: this.model.get("priority"),
       age: this.model.get("age"),
       product_type_id: this.model.get("product_type_id"),
-      quantity: this.model.get("quantity"),
+      desired_quantity: this.model.get("desired_quantity"),
+      owned_quantity: this.model.get("owned_quantity"),
       owned: this.model.get("owned"),
       image_url: this.model.get("product_type_image_name"),
       product_type_image_name: this.model.get("product_type_image_name"),

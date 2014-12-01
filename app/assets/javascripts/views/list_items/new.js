@@ -32,10 +32,13 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
     });
     $(".prod-when-own", this.$el).append(ageRangeView.render().$el);
 
-    var quantityView = new Mamajamas.Views.ListItemQuantity({
-      model: this.model
+    var desiredQuantityView = new Mamajamas.Views.ListItemQuantity({
+      model: this.model,
+      quantityField: "desired_quantity",
+      quantityLabel: "Want",
+      minimum: 1
     });
-    $(".prod-when-own", this.$el).append(quantityView.render().$el);
+    $(".prod-when-own", this.$el).append(desiredQuantityView.render().$el);
 
     if (Mamajamas.Context.List.isAllCategory()) {
       var categoryView = new Mamajamas.Views.ListItemCategory({
@@ -77,7 +80,8 @@ Mamajamas.Views.ListItemNew = Backbone.View.extend({
       age: this.model.get("age"),
       image_url: this.model.get("image_url"),
       product_type_id: this.model.get("product_type_id"),
-      quantity: this.model.get("quantity"),
+      desired_quantity: this.model.get("desired_quantity"),
+      owned_quantity: this.model.get("owned_quantity"),
       owned: this.model.get("owned"),
       price: this.model.get("price"),
       product_type_name: itemName,

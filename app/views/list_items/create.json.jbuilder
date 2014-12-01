@@ -6,7 +6,8 @@ json.product_type_id @list_entry.product_type_id
 json.category_id @list_entry.category_id
 json.priority @list_entry.priority
 json.age @list_entry.age
-json.quantity @list_entry.quantity
+json.desired_quantity @list_entry.desired_quantity
+json.owned_quantity @list_entry.owned_quantity
 json.vendor @list_entry.vendor
 json.vendor_id @list_entry.vendor_id
 json.recommended @list_entry.recommended

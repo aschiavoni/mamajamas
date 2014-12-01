@@ -23,7 +23,8 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:age", this.updateAgeRange, this);
     this.model.on("change:owned", this.updateOwned, this);
-    this.model.on("change:quantity", this.updateQuantity, this);
+    this.model.on("change:desired_quantity", this.updateDesiredQuantity, this);
+    this.model.on("change:owned_quantity", this.updateOwnedQuantity, this);
   },
 
   events: {
@@ -65,10 +66,19 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     });
     $(".prod-when-own fieldset", this.$el).append(ageRangeView.render().$el);
 
-    var quantityView = new Mamajamas.Views.ListItemQuantity({
-      model: this.model
+    var desiredQuantityView = new Mamajamas.Views.ListItemQuantity({
+      model: this.model,
+      quantityField: "desired_quantity",
+      quantityLabel: "Want"
     });
-    $(".prod-when-own fieldset", this.$el).append(quantityView.render().$el);
+    $(".prod-when-own fieldset", this.$el).append(desiredQuantityView.render().$el);
+
+    var ownedQuantityView = new Mamajamas.Views.ListItemQuantity({
+      model: this.model,
+      quantityField: "owned_quantity",
+      quantityLabel: "Have"
+    });
+    $(".prod-when-own fieldset", this.$el).append(ownedQuantityView.render().$el);
 
     this.initializeAutocomplete();
 
@@ -133,8 +143,12 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     $('div.rating', this.$el).toggle(this.model.get('owned'));
   },
 
-  updateQuantity: function() {
-    this.itemField("quantity").val(this.model.get("quantity"));
+  updateDesiredQuantity: function() {
+    this.itemField("desired_quantity").val(this.model.get("desired_quantity"));
+  },
+
+  updateOwnedQuantity: function() {
+    this.itemField("owned_quantity").val(this.model.get("owned_quantity"));
   },
 
   initializeAutocomplete: function() {

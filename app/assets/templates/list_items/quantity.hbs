@@ -1,12 +1,7 @@
- I
-  <div class="choicedrop have-need"> <a href="#">{{haveNeed listItem.owned}} <span class="ss-dropdown"></span></a>
-    <ul style="display:none; width:4.1em;">
-      <li><a href="#">want</a></li>
-      <li><a href="#">have</a></li>
-    </ul>
-  </div>
-  <div class="choicedrop quantity"> <a href="#">{{listItem.quantity}} <span class="ss-dropdown"></span></a>
+  {{quantityLabel}}
+  <div class="choicedrop quantity"> <a href="#">{{quantity}} <span class="ss-dropdown"></span></a>
     <ul style="display:none; width:2.4em;">
+      <li><a href="#0">0</a></li>
       <li><a href="#1">1</a></li>
       <li><a href="#2">2</a></li>
       <li><a href="#3">3</a></li>
@@ -19,4 +14,3 @@
       <li><a href="#10">10</a></li>
     </ul>
   </div>
-  of these.

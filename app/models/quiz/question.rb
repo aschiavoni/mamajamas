@@ -31,7 +31,7 @@ class Quiz::Question
   end
 
   def set_quantity(name, quantity)
-    update_list_items!(name, quantity: quantity)
+    update_list_items!(name, desired_quantity: quantity)
   end
 
   def included(*items)

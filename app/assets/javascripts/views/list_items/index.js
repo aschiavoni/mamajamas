@@ -257,7 +257,7 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
         category_id: Mamajamas.Context.List.get("category_id"),
         age: "Pre-birth",
         priority: 2,
-        quantity: 1,
+        desired_quantity: 1,
         owned: false,
         image_url: "products/icons/unknown.png"
       })
