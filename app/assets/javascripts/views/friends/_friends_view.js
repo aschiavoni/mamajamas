@@ -196,7 +196,8 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
 
       if (!foundMatch) {
         if ($('.list-search-no-results', $ul).length == 0)
-          $ul.prepend("<p class=\"list-search-no-results\">No lists found. Click <a class=\"clear-list-search\" href=\"#\">here</a> to clear your search.</p>");
+          var noResults = HandlebarsTemplates["friends/no_results"];
+          $ul.prepend(noResults());
       } else {
         $('.list-search-no-results', $ul).remove();
       }
