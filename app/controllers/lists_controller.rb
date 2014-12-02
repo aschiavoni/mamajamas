@@ -36,6 +36,8 @@ class ListsController < ApplicationController
         current_user.update_attributes!(show_friends_prompt: false)
       end
     else
+      set_page_id ""
+      hide_header
       template = "wait"
     end
 
