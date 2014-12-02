@@ -77,6 +77,14 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
       $(".prod-when-own", this.$el).append(ownedQuantityView.render().$el);
     }
 
+    if (this.model.get("gifted_quantity") > 0) {
+      var giftedView = new Mamajamas.Views.ListItemGifted({
+        model: this.model
+      });
+
+      $(".prod-when-own", this.$el).append(giftedView.render().$el);
+    }
+
     var notesView = new Mamajamas.Views.ListItemNotes({
       model: this.model
     });

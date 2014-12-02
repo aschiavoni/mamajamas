@@ -14,7 +14,7 @@
       </h3>
       <div class="prod-when-own">
         <div class="price"> <strong><%= @list_item.price %></strong></div>
-        <div class="own"> <strong><%= @list_item.owned? ? "Has" : "Wants"  %></strong> <%= @list_item.quantity %> of these </div>
+        <div class="own"> <strong>Wants</strong> <%= @list_item.desired_quantity %> of these </div>
       </div>
     </div>
   </div>
@@ -57,7 +57,7 @@
             <div class="col col60">
               <strong>
                 <%= @owner.display_name %><br/>
-                <%= simple_format(@owner.full_shipping_address, wrapper_tag: "div") %>
+                <%= simple_format(@owner.full_shipping_address, {}, wrapper_tag: "div") %>
               </strong>
             </div>
           </div>

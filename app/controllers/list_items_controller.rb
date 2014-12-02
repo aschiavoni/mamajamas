@@ -3,6 +3,7 @@ class ListItemsController < ApplicationController
   before_filter :find_list
   before_filter :find_category, only: [ :index ]
   before_filter :set_cache_buster, only: [ :index ]
+  before_filter :init_view, only: [ :gifts ]
 
   respond_to :json
 
@@ -33,6 +34,11 @@ class ListItemsController < ApplicationController
     respond_with @list_entry
   end
 
+  def gifts
+    @list_item = @list.list_items.includes(:gifts).find(params[:id])
+    @owner = @list.user
+  end
+
   private
 
   def find_list
@@ -49,5 +55,11 @@ class ListItemsController < ApplicationController
     end
     params_to_clean[:owned] = false if params_to_clean[:owned].blank?
     params_to_clean
+  end
+
+  def init_view
+    hide_header
+    set_body_class "bgfill"
+    set_nested_window
   end
 end

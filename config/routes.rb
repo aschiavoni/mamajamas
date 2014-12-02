@@ -69,7 +69,11 @@ Mamajamas::Application.routes.draw do
 
   resource :quiz, only: [ :show, :update ], controller: "quiz"
   resource :list, only: [ :show, :update ] do
-    resources :list_items, only: [ :index, :create, :update, :destroy ]
+    resources :list_items, only: [ :index, :create, :update, :destroy ] do
+      member do
+        get 'gifts'
+      end
+    end
     get 'check' => "lists#check", as: :list_check
     post 'copy' => "public_lists#copy", as: :public_list_copy
     post "clear_recommended" => "lists#clear_recommended", as: :clear_recommended
@@ -107,6 +111,7 @@ Mamajamas::Application.routes.draw do
       post "kids" => "quiz#update_kid"
       put "update_zip_code" => "quiz#update_zip_code"
       post "list_item_images" => "list_item_images#create"
+      put "/gifts/:gift_id" => "gifts#update"
       resources :invites, only: [ :create ]
     end
   end

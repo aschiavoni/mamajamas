@@ -6,6 +6,7 @@ class ListItem < ActiveRecord::Base
   belongs_to :product_type
   belongs_to :age_range
   has_one :list_item_image
+  has_many :gifts
 
   attr_accessible :link, :name, :notes, :owned
   attr_accessible :priority, :rating, :age, :image_url, :quantity

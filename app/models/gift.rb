@@ -11,6 +11,8 @@ class Gift < ActiveRecord::Base
   after_save :update_list_item_gifted_count
   after_destroy :update_list_item_gifted_count
 
+  scope :purchased, -> { where(purchased: true) }
+
   def update_list_item_gifted_count
     list_item = ListItem.find_by(id: self.list_item_id)
     if list_item.present?

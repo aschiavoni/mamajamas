@@ -87,6 +87,13 @@ window.Mamajamas = {
       });
     }
 
+    // gift-details
+    if ($('#gift-details').length > 0) {
+      new Mamajamas.Views.GiftList({
+        el: '#gift-details'
+      });
+    }
+
     // list
     if ($('#my-list').length > 0) {
       new Mamajamas.Routers.ListItems();

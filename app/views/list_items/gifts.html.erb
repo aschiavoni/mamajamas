@@ -1,0 +1,70 @@
+<div id="gift-details" class="nestedwin giftingwin clearfix" data-list-item-id="<%= @list_item.id -%>">
+  <h2><%= @owner.possessive_full_name %> Baby Registry</h2>
+  <h3 class="icon">Gift Details</h3>
+
+  <!-- product -->
+  <div id="list-item-<%= @list_item.id %>" class="prod clearfix">
+    <div class="prod-thumb">
+      <%= image_tag @list_item.image_url, alt: @list_item.name %>
+    </div>
+    <div class="prod-cat-name-rating">
+      <div class="prod-category"><%= @list_item.product_type_name %></div>
+      <h3>
+        <%= link_to @list_item.name, @list_item.link, target: "_blank" %>
+      </h3>
+      <div class="prod-when-own">
+        <div class="price"> <strong><%= @list_item.price %></strong></div>
+        <div>
+          <ul class="own">
+            <li>Want <strong><%= @list_item.desired_quantity %></strong> </li>
+            <li>Have <strong><%= @list_item.owned_quantity %></strong></li>
+            <li>Received <strong><%= @list_item.gifted_quantity %></strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /product -->
+  <% if @list_item.gifts.purchased.size > 0 -%>
+    <!-- gifting list -->
+    <div id="giftinglist">
+      <table border="0" class="friends-list">
+        <tbody>
+          <tr>
+            <th scope="col">Gifted by</th>
+            <th scope="col">Date ordered</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Confirm/Reset</th>
+          </tr>
+          <% @list_item.gifts.purchased.each do |gift| -%>
+            <tr id="gift-<%= gift.id %>">
+              <td class="friend-info">
+                <% if gift.user.present? -%>
+                  <%= link_to public_list_path(gift.user.slug), target: "_blank" do %>
+                    <%= image_tag GravatarProfilePicture.url(gift.email) -%>
+                  <% end -%>
+                <% else -%>
+                  <%= image_tag GravatarProfilePicture.url(gift.email) -%>
+                <% end -%>
+                <p>
+                  <strong class="mom"><%= gift.full_name %></strong><br/>
+                  <% if @owner.address.present? -%>
+                    <%= simple_format(@owner.full_shipping_address, {}, wrapper_tag: "span") %>
+                    <br/>
+                  <% end -%>
+                  <%= mail_to gift.email %>
+                </p>
+              </td>
+              <td><%= gift.updated_at.strftime('%m/%d/%Y') %></td>
+              <td class="center"><%= gift.quantity %></td>
+              <td>
+                <a href="#" class="button icon-link confirm-button" title="Confirm"><i class="fa fa-check-square-o"></i><span>Confirm</span></a><br>
+                <a href="#" class="button icon-link reset-button" title="Reset"><i class="fa fa-minus-square-o"></i><span>Reset</span></a>
+              </td>
+            </tr>
+          <% end -%>
+        </tbody>
+      </table>
+    </div>
+  <% end -%>
+</div>
