@@ -1,22 +1,25 @@
 <div class="nestedwin mjform clearfix" id="registry-settings">
   <h2>Complete Sign Up</h2>
   <%= form_for @registry, url: registry_path, as: :registry, method: :put, html: { id: "frm-registry-settings", class: "label-infield" } do |f| %>
-    <h3>Registry</h3>
-    <fieldset>
-      <div class="radio">
-        <label>
-          <%= f.radio_button :registry, true %>
-          <strong class="col5">ON</strong> Allow visitors to buy you gifts from your baby gear list. Recommended
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <%= f.radio_button :registry, false %>
-          <strong class="col5">OFF</strong> Deactivate the registry option on your baby gear list.
-        </label>
-    </li>
-      </div>
-    </fieldset>
+    <% if current_user.quiz_taken_at.present? -%>
+      <h3>Registry</h3>
+      <fieldset>
+        <div class="radio">
+          <label>
+            <%= f.radio_button :registry, true %>
+            <strong class="col5">ON</strong> Allow visitors to buy you gifts from your baby gear list. Recommended
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <%= f.radio_button :registry, false %>
+            <strong class="col5">OFF</strong> Deactivate the registry option on your baby gear list.
+          </label>
+        </div>
+      </fieldset>
+    <% else -%>
+      <%= f.hidden_field :registry, value: true %>
+    <% end -%>
     <h3 id="shippinghed" class="collapsible">Shipping address</h3>
     <div class="collapsible-content" style="display: none;">
       <fieldset>

@@ -9,7 +9,11 @@ class RegistryController < ApplicationController
   def update
     @registry = Forms::RegistrySettings.new(current_user, current_user.list)
     if @registry.update!(params[:registry])
-      redirect_to list_path
+      if current_user.list.present?
+        redirect_to list_path
+      else
+        redirect_to quiz_path
+      end
     else
       render action: "edit"
     end

@@ -10,8 +10,8 @@ feature "Visitor signs up", js: true do
       sleep_maybe
       expect(page).to have_selector("#logout")
       expect(page).to have_content(@tempuser.username)
-      expect(page).to have_content("Tell us a little")
-      expect(current_path).to eq(quiz_path)
+      expect(page).to have_content("COMPLETE SIGN UP")
+      expect(current_path).to eq(registry_path)
     end
   end
 
@@ -56,7 +56,7 @@ feature "Visitor signs up", js: true do
 
       # should be on the friends page
       sleep_maybe
-      expect(page).to have_content("Registry")
+      expect(page).to have_content("COMPLETE SIGN UP")
     end
   end
 

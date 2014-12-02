@@ -2,9 +2,16 @@ Mamajamas.Views.HomeIndex = Backbone.View.extend({
 
   initialize: function() {
     var _view = this;
+
     $("#learn-more").click(function (e) {
       e.preventDefault();
       _view.scrollToElement("#secondary");
+    });
+
+    $("#create-registry").click(function(e) {
+      e.preventDefault();
+      Mamajamas.Context.AppAuth.signup();
+      return false;
     });
   },
 

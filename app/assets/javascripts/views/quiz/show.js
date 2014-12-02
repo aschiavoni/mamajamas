@@ -55,10 +55,6 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
           complete_list: true
         })
       ],
-
-      [
-        Mamajamas.Views.QuizZipCode, new Mamajamas.Models.QuizQuestion()
-      ],
   ],
 
   render: function() {

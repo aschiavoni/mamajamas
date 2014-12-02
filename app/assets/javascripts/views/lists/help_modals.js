@@ -52,9 +52,11 @@ Mamajamas.Views.ListHelpModals = Mamajamas.Views.Base.extend({
     $.modal.close();
 
     // show the bookmarklet prompt
-    var bookmarkletPrompt = new Mamajamas.Views.ListBookmarkletPrompt();
-    $('body').append(bookmarkletPrompt.render().$el);
-    bookmarkletPrompt.show();
+    _.delay(function() {
+      var bookmarkletPrompt = new Mamajamas.Views.ListBookmarkletPrompt();
+      $('body').append(bookmarkletPrompt.render().$el);
+      bookmarkletPrompt.show();
+    }, 60000);
 
     return false;
   },

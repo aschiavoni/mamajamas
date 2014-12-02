@@ -19,9 +19,7 @@ class Forms::RegistrySettings
            to: :user)
   delegate(:street, :street2, :city, :region, :phone,
            to: :address)
-  delegate(:street=, :street2=, :city=, :region=,
-           :postal_code=, :country_code=, :phone=,
-           to: :address)
+  delegate(:street=, :street2=, :city=, :region=, :phone=, to: :address)
 
   validates(:full_name, :street, :city, :region,
             :postal_code, :country_code,
@@ -51,8 +49,18 @@ class Forms::RegistrySettings
     user.zip_code.blank? ? nil : user.zip_code
   end
 
+  def postal_code=(pc)
+    address.postal_code = pc
+    user.zip_code = pc
+  end
+
   def country_code
     user.country_code.blank? ? nil : user.country_code
+  end
+
+  def country_code=(cc)
+    address.country_code = cc
+    user.country_code = cc
   end
 
   def registry
@@ -84,6 +92,7 @@ class Forms::RegistrySettings
       user.address = address
       user.save!
       list.save! if list.present?
+      true
     end
   rescue
     false
