@@ -126,7 +126,8 @@ describe List, :type => :model do
 
     it "should have a list item with the correct quantity" do
       list_item = list.add_list_item_placeholder(product_type)
-      expect(list_item.quantity).to eq(product_type.recommended_quantity)
+      expect(list_item.desired_quantity).
+        to(eq(product_type.recommended_quantity))
     end
 
   end
