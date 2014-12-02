@@ -30,7 +30,7 @@ module Features
       expect(page).to have_content("My zip code")
 
       click_link "Build My Registry"
-      expect(page).to have_content("Your baby gear registry")
+      expect(page).to have_content("Your baby registry")
       expect(current_path).to eq(list_path)
     end
   end
