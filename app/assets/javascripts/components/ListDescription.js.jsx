@@ -104,9 +104,8 @@ var Mamajamas = Mamajamas || { Components: {} };
         }
 
         return (
-          <div className="expandable editable">
-            <span className="ss-icon ss-write icon-edit"
-                  onClick={this.props.onEdit}>
+          <div className="expandable editable" onClick={this.props.onEdit}>
+            <span className="ss-icon ss-write icon-edit">
             </span>
             {content}
           </div>
