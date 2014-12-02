@@ -9,7 +9,7 @@ class GiftsController < ApplicationController
   def create
     gift_params = params[:gift]
     gift_params[:user_id] = current_user.id if current_user.present?
-    @gift = Gift.create(params[:gift])
+    @gift = @list_item.gift_item(params[:gift])
     if @gift.persisted?
       redirect_to public_list_category_path(@owner, @list_item.category.slug)
      else

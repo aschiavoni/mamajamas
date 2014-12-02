@@ -400,7 +400,8 @@ CREATE TABLE list_items (
     recommended boolean DEFAULT false NOT NULL,
     price character varying(255),
     desired_quantity integer DEFAULT 0 NOT NULL,
-    owned_quantity integer DEFAULT 0 NOT NULL
+    owned_quantity integer DEFAULT 0 NOT NULL,
+    gifted_quantity integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1542,4 +1543,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141120182937');
 INSERT INTO schema_migrations (version) VALUES ('20141125170040');
 
 INSERT INTO schema_migrations (version) VALUES ('20141130143124');
+
+INSERT INTO schema_migrations (version) VALUES ('20141202003132');
 

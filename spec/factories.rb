@@ -132,4 +132,12 @@ FactoryGirl.define do
     postal_code "33444"
     country_code "US"
   end
+
+  factory :gift do
+    full_name "John Doe"
+    email "john@example.com"
+    quantity 1
+    purchased true
+    confirmed true
+  end
 end

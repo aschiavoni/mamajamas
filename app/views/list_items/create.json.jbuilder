@@ -8,6 +8,7 @@ json.priority @list_entry.priority
 json.age @list_entry.age
 json.desired_quantity @list_entry.desired_quantity
 json.owned_quantity @list_entry.owned_quantity
+json.gifted_quantity @list_entry.gifted_quantity
 json.vendor @list_entry.vendor
 json.vendor_id @list_entry.vendor_id
 json.recommended @list_entry.recommended

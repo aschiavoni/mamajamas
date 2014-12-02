@@ -102,4 +102,43 @@ describe ListItem, :type => :model do
 
   end
 
+  describe "gift item" do
+    let(:list_item) {
+      create(:list_item,
+             desired_quantity: 2,
+             owned_quantity: 2)
+    }
+
+    let(:gift_attributes) {
+      {
+       full_name: "Test User",
+       email: "testuser@example.com",
+       purchased: true,
+       quantity: 2,
+      }
+    }
+
+    it "saves gift" do
+      expect {
+        list_item.gift_item(gift_attributes)
+      }.to change(Gift, :count).by(1)
+    end
+
+    it "decrements desired quantity" do
+      list_item.gift_item(gift_attributes)
+      list_item.reload.desired_quantity.should == 0
+    end
+
+    it "increments owned quantity" do
+      list_item.gift_item(gift_attributes)
+      list_item.reload.owned_quantity.should == 4
+    end
+
+    it "never allows desired quantity to go below 0" do
+      list_item.gift_item(gift_attributes.merge(quantity: 3))
+      list_item.reload.desired_quantity.should == 0
+    end
+
+  end
+
 end

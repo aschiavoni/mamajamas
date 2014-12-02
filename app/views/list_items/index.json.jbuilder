@@ -16,6 +16,7 @@ json.array!(list_entries) do |list_entry|
   json.age list_entry.age
   json.desired_quantity list_entry.desired_quantity
   json.owned_quantity list_entry.owned_quantity
+  json.gifted_quantity list_entry.gifted_quantity
   json.age_position list_entry.age_range.position
   json.priority list_entry.priority
   json.notes list_entry.notes

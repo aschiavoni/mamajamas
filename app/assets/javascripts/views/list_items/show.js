@@ -71,7 +71,8 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
       var ownedQuantityView = new Mamajamas.Views.ListItemQuantity({
         model: this.model,
         quantityField: "owned_quantity",
-        quantityLabel: "Have"
+        quantityLabel: "Have",
+        minimum: this.model.get('gifted_quantity') || 0
       });
       $(".prod-when-own", this.$el).append(ownedQuantityView.render().$el);
     }

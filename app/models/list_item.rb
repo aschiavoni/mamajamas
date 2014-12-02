@@ -9,7 +9,7 @@ class ListItem < ActiveRecord::Base
 
   attr_accessible :link, :name, :notes, :owned
   attr_accessible :priority, :rating, :age, :image_url
-  attr_accessible :desired_quantity, :owned_quantity
+  attr_accessible :desired_quantity, :owned_quantity, :gifted_quantity
   attr_accessible :category_id, :product_type_id, :product_type_name
   attr_accessible :placeholder, :list_item_image_id
   attr_accessible :vendor, :vendor_id
@@ -26,6 +26,8 @@ class ListItem < ActiveRecord::Base
   validates(:desired_quantity,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 })
   validates(:owned_quantity,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 })
+  validates(:gifted_quantity,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 })
 
   scope :placeholders, -> { where(placeholder: true) }
@@ -58,6 +60,19 @@ class ListItem < ActiveRecord::Base
       p = nil
     end
     write_attribute(:price, p)
+  end
+
+  def gift_item(gift_attributes)
+    ActiveRecord::Base.transaction do
+      gift = Gift.new(gift_attributes.merge(list_item_id: self.id))
+      if gift.purchased?
+        self.desired_quantity = [ self.desired_quantity - gift.quantity, 0 ].max
+        self.owned_quantity = self.owned_quantity + gift.quantity
+      end
+      gift.save!
+      self.save!
+      gift
+    end
   end
 
   private
