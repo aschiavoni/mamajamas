@@ -71,18 +71,7 @@
       <div class="tabbody center">
         <div class="padded infobox">
           <fieldset>
-            <p><strong>Have you purchased the gift?</strong></p>
-            <p>
-              <label>
-                <%= f.radio_button :purchased, true %>
-                Yes
-              </label>
-              &nbsp;
-              <label>
-                <%= f.radio_button :purchased, false %>
-                Not yet
-              </label>
-            </p>
+            <%= f.hidden_field :purchased, value: true %>
             <p><strong>How many did you order?</strong></p>
             <p><!-- drop-down menu:  -->
               <%= f.select :quantity, (0..5).to_a %>
@@ -90,7 +79,7 @@
           </fieldset>
         </div>
         <div class="progress-container center">
-          <button id="" class="button bt-color" type="submit">Done</button>
+          <button id="" class="button bt-color" type="submit">Confirm</button>
           <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
         </div>
       </div>
