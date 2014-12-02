@@ -3620,10 +3620,12 @@ background: #FFF;
 }
 #buildlist .prod-when-own {
         padding: 0 40px 0 10px;
-        position: absolute;
-        right: 0;
-        top: 17px;
         width: 33.333%;
+        float: right;
+        margin-top: -3.3846em
+}
+#buildlist .edit-mode .prod-when-own {
+        margin-top: -8em;
 }
 /* public list page colors ---- */
 #publist {
@@ -3725,13 +3727,13 @@ a.bt-gift {
         display: inline-block;
         color: #5BAA5D;
         background: url(<%= asset_path("icon_gift.png") %>) no-repeat 4px 0;
-        background-size: 19px 50px;
+        background-size: 19px 100px;
         padding-left: 26px;
 }
 a.bt-gift:hover {
         text-decoration: none;
         color: #000;
-        background-position: 4px -30px;
+        background-position: 4px -80px;
 }
 /* follow button ------- */
 #bt-follow {
@@ -3992,10 +3994,12 @@ a.bt-gift:hover {
 }
 #registry .prod-when-own {
         padding: 0 40px 0 10px;
-        position: absolute;
-        right: 0;
-        top: 17px;
         width: 33.333%;
+        float: right;
+        margin-top: -3.3846em;
+}
+#registry .edit-mode .prod-when-own {
+        margin-top: -8em;
 }
 #registry .price a.bt-gift {
         margin-left: 4px;
