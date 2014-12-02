@@ -16,15 +16,11 @@ describe UserMailer, :type => :mailer do
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match("Thanks for signing up")
+      expect(mail.body.encoded).to match("Congratulations")
     end
 
     it "includes a greeting" do
       expect(mail.body.encoded).to match("Hi #{user.first_name}")
-    end
-
-    it "includes a link to angie's list page" do
-      expect(mail.body.encoded).to match("http://www.mamajamas.com/angie")
     end
 
   end

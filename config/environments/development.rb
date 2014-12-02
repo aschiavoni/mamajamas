@@ -17,7 +17,7 @@ Mamajamas::Application.configure do
   # default url host for mailers
   config.action_mailer.perform_deliveries = false
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 
   # uncomment this to use mandril in development
