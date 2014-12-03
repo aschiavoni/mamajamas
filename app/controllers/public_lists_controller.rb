@@ -86,7 +86,8 @@ class PublicListsController < ApplicationController
   private
 
   def shareable?(list)
-    if list.blank? || (!list.registry? && current_user != list.user)
+    if list.blank? ||
+      ((!list.public? && !list.registry?) && current_user != list.user)
       false
     else
       true
