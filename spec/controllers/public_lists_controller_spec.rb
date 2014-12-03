@@ -29,7 +29,7 @@ describe PublicListsController, :type => :controller do
     end
 
     it "returns a 404 if the list is not public" do
-      @list.update_attributes!(registry: false)
+      @list.update_attributes!(registry: false, privacy: List::PRIVACY_PRIVATE)
 
       expect {
         get 'show', slug: @user.username
