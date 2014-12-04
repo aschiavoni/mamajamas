@@ -20,13 +20,13 @@
   {{#ifNotLowPriority listItem}}
     <div class="prod-when-own">
       <div class="price"> <strong>{{listItem.price}}</strong></div>
-      {{#unless listItem.owned}}
+      {{#if listItem.desired}}
         <div class="gift">
           <a class="bt-gift" href="/gifts/{{listItem.id}}/new">
             <span>Gift this to {{listItem.ownerName}}</span>
           </a>
         </div>
-      {{/unless}}
+      {{/if}}
       <div class="when">
         {{buyLink listItem}}
       </div>
