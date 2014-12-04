@@ -22,7 +22,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     this.model.on("change", this.updateMaybe, this);
     this.model.on("change:rating", this.updateRating, this);
     this.model.on("change:age", this.updateAgeRange, this);
-    this.model.on("change:owned", this.updateOwned, this);
     this.model.on("change:desired_quantity", this.updateDesiredQuantity, this);
     this.model.on("change:owned_quantity", this.updateOwnedQuantity, this);
   },
@@ -58,7 +57,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
       model: this.model
     });
     var $ratingContainer = $("div.rating", this.$el);
-    $ratingContainer.toggle(this.model.get('owned'));
+    $ratingContainer.toggle(this.model.get('owned_quantity') > 0);
     $ratingContainer.append(ratingView.render().$el);
 
     var ageRangeView = new Mamajamas.Views.ListItemAgeRange({
@@ -138,17 +137,13 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     this.itemField("age").val(this.model.get("age"));
   },
 
-  updateOwned: function() {
-    this.itemField("owned").val(this.model.get("owned"));
-    $('div.rating', this.$el).toggle(this.model.get('owned'));
-  },
-
   updateDesiredQuantity: function() {
     this.itemField("desired_quantity").val(this.model.get("desired_quantity"));
   },
 
   updateOwnedQuantity: function() {
     this.itemField("owned_quantity").val(this.model.get("owned_quantity"));
+    $('div.rating', this.$el).toggle(this.model.get('owned_quantity') > 0);
   },
 
   initializeAutocomplete: function() {

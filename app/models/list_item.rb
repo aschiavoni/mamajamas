@@ -76,6 +76,14 @@ class ListItem < ActiveRecord::Base
     end
   end
 
+  def owned
+    owned_quantity > 0
+  end
+
+  def owned=(new_owned)
+    # do nothing
+  end
+
   private
 
   def base_image_url
