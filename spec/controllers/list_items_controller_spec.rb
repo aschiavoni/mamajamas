@@ -168,10 +168,6 @@ describe ListItemsController, type: :controller do
       expect(assigns(:list_entry)).to eq(list_item)
     end
 
-    it "should update list entry owned" do
-      expect(assigns(:list_entry).owned).to be_truthy
-    end
-
     it "should update list item rating" do
       expect(assigns(:list_entry).rating).to eq(3)
     end
