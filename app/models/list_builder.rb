@@ -24,6 +24,7 @@ class ListBuilder
       end
     end
 
+    list.privacy = List::PRIVACY_PUBLIC
     list.registry = true
     list.built_at = Time.now.utc
     list.save!
