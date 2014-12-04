@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   include EmailPreferences
 
+  before_validation :set_username
   extend FriendlyId
   friendly_id :username, use: [ :slugged, :history, :finders ]
 
@@ -63,7 +64,6 @@ class User < ActiveRecord::Base
   validate :valid_zip_code
   validate :valid_country_code
 
-  before_validation :set_username
   before_validation(on: :create) do
     self.email_preferences = {}
     self.settings = { show_bookmarklet_prompt: true, show_friends_prompt: true }
@@ -82,10 +82,6 @@ class User < ActiveRecord::Base
     where("authentications.provider" => "google").
     where("authentications.uid IS NOT NULL")
   }
-
-  def should_generate_new_friendly_id?
-    username_changed? || super
-  end
 
   # hook devise to support logging in by email or username
   def self.find_first_by_auth_conditions(warden_conditions)
