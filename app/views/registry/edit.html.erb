@@ -1,5 +1,5 @@
 <div class="nestedwin mjform clearfix" id="registry-settings">
-  <h2>Complete Sign Up</h2>
+  <h2><%= @registry.settings_title %></h2>
   <%= form_for @registry, url: registry_path, as: :registry, method: :put, html: { id: "frm-registry-settings", class: "label-infield" } do |f| %>
     <% if current_user.quiz_taken_at.present? -%>
       <h3>Registry</h3>
@@ -85,8 +85,12 @@
 
     <div class="button-row clearfix">
       <div class="progress-container">
-        <button id="bt-cancel" class="button" type="reset">Cancel</button>
-        <button id="bt-create-account" class="button" type="submit">Create Account</button>
+        <% if @registry.has_list? -%>
+          <%= link_to "Cancel", list_path, id: "bt-cancel", class: "button" %>
+        <% end -%>
+        <button id="bt-create-account" class="button" type="submit">
+          <%= @registry.settings_button_text %>
+        </button>
         <img class="progress" style="display: none;" src="/assets/progress-bar-da578cc730973af12284b3ee87a398b8.gif" alt="Progress-bar"> </div>
     </div>
   <% end %>

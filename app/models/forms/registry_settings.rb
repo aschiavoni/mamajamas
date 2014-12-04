@@ -79,6 +79,18 @@ class Forms::RegistrySettings
     save
   end
 
+  def settings_title
+    has_list? ? "Registry Details" : "Complete Sign Up"
+  end
+
+  def settings_button_text
+    has_list? ? "Update" : "Create Account"
+  end
+
+  def has_list?
+    list.present?
+  end
+
   private
 
   def update_attributes(attributes = {})
@@ -97,4 +109,5 @@ class Forms::RegistrySettings
   rescue
     false
   end
+
 end
