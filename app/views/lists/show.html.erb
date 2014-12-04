@@ -113,7 +113,7 @@
            item_count: <%= @view.list.item_count %>,
            has_recommended_items: <%= @view.recommended_items? %>,
            product_types: JSON.parse('<%= @view.product_types.to_json.html_safe %>'),
-           notes: "<%= h(@view.owner.notes.html_safe) %>",
+           notes: "<%= h(@view.owner.notes.present? ? @view.owner.notes.html_safe : '') %>",
            username: '<%= @view.owner.username %>',
            profile_photo_url: '<%= @view.owner.profile_picture.public_list %>'
          });
