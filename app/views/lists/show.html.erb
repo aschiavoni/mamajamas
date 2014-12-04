@@ -103,7 +103,7 @@
         <script type="text/javascript">
          Mamajamas.Context.List = new Mamajamas.Models.List({
            id: <%= @view.list_id %>,
-           title: '<%= @view.list.title %>',
+           title: "<%= @view.list.title.html_safe %>",
            <% if @view.category.present? -%>
            category_id: '<%= @view.category.id %>',
            category: '<%= @view.category.slug %>',
