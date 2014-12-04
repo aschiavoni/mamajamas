@@ -5,6 +5,7 @@ Mamajamas.Views.SocialLinks = Backbone.View.extend({
 
   events: {
     "click .ss-social-circle": "shareDispatch",
+    "click .ss-email": "shareDispatch",
   },
 
   render: function() {
@@ -20,10 +21,16 @@ Mamajamas.Views.SocialLinks = Backbone.View.extend({
       case "twitter":
         this.shareTwitter(event);
         break;
+      case "email":
+        this.shareEmail(event);
+        break;
       default:
         return true;
     }
     return false;
+  },
+
+  shareEmail: function(event) {
   },
 
   shareFacebook: function(event) {
