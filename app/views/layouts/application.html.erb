@@ -49,11 +49,11 @@
         <% if show_mainnav && user_signed_in? -%>
           <ul>
             <li class="<%= "active" if params[:controller] == "lists" %>">
-              <%= link_to "Edit List", list_path %>
+              <%= link_to "Customize Registry", list_path %>
             </li>
             <li class="<%= "active" if params[:controller] == "friends" %>">
               <% browse_lists_path = current_user.guest? ? new_friend_path : following_friends_path -%>
-              <%= link_to "Browse Lists", browse_lists_path, class: "find-moms" %>
+              <%= link_to "Browse Registries", browse_lists_path, class: "find-moms" %>
             </li>
           </ul>
         <% end -%>
