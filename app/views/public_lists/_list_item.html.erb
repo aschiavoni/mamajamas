@@ -40,9 +40,16 @@
       <div class="when">
         <%= link_to "Buy", list_item.link, target: "_blank" %> at <%= list_item.age %>
       </div>
-      <div class="own">
-        <strong>Wants</strong> <%= list_item.desired_quantity%> of these
-      </div>
+      <% if list_item.desired? -%>
+        <div class="own">
+          <strong>Wants</strong> <%= list_item.desired_quantity %> of these
+        </div>
+      <% end -%>
+      <% if list_item.owned? -%>
+        <div class="own">
+          <strong>Has</strong> <%= list_item.owned_quantity %> of these
+        </div>
+      <% end -%>
     </div>
     <div class="prod-note">
       <% if list_item.notes.present? -%>

@@ -79,8 +79,18 @@ class ListItem < ActiveRecord::Base
   def owned
     owned_quantity > 0
   end
+  alias_method :owned?, :owned
 
   def owned=(new_owned)
+    # do nothing
+  end
+
+  def desired
+    desired_quantity > 0
+  end
+  alias_method :desired?, :desired
+
+  def desired=(new_desired)
     # do nothing
   end
 

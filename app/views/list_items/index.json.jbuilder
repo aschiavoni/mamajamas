@@ -14,6 +14,8 @@ json.array!(list_entries) do |list_entry|
   json.link list_entry.link
   json.rating list_entry.rating
   json.age list_entry.age
+  json.desired list_entry.desired?
+  json.owned list_entry.owned?
   json.desired_quantity list_entry.desired_quantity
   json.owned_quantity list_entry.owned_quantity
   json.gifted_quantity list_entry.gifted_quantity
