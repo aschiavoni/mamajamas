@@ -44,5 +44,20 @@ namespace :mamajamas do
       end
     end
 
+    desc "Add price to existing list items"
+    task backfill_price_on_list_items: :environment do
+      ListItem.user_items.each do |li|
+        next if li.price.present?
+        rp = RecommendedProduct.find_by(link: li.link)
+        if rp.blank? || rp.price.blank?
+          puts "Can't find recommended product with price for #{li.id}."
+          next
+        end
+
+        puts "Updating #{li.id} with #{rp.price}..."
+        li.update_column(:price, rp.price)
+      end
+    end
+
   end
 end
