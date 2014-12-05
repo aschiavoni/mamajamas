@@ -1,7 +1,7 @@
 <%= content_for :nav do -%>
   <ul class="sidemenu">
     <li class="current">
-      <%= link_to "List", settings_path %>
+      <%= link_to "Privacy", settings_path %>
     </li>
     <li>
       <%= link_to "Email", email_path %>
@@ -10,21 +10,21 @@
 <% end -%>
 <% if @settings.has_list? -%>
   <%= form_for @settings, url: settings_path, as: :settings, method: :put, html: { id: "frm-list-settings" } do |f| %>
-    <h3>List Privacy</h3>
+    <h3>Registry Privacy</h3>
     <p class="privacy-status">
-      <em class="privacy-status" style="display: <%= @settings.private? ? "inline" : "none"%>;">Current setting: <strong>Only you can see your list.</strong></em>
-      <em class="privacy-status" style="display: <%= @settings.public? ? "inline" : "none"%>;">Current setting: <span class="icon-globe"></span> <strong>Anyone can see your list.</strong></em>
-      <em class="privacy-status" style="display: <%= @settings.registered_users_only? ? "inline" : "none"%>;">Current setting: <span class="icon-bird"></span> <strong>Mamajamas users can see your list.</strong></em>
+      <em class="privacy-status" style="display: <%= @settings.private? ? "inline" : "none"%>;">Current setting: <strong>Only you can see your registry.</strong></em>
+      <em class="privacy-status" style="display: <%= @settings.public? ? "inline" : "none"%>;">Current setting: <span class="icon-globe"></span> <strong>Anyone can see your registry.</strong></em>
+      <em class="privacy-status" style="display: <%= @settings.registered_users_only? ? "inline" : "none"%>;">Current setting: <span class="icon-bird"></span> <strong>Mamajamas users can see your registry.</strong></em>
       <em class="privacy-status" style="display: <%= @settings.want_only? ? "inline" : "none"%>;">Current setting: <span class="icon-gift"></span> <strong>Registry: anyone can see only items you need.</strong></em>
     </p>
     <div id="listprivacy-select">
-      <p>Who would you like to see your list?</p>
+      <p>Who would you like to see your registry?</p>
       <fieldset>
         <ul>
           <li>
             <label>
               <%= f.radio_button :privacy, List::PRIVACY_PRIVATE %>
-              Just you</label> — Only you can see your list.
+              Just you</label> — Only you can see your registry.
           </li>
           <li>
             <label>
@@ -35,11 +35,6 @@
             <label>
               <%= f.radio_button :privacy, List::PRIVACY_REGISTERED %>
               Mamajamas users</label> — Only logged-in Mamajamas users.
-          </li>
-          <li>
-            <label>
-              <%= f.radio_button :privacy, List::PRIVACY_WANT_ONLY %>
-              Registry option</label> — Everyone can see only items you need.
           </li>
         </ul>
       </fieldset>
