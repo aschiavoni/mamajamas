@@ -179,6 +179,8 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
       var $items = $('li', $ul);
       _.each($items, function(item) {
         var $item = $(item);
+        if ($item.hasClass("list-search-no-results"))
+          return true;
         if (query === "") {
           $item.show();
           foundMatch = true;
@@ -195,9 +197,10 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
       }, this);
 
       if (!foundMatch) {
-        if ($('.list-search-no-results', $ul).length == 0)
+        if ($('.list-search-no-results', $ul).length == 0) {
           var noResults = HandlebarsTemplates["friends/no_results"];
           $ul.prepend(noResults());
+        }
       } else {
         $('.list-search-no-results', $ul).remove();
       }
