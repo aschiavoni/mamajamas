@@ -83,6 +83,10 @@ class User < ActiveRecord::Base
     where("authentications.uid IS NOT NULL")
   }
 
+  def should_generate_new_friendly_id?
+    username_changed? || super
+  end
+
   # hook devise to support logging in by email or username
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
