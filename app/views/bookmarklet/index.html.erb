@@ -1,5 +1,5 @@
 <!-- window header -->
-<h2>Add to <strong>Mamajamas List</strong></h2>
+<h2>Add to <strong>Mamajamas Registry</strong></h2>
 <!-- window content -->
 <div class="content clearfix">
   <div class="logo">&nbsp;</div>
@@ -68,13 +68,17 @@
         </fieldset>
         <fieldset>
           <div class="form-row">
-            <%= f.label :owned, 'Need' %>
-            I
+            <label>I Want</label>
             <!-- drop-down menu:  -->
-            <%= f.select :owned, [ [ 'Want', false ], [ 'Have', true ] ], {} -%>
+            <%= f.select :desired_quantity, [ 1, 2, 3, 4, 5 ] -%>
             <!-- / drop-down menu: -->
+            of these. </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-row">
+            <label>I Have</label>
             <!-- drop-down menu:  -->
-            <%= f.select :quantity, [ 1, 2, 3, 4, 5 ] -%>
+            <%= f.select :owned_quantity, [ 1, 2, 3, 4, 5 ] -%>
             <!-- / drop-down menu: -->
             of these. </div>
         </fieldset>
