@@ -1,10 +1,16 @@
 <p>
-  Congratulations on creating a Mamajamas registry! Our goal is to make it as easier for you to figure out what you will need for your new baby. If you haven’t already, you may want to
+  Congratulations on creating a Mamajamas registry! Our goal is to make it as easier for you to figure out what you will need for your new baby. If you haven’t already, you may want to:
 </p>
 <ul>
   <li><%= link_to "Browse", new_friend_url %> other new parent registries and top baby experts for gift ideas.</li>
   <li>Get the <%= link_to "Mamajamas Bookmark", faq_url(anchor: "faq05") %> to easily add any product from the web to your registry.</li>
 </ul>
+<p>
+  You can use the share button on the top right of your registry to send it to family and friends, or copy and paste the following link:
+</p>
+<p>
+  <%= link_to public_list_url(@user), public_list_url(@user) %>
+</p>
 <p>
   We hope Mamajamas will help you spend less time thinking about stuff, and more time enjoying pregnancy and new parenthood.
 </p>

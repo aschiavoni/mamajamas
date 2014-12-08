@@ -1,0 +1,22 @@
+<%= @user.full_name %> has a received a notification that a gift from you is on the way!
+
+If you have already ordered the item, thank you!
+You are all set.
+
+If for some reason you have yet to complete your purchase, please do it now by clicking the link below:
+
+<%= @gift.quantity > 1 ? "#{@gift.quantity} - #{@list_item.name}" : @list_item.name %> <%= public_list_category_url(@user.slug, @list_item.category.slug) %>
+
+The registrant’s information is:
+
+<%= @user.partner_full_name.present? ? "#{@user.full_name} & #{@user.partner_full_name}" : @user.full_name %>
+<% if @user.address.present? -%>
+<%= @user.address.full_address %>
+<% end -%>
+<%= @user.email %>
+
+Thank you again!
+
+Best,
+The Mamajamas Team
+info@mamajamas.com

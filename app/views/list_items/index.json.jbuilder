@@ -13,6 +13,7 @@ json.array!(list_entries) do |list_entry|
   json.owned list_entry.owned
   json.link list_entry.link
   json.rating list_entry.rating
+  json.has_rating list_entry.has_rating?
   json.age list_entry.age
   json.desired list_entry.desired?
   json.owned list_entry.owned?

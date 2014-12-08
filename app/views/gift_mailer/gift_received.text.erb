@@ -1,0 +1,13 @@
+Alright! Here’s what’s coming your way:
+
+<%= @gift.quantity > 1 ? "#{@gift.quantity} - #{@list_item.name}" : @list_item.name %> <%= list_category_url(@list_item.category.slug) %>
+
+From:
+<%= @gift.full_name %>
+<%= @gift.email %>
+
+For more information head to your Mamajamas Registry at <%= list_url %>.
+
+Best,
+The Mamajamas Team
+info@mamajamas.com

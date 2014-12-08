@@ -14,6 +14,7 @@ class GiftsController < ApplicationController
     gift_params[:user_id] = current_user.id if current_user.present?
     @gift = @list_item.gift_item(params[:gift])
     if @gift.persisted?
+      GiftNotificationWorker.perform_async(@gift.id)
       redirect_to public_list_category_path(@owner, @list_item.category.slug)
      else
        render :new

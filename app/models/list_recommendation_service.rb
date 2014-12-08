@@ -34,6 +34,7 @@ class ListRecommendationService
                                      vendor: recommended_product.vendor,
                                      vendor_id: recommended_product.vendor_id,
                                      image_url: recommended_product.image_url,
+                                     price: recommended_product.price,
                                      placeholder: false,
                                      recommended: true
                                    })

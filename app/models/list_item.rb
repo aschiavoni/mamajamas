@@ -94,6 +94,10 @@ class ListItem < ActiveRecord::Base
     # do nothing
   end
 
+  def has_rating?
+    owned? && rating.present? && rating > 0
+  end
+
   private
 
   def base_image_url
