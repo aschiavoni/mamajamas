@@ -13,7 +13,7 @@
       <% if user_has_list? -%>
         <a href="/list/all" target="_blank" class="button bt-color bt-add" title="Add to my list"><span class="ss-plus"></span><strong>Add</strong></a>
       <% end -%>
-      <% if list_item.owned? -%>
+      <% if list_item.has_rating? -%>
         <div class="rating"> <em>My rating:</em>
           <% rating = list_item.rating || 0 -%>
           <div class="stars">
