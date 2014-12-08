@@ -1,0 +1,39 @@
+<p>
+  Alright! Here’s what’s coming your way:
+</p>
+<table border="0" cellpadding="0" cellspacing="0" id="productstable" width="100%" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
+  <tr>
+    <td colspan="2" style="-ms-text-size-adjust: 67%;-webkit-text-size-adjust: 67%;">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="80" align="center" style="text-align:center;">
+      <%= image_tag @list_item.image_url, size: "78x78", alt: @list_item.name, style: "width: 78px !important; height: 78px !important;" %>
+    </td>
+    <td style="padding-left:10px;">
+      <% if @gift.quantity > 1 -%>
+        <%= "#{@gift.quantity} - "%>
+      <% end -%>
+      <%= @list_item.name %> <%= link_to "details", list_category_url(@list_item.category.slug) %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="-ms-text-size-adjust: 67%;-webkit-text-size-adjust: 67%;">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" style="-ms-text-size-adjust: 67%;-webkit-text-size-adjust: 67%;">&nbsp;</td>
+  </tr>
+</table>
+<p>
+  From:<br/>
+  <%= @gift.full_name %><br/>
+  <%= mail_to @gift.email %>
+</p>
+<p>
+  For more information head to your <%= link_to "Mamajamas Registry", list_url %>.
+</p>
+
+<p>
+  Best,<br/>
+  The Mamajamas Team<br/>
+  <%= mail_to "info@mamajamas.com"%>
+</p>
