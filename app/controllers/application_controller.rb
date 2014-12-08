@@ -114,14 +114,9 @@ class ApplicationController < ActionController::Base
   def require_basic_auth_maybe
     if Rails.env.staging?
       authenticate_or_request_with_http_basic do |user, password|
-        user == "mamajamas" && password == "mamab1rd"
+        user == "mamajamas" && (password == "mamab1rd" || password == "welcome")
       end
     end
-    # if Rails.env.production?
-    #   authenticate_or_request_with_http_basic do |user, password|
-    #     user == "mamajamas" && password == "welcome123"
-    #   end
-    # end
   end
 
   def not_found
