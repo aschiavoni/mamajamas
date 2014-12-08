@@ -11,11 +11,6 @@ class RecommendedProductService
       link = product_attrs[:link]
       override_name = product_attrs[:name]
 
-      if link.present?
-        amazon = CreatesRecommendedProductFromAmazonUrl.new(link, ecs_config)
-        product_attrs = product_attrs.merge(amazon.product.symbolize_keys)
-      end
-
       rp = RecommendedProduct.where(conditions).first
       if rp.present? && product_attrs[:link].blank?
         rp.destroy
@@ -24,9 +19,15 @@ class RecommendedProductService
 
       if product_attrs[:link].present?
         product_attrs[:name] = override_name if override_name.present?
+
         if rp.present?
-          rp.update_attributes!(product_attrs)
+          # rp.update_attributes!(product_attrs)
+          next
         else
+          if link.present?
+            amazon = CreatesRecommendedProductFromAmazonUrl.new(link, ecs_config)
+            product_attrs = product_attrs.merge(amazon.product.symbolize_keys)
+          end
           rp = RecommendedProduct.create!(conditions.merge(product_attrs))
         end
       end
