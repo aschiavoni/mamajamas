@@ -162,7 +162,7 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
     var _view = this;
     if (_view.isAuthenticated() && _view.userHasList() &&
         _view.model.get("owner_id") != Mamajamas.Context.User.get("id")) {
-      var $a = $("<a>").attr("href", "#").addClass("button").html("Copy List")
+      var $a = $("<a>").attr("href", "#").addClass("button").html("Copy Registry")
       $("#subhed h2").after($a);
       $a.click(function(event) {
         event.preventDefault();
