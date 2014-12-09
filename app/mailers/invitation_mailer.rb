@@ -17,6 +17,25 @@ class InvitationMailer < ActionMailer::Base
          subject: "Check out Mamajamas.com")
   end
 
+  def shared_list(invite_id)
+    @invite = Invite.find(invite_id)
+    @user = @invite.user
+    return if @user.blank?
+
+    @display_name = @invite.from || @invite.name
+    @from_name = from_name(@invite)
+
+    @invite.invite_sent_at = Time.now.utc
+    @invite.save!
+
+    @hide_salutation = true
+    @subject = @invite.subject || ""
+
+    mail(from: from_address(@invite),
+         to: to_address(@invite),
+         subject: @subject)
+  end
+
   private
 
   def from_name(invite)

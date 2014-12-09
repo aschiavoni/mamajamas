@@ -213,4 +213,72 @@
   </div>
   <!-- end modal window box -->
 <% end -%>
+<!-- share by email win -->
+<div id="email-modal" class="modal-win form-page">
+  <h2>Share Registry</h2>
+  <div class="content">
+    <%= form_for @view.email_invite, url: invites_path, html: { class: "label-infield create-email-form", id: "frm-create-email-invite" } do |f| %>
+      <%= f.hidden_field :user_id %>
+      <%= f.hidden_field :list_id %>
+      <%= f.hidden_field :provider %>
+      <%= f.hidden_field :name %>
+      <dl class="clearfix">
+        <dt></dt>
+        <dd>
+          <p class="intro">Share your baby registry with friends and family.</p>
+        </dd>
+        <fieldset>
+          <!-- row -->
+          <dt>To<strong class="required">*</strong></dt>
+          <dd>
+            <p>
+              <%= f.label :email, "Email (required)" %>
+              <br>
+              <%= f.text_field :email %>
+            </p>
+          </dd>
+          <!-- row -->
+          <dt>From</dt>
+          <dd>
+            <p>
+              <%= f.label :from, "Your name" %>
+              <br>
+              <%= f.text_field :from %>
+            </p>
+          </dd>
+        </fieldset>
+        <!-- row -->
+        <fieldset>
+          <dt>Subject</dt>
+          <dd>
+            <p>
+              <%= f.label :subject, "Subject" %>
+              <br>
+              <%= f.text_field :subject, value: "Check out my baby registry at Mamajamas.com" %>
+            </p>
+          </dd>
+          <!-- row -->
+          <dt>Message</dt>
+          <dd>
+            <p>
+              <%= f.label :message, "Personalized message" %>
+              <br>
+              <%= f.text_area :message, rows: 2 %>
+            </p>
+            <p class="normal"><span class="instruction">Your message will include the following text:</span><br>
+              <strong>You can find my global baby registry at:</strong>
+              <%= link_to public_list_url(current_user.slug).gsub(/(http|https):\/\//, ""), public_list_url(current_user.slug) -%>
+            </p>
+          </dd>
+        </fieldset>
+      </dl>
+      <div class="button-row">
+        <button id="bt-cancel" class="button" type="reset">Cancel</button>
+        <button id="bt-name" class="button bt-color bt-send" type="submit"><span class="ss-icon ss-send"></span>Send</button>
+      </div>
+    </form>
+    <% end -%>
+  </div>
+</div>
+<!-- end share by email win --> 
 <%= adwords_event "LdrCCN7BzAcQmoDU4wM", "0" %>

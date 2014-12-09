@@ -13,8 +13,12 @@ class InvitesController < ApplicationController
 
     @invite = Invite.create(invite_params)
 
-    if @invite.persisted? && invite_params[:provider] != "facebook"
-      InvitationMailer.delay.invitation(@invite.id)
+    if @invite.persisted?
+      if invite_params[:provider] == 'mamajamas_share'
+        InvitationMailer.delay.shared_list(@invite.id)
+      elsif invite_params[:provider] != "facebook"
+        InvitationMailer.delay.invitation(@invite.id)
+      end
     end
 
     respond_with @invite

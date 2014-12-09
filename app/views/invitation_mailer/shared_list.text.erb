@@ -1,0 +1,8 @@
+<% if @invite.message.present? -%>
+<%= h @invite.message %>
+
+<% end -%>
+You can find my global baby registry at: <%= public_list_url(@user.slug) %>
+
+Thanks!
+<%= h @from_name %>

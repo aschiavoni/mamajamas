@@ -112,6 +112,13 @@ window.Mamajamas = {
       new Mamajamas.Views.PublicListPrivate();
     }
 
+    // share by email modal
+    if ($("#email-modal").length > 0) {
+      Mamajamas.Context.EmailShareModal = new Mamajamas.Views.EmailShareModal({
+        el: '#email-modal'
+      });
+    }
+
     // quiz
     if ($('#quiz-modal').length > 0) {
       new Mamajamas.Routers.Quiz();

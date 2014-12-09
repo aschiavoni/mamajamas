@@ -280,7 +280,9 @@ CREATE TABLE invites (
     updated_at timestamp without time zone NOT NULL,
     user_id integer,
     "from" character varying(255),
-    message text
+    message text,
+    subject character varying(255),
+    list_id integer
 );
 
 
@@ -1143,6 +1145,13 @@ CREATE INDEX index_gifts_on_user_id ON gifts USING btree (user_id);
 
 
 --
+-- Name: index_invites_on_list_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_invites_on_list_id ON invites USING btree (list_id);
+
+
+--
 -- Name: index_kids_on_age_range_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1545,4 +1554,8 @@ INSERT INTO schema_migrations (version) VALUES ('20141125170040');
 INSERT INTO schema_migrations (version) VALUES ('20141130143124');
 
 INSERT INTO schema_migrations (version) VALUES ('20141202003132');
+
+INSERT INTO schema_migrations (version) VALUES ('20141209221645');
+
+INSERT INTO schema_migrations (version) VALUES ('20141209222401');
 

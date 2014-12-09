@@ -70,6 +70,16 @@ class ListView
     @public_url ||= public_list_url(owner.slug)
   end
 
+  def email_invite
+    @email_invite ||= Invite.new do |i|
+      i.user = current_user
+      i.provider = "mamajamas_share"
+      i.from = current_user.full_name
+      i.name = current_user.full_name
+      i.list = list
+    end
+  end
+
   private
 
   def default_url_options
