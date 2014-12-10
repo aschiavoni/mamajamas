@@ -25,7 +25,7 @@ class Forms::RegistrySettings
 
   validate do
     required_objects = [ user, list ]
-    required_objects.push(address) if registry
+    required_objects.push(address) if registry || has_partial_address?
 
     required_objects.each do |object|
       if object.present? && !object.valid?
@@ -90,6 +90,13 @@ class Forms::RegistrySettings
 
   def has_list?
     list.present?
+  end
+
+  def has_partial_address?
+    return false if address.blank?
+    [ :street, :street2, :city, :region, :phone ].map do |f| 
+      address.public_send(f).present?
+    end.any?
   end
 
   private
