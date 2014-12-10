@@ -20,8 +20,16 @@ class InvitationMailer < ActionMailer::Base
   def shared_list(invite_id)
     @invite = Invite.find(invite_id)
     @user = @invite.user
-    return if @user.blank?
+    @list = @invite.list
 
+    return if @list.blank?
+
+    @owner = @list.user
+    @owned = @user.present? && @user.id == @list.user_id
+    default_subject = "Check out this baby registry at Mamajamas.com"
+    default_subject = "Check out my baby registry at Mamajamas.com" if @owned
+
+    @subject = @invite.subject || default_subject
     @display_name = @invite.from || @invite.name
     @from_name = from_name(@invite)
 
@@ -29,7 +37,6 @@ class InvitationMailer < ActionMailer::Base
     @invite.save!
 
     @hide_salutation = true
-    @subject = @invite.subject || ""
 
     mail(from: from_address(@invite),
          to: to_address(@invite),
@@ -39,11 +46,16 @@ class InvitationMailer < ActionMailer::Base
   private
 
   def from_name(invite)
-    invite.from || full_name(invite.user)
+    invite.from || invite.name || full_name(invite.user)
   end
 
   def from_address(invite)
-    "#{from_name(invite)} <#{invite.user.email}>"
+    if invite.user.blank?
+      from_email = "info@mamajamas.com"
+    else
+      from_email = invite.user.email
+    end
+    "#{from_name(invite)} <#{from_email}>"
   end
 
   def to_address(invite)

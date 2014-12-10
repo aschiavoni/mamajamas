@@ -74,8 +74,8 @@ class ListView
     @email_invite ||= Invite.new do |i|
       i.user = current_user
       i.provider = "mamajamas_share"
-      i.from = current_user.full_name
-      i.name = current_user.full_name
+      i.from = current_user.try(:full_name)
+      i.name = current_user.try(:full_name)
       i.list = list
     end
   end

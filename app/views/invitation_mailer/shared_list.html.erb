@@ -4,7 +4,12 @@
   </p>
 <% end -%>
 <p>
-You can find my global baby registry at: <%= link_to public_list_url(@user.slug), public_list_url(@user.slug) %>
+  <% if @owned -%>
+    You can find my global baby registry at:
+  <% else -%>
+    I thought you’d be interested in this Mamajamas baby registry:
+  <% end -%>
+  <%= link_to public_list_url(@owner.slug), public_list_url(@owner.slug) %>
 <p>
 Thanks!
 <br/>

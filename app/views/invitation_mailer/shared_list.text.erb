@@ -2,7 +2,11 @@
 <%= h @invite.message %>
 
 <% end -%>
-You can find my global baby registry at: <%= public_list_url(@user.slug) %>
+<% if @owned -%>
+You can find my global baby registry at: <%= public_list_url(@owner.slug) %>
+<% else -%>
+I thought you’d be interested in this Mamajamas baby registry: <%= public_list_url(@owner.slug) %>
+<% end -%>
 
 Thanks!
 <%= h @from_name %>
