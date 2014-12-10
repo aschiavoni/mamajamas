@@ -83,6 +83,18 @@ en:
               invalid: "Sorry, but that does not appear to be a valid zip code."
             country_code:
               invalid: "Sorry, but that does not appear to be a valid country."
+        address:
+          attributes:
+            street:
+              blank: "Sorry, but we need a valid street address."
+            city:
+              blank: "Sorry, a city is required."
+            region:
+              blank: "Sorry, a state or region is required."
+            country_code:
+              blank: "Required"
+            postal_code:
+              blank: "Sorry, a zip or postal code is required."
         list:
           attributes:
             title:

@@ -21,12 +21,13 @@ class Forms::RegistrySettings
            to: :address)
   delegate(:street=, :street2=, :city=, :region=, :phone=, to: :address)
 
-  validates(:full_name, :street, :city, :region,
-            :postal_code, :country_code,
-            presence: true)
+  validates(:full_name, presence: true)
 
   validate do
-    [ user, address, list ].each do |object|
+    required_objects = [ user, list ]
+    required_objects.push(address) if registry
+
+    required_objects.each do |object|
       if object.present? && !object.valid?
         object.errors.each do |key, values|
           errors[key] = values
@@ -101,7 +102,11 @@ class Forms::RegistrySettings
 
   def save
     ActiveRecord::Base.transaction do
-      user.address = address
+      if address.street.present?
+        user.address = address
+      else
+        user.address = nil
+      end
       user.save!
       list.save! if list.present?
       true
