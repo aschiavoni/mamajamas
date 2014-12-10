@@ -16,7 +16,7 @@
   <% unless current_user.present? && current_user.guest? -%>
     <%= content_for :logged_out_header_buttons do %>
       <li id="startlist">
-        <%= link_to "Start Your List", quiz_path, class: "button bt-color" %>
+        <%= link_to "Start Your Registry", quiz_path, class: "button bt-color" %>
       </li>
     <% end -%>
   <% end -%>
