@@ -13,7 +13,7 @@ feature "Visitor logs in", js: true do
       sign_in_with @testuser.username, @testuser.email, @password, :username
 
       expect(page).to have_content("Signed in")
-      expect(page).to have_content("List")
+      expect(page).to have_content("Registry")
       expect(current_path).to eq(list_path)
     end
   end
@@ -23,7 +23,7 @@ feature "Visitor logs in", js: true do
       sign_in_with @testuser.username, @testuser.email, @password, :email
 
       expect(page).to have_content("Signed in")
-      expect(page).to have_content("List")
+      expect(page).to have_content("Registry")
       expect(current_path).to eq(list_path)
     end
   end
@@ -63,7 +63,7 @@ feature "Visitor logs in", js: true do
         page.execute_script("Mamajamas.Context.LoginSession.saveSession(true);")
 
         # should be on the list page
-        expect(page).to have_content("List")
+        expect(page).to have_content("Registry")
       end
     end
 
