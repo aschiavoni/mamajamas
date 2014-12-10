@@ -36,8 +36,7 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
     var desiredQuantityView = new Mamajamas.Views.ListItemQuantity({
       model: this.model,
       quantityField: "desired_quantity",
-      quantityLabel: "Want",
-      minimum: 1
+      quantityLabel: "Want"
     });
     $(".frm-added > .own", this.$el).append(desiredQuantityView.render().$el);
 
@@ -90,8 +89,8 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
       desired_quantity: _view.model.get("desired_quantity"),
       owned_quantity: _view.model.get("owned_quantity"),
       rating: _view.model.get("rating"),
-      notes: $("textarea", _view.$el).val(),
-    }
+      notes: $("textarea", _view.$el).val()
+    };
     _view.setNoShow();
     _view.listItem.set(attribs);
     _view.saved = true;
@@ -163,6 +162,6 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
     this.model.off("change:owned", this.toggleRatingAndNotes, this);
     this.model.off("change:rating", this.toggleRatingAndNotes, this);
     $(window).off("scroll", this.updateOffsets);
-  },
+  }
 
 });
