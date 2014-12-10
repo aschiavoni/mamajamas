@@ -60,6 +60,7 @@
       </nav>
       <div id="login">
         <ul>
+          <li><a href="#" class="get-bookmark">Get Bookmark</a></li>
           <li><a href="mailto:angie@mamajamas.com">Contact</a></li>
           <li><%= link_to "FAQ", faq_path %></li>
           <li><%= link_to "Blog", "http://blog.mamajamas.com/", target: "_blank" %></li>
@@ -71,13 +72,8 @@
               <% end -%>
               <ul class="nav-drop">
                 <li class="user-email"><%= link_to current_user.display_email, profile_path %></li>
-                <li><%= link_to "My List", list_path %></li>
-                <% if current_user.list.present? && current_user.list.public? -%>
-                  <li><%= link_to "My Shared List", public_list_path(current_user) %></li>
-                <% end -%>
-                <li><%= link_to "My Profile", profile_path %></li>
+                <li><%= link_to "My Registry", list_path %></li>
                 <li><%= link_to "My Settings", settings_path %></li>
-                <li><a href="#" class="get-bookmark">Get Bookmark</a></li>
                 <% if admin_user? -%>
                   <li><%= link_to "Admin", admin_admin_path %></li>
                 <% end -%>
