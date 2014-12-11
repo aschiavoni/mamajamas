@@ -44,7 +44,7 @@ Mamajamas.Views.PublicListSidebar = Mamajamas.Views.Base.extend({
   signupPrompt: function() {
     var name = this.$followButton.data("owner-name");
     var prompt = "Sign up to follow " + name;
-    prompt += " and get started keeping track of your baby gear."
+    prompt += "  and create a Mamajamas baby registry!";
     return prompt;
   },
 
