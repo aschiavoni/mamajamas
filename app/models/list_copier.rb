@@ -33,6 +33,6 @@ class ListCopier
 
   def copy_list_item(list_item)
     list_item.attributes.with_indifferent_access.
-      except(:id, :list_id, :owned, :rating, :created_at, :updated_at)
+      except(:id, :list_id, :rating, :created_at, :updated_at, :owned_quantity)
   end
 end

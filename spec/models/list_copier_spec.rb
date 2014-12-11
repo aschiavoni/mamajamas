@@ -11,7 +11,7 @@ describe ListCopier, :type => :model do
 
   def add_items(list, count)
     count.times do
-      list.add_list_item build(:list_item, list: nil, rating: 4, owned: true)
+      list.add_list_item build(:list_item, list: nil, rating: 4, owned_quantity: 2)
     end
     list.save!
   end
@@ -38,13 +38,13 @@ describe ListCopier, :type => :model do
     copier = ListCopier.new source, target
 
     copier.copy
-    expect(target.reload.list_items.pluck(:owned).uniq).to eq([ false ])
+    expect(target.reload.list_items.pluck(:owned_quantity).uniq).to eq([ 0 ])
   end
 
   it "does not copy low priority items" do
     add_items source, 3
     source.add_list_item build(:list_item, list: nil, priority: 3,
-                               rating: 4, owned: true)
+                               rating: 4, owned_quantity: 3)
     copier = ListCopier.new source, target
     copier.copy
     expect(target.reload.list_items.user_items.count).to eq(3)

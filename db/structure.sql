@@ -240,7 +240,6 @@ CREATE TABLE gifts (
     list_item_id integer NOT NULL,
     quantity integer DEFAULT 0 NOT NULL,
     purchased boolean DEFAULT false NOT NULL,
-    confirmed boolean DEFAULT false NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -383,7 +382,6 @@ CREATE TABLE list_items (
     id integer NOT NULL,
     list_id integer,
     name character varying(255),
-    owned boolean DEFAULT false NOT NULL,
     link character varying(1999),
     rating integer DEFAULT 0,
     priority integer,
@@ -1564,4 +1562,8 @@ INSERT INTO schema_migrations (version) VALUES ('20141209222401');
 INSERT INTO schema_migrations (version) VALUES ('20141210203906');
 
 INSERT INTO schema_migrations (version) VALUES ('20141210233457');
+
+INSERT INTO schema_migrations (version) VALUES ('20141211165652');
+
+INSERT INTO schema_migrations (version) VALUES ('20141211165754');
 

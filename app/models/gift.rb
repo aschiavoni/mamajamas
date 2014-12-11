@@ -23,4 +23,14 @@ class Gift < ActiveRecord::Base
       list_item.save!
     end
   end
+
+  # TODO: shadowed attributes to handle the deletion of the
+  # column. Can be removed at some point
+  def confirmed
+    false
+  end
+
+  def confirmed=(new_confirmed)
+    # do nothing
+  end
 end
