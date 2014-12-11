@@ -50,7 +50,10 @@ Mamajamas.bookmarklet = (function() {
     $('a.bt-close').click(close);
   };
 
-  var populateSelect = function($select, options) {
+  var populateSelect = function($select, options, prompt) {
+    if (prompt && prompt.length > 0)
+      options.unshift({ name: prompt });
+
     $select.find('option').remove();
     _.each(options, function(element, index, list) {
       var $opt = $('<option/>').val(element.id).text(element.name);
@@ -98,8 +101,13 @@ Mamajamas.bookmarklet = (function() {
       return c.id.toString() === categoryId.toString();
     });
 
-    if (category)
-      populateSelect($('#additem-field-type'), category.product_types);
+    if (category) {
+      // remove the prompt if a category is selected
+      var $firstOpt = $('option:first', $select);
+      if (!$firstOpt.val())
+        $firstOpt.remove();
+      populateSelect($('#additem-field-type'), category.product_types, "--please select--");
+    }
   };
 
   var setProductTypeName = function() {
