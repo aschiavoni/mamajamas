@@ -242,7 +242,7 @@
   </div>
   <div class="button-row">
     <div class="progress-container">
-      <button id="bt-cancel" class="button" type="reset">Cancel</button>
+      <%= link_to "Cancel", list_path, class: "button", id: "bt-cancel" %>
       <button type="submit" class="button bt-color" id="bt-save">Save Changes</button>
       <%= image_tag "progress-bar.gif", class: "progress", style: "display: none;" %>
     </div>
