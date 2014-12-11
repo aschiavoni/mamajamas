@@ -73,6 +73,13 @@ window.Mamajamas = {
       });
     }
 
+    // settings
+    if ($('#frm-list-settings').length > 0) {
+      new Mamajamas.Views.Settings({
+        el: '#frm-list-settings'
+      });
+    }
+
     // registry settings
     if ($('#registry-settings').length > 0) {
       new Mamajamas.Views.RegistrySettings({

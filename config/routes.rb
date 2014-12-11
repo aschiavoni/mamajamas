@@ -27,10 +27,8 @@ Mamajamas::Application.routes.draw do
     mount Sidekiq::Web => '/admin/sidekiq'
   end
 
-  get "/settings" => "list_settings#edit"
-  put "/settings" => "list_settings#update"
-  get "/email" => "email_settings#edit"
-  put "/email" => "email_settings#update"
+  get "/settings" => "settings#edit"
+  put "/settings" => "settings#update"
   get("/email/unsubscribe/:signature" => "email_settings#unsubscribe",
       as: "unsubscribe")
   get "/profile" => "users#edit"
