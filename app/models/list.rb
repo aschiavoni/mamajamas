@@ -152,6 +152,7 @@ class List < ActiveRecord::Base
       product_type_id: orig.product_type_id,
       category_id: orig.category_id,
       placeholder: false,
+      price: orig.price,
       product_type_name: orig.product_type_name,
       list_item_image_id: orig.list_item_image_id,
       vendor: orig.vendor,

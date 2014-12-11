@@ -30,7 +30,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     "submit .new-list-item": "save",
     "click .cancel-item.button": "cancel",
     "click .find-item.button": "findItemClicked",
-    "keyup textarea": "autoSaveNotes",
+    "keyup textarea": "autoSaveNotes"
   },
 
   render: function() {
@@ -95,7 +95,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
         _view.itemField("link").val(null);
         _view.itemField("link").focus();
       }
-      if (_view.model.isNew() || (!priceVal || priceVal.trim().length == 0)) {
+      if (!priceVal || priceVal.trim().length == 0) {
         _view.itemField("price").val("$0.00");
       }
       _view.itemField("name").focus();
@@ -159,8 +159,8 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
               label: item.display_name,
               name: item.name,
               value: item
-            }
-          }))
+            };
+          }));
         });
       },
       focus: function(event, ui) {
@@ -266,7 +266,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     var _view = this;
     var attributes = {
       notes: this.itemField("edit_notes").val()
-    }
+    };
     if (!_view.model.isNew()) {
       _view.autoSave(_view, attributes);
     }
@@ -292,6 +292,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
 
     this.itemField("name").val(this.model.get("name"));
     this.itemField("link").val(this.model.get("link"));
+    this.itemField("price").val(this.model.get("price"));
     this.itemField("image_url").val(this.model.get("image_url"));
     this.itemField("vendor").val(this.model.get("vendor"));
     this.itemField("vendor_id").val(this.model.get("vendor_id"));
@@ -325,7 +326,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     if (this.model.get("notes") != this.itemField("edit_notes").val()) {
       var attributes = {
         notes: this.model.get("notes")
-      }
+      };
       this.doSave(attributes, null, null);
     }
 
@@ -360,7 +361,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
     return {
       name: this.itemId("name"),
       link: this.itemId("link"),
-      notes: this.itemId("edit_notes"),
+      notes: this.itemId("edit_notes")
     };
   },
 
@@ -403,7 +404,7 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
         } else {
           listItem = $.parseJSON(data.result);
         }
-        _view.itemField('list_item_image_id').val(listItem.id)
+        _view.itemField('list_item_image_id').val(listItem.id);
         _view.itemField('image_url').val(listItem.image.url);
         _view.$itemPicture.attr("src", listItem.image.url);
       }
@@ -432,6 +433,6 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
   showAddedModal: function(addedView) {
     // no-op - interface implementation for any item view
     // ListItemsIndex.insertItem may call this
-  },
+  }
 
 });

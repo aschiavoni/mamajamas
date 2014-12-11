@@ -34,10 +34,10 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       var shareButonHeader = $('#bt-share-header');
       if (this.model.get('item_count') > 0) {
         shareButton.removeClass('disabled');
-        shareButonHeader.attr('href', "/registry")
+        shareButonHeader.attr('href', "/registry");
       } else {
         shareButton.addClass('disabled');
-        shareButonHeader.attr('href', "/list")
+        shareButonHeader.attr('href', "/list");
       }
     }, this);
 
@@ -72,7 +72,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     "click .listsort .choicedrop.list-sort ol li a": "sort",
     "click .listsort .choicedrop.list-age-filter a": "toggleAgeFilterList",
     "click .listsort .choicedrop.list-age-filter ul li a": "ageFilter",
-    "click #prod-rec": "clearRecommendedItems",
+    "click #prod-rec": "clearRecommendedItems"
   },
 
   render: function() {
