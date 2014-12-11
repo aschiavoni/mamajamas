@@ -23,6 +23,11 @@ Mamajamas.Views.Settings = Backbone.View.extend({
           $('#ind-emails').slideDown();
         }
       });
+      $('img.date-picker').click(function(event) {
+        event.preventDefault();
+        $("#field-duedate").datepicker("show");
+        return false;
+      });
     });
   }
 
