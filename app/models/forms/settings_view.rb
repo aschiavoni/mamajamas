@@ -82,14 +82,24 @@ class Forms::SettingsView
   end
 
   def partner_first_name
-    @partner_first_name ||= user.partner_full_name.split(" ").first
+    @partner_first_name ||= (
+      if user.partner_full_name.present?
+        user.partner_full_name.split(" ").first
+      else
+        nil
+      end
+    )
   end
 
   def partner_last_name
     @partner_last_name ||= (
-      parts = user.partner_full_name.split(" ")
-      parts.shift
-      parts.join(" ")
+      if user.partner_full_name.present?
+        parts = user.partner_full_name.split(" ")
+        parts.shift
+        parts.join(" ")
+      else
+        nil
+      end
     )
   end
 
