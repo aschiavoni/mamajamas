@@ -31,7 +31,9 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
     var ratingView = new Mamajamas.Views.ListItemRating({
       model: this.model
     });
-    $("div.rating", this.$el).append(ratingView.render().$el);
+    var $ratingContainer = $("div.rating", this.$el);
+    $ratingContainer.toggle(this.model.get('owned_quantity') > 0);
+    $ratingContainer.append(ratingView.render().$el);
 
     var desiredQuantityView = new Mamajamas.Views.ListItemQuantity({
       model: this.model,
@@ -104,7 +106,7 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
   },
 
   toggleRatingAndNotes: function() {
-    if (this.model.get("owned")) {
+    if (this.model.get("owned_quantity") > 0) {
       $(".rating", this.$el).show();
       if (this.model.get("rating") > 0) {
         $(".prod-note", this.$el).show();
@@ -151,7 +153,7 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
     $(".cancel-modal", this.$el).on('click', null, this, this.close);
     $(".save-added-item", this.$el).on('click', null, this, this.save);
     $(".frm-added", this.$el).on('submit', null, this, this.save);
-    this.model.on("change:owned", this.toggleRatingAndNotes, this);
+    this.model.on("change:owned_quantity", this.toggleRatingAndNotes, this);
     this.model.on("change:rating", this.toggleRatingAndNotes, this);
   },
 
@@ -159,7 +161,7 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
     $(".cancel-modal", this.$el).off('click', null, this.close);
     $(".save-added-item", this.$el).off('click', null, this.save);
     $(".frm-added", this.$el).off('submit', null, this.save);
-    this.model.off("change:owned", this.toggleRatingAndNotes, this);
+    this.model.off("change:owned_quantity", this.toggleRatingAndNotes, this);
     this.model.off("change:rating", this.toggleRatingAndNotes, this);
     $(window).off("scroll", this.updateOffsets);
   }
