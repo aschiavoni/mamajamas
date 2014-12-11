@@ -70,7 +70,7 @@
           <div class="form-row">
             <label>I Want</label>
             <!-- drop-down menu:  -->
-            <%= f.select :desired_quantity, [ 1, 2, 3, 4, 5 ] -%>
+            <%= f.select :desired_quantity, [ 0, 1, 2, 3, 4, 5 ], selected: 1 -%>
             <!-- / drop-down menu: -->
             of these. </div>
         </fieldset>
@@ -78,7 +78,7 @@
           <div class="form-row">
             <label>I Have</label>
             <!-- drop-down menu:  -->
-            <%= f.select :owned_quantity, [ 1, 2, 3, 4, 5 ] -%>
+            <%= f.select :owned_quantity, [ 0, 1, 2, 3, 4, 5 ] -%>
             <!-- / drop-down menu: -->
             of these. </div>
         </fieldset>
