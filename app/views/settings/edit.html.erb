@@ -1,0 +1,250 @@
+<%= content_for :nav do -%>
+  <ul class="sidemenu">
+    <li> <a id="listinfo-bt" href="#listinfo">Registry Details</a></li>
+    <li> <a id="giftoption-bt" href="#giftoption">Gift Option</a> </li>
+    <li> <a id="shipping-bt" href="#shipping">Shipping Address</a> </li>
+    <li> <a id="privacy-bt" href="#privacy">Privacy</a> </li>
+    <li> <a id="emailprefs-bt" href="#emailprefs">Email Preferences</a> </li>
+  </ul>
+<% end -%>
+<%= form_for @settings, url: settings_path, as: :settings, method: :put, html: { class: "new_settings label-infield mjform", id: "frm-list-settings" } do |f| %>
+  <h3 id="listinfo">Registry Details</h3>
+  <fieldset>
+    <!-- name -->
+    <dt>Name</dt>
+    <dd class="half">
+      <p>
+        <%= f.label :first_name %>
+        <br>
+        <%= f.text_field :first_name %>
+      </p>
+    </dd>
+    <dd class="half">
+      <p>
+        <%= f.label :last_name %>
+        <br>
+        <%= f.text_field :last_name %>
+      </p>
+    </dd>
+  </fieldset>
+  <fieldset>
+    <!-- co-registrant name -->
+    <dt>Co-registrant</dt>
+    <dd class="half">
+      <p>
+        <%= f.label :partner_first_name, "Co-registrant first name" %>
+        <br>
+        <%= f.text_field :partner_first_name %>
+      </p>
+    </dd>
+    <dd class="half">
+      <p>
+        <%= f.label :partner_last_name, "Co-registrant last name" %>
+        <br>
+        <%= f.text_field :partner_last_name %>
+      </p>
+    </dd>
+  </fieldset>
+  <fieldset>
+    <!-- due date -->
+    <dt>Baby due date</dt>
+    <dd class="half">
+      <p>
+        <label for="field-duedate">mm/dd/yy</label>
+        <%= f.text_field :baby_due_date, size: 30, id: "field-duedate" %>
+        <%= image_tag "icon_calendar@2x.png", class: "date-picker", alt: "calendar" %>
+      </p>
+    </dd>
+  </fieldset>
+  <fieldset>
+    <dl class="clearfix">
+      <fieldset>
+        <!-- email -->
+        <dt>Email address <strong class="required">*</strong></dt>
+        <dd>
+          <p>
+            <%= f.label :email, "Email address" %>
+            <br>
+            <%= f.text_field :email, class: "form-control" %>
+          </p>
+        </dd>
+        <!-- username -->
+        <dt>URL name <strong class="required">*</strong></dt>
+        <dd>
+          <p>
+            <%= f.label :username do %>
+              <strong>[default url]</strong>
+            <% end -%>
+            <br>
+            <%= f.text_field :username %>
+          </p>
+        </dd>
+        <!-- URL -->
+        <dt> Registry URL</dt>
+        <dd class="pad">
+          <p><strong>www.mamajamas.com/<span class="list-url-suffix"><%= @settings.username %></span></strong> <em class="light">(generated from your URL name)</em></p>
+        </dd>
+        <!-- list title -->
+        <dt>Registry title <strong class="required">*</strong></dt>
+        <dd>
+          <p>
+            <%= f.label :title do %>
+              <strong><%= @settings.title %></strong> (click to edit)
+            <% end -%>
+            <br>
+            <%= f.text_field :title %>
+          </p>
+        </dd>
+      </fieldset>
+    </dl>
+  </fieldset>
+  <h3 id="giftoption">Gift Option</h3>
+  <fieldset>
+    <div class="radio">
+      <label>
+        <%= f.radio_button :registry, true %>
+        <strong class="col5">ON</strong> Allow visitors to buy you gifts from your baby gear registry. Recommended
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <%= f.radio_button :registry, false %>
+        <strong class="col5">OFF</strong> Deactivate the gift option on your registry. 
+      </label>
+    </div>
+  </fieldset>
+  <h3 id="shipping">Shipping Address</h3>
+  <fieldset>
+    <p class="form-group">
+      <%= f.label :address_full_name, "First and last name" %>
+      <%= f.text_field :address_full_name, class: "form-control" %>
+      <%= field_error @settings, :address_full_name %>
+    </p>
+    <p class="form-group">
+      <%= f.label :street, "Street address, P.O. box ..." %>
+      <%= f.text_field :street, class: "form-control" %>
+      <%= field_error @settings, :street %>
+    </p>
+    <p class="form-group">
+      <%= f.label :street2, "Apartment, building, suite, unit, floor ..." %>
+      <%= f.text_field :street2, class: "form-control" %>
+    </p>
+    <div class="grid">
+      <div class="col col50">
+        <p class="form-group">
+          <%= f.label :city %>
+          <%= f.text_field :city, class: "form-control" %>
+          <%= field_error @settings, :city %>
+        </p>
+      </div>
+      <div class="col col50">
+        <p class="form-group">
+          <%= f.label :region, "State/Province/Region" %>
+          <%= f.text_field :region, class: "form-control" %>
+          <%= field_error @settings, :region %>
+        </p>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col col50">
+        <p class="form-group">
+          <%= f.label :postal_code, "Zip code" %>
+          <%= f.text_field :postal_code, class: "form-control" %>
+          <%= field_error @settings, :postal_code %>
+        </p>
+      </div>
+      <div class="col col50">
+        <p class="form-group">
+          <%= f.label :country_code, class: "hidden" %>
+          <%= f.select :country_code, @settings.countries, prompt: "Country..." %>
+          <%= field_error @settings, :country_code %>
+        </p>
+      </div>
+    </div>
+    <p class="form-group">
+      <%= f.label :phone, "Phone (optional)" %>
+      <%= f.text_field :phone, class: "form-control" %>
+    </p>
+  </fieldset>
+  <h3 id="privacy">Privacy</h3>
+  <p class="privacy-status">
+    <em class="privacy-status" style="display: <%= @settings.private? ? "inline" : "none"%>;">Current setting: <strong>Only you can see your registry.</strong></em>
+    <em class="privacy-status" style="display: <%= @settings.public? ? "inline" : "none"%>;">Current setting: <span class="icon-globe"></span> <strong>Anyone can see your registry.</strong></em>
+    <em class="privacy-status" style="display: <%= @settings.registered_users_only? ? "inline" : "none"%>;">Current setting: <span class="icon-bird"></span> <strong>Mamajamas users can see your registry.</strong></em>
+  </p>
+  <div id="listprivacy-select">
+    <p>Who would you like to see your registry?</p>
+    <fieldset>
+      <ul>
+        <li>
+          <label>
+            <%= f.radio_button :privacy, List::PRIVACY_PUBLIC %>
+            Anyone
+          </label>
+          — Everyone who visits Mamajamas.
+        </li>
+        <li>
+          <label>
+            <%= f.radio_button :privacy, List::PRIVACY_REGISTERED %>
+            Mamajamas users
+          </label>
+          — Only logged-in Mamajamas users.
+        </li>
+        <li>
+          <label>
+            <%= f.radio_button :privacy, List::PRIVACY_PRIVATE %>
+            Just you
+          </label>
+          — Only you can see your registry.
+        </li>
+      </ul>
+    </fieldset>
+  </div>
+  <h3 id="emailprefs">Email Preferences</h3>
+  <div class="settings-select">
+    <p> Send me an email when: </p>
+    <fieldset>
+      <ul>
+        <div id="ind-emails">
+          <li>
+            <label>
+              <%= f.check_box :new_follower_notifications_enabled %>
+              Someone follows my registry
+            </label>
+          </li>
+          <li>
+            <label>
+              <%= f.check_box :followed_user_updates_enabled %>
+              Someone I’m following adds something to their registry
+            </label>
+          </li>
+          <li>
+            <label>
+              <%= f.check_box :blog_updates_enabled %>
+              Mamajamas posts parenting, product advice or other cool content on their blog
+            </label>
+          </li>
+          <li>
+            <label>
+              <%= f.check_box :product_updates_enabled %>
+              Mamajamas announces new features or site news
+            </label>
+          </li>
+        </div>
+        <li class="separator">
+          <label>
+            <%= check_box_tag "settings[unsubscribe_all]"%>
+            Don’t send me any emails, please.
+          </label>
+        </li>
+      </ul>
+    </fieldset>
+  </div>
+  <div class="button-row">
+    <div class="progress-container">
+      <%= link_to "Cancel", list_path, class: "button", id: "bt-cancel" %>
+      <button type="submit" class="button bt-color" id="bt-save">Save Changes</button>
+      <%= image_tag "progress-bar.gif", class: "progress", style: "display: none;" %>
+    </div>
+  </div>
+<% end -%>

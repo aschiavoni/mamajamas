@@ -14,14 +14,10 @@ class Forms::RegistrySettings
   attr_reader :address
   attr_reader :list
 
-  delegate(:full_name, :full_name=,
-           :partner_full_name, :partner_full_name=,
-           to: :user)
-  delegate(:street, :street2, :city, :region, :phone,
+  delegate(:partner_full_name, :partner_full_name=, to: :user)
+  delegate(:full_name=, :street, :street2, :city, :region, :phone,
            to: :address)
   delegate(:street=, :street2=, :city=, :region=, :phone=, to: :address)
-
-  validates(:full_name, presence: true)
 
   validate do
     required_objects = [ user, list ]
@@ -40,6 +36,10 @@ class Forms::RegistrySettings
     @user = user
     @list = list
     @address = user.address || user.build_address
+  end
+
+  def full_name
+    address.full_name.present? ? address.full_name : user.full_name
   end
 
   def countries

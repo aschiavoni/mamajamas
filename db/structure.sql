@@ -73,7 +73,8 @@ CREATE TABLE addresses (
     addressable_type character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    phone character varying(255)
+    phone character varying(255),
+    full_name character varying(255)
 );
 
 
@@ -787,7 +788,8 @@ CREATE TABLE users (
     follower_count integer DEFAULT 0 NOT NULL,
     email_preferences hstore DEFAULT ''::hstore NOT NULL,
     settings hstore DEFAULT ''::hstore NOT NULL,
-    partner_full_name character varying(255)
+    partner_full_name character varying(255),
+    baby_due_date timestamp without time zone
 );
 
 
@@ -1558,4 +1560,8 @@ INSERT INTO schema_migrations (version) VALUES ('20141202003132');
 INSERT INTO schema_migrations (version) VALUES ('20141209221645');
 
 INSERT INTO schema_migrations (version) VALUES ('20141209222401');
+
+INSERT INTO schema_migrations (version) VALUES ('20141210203906');
+
+INSERT INTO schema_migrations (version) VALUES ('20141210233457');
 
