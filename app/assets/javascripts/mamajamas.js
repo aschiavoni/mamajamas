@@ -132,6 +132,13 @@ window.Mamajamas = {
       Backbone.history.start();
     }
 
+    // start registry button
+    $("#startlist a.button").click(function(e) {
+      e.preventDefault();
+      Mamajamas.Context.AppAuth.signup();
+      return false;
+    });
+
     // footer
     $("#footer .nav-drop-trigger a.nav-drop-link").click(function() {
       event.preventDefault();
