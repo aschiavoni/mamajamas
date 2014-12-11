@@ -51,13 +51,13 @@
           <div class="form-row">
             <%= label :category_id, 'Category' %>
             <!-- drop-down menu: item category -->
-            <%= f.select :category_id, @categories.map { |c| [ c[:name], c[:id ]]}, {}, id: 'additem-field-cat' %>
+            <%= f.select :category_id, @categories.map { |c| [ c[:name], c[:id ]]}, { include_blank: "--please select--" }, { id: 'additem-field-cat' } %>
             <!-- / drop-down menu: item category -->
           </div>
           <div class="form-row">
             <%= label :product_type_id, 'Type' %>
             <!-- drop-down menu: item type -->
-            <%= f.select :product_type_id, selected_category[:product_types].map { |pt| [ pt[:name], pt[:id] ] }, {}, id: 'additem-field-type' %>
+            <%= f.select :product_type_id, [], { include_blank: "--select category--" }, { id: 'additem-field-type' } %>
             <!-- / drop-down menu: item type -->
             <%= f.hidden_field :product_type_name %>
           </div>

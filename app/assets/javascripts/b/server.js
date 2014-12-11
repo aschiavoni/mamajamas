@@ -163,11 +163,35 @@ Mamajamas.bookmarklet = (function() {
     nameField.focus();
   };
 
+  var productTypeRequired = function() {
+    var field = $('#additem-field-type');
+    field.highlight();
+    field.focus();
+  };
+
+  var categoryRequired = function() {
+    var field = $('#additem-field-cat');
+    field.highlight();
+    field.focus();
+  };
+
   var valid = function() {
+    var cat = $('#additem-field-cat');
+    var ptId = $('#additem-field-type');
     var nameField = $('#additem-name');
 
     if (nameField.val().trim().length === 0) {
       nameRequired();
+      return false;
+    }
+
+    if (cat.val().trim().length === 0) {
+      categoryRequired();
+      return false;
+    }
+
+    if (ptId.val().trim().length === 0) {
+      productTypeRequired();
       return false;
     }
 
