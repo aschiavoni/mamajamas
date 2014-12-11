@@ -139,19 +139,19 @@
             <% if @view.list_entries_by_priority(1).size > 0 -%>
               <h4 id="priority-high-hed" class="priority priority-high collapsible"><strong>Must-Have</strong></h4>
               <div class="priority-high collapsible-content">
-                <%= render partial: "list_item", locals: { owner_name: @view.owner.display_first_name_or_username }, collection: @view.list_entries_by_priority(1) %>
+                <%= render partial: "list_item", locals: { registry: @view.list.registry?, owner_name: @view.owner.display_first_name_or_username }, collection: @view.list_entries_by_priority(1) %>
               </div>
             <% end -%>
             <% if @view.list_entries_by_priority(2).size > 0 -%>
               <h4 id="priority-med-hed" class="priority collapsible"><strong>Consider</strong></h4>
               <div class="priority-med collapsible-content">
-                <%= render partial: "list_item", locals: { owner_name: @view.owner.display_first_name_or_username }, collection: @view.list_entries_by_priority(2) %>
+                <%= render partial: "list_item", locals: { registry: @view.list.registry?, owner_name: @view.owner.display_first_name_or_username }, collection: @view.list_entries_by_priority(2) %>
               </div>
             <% end -%>
             <% if @view.list_entries_by_priority(3).size > 0 -%>
               <h4 id="priority-low-hed" class="priority collapsible ss-directright"><strong>Don’t Bother</strong></h4>
               <div class="priority-low collapsible-content">
-                <%= render partial: "list_item", locals: { owner_name: @view.owner.display_first_name_or_username }, collection: @view.list_entries_by_priority(3) %>
+                <%= render partial: "list_item", locals: { registry: @view.list.registry?, owner_name: @view.owner.display_first_name_or_username }, collection: @view.list_entries_by_priority(3) %>
               </div>
             <% end -%>
           </div>
@@ -162,6 +162,7 @@
            title: '<%= @view.list.title %>',
            owner_id: <%= @view.list.user.id %>,
            owner_name: '<%= @view.owner.display_first_name_or_username %>',
+           registry: <%= @view.list.registry? %>,
            <% if @view.category.present? -%>
            category_id: '<%= @view.category.id %>',
            category: '<%= @view.category.slug %>',

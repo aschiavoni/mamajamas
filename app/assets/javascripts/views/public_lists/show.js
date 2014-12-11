@@ -18,6 +18,8 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
 
   ownerName: null,
 
+  registry: null,
+
   initialize: function() {
     this.collection.on('reset', this.render, this);
 
@@ -48,11 +50,12 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
     "click .listsort .choicedrop.list-sort a": "toggleSortList",
     "click .listsort .choicedrop.list-sort ol li a": "sort",
     "click .listsort .choicedrop.list-age-filter a": "toggleAgeFilterList",
-    "click .listsort .choicedrop.list-age-filter ul li a": "ageFilter",
+    "click .listsort .choicedrop.list-age-filter ul li a": "ageFilter"
   },
 
   render: function() {
     this.ownerName = Mamajamas.Context.List.get('owner_name');
+    this.registry = Mamajamas.Context.List.get('registry');
     this.clearList();
     this.collection.each(this.appendItem, this);
     this.initExpandables();
@@ -66,12 +69,14 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
   appendItem: function(item) {
     var priority = item.get("priority");
     var ownerName = this.ownerName;
+    var isRegistry = this.registry;
     if (this.hideOwned && item.get("owned"))
       return;
     if (this.filter && item.get("age") != this.filter) {
       return;
     }
     item.set('ownerName', ownerName);
+    item.set('registry', isRegistry);
     var view = new Mamajamas.Views.PublicListItemShow({
       model: item
     });

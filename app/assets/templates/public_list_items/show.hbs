@@ -20,12 +20,14 @@
   {{#ifNotLowPriority listItem}}
     <div class="prod-when-own">
       <div class="price"> <strong>{{listItem.price}}</strong></div>
-      {{#if listItem.desired}}
-        <div class="gift">
-          <a class="bt-gift" href="/gifts/{{listItem.id}}/new">
-            <span>Gift this to {{listItem.ownerName}}</span>
-          </a>
-        </div>
+      {{#if listItem.registry}}
+        {{#if listItem.desired}}
+          <div class="gift">
+            <a class="bt-gift" href="/gifts/{{listItem.id}}/new">
+              <span>Gift this to {{listItem.ownerName}}</span>
+            </a>
+          </div>
+        {{/if}}
       {{/if}}
       <div class="when">
         {{buyLink listItem}}

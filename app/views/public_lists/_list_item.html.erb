@@ -30,12 +30,14 @@
       <% if list_item.price.present? -%>
         <div class="price"> <strong><%= list_item.price %></strong></div>
       <% end -%>
-      <% unless list_item.owned? -%>
-        <div class="gift">
-          <%= link_to new_gift_path(list_item.id), class: "bt-gift" do %>
-            <span>Gift this to <%= owner_name %></span>
-          <% end -%>
-        </div>
+      <% if registry %>
+        <% unless list_item.owned? -%>
+          <div class="gift">
+            <%= link_to new_gift_path(list_item.id), class: "bt-gift" do %>
+              <span>Gift this to <%= owner_name %></span>
+            <% end -%>
+          </div>
+        <% end -%>
       <% end -%>
       <div class="when">
         <%= link_to "Buy", list_item.link, target: "_blank" %> at <%= list_item.age %>
