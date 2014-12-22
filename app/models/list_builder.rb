@@ -95,10 +95,11 @@ class ListBuilder
   # POSTGRESQL SPECIFIC, MIGHT NEED UPDATING IF Model(s) changes
   # But this is super fast
   def placeholder_insert(pt, ts = Time.now.utc)
+    rank = pt.rank || 'NULL'
     %Q(INSERT INTO "list_items"
     ("age_range_id", "category_id", "created_at", "image_url", "list_id",
     "placeholder", "priority", "product_type_id", "product_type_name",
-    "desired_quantity", "updated_at")
+    "desired_quantity", "rank", "updated_at")
     VALUES (
     #{pt.age_range_id},
     #{pt.category_id},
@@ -110,6 +111,7 @@ class ListBuilder
     #{pt.id},
     '#{pt.name}',
     #{pt.recommended_quantity},
+    #{rank},
     '#{ts}'
     )
     )

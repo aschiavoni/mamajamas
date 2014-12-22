@@ -29,5 +29,6 @@ json.array!(list_entries) do |list_entry|
   json.vendor_id list_entry.vendor_id
   json.recommended list_entry.recommended
   json.price list_entry.price
+  json.rank list_entry.rank
   json.updated_at list_entry.updated_at
 end

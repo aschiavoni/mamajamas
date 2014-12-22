@@ -93,6 +93,7 @@ class List < ActiveRecord::Base
       list_item.image_url = product_type.image_name
       list_item.age_range = product_type.age_range
       list_item.desired_quantity = product_type.recommended_quantity
+      list_item.rank = product_type.rank
     end
 
     list_items << placeholder
@@ -155,6 +156,7 @@ class List < ActiveRecord::Base
       price: orig.price,
       product_type_name: orig.product_type_name,
       list_item_image_id: orig.list_item_image_id,
+      rank: orig.rank,
       vendor: orig.vendor,
       vendor_id: orig.vendor_id
     }).tap do |li|
@@ -192,7 +194,7 @@ class List < ActiveRecord::Base
 
   def list_entries_sort_order
     @li_sort ||=
-      "list_items.placeholder ASC, age_ranges.position ASC, categories.name ASC, list_items.product_type_name ASC"
+      "list_items.placeholder ASC, list_items.rank ASC, age_ranges.position ASC, categories.name ASC, list_items.product_type_name ASC"
   end
 
 end

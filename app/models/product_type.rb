@@ -52,4 +52,8 @@ class ProductType < ActiveRecord::Base
     end
     self.aliases = new_aliases.to_a
   end
+
+  def ranked?
+    rank?
+  end
 end

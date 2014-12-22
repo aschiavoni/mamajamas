@@ -17,6 +17,7 @@ class ListItem < ActiveRecord::Base
   attr_accessible :age_range_id
   attr_accessible :recommended
   attr_accessible :price
+  attr_accessible :rank
 
   validates :name, :link, presence: true, unless: :placeholder?
   validates :product_type_name, presence: true
@@ -96,6 +97,10 @@ class ListItem < ActiveRecord::Base
 
   def has_rating?
     owned? && rating.present? && rating > 0
+  end
+
+  def ranked?
+    rank?
   end
 
   private

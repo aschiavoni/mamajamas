@@ -402,7 +402,8 @@ CREATE TABLE list_items (
     price character varying(255),
     desired_quantity integer DEFAULT 0 NOT NULL,
     owned_quantity integer DEFAULT 0 NOT NULL,
-    gifted_quantity integer DEFAULT 0 NOT NULL
+    gifted_quantity integer DEFAULT 0 NOT NULL,
+    rank integer
 );
 
 
@@ -521,7 +522,8 @@ CREATE TABLE product_types (
     search_query character varying(255),
     recommended_quantity integer DEFAULT 1 NOT NULL,
     active boolean DEFAULT true NOT NULL,
-    aliases text[] DEFAULT '{}'::text[]
+    aliases text[] DEFAULT '{}'::text[],
+    rank integer
 );
 
 
@@ -1566,4 +1568,8 @@ INSERT INTO schema_migrations (version) VALUES ('20141210233457');
 INSERT INTO schema_migrations (version) VALUES ('20141211165652');
 
 INSERT INTO schema_migrations (version) VALUES ('20141211165754');
+
+INSERT INTO schema_migrations (version) VALUES ('20141222220116');
+
+INSERT INTO schema_migrations (version) VALUES ('20141222220122');
 

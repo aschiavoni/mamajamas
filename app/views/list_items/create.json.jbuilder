@@ -16,6 +16,7 @@ json.vendor_id @list_entry.vendor_id
 json.recommended @list_entry.recommended
 json.price @list_entry.price
 json.updated_at @list_entry.updated_at
+json.rank @list_entry.rank
 if @list_entry.product_type.present?
   json.product_type_plural_name @list_entry.product_type.plural_name
   json.product_type_image_name @list_entry.product_type.image_name

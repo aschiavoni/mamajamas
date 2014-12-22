@@ -28,6 +28,8 @@ class ListRecommendationService
   end
 
   def replace_placeholder(placeholder, recommended_product)
+    product_type = recommended_product.product_type
+    rank = product_type.present? ? product_type.rank : nil
     placeholder.update_attributes!({
                                      name: recommended_product.name,
                                      link: recommended_product.link,
@@ -36,6 +38,7 @@ class ListRecommendationService
                                      image_url: recommended_product.image_url,
                                      price: recommended_product.price,
                                      placeholder: false,
+                                     rank: rank,
                                      recommended: true
                                    })
   end
@@ -46,6 +49,11 @@ class ListRecommendationService
                  else
                    'products/icons/unknown.png'
                  end
+    rank = if list_item.product_type.present?
+             list_item.product_type.rank
+           else
+             nil
+           end
     list_item.update_attributes!({
                                    name: nil,
                                    link: nil,
@@ -54,6 +62,7 @@ class ListRecommendationService
                                    notes: nil,
                                    image_url: image_name,
                                    placeholder: true,
+                                   rank: rank,
                                    recommended: false
                                  })
   end

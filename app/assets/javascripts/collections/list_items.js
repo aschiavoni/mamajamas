@@ -1,7 +1,7 @@
 Mamajamas.Collections.ListItems = Backbone.Collection.extend({
 
   initialize: function() {
-    this.sortField = "age";
+    this.sortField = "rank";
     this.sortDirection = "ASC";
   },
 
@@ -47,6 +47,12 @@ Mamajamas.Collections.ListItems = Backbone.Collection.extend({
     },
     updated_at_desc: function(listEntry, compareTo) {
       return this.reverseSortByField(listEntry, compareTo, "updated_at");
+    },
+    rank: function(listEntry, compareTo) {
+      return this.sortByField(listEntry, compareTo, "rank");
+    },
+    rank_desc: function(listEntry, compareTo) {
+      return this.reverseSortByField(listEntry, compareTo, "rank");
     },
   },
 
