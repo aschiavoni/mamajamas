@@ -9,6 +9,7 @@ class ProductType < ActiveRecord::Base
   attr_accessible :image_name, :search_index, :search_query
   attr_accessible :recommended_quantity, :active
   attr_accessible :alias_list
+  attr_accessible :rank
 
   belongs_to :user
   belongs_to :age_range
@@ -55,5 +56,13 @@ class ProductType < ActiveRecord::Base
 
   def ranked?
     rank?
+  end
+
+  def ranked_name
+    if ranked?
+      "#{name} (#{rank})"
+    else
+      name
+    end
   end
 end

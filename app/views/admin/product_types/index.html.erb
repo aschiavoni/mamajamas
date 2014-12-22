@@ -10,6 +10,6 @@
 <h2><%= @view.category.name %> Product Types</h2>
 <% @view.product_types.each do |product_type| -%>
   <p>
-    <%= link_to product_type.name, edit_admin_product_type_path(product_type) %>
+    <%= link_to product_type.ranked_name, edit_admin_product_type_path(product_type) %>
   </p>
 <% end -%>

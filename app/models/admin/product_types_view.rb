@@ -16,7 +16,7 @@ class Admin::ProductTypesView
   end
 
   def product_types
-    category.product_types.order(:name)
+    category.product_types.order(:rank, :name)
   end
 
   def amazon_search_indexes
