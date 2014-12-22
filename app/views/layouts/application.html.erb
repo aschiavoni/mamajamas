@@ -68,7 +68,7 @@
           <li><%= link_to "Blog", "http://blog.mamajamas.com/", target: "_blank" %></li>
           <% if user_signed_in? && !current_user.guest? -%>
             <li id="myaccount">
-              <%= link_to profile_path, class: "nav-drop-link" do %>
+              <%= link_to settings_path, class: "nav-drop-link" do %>
                 <%= image_tag current_user.profile_picture.account %>
                 <span class="ss-icon ss-dropdown"></span>
               <% end -%>
