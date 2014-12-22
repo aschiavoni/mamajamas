@@ -76,7 +76,7 @@ gem 'possessive'
 gem 'active_decorator'
 gem 'countries'
 gem 'going_postal'
-gem 'meta-tags', :require => 'meta_tags'
+gem 'meta-tags', require: 'meta_tags'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -95,24 +95,24 @@ gem 'heroku'
 gem 'rack-mini-profiler'
 gem 'memcachier'
 gem 'dalli'
-gem 'sentry-raven', :git => "https://github.com/getsentry/raven-ruby.git"
+gem 'sentry-raven', git: 'https://github.com/getsentry/raven-ruby.git'
 gem 'newrelic_rpm'
 # mailchimp api wrapper
-gem 'gibbon', :git => "https://github.com/ryane/gibbon.git"
+gem 'gibbon', git: 'https://github.com/ryane/gibbon.git'
 
 # background processing
 gem 'sidekiq'
 gem 'sidekiq-middleware'
 gem 'slim', '>= 1.1.0'
-gem 'sinatra', '>= 1.3.0', :require => nil
+gem 'sinatra', '>= 1.3.0', require: nil
 
 group :development do
   gem 'guard'
   gem 'foreman'
   gem 'zeus'
-  gem 'rb-inotify', :require => false
-  gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
-  gem 'terminal-notifier-guard', :require => false # if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-inotify', require: false
+  gem 'rb-fsevent', require: false # if RUBY_PLATFORM =~ /darwin/i
+  gem 'terminal-notifier-guard', require: false # if RUBY_PLATFORM =~ /darwin/i
   gem 'quiet_assets'
   gem 'letter_opener'
 
