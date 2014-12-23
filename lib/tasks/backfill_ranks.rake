@@ -14,6 +14,9 @@ namespace :mamajamas do
         'Wipes',
         'Diaper Pail',
         'Bath Tub',
+        'Bottle',
+        'High Chair',
+        'Rocking Chair or Glider'
       ]
 
       ranked.each_with_index do |product_type_name, idx| 
