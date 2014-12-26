@@ -14,7 +14,7 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
 
   privacyWantOnly: 3,
 
-  filter: null,
+  filter: "Available",
 
   ownerName: null,
 
@@ -49,8 +49,8 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
   events: {
     "click .listsort .choicedrop.list-sort a": "toggleSortList",
     "click .listsort .choicedrop.list-sort ol li a": "sort",
-    "click .listsort .choicedrop.list-age-filter a": "toggleAgeFilterList",
-    "click .listsort .choicedrop.list-age-filter ul li a": "ageFilter"
+    "click .listsort .choicedrop.list-available-filter a": "toggleAvailableFilterList",
+    "click .listsort .choicedrop.list-available-filter ul li a": "availableFilter"
   },
 
   render: function() {
@@ -70,17 +70,32 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
     var priority = item.get("priority");
     var ownerName = this.ownerName;
     var isRegistry = this.registry;
+
+    if (this.isFiltered(item))
+      return;
     if (this.hideOwned && item.get("owned"))
       return;
-    if (this.filter && item.get("age") != this.filter) {
-      return;
-    }
+
     item.set('ownerName', ownerName);
     item.set('registry', isRegistry);
     var view = new Mamajamas.Views.PublicListItemShow({
       model: item
     });
     $(this.$priorityContainer(priority)).append(view.render().$el);
+  },
+
+  isFiltered: function(item) {
+    if (this.filter) {
+      if (this.filter === "Available" && item.get('desired_quantity') <= 0)
+        return true;
+      else if (this.filter === "Not available" && item.get('desired_quantity') != 0) {
+        return true;
+      } else {
+        return false;
+      }
+
+    }
+    return false;
   },
 
   toggleSortList: function(event) {
@@ -107,7 +122,7 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
     this.collection.sort();
   },
 
-  toggleAgeFilterList: function(event) {
+  toggleAvailableFilterList: function(event) {
     var $target = $(event.currentTarget);
     var $choiceDrop = $target.parents(".choicedrop");
     var $list = $choiceDrop.find("ul");
@@ -121,12 +136,12 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
     return false;
   },
 
-  ageFilter: function(event) {
+  availableFilter: function(event) {
     var $filterLink = $(event.currentTarget);
     var filterName = $filterLink.html();
     var $filterDisplay = $filterLink.parents(".choicedrop").children("a");
     $filterDisplay.html(filterName + " <span class=\"ss-dropdown\"></span>");
-    (filterName === "All ages") ? this.filter = null : this.filter = filterName;
+    (filterName === "All") ? this.filter = null : this.filter = filterName;
 
     this.render();
   },
