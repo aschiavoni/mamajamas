@@ -25,6 +25,7 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
   showClearRecommendedTooltip: false,
 
   initialize: function() {
+    this.filter = $.cookies.get('edit_registry_filter');
     this.collection.on("reset", this.render, this);
     this.collection.on("add", this.insertItem, this);
     this.collection.on("remove", this.removeItem, this);
@@ -57,6 +58,13 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
   render: function() {
     this.priorityContainers = {};
     this.$el.html(this.template);
+
+    if (this.filter) {
+      $('.list-age-filter > a').html(
+        this.filter + " <span class=\"ss-dropdown\"></span>"
+      );
+    }
+
     this.collection.each(this.appendItem, this);
     this.initCollapsibles();
     this.initExpandables();
@@ -220,6 +228,7 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     var $target = $(event.target);
     var filterBy = $target.html();
     (filterBy === "All ages") ? this.filter = null : this.filter = filterBy;
+    $.cookies.set('edit_registry_filter', this.filter);
     this.render();
   },
 

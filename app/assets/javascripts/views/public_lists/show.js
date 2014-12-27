@@ -14,13 +14,14 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
 
   privacyWantOnly: 3,
 
-  filter: "Available",
+  filter: null,
 
   ownerName: null,
 
   registry: null,
 
   initialize: function() {
+    this.filter = $.cookies.get('public_registry_filter') || "Available";
     this.collection.on('reset', this.render, this);
 
     this.initCollapsibles();
@@ -54,6 +55,12 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
   },
 
   render: function() {
+    if (this.filter) {
+      $('.list-available-filter > a', this.$el).html(
+        this.filter + " <span class=\"ss-dropdown\"></span>"
+      );
+    }
+
     this.ownerName = Mamajamas.Context.List.get('owner_name');
     this.registry = Mamajamas.Context.List.get('registry');
     this.clearList();
@@ -141,7 +148,8 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
     var filterName = $filterLink.html();
     var $filterDisplay = $filterLink.parents(".choicedrop").children("a");
     $filterDisplay.html(filterName + " <span class=\"ss-dropdown\"></span>");
-    (filterName === "All") ? this.filter = null : this.filter = filterName;
+    this.filter = filterName;
+    $.cookies.set('public_registry_filter', this.filter);
 
     this.render();
   },
