@@ -17,7 +17,7 @@ class CompleteListWorker
 
     # add recommended products
     log "4 / 7: Adding recommended products, if applicable"
-    ListRecommendationService.new(user).update! if !user.build_custom_list?
+    ListRecommendationService.new(user).update! unless user.build_custom_list?
 
     # prune list
     log "5 / 7: List updated. Pruning list..."

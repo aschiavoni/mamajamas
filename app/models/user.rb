@@ -255,7 +255,8 @@ class User < ActiveRecord::Base
   def build_custom_list?
     answer = Quiz::Answer.most_recent_answers(self.id).
       select { |a| a.question == "custom list" }.first
-    answer.present? && answer.answers.first == "true"
+    return true if answer.blank?
+    answer.answers.first == "true"
   end
 
   def reset_list!

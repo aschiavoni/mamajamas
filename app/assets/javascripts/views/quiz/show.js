@@ -71,7 +71,27 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
 
   closeQuiz: function(dialog) {
     if (confirm("Are you sure you want to quit the quiz?")) {
-      window.location = '/';
+      if (Mamajamas.Context.List.get('id'))
+        window.location = '/';
+      else {
+        var _view = this;
+
+        $.ajax({
+          url: '/quiz',
+          type: 'PUT',
+          data: {
+            complete_list: true
+          },
+          success: function(data, status, xhr) {
+            window.location = '/';
+          },
+          error: function(xhr, status, error) {
+            Mamajamas.Context.Notifications.error('Please try again later.');
+          },
+          complete: function() {
+          }
+        });
+      }
     } else {
       // this is pretty tied to the internal implementation of simplemodal
       // beware of this breaking if we update simplemodal

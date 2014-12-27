@@ -12,9 +12,11 @@ class QuizController < ApplicationController
   end
 
   def update
-    question_name = params[:question].downcase
-    answers = params[:answers] || []
-    Quiz::Answer.save_answer!(current_user, question_name, answers)
+    question_name = params[:question].try(:downcase)
+    if question_name.present?
+      answers = params[:answers] || []
+      Quiz::Answer.save_answer!(current_user, question_name, answers)
+    end
 
     if params[:complete_list]
       current_user.complete_quiz!
