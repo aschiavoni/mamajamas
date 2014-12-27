@@ -49,8 +49,10 @@ describe ListRecommendationService, :type => :model do
 
   context 'clear_recommendations!' do
     before(:each) {
-      create(:list_item, recommended: true, list: @user.list)
-      create(:list_item, recommended: true, list: @user.list)
+      @c1 = create(:category)
+      @c2 = create(:category)
+      create(:list_item, recommended: true, list: @user.list, category_id: @c1.id)
+      create(:list_item, recommended: true, list: @user.list, category_id: @c2.id)
     }
 
     it "clears all recommendations from a list" do
@@ -62,6 +64,18 @@ describe ListRecommendationService, :type => :model do
       rc = @user.list.list_items.recommended.count
       expect do
         ListRecommendationService.new(@user).clear_recommendations!
+      end.to change(@user.list.list_items.placeholders, :count).by(rc)
+    end
+
+    it "clears all recommendations from a category" do
+      ListRecommendationService.new(@user, @c1).clear_recommendations!
+      expect(@user.list.reload.list_items.recommended.count).to eq(1)
+    end
+
+    it "restores placeholders to a category" do
+      rc = @user.list.list_items.recommended.where(category_id: @c1.id).count
+      expect do
+        ListRecommendationService.new(@user, @c1).clear_recommendations!
       end.to change(@user.list.list_items.placeholders, :count).by(rc)
     end
 

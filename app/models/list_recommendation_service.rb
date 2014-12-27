@@ -1,6 +1,7 @@
 class ListRecommendationService
-  def initialize(user)
+  def initialize(user, category = nil)
     @user = user
+    @category = category
   end
 
   def update!
@@ -22,7 +23,13 @@ class ListRecommendationService
 
   def clear_recommendations!
     list = user.list
-    list.list_items.recommended.each do |list_item|
+    list_items = list.list_items.recommended
+
+    if category.present?
+      list_items = list_items.where(category_id: category.id)
+    end
+
+    list_items.recommended.each do |list_item|
       restore_placeholder(list_item)
     end
   end
@@ -71,6 +78,10 @@ class ListRecommendationService
 
   def user
     @user
+  end
+
+  def category
+    @category
   end
 
   def recommended_products

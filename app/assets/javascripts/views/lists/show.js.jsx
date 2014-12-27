@@ -238,7 +238,13 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     }
     var view = this;
     view.showProgress();
-    m = "This will clear all Mamajamas recommendations that you have not added, rated, or edited. You cannot get recommendations back once you clear them.\n\nAre you sure you want to clear all recommended items from your list?"
+    m = "This will clear all Mamajamas recommendations that you have not added, rated, or edited. You cannot get recommendations back once you clear them.\n\nAre you sure you want to clear all recommended items from "
+
+    if (Mamajamas.Context.List.get('category_id')) {
+      m += "this category in your registry?";
+    } else {
+      m += "your registry?";
+    }
 
     _.delay(function() {
       if (confirm(m)) {

@@ -70,9 +70,25 @@ class ListsController < ApplicationController
   end
 
   def clear_recommended
-    flash[:notice] = "We have cleared all recommended items from your list."
-    ListRecommendationService.new(current_user).clear_recommendations!
-    redirect_to list_path
+    category_id = params[:category_id]
+
+    if category_id.present?
+      category = Category.find(category_id)
+      msg = "We have cleared all recommended items from the #{category.name} category."
+      redirect_path = list_category_path(category)
+    else
+      category = nil
+      msg = "We have cleared all recommended items from your registry."
+      redirect_path = list_path
+    end
+
+    ListRecommendationService.
+      new(current_user, category).
+      clear_recommendations!
+
+    flash[:notice] = msg
+
+    redirect_to redirect_path
   end
 
   private

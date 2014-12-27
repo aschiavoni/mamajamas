@@ -77,6 +77,8 @@ Mamajamas::Application.routes.draw do
     get 'check' => "lists#check", as: :list_check
     post 'copy' => "public_lists#copy", as: :public_list_copy
     post "clear_recommended" => "lists#clear_recommended", as: :clear_recommended
+    post("clear_recommended/:category_id" => "lists#clear_recommended",
+         as: :clear_recommended_category)
   end
   get "/list/:category" => "lists#show", as: :list_category
 

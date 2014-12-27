@@ -1,7 +1,7 @@
 <div id="listcontrols" class="clearfix">
   {{#if has_recommended_items}}
     <div id="prod-rec" class="menu-icon">
-      <form method="POST" action="/list/clear_recommended" class="clear-recommended">
+      <form method="POST" action="/list/clear_recommended/{{category_id}}" class="clear-recommended">
         <input type="hidden" name="authenticity_token">
         <a href="#" class="tooltip">
           Clear Recommended
