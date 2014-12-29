@@ -13,6 +13,10 @@ class AgeRangeComparer
     age_ranges.where("position > ?", age_range.position)
   end
 
+  def pre_birth?(age_range)
+    age_range == pre_birth
+  end
+
   def newborn?(age_range)
     position = age_range.position
     position > pre_birth.position &&

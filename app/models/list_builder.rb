@@ -45,7 +45,9 @@ class ListBuilder
   end
 
   def product_type_applicable?(product_type)
-    if comparer.newborn?(kid.age_range)
+    if comparer.pre_birth?(kid.age_range)
+      return !older_than_seven_to_twelve_months.include?(product_type.age_range)
+    elsif comparer.newborn?(kid.age_range)
       return !older_than_thirteen_to_eighteen_months.include?(product_type.age_range)
     elsif comparer.infant?(kid.age_range)
       return !older_than_two_years.include?(product_type.age_range)
@@ -78,6 +80,10 @@ class ListBuilder
 
   def younger_ages
     @younger ||= kid.age_range.younger
+  end
+
+  def older_than_seven_to_twelve_months
+    @older_than_seven ||= comparer.older(comparer.seven_to_twelve_months)
   end
 
   def older_than_thirteen_to_eighteen_months
