@@ -2,6 +2,7 @@ class RegistrationsController < Devise::RegistrationsController
   prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy, :facebook, :facebook_update]
   prepend_before_filter :logout_guest, only: [ :new ]
   before_filter :init_view, only: [ :new ]
+  before_filter :clear_preference_cookies
   before_filter :configure_permitted_parameters
 
   # fix for facebook friends update

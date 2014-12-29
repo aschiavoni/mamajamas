@@ -25,7 +25,6 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
   showClearRecommendedTooltip: false,
 
   initialize: function() {
-    this.filter = $.cookies.get('edit_registry_filter');
     this.collection.on("reset", this.render, this);
     this.collection.on("add", this.insertItem, this);
     this.collection.on("remove", this.removeItem, this);
@@ -33,6 +32,9 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
 
     var _view = this;
     if (Mamajamas.Context.List.get('view_count') == 0) {
+      // clear filter cookie
+      $.cookies.set('edit_registry_filter', null);
+      $.cookies.set('public_registry_filter', null);
       _view.showHelpModals = true;
       _view.showClearRecommendedTooltip = true;
     } else if (Mamajamas.Context.User.get('show_bookmarklet_prompt') == true) {
@@ -43,6 +45,8 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
       $('body').append(bookmarkletPrompt.render().$el);
       bookmarkletPrompt.show();
     }
+
+    this.filter = $.cookies.get('edit_registry_filter');
 
     if (_view.isGuestUser()) {
       _.delay(function() {

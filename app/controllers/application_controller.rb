@@ -144,6 +144,12 @@ class ApplicationController < ActionController::Base
     response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
 
+  def clear_preference_cookies
+    %w(edit_registry_filter public_registry_filter).each do |name| 
+      cookies.delete(name)
+    end
+  end
+
   def asset_url(source)
     path = ActionController::Base.helpers.asset_path(source)
     unless Rails.application.config.action_controller.asset_host.present?

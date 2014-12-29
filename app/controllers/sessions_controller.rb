@@ -2,6 +2,7 @@ class SessionsController < Devise::SessionsController
   before_filter :init_view
   skip_filter :prompt_to_confirm_email_maybe, only: [ :create ]
   prepend_before_filter :logout_guest, only: [ :new ]
+  before_filter :clear_preference_cookies
 
   def new
     self.resource = build_resource sign_in_params
