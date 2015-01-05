@@ -9,7 +9,7 @@
 .quiz-box {
   font-family: 'Open Sans', sans-serif;
   clear: both;
-  width: 740px;
+  width: 821px;
   min-height:377px;
   position: relative;
   z-index: 40003;
@@ -25,12 +25,13 @@
     top:75px;
     border: 1px solid #c9c9c9;
   }
-.quiz-box-s {
+.quiz-box-s,
+.quiz-results {
   min-height:377px;
 }
 #quiz-modal.simplemodal-data,
 .quiz-modal.simplemodal-data {
-  width: 740px;
+  width: 821px;
   }
 #quiz-modal.simplemodal-data input[type=email],
 #quiz-modal.simplemodal-data input[type=text],
@@ -107,15 +108,18 @@
   margin-top: 1em;
 }
 .quiz-box .button-row,
-.quiz-box-s .button-row {
+.quiz-box-s .button-row,
+.quiz-results .button-row {
   position:absolute;
   bottom:0;
-  margin: 1px;
-  padding: 10px 20px 8px;
-  width:698px;
+  padding: 10px 20px;
+  width:100%;
   text-align: center;
   border-top: none;
   background:#f6f4f2;
+  box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
 }
 .quiz-box .divider,
 .quiz-box-s .divider {
@@ -253,7 +257,7 @@ div.choicedrop {
   display: block;
   padding: .35em 0 0.4em;
   font-size: .667em;
-  font-weight: 300;
+  font-weight: 400;
   text-transform: lowercase;
   text-align: center;
   color: #FFF;
@@ -371,20 +375,28 @@ div.checked { /* checkbox overlay for selected item */
 .quiz-box button,
 .quiz-box .button,
 .quiz-box-s button,
-.quiz-box-s .button {
+.quiz-box-s .button,
+.quiz-results .button-row button,
+.quiz-results .button-row .button {
   font-family: 'Open Sans', sans-serif;
   padding: 5px 25px .35em;
   border: none;
-  background-color: #c7c7c7;
   text-transform:uppercase;
   letter-spacing:.15em;
 }
+.quiz-results .button-row button,
+.quiz-results .button-row .button {
+  padding: 5px 15px .35em;
+}
 .simplemodal-data .quiz-box-s .button-row button,
-.simplemodal-data .quiz-box-s .button-row .button {
+.simplemodal-data .quiz-box-s .button-row .button,
+.simplemodal-data .quiz-results .button-row button,
+.simplemodal-data .quiz-results .button-row .button{
   font-size: 12px;
 }
 .quiz-box .bt-color,
-.quiz-box-s .bt-color {
+.quiz-box-s .bt-color,
+.quiz-results .button-row .bt-color {
   background: #874789;
 }
 span.ss-navigateleft,
@@ -395,19 +407,14 @@ span.ss-navigateright {
 }
 #bt-start {
   margin-top:30px;
-}
-#bt-start,
-#bt-next {
   padding-left: 32px;
-}
-#bt-prev {
-  padding-right: 32px;
 }
 #bt-build {
   background: #5BAA5D;
 }
 .quiz-box .button-row p,
-.quiz-box-s .button-row p {
+.quiz-box-s .button-row p,
+.quiz-results .button-row p {
   font-size:1.077em;
   color:#808080;
   position:absolute;
@@ -418,11 +425,13 @@ span.ss-navigateright {
   text-align:center;
 }
 .quiz-box .button-row p a,
-.quiz-box-s .button-row p a {
+.quiz-box-s .button-row p a,
+.quiz-results .button-row p a {
   color:#696969;
 }
 .quiz-box .button-row p a:hover,
-.quiz-box-s .button-row p a:hover  {
+.quiz-box-s .button-row p a:hover,
+.quiz-results .button-row p a:hover {
   color:#000;
 }
 .skip {
@@ -582,6 +591,10 @@ span.ss-navigateright {
 #quiz09 li:hover .thumb {
   z-index: 40100;
 }
+.quiz-results .content {
+  padding-top: 0;
+  padding-bottom: 50px;
+}
 
 /* modal gallery */
 .gallery {
@@ -597,7 +610,8 @@ span.ss-navigateright {
 }
 .gallery .content {
   font-size: 1em;
-  color: #a6a6a6;
+  font-weight: 400;
+  color: #b6b6b6;
   text-align: left;
 }
 .gallery .content a {
