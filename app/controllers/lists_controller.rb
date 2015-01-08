@@ -6,7 +6,7 @@ class ListsController < ApplicationController
   before_filter :set_cache_buster, only: [ :show ]
   before_filter :set_add_to_list, only: [ :show ]
   before_filter only: [:show] { |c|
-    c.set_facebook_ad_conversion_params '6014528473678'
+    c.set_facebook_ad_conversion_params '6014528445278'
   }
 
   respond_to :html, :json

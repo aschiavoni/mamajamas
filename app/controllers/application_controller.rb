@@ -163,7 +163,7 @@ class ApplicationController < ActionController::Base
     @pinterest_js = true
   end
 
-  def set_facebook_ad_conversion_params(pixel_id, value = 0.0, currency = "USD")
+  def set_facebook_ad_conversion_params(pixel_id, value = 0.01, currency = "USD")
     @facebook_ad_conversion_params = {
       pixel_id: pixel_id,
       value: value,

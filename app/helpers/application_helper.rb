@@ -144,15 +144,21 @@ module ApplicationHelper
     if Rails.env.production? && @facebook_ad_conversion_params
       js = <<-JS
         <!-- Facebook Conversion Code for Get to List Page -->
-        <script type="text/javascript">
-        var fb_param = {};
-        fb_param.pixel_id = '#{@facebook_ad_conversion_params[:pixel_id]}';
-        fb_param.value = '#{@facebook_ad_conversion_params[:value]}';
-        fb_param.currency = '#{@facebook_ad_conversion_params[:currency]}';
-        (function()
-        { var fpw = document.createElement('script'); fpw.async = true; fpw.src = '//connect.facebook.net/en_US/fp.js'; var ref = document.getElementsByTagName('script')[0]; ref.parentNode.insertBefore(fpw, ref); })();
+        <script>(function() {
+        var _fbq = window._fbq || (window._fbq = []);
+        if (!_fbq.loaded) {
+        var fbds = document.createElement('script');
+        fbds.async = true;
+        fbds.src = '//connect.facebook.net/en_US/fbds.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(fbds, s);
+        _fbq.loaded = true;
+        }
+        })();
+        window._fbq = window._fbq || [];
+        window._fbq.push(['track', '#{@facebook_ad_conversion_params[:pixel_id]}', {'value':'#{@facebook_ad_conversion_params[:value]}','currency':'#{@facebook_ad_conversion_params[:currency]}'}]);
         </script>
-        <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=#{@facebook_ad_conversion_params[:pixel_id]}&value=#{@facebook_ad_conversion_params[:value].to_i}&currency=#{@facebook_ad_conversion_params[:currency]}" /></noscript>
+        <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=#{@facebook_ad_conversion_params[:pixel_id]}&amp;cd[value]=#{@facebook_ad_conversion_params[:value]}&amp;cd[currency]=#{@facebook_ad_conversion_params[:currency]}&amp;noscript=1" /></noscript>
       JS
       js.html_safe
     end
