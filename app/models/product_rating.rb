@@ -12,4 +12,14 @@ class ProductRating < ActiveRecord::Base
       where(["product_ratings.rating >= 3.0"]).
       select("DISTINCT product_ratings.vendor_id").map(&:vendor_id)
   end
+
+  def self.for_recommended_products
+    join = %Q{
+      INNER JOIN recommended_products
+      ON product_ratings.vendor = recommended_products.vendor
+      AND product_ratings.vendor_id = recommended_products.vendor_id
+    }
+
+    self.joins(join)
+  end
 end

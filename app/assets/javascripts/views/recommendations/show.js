@@ -14,6 +14,18 @@ Mamajamas.Views.Recommendation = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
+
+    var rating = this.model.get('rating');
+    if (rating && rating > 0) {
+      var ratingView = new Mamajamas.Views.ListItemRating({
+        model: this.model
+      });
+      ratingView.readOnly = true;
+
+      var $ratingContainer = $("div.rating", this.$el);
+      $ratingContainer.append(ratingView.render().$el);
+    }
+
     return this;
   },
 

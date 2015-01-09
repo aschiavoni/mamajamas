@@ -8,6 +8,16 @@ class ProductRatingUpdater
       rating = calculate(*product_data)
       rating.present? ? rating.save! : remove_rating(*product_data)
     end
+
+    ProductRating.for_recommended_products.each do |rating|
+      rp = RecommendedProduct.find_by(vendor: rating.vendor,
+                                      vendor_id: rating.vendor_id)
+
+      if rp.present?
+        rp.rating = rating.rating.round
+        rp.save!
+      end
+    end
   end
 
   private

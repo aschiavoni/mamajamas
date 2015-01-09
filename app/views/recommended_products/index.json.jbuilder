@@ -7,6 +7,7 @@ json.array!(@recommended_products) do |item|
   json.image_url item[:recommended_product].image_url
   json.tag item[:recommended_product].tag
   json.price item[:recommended_product].price
+  json.rating item[:recommended_product].rating
 
   if item[:product_type].present?
     json.category_id item[:product_type].category_id

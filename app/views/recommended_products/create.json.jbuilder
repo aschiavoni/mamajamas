@@ -17,6 +17,7 @@ json.recommended @list_item.recommended
 json.price @list_item.price
 json.updated_at @list_item.updated_at
 json.rank @list_item.rank
+json.rating @list_item.rating
 if @list_item.product_type.present?
   json.product_type_plural_name @list_item.product_type.plural_name
   json.product_type_image_name @list_item.product_type.image_name
