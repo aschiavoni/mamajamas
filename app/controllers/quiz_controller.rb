@@ -8,7 +8,12 @@ class QuizController < ApplicationController
   respond_to :json
 
   def show
-    @countries = Country.all.sort.to_json
+    @countries = Rails.cache.fetch('countries-all') do
+      Country.all.sort.to_json
+    end
+    @categories = Rails.cache.fetch('categories-all') do
+      Category.all.order(:name).to_json(only: [:id, :name])
+    end
   end
 
   def update

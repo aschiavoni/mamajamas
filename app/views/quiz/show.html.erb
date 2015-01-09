@@ -5,8 +5,16 @@
   <!-- /end modal window ************ -->
   <div id="countries" style="display:none" data-countries="<%= @countries %>"></div>
   <script type="text/javascript">
-    Mamajamas.Context.List = new Mamajamas.Models.List({
-      id: <%= current_user.list.present? ? current_user.list.id : 'null' %>
-    });
+   <% if current_user.list.present? -%>
+   Mamajamas.Context.List = new Mamajamas.Models.List({
+     id: <%= current_user.list.id %>,
+     completed: <%= current_user.list.completed? %>,
+   });
+   <% else -%>
+   Mamajamas.Context.List = new Mamajamas.Models.List({
+     id: null
+   });
+   <% end -%>
+   Mamajamas.Context.Categories = <%= @categories.html_safe %>;
   </script>
 <% end -%>

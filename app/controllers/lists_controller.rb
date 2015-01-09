@@ -66,7 +66,14 @@ class ListsController < ApplicationController
   end
 
   def check
-    render json: { complete: ( @list.present? && @list.completed? ) }
+    if @list.present?
+      render json: {
+                    id: @list.id,
+                    complete: @list.completed?
+                   }
+    else
+      render json: { complete: false, id: nil }
+    end
   end
 
   def clear_recommended

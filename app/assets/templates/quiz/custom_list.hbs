@@ -14,8 +14,8 @@
                 </label>
                 <a href="#" class="float-r small gallery-a"><span class="ss-icon ss-view"></span> Preview</a>
               </div>
-              We’ll start your registry pre-filled with products that Mamajamas recommends for you, but you’ll still be able to add your own and delete ours.
-              <img src="{{assetPath 'list-preview_recommendations-t.png'}}" class="thumb" alt="" width="229" height="217" />
+              We’ll start your registry pre-filled with products that Mamajamas recommends, but you’ll still be able to add your own and delete ours.
+              <img src="{{assetPath 'preview_recommendations-t.png'}}" class="thumb" alt="" width="229" height="217" />
             </li>
             <li>
               <div>
@@ -25,8 +25,8 @@
                 </label>
                 <a href="#" class="float-r small gallery-b"><span class="ss-icon ss-view"></span> Preview</a>
               </div>
-              We’ll still give you a list of baby gear you'll need based on your quiz results, but let you fill in your own products. Choose this if you know what brands you want, or plan to copy from other registries.
-              <img src="{{assetPath 'list-preview_blank-t.png'}}" class="thumb" alt="" width="229" height="217" />
+							We’ll give you an empty registry of baby gear categories and let you fill in your own products. Choose this if you want to give advice or copy from other members’ registries. 
+              <img src="{{assetPath 'preview_norecs-t.png'}}" class="thumb" alt="" width="229" height="217" />
             </li>
           </ul>
         </fieldset>
@@ -37,12 +37,13 @@
   <!-- end modal window content -->
   <div class="button-row clearfix">
     <!-- instructions -->
+		<p><a class="skip" href="#">Skip this</a> and build my registry.</p>
     <!-- previous and next buttons -->
     <div class="col50 float-l left">
       <a href="#" class="button" id="bt-prev"><span class="ss-navigateleft"></span>Previous</a>
     </div>
     <div class="col50 float-r right">
-      <a href="#" class="button" id="bt-build">Build My Registry</a>
+      <a href="#" class="button bt-color" id="bt-next">Next<span class="ss-navigateright"></span></a>
     </div>
   </div>
   <!-- quiz progress bar -->
@@ -61,7 +62,7 @@
       <p>You’ll get an editable list pre-filled with baby gear products that Mamajamas recommends. <a data-toggle-preview-target="#gallery-modal-b" class="toggle-preview gallery-b" href="#">See the other option</a></p>
       <p><a class="quiz-return" href="#">Return to quiz question</a></p>
       <div class="gallery-img">
-        <img src="{{assetPath 'list-preview_recommendations.png'}}" title="Baby gear list pre-filled with products recommended by Mamajamas" alt=""/>
+        <img src="{{assetPath 'preview_recommendations.png'}}" title="Baby gear list pre-filled with products recommended by Mamajamas" alt=""/>
       </div>
     </div>
     <!-- end modal window content -->
@@ -78,7 +79,7 @@
       <p>You’ll get a “blank” list of baby gear categories that you can fill in with specific products. <a data-toggle-preview-target="#gallery-modal-a" class="toggle-preview gallery-a" href="#">See the other option</a></p>
       <p><a class="quiz-return" href="#">Return to quiz question</a></p>
       <div class="gallery-img">
-        <img src="{{assetPath 'list-preview_blank.png'}}" title="Baby gear list of item categories, to be filled with specific product listings" alt=""/>
+        <img src="{{assetPath 'preview_no-recs.png'}}" title="Baby gear list of item categories, to be filled with specific product listings" alt=""/>
       </div>
     </div>
     <!-- end modal window content -->

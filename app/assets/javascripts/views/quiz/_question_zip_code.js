@@ -25,7 +25,7 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
     'click .skip': 'skip',
     'click #country-select': 'showCountries',
     'click .country-name': 'selectCountry',
-    'submit #frm-zip': 'save',
+    'submit #frm-zip': 'save'
   },
 
   rendered: function() {
@@ -47,7 +47,7 @@ Mamajamas.Views.QuizZipCode = Mamajamas.Views.QuizQuestion.extend({
       type: 'PUT',
       data: {
         zip_code: $('#zip_code', this.$el).val(),
-        country: $('#country', this.$el).val(),
+        country: $('#country', this.$el).val()
       },
       success: function(data, status, xhr) {
         _view.clearErrors();

@@ -21,7 +21,7 @@ Mamajamas.Views.QuizCustomList = Mamajamas.Views.QuizQuestion.extend({
     'click #bt-build': 'save',
     'change input[name=prodrecc-radio]': 'customListToggle',
     'click .gallery-a': 'showPreviewA',
-    'click .gallery-b': 'showPreviewB',
+    'click .gallery-b': 'showPreviewB'
   },
 
   rendered: function() {
@@ -31,6 +31,12 @@ Mamajamas.Views.QuizCustomList = Mamajamas.Views.QuizQuestion.extend({
         $('#custom-list').prop('checked', true);
       });
     }
+  },
+
+  next: function() {
+    if (this.model.get("answers")[0] === "true")
+      this.quizView.forceDone = true;
+    this.quizView.next();
   },
 
   customListToggle: function(event) {
@@ -101,6 +107,6 @@ Mamajamas.Views.QuizCustomList = Mamajamas.Views.QuizQuestion.extend({
     _view.showPreview(targetPreviewSelector);
     _view.hidePreview(currentPreviewSelector);
     return false;
-  },
+  }
 
 });
