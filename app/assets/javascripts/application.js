@@ -30,5 +30,6 @@
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections
+//= require ./views/recommendations/edit
 //= require_tree ./views
 //= require_tree ./routers

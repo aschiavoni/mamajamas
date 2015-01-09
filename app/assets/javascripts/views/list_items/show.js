@@ -20,7 +20,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     this.$el.attr("id", this.model.get("id"));
 
     if (this.model.get('recommended'))
-      this.$el.addClass('prod-rec')
+      this.$el.addClass('prod-rec');
   },
 
   events: {
@@ -28,7 +28,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
     "click .prod-edit-menu .delete": "delete",
     "click .prod-edit-menu .drag": "doNothing",
     "click .bt-addanother": "addAnother",
-    "click .bt-change": "change",
+    "click .bt-change": "change"
   },
 
   render: function() {

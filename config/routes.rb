@@ -114,6 +114,7 @@ Mamajamas::Application.routes.draw do
       put "update_zip_code" => "quiz#update_zip_code"
       post "list_item_images" => "list_item_images#create"
       put "/gifts/:gift_id" => "gifts#update"
+      get "recommendations" => "recommended_products#index"
       resources :invites, only: [ :create ]
     end
   end

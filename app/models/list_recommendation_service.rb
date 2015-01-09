@@ -8,17 +8,13 @@ class ListRecommendationService
     list = user.list
     conditions = "priority < 3"
     list.list_items.placeholders.where(conditions).each do |placeholder|
-      rps = recommended_products[placeholder.product_type_id]
-
-      if rps.size > 0
-        if user.has_multiples? &&
-            (twins_rec = rps.select { |rp| rp.tag == "twins" }.first).present?
-          replace_placeholder(placeholder, twins_rec)
-        else
-          replace_placeholder(placeholder, rps.sample)
-        end
-      end
+      product = random_recommended_products[placeholder.product_type_id]
+      replace_placeholder(placeholder, product[:recommended_product]) if product.present?
     end
+  end
+
+  def random_recommended_products
+    @random_products ||= build_random_recommended_products
   end
 
   def clear_recommendations!
@@ -74,6 +70,19 @@ class ListRecommendationService
                                  })
   end
 
+  def recommended_products
+    @recommended_products ||= build_recommended_products_hash
+  end
+
+  def product_type_ids
+    @product_type_ids ||= user.
+      list.
+      list_items.
+      select(:product_type_id).
+      uniq.
+      map(&:product_type_id)
+  end
+
   private
 
   def user
@@ -84,16 +93,33 @@ class ListRecommendationService
     @category
   end
 
-  def recommended_products
-    @recommended_products ||= build_recommended_products_hash
-  end
-
   def build_recommended_products_hash
     h = Hash.new { |hsh, key| hsh[key] = [] }
     tags = [ "eco", "cost", "extra", "twins" ]
-    RecommendedProduct.where(tag: tags).each do |rp|
-      h[rp.product_type_id] << rp
+    RecommendedProduct.
+      includes(product_type: :age_range).
+      where(tag: tags, product_type_id: product_type_ids).each do |rp|
+
+      h[rp.product_type_id] << {
+                                recommended_product: rp,
+                                product_type: rp.product_type,
+                                age_range: rp.product_type.age_range
+                               }
     end
     h
   end
+
+  def build_random_recommended_products
+    random_products = {}
+    recommended_products.each do |product_type_id, items| 
+      if user.has_multiples? &&
+          (twins_rec = items.select { |rp| rp[:recommended_product].tag == "twins" }.first).present?
+        random_products[product_type_id] = twins_rec
+      else
+        random_products[product_type_id] = items.sample
+      end
+    end
+    random_products
+  end
+
 end
