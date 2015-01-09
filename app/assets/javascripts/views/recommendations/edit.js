@@ -34,7 +34,8 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
 
   events: {
     "click .choicedrop > a": "toggleCategories",
-    "click .choicedrop ul li a": "selectCategory"
+    "click .choicedrop ul li a": "selectCategory",
+    "click .bt-add-all": "addAllRecommendations"
   },
 
   render: function() {
@@ -96,6 +97,31 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
 
   showEmpty: function() {
     $('.prodlist', this.$el).html(this.emptyView.render().$el);
+  },
+
+  addAllRecommendations:function(event) {
+    event.preventDefault();
+
+    var _view = this;
+    var recs = this.filteredRecommendations();
+    var ids = _.map(recs, function(rec) {
+      return rec.id;
+    }, this);
+
+    $.post('/api/recommendations/add_all', { 'recs': ids }, function(data) {
+      if (_view.filter === null)
+        _view.model.recommendations.reset([]);
+      else {
+        _.each(ids, function(id) {
+          var rec = _view.model.recommendations.get(id);
+          _view.model.recommendations.remove(rec);
+        }, this);
+      }
+    }).fail(function() {
+      alert("We apologize. We could not add recommendations right now.");
+    });
+
+    return false;
   },
 
   selectCategory: function(event) {

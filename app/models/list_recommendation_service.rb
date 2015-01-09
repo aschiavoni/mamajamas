@@ -26,6 +26,23 @@ class ListRecommendationService
     replace_placeholder(placeholder, recommended_product)
   end
 
+  def add_recommendations(recommendation_ids)
+    recommendations = RecommendedProduct.where(id: recommendation_ids)
+    placeholders = Hash[user.list.list_items.placeholders.map { |p|
+                          [ p.product_type_id, p ]
+                        }]
+
+    ids = []
+    recommendations.each do |rec|
+      placeholder = placeholders[rec.product_type_id]
+      if placeholder.present?
+        list_item = replace_placeholder(placeholder, rec)
+        ids << list_item.id if list_item.present?
+      end
+    end
+    ids
+  end
+
   def random_recommended_products
     @random_products ||= build_random_recommended_products
   end

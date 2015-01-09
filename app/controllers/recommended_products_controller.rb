@@ -13,6 +13,11 @@ class RecommendedProductsController < ApplicationController
     respond_with @list_item
   end
 
+  def add_all
+    @list_item_ids = service.add_recommendations(params[:recs])
+    render json: @list_item_ids.to_json
+  end
+
   private
 
   def recommended_products

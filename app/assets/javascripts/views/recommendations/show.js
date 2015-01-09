@@ -31,7 +31,7 @@ Mamajamas.Views.Recommendation = Backbone.View.extend({
         this.remove();
       });
     }).fail(function() {
-      alert("We apologize. We could not add that recommendation");
+      alert("We apologize. We could not add that recommendation.");
     });
 
     return false;

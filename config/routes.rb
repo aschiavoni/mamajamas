@@ -115,6 +115,7 @@ Mamajamas::Application.routes.draw do
       post "list_item_images" => "list_item_images#create"
       put "/gifts/:gift_id" => "gifts#update"
       get "recommendations" => "recommended_products#index"
+      post "recommendations/add_all" => "recommended_products#add_all"
       post "recommendations/:id" => "recommended_products#create"
       resources :invites, only: [ :create ]
     end
