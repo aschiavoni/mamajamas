@@ -8,10 +8,18 @@ class RecommendedProductsController < ApplicationController
     respond_with @recommended_products
   end
 
+  def create
+    @list_item = service.add_recommendation(params[:id])
+    respond_with @list_item
+  end
+
   private
 
   def recommended_products
-    service = ListRecommendationService.new(current_user)
     service.random_recommended_products.values
+  end
+
+  def service
+    @service ||= ListRecommendationService.new(current_user)
   end
 end

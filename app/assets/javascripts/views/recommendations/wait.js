@@ -35,7 +35,10 @@ Mamajamas.Views.RecommendationsWait = Mamajamas.Views.Base.extend({
           $('.listsort a').off('click', _view.doNothing);
           if (_editor) {
             _editor.model.list.set(data);
-            _editor.renderRecommendations();
+            if (Mamajamas.Context.Recommendations.length == 0)
+              Mamajamas.Context.Recommendations.fetch();
+            else
+              _editor.renderRecommendations();
           }
         } else {
           _.delay(_view.check, _view.delay, _view);

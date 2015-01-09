@@ -13,6 +13,19 @@ class ListRecommendationService
     end
   end
 
+  def add_recommendation(recommendation_id)
+    recommended_product = RecommendedProduct.
+      includes(:product_type).
+      find(recommendation_id)
+
+    placeholder = @user.list.
+      list_items.
+      placeholders.
+      find_by!(product_type_id: recommended_product.product_type_id)
+
+    replace_placeholder(placeholder, recommended_product)
+  end
+
   def random_recommended_products
     @random_products ||= build_random_recommended_products
   end
@@ -44,6 +57,7 @@ class ListRecommendationService
                                      rank: rank,
                                      recommended: true
                                    })
+    placeholder
   end
 
   def restore_placeholder(list_item)
@@ -78,6 +92,7 @@ class ListRecommendationService
     @product_type_ids ||= user.
       list.
       list_items.
+      placeholders.
       select(:product_type_id).
       uniq.
       map(&:product_type_id)
@@ -96,6 +111,8 @@ class ListRecommendationService
   def build_recommended_products_hash
     h = Hash.new { |hsh, key| hsh[key] = [] }
     tags = [ "eco", "cost", "extra", "twins" ]
+    return h if user.list.blank?
+
     RecommendedProduct.
       includes(product_type: :age_range).
       where(tag: tags, product_type_id: product_type_ids).each do |rp|

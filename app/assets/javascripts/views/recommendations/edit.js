@@ -8,11 +8,21 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
 
   disabledControls: false,
 
+  hasFetchedRecommendations: false,
+
+  emptyView: null,
+
   initialize: function() {
+    this.emptyView = new Mamajamas.Views.RecommendationsEmpty();
+
     this.$el.attr("id", "quiz-modal").css('display', 'block');
 
     Mamajamas.Context.Recommendations.on('reset',
-                                         this.renderRecommendations,
+                                         this.fetchedRecommendations,
+                                         this);
+
+    Mamajamas.Context.Recommendations.on('remove',
+                                         this.recommendationRemoved,
                                          this);
 
     this.model = {
@@ -44,25 +54,48 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
     return this;
   },
 
+  fetchedRecommendations: function() {
+    this.hasFetchedRecommendations = true;
+    this.renderRecommendations();
+  },
+
   renderRecommendations: function() {
-    if (this.model.list.id === null || this.model.recommendations.length === 0) {
+    if (this.model.list.id === null || !this.hasFetchedRecommendations) {
       return;
     }
+
     this.disabledControls = false;
     var $container = $('.prodlist', this.$el);
 
     $container.html(null);
-    this.model.recommendations.each(function(item) {
-      if (this.filter && item.get("category_id") != this.filter) {
-        return;
-      }
+    var recs = this.filteredRecommendations();
+    if (recs.length == 0) {
+      this.showEmpty();
+    } else {
+      _.each(recs, function(item) {
+        var $v = new Mamajamas.Views.Recommendation({
+          model: item
+        }).render().$el;
 
-      var $v = new Mamajamas.Views.Recommendation({
-        model: item
-      }).render().$el;
+        $container.append($v);
+      }, this);
+    }
+  },
 
-      $container.append($v);
+  filteredRecommendations: function() {
+    return this.model.recommendations.filter(function(item) {
+      return (!this.filter || item.get("category_id") == this.filter);
     }, this);
+  },
+
+  recommendationRemoved: function(o) {
+    if (this.filteredRecommendations().length == 0) {
+      this.showEmpty();
+    }
+  },
+
+  showEmpty: function() {
+    $('.prodlist', this.$el).html(this.emptyView.render().$el);
   },
 
   selectCategory: function(event) {
