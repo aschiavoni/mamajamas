@@ -4,9 +4,23 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
 
   previousQuestion: 0,
 
+  recommendations: null,
+
+  recommendationsEditor: null,
+
+  forceDone: false,
+
   initialize: function() {
-    this.renderCurrentQuestion();
     this.preloadImages();
+
+    Mamajamas.Context.Recommendations = new Mamajamas.Collections.Recommendations();
+
+    this.recommendationsEditor = new Mamajamas.Views.RecommendationsEditor();
+    _.delay(function(_view) {
+      Mamajamas.Context.Recommendations.fetch();
+    }, 2000);
+
+    this.renderCurrentQuestion();
   },
 
   events: {
@@ -55,6 +69,10 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
           complete_list: true
         })
       ],
+
+      [
+        "recommendations", null
+      ]
   ],
 
   render: function() {
@@ -104,6 +122,12 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
     var _view = this;
     this.previousQuestion = this.currentQuestion;
     this.currentQuestion++;
+
+    if (this.forceDone) {
+      this.done();
+      return;
+    }
+
     if (this.currentQuestion > this.questions.length - 1) {
       this.currentQuestion = this.questions.length - 1;
       this.done();
@@ -143,9 +167,15 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
 
   getQuestion: function(index) {
     var q = this.questions[index];
-    var question = new q[0]({
-      model: q[1]
-    });
+    var question = null;
+    if (q[0] == "recommendations")
+      question = this.recommendationsEditor;
+    else {
+      question = new q[0]({
+        model: q[1]
+      });
+    }
+
     question.quizView = this;
     return question;
   },

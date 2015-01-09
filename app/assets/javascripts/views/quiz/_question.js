@@ -158,7 +158,7 @@ Mamajamas.Views.QuizSliderQuestion = Mamajamas.Views.QuizQuestion.extend({
     'click .skip': 'skip',
     'click #q-sliderscale': 'moveToCursor',
     'click .q-slider a:first': 'moveToLeft',
-    'click .q-slider a:last': 'moveToRight',
+    'click .q-slider a:last': 'moveToRight'
   },
 
   steps: [ -21, 41, 105, 166, 229 ],

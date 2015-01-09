@@ -12,6 +12,8 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
 
   emptyView: null,
 
+  rendered: false,
+
   initialize: function() {
     this.emptyView = new Mamajamas.Views.RecommendationsEmpty();
 
@@ -30,6 +32,9 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
       recommendations: Mamajamas.Context.Recommendations,
       categories: Mamajamas.Context.Categories
     };
+
+    $('body').on('click', '#bt-rec-next', $.proxy(this.next, this));
+    $('body').on('click', '#bt-rec-prev', $.proxy(this.previous, this));
   },
 
   events: {
@@ -52,12 +57,28 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
       $('.prodlist', this.$el).html(waitView.render().$el);
     }
 
+    $('#simplemodal-container').css('height', 'auto');
+    this.rendered = true;
+    this.renderRecommendations();
     return this;
+  },
+
+  previous: function(event) {
+    event.preventDefault();
+    this.quizView.previous();
+    return false;
+  },
+
+  next: function(event) {
+    event.preventDefault();
+    this.quizView.next();
+    return false;
   },
 
   fetchedRecommendations: function() {
     this.hasFetchedRecommendations = true;
-    this.renderRecommendations();
+    if (this.rendered)
+      this.renderRecommendations();
   },
 
   renderRecommendations: function() {
