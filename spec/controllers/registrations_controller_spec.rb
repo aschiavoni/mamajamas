@@ -65,9 +65,9 @@ describe RegistrationsController, :type => :controller do
       expect(assigns(:user).sign_in_count).to eq(1)
     end
 
-    it "redirects to registry setting after signup" do
+    it "redirects to quiz after signup" do
       post :create, user: registration
-      expect(response).to redirect_to(registry_path)
+      expect(response).to redirect_to(quiz_path)
     end
 
   end

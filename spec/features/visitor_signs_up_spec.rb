@@ -10,8 +10,8 @@ feature "Visitor signs up", js: true do
       sleep_maybe
       expect(page).to have_selector("#logout")
       expect(page).to have_content(@tempuser.username)
-      expect(page).to have_content("COMPLETE SIGN UP")
-      expect(current_path).to eq(registry_path)
+      expect(page).to have_content("Tell us a little")
+      expect(current_path).to eq(quiz_path)
     end
   end
 
@@ -54,9 +54,9 @@ feature "Visitor signs up", js: true do
       page.execute_script("Mamajamas.Context.LoginSession.saveSession(true);")
       sleep_maybe
 
-      # should be on the friends page
+      # should be on the quiz
       sleep_maybe
-      expect(page).to have_content("COMPLETE SIGN UP")
+      expect(page).to have_content("Tell us a little")
     end
   end
 

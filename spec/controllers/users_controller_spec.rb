@@ -29,7 +29,7 @@ describe UsersController, :type => :controller do
 
   describe "update" do
 
-    it "should redirect to public list after update" do
+    it "should redirect to registry settings after update" do
       expect_any_instance_of(Forms::UserProfile).to receive(:update!).and_return(true)
       put :update, user: { username: "test123" }
       expect(response).to redirect_to(registry_path)

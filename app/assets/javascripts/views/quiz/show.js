@@ -102,7 +102,7 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
             complete_list: true
           },
           success: function(data, status, xhr) {
-            window.location = '/';
+            window.location = '/registry';
           },
           error: function(xhr, status, error) {
             Mamajamas.Context.Notifications.error('Please try again later.');
@@ -163,7 +163,7 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
   },
 
   done: function() {
-    window.location = '/list';
+    window.location = '/registry';
   },
 
   getQuestion: function(index) {
