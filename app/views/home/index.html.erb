@@ -8,59 +8,74 @@
 <% end -%>
 <% content_for :feature do -%>
   <div id="feature">
-    <a class="sq-button" href="#" id="learn-more">
-      <span class="ss-icon ss-navigatedown"></span>Learn more
+    <a href="#" id="learn-more">
+      <span class="ss-icon ss-navigatedown"></span>
     </a>
   </div>
 <% end -%>
 <% content_for :nav do -%>
   <h1>
-    <strong>It’s your baby registry.</strong> Made Simple. <em>(and social!)</em>
+    <strong>It’s your baby registry.</strong> Made simple. <em>(and social!)</em>
   </h1>
   <ul>
     <li>
-      <a href="/registry" id="create-registry" class="button">Create your registry</a>
+      <a href="/registry" id="create-registry" class="button">Create your registry now</a>
     </li>
     <li class="option">
       <%= link_to new_friend_path, id: "browse-registries" do -%>
-        <i class="fa fa-caret-right"></i> Or, browse registries
+        <i class="fa fa-caret-right"></i> Or, browse registries first
       <% end -%>
     </li>
   </ul>
 <% end -%>
-<% content_for :tertiary do -%>
-  <%= image_tag "about-mamajamas.jpg", alt: "about mamajamas", size: "196x294", class: "float-l" %>
-  <p>The idea for Mamajamas was born out of my own experience as an expecting mom four years ago.</p>
-  <p>I was overwhelmed by the process of figuring out what I needed to prepare for the birth of my son. I also wondered how I could help friends and family get me things I’d need for the baby, when I didn’t even know myself! I spent hours researching products online and emailing mom friends asking for advice. </p>
-  <p>I started thinking that there should be an easier way for expecting parents to build their registries and get baby gear recommendations. I wanted someone to tell me what I would need (and wouldn’t!) based on how I was planning to parent, and I wanted an easy way to get recommendations from my new parent friends.</p>
-  <p>The goal of Mamajamas is to take all of the guesswork out of building your baby registry. I want you to be able to spend less time thinking about stuff, and more time enjoying pregnancy and new parenthood.</p>
-  <p>I hope your Mamajamas baby registry is helpful to you during this exciting time!</p>
-  <p class="ltr-closing">
-    <%= image_tag "angie-schiavoni_sig.png", alt: "Angie Schiavoni", size: "168x64" %>
-    <br>
-    <em>Angie Schiavoni, Founder</em>
-  </p>
+<% content_for :tertiary_override do -%>
+  <div class="content clearfix">
+    <div class="col">
+      <p>
+        <%= image_tag "angie-dario2015.jpg", alt: "about mamajamas", size: "180x270" %>
+      </p>
+      <p class="center"><a href="/angie" class="button">Visit Angie’s registry</a></p>
+    </div>
+    <div class="col">
+      <h2>The Mamajamas birth story</h2>
+      <p>The idea for Mamajamas was born out of my own experience as an expecting mom.</p>
+      <p>Four years ago, I was overwhelmed trying to figure out what I needed for the birth of my son. How could I help my family and friends buy us things when I didn't even know what I needed myself? I spent hours researching products online and emailing mom friends asking for advice.</p>
+      <p>I realized there needed to be an easier way for expecting parents to build their registries and get gear recommendations. I wanted to find like-minded parents and find out what worked for them (and what didn’t!).</p>
+      <p>For ideas, you can start by checking out my registry here: <a href="http://www.mamajamas.com/angie">www.mamajamas.com/angie</a></p>
+      <p>The goal of Mamajamas is to take all of the guesswork out of building your baby registry. I want you to spend less time thinking about stuff and more time enjoying pregnancy and parenthood.</p>
+      <p>Congratulations and welcome!</p>
+      <p class="ltr-closing">
+        <%= image_tag "angie-schiavoni_sig.png", alt: "Angie Schiavoni", size: "168x64" %>
+        <br>
+        <em>Angie Schiavoni, Founder</em></p>
+    </div>
+  </div>
+  <div id="bt-promo" class="center">
+    <a href="/registry" id="create-registry-cta" class="button bt-color">Create your registry now</a></div>
 <% end -%>
 <% content_for :footer do -%>
   <div class="testimonial">
     <%= image_tag "arian.jpg", alt: "Arian Hushyar" %>
   </div>
-  <p>“I was planning to build out my list in Google Docs and share it with friends as they become pregnant, but I'm so happy you have an amazing product like this instead.” <br>
+  <p>“I was planning to build out my list in Google Docs and<br>
+    share it with friends as they become pregnant, but I'm so happy
+    Mamajamas has an amazing product like this instead.” <br>
     <em>Arian Hushyar</em></p>
-  </div>
 <% end -%>
 <ul class="clearfix">
   <li>
-    <p>
-      <strong><em>1</em></strong> <em>Discover.</em> We’ll tell you what we think you’ll need (and won’t need!) for your registry, based on your preferences.
-    </p>
+    <p><strong><em class="fa fa-certificate"></em></strong> <em>Get baby gear recommendations.</em> Use our engine to receive a list of recommended gear for your registry. Choose the things you need, delete the ones you don't.</p>
   </li>
   <li>
-    <p><strong><em>2</em></strong> <em>Create.</em> Build your registry with help from other parents and products from anywhere on the Web.
-    </p>
+    <p><strong><em class="fa fa-bookmark"></em></strong> <em>Add products to your registry from any web store.</em> Use our browser bookmark to easily add products from any website.</p>
+  </li>
+  <li>
+    <p><strong><em class="fa fa-users"></em></strong> <em>Get ideas from other parents.</em> Browse other people’s registries for inspiration.</p>
+  </li>
+  <li>
+    <p><strong><em class="fa fa-envelope"></em></strong> <em>Share your registry with family and friends. </em> Send your registry to family and friends so they’ll know what you really need!</p>
   </li>
   <li class="last">
-    <p><strong><em>3</em></strong> <em>Share.</em> Easily share your registry with family and friends.
-    </p>
+    <p><strong><em class="fa fa-star-half-empty"></em></strong> <em>Use your registry to help friends who are expecting.</em> Review the gear you’ve tried and tested to help your friends build their registries.</p>
   </li>
 </ul>

@@ -142,11 +142,17 @@
         </div>
       <% end -%>
     </div>
-    <div id="tertiary"<%= " class=#{tertiary_class}" if tertiary_class.present? %>>
-      <div class="content">
-        <%= content_for?(:tertiary) ? yield(:tertiary) : raw("&nbsp;") -%>
+    <%- if content_for?(:tertiary_override) -%>
+      <div id="tertiary">
+        <%= yield(:tertiary_override) %>
       </div>
-    </div>
+    <% else -%>
+      <div id="tertiary"<%= " class=#{tertiary_class}" if tertiary_class.present? %>>
+        <div class="content">
+          <%= content_for?(:tertiary) ? yield(:tertiary) : raw("&nbsp;") -%>
+        </div>
+      </div>
+    <% end -%>
     <div id="footer">
       <div class="content">
         <%= yield :footer %>

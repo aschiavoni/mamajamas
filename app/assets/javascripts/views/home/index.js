@@ -8,7 +8,7 @@ Mamajamas.Views.HomeIndex = Backbone.View.extend({
       _view.scrollToElement("#secondary");
     });
 
-    $("#create-registry").click(function(e) {
+    $("#create-registry, #create-registry-cta").click(function(e) {
       e.preventDefault();
       Mamajamas.Context.AppAuth.signup();
       return false;
