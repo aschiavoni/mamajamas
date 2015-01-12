@@ -19,7 +19,7 @@ class ListsController < ApplicationController
     if @list.present? && @list.completed?
       template = "show"
       cat = params[:category]
-      cat = 'all' if cat.blank? && @list.view_count >= 1
+      cat = 'all' if cat.blank?
       @view = ListView.new(@list, cat, current_user)
       @list_entries_json = Rails.cache.fetch [@list, cat, 'entries'] do
         render_to_string(
