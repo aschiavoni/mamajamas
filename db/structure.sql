@@ -790,7 +790,8 @@ CREATE TABLE users (
     email_preferences hstore DEFAULT ''::hstore NOT NULL,
     settings hstore DEFAULT ''::hstore NOT NULL,
     partner_full_name character varying(255),
-    baby_due_date timestamp without time zone
+    baby_due_date timestamp without time zone,
+    setup_registry boolean DEFAULT false NOT NULL
 );
 
 
@@ -1575,4 +1576,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141222220116');
 INSERT INTO schema_migrations (version) VALUES ('20141222220122');
 
 INSERT INTO schema_migrations (version) VALUES ('20150109230843');
+
+INSERT INTO schema_migrations (version) VALUES ('20150115144218');
 

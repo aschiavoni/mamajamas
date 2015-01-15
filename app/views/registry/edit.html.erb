@@ -1,7 +1,7 @@
 <div class="nestedwin mjform clearfix" id="registry-settings">
   <h2><%= @registry.settings_title %></h2>
   <%= form_for @registry, url: registry_path, as: :registry, method: :put, html: { id: "frm-registry-settings", class: "label-infield" } do |f| %>
-    <% if current_user.quiz_taken_at.present? -%>
+    <% if current_user.setup_registry? -%>
       <h3>Registry</h3>
       <fieldset>
         <div class="radio">

@@ -85,11 +85,15 @@ class Forms::RegistrySettings
   end
 
   def settings_button_text
-    has_list? ? "Update" : "Create Account"
+    setup_registry? ? "Update" : "Build Registry"
   end
 
   def has_list?
     list.present?
+  end
+
+  def setup_registry?
+    user.setup_registry?
   end
 
   def has_partial_address?
@@ -114,6 +118,7 @@ class Forms::RegistrySettings
       else
         user.address = nil
       end
+      user.setup_registry = true
       user.save!
       list.save! if list.present?
       true
