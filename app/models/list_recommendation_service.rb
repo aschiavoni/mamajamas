@@ -131,13 +131,16 @@ class ListRecommendationService
     return h if user.list.blank?
 
     RecommendedProduct.
+      joins(product_type: :age_range).
       includes(product_type: :age_range).
-      where(tag: tags, product_type_id: product_type_ids).each do |rp|
+      where(tag: tags, product_type_id: product_type_ids).
+      order("product_types.rank ASC").each do |rp|
 
       h[rp.product_type_id] << {
                                 recommended_product: rp,
                                 product_type: rp.product_type,
-                                age_range: rp.product_type.age_range
+                                age_range: rp.product_type.age_range,
+                                rank: rp.product_type.rank
                                }
     end
     h
