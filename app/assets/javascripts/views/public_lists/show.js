@@ -21,7 +21,7 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
   registry: null,
 
   initialize: function() {
-    this.filter = $.cookies.get('public_registry_filter') || "Available";
+    this.filter = "All";
     this.collection.on('reset', this.render, this);
 
     this.initCollapsibles();
@@ -149,7 +149,6 @@ Mamajamas.Views.PublicListShow = Mamajamas.Views.Base.extend({
     var $filterDisplay = $filterLink.parents(".choicedrop").children("a");
     $filterDisplay.html(filterName + " <span class=\"ss-dropdown\"></span>");
     this.filter = filterName;
-    $.cookies.set('public_registry_filter', this.filter);
 
     this.render();
   },
