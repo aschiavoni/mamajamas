@@ -35,7 +35,7 @@ var Mamajamas = Mamajamas || { Components: {} };
                           this.setState({
                             error: true,
                             errorMessage: errors.title
-                          })
+                          });
                         }.bind(this)
 
                        );
@@ -91,8 +91,7 @@ var Mamajamas = Mamajamas || { Components: {} };
         var content = null;
         if (this.props.notes) {
           content = (
-            <p>
-              {this.props.notes}
+            <p dangerouslySetInnerHTML={{__html: this.props.notes}}>
             </p>
           );
         } else {
