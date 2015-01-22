@@ -64,8 +64,15 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
 
     if (this.model.list.id === null || this.model.recommendations.length === 0) {
       this.disabledControls = true;
-      var waitView = new Mamajamas.Views.RecommendationsWait();
+      var waitModel = {};
+      if (this.standalone)
+        waitModel['message'] = "Please wait while we load your recommendations";
+      else
+        waitModel['message'] = "Please wait while we create your registry";
+
+      var waitView = new Mamajamas.Views.RecommendationsWait({ model: waitModel });
       waitView.editor = this;
+
       $('.prodlist', this.$el).html(waitView.render().$el);
     }
 
