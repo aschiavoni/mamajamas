@@ -72,6 +72,7 @@ class ListRecommendationService
                                      price: recommended_product.price,
                                      placeholder: false,
                                      rank: rank,
+                                     priority: 1,
                                      recommended: true
                                    })
     placeholder
