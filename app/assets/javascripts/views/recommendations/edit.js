@@ -14,6 +14,8 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
 
   rendered: false,
 
+  standalone: false,
+
   initialize: function() {
     this.emptyView = new Mamajamas.Views.RecommendationsEmpty();
 
@@ -33,8 +35,12 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
       categories: Mamajamas.Context.Categories
     };
 
-    $('body').on('click', '#bt-rec-next', $.proxy(this.next, this));
-    $('body').on('click', '#bt-rec-prev', $.proxy(this.previous, this));
+    if (!this.standalone) {
+      $('body').on('click', '#bt-rec-next', $.proxy(this.next, this));
+      $('body').on('click', '#bt-rec-prev', $.proxy(this.previous, this));
+    }
+
+    this.hasFetchedRecommendations = Mamajamas.Context.Recommendations.length > 0;
   },
 
   events: {
@@ -44,10 +50,16 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
   },
 
   render: function() {
+    if (this.standalone) {
+      this.$el.css("display", "none");
+      this.$el.attr("id", "recommendations-editor");
+    }
+
     this.$el.html(this.template({
       list: this.model.list.toJSON(),
       recommendations: this.model.recommendations.toJSON,
-      categories: this.model.categories
+      categories: this.model.categories,
+      standalone: this.standalone
     }));
 
     if (this.model.list.id === null || this.model.recommendations.length === 0) {
@@ -61,6 +73,32 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
     this.rendered = true;
     this.renderRecommendations();
     return this;
+  },
+
+  showAsModal: function(categoryId) {
+    var _view = this;
+    if (categoryId)
+      this.setFilter(categoryId);
+
+    $("#" + this.$el.attr("id")).modal({
+      closeHTML:'<a class="bt-close ss-icon" href="#">Close</a>',
+			maxHeight:'610',
+      position:['7%', null],
+      // focus: false,
+      // escClose: false,
+      // overlayClose: false,
+      onClose: _view.closeModal
+    });
+  },
+
+  closeModal: function() {
+    $.modal.close();
+    $('#recommendations-editor').remove();
+  },
+
+  setStandalone: function(isStandalone) {
+    this.standalone = isStandalone == true;
+    this.model.standalone = this.standalone;
   },
 
   previous: function(event) {
@@ -138,6 +176,11 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
           _view.model.recommendations.remove(rec);
         }, this);
       }
+      if (_view.standalone) {
+        _.delay(function() {
+          window.location.reload(true);
+        }, 1000);
+      }
     }).fail(function() {
       alert("We apologize. We could not add recommendations right now.");
     });
@@ -146,8 +189,9 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
   },
 
   selectCategory: function(event) {
-    if (this.disabledControls)
+    if (this.disabledControls) {
       return false;
+    }
 
     var $target = $(event.currentTarget);
     var $list = $target.parents("ul");
@@ -157,14 +201,28 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
     if (categoryId === 'all')
       categoryId = null;
 
-    this.filter = categoryId;
-    $('.choicedrop > a').html(
-      value + " <span class=\"ss-dropdown\"></span>"
-    );
     $list.hide();
-    this.renderRecommendations();
+    this.setFilter(categoryId);
 
     return false;
+  },
+
+  setFilter: function(categoryId) {
+    var value;
+    var cat = _.find(Mamajamas.Context.Categories, function(category) {
+      return category.id == categoryId;
+    });
+
+    if (cat)
+      value = cat.name;
+    else
+      value = 'All';
+
+    this.filter = categoryId;
+    $('.choicedrop > a', this.$el).html(
+      value + " <span class=\"ss-dropdown\"></span>"
+    );
+    this.renderRecommendations();
   },
 
   toggleCategories: function(event) {

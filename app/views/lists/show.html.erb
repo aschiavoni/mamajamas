@@ -117,9 +117,7 @@
            username: '<%= @view.owner.username %>',
            profile_photo_url: '<%= @view.owner.profile_picture.public_list %>'
          });
-         <% if @view.all_category? -%>
          Mamajamas.Context.Categories = <%= @view.categories.to_json.html_safe %>;
-         <% end -%>
         </script>
       <% end -%>
     </div>

@@ -4,6 +4,8 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 
   template: HandlebarsTemplates['lists/show'],
 
+  recommendationsEditor: null,
+
   inFieldLabelDefaults: {
     fadeDuration:200,
     fadeOpacity:0.55
@@ -65,6 +67,8 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     if ($('.show-all-friends').length > 0) {
       $('.show-all-friends').click(this.showAllFriends);
     }
+
+    Mamajamas.Context.Recommendations = new Mamajamas.Collections.Recommendations();
   },
 
   events: {
@@ -72,7 +76,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     "click .listsort .choicedrop.list-sort ol li a": "sort",
     "click .listsort .choicedrop.list-age-filter a": "toggleAgeFilterList",
     "click .listsort .choicedrop.list-age-filter ul li a": "ageFilter",
-    "click #prod-rec": "clearRecommendedItems"
+    "click #prod-rec": "showRecommendations"
   },
 
   render: function() {
@@ -228,6 +232,20 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     return this.indexView.ageFilter(event);
   },
 
+  showRecommendations: function(event) {
+    event.preventDefault();
+
+    var catId = Mamajamas.Context.List.get('category_id');
+
+    this.recommendationsEditor = new Mamajamas.Views.RecommendationsEditor();
+    this.recommendationsEditor.setStandalone(true);
+    $('body').append(this.recommendationsEditor.render().$el);
+    this.recommendationsEditor.showAsModal(catId);
+
+    return false;
+  },
+
+  // TODO: delete me
   clearRecommendedItems: function(event) {
     event.preventDefault();
 
@@ -238,7 +256,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     }
     var view = this;
     view.showProgress();
-    m = "This will clear all Mamajamas recommendations that you have not added, rated, or edited. You cannot get recommendations back once you clear them.\n\nAre you sure you want to clear all recommended items from "
+    m = "This will clear all Mamajamas recommendations that you have not added, rated, or edited. You cannot get recommendations back once you clear them.\n\nAre you sure you want to clear all recommended items from ";
 
     if (Mamajamas.Context.List.get('category_id')) {
       m += "this category in your registry?";

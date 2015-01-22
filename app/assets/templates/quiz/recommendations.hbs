@@ -1,4 +1,10 @@
-<h2>Quiz Results</h2>
+<h2>
+  {{#if standalone}}
+    Recommendations
+  {{else}}
+    Quiz Results
+  {{/if}}
+</h2>
 <div class="content">
   <h3>Your baby gear recommendations <em>(based on your quiz results)</em></h3>
   <p class="intro">Add any products to your registry that look interesting. You can change or delete them later.</p>
@@ -23,6 +29,7 @@
   <!-- end product list ***** --> 
   
 </div>
+{{#unless standalone}}
 <div class="button-row clearfix"> 
   <!-- instructions -->
   <!-- previous and next buttons -->
@@ -33,3 +40,4 @@
 <div title="Step 9 of 9" id="q-progress">
   <div class="bar"></div>
 </div>
+{{/unless}}

@@ -39,6 +39,20 @@ Mamajamas.Views.Recommendation = Backbone.View.extend({
       var rec = Mamajamas.Context.Recommendations.get(recId);
       Mamajamas.Context.Recommendations.remove(rec);
 
+      if (Mamajamas.Context.ListItems) {
+        var listItemId = data.id;
+
+        var existing = Mamajamas.Context.ListItems.find(function(item) {
+          return item.id == listItemId;
+        });
+
+        if (existing)
+          Mamajamas.Context.ListItems.remove(existing);
+
+        data['disable_scroll'] = true;
+        var added = Mamajamas.Context.ListItems.add(data);
+      }
+
       _view.$el.slideUp(function() {
         this.remove();
       });

@@ -1,15 +1,13 @@
 <div id="listcontrols" class="clearfix">
-  {{#if has_recommended_items}}
-    <div id="prod-rec" class="menu-icon">
-      <form method="POST" action="/list/clear_recommended/{{category_id}}" class="clear-recommended">
-        <input type="hidden" name="authenticity_token">
-        <a href="#" class="tooltip">
-          Clear Recommended
-          <span>Clear Mamajamas-recommended items<em></em></span>
-        </a>
-      </form>
-    </div>
-  {{/if}}
+  <div id="prod-rec" class="menu-icon">
+    <form method="POST" action="/list/clear_recommended/{{category_id}}" class="clear-recommended">
+    <input type="hidden" name="authenticity_token">
+    <a href="#" class="tooltip">
+      View Recommendations
+      <span>View Mamajamas-recommended items<em></em></span>
+    </a>
+    </form>
+  </div>
   <div class="listsort">Sort by:
     <div class="choicedrop list-sort"> <a href="#">- click to sort - <span class="ss-dropdown"></span></a>
       <ol style="display:none; width:7.5em;">

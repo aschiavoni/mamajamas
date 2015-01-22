@@ -187,9 +187,11 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
       itemView.showAddedModal(Mamajamas.Context.ListItemAdded);
 
     // scroll to the item
-    _.defer(function(_view) {
-      $('body').scrollTo($itemView.offset().top - _view.titleHeight);
-    }, this);
+    if (!item.get('disable_scroll')) {
+      _.defer(function(_view) {
+        $('body').scrollTo($itemView.offset().top - _view.titleHeight);
+      }, this);
+    }
   },
 
   appendItem: function(item) {

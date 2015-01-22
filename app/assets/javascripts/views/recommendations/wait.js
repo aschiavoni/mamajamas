@@ -15,7 +15,7 @@ Mamajamas.Views.RecommendationsWait = Mamajamas.Views.Base.extend({
   render: function() {
     this.$el.html(this.template());
 
-    if (!this.editor.model.list.id)
+    if (!this.editor.model.list.id || !this.hasFetchedRecommendations)
       this.check(this);
     
     return this;
