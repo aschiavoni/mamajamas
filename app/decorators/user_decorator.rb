@@ -28,6 +28,28 @@ module UserDecorator
   end
   memoize :display_owner_name
 
+  def display_full_name_with_coregistrant
+    owner_first_name = display_first_name_or_username
+    owner_last_name = last_name
+    owner_display_name = display_name
+
+    name = owner_display_name
+
+    pn = partner_full_name
+    if pn.present?
+      pf, pl = pn.split
+      if pf.present? && pl.present?
+        name = "#{owner_display_name} and #{pn}"
+      else
+        name = "#{owner_first_name} and #{pf || pl}"
+        name = "#{name} #{owner_last_name}" if owner_last_name.present?
+      end
+    end
+
+    name
+  end
+  memoize :display_full_name_with_coregistrant
+
   def possessive_name
     display_first_name_or_username.possessive
   end

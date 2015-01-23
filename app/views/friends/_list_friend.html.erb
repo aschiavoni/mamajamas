@@ -1,18 +1,18 @@
 <li class="<%= "following" if following %>" id="<%= "friend_#{friend.id}" %>" data-friend-id="<%= friend.id %>" data-relationship-id="<%= following.id unless following.blank? %>" data-name="<%= friend.display_name %>">
   <% if friend.has_shared_list? %>
     <%= link_to public_list_path(friend.slug), target: "_blank" do %>
-      <%= image_tag friend.profile_picture.friend, alt: friend.display_name %>
+      <%= image_tag friend.profile_picture.friend, alt: friend.display_full_name_with_coregistrant %>
     <% end -%>
   <% else -%>
-    <%= image_tag friend.profile_picture.friend, alt: friend.display_name %>
+    <%= image_tag friend.profile_picture.friend, alt: friend.display_full_name_with_coregistrant %>
   <% end -%>
   <div class="friend-info">
     <% if friend.has_shared_list? %>
       <%= link_to public_list_path(friend.slug), target: "_blank" do %>
-        <strong class="mom"><%= friend.display_name %></strong>
+        <strong class="mom"><%= friend.display_full_name_with_coregistrant %></strong>
       <% end -%>
     <% else -%>
-      <strong class="mom"><%= friend.display_name %></strong>
+      <strong class="mom"><%= friend.display_full_name_with_coregistrant %></strong>
     <% end -%>
     <% if friend.list.present? && friend.list.expert? -%>
       <span class="ss-icon ss-target expert" title="Expert list"><em>Expert</em></span>
