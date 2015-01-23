@@ -18,6 +18,16 @@ module UserDecorator
     last_name
   end
 
+  def display_owner_name
+    n = display_first_name_or_username
+    pn = partner_full_name
+    if pn.present?
+      n = "#{n} & #{pn.split.first}".html_safe
+    end
+    n
+  end
+  memoize :display_owner_name
+
   def possessive_name
     display_first_name_or_username.possessive
   end
