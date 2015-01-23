@@ -25,7 +25,7 @@
       <%= f.hidden_field :list_item_id -%>
       <h3 id="step1"><strong>Step 1.</strong> Enter your info</h3>
       <div class="tabbody label-infield">
-        <p class="center">Please provide your name and email so we can send confirmations to you and Angie.</p>
+        <p class="center">Please provide your name and email so we can send confirmations to you and <%= @owner.display_owner_name %>.</p>
         <fieldset>
           <p>
             <%= f.label :full_name, "First and last name" %>
