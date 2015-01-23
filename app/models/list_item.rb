@@ -38,6 +38,7 @@ class ListItem < ActiveRecord::Base
   scope :added_since, ->(time) { user_items.where("created_at > ?", time) }
   scope :recommended, -> { where(recommended: true) }
   scope :not_recommended, -> { where.not(recommended: true) }
+  scope :gifted_items, -> { where("gifted_quantity > ?", 0) }
 
   def self.unique_products
     vendored_items.select("DISTINCT vendor_id, vendor").map do |list_item|

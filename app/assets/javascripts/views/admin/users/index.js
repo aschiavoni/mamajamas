@@ -24,7 +24,7 @@ Mamajamas.Views.Admin.UsersIndex = Backbone.View.extend({
         "bInfo": false,
         "bAutoWidth": false,
         "aoColumnDefs": [
-          { "bSortable": false, "aTargets": [2, 6] },
+          { "bSortable": false, "aTargets": [2, 7] },
         ]
       });
 
