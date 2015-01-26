@@ -186,7 +186,7 @@ _.extend(Mamajamas.Views.FriendsView.prototype, Backbone.View.prototype, {
           foundMatch = true;
         } else {
           var name = $item.data('name');
-          var pattern = new RegExp(query, "ig")
+          var pattern = new RegExp(query, "ig");
           if (!pattern.test(name))
             $item.hide();
           else {

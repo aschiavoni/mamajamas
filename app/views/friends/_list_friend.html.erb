@@ -1,4 +1,4 @@
-<li class="<%= "following" if following %>" id="<%= "friend_#{friend.id}" %>" data-friend-id="<%= friend.id %>" data-relationship-id="<%= following.id unless following.blank? %>" data-name="<%= friend.display_name %>">
+<li class="<%= "following" if following %>" id="<%= "friend_#{friend.id}" %>" data-friend-id="<%= friend.id %>" data-relationship-id="<%= following.id unless following.blank? %>" data-name="<%= friend.display_full_name_with_coregistrant %>">
   <% if friend.has_shared_list? %>
     <%= link_to public_list_path(friend.slug), target: "_blank" do %>
       <%= image_tag friend.profile_picture.friend, alt: friend.display_full_name_with_coregistrant %>
