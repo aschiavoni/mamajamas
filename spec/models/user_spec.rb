@@ -27,8 +27,8 @@ describe User, :type => :model do
 
     it "sets a username from full name" do
       new_user = create(:user,
-                        first_name: "Jonathan", last_name: "Doe", username: nil)
-      expect(new_user.username).to eq("jonathandoe")
+                        first_name: "Jonathan", last_name: "Dogooder", username: nil)
+      expect(new_user.username).to eq("dogooder")
     end
 
     it "sets a username from first name" do
