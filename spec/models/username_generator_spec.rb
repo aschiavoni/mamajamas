@@ -36,6 +36,7 @@ describe UsernameGenerator, :type => :model do
   context "from name" do
 
     it "returns parameterized name" do
+      expect(User).to receive(:find_by_username).with("doe").and_return(double)
       expect(User).to receive(:find_by_username).with("johndoe").and_return(nil)
       expect(UsernameGenerator.from_name("John Doe")).to eq("johndoe")
     end
@@ -45,7 +46,19 @@ describe UsernameGenerator, :type => :model do
       expect(UsernameGenerator.from_name("john")).to eq("john")
     end
 
+    it "uses last name only if last name available" do
+      expect(User).to receive(:find_by_username).with("doe").and_return(nil)
+      expect(UsernameGenerator.from_name("John Doe")).to eq("doe")
+    end
+
+    it "uses full name if last name is not available" do
+      expect(User).to receive(:find_by_username).with("doe").and_return(double)
+      expect(User).to receive(:find_by_username).with("johndoe").and_return(nil)
+      expect(UsernameGenerator.from_name("John Doe")).to eq("johndoe")
+    end
+
     it "should append unique number if username is not unique" do
+      expect(User).to receive(:find_by_username).with("doe").and_return(double)
       expect(User).to receive(:find_by_username).with("johndoe").and_return(double)
       expect(User).to receive(:find_by_username).with("johndoe_2").and_return(double)
       expect(User).to receive(:find_by_username).with("johndoe_3").and_return(nil)

@@ -7,7 +7,15 @@ class UsernameGenerator
   end
 
   def self.from_name(name)
-    self.new(name).generate
+    return nil if name.blank?
+
+    _, last = name.split
+    if last.present? && last.size >= 3
+      un = last.dup.parameterize('')
+      User.find_by_username(un).present? ? self.new(name).generate : un
+    else
+      self.new(name).generate
+    end
   end
 
   def initialize(name)
