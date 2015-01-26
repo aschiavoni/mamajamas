@@ -46,7 +46,8 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
   events: {
     "click .choicedrop > a": "toggleCategories",
     "click .choicedrop ul li a": "selectCategory",
-    "click .bt-add-all": "addAllRecommendations"
+    "click .bt-add-all": "addAllRecommendations",
+    "click .bt-rec-close": "closeModal"
   },
 
   render: function() {
@@ -98,9 +99,10 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
     });
   },
 
-  closeModal: function() {
+  closeModal: function(event) {
     $.modal.close();
     $('#recommendations-editor').remove();
+    return false;
   },
 
   setStandalone: function(isStandalone) {
