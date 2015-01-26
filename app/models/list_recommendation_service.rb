@@ -21,7 +21,13 @@ class ListRecommendationService
     placeholder = @user.list.
       list_items.
       placeholders.
-      find_by!(product_type_id: recommended_product.product_type_id)
+      find_by(product_type_id: recommended_product.product_type_id)
+
+    if placeholder.blank?
+      list = user.list
+      placeholder =
+        list.add_list_item_placeholder(recommended_product.product_type)
+    end
 
     replace_placeholder(placeholder, recommended_product)
   end
