@@ -158,7 +158,8 @@ class List < ActiveRecord::Base
       list_item_image_id: orig.list_item_image_id,
       rank: orig.rank,
       vendor: orig.vendor,
-      vendor_id: orig.vendor_id
+      vendor_id: orig.vendor_id,
+      desired_quantity: 1
     }).tap do |li|
       li.age = orig.age
     end
