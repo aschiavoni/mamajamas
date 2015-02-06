@@ -52,8 +52,7 @@
               <%= link_to "Customize Registry", list_path %>
             </li>
             <li class="<%= "active" if params[:controller] == "friends" %>">
-              <% browse_lists_path = current_user.guest? ? new_friend_path : following_friends_path -%>
-              <%= link_to "Browse Registries", browse_lists_path, class: "find-moms" %>
+              <%= link_to "Browse Registries", new_friend_path, class: "find-moms" %>
             </li>
           </ul>
         <% end -%>
