@@ -52,6 +52,11 @@ Mamajamas.Views.GiftNew = Backbone.View.extend({
 
   _showTab: function(idx) {
     this._tabs.showAccessibleTab(idx);
+    var prevIdx = idx - 1;
+    var sel = '.tabs > ul li';
+    var prevTab = $($(sel, this.$el)[prevIdx]);
+    if (prevTab.length > 0)
+      prevTab.addClass('complete');
   }
 
 });
