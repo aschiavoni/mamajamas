@@ -18,6 +18,18 @@ Mamajamas.Views.GiftNew = Backbone.View.extend({
 
     $('#step1-continue', _view.$el).click(_view.step1Continue.bind(_view));
     $('#step2-continue', _view.$el).click(_view.step2Continue.bind(_view));
+
+    $('.collapsible', _view.$el).collapsible({
+      cssClose: 'coll-closed',
+    	cssOpen: 'coll-open',
+		  speed:200
+    });
+
+	  $('#close-coll').click(function(event) {
+		  event.preventDefault();
+		  $('.collapsible', _view.$el).collapsible('close');
+      return false;
+	  });
   },
 
   events: {

@@ -1,5 +1,17 @@
 <div class="nestedwin giftingwin clearfix" id="new-gift">
   <h2><%= @owner.possessive_full_name %> Baby Registry</h2>
+
+  <!-- help video link -->
+  <div id="giftinghelp">
+    <p class="center collapsible coll-closed">Need help? Watch now: <em><i class="fa fa-lg fa-play-circle-o"></i> How to Gift</em></p>
+    <div class="collapsible-content" style="display: none;">
+      <!-- video embed ***** -->
+      <iframe src="//player.vimeo.com/video/117741451?color=874789" width="500" height="305" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      <!-- / video embed ***** -->
+      <a href="#" class="close" id="close-coll" title="close panel"><span>Close</span></a>
+    </div>
+  </div>
+
   <h3 class="icon">Give <%= @owner.display_first_name_or_username %> a Gift</h3>
 
   <!-- product -->
