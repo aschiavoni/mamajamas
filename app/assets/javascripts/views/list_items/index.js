@@ -18,6 +18,8 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
 
   filter: null,
 
+  availFilter: null,
+
   titleHeight: null,
 
   showHelpModals: false,
@@ -31,9 +33,11 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     this.$el.attr("id", "list-items");
 
     var _view = this;
+
     if (Mamajamas.Context.List.get('view_count') == 0) {
       // clear filter cookie
       $.cookies.set('edit_registry_filter', null);
+      $.cookies.set('edit_registry_available_filter', null);
       $.cookies.set('public_registry_filter', null);
       _view.showHelpModals = true;
       _view.showClearRecommendedTooltip = true;
@@ -47,6 +51,7 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     }
 
     this.filter = $.cookies.get('edit_registry_filter');
+    this.availFilter = $.cookies.get('edit_registry_available_filter');
 
     if (_view.isGuestUser()) {
       _.delay(function() {
@@ -66,6 +71,12 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     if (this.filter) {
       $('.list-age-filter > a').html(
         this.filter + " <span class=\"ss-dropdown\"></span>"
+      );
+    }
+
+    if (this.availFilter) {
+      $('.list-available-filter > a').html(
+        this.availFilter + " <span class=\"ss-dropdown\"></span>"
       );
     }
 
@@ -198,6 +209,14 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     if (this.filter && item.get("age") != this.filter) {
       return;
     }
+
+    if (this.availFilter) {
+      if (this.availFilter === "Available" && item.get('desired_quantity') <= 0)
+        return;
+      else if (this.availFilter === "Not available" && item.get('desired_quantity') != 0)
+        return;
+    }
+
     var $itemView = this.itemView(item).render().$el;
     var priority = item.get("priority");
     $(this.$priorityContainer(priority)).append($itemView);
@@ -235,6 +254,14 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     var filterBy = $target.html();
     (filterBy === "All ages") ? this.filter = null : this.filter = filterBy;
     $.cookies.set('edit_registry_filter', this.filter);
+    this.render();
+  },
+
+  availableFilter: function(event) {
+    var $target = $(event.target);
+    var filterBy = $target.html();
+    (filterBy === "All") ? this.availFilter = null : this.availFilter = filterBy;
+    $.cookies.set('edit_registry_available_filter', this.availFilter);
     this.render();
   },
 

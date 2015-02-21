@@ -72,10 +72,10 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
   },
 
   events: {
-    "click .listsort .choicedrop.list-sort a": "toggleSortList",
-    "click .listsort .choicedrop.list-sort ol li a": "sort",
     "click .listsort .choicedrop.list-age-filter a": "toggleAgeFilterList",
     "click .listsort .choicedrop.list-age-filter ul li a": "ageFilter",
+    "click .listsort .choicedrop.list-available-filter a": "toggleAvailableFilterList",
+    "click .listsort .choicedrop.list-available-filter ul li a": "availableFilter",
     "click #prod-rec": "showRecommendations"
   },
 
@@ -230,6 +230,28 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
     var $filterDisplay = $filterLink.parents(".choicedrop").children("a");
     $filterDisplay.html(filterName + " <span class=\"ss-dropdown\"></span>");
     return this.indexView.ageFilter(event);
+  },
+
+  toggleAvailableFilterList: function(event) {
+    var $target = $(event.currentTarget);
+    var $choiceDrop = $target.parents(".choicedrop");
+    var $list = $choiceDrop.find("ul");
+
+    if ($list.is(":visible")) {
+      $list.hide();
+    } else {
+      $list.show();
+    }
+
+    return false;
+  },
+
+  availableFilter: function(event) {
+    var $filterLink = $(event.currentTarget);
+    var filterName = $filterLink.html();
+    var $filterDisplay = $filterLink.parents(".choicedrop").children("a");
+    $filterDisplay.html(filterName + " <span class=\"ss-dropdown\"></span>");
+    return this.indexView.availableFilter(event);
   },
 
   showRecommendations: function(event) {
