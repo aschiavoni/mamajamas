@@ -141,6 +141,7 @@ class ListRecommendationService
       joins(product_type: :age_range).
       includes(product_type: :age_range).
       where(tag: tags, product_type_id: product_type_ids).
+      where(hidden: false).
       order("product_types.rank ASC").each do |rp|
 
       h[rp.product_type_id] << {

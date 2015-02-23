@@ -20,7 +20,6 @@ class ProductTypeSuggestions
     { id: product_type.id, suggestions: suggestions.map(&:attributes) }
   end
 
-
   private
 
   def recommended_product_lookup(product_type)

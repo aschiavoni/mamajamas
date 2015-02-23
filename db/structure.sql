@@ -649,7 +649,8 @@ CREATE TABLE recommended_products (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     price character varying(255),
-    rating integer
+    rating integer,
+    hidden boolean DEFAULT false NOT NULL
 );
 
 
@@ -1578,4 +1579,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141222220122');
 INSERT INTO schema_migrations (version) VALUES ('20150109230843');
 
 INSERT INTO schema_migrations (version) VALUES ('20150115144218');
+
+INSERT INTO schema_migrations (version) VALUES ('20150223030103');
 
