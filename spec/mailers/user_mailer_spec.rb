@@ -16,7 +16,7 @@ describe UserMailer, :type => :mailer do
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match("Congratulations")
+      expect(mail.body.encoded).to match("Congrats")
     end
 
     it "includes a greeting" do

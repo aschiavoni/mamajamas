@@ -2,7 +2,7 @@ class UserMailer < ActionMailer::Base
   include MailerHelper
 
   layout "mailer"
-  default from: "\"Angie Schiavoni, Founder\" <angie@mamajamas.com>"
+  default from: "\"Angie Schiavoni, Mamajamas\" <angie@mamajamas.com>"
 
   def welcome(user_id)
     @user = User.find(user_id)
