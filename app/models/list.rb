@@ -73,7 +73,7 @@ class List < ActiveRecord::Base
       shared_items = shared_items.where(owned: false)
     end
 
-    shared_items.order(list_entries_sort_order)
+    shared_items.order(public_list_entries_sort_order)
   end
 
   def shared_list_categories
@@ -198,4 +198,8 @@ class List < ActiveRecord::Base
       "list_items.placeholder ASC, list_items.rank ASC, age_ranges.position ASC, categories.name ASC, list_items.product_type_name ASC"
   end
 
+  def public_list_entries_sort_order
+    @public_li_sort ||=
+      "list_items.placeholder ASC, list_items.desired_quantity DESC, list_items.rank ASC, age_ranges.position ASC, categories.name ASC, list_items.product_type_name ASC"
+  end
 end
