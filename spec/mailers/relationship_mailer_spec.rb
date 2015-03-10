@@ -10,7 +10,7 @@ describe RelationshipMailer, :type => :mailer do
     let(:mail) { RelationshipMailer.follower_notification(relationship.id) }
 
     it "renders the subject" do
-      expect(mail.subject).to match(/#{follower.username}/)
+      expect(mail.subject).to eq("Someone is following you!")
     end
 
     it "sends to the followed user" do

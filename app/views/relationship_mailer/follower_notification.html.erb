@@ -1,9 +1,11 @@
-<p><%= @follower_display_name %> is now following your Mamajamas list.</p>
-<% if @follower.list.blank? || @follower.list.private? -%>
-  <p>They have chosen to keep their list private for now, so you can't follow them back at this time, but they may decide to share it later.</p>
-<% else -%>
-  <p>You can follow them back by going to their list <%= link_to "here", public_list_url(@follower) %>.</p>
-<% end -%>
-<p>You may also want to make sure your list is up to date by editing it <%= link_to "here", list_url %>.</p>
-<p>Best,</p>
+<p>
+  Just wanted to let you know that <%= @follower_display_name %> is following your Mamajamas registry.
+  <% if @follower.list.blank? || @follower.list.private? -%>
+    They have chosen to keep their list private for now, so you can't follow them back at this time, but they may decide to share it later.
+  <% else -%>
+    If you’d like to follow them back, you can click <%= link_to "here", public_list_url(@follower) %>.
+  <% end -%>
+</p>
+<p>Also, do you have new products to recommend? Or items you’ve recently purchased? If so, don't forget to go back and update your <%= link_to "registry", list_url %>.</p>
+<p>Stay fabulous!</p>
 <p>The Mamajamas Team</p>

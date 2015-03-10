@@ -17,7 +17,7 @@ class RelationshipMailer < ActionMailer::Base
     relationship.delivered_notification_at = Time.zone.now
     relationship.save!
 
-    @subject = "#{@follower_display_name} is now following your Mamajamas List!"
+    @subject = "Someone is following you!"
     @hide_salutation = true
 
     sig = EmailAccessToken.
