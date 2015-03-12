@@ -26,3 +26,4 @@ Session.vim
 spec/reports
 .DS_Store
 .tern-port
+/.env
