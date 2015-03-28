@@ -81,7 +81,15 @@ class Forms::RegistrySettings
   end
 
   def settings_title
-    has_list? ? "Registry Details" : "Complete Sign Up"
+    if has_list?
+      if user.setup_registry?
+        "Registry Details"
+      else
+        "Gifts will ship to:"
+      end
+    else
+      "Complete Sign Up"
+    end
   end
 
   def settings_button_text
@@ -98,7 +106,7 @@ class Forms::RegistrySettings
 
   def has_partial_address?
     return false if address.blank?
-    [ :street, :street2, :city, :region, :phone ].map do |f| 
+    [ :street, :street2, :city, :region, :phone ].map do |f|
       address.public_send(f).present?
     end.any?
   end
