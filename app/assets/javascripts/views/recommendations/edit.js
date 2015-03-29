@@ -192,6 +192,9 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
       return rec.id;
     }, this);
 
+    var loadingTemplate = HandlebarsTemplates["recommendations/add_all_loading"]();
+    $('.prodlist').append($(loadingTemplate));
+
     $.post('/api/recommendations/add_all', { 'recs': ids }, function(data) {
       if (_view.filter === null)
         _view.model.recommendations.reset([]);
@@ -208,6 +211,8 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
       }
     }).fail(function() {
       alert("We apologize. We could not add recommendations right now.");
+    }).always(function() {
+      $('.prodlist .loading').remove();
     });
 
     return false;
