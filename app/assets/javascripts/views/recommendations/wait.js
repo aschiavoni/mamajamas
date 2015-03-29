@@ -17,7 +17,7 @@ Mamajamas.Views.RecommendationsWait = Mamajamas.Views.Base.extend({
 
     if (!this.editor.model.list.id || !this.hasFetchedRecommendations)
       this.check(this);
-    
+
     return this;
   },
 
@@ -46,6 +46,6 @@ Mamajamas.Views.RecommendationsWait = Mamajamas.Views.Base.extend({
         }
       }
     });
-  },
+  }
 
 });

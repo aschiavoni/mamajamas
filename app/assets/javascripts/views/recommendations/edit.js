@@ -64,23 +64,38 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
     }));
 
     if (this.model.list.id === null || this.model.recommendations.length === 0) {
-      this.disabledControls = true;
-      var waitModel = {};
-      if (this.standalone)
-        waitModel['message'] = "Please wait while we load your recommendations";
-      else
-        waitModel['message'] = "Please wait while we create your registry";
-
-      var waitView = new Mamajamas.Views.RecommendationsWait({ model: waitModel });
-      waitView.editor = this;
-
-      $('.prodlist', this.$el).html(waitView.render().$el);
+      this.showWaitView();
     }
 
     $('#simplemodal-container').css('height', 'auto');
     this.rendered = true;
     this.renderRecommendations();
     return this;
+  },
+
+  showWaitView: function() {
+    this.disabledControls = true;
+    var waitModel = {};
+    waitModel['message'] = 'Please wait while we get your recommendations...';
+
+    var waitView = new Mamajamas.Views.RecommendationsWait({ model: waitModel });
+    waitView.editor = this;
+    this.disableButtons();
+
+    var $buttons = $('a.button', this.$el);
+    $buttons.addClass('disabled');
+
+    $('.prodlist', this.$el).html(waitView.render().$el);
+  },
+
+  enableButtons: function() {
+    var $buttons = $('a.button', this.$el);
+    $buttons.removeClass('disabled');
+  },
+
+  disableButtons: function() {
+    var $buttons = $('a.button', this.$el);
+    $buttons.addClass('disabled');
   },
 
   showAsModal: function(categoryId) {
@@ -134,6 +149,7 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
     }
 
     this.disabledControls = false;
+    this.enableButtons();
     var $container = $('.prodlist', this.$el);
 
     $container.html(null);
