@@ -1,5 +1,7 @@
 Mamajamas.Views.RecommendationsEmpty = Mamajamas.Views.Base.extend({
 
+  className: 'loading',
+
   template: HandlebarsTemplates["recommendations/empty"],
 
   initialize: function() {

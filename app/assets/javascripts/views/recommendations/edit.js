@@ -204,6 +204,7 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
           _view.model.recommendations.remove(rec);
         }, this);
       }
+
       if (_view.standalone) {
         _.delay(function() {
           window.location.reload(true);
@@ -211,8 +212,6 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
       }
     }).fail(function() {
       alert("We apologize. We could not add recommendations right now.");
-    }).always(function() {
-      $('.prodlist .loading').remove();
     });
 
     return false;
