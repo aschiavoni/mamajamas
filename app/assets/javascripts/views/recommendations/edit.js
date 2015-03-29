@@ -195,6 +195,7 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
     var loadingTemplate = HandlebarsTemplates["recommendations/add_all_loading"]();
     $('.prodlist').append($(loadingTemplate));
 
+    _view.clearMessage();
     $.post('/api/recommendations/add_all', { 'recs': ids }, function(data) {
       if (_view.filter === null)
         _view.model.recommendations.reset([]);
@@ -211,10 +212,23 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
         }, 1000);
       }
     }).fail(function() {
-      alert("We apologize. We could not add recommendations right now.");
+      _view.showMessage('We apologize. We could not add recommendations right now.', 'error');
+      $('.prodlist .loading').remove();
     });
 
     return false;
+  },
+
+  clearMessage: function() {
+    $('#rec-message').remove();
+  },
+
+  showMessage: function(msg, typeName) {
+    var m = '<div id="rec-message" class="messagebox ' + typeName + '">' + msg + '</div>';
+    $m = $('.prodlist').before($(m));
+    _.delay(function() {
+      $('#rec-message').fadeOut();
+    }, 5000);
   },
 
   selectCategory: function(event) {
