@@ -29,12 +29,34 @@ Mamajamas.Views.Recommendation = Backbone.View.extend({
     return this;
   },
 
+  setLoading: function($prod, isLoading) {
+    var $btn = $('.bt-add', $prod);
+    var $strong = $('strong', $btn);
+    var $span = $('span', $btn);
+    var assetPath = Mamajamas.Context.AssetPath;
+
+    if (isLoading) {
+      $btn.addClass('loading');
+      $span.attr('class', 'loader');
+      var $img = $('<img/>').attr('src', assetPath + 'loader_32_white.gif');
+      $span.html($img);
+      $strong.html('Adding to Registry');
+    } else {
+      $btn.removeClass('loading');
+      $span.attr('class', 'ss-plus');
+      $span.html(null);
+      $strong.html('Add to Registry');
+    }
+  },
+
   addItem: function(event) {
     event.preventDefault();
     var _view = this;
     var $prod = $(event.currentTarget).parents('.prod');
     var recId = parseInt($prod.attr('id'));
 
+    _view.clearMessage();
+    _view.setLoading($prod, true);
     $.post('/api/recommendations/' + recId, function(data) {
       var rec = Mamajamas.Context.Recommendations.get(recId);
       Mamajamas.Context.Recommendations.remove(rec);
@@ -57,10 +79,23 @@ Mamajamas.Views.Recommendation = Backbone.View.extend({
         this.remove();
       });
     }).fail(function() {
-      alert("We apologize. We could not add that recommendation.");
+      _view.setLoading($prod, false);
+      _view.showMessage('We apologize. We could not add that recommendation.', 'error');
     });
 
     return false;
+  },
+
+  clearMessage: function() {
+    $('#rec-message').remove();
+  },
+
+  showMessage: function(msg, typeName) {
+    var m = '<div id="rec-message" class="messagebox ' + typeName + '">' + msg + '</div>';
+    $m = $('.prodlist').before($(m));
+    _.delay(function() {
+      $('#rec-message').fadeOut();
+    }, 5000);
   }
 
 });
