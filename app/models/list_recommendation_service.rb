@@ -156,7 +156,7 @@ class ListRecommendationService
 
   def build_random_recommended_products
     random_products = {}
-    recommended_products.each do |product_type_id, items| 
+    recommended_products.each do |product_type_id, items|
       if user.has_multiples? &&
           (twins_rec = items.select { |rp| rp[:recommended_product].tag == "twins" }.first).present?
         random_products[product_type_id] = twins_rec

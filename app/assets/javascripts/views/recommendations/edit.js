@@ -151,8 +151,15 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
     this.disabledControls = false;
     this.enableButtons();
     var $container = $('.prodlist', this.$el);
+    var priorities = HandlebarsTemplates['quiz/recommendations-containers']();
+    $container.html(priorities);
 
-    $container.html(null);
+    var $highPriorityContainer = $('div.priority-1', $container);
+    var $medPriorityContainer = $('div.priority-2', $container);
+
+    $highPriorityContainer.html(null);
+    $medPriorityContainer.html(null);
+
     var recs = this.filteredRecommendations();
     if (recs.length == 0) {
       this.showEmpty();
@@ -161,9 +168,19 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
         var $v = new Mamajamas.Views.Recommendation({
           model: item
         }).render().$el;
-
-        $container.append($v);
+        if (item.get('product_type_priority') === 1)
+          $highPriorityContainer.append($v);
+        else
+          $medPriorityContainer.append($v);
       }, this);
+
+      $('.collapsible', $container).collapsible({
+        cssClose: 'ss-directright',
+        cssOpen: 'ss-dropdown',
+        defaultOpen: 'priority-high-hed,priority-med-hed',
+        bind: 'click',
+        speed:200
+      });
     }
   },
 

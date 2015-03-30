@@ -16,6 +16,7 @@ json.array!(@recommended_products) do |item|
     json.product_type_name item[:product_type].name
     json.product_type_plural_name item[:product_type].plural_name
     json.product_type_image_name item[:product_type].image_name
+    json.product_type_priority item[:product_type].priority
   end
 
   if item[:age_range].present?
