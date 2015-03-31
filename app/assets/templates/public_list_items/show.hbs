@@ -19,29 +19,43 @@
   </div>
   {{#ifNotLowPriority listItem}}
     <div class="prod-when-own">
-      <div class="price"> <strong>{{listItem.price}}</strong></div>
       {{#if listItem.registry}}
         {{#if listItem.desired}}
           <div class="gift">
             <a class="bt-gift" href="/gifts/{{listItem.id}}/new">
-              <span>Gift this to {{listItem.ownerName}}</span>
+              <span>Gift this</span>
             </a>
+            {{#if listItem.desired}}
+              <span class="merchant {{listItem.vendor}}">{{listItem.vendor}}</span>
+            {{/if}}
+          </div>
+        {{/if}}
+      {{/if}}
+      <div class="price">Price: <strong>{{listItem.price}}</strong></div>
+      {{#if listItem.desired}}
+        <div class="own">
+          <ul>
+            <li>
+              <strong>{{listItem.desired_quantity}}</strong> Wanted
+            </li>
+            <li>
+              <strong>{{listItem.owned_quantity}}</strong> Received
+            </li>
+        </div>
+      {{else}}
+        {{#if listItem.owned}}
+          <div class="own">
+            <ul>
+              <li>
+                <strong>{{listItem.owned_quantity}}</strong> Received
+              </li>
+            </ul>
           </div>
         {{/if}}
       {{/if}}
       <div class="when">
-        {{buyLink listItem}}
+        When: <strong>{{listItem.age}}</strong>
       </div>
-      {{#if listItem.desired}}
-        <div class="own">
-          <strong>Wants</strong> {{listItem.desired_quantity}} of these
-        </div>
-      {{/if}}
-      {{#if listItem.owned}}
-        <div class="own">
-          <strong>Has</strong> {{listItem.owned_quantity}} of these
-        </div>
-      {{/if}}
     </div>
   {{/ifNotLowPriority}}
   <div class="prod-note">

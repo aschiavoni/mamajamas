@@ -27,31 +27,44 @@
       <% end -%>
     </div>
     <div class="prod-when-own">
-      <% if list_item.price.present? -%>
-        <div class="price"> <strong><%= list_item.price %></strong></div>
-      <% end -%>
       <% if registry %>
         <% unless list_item.owned? -%>
           <div class="gift">
             <%= link_to new_gift_path(list_item.id), class: "bt-gift" do %>
-              <span>Gift this to <%= owner_name %></span>
+              <span>Gift this</span>
+            <% end -%>
+            <% if list_item.desired? %>
+              <span class="merchant <%= list_item.vendor %>"><%= list_item.vendor %>
             <% end -%>
           </div>
         <% end -%>
       <% end -%>
-      <div class="when">
-        <%= link_to "Buy", list_item.link, target: "_blank" %> at <%= list_item.age %>
-      </div>
+      <% if list_item.price.present? -%>
+        <div class="price">Price: <strong><%= list_item.price %></strong></div>
+      <% end -%>
       <% if list_item.desired? -%>
         <div class="own">
-          <strong>Wants</strong> <%= list_item.desired_quantity %> of these
+          <ul>
+            <li>
+              <strong><%= list_item.desired_quantity %></strong> Wanted
+            </li>
+            <li>
+              <strong><%= list_item.owned_quantity %></strong> Received
+            </li>
+          </ul>
         </div>
-      <% end -%>
-      <% if list_item.owned? -%>
+      <% elsif list_item.owned? -%>
         <div class="own">
-          <strong>Has</strong> <%= list_item.owned_quantity %> of these
+          <ul>
+            <li>
+              <strong><%= list_item.owned_quantity %></strong> Received
+            </li>
+          </ul>
         </div>
       <% end -%>
+      <div class="when">
+        When: <strong><%= list_item.age %></strong>
+      </div>
     </div>
     <div class="prod-note">
       <% if list_item.notes.present? -%>
