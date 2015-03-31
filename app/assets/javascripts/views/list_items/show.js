@@ -65,7 +65,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
         quantityField: "desired_quantity",
         quantityLabel: "Want"
       });
-      $(".prod-when-own", this.$el).append(desiredQuantityView.render().$el);
+      $(".prod-when-own .price", this.$el).after(desiredQuantityView.render().$el);
 
       var ownedQuantityView = new Mamajamas.Views.ListItemQuantity({
         model: this.model,
@@ -73,7 +73,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
         quantityLabel: "Have",
         minimum: this.model.get('gifted_quantity') || 0
       });
-      $(".prod-when-own", this.$el).append(ownedQuantityView.render().$el);
+      $(".prod-when-own .quantity", this.$el).after(ownedQuantityView.render().$el);
     }
 
     if (this.model.get("gifted_quantity") > 0) {
@@ -81,7 +81,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
         model: this.model
       });
 
-      $(".prod-when-own", this.$el).append(giftedView.render().$el);
+      $(".prod-when-own", this.$el).prepend(giftedView.render().$el);
     }
 
     var notesView = new Mamajamas.Views.ListItemNotes({
