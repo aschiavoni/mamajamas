@@ -5,6 +5,7 @@ class PublicListsController < ApplicationController
   before_filter :init_view, except: [ :copy ]
 
   def show
+    @page_title = "Baby Registry: #{@list.user.full_name} - Mamajamas"
     cat = params[:category] || 'all'
     @view = PublicListView.new(@list, cat, false, current_user)
 
