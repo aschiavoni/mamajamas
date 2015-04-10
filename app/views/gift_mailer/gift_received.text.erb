@@ -1,8 +1,8 @@
-Alright! Here’s what’s coming your way:
+There’s something wonderful coming your way:
 
 <%= @gift.quantity > 1 ? "#{@gift.quantity} - #{@list_item.name}" : @list_item.name %> <%= list_category_url(@list_item.category.slug) %>
 
-From:
+This gift is from:
 <%= @gift.full_name %>
 <%= @gift.email %>
 
