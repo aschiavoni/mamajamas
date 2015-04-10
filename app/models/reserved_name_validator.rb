@@ -39,4 +39,8 @@ class ReservedNameValidator < ActiveModel::EachValidator
       object.errors.add(attribute, :reserved_name)
     end
   end
+
+  def self.valid_name?(n)
+    !RESERVED_NAMES.include?(n)
+  end
 end

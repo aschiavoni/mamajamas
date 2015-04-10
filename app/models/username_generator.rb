@@ -12,14 +12,15 @@ class UsernameGenerator
     _, last = name.split
     if last.present? && last.size >= 3
       un = last.dup.parameterize('')
-      User.find_by_username(un).present? ? self.new(name).generate : un
+      User.find_by_username(un).present? ? self.new(name).generate : self.new(un).generate
     else
       self.new(name).generate
     end
   end
 
-  def initialize(name)
+  def initialize(name, validator = ReservedNameValidator)
     @name = name
+    @validator = validator
   end
 
   def generate
@@ -30,7 +31,7 @@ class UsernameGenerator
     num = 2
     username = "#{username}_#{num}" if username.size < 3
 
-    while(User.find_by_username(username).present?)
+    while(!@validator.valid_name?(username) || User.find_by_username(username).present?)
       username = "#{username_part}_#{num}"
       num += 1
     end

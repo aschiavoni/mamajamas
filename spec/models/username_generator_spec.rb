@@ -3,14 +3,14 @@ describe UsernameGenerator, :type => :model do
   context "from email" do
 
     it "should parse username from email" do
-      expect(UsernameGenerator.from_email("user@example.com")).to eq("user")
+      expect(UsernameGenerator.from_email("someuser@example.com")).to eq("someuser")
     end
 
     it "should append unique number if username is not unique" do
-      expect(User).to receive(:find_by_username).with("user").and_return(double)
-      expect(User).to receive(:find_by_username).with("user_2").and_return(double)
-      expect(User).to receive(:find_by_username).with("user_3").and_return(nil)
-      expect(UsernameGenerator.from_email("user@example.com")).to eq("user_3")
+      expect(User).to receive(:find_by_username).with("someuser").and_return(double)
+      expect(User).to receive(:find_by_username).with("someuser_2").and_return(double)
+      expect(User).to receive(:find_by_username).with("someuser_3").and_return(nil)
+      expect(UsernameGenerator.from_email("someuser@example.com")).to eq("someuser_3")
     end
 
     it "returns nil if email is nil" do
@@ -22,13 +22,13 @@ describe UsernameGenerator, :type => :model do
     end
 
     it "returns email if email is not valid" do
-      expect(UsernameGenerator.from_email('test')).to eq('test')
+      expect(UsernameGenerator.from_email('bademail')).to eq('bademail')
     end
 
     it "returns email with unique number if email is not valid and not unique" do
-      expect(User).to receive(:find_by_username).with('test').and_return(double)
-      expect(User).to receive(:find_by_username).with('test_2').and_return(nil)
-      expect(UsernameGenerator.from_email('test')).to eq('test_2')
+      expect(User).to receive(:find_by_username).with('someemail').and_return(double)
+      expect(User).to receive(:find_by_username).with('someemail_2').and_return(nil)
+      expect(UsernameGenerator.from_email('someemail')).to eq('someemail_2')
     end
 
   end
@@ -47,7 +47,7 @@ describe UsernameGenerator, :type => :model do
     end
 
     it "uses last name only if last name available" do
-      expect(User).to receive(:find_by_username).with("doe").and_return(nil)
+      expect(User).to receive(:find_by_username).with("doe").and_return(nil).twice
       expect(UsernameGenerator.from_name("John Doe")).to eq("doe")
     end
 
