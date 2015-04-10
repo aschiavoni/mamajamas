@@ -1,9 +1,9 @@
-<%= @user.full_name %> has a received a notification that a gift from you is on the way!
+<%= @user.full_name %> has a received a notification that your fabulous gift is on the way!
 
 If you have already ordered the item, thank you!
 You are all set.
 
-If for some reason you have yet to complete your purchase, please do it now by clicking the link below:
+If you have already ordered the item, thank you. You are good to go. If for some reason you haven’t completed the purchase, please do so now by clicking the link below:
 
 <%= @gift.quantity > 1 ? "#{@gift.quantity} - #{@list_item.name}" : @list_item.name %> <%= public_list_category_url(@user.slug, @list_item.category.slug) %>
 
@@ -17,6 +17,5 @@ The registrant’s information is:
 
 Thank you again!
 
-Best,
 The Mamajamas Team
 info@mamajamas.com
