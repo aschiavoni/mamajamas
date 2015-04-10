@@ -103,6 +103,7 @@ class List < ActiveRecord::Base
 
   def add_list_item(list_item, placeholder = false)
     list_item.placeholder = placeholder
+    list_item.set_vendor
     list_items << list_item
     list_item
   end

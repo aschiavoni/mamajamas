@@ -104,6 +104,15 @@ class ListItem < ActiveRecord::Base
     rank?
   end
 
+  def set_vendor
+    return if self.link.blank?
+    begin
+      uri = URI(self.link)
+      self.vendor = 'amazon' if uri.host =~ /amazon\.com/
+    rescue Exception
+    end
+  end
+
   private
 
   def base_image_url
