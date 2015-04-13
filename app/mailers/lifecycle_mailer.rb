@@ -11,4 +11,12 @@ class LifecycleMailer < ActionMailer::Base
     @hide_salutation = true
     mail to: @user.email, subject: @subject
   end
+
+  def baby_shower(user_id)
+    @user = User.find(user_id)
+    @display_name = first_name(@user)
+    @subject = "Your Baby Shower!"
+    @hide_salutation = true
+    mail to: @user.email, subject: @subject
+  end
 end

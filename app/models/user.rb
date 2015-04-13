@@ -343,6 +343,16 @@ class User < ActiveRecord::Base
       merge('lifecycle_email_post_due_ratings_sent_at' => val)
   end
 
+  def lifecycle_email_baby_shower_sent_at
+    email_preferences &&
+      email_preferences['lifecycle_email_baby_shower_sent_at']
+  end
+
+  def lifecycle_email_baby_shower_sent_at=(val)
+    self.email_preferences = (self.email_preferences || {}).
+      merge('lifecycle_email_baby_shower_sent_at' => val)
+  end
+
   def show_bookmarklet_prompt
     settings && settings['show_bookmarklet_prompt'].present? &&
       settings['show_bookmarklet_prompt'].to_s == 'true'
