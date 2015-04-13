@@ -333,14 +333,14 @@ class User < ActiveRecord::Base
       merge('followed_user_updates_sent_at' => val)
   end
 
-  def lifecyle_email_post_due_ratings_sent_at
+  def lifecycle_email_post_due_ratings_sent_at
     email_preferences &&
-      email_preferences['lifecyle_email_post_due_ratings_sent_at']
+      email_preferences['lifecycle_email_post_due_ratings_sent_at']
   end
 
-  def lifecyle_email_post_due_ratings_sent_at=(val)
+  def lifecycle_email_post_due_ratings_sent_at=(val)
     self.email_preferences = (self.email_preferences || {}).
-      merge('lifecyle_email_post_due_ratings_sent_at' => val)
+      merge('lifecycle_email_post_due_ratings_sent_at' => val)
   end
 
   def show_bookmarklet_prompt
