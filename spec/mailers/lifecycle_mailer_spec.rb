@@ -20,7 +20,7 @@ RSpec.describe LifecycleMailer, :type => :mailer do
     end
   end
 
-  describe "post_due_ratings" do
+  describe "baby_shower" do
     let(:user) { create(:user, first_name: "Jane") }
     let(:mail) { LifecycleMailer.baby_shower(user.id) }
 
@@ -31,7 +31,7 @@ RSpec.describe LifecycleMailer, :type => :mailer do
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match("with a baby shower")
+      expect(mail.body.encoded).to match("Have a fabulous shower.")
     end
 
     it "includes a greeting" do
