@@ -4,6 +4,25 @@
 
 ### Development Environment
 
+#### Initial Setup
+
+1. Add a working *database.yml* file
+
+    `cp config/database.yml.example config/database.yml`
+
+2. Adjust the parameters to work with your local database installation
+
+3. Add a *.env* file
+
+    `cp .env .env.example`
+
+4. At minimum, set the following variables in *.env*
+
+    * SECRET_TOKEN
+    * SECRET_KEY_BASE
+
+You can use `rake secret` to generate secure keys for those values.
+
 #### Thin
 
 We are using the thin web server in development and production.
