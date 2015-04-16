@@ -92,3 +92,7 @@ $autocomplete-height: 160px;
 #recommendations-editor.simplemodal-data, {
   width: 821px;
 }
+
+#registry .own .choicedrop.quantity li:first-child {
+  margin-right: 0px;
+}
