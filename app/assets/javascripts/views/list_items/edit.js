@@ -233,12 +233,16 @@ Mamajamas.Views.ListItemEdit = Mamajamas.Views.ListItem.extend({
       rating: this.itemField("rating").val(),
       image_url: this.itemField("image_url").val(),
       owned: _view.model.get("owned"),
+      rank: _view.model.get("rank"),
+      desired_quantity: _view.model.get('desired_quantity'),
+      gifted_quantity: _view.model.get('gifted_quantity'),
+      owned_quantity: _view.model.get('owned_quantity'),
       placeholder: false,
       price: _view.itemField("price").val(),
       vendor_id: this.itemField("vendor_id").val(),
       vendor: this.itemField("vendor").val(),
       list_item_image_id: this.itemField('list_item_image_id').val(),
-      idSuffix: _view.model.get("idSuffix"),
+      idSuffix: _view.model.get("idSuffix")
     };
 
     this.doSave(attributes, function() {
