@@ -127,8 +127,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
   addToMyList: function(_view) {
     $.cookies.set("add_to_my_list", null);
     var listItemAttrs = $("#add-list-item").data("add-list-item");
-    listItemAttrs["edit_mode"] = true;
-    Mamajamas.Context.ListItems.add(listItemAttrs);
+    Mamajamas.Context.ListItems.create(listItemAttrs);
   },
 
   toggleSortList: function(event) {
