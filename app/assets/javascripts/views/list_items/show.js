@@ -73,7 +73,7 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
         quantityLabel: "Have",
         minimum: this.model.get('gifted_quantity') || 0
       });
-      $(".prod-when-own .quantity", this.$el).after(ownedQuantityView.render().$el);
+      $(".prod-when-own .when", this.$el).before(ownedQuantityView.render().$el);
     }
 
     if (this.model.get("gifted_quantity") > 0) {
