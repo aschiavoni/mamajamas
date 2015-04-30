@@ -61,12 +61,18 @@ class User < ActiveRecord::Base
             length: { minimum: 3 }, uniqueness: true,
             format: { :with => /\A[A-Za-z\d_]+\z/ })
   validates :full_name, presence: true, if: Proc.new { |u| u.signup_registration? }
+  validates :referral_id, uniqueness: true
   validate :valid_zip_code
   validate :valid_country_code
 
   before_validation(on: :create) do
     self.email_preferences = {}
     self.settings = { show_bookmarklet_prompt: true, show_friends_prompt: true }
+  end
+
+  after_create do
+    self.referral_id = UserReferralIdGenerator.new.generate(self)
+    self.save
   end
 
   scope :guests, lambda { where(guest: true) }
