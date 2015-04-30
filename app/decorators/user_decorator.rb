@@ -1,5 +1,6 @@
 # coding: utf-8
 module UserDecorator
+  include Rails.application.routes.url_helpers
   extend Memoist
 
   def display_name
@@ -110,9 +111,17 @@ module UserDecorator
     end
   end
 
+  def admin_url
+    admin_user_url(username)
+  end
+
   private
 
   def formatted_date(ts)
     ts.present? ? ts.to_formatted_s(:long) : nil
+  end
+
+  def default_url_options
+    { host: 'wwww.mamajamas.com' }
   end
 end

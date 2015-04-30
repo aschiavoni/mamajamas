@@ -62,6 +62,14 @@
         <td><%= @view.user.last_sign_in %></td>
       </tr>
       <tr>
+        <td>Referral ID</td>
+        <td><%= @view.user.referral_id %></td>
+      </tr>
+      <tr>
+        <td>Referral Url</td>
+        <td><%= link_to nil, root_url(ref: @view.user.referral_id), target: '_blank' %></td>
+      </tr>
+      <tr>
         <td>Followers</td>
         <td><%= @view.follower_count %></td>
       </tr>

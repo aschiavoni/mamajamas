@@ -382,6 +382,26 @@ class User < ActiveRecord::Base
       merge(:show_friends_prompt => show)
   end
 
+  def referred_users
+    User.where(referred_by: self.id)
+  end
+
+  def referred_active_users
+    referred_users
+      .joins(list: :list_items)
+      .select('users.id', 'sum(list_items.gifted_quantity)')
+      .group('users.id')
+      .having('sum(list_items.gifted_quantity) >= ?', 2)
+  end
+
+  def referred_user_count
+    referred_users.count
+  end
+
+  def referred_active_user_count
+    referred_active_users.to_a.size
+  end
+
   protected
 
   def password_required?
