@@ -158,6 +158,25 @@
       </tbody>
     </table>
   <% end -%>
+  <% if @view.referred_users.size > 0 -%>
+    <h2>
+      Referred Users
+    </h2>
+    <table class="table">
+      <tbody>
+        <% @view.referred_users.each do |user, active| -%>
+          <tr>
+            <td><%= link_to user.username, public_list_url(user), target: '_blank' %></td>
+            <td>
+              <% if active -%>
+              active
+              <% end -%>
+            </td>
+          </tr>
+        <% end -%>
+      </tbody>
+    </table>
+  <% end -%>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {

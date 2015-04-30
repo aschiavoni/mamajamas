@@ -1,4 +1,5 @@
 class Admin::UserView
+  extend Memoist
   attr_reader :user
 
   delegate :username, :profile_picture, :full_name, to: :user
@@ -39,6 +40,15 @@ class Admin::UserView
   def has_social_connection?
     user.google_connected? || user.facebook_connected?
   end
+
+  def referred_users
+    active_user_ids = user.referred_active_users.map(&:id)
+    Hash[
+         user.referred_users.map { |u|
+           [ u, active_user_ids.include?(u.id) ]
+         }]
+  end
+  memoize :referred_users
 
   def quiz_answers
     @answers ||= Quiz::Answer.most_recent_answers(user.id)

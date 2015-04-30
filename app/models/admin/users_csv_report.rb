@@ -46,7 +46,9 @@ class Admin::UsersCsvReport
                 :featured_list?,
                 :expert_list?,
                 :referred_user_count,
+                :referred_user_list,
                 :referred_active_user_count,
+                :referred_active_user_list,
                 :admin_url
     ]
   end

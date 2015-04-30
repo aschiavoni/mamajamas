@@ -115,6 +115,17 @@ module UserDecorator
     admin_user_url(username)
   end
 
+  def referred_user_list
+    referred_users.map(&:username).join(',')
+  end
+  memoize :referred_user_list
+
+  def referred_active_user_list
+    ids = referred_active_users.map(&:id)
+    User.where(id: ids).map(&:username).join(',')
+  end
+  memoize :referred_active_user_list
+
   private
 
   def formatted_date(ts)
