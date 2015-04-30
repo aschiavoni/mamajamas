@@ -195,6 +195,7 @@ GEM
       multi_json
       sprockets (>= 2.0.3)
       tilt
+    hashids (1.0.2)
     hashie (3.2.0)
     heroku (3.10.1)
       heroku-api (~> 0.3.19)
@@ -494,6 +495,7 @@ DEPENDENCIES
   guard
   guard-rspec
   handlebars_assets
+  hashids
   heroku
   htmlentities
   interactive_editor

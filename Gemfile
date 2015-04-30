@@ -56,6 +56,9 @@ gem 'jbuilder'
 # url slugs
 gem 'friendly_id'
 
+# referral ids
+gem 'hashids'
+
 # html encoding/decoding
 gem 'htmlentities'
 
