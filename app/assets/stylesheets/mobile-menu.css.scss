@@ -1,0 +1,122 @@
+// Place all the styles related to the Mobile Menu here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#mobile-menu-btn-container,
+#mobile-menu {
+  display: none;
+}
+
+@media (max-width: 400px) {
+  #mobile-menu-btn-container {
+    display: none;
+    text-align: right;
+
+    #toggle-mobile-menu {
+      margin-top: 25px;
+      margin-right: 10px;
+      padding: 5px;
+      background-color: transparent;
+
+      .menu-bar {
+        height: 3px;
+        width: 20px;
+        background-color: #333333;
+        margin-top: 2px;
+        display: block;
+      }
+
+      .menu-bar:last-child {
+        margin-bottom: 2px;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: #666666;
+
+        .menu-bar {
+          background-color: #ffffff;
+        }
+      }
+    }
+
+  }
+
+  #mobile-menu {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    &:before {
+      content: '';
+      display: block;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 599;
+      color: #ffffff;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .mobile-menu-content {
+      position: relative;
+      margin-top: 15%;
+      z-index: 600;
+      text-align: center;
+
+      .close-btn {
+        position: fixed;
+        color: #ffffff;
+        top: 0;
+        right: 10px;
+        font-size: 2em;
+        z-index: 600;
+        font-weight: 100;
+        background-color: transparent;
+        border: none;
+      }
+
+      h2 {
+        font-size: 1em;
+        color: #ffffff;
+        text-transform: uppercase;
+      }
+
+      ul {
+        position: relative;
+        font-size: 2em;
+        margin-left: -40px;
+        margin-top: 0;
+        width: 100%;
+        list-style-type: none;
+        padding-bottom: 25px;
+      }
+
+      li {
+        text-align: center;
+        padding: 10px;
+
+        &.active > a {
+          color: #ffffff;
+        }
+
+        > a {
+          color: #666666;
+          padding: 10px;
+          transition: color 0.3s linear;
+          font-weight: 100;
+
+          &:hover,
+          &:focus {
+            color: #ffffff;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}

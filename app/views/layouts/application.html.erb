@@ -31,11 +31,52 @@
 <%= facebook_ad_conversion %>
 </head>
 <body id="<%= body_id if body_id.present? %>" class="<%= body_class if body_class.present? %>">
+
+<div id="mobile-menu">
+    <div class="mobile-menu-content">
+      <button class="close-btn">&times;</button>
+
+      <h2>Menu</h2>
+      <ul>
+        <li class="<%= "active" if params[:controller] == "lists" %>">
+          <%= link_to (user_signed_in? ? list_path : root_path) do %>
+            Home
+          <% end -%>
+        </li>
+        <li class="<%= "active" if params[:controller] == "friends" %>">
+          <%= link_to "Browse", new_friend_path, class: "find-moms" %>
+        </li>
+        <% if user_signed_in? && !current_user.guest? -%>
+          <li>
+            <%= link_to "Account", settings_path %>
+          </li>
+        <% else -%>
+          <li>
+            <%= link_to "Login", new_user_session_path  %>
+          </li>
+          <li>
+            <%= link_to "Sign Up", new_user_registration_path  %>
+          </li>
+          <%= yield :logged_out_header_buttons -%>
+        <% end -%>
+      </ul>
+
+      <h2>Get In Touch</h2>
+      <ul>
+        <li><%= link_to "Questions", faq_path %></li>
+        <li><a href="mailto:angie@mamajamas.com">Contact</a></li>
+        <li><%= link_to "Blog", "http://blog.mamajamas.com/", target: "_blank" %></li>
+      </ul>
+    </div>
+</div>
+
+
 <!-- header area ***** -->
 <%= content_for?(:header_overlay) ? yield(:header_overlay) : "" %>
 <div id="hed-wrap">
   <div class="gridContainer clearfix">
     <div id="header">
+
       <div id="branding">
         <%= link_to (user_signed_in? ? list_path : root_path) do %>
           <h1>Mamajamas</h1>
@@ -44,6 +85,16 @@
         beta <span>&#8220;beta&#8221; means we&#8217;re still working out some of the kinks.<em></em></span>
         <% end -%>
       </div>
+
+      <!-- Mobile Menu Button -->
+      <div id="mobile-menu-btn-container">
+        <button id="toggle-mobile-menu">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
+      </div>
+
       <%= content_for?(:search) ? yield(:search) : "" %>
       <nav id="mainnav">
         <% if show_mainnav && user_signed_in? -%>
@@ -57,6 +108,7 @@
           </ul>
         <% end -%>
       </nav>
+
       <div id="login">
         <ul>
           <% if user_signed_in? -%>

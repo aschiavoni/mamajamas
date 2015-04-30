@@ -15,8 +15,9 @@
 <% end -%>
 <% content_for :nav do -%>
   <h1>
-    <strong>It’s your baby registry.</strong> Made simple. <em>(and social!)</em>
+    <strong>It’s your baby registry.</strong> <span>Made simple.<span> <em>(and social!)</em>
   </h1>
+
   <ul>
     <li>
       <a href="/registry" id="create-registry" class="button">Create your registry now</a>
@@ -38,6 +39,9 @@
     </div>
     <div class="col">
       <h2>The Mamajamas birth story</h2>
+      <p class="mobile-image">
+        <%= image_tag "angie-dario2015.jpg", alt: "about mamajamas", size: "180x270" %>
+      </p>
       <p>The idea for Mamajamas was born out of my own experience as an expecting mom.</p>
       <p>Four years ago, I was overwhelmed trying to figure out what I needed for the birth of my son. How could I help my family and friends buy us things when I didn't even know what I needed myself? I spent hours researching products online and emailing mom friends asking for advice.</p>
       <p>I realized there needed to be an easier way for expecting parents to build their registries and get gear recommendations. I wanted to find like-minded parents and find out what worked for them (and what didn’t!).</p>
@@ -51,7 +55,9 @@
     </div>
   </div>
   <div id="bt-promo" class="center">
-    <a href="/registry" id="create-registry-cta" class="button bt-color">Create your registry now</a></div>
+    <a href="/registry" id="create-registry-cta" class="button bt-color">Create your registry now</a>
+    <a href="/angie" class="button show-mobile">Visit Angie’s registry</a>
+  </div>
 <% end -%>
 <% content_for :footer do -%>
   <div class="testimonial">
