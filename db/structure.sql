@@ -792,7 +792,8 @@ CREATE TABLE users (
     settings hstore DEFAULT ''::hstore NOT NULL,
     partner_full_name character varying(255),
     baby_due_date timestamp without time zone,
-    setup_registry boolean DEFAULT false NOT NULL
+    setup_registry boolean DEFAULT false NOT NULL,
+    referral_id character varying(255)
 );
 
 
@@ -1581,4 +1582,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150109230843');
 INSERT INTO schema_migrations (version) VALUES ('20150115144218');
 
 INSERT INTO schema_migrations (version) VALUES ('20150223030103');
+
+INSERT INTO schema_migrations (version) VALUES ('20150430171721');
 
