@@ -1,7 +1,7 @@
 class UserReferralIdGenerator
   def generate(user)
-    converted = user.username.chars.map(&:ord).join.to_i
-    hasher.encode(user.id + converted)
+    converted = user.username.chars.map(&:ord).join + user.id.to_s
+    hasher.encode(converted)
   end
 
   private
