@@ -4,6 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
   before_filter :init_view, only: [ :new ]
   before_filter :clear_preference_cookies
   before_filter :configure_permitted_parameters
+  after_action  :check_referred_by, only: [ :create ]
 
   # fix for facebook friends update
   protect_from_forgery(with: :null_session,

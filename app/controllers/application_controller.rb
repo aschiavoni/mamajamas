@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_basic_auth_maybe
   before_filter :set_meta
+  before_filter :capture_referral
 
   # Convenience accessor for flash[:error]
   def error
@@ -93,6 +94,29 @@ class ApplicationController < ActionController::Base
                     url: "http://www.mamajamas.com/",
                     image: logo
                   })
+  end
+
+  def capture_referral
+    if current_user.blank? && !params[:ref].blank?
+      cookies.signed[:aff_referred_by] = {
+                                          value: params[:ref],
+                                          expires: 30.days.from_now
+                                         }
+    end
+  end
+
+  def check_referred_by
+    return unless current_user.present?
+
+    referred_by = cookies.signed[:aff_referred_by]
+    if referred_by.present?
+      cookies.delete :aff_referred_by
+      referral_user = User.find_by(referral_id: referred_by)
+      if referral_user.present? && current_user.referred_by.blank?
+        current_user.referred_by_id = referral_user.id
+        current_user.save
+      end
+    end
   end
 
   def after_sign_in_path_for(resource)

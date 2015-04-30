@@ -1,6 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   skip_before_filter :require_basic_auth_maybe
   before_filter :clear_preference_cookies
+  after_action  :check_referred_by
 
   def facebook
     oauth = OmniauthHashParser.new(request.env["omniauth.auth"])

@@ -793,7 +793,8 @@ CREATE TABLE users (
     partner_full_name character varying(255),
     baby_due_date timestamp without time zone,
     setup_registry boolean DEFAULT false NOT NULL,
-    referral_id character varying(255)
+    referral_id character varying(255),
+    referred_by_id integer
 );
 
 
@@ -1284,6 +1285,13 @@ CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
+-- Name: index_users_on_referred_by_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_referred_by_id ON users USING btree (referred_by_id);
+
+
+--
 -- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1584,4 +1592,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150115144218');
 INSERT INTO schema_migrations (version) VALUES ('20150223030103');
 
 INSERT INTO schema_migrations (version) VALUES ('20150430171721');
+
+INSERT INTO schema_migrations (version) VALUES ('20150430183424');
 

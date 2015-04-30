@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
   has_many :social_friends, dependent: :destroy, class_name: "SocialFriends"
   has_one  :address, as: :addressable, dependent: :destroy
   has_many :gifts, dependent: :nullify
+  belongs_to :referred_by, class_name: "User"
 
   mount_uploader :profile_picture, ProfilePictureUploader
 

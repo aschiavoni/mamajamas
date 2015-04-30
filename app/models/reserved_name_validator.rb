@@ -22,6 +22,7 @@ class ReservedNameValidator < ActiveModel::EachValidator
     password passwords
     privacy product product_type product_types profile profiles
     quiz quizes
+    ref referral referral-id
     register registrations registry registries relationship relationships
     remove replies robots rss
     save search searcher session sessions settings sign-in sign-out sign-up
