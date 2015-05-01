@@ -23,6 +23,7 @@ RUN \
   apt-get autoremove -y && \
   apt-get clean all
 
+ENV RAILS_ENV development
 RUN mkdir /myapp
 WORKDIR /myapp
 ADD Gemfile /myapp/Gemfile

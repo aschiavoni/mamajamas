@@ -1,0 +1,4 @@
+gosu postgres postgres --single <<- EOSQL
+  CREATE ROLE mamajamas WITH CREATEDB LOGIN SUPERUSER PASSWORD '$DB_PASSWORD';
+  CREATE EXTENSION IF NOT EXISTS hstore;
+EOSQL

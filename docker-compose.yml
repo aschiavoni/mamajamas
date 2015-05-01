@@ -1,0 +1,33 @@
+web:
+  build: .
+  command: bundle exec foreman start -f Procfile.development
+  env_file:
+    - .env
+  volumes:
+    - ./myapp
+  ports:
+    - '3000:3000'
+  links:
+    - postgres
+    - redis
+    - memcached
+
+postgresData:
+  image: busybox
+  command: true
+  volumes:
+    - /var/lib/postgresql/data
+
+postgres:
+  build: dbcontainer
+  environment:
+    POSTGRES_PASSWORD: asecurepassword
+    DB_PASSWORD: secret
+  volumes_from:
+    - postgresData
+
+redis:
+  image: redis
+
+memcached:
+  image: memcached
