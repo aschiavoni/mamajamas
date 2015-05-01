@@ -31,12 +31,12 @@
   <!-- end product category, name, rating -->
 
   <!-- when to buy, need vs. have -->
-  {{#ifNotLowPriority listItem}}
   <div class="prod-when-own">
-    <div class="price">Price: <strong>{{listItem.price}}</strong></div>
-    <div class="when">When: <strong>{{listItem.age}}</strong></div>
+    {{#ifNotLowPriority listItem}}
+      <div class="price">Price: <strong>{{listItem.price}}</strong></div>
+      <div class="when">When: <strong>{{listItem.age}}</strong></div>
+    {{/ifNotLowPriority}}
   </div>
-  {{/ifNotLowPriority}}
   <!-- end when to buy, need vs. have -->
   <!-- menu: delete, drag, edit -->
   <div class="prod-edit-menu">
