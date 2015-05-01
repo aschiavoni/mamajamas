@@ -68,6 +68,12 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
       $('.show-all-friends').click(this.showAllFriends);
     }
 
+    $('.tooltipster').tooltipster({
+      position:'left',
+      maxWidth:180,
+      speed:200
+    });
+
     Mamajamas.Context.Recommendations = new Mamajamas.Collections.Recommendations();
   },
 
