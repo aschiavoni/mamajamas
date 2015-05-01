@@ -75,7 +75,7 @@ class FacebookGraph
       where("lists.privacy <> ?", List::PRIVACY_PRIVATE).
       references(:authentications).
       references(:lists).
-      order("lists.featured DESC, users.follower_count DESC")
+      order("lists.featured DESC, users.created_at DESC, users.follower_count DESC")
   end
   memoize :all_mamajamas_friends
 end

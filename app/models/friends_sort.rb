@@ -1,6 +1,6 @@
 module FriendsSort
   def sort_by(sort_by)
-    default_sort = "lists.featured DESC, users.follower_count DESC"
+    default_sort = "lists.featured DESC, users.created_at DESC, users.follower_count DESC"
     return default_sort if sort_by.blank?
 
     case sort_by.to_sym
