@@ -3,7 +3,6 @@
   <form class="label-infield">
     <!-- question q02-01 ***** -->
     <div id="q02-01" class="q-question">
-      I
       <!-- drop-down menu -->
       <div class="choicedrop">
         <a id="mom-type" href="#">
@@ -11,10 +10,10 @@
         <span class="ss-dropdown"></span>
       </a>
       <ol style="display:none; width:19.5em;">
-        <li><a class="mom-type" href="#">am expecting my first child.</a></li>
-        <li><a class="mom-type" href="#">am already a parent.</a></li>
-        <li><a class="mom-type" href="#">am already a parent and expecting again.</a></li>
-        <li><a class="mom-type" href="#">am just browsing or have advice.</a></li>
+        <li><a class="mom-type" href="#">I'm expecting my first child.</a></li>
+        <li><a class="mom-type" href="#">I'm already a parent.</a></li>
+        <li><a class="mom-type" href="#">I'm already a parent and expecting again.</a></li>
+        <li><a class="mom-type" href="#">I'm just browsing or have advice.</a></li>
       </ol>
     </div>
     <!-- end drop-down menu -->
@@ -36,7 +35,7 @@
         <p>
           <label for="field-bdate">mm/dd/yyyy</label>
           <br />
-          <input type="text" value="{{answers.[2]}}" size="30" name="child[birthday]" id="field-bdate" class=""></p>
+          <input type="date" value="{{answers.[2]}}" size="30" name="child[birthday]" id="field-bdate" class=""></p>
       </fieldset>
     </div>
   </div>
@@ -71,17 +70,27 @@
 </div>
 <!-- end modal window content -->
 <div class="button-row clearfix">
+  <div class="mobile-button-row">
+    <div class="col50 float-l left">
+      <a href="#" class="button" id="bt-prev"><span class="ss-navigateleft"></span><span class="hide-mobile">Previous</span></a>
+    </div>
+    <div class="mobile-question-number">
+        Question 1
+    </div>
+    <div class="col50 float-r right">
+      <a href="#" class="button bt-color" id="bt-next"><span class="hide-mobile">Next</span><span class="ss-navigateright"></span></a>
+    </div>
+  </div>
+
   <!-- instructions -->
-  <p>Skip the quiz and <a href="#" class="skip">go to my list</a></p>
-  <div class="col50 float-l left">
-    <a href="#" class="button" id="bt-prev"><span class="ss-navigateleft"></span>Previous</a>
-  </div>
-  <div class="col50 float-r right">
-    <a href="#" class="button bt-color" id="bt-next">Next<span class="ss-navigateright"></span></a>
-  </div>
+  <p>Skip this quiz <span class="hide-mobile">and</span> <a href="#" class="skip"><span class="hide-mobile">go to my list</span></a></p>
 </div>
+
+
 <!-- quiz progress bar -->
-<div id="q-progress" title="Step 2 of 9">
-  <div class="bar"></div>
+<div class="mobile-q-progress">
+  <div id="q-progress" title="Step 2 of 9">
+    <div class="bar"></div>
+  </div>
 </div>
 <!-- end quiz progress bar -->

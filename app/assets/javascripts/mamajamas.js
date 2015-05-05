@@ -37,6 +37,27 @@ window.Mamajamas = {
       new Mamajamas.Views.HomeIndex();
     }
 
+    if($('#toggle-mobile-menu').length > 0) {
+      var $mobileMenu = $('#mobile-menu');
+      $('#toggle-mobile-menu').on('click', function() {
+        if($mobileMenu.length > 0) {
+          $mobileMenu.toggle();
+
+          if($mobileMenu.is(':visible')) {
+            $mobileMenu.find('.close-btn').on('click', function() {
+              $mobileMenu.hide();
+              $(this).off('click');
+            });
+
+            $mobileMenu.find('a').on('click', function() {
+              $mobileMenu.hide();
+            });
+          }
+        }
+
+      });
+    }
+
     // follow page
     if ($('#follow-moms').length > 0) {
       new Mamajamas.Views.FriendPicker({

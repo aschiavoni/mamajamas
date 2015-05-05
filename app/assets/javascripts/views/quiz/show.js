@@ -24,6 +24,7 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
   },
 
   events: {
+    "click .mobile-skip-registry-btn": 'closeQuiz'
   },
 
   questions: [
@@ -35,7 +36,7 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
       [
         Mamajamas.Views.QuizBabyAge, new Mamajamas.Models.QuizQuestion({
           answers: [
-            "am expecting my first child.",
+            "I'm expecting my first child.",
             false, // multiples
             null, // due date
             "0-3 mo" // age range
