@@ -3,6 +3,14 @@
     .mobile-header {
       display: none;
     }
+
+    .q-question {
+
+      .hide-mobile {
+        display: block;
+      }
+
+    }
   }
 
   .mobile-skip-registry-btn,
@@ -51,7 +59,7 @@
 
   #quiz-modal {
     .content {
-      padding: 25% 20px;
+      padding: 10% 20px;
 
       .mobile-header {
         font-weight: 400;
@@ -105,6 +113,18 @@
 
       .mobile-skip-registry-btn {
         display: block;
+      }
+
+      .q-question {
+
+        .hide-mobile {
+          display: none;
+        }
+
+      }
+
+      #q02-02 {
+        padding: 0 15px;
       }
     }
 

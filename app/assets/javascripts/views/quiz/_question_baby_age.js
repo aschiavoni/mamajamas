@@ -63,22 +63,22 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
 
   initQuestion: function(answerText) {
     switch (answerText) {
-    case 'am expecting my first child.':
+    case "I'm expecting my first child.":
       this.hideBabyAgeQuestion();
       this.showDueDateQuestion();
       this.showTwinsQuestion();
       break;
-    case 'am already a parent.':
+    case "I'm already a parent.":
       this.showBabyAgeQuestion();
       this.hideDueDateQuestion();
       this.showTwinsQuestion();
       break;
-    case 'am already a parent and expecting again.':
+    case "I'm already a parent and expecting again.":
       this.showBabyAgeQuestion();
       this.showDueDateQuestion();
       this.showTwinsQuestion();
       break;
-    case 'am just browsing or have advice.':
+    case "I'm just browsing or have advice.":
       this.hideBabyAgeQuestion();
       this.hideDueDateQuestion();
       this.hideTwinsQuestion();
@@ -109,27 +109,27 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
     var answers = this.model.get('answers');
     answers[0] = answerText;
     switch (answerText) {
-      case 'am expecting my first child.':
+      case "I'm expecting my first child.":
         this.kid.set('age_range', 'Pre-birth');
         this.hideBabyAgeQuestion();
         this.showDueDateQuestion();
         this.showTwinsQuestion();
         break;
-      case 'am already a parent.':
+      case "I'm already a parent.":
         answers[3] = '0-3 mo';
         this.kid.set('age_range', '0-3 mo');
         this.showBabyAgeQuestion();
         this.hideDueDateQuestion();
         this.showTwinsQuestion();
         break;
-      case 'am already a parent and expecting again.':
+      case "I'm already a parent and expecting again.":
         answers[3] = '0-3 mo';
         this.kid.set('age_range', '0-3 mo');
         this.showBabyAgeQuestion();
         this.showDueDateQuestion();
         this.showTwinsQuestion();
         break;
-      case 'am just browsing or have advice.':
+      case "I'm just browsing or have advice.":
         answers[3] = '0-3 mo';
         this.kid.set('age_range', '0-3 mo');
         this.hideBabyAgeQuestion();
