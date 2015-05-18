@@ -1,3 +1,13 @@
+<% content_for :mobileSearch do -%>
+  <div id="mobile-friends-search">
+    <%= form_tag new_friend_path, method: :post do %>
+      <input type="text" name="query" placeholder="Find" class="mobile-menu-search-input" />
+      <label class="floating-label"><i class="fa fa-search"></i></label>
+      <input type="submit" value="Search" class="submit-btn" />
+    <% end %>
+  </div>
+<% end -%>
+
 <% content_for :search do -%>
   <div id="friendssearch">
     <%= form_tag new_friend_path, method: :post do %>
@@ -6,6 +16,7 @@
     <% end %>
   </div>
 <% end -%>
+
 <% content_for :feature do -%>
   <div id="feature">
     <a href="#" id="learn-more">

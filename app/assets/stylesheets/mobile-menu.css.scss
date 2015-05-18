@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #mobile-menu-btn-container,
+#mobile-friends-search,
 #mobile-menu {
   display: none;
 }
@@ -98,6 +99,68 @@
       margin-top: 15%;
       z-index: 600;
       text-align: center;
+
+      #mobile-friends-search {
+        display: block;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+
+        &:after {
+          content: '';
+          display: table;
+          clear: both;
+        }
+
+        .floating-label {
+          display: block;
+          color: transparent;
+          text-align: left;
+          position: absolute;
+          margin-top: -25px;
+          margin-left: 0;
+          transition: color .3s linear;
+        }
+
+        .mobile-menu-search-input {
+          border: none;
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          border-radius: 0;
+          border-bottom: 1px solid transparent;
+          color: #666666;
+          background-color: transparent;
+          font-size: 2em;
+          max-width: 200px;
+          padding: 0.25em 0 .25em 72px;
+          font-weight: 100;
+          transition: color .4s linear, border-color .4s linear, padding .3s ease-out;
+
+          &::-webkit-input-placeholder {
+            color: #666666;
+            font-weight: 100;
+            transition: color .4s linear;
+          }
+
+          &:focus {
+            color: #ffffff;
+            border-color: #ffffff;
+            padding: .25em 0 .25em 25px;
+          }
+
+          &:focus + .floating-label {
+            color: #ffffff;
+          }
+
+          &:focus::-webkit-input-placeholder {
+            color: #FFFFFF;
+          }
+        }
+
+        .submit-btn {
+          display: none;
+        }
+      }
 
       .close-btn {
         position: fixed;

@@ -32,11 +32,13 @@
 </head>
 <body id="<%= body_id if body_id.present? %>" class="<%= body_class if body_class.present? %>">
 
+<!-- START of MOBILE MENU -->
 <div id="mobile-menu">
     <div class="mobile-menu-content">
       <button class="close-btn">&times;</button>
 
       <h2>Menu</h2>
+      <%= content_for?(:mobileSearch) ? yield(:mobileSearch) : "" %>
       <ul>
         <li class="<%= "active" if params[:controller] == "lists" %>">
           <%= link_to (user_signed_in? ? list_path : root_path) do %>
@@ -69,6 +71,7 @@
       </ul>
     </div>
 </div>
+<!-- END OF MOBILE MENU -->
 
 
 <!-- header area ***** -->
