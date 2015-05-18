@@ -87,14 +87,17 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
       // overlayClose: false,
       onClose: _view.closeQuiz
     });
+
+    $('body').addClass('quiz');
     return this;
   },
 
   closeQuiz: function(dialog) {
     if (confirm("Are you sure you want to quit the quiz?")) {
-      if (Mamajamas.Context.List.get('id'))
+      if (Mamajamas.Context.List.get('id')) {
+        $('body').removeClass('quiz');
         window.location = '/';
-      else {
+      } else {
         var _view = this;
 
         $.ajax({
@@ -104,9 +107,11 @@ Mamajamas.Views.QuizShow = Backbone.View.extend({
             complete_list: true
           },
           success: function(data, status, xhr) {
+            $('body').removeClass('quiz');
             window.location = '/registry';
           },
           error: function(xhr, status, error) {
+            $('body').removeClass('quiz');
             Mamajamas.Context.Notifications.error('Please try again later.');
           },
           complete: function() {
