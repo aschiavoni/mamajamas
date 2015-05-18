@@ -1,17 +1,17 @@
 /* Animations */
-@-webkit-keyframes fader {
+@-webkit-keyframes fade-in {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
-@-moz-keyframes fader {
+@-moz-keyframes fade-in {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
-@-o-keyframes fader {
+@-o-keyframes fade-in {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
-@keyframes fader {
+@keyframes fade-in {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }

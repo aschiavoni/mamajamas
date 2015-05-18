@@ -20,17 +20,11 @@
   </div>
   <!-- / question q02-01 ***** -->
 
-  <!-- question q02-02 ***** -->
-  <div id="q02-02" class="q-question" style="display:block;">
-    <label for="twins"><input type="checkbox" name="twins" {{#if answers.[1]}}checked{{/if}}> with twins or multiples!</label>
-  </div>
-  <!-- / question q02-02 ***** -->
-
   <!-- question q02-03 ***** -->
   <div id="q02-03" class="q-question clearfix" style="display:none;">
-    <div class="col35 float-l left">
+    <div class="col33 float-l left field-label">
       My due date is:</div>
-    <div class="col60 float-l right">
+    <div class="col66 float-l right">
       <fieldset>
         <p>
           <label for="field-bdate" class="hide-mobile">mm/dd/yyyy</label>
@@ -65,6 +59,12 @@
     <!-- end drop-down menu -->
   </div>
   <!-- / question q02-04 ***** -->
+
+  <!-- question q02-02 ***** -->
+  <div id="q02-02" class="q-question" style="display:block;">
+    <label for="twins"><input type="checkbox" name="twins" {{#if answers.[1]}}checked{{/if}}> It's twins or multiples!</label>
+  </div>
+  <!-- / question q02-02 ***** -->
 
   </form>
 </div>
