@@ -4,4 +4,16 @@
 	body {
 		overflow-x: hidden;
 	}
+
+	#hed-wrap {
+		.beta {
+			z-index: 50;
+		}
+		
+		.tooltip-r {
+			span {
+				display: none;
+			}
+		}
+	}
 }
