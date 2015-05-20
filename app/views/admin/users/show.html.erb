@@ -168,6 +168,9 @@
           <tr>
             <td><%= link_to user.username, public_list_url(user), target: '_blank' %></td>
             <td>
+              <%= user.signed_up %>
+            </td>
+            <td>
               <% if active -%>
               active
               <% end -%>

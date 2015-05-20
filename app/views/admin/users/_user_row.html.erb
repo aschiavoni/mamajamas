@@ -20,9 +20,6 @@
     <% end -%>
   </td>
   <td>
-    <%= check_box_tag "shared_list", "1", user.shared_list?, disabled: true %>
-  </td>
-  <td>
     <%= user.signed_up %>
   </td>
   <td>
@@ -33,6 +30,9 @@
   </td>
   <td>
     <%= user.list.present? ? user.list.list_items.gifted_items.count : 0 %>
+  </td>
+  <td>
+    <%= user.referred_active_users.to_a.size %>
   </td>
   <td class="user-actions">
     <%= link_to admin_become_path(user.username), class: "button bt-become" do %>
