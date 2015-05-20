@@ -1,0 +1,164 @@
+// Place all the styles related to the Mobile List here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@media (max-width: 400px) {
+  #registry {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+
+
+    #listwrap {
+      //width: 100%;
+      //float: none;
+      width: auto;
+      -webkit-flex: 1 auto;
+      flex: 1 auto;
+      -webkit-order: 2;
+      order: 2;
+
+      #title {
+        padding: 0;
+        float: none;
+
+        #subhed {
+          display: none;
+        }
+
+        #title-links {
+          width: 100%;
+          float: none;
+          padding: 0;
+
+          > ul {
+
+            > li {
+              width: 49%;
+              text-align: center;
+              padding: 15px;
+              margin: 0;
+              text-transform: uppercase;
+
+              &:first-of-type {
+                border-right: 1px solid #d9d9d9;
+              }
+            }
+
+          }
+        }
+      }
+
+      #primary {
+        display: none;
+      }
+
+      #secondary {
+        width: 100%;
+
+        #listcontrols {
+
+          #prod-rec {
+            display: none;
+          }
+
+          .listsort {
+            width: 49%;
+            padding: 3px;
+
+            .choicedrop {
+              width: 97%;
+              float: none;
+              padding: 10px 5px;
+
+              > a {
+                text-align: center;
+              }
+
+              > ul {
+                width: 100% !important;
+
+                li {
+
+                  a {
+                    padding: 10px 5px;
+                  }
+                }
+              }
+            }
+
+            .listsort-label {
+              display: none;
+            }
+          }
+
+        }
+
+        #list-items {
+
+          h4.priority {
+            padding: 15px 10px;
+          }
+
+          .prod-links {
+
+            .button {
+              width: 95%;
+              padding: 15px 12px;
+              font-size: 14px;
+            }
+          }
+
+          .prod-category {
+            display: none;
+          }
+        }
+      }
+    }
+
+    #tertiary {
+      width: auto;
+      -webkit-flex: 1 auto;
+      flex: 1 auto;
+      -webkit-order: 1;
+      order: 1;
+      background-color: #ffffff;
+
+      #module-profile {
+        .content {
+          display: -webkit-box;
+          display: -moz-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+
+          -webkit-flex-flow: row wrap;
+          flex-flow: row wrap;
+
+          justify-content: space-around;
+        }
+
+        h3 {
+          -webkit-flex: 1 50%;
+          flex: 1 50%;
+          -webkit-order: 2;
+          order: 2;
+        }
+
+        #profile-photo {
+          -webkit-flex: 1 25%;
+          flex: 1 25%;
+          -webkit-order: 1;
+          order: 1;
+        }
+
+      }
+
+    }
+  }
+}

@@ -71,6 +71,8 @@
     </ul>
     <div class="arrow"><span></span></div>
   </div>
+
+
   <div id="primary">
     <div class="content">
       <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
@@ -90,10 +92,14 @@
       <% end -%>
     </div>
   </div>
+
+
   <div id="secondary">
     <div class="content">
       <!-- notification ***** -->
       <div id="notifications"><%= notifications %></div>
+
+
       <% cache [ @view.list, @view.category_slug, @view.owner, 'list' ] do -%>
         <form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>" data-list-entries-loaded-at="<%= Time.now.utc %>">
         </form>
@@ -123,6 +129,8 @@
     </div>
   </div>
 </div>
+
+
 <div id="tertiary" class="light">
   <div class="content">
     <div id="module-profile">

@@ -10,9 +10,15 @@
 
 	body {
 		overflow-x: hidden;
+	  	line-height: inherit;
 	}
 
 	#hed-wrap {
+
+	  	#mainnav {
+			display: none;
+		}
+
 		.beta {
 			z-index: 50;
 		}
