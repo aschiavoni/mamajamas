@@ -5,6 +5,13 @@
           transition: $transition;
 }
 
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
 
 
 #quiz-modal {
@@ -31,9 +38,28 @@
 
 @media (max-width: 400px) {
 
-.profiler-results {
-	/* This is for the Ruby Dev Tools */
-	display: none;
+
+#loader-wrap {
+  background: none repeat scroll 0 0 rgba(255, 255, 255, 0.8);
+  height: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 4000;
+}
+#loader {
+  /*clear: both;*/
+  width: 36px;
+  padding: 40px;
+  position: relative;
+  top: 8rem;
+  left: 50%;
+  margin-top: -64px;
+  margin-left: -58px;
+  background: rgba(255,255,255,1);
+  border: 1px solid #eee;
+  border-radius: 50%;
 }
 
 	.quiz {
@@ -200,34 +226,48 @@
 
 			.quiz-title {
 				font-size: 1.1rem;
+				display: inline-block;
+				margin-top: -0.2rem;
 			}
+
+			.q-multi {
+				margin-top: 1rem;
+			}
+
 			.label-infield {
 				margin-top: -9px;
 			}
 
 			.mobile-header {
-				font-weight: 400;
-				font-size: 0.5em;
+				font-weight: 100;
+				font-size: 0.4em;
 				padding: 15px 0;
 				display: block;
+				letter-spacing: 0.15em;
+				color: rgba(140,140,140,1);
+
+				& + p {
+					padding: 0 0.7em;
+					font-size: 0.8em;
+				}
 			}
 
 			.mobile-start-btn {
 				position: fixed;
-				bottom: 20px;
+				bottom: 10px;
 				left: 15px;
 				right: 15px;
 				background-color: rgba(255,255,255,1);
-				-webkit-animation: ease fade-in 0.8s;
+				-webkit-animation: ease fade-in 0.8s;	
 
 				.button {
 					width: 100%;
 					padding: 15px 0;
-					margin: 10px 0 5px 0;
+					margin: 2px 0 5px 0;
 				}
 
 				.mobile-skip-registry-btn {
-					font-size: 0.7em;
+					font-size: 0.5em;
 					color: #C9C9C9;
 
 					&:hover,
@@ -388,10 +428,10 @@
 					width: 254px;
 
 					a {
-						height: 200px;
+						height: 130px;
 
 						img {
-							height: 170px;
+							height: 130px;
 							width: 100%;
 						}
 					}
@@ -418,8 +458,11 @@
 			position: fixed;
 			left: 0;
 			right: 0;
+			bottom: 0;
 			z-index: 9999;
-			background-color: #ffffff;
+			padding: 0 20px;
+			margin: 2px 0 0 0;
+			background-color: rgba(255,255,255,1);
 
 			.hide-mobile {
 				display: none;
@@ -493,7 +536,13 @@
 			left: 0;
 			right: 0;
 			margin: 0 15px;
-			border-radius: 10px;
+			border-color: rgba(135, 71, 137, 1);
+			@include border-radius (10px);
+
+			.bar {
+				background-color: rgba(135, 71, 137, 1);
+				@include border-radius (10px 0 0 10px);
+			}
 		}
 	}
 
@@ -511,7 +560,8 @@
 		}
 	}
 
-	#quiz07 {
+	#quiz07,
+	#quiz06 {
 		.content {
 			.q-slider {
 				li:nth-of-type(1) {

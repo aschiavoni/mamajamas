@@ -1,6 +1,13 @@
 /* Mobile Global Styles */
 
 @media (max-width: 400px) {
+
+
+.profiler-results {
+	/* This is for the Ruby Dev Tools */
+	display: none;
+}
+
 	body {
 		overflow-x: hidden;
 	}
@@ -9,7 +16,7 @@
 		.beta {
 			z-index: 50;
 		}
-		
+
 		.tooltip-r {
 			span {
 				display: none;
