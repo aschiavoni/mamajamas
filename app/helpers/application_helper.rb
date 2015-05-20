@@ -164,6 +164,22 @@ module ApplicationHelper
     end
   end
 
+  def twitter_ad_conversion(pid, sale_amount = 0, quantity = 0)
+    if Rails.env.development?
+      js = <<-JS
+        <script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        twttr.conversion.trackPid('#{pid}',
+        { tw_sale_amount: #{sale_amount}, tw_order_quantity: #{quantity} }
+        );</script>
+        <noscript>
+        <img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=#{pid}&p_id=Twitter&tw_sale_amount=#{sale_amount}&tw_order_quantity=#{quantity}" />
+        <img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=#{pid}&p_id=Twitter&tw_sale_amount=#{sale_amount}&tw_order_quantity=#{quantity}" /></noscript>
+      JS
+      js.html_safe
+    end
+  end
+
   private
 
   def notification_config
