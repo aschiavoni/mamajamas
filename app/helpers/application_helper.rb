@@ -165,7 +165,7 @@ module ApplicationHelper
   end
 
   def twitter_ad_conversion(pid, sale_amount = 0, quantity = 0)
-    if Rails.env.development?
+    if Rails.env.production?
       js = <<-JS
         <script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
         <script type="text/javascript">
