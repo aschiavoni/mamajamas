@@ -1,18 +1,4 @@
-@mixin transition($transition) {
-  -webkit-transition: $transition;
-     -moz-transition: $transition;
-      -ms-transition: $transition;
-          transition: $transition;
-}
-
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
-}
-
-
+@import "modules/_mixins-vendor-prefixes";
 
 #quiz-modal {
 	.content {
@@ -458,8 +444,8 @@
 
 		.quiz-results {
 			.button-row {
-				display: flex;
-				flex-wrap: wrap;
+				@include flexbox();
+				@include flex-flow(wrap column);
 
 				.col50 {
 					display: block;
@@ -467,11 +453,15 @@
 				}
 
 				.btn-build-registry {
-					order: 1;
+					@include order(1);
+					flex: 1 auto;
+
+
 				}
 
 				.btn-quiz-back {
-					order: 2;
+					@include order(2);
+					flex: 1 auto;
 
 					.button {
 						font-size: 1em;
