@@ -135,8 +135,10 @@
   <div class="content">
     <div id="module-profile">
       <div class="content">
-        <p id="sharedby"><span></span>Profile</p>
-        <h3><%= @view.owner.display_name %></h3>
+
+        <p id="sharedby" class="hide-mobile"><span></span>Profile</p>
+        <h3 class="hide-mobile-block"><%= @view.owner.display_name %></h3>
+
         <div id="profile-photo">
           <%= image_tag @view.owner.profile_picture.public_list, alt: "#{@view.owner.username} profile photo" %>
           <div class="progress-container">
@@ -146,6 +148,17 @@
             <%= image_tag "progress-bar.gif", alt: "Progress bar", class: "progress", style: "display: none;" %>
           </div>
         </div>
+
+        <div class="mobile-followed-friends-section">
+          <h3><%= @view.owner.display_name %></h3>
+          <% if @view.owner.followed_users_with_shared_lists.none? -%>
+            <%= link_to new_friend_path, class: "button bt-color" do -%>
+              Find &amp; Follow Friends
+            <% end -%>
+          <% end -%>
+
+        </div>
+
         <div class="module-notes">
           <% if @view.owner.notes.present? -%>
             <div class="expandable editable">
@@ -170,13 +183,14 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
     <div id="module-friends">
       <div class="content">
-        <h3>Following</h3>
+        <h3 class="hide-mobile">Following</h3>
         <% if @view.owner.followed_users_with_shared_lists.none? -%>
-          <%= link_to new_friend_path, class: "button bt-color", id: "bt-follow" do -%>
+          <%= link_to new_friend_path, class: "button bt-color hide-mobile", id: "bt-follow" do -%>
             <span class="ss-icon ss-users"></span>Find &amp; Follow Friends
           <% end -%>
         <% end -%>
