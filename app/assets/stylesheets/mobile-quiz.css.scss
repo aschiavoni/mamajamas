@@ -443,6 +443,31 @@
 		}
 
 		.quiz-results {
+
+			h2 {
+				display: none;
+			}
+
+			h3 {
+				margin-top: -2.8em;
+				font-size: 1.2rem;
+				font-weight: 600;
+			}
+
+			.intro {
+				margin-top: 0.7em;
+				font-size: 0.9rem;
+				font-weight: 100;
+			}
+
+			.prodlist {
+				max-height: initial;
+
+				#my-list {
+					height: initial !important;
+				}
+			}
+
 			.button-row {
 				@include flexbox();
 				@include flex-flow(wrap column);
@@ -495,6 +520,10 @@
 						display: none;
 					}
 				}
+			}
+
+			#q-progress {
+				display: none;
 			}
 
 		}
