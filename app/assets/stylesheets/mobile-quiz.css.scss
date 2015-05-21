@@ -458,11 +458,35 @@
 
 		.quiz-results {
 			.button-row {
-				height: 200px;
+				display: flex;
+				flex-wrap: wrap;
 
 				.col50 {
 					display: block;
 					width: 100%;
+				}
+
+				.btn-build-registry {
+					order: 1;
+				}
+
+				.btn-quiz-back {
+					order: 2;
+
+					.button {
+						font-size: 1em;
+						color: #C9C9C9;
+						margin-bottom: 1em;
+						width: initial;
+						padding: 0;
+						background-color: transparent;
+
+						&:hover,
+						&:active {
+							color: #c9c9c9;
+							background-color: transparent !important;
+						}
+					}
 				}
 
 				.float-l,

@@ -1,47 +1,47 @@
 <h2>
-  {{#if standalone}}
-    Recommendations
-  {{else}}
-    Quiz Results
-  {{/if}}
+	{{#if standalone}}
+		Recommendations
+	{{else}}
+		Quiz Results
+	{{/if}}
 </h2>
 <div class="content">
-  <h3>Your baby gear recommendations <em>(based on your quiz results)</em></h3>
-  <p class="intro">Add any products to your registry that look interesting. You can change or delete them later.</p>
-  <div id="listcontrols" class="clearfix">
-    <div class="listsort"><a class="button bt-color bt-add-all" href="#"><span class="ss-plus"></span>Add All</a> </div>
-    <div class="listsort">Categories: 
-      <!-- drop-down menu -->
-      <div class="choicedrop"> <a href="#">All <span class="ss-dropdown"></span></a>
-      <ul style="display:none; width:9.5em;">
-        <li class="cat-selected"> <a href="#all">All</a> </li>
-        {{#each categories}}
-          <li class=""> <a href="#{{this.id}}">{{this.name}}</a> </li>
-        {{/each}}
-      </ul>
-      </div>
-      <!-- /drop-down menu --> 
-    </div>
-  </div>
-  <!-- product list ***** -->
-  <div class="prodlist"> 
-  </div>
-  <!-- end product list ***** --> 
-  
+	<h3>Your baby gear recommendations <em>(based on your quiz results)</em></h3>
+	<p class="intro">Add any products to your registry that look interesting. You can change or delete them later.</p>
+	<div id="listcontrols" class="clearfix">
+		<div class="listsort"><a class="button bt-color bt-add-all" href="#"><span class="ss-plus"></span>Add All</a> </div>
+		<div class="listsort">Categories: 
+			<!-- drop-down menu -->
+			<div class="choicedrop"> <a href="#">All <span class="ss-dropdown"></span></a>
+			<ul style="display:none; width:9.5em;">
+				<li class="cat-selected"> <a href="#all">All</a> </li>
+				{{#each categories}}
+					<li class=""> <a href="#{{this.id}}">{{this.name}}</a> </li>
+				{{/each}}
+			</ul>
+			</div>
+			<!-- /drop-down menu --> 
+		</div>
+	</div>
+	<!-- product list ***** -->
+	<div class="prodlist"> 
+	</div>
+	<!-- end product list ***** --> 
+	
 </div>
 {{#unless standalone}}
 <div class="button-row clearfix"> 
-  <!-- instructions -->
-  <!-- previous and next buttons -->
-  <div class="col50 float-l left"> <a id="bt-rec-prev" class="button" href="#"><span class="ss-navigateleft"></span>Previous</a> </div>
-  <div class="col50 float-r right"> <a href="#" class="button bt-color" id="bt-rec-next">Build my Registry<span class="ss-navigateright"></span></a></div>
+	<!-- instructions -->
+	<!-- previous and next buttons -->
+	<div class="col50 float-l left btn-quiz-back"> <a id="bt-rec-prev" class="button" href="#"><span class="ss-navigateleft"></span>Previous</a> </div>
+	<div class="col50 float-r right btn-build-registry"> <a href="#" class="button bt-color" id="bt-rec-next">Build my Registry<span class="ss-navigateright"></span></a></div>
 </div>
 <!-- quiz progress bar -->
 <div title="Step 9 of 9" id="q-progress">
-  <div class="bar"></div>
+	<div class="bar"></div>
 </div>
 {{else}}
 <div class="button-row clearfix">
-  <a class="bt-rec-close button bt-color" href="#">Done</a>
+	<a class="bt-rec-close button bt-color" href="#">Done</a>
 </div>
 {{/unless}}
