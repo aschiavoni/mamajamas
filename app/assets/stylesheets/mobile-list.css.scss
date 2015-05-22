@@ -6,6 +6,7 @@
 }
 
 @media (max-width: 400px) {
+
   #registry {
     background: #ffffff;
     display: -webkit-box;
@@ -218,6 +219,7 @@
             padding: 15px 10px;
           }
 
+
           .prod-links {
 
             .button {
@@ -227,8 +229,23 @@
             }
           }
 
-          .prod-category {
-            display: none;
+          #add-new {
+
+            .prod-links {
+              margin-left: 0;
+
+              .button {
+                width: 97%;
+                padding: 15px 12px;
+                font-size: 14px;
+                margin: 0 5px;
+              }
+            }
+
+            .prod-thumb,
+            .prod-category {
+              display: none;
+            }
           }
         }
       }
