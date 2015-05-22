@@ -8,5 +8,5 @@ secret = FACEBOOK_CONFIG["secret_key"]
                                              :secret => secret)
 
 puts "Creating #{count} users..."
-@test_users.create_network(count, true, "email, user_photos, publish_stream")
+@test_users.create_network(count, true, "email, user_photos, publish_actions")
 puts "Done"

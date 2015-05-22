@@ -1,20 +1,20 @@
 development:
   app_id: 163971090409302
   secret_key: ce1b64ceab5e5a6dbf5fc02de8eedde5
-  scope: "email, user_photos, publish_stream"
+  scope: "email, user_photos, publish_actions"
   secure_image_url: true
 test:
   app_id: 163971090409302
   secret_key: ce1b64ceab5e5a6dbf5fc02de8eedde5
-  scope: "email, user_photos, publish_stream"
+  scope: "email, user_photos, publish_actions"
   secure_image_url: true
 staging:
   app_id: 437830716277340
   secret_key: 929561c463d82bf1e6556fffa267c56b
-  scope: "email, user_photos, publish_stream"
+  scope: "email, user_photos, publish_actions"
   secure_image_url: true
 production:
   app_id: 573733729331783
   secret_key: 6fa806354d925b090488c0746da80a98
-  scope: "email, user_photos, publish_stream"
+  scope: "email, user_photos, publish_actions"
   secure_image_url: true
