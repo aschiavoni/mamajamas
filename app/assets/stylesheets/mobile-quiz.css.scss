@@ -465,6 +465,65 @@
 
 				#my-list {
 					height: initial !important;
+
+					.prod-desc {
+						@include flexbox();
+						@include flex-flow(wrap column);
+
+						.prod-cat-name-rating {
+							@include order(1);
+							@include flexbox();
+							@include flex-flow(wrap column);
+
+							.prod-category {
+								@include order(2);
+							}
+
+							h3 {
+								@include order(1);
+							}
+
+							.bt-add {
+								@include order(4);
+							}
+
+							.rating {
+								@include order(3);
+							}
+
+						}
+
+						.prod-when-own {
+							@include order(2);
+						}
+
+					}
+
+
+					h3 {
+						margin: 0;
+					}
+
+
+					.bt-add {
+						top: 20px !important;
+						border: 0;
+						width: 80px;
+						background-color: transparent;
+						height: 80px;
+
+						&:active,
+						&:hover,
+						&:focus,
+						&:visited {
+							background-color: transparent !important;
+							border: 0 !important;
+						}
+
+						.ss-plus + strong {
+							display: none;
+						}
+					}
 				}
 			}
 
