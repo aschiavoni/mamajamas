@@ -460,6 +460,104 @@
 				font-weight: 100;
 			}
 
+			.content > {
+				h3:first-child, .intro, #listcontrols {
+					padding-left: 20px;
+					padding-right: 20px;
+				}
+
+				#listcontrols {
+					@include flexbox();
+					@include flex-flow(nowrap row);
+
+					.listsort {
+						width: 100%;
+						padding: 0;
+						margin: 0 0 1rem 0;
+
+						.bt-add-all {
+							width: 100%;
+							margin: 0;
+							padding: 0.8rem 1rem;
+
+						}
+
+						&:first-of-type {
+							@include order(1);
+							margin-right: 0.5rem;
+						}
+
+						&:last-of-type {
+							@include order(2);
+							margin-left: 0.5rem;
+						}
+
+						> span {
+							display: none;
+						}
+
+						.choicedrop {
+							ul {
+								overflow-y: scroll;
+								height: 12.2rem;
+								margin: -6rem 0 0rem -2rem;
+								width: 125% !important;
+								position: absolute;
+
+								li {
+									padding: 0;
+
+									a {
+										padding: 10px 30px;
+									}
+								}
+							}
+
+							> a {
+								width: 100%;
+								margin: 0;
+								padding: 0.8rem 1rem;
+								font-size: 12px;
+								font-weight: 400;
+								line-height: 1.4167em;
+								color: #fff;
+								border: 2px solid #5daf5d;
+								@include border-radius(4px);
+								display: inline-block;
+								outline: none;
+								cursor: pointer;
+								box-sizing: border-box;
+								color: #5daf5d;
+
+								.ss-dropdown {
+									display: inline-block;
+									color: #5daf5d;
+									width: 1.4em;
+
+									&:after {
+										display: none;
+									}
+								}
+
+
+							}
+
+							/*.ss-dropdown {
+								display: inline-block;
+								color: #5daf5d;
+
+								&:after {
+									display: none;
+								}
+							}*/
+
+						}
+					}
+
+
+				}
+			}
+
 			.prodlist {
 				max-height: initial;
 
