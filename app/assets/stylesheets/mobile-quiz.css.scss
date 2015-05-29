@@ -479,6 +479,7 @@
 							width: 100%;
 							margin: 0;
 							padding: 0.8rem 1rem;
+							font-weight: 600;
 
 						}
 
@@ -516,12 +517,13 @@
 							> a {
 								width: 100%;
 								margin: 0;
-								padding: 0.8rem 1rem;
+								padding: 0.7rem 1rem;
 								font-size: 12px;
-								font-weight: 400;
+								font-weight: 600;
 								line-height: 1.4167em;
-								color: #fff;
+								color: rgba(255,255,255,1);
 								border: 2px solid #5daf5d;
+								text-align: center;
 								@include border-radius(4px);
 								display: inline-block;
 								outline: none;
@@ -529,8 +531,28 @@
 								box-sizing: border-box;
 								color: #5daf5d;
 
+								&:after {
+									content:'▾';
+									position: absolute;
+									margin-left: 0.5rem;
+									top: 0.9rem;
+									font-size: 0.4rem;
+									font-family: "SSStandard";
+									font-style: normal;
+									font-weight: normal;
+									text-decoration: none;
+									text-rendering: optimizeLegibility;
+									white-space: nowrap;
+									-moz-font-feature-settings: "liga=1";
+									-moz-font-feature-settings: "liga";
+									-ms-font-feature-settings: "liga" 1;
+									-o-font-feature-settings: "liga";
+									font-feature-settings: "liga";
+									-webkit-font-smoothing: antialiased;
+								}
+
 								.ss-dropdown {
-									display: inline-block;
+									display: none;
 									color: #5daf5d;
 									width: 1.4em;
 
@@ -642,8 +664,8 @@
 						top: 0.6em !important;
 						left: 0.6em;
 						border: 0;
-						height: 60px;
-						width: 60px;
+						height: 56px;
+						width: 56px;
 						padding: 0;
 						background-color: transparent;
 
@@ -654,6 +676,19 @@
 						&:visited {
 							background-color: transparent !important;
 							border: 0 !important;
+						}
+
+						.ss-plus {
+							background-color: #6BB36E;
+							font-size: 0.5rem;
+							font-weight: 100;
+							line-height: 1.2rem;
+							@include border-radius(0.2rem 0);
+							position: absolute;
+							top: 2.5rem;
+							right: 0rem;
+							width: 1rem;
+							height: 1rem;	
 						}
 
 						.ss-plus + strong {
@@ -842,7 +877,7 @@
 			background-color: rgb(245, 245, 245);
 			box-shadow: 0px 2px 3px rgb(176, 176, 176);
 			border: 0.1rem solid rgb(228, 228, 228);
-			border-radius: 2rem;
+			@include border-radius(2rem);
 			z-index: 999;
 
 			&:before {
@@ -863,7 +898,7 @@
 				height: 1rem;
 				width: 1rem;
 				position: absolute;
-				border-radius: 1rem;
+				@include border-radius(1rem);
 				top: 0rem;
 				left: 0.08rem;
 			}
