@@ -1,0 +1,39 @@
+@import "modules/_mixins-vendor-prefixes";
+
+
+
+@media (max-width: 400px) {
+	#user-login {
+		h3 {
+			display: none;
+		}
+
+		form {
+
+			.instruction {
+				position: absolute;
+				bottom: 3.6rem;
+				text-align: left;
+				font-size: 0.8rem !important;
+
+				br {
+					display: none;
+				}
+			}
+		}
+
+		.divider > strong {
+			display: none;
+		}
+
+		.helper {
+			display: none;
+		}
+
+		.progress-container {
+			#bt-cancel {
+				display: none;
+			}
+		}
+	}
+}
