@@ -4,21 +4,29 @@
 
 @media (max-width: 400px) {
 	#user-login {
-		h3 {
+		h3,
+		.instruction {
 			display: none;
 		}
 
-		form {
+		form#login-form {
 
-			.instruction {
+			.center.instruction {
+				display:block;
 				position: absolute;
-				bottom: 3.6rem;
+				bottom: 5.2rem;
 				text-align: left;
 				font-size: 0.8rem !important;
 
 				br {
 					display: none;
 				}
+			}
+
+			.button-row {
+				border: none;
+				padding: 0;
+				margin: 0;
 			}
 		}
 
@@ -29,6 +37,8 @@
 		.helper {
 			display: none;
 		}
+
+
 
 		.progress-container {
 			#bt-cancel {
