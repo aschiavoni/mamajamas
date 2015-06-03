@@ -56,3 +56,9 @@
 	  display: none !important;
 	}
 }
+
+@media (min-width: 401px) {
+	.hide-desktop {
+		display: none;
+	}
+}

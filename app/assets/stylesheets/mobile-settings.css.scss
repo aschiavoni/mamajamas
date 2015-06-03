@@ -1,0 +1,18 @@
+@import "modules/_mixins-vendor-prefixes";
+
+
+@media (max-width: 400px) {
+	.gridContainer {
+		#title {
+			#subhed {
+				padding: 0;
+				margin: 0;
+			}	
+		}
+
+		#primary {
+			display: none;
+		}
+	}
+}
+
