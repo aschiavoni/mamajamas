@@ -1,6 +1,10 @@
 @import "modules/_mixins-vendor-prefixes";
 
-
+@media (min-width: 401px) {
+	.hide-desktop {
+		display: none;
+	}
+}
 
 @media (max-width: 400px) {
 	#user-login {
@@ -28,6 +32,17 @@
 				padding: 0;
 				margin: 0;
 			}
+
+			.button {
+				width: 100%;
+				padding: 15px;
+				margin-top: 0.7rem;
+
+				&:first-child {
+					margin-top: 0;
+				}
+			}
+
 		}
 
 		.divider > strong {
@@ -47,3 +62,4 @@
 		}
 	}
 }
+

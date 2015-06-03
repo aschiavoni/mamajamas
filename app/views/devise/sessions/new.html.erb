@@ -41,8 +41,7 @@
 		<div class="progress-container">
 			<button type="reset" class="button" id="bt-cancel">Cancel</button>
 			<button type="submit" class="button bt-color" id="bt-log-in">Log in</button>
-			<a href="/users/password/new" class="button" style="width:100%; padding: 15px; margin-top: 0.7rem;">Forgot Login?</a>
-			<!--%= link_to "Forgot your username or password?", new_password_path(resource_name) %-->
+			<%= link_to "Forgot Login?", new_password_path(resource_name), :class => "button hide-desktop" %>
 			<%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
 		</div>
 	</div>
