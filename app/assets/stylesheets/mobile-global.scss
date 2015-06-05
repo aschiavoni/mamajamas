@@ -6,11 +6,11 @@
 -------------------------------*/
 
 .hide-mobile-block {
-  display: block;
+  display: block !important;
 }
 
 .hide-mobile-inline-block {
-  display: inline-block;
+  display: inline-block !important;
 }
 
 
@@ -59,6 +59,28 @@
 
 @media (min-width: 401px) {
 	.hide-desktop {
-		display: none;
+		display: none !important;
 	}
+
+
+	input {
+		&::-webkit-input-placeholder {
+			opacity: 0;
+		}
+
+		&::-moz-placeholder {
+			opacity: 0;
+		}
+
+		&:-moz-placeholder {
+			opacity: 0;
+		}
+
+		&:-ms-input-placeholder {
+			opacity: 0;
+		}
+
+	}
+
+
 }

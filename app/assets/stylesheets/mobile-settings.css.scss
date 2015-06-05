@@ -1,18 +1,147 @@
 @import "modules/_mixins-vendor-prefixes";
 
+/* Variables */
+
+$container-padding: 20px;
 
 @media (max-width: 400px) {
-	.gridContainer {
-		#title {
-			#subhed {
-				padding: 0;
+
+	.form-page  {
+		.gridContainer {
+			#title {
+				#subhed {
+					width: 100%;
+					margin: 0;
+					padding: 0 $container-padding;
+				}	
+			}
+
+			#primary {
+				display: none;
+			}
+
+			#secondary {
+				width: 100%;
 				margin: 0;
-			}	
+				padding: 0 $container-padding;
+			}
+
+
+			.mobile-form-group {
+				@include border-radius(3px);
+				border: 1px solid #ccc;
+			}
+
+			dd {
+				border-bottom: 1px solid #ccc;
+			}
+
+			fieldset {
+				fieldset {
+					dd:last-of-type {
+						border: none;
+					}
+				}
+			}
+
+			dl{
+				&.clearfix {
+					margin: 0;
+				}
+			}
+
+
+			dd,
+			.half {
+				width: 100%;
+				clear: both;
+
+				p {
+					width: 100%;
+					margin: 0;
+					padding: 0;
+
+					&:after {
+						content: " ";
+						display: table;
+						clear: both;
+					}
+
+
+					label {
+						display: block !important;
+						opacity: 1 !important;
+						float: left !important;
+						width: 30% !important;
+						font-size: 0.8rem;
+						font-weight: 100;
+
+						&.hide-mobile {
+							display: none !important
+						}
+
+
+
+					}
+
+					input,
+					select,
+					textarea {
+						border: none;
+						box-shadow: initial;
+						margin: 0 !important;
+						width: 68% !important;
+						float: right !important;
+
+						&[type="date"] {
+							width: calc(68% - 20px) !important;
+							background-color: transparent;
+
+							&:focus {
+								outline: none;
+							}
+							
+
+							&::-webkit-input-placeholder {
+								background-color: transparent !important;
+								content: ' ajslkdfjalskjdfs';
+							}
+
+							&::-webkit-calendar-picker-indicator {
+								-webkit-appearance: none;
+								font-size: 18px;
+								background-image: url("/assets/icon_calendar@2x.png");
+								background-size: contain;
+								background-repeat: no-repeat;
+								color: transparent;
+							}
+						}
+
+					}
+
+
+
+					.date-picker {
+						width: auto;
+						height: 16px;
+						opacity: 0.5;
+						position: absolute;
+						right: 13px;
+						top: 10px;
+						display: none;
+					}
+
+					br {
+						display: none;
+					}
+
+				}
+
+			}
+			
 		}
 
-		#primary {
-			display: none;
-		}
 	}
+
 }
 
