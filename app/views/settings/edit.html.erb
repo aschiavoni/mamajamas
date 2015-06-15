@@ -89,15 +89,18 @@
 					<!-- URL -->
 					<dt> Registry URL</dt>
 					<dd class="pad">
-						<p><strong>www.mamajamas.com/<span class="list-url-suffix"><%= @settings.username %></span></strong> <em class="light">(generated from your URL name)</em></p>
+						<p>
+							<strong>www.mamajamas.com/<span class="list-url-suffix"><%= @settings.username %></span></strong> <em class="light">(generated from your URL name)</em>
+						</p>
 					</dd>
 					<!-- list title -->
 					<dt>Registry title <strong class="required">*</strong></dt>
 					<dd>
 						<p>
-							<%= f.label :title do %>
+							<%= f.label :title, class: "hide-mobile" do %>
 								<strong><%= @settings.title %></strong> (click to edit)
 							<% end -%>
+							<%= f.label :title, "Registry name", class: "hide-desktop" %>
 							<br>
 							<%= f.text_field :title %>
 						</p>
@@ -114,13 +117,17 @@
 			<div class="radio">
 				<label>
 					<%= f.radio_button :registry, true %>
-					<strong class="col5">ON</strong> Allow visitors to buy you gifts from your baby gear registry. Recommended
+					<span class="mobile-radio-group">
+					<strong class="col5">ON</strong>&nbsp;Allow visitors to buy you gifts from your baby gear registry. Recommended
+					</span>
 				</label>
 			</div>
 			<div class="radio">
 				<label>
 					<%= f.radio_button :registry, false %>
-					<strong class="col5">OFF</strong> Deactivate the gift option on your registry. 
+					<span class="mobile-radio-group">
+					<strong class="col5">OFF</strong>&nbsp;Deactivate the gift option on your registry.
+					</span>
 				</label>
 			</div>
 		</fieldset>
@@ -128,34 +135,39 @@
 
 
 	<h3 id="shipping">Shipping Address</h3>
-	<div class="mobile-form-group">
+	<div class="mobile-form-group shipping">
 		<fieldset>
 			<p class="form-group">
-				<%= f.label :address_full_name, "First and last name" %>
-				<%= f.text_field :address_full_name, class: "form-control" %>
+				<%= f.label :address_full_name, "Your name", class: "hide-desktop" %>
+				<%= f.label :address_full_name, "First and last name", class: "hide-mobile" %>
+				<%= f.text_field :address_full_name, class: "form-control", placeholder: "Your first name" %>
 				<%= field_error @settings, :address_full_name %>
 			</p>
 			<p class="form-group">
-				<%= f.label :street, "Street address, P.O. box ..." %>
-				<%= f.text_field :street, class: "form-control" %>
+				<%= f.label :street, "Street address", class: "hide-desktop" %>
+				<%= f.label :street, "Street address, P.O. box ...", class: "hide-mobile" %>
+				<%= f.text_field :street, class: "form-control", placeholder: "Your address" %>
 				<%= field_error @settings, :street %>
 			</p>
 			<p class="form-group">
-				<%= f.label :street2, "Apartment, building, suite, unit, floor ..." %>
-				<%= f.text_field :street2, class: "form-control" %>
+				<%= f.label :street2, "Apt, suite, etc.", class: "hide-desktop" %>
+				<%= f.label :street2, "Apartment, building, suite, unit, floor ...", class: "hide-mobile" %>
+				<%= f.text_field :street2, class: "form-control", placeholder: "Address line 2" %>
 			</p>
 			<div class="grid">
 				<div class="col col50">
 					<p class="form-group">
-						<%= f.label :city %>
-						<%= f.text_field :city, class: "form-control" %>
+						<%= f.label :city, class: "hide-desktop" %>
+						<%= f.label :city, class: "hide-mobile" %>
+						<%= f.text_field :city, class: "form-control", placeholder: "City" %>
 						<%= field_error @settings, :city %>
 					</p>
 				</div>
 				<div class="col col50">
 					<p class="form-group">
-						<%= f.label :region, "State/Province/Region" %>
-						<%= f.text_field :region, class: "form-control" %>
+						<%= f.label :region, "State", class: "hide-desktop" %>
+						<%= f.label :region, "State/Province/Region", class: "hide-mobile" %>
+						<%= f.text_field :region, class: "form-control", placeholder: "State" %>
 						<%= field_error @settings, :region %>
 					</p>
 				</div>
@@ -163,22 +175,26 @@
 			<div class="grid">
 				<div class="col col50">
 					<p class="form-group">
-						<%= f.label :postal_code, "Zip code" %>
-						<%= f.text_field :postal_code, class: "form-control" %>
+						<%= f.label :postal_code, "Zip code", class: "hide-desktop" %>
+						<%= f.label :postal_code, "Zip code", class: "hide-mobile" %>
+						<%= f.text_field :postal_code, class: "form-control", placeholder: "Zip Code" %>
 						<%= field_error @settings, :postal_code %>
 					</p>
 				</div>
 				<div class="col col50">
 					<p class="form-group">
+						<%= f.label :country_code, "Country", class: "hide-desktop" %>
 						<%= f.label :country_code, class: "hidden" %>
+						<label class="hide-desktop mobile-sort-indicator"><i class="fa fa-sort"></i></label>
 						<%= f.select :country_code, @settings.countries, prompt: "Country..." %>
 						<%= field_error @settings, :country_code %>
 					</p>
 				</div>
 			</div>
-			<p class="form-group">
-				<%= f.label :phone, "Phone (optional)" %>
-				<%= f.text_field :phone, class: "form-control" %>
+			<p class="form-group remove-border-bottom">
+				<%= f.label :phone, "Phone", class: "hide-desktop" %>
+				<%= f.label :phone, "Phone (optional)", class: "hide-mobile" %>
+				<%= f.text_field :phone, class: "form-control", placeholder: "(optional)" %>
 			</p>
 		</fieldset>
 	</div>
@@ -186,7 +202,7 @@
 
 	<h3 id="privacy">Privacy</h3>
 	<div>
-		<p class="privacy-status">
+		<p class="privacy-status hide-mobile">
 			<em class="privacy-status" style="display: <%= @settings.private? ? "inline" : "none"%>;">Current setting: <strong>Only you can see your registry.</strong></em>
 			<em class="privacy-status" style="display: <%= @settings.public? ? "inline" : "none"%>;">Current setting: <span class="icon-globe"></span> <strong>Anyone can see your registry.</strong></em>
 			<em class="privacy-status" style="display: <%= @settings.registered_users_only? ? "inline" : "none"%>;">Current setting: <span class="icon-bird"></span> <strong>Mamajamas users can see your registry.</strong></em>
@@ -198,27 +214,29 @@
 					<li>
 						<label>
 							<%= f.radio_button :privacy, List::PRIVACY_PUBLIC %>
-							Anyone
+							<span>Anyone: Everyone who visits Mamajamas.</span>
 						</label>
-						— Everyone who visits Mamajamas.
 					</li>
 					<li>
 						<label>
 							<%= f.radio_button :privacy, List::PRIVACY_REGISTERED %>
-							Mamajamas users
+							<span>Mamajamas users: Only logged-in Mamajamas users.</span>
 						</label>
-						— Only logged-in Mamajamas users.
 					</li>
 					<li>
 						<label>
 							<%= f.radio_button :privacy, List::PRIVACY_PRIVATE %>
-							Just you
+							<span>Just you: Only you can see your registry.</span>
 						</label>
-						— Only you can see your registry.
 					</li>
 				</ul>
 			</fieldset>
 		</div>
+		<p class="privacy-status hide-desktop">
+			<em class="privacy-status" style="display: <%= @settings.private? ? "inline" : "none"%>;">Current setting: <strong>Only you can see your registry.</strong></em>
+			<em class="privacy-status" style="display: <%= @settings.public? ? "inline" : "none"%>;">Current setting: <span class="icon-globe"></span> <strong>Anyone can see your registry.</strong></em>
+			<em class="privacy-status" style="display: <%= @settings.registered_users_only? ? "inline" : "none"%>;">Current setting: <span class="icon-bird"></span> <strong>Mamajamas users can see your registry.</strong></em>
+		</p>
 	</div>
 
 
@@ -231,32 +249,32 @@
 					<li>
 						<label>
 							<%= f.check_box :new_follower_notifications_enabled %>
-							Someone follows my registry
+							<span>Someone follows my registry</span>
 						</label>
 					</li>
 					<li>
 						<label>
 							<%= f.check_box :followed_user_updates_enabled %>
-							Someone I’m following adds something to their registry
+							<span>Someone I’m following adds something to their registry</span>
 						</label>
 					</li>
 					<li>
 						<label>
 							<%= f.check_box :blog_updates_enabled %>
-							Mamajamas posts parenting, product advice or other cool content on their blog
+							<span>Mamajamas posts parenting, product advice or other cool content on their blog</span>
 						</label>
 					</li>
 					<li>
 						<label>
 							<%= f.check_box :product_updates_enabled %>
-							Mamajamas announces new features or site news
+							<span>Mamajamas announces new features or site news</span>
 						</label>
 					</li>
 				</div>
 				<li class="separator">
 					<label>
 						<%= check_box_tag "settings[unsubscribe_all]"%>
-						Don’t send me any emails, please.
+						<span>Don’t send me any emails, please.</span>
 					</label>
 				</li>
 			</ul>

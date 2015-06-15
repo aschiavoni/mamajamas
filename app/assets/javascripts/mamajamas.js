@@ -60,6 +60,7 @@ window.Mamajamas = {
 
     // follow page
     if ($('#follow-moms').length > 0) {
+      $('body').addClass('find-friends-page');
       new Mamajamas.Views.FriendPicker({
         el: '#follow-moms'
       });
@@ -67,6 +68,7 @@ window.Mamajamas = {
 
     // friends list
     if ($('#friendslistapp').length > 0) {
+      $('body').addClass('find-friends-page');
       new Mamajamas.Views.FriendsList({
         el: '#friendslistapp'
       });
@@ -74,6 +76,7 @@ window.Mamajamas = {
 
     // find friends
     if ($('#findfriendsapp').length > 0) {
+      $('body').addClass('find-friends-page');
       Mamajamas.Context.Invites = new Mamajamas.Collections.Invites();
       new Mamajamas.Views.FindFriends({
         el: '#findfriendsapp'

@@ -2,48 +2,44 @@
 
 
 @media (max-width: 400px) {
-	#user-login {
-
-	  	&:before {
-		  content: 'Welcome back';
-		  display: block;
-		  font-size: 2.5em;
-		  font-weight: 300;
-		  text-align: center;
-		  padding: 15px;
-		}
+	#user-signup {
+	  	margin-top: 25px;
 
 		h3,
-		.instruction {
+		.privacy,
+		{
 			display: none;
 		}
 
-		form#login-form {
+		form#new_user {
 
 			.center.instruction {
-				display:block;
-				position: absolute;
-				bottom: 5.2rem;
-				text-align: left;
-				font-size: 0.8rem !important;
+				display:none;
 
 				br {
 					display: none;
 				}
 			}
 
+		  	.tip {
+			  background: transparent;
+			  box-shadow: none;
+			}
+
+		  	.divider {
+			  margin-top: 0;
+			}
+
 			.button-row {
 				border: none;
 				padding: 0;
-				margin: -15px 0 0 0;
+				margin: 0;
 			}
 
 			.button {
 				width: 100%;
-				padding: 15px;
+				padding: 17px;
 				margin-top: 0.7rem;
-			  	font-size: 1.2em;
-			  	font-weight: 300;
 
 				&:first-child {
 					margin-top: 0;
@@ -59,8 +55,6 @@
 		.helper {
 			display: none;
 		}
-
-
 
 		.progress-container {
 			#bt-cancel {
