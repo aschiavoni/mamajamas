@@ -38,15 +38,18 @@
       <button class="close-btn">&times;</button>
 
       <h2>Menu</h2>
-      <%= content_for?(:mobileSearch) ? yield(:mobileSearch) : "" %>
+      <div id="mobile-friends-search">
+        <%= form_tag new_friend_path, class: "mobile-search-form", method: :post do %>
+          <input type="text" name="query" placeholder="Find" class="mobile-menu-search-input" />
+          <label class="floating-label"><i class="fa fa-search"></i></label>
+          <input type="submit" value="Search" class="submit-btn" />
+        <% end %>
+      </div>
       <ul>
         <li class="<%= "active" if params[:controller] == "lists" %>">
           <%= link_to (user_signed_in? ? list_path : root_path) do %>
             Home
           <% end -%>
-        </li>
-        <li class="<%= "active" if params[:controller] == "friends" %>">
-          <%= link_to "Browse", new_friend_path, class: "find-moms" %>
         </li>
         <% if user_signed_in? && !current_user.guest? -%>
           <li>

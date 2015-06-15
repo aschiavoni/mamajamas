@@ -37,6 +37,7 @@ window.Mamajamas = {
       new Mamajamas.Views.HomeIndex();
     }
 
+    //Add event for mobile menu
     if($('#toggle-mobile-menu').length > 0) {
       var $mobileMenu = $('#mobile-menu');
       $('#toggle-mobile-menu').on('click', function() {
@@ -47,14 +48,20 @@ window.Mamajamas = {
             $mobileMenu.find('.close-btn').on('click', function() {
               $mobileMenu.hide();
               $(this).off('click');
+              $mobileMenu.find('.mobile-menu-search-input').val('');
             });
 
             $mobileMenu.find('a').on('click', function() {
               $mobileMenu.hide();
+              $mobileMenu.find('.mobile-menu-search-input').val('');
             });
           }
         }
 
+      });
+
+      $mobileMenu.find('.mobile-search-form').on('submit', function() {
+        $mobileMenu.find('.mobile-menu-search-input').val('');
       });
     }
 
