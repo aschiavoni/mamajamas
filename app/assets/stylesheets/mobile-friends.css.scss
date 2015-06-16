@@ -1,0 +1,140 @@
+// Place all the styles related to the Mobile List here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "modules/_mixins-vendor-prefixes";
+
+$container-padding: 20px;
+
+@media (max-width: 480px) {
+
+  #p-browse {
+
+    #primary {
+      width: 0;
+      float: none;
+      display: none;
+    }
+
+    #secondary {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      float: none;
+
+      > .content {
+        border-left: none;
+      }
+
+      #findfriendsapp,
+      #friendslistapp {
+        width: 100%;
+
+        #findfriendsmenu {
+          width: 100% !important;
+
+          .mobile-find-page-navigation {
+            .choicedrop {
+              width: 90%;
+              margin-bottom: 10px;
+              border-radius: 3px;
+
+              > a {
+                padding: 8px;
+                text-align: center
+              }
+
+              > ul {
+                width: 100% !important;
+
+                li {
+                  padding: 10px;
+                  text-indent: 0;
+                }
+              }
+            }
+          }
+
+          ul.menu {
+            max-width: 95%;
+            margin-right: 150px;
+            overflow-x: scroll;
+            overflow-y: hidden;
+
+            li {
+              min-width: 150px;
+            }
+
+            &:after {
+              content: '';
+              position: absolute;
+              right: 9%;
+              height: 42px;
+              margin-top: -2px;
+              width: 20px;
+              background-color: rgba(#ffffff, 0.5); /* fallback color if gradients are not supported */
+              background-image: -webkit-linear-gradient(right, rgba(#ffffff, 0.1), #ffffff); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+              background-image:    -moz-linear-gradient(right,rgba(#ffffff, 0.1), #ffffff); /* For Firefox (3.6 to 15) */
+              background-image:      -o-linear-gradient(right, rgba(#ffffff, 0.1), #ffffff); /* For old Opera (11.1 to 12.0) */
+              background-image:         linear-gradient(to right, rgba(#ffffff, 0.1), #ffffff); /* Standard syntax; must be last */
+            }
+
+          }
+
+          #friendssearch {
+            display: block;
+            padding-bottom: 10px;
+
+            form {
+              display: inline-block;
+              width: 68%;
+              margin-right: -30px;
+              margin-left: 0;
+
+              input[type="text"] {
+                width: 87%;
+                padding: 8px 5px;
+              }
+            }
+
+            .friends-sort {
+              display: inline-block;
+              width: 33%;
+              min-width: 33%;
+              float: none;
+
+              .choicedrop {
+                width: 100px;
+                padding: 8px 5px;
+
+                .ss-dropdown {
+                  float: right;
+                  margin: 0;
+                  margin-top: 8px;
+
+                }
+              }
+            }
+          }
+
+          #findfriendsfilter {
+            display: none;
+            .friends-key {
+              display: none !important;
+            }
+          }
+        }
+
+        #friendslist {
+          margin: 5px 0;
+        }
+
+        #findfriends {
+
+        }
+
+      }
+    }
+
+  }
+}
