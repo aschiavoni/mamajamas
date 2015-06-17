@@ -29,10 +29,10 @@
      <!-- /mobile-only sort dropdown -->
       <div class="mobile-find-page-navigation hide-desktop">
         <!-- drop-down menu -->
+        <% if current_user.present? && !current_user.guest?  -%>
         <div class="choicedrop">
          <a href="#">Discover <span class="ss-dropdown"></span></a>
           <ul style="display:none; width:7.5em;">
-          <% if current_user.present? && !current_user.guest?  -%>
             <li>
               <%= link_to "Following", following_friends_path %>
             </li>
@@ -42,15 +42,15 @@
             <li class="current">
               <%= link_to "Discover", new_friend_path %>
             </li>
-          <% else -%>
-            <% unless current_user.present? && current_user.guest? -%>
-                <li id="startlist">
-                  <%= link_to "Start Your Registry", quiz_path, class: "button bt-color" %>
-                </li>
-            <% end -%>
-          <% end -%>
           </ul>
         </div>
+        <% else -%>
+            <% unless current_user.present? && current_user.guest? -%>
+              <div class="startRegistryButton">
+                <%= link_to "Start Your Registry", quiz_path %>
+              </div>
+            <% end -%>
+          <% end -%>
         <!-- /drop-down menu -->
       </div>
 

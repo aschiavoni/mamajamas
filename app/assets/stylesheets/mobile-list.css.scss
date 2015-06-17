@@ -81,6 +81,12 @@
 							margin-top: 15px;
 						}
 					}
+
+				  	> .button {
+					  width: 100%;
+					  margin: 10px 0;
+					  padding: 10px;
+					}
 				}
 
 				#title-links {
@@ -301,6 +307,11 @@
 			background-color: #ffffff;
 			margin-top: 30px;
 
+		  	&.public-list {
+			  margin-top: 50px;
+			}
+
+
 			#module-profile {
 				.content {
 					display: -webkit-box;
@@ -352,6 +363,13 @@
 
 				}
 
+			  	.follow {
+				  -webkit-flex: 1 100%;
+				  flex: 1 100%;
+				  -webkit-order: 4;
+				  order: 4;
+				}
+
 				.mobile-followed-friends-section {
 					display: inline-block;
 					padding: 0 10px;
@@ -368,7 +386,7 @@
 
 					.button {
 						display: block;
-						padding: 15px 12px;
+						padding: 10px 12px;
 						width: 100%;
 					}
 				}

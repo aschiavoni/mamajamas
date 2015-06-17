@@ -174,17 +174,38 @@
     </div>
   </div>
 </div>
-<div id="tertiary" class="light">
+<div id="tertiary" class="light public-list">
   <div class="content">
     <div id="module-profile">
       <div class="content">
-        <p id="sharedby"><span></span>Profile</p>
-        <h3><%= @view.owner.display_name %></h3>
+        <p id="sharedby" class="hide-mobile"><span></span>Profile</p>
+        <h3 class="hide-mobile-block"><%= @view.owner.display_name %></h3>
         <div id="profile-photo">
           <%= image_tag @view.owner.profile_picture.public_list, alt: "#{@view.owner.username} profile photo" %>
         </div>
+
+        <div class="mobile-followed-friends-section">
+          <h3><%= @view.owner.display_name %></h3>
+          <% unless @view.owner == current_user -%>
+            <div class="center follow">
+              <% if @view.following? -%>
+                <a href="#" id="bt-follow" class="button bt-color bt-active" data-owner-id="<%= @view.owner.id %>" data-relationship-id="<%= @view.following?.id %>">
+                  <span class="bt-text1">
+                    <span class="ss-check"></span>Following
+                  </span>
+                  <em class="bt-text2"><span class="ss-delete"></span>Unfollow</em>
+                </a>
+              <% else -%>
+                <a href="#" id="bt-follow" class="button bt-color" data-owner-name="<%= @view.owner.full_name %>" data-owner-id="<%= @view.owner.id %>">
+                  <span class="ss-check"></span>Follow
+                </a>
+              <% end -%>
+            </div>
+          <% end -%>
+        </div>
+
         <% unless @view.owner == current_user -%>
-          <div class="center follow">
+          <div class="center follow hide-mobile">
             <% if @view.following? -%>
               <a href="#" id="bt-follow" class="button bt-color bt-active" data-owner-id="<%= @view.owner.id %>" data-relationship-id="<%= @view.following?.id %>">
                 <span class="bt-text1">
@@ -211,6 +232,7 @@
         </div>
       </div>
     </div>
+
     <% if @view.owner.followed_users_with_shared_lists.any? -%>
       <div id="module-friends">
         <div class="content">

@@ -34,7 +34,21 @@ $mamajamas-green: #5daf5d;
           width: 100% !important;
 
           .mobile-find-page-navigation {
-            .choicedrop {
+            .startRegistryButton {
+              text-align: center;
+              border: 1px solid $mamajamas-green;
+              padding: 8px 0;
+
+              a {
+                &:hover,
+                &:focus {
+                  text-decoration: none;
+                }
+              }
+            }
+
+            .choicedrop,
+            .startRegistryButton {
               width: 90%;
               margin-bottom: 10px;
               border-radius: 3px;
