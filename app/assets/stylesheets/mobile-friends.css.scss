@@ -4,7 +4,7 @@
 
 @import "modules/_mixins-vendor-prefixes";
 
-$container-padding: 20px;
+$mamajamas-green: #5daf5d;
 
 @media (max-width: 480px) {
 
@@ -38,14 +38,21 @@ $container-padding: 20px;
               width: 90%;
               margin-bottom: 10px;
               border-radius: 3px;
+              border-color: $mamajamas-green;
+              color: $mamajamas-green;
 
               > a {
                 padding: 8px;
-                text-align: center
+                text-align: center;
+                color: $mamajamas-green;
+
+                .ss-dropdown {
+                  color: $mamajamas-green;
+                }
               }
 
               > ul {
-                width: 100% !important;
+                width: 90% !important;
 
                 li {
                   padding: 10px;
@@ -105,13 +112,27 @@ $container-padding: 20px;
 
               .choicedrop {
                 width: 100px;
-                padding: 8px 5px;
+                padding: 0 5px;
+                border-radius: 3px;
 
-                .ss-dropdown {
-                  float: right;
-                  margin: 0;
-                  margin-top: 8px;
+                > a {
+                  padding: 8px 5px;
 
+                  .ss-dropdown {
+                    float: right;
+                    margin: 0;
+                    margin-top: 6px;
+
+                  }
+                }
+
+                ul {
+
+
+                  li {
+                    padding: 8px 5px;
+                    text-indent: 0;
+                  }
                 }
               }
             }
@@ -128,11 +149,91 @@ $container-padding: 20px;
         #friendslist {
           margin: 5px 0;
         }
+      }
 
-        #findfriends {
 
+      #mamajamasfriends-tab,
+      #facebookfriends-tab,
+      #gmailfriends-tab {
+        #findfriends-prompt {
+          padding: 0;
+          background-position: center top;
+          text-align: center;
+          padding: 0 25px;
+
+          h3 {
+            padding-top: 80px;
+            font-size: 2em;
+            font-weight: 300;
+          }
+
+          p {
+            font-size: 1.2em;
+            font-weight: 300;
+          }
+
+          .button {
+            width: 100%;
+            padding: 12px;
+          }
+        }
+      }
+
+      #invitefriends-tab {
+        padding: 0;
+
+        form {
+          padding: 0 15px;
+
+          input,
+          textarea {
+            width: 100%;
+          }
+
+          label {
+            font-weight: 300;
+          }
+
+          dd.half {
+            width: 100%;
+          }
+
+
+          .button-row {
+            padding: 20px 0;
+
+            .button {
+              width: 100%;
+              padding: 12px;
+              font-size: 1em;
+            }
+          }
+        }
+      }
+    }
+
+    .modal-box {
+      width: 95%;
+      left: 10px;
+      margin: 0;
+
+      fieldset {
+        input {
+          width: 100%;
         }
 
+        label {
+          font-weight: 300;
+        }
+      }
+
+
+      .button-row {
+        .button {
+          padding: 10px 12px;
+          width: 49%;
+          display: inline-block;
+        }
       }
     }
 

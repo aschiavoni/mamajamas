@@ -196,7 +196,8 @@
         padding-bottom: 25px;
       }
 
-      li {
+      li,
+      #startlist {
         text-align: center;
         padding: 10px;
 
@@ -214,6 +215,18 @@
           &:focus {
             color: #ffffff;
             text-decoration: none;
+          }
+
+          &.button.bt-color {
+            font-size: 1em;
+            border: none !important;
+            background: transparent !important;
+
+            &:hover,
+            &:focus {
+              color: #ffffff;
+              text-decoration: none;
+            }
           }
         }
       }

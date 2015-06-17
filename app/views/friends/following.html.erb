@@ -14,6 +14,27 @@
 <!-- sorting / key -->
 <div id="friendslistapp">
   <div id="findfriendsmenu" class="clearfix">
+
+    <!-- /mobile-only sort dropdown -->
+    <div class="mobile-find-page-navigation hide-desktop">
+      <!-- drop-down menu -->
+      <div class="choicedrop">
+       <a href="#">Following <span class="ss-dropdown"></span></a>
+        <ul style="display:none; width:7.5em;">
+          <li>
+            <%= link_to "Following", following_friends_path %>
+          </li>
+          <li>
+            <%= link_to "Followers", followers_friends_path %>
+          </li>
+          <li>
+            <%= link_to "Discover", new_friend_path %>
+          </li>
+        </ul>
+      </div>
+      <!-- /drop-down menu -->
+    </div>
+
     <div id="list-search" data-query="<%= @view.query %>"></div>
     <div id="friendssearch">
       <%= form_tag following_friends_path, id: "frm-friendssearch" do -%>

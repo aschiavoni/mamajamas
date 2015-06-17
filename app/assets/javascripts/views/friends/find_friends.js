@@ -104,11 +104,19 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
   },
 
   hideSearch: function() {
-    $('#friendssearch input').hide();
+    //Changed
+    // from #friendssearch input
+    // to #friendssearch
+    // inorder to hide/show the sort dropdown on mobile
+    $('#friendssearch').hide();
   },
 
   showSearch: function() {
-    $('#friendssearch input').show();
+    //Changed
+    // from #friendssearch input
+    // to #friendssearch
+    // inorder to hide/show the sort dropdown on mobile
+    $('#friendssearch').show();
   },
 
   waitForFriends: function(_view, provider) {

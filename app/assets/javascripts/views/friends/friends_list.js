@@ -21,6 +21,7 @@ window.Mamajamas.Views.FriendsList = Mamajamas.Views.FriendsView.extend({
     "click button.follow": "follow",
     "click button.unfollow": "unfollow",
     "submit #frm-friendssearch": "filterFriends",
+    "click .mobile-find-page-navigation .choicedrop > a": "toggleSortList"
   },
 
   render: function(event) {
