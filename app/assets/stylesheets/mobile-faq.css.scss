@@ -1,0 +1,93 @@
+// Place all the styles related to the Mobile FAQ here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "modules/_mixins-vendor-prefixes";
+
+
+@media (max-width: 400px) {
+	#primary {
+	}
+	#secondary {
+	}
+	div.faq {
+		display: -webkit-flex;
+		display: flex;
+		-webkit-flex-direction: column;
+		flex-direction: column;
+
+		h3:nth-child(1) {	-webkit-order: 0;}
+		ul:nth-child(2) {	-webkit-order: 1;}
+		h4:nth-child(18) {	-webkit-order: 2;}
+		p:nth-child(19) {	-webkit-order: 3;}
+		ul:nth-child(3) {	-webkit-order: 4;}
+		h4:nth-child(20) {	-webkit-order: 5;}
+		p:nth-child(21) {	-webkit-order: 6;}
+		p:nth-child(22) {	-webkit-order: 7;}
+		p:nth-child(23) {	-webkit-order: 8;}
+		p:nth-child(24) {	-webkit-order: 9;}
+		ul:nth-child(4) {	-webkit-order: 10;}
+		h4:nth-child(25) {	-webkit-order: 11;}
+		p:nth-child(26) {	-webkit-order: 12;}
+		h3:nth-child(5) {	-webkit-order: 13;}
+		ul:nth-child(6) {	-webkit-order: 14;}
+		h4:nth-child(27) {	-webkit-order: 15;}
+		p:nth-child(28) {	-webkit-order: 16;}
+		p:nth-child(29) {	-webkit-order: 17;}
+		ul:nth-child(7) {	-webkit-order: 18;}
+		h4:nth-child(30) {	-webkit-order: 19;}
+		p:nth-child(31) {	-webkit-order: 20;}
+		ul:nth-child(8) {	-webkit-order: 21;}
+		h4:nth-child(32) {	-webkit-order: 22;}
+		p:nth-child(33) {	-webkit-order: 23;}
+		h3:nth-child(9) {	-webkit-order: 24;}
+		ul:nth-child(10) {	-webkit-order: 25;}
+		h4:nth-child(34) {	-webkit-order: 26;}
+		p:nth-child(35) {	-webkit-order: 27;}
+		ul:nth-child(11) {	-webkit-order: 28;}
+		h4:nth-child(36) {	-webkit-order: 29;}
+		p:nth-child(37) {	-webkit-order: 30;}
+		h3:nth-child(12) {	-webkit-order: 31;}
+		ul:nth-child(13) {	-webkit-order: 32;}
+		h4:nth-child(38) {	-webkit-order: 33;}
+		p:nth-child(39) {	-webkit-order: 34;}
+		ul:nth-child(14) {	-webkit-order: 35;}
+		h4:nth-child(40) {	-webkit-order: 36;}
+		p:nth-child(41) {	-webkit-order: 37;}
+		p:nth-child(42) {	-webkit-order: 38;}
+		h3:nth-child(15) {	-webkit-order: 39;}
+		ul:nth-child(16) {	-webkit-order: 40;}
+		h4:nth-child(43) {	-webkit-order: 41;}
+		p:nth-child(44) {	-webkit-order: 42;}
+		ul:nth-child(17) {	-webkit-order: 43;}
+		h4:nth-child(45) {	-webkit-order: 44;}
+		p:nth-child(46) {	-webkit-order: 45;}
+
+		h4 {
+			display: none;
+		}
+		ul.faq {
+			margin-bottom: .5em;
+			border-bottom: 1px solid #ddd;
+
+			li a {
+				padding: 0;
+				margin: .5em 0;
+				background-color: transparent;
+				font-weight: bold;
+
+				&:hover {
+					color: #000;
+					background-color: transparent;
+				}
+				span {
+					float: right;
+					padding-left: .5em;
+				}
+				&:hover span {
+					color: #a6a6a6;
+				}
+			}
+		}
+	}
+}
