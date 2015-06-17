@@ -100,9 +100,21 @@
       <div id="notifications"><%= notifications %></div>
 
       <div class="mobile-category-btn">
-        <%= link_to list_category_path('all'), class: "button bt-color" do -%>
-          Choose a category
-        <% end -%>
+       <%= link_to list_category_path('all'), class: "button bt-color" do -%>
+         Choose a category
+       <% end -%>
+        <div class="choicedrop" style="display: none;">
+          <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
+              <a href="#">Choose a category <span class="ss-dropdown"></span></a>
+              <ul style="display:none; width:7.5em;">
+                <% @view.categories.each do |category| -%>
+                  <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
+                    <%= link_to category.name, list_category_path(category.slug) %>
+                  </li>
+                <% end -%>
+              </ul>
+          <% end -%>
+        </div>
       </div>
 
       <% cache [ @view.list, @view.category_slug, @view.owner, 'list' ] do -%>

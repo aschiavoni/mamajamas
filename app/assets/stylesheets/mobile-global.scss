@@ -18,7 +18,7 @@
     Mobile
 -------------------------------*/
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
 
 .profiler-results {
 	/* This is for the Ruby Dev Tools */
@@ -57,7 +57,7 @@
 	}
 }
 
-@media (min-width: 401px) {
+@media (min-width: 481px) {
 	.hide-desktop {
 		display: none !important;
 	}

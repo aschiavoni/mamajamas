@@ -20,6 +20,20 @@
         <%= text_field_tag :query, params[:query], placeholder: "Search by first or last name" %>
         <%= submit_tag "Search" %>
       <% end %>
+
+      <!-- /mobile-only sort dropdown -->
+      <div class="friends-sort hide-desktop">
+        <!-- drop-down menu -->
+        <div class="choicedrop"> <a href="#"><%= @view.sort_name %> <span class="ss-dropdown"></span></a>
+          <ul style="display:none; width:7.5em;">
+            <li><a href="#" data-sort="popular">Popularity</a></li>
+            <li><a href="#" data-sort="name">Name</a></li>
+            <li><a href="#" data-sort="recent">Last updated</a></li>
+            <li><a href="#" data-sort="expert">Expert Lists</a></li>
+          </ul>
+        </div>
+        <!-- /drop-down menu -->
+      </div>
     </div>
     <div id="findfriendsfilter" class="clearfix">
       <div class="friends-sort">Sort by:
