@@ -1,0 +1,136 @@
+// Place all the styles related to the Mobile New here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "modules/_mixins-vendor-prefixes";
+
+
+@media (max-width: 480px) {
+	.giftingwin {
+		margin: 0;
+		box-shadow: none;
+		padding-left: 0;
+		padding-right: 0;
+		h2 {
+			display: none;
+		}
+		#giftinghelp {
+			float: right;
+			background-color: transparent;
+			border: none;
+			margin-top: 15px;
+			p {
+				display: none;
+			}
+			&:before {
+				content: "Help";
+				text-transform: uppercase;
+				color: #999;
+				font-weight: bold;
+				font-size: 14px;
+				letter-spacing: 1px;
+			}
+		}
+		h3.icon {
+			float: left;
+			background-image: none;
+			padding-left: 0;
+			margin-top: 0;
+			margin-bottom: 20px; 
+		}
+		.prod.clearfix {
+			clear: both;
+			margin: 0 0 20px;
+			border-left: 0;
+			border-right: 0;
+			border-color: #d9d9d9;
+		}
+		.tabs {
+			margin-left: 0;
+			margin-right: 0;
+			.content {
+				border-right: none;
+				border-left: none;
+			}
+			.menu {
+				border-right: none;
+				border-left: none;
+				#step1 {
+					padding-left: 20px;
+				}
+				#step3 {
+					padding-right: 20px;
+				}
+			}
+			.tabbody {
+				padding-left: 0;
+				padding-right: 0;
+				p.center {
+					text-align: left;
+				}
+				fieldset {
+					border: 1px solid #ccc;
+					border-radius: 3px 3px 0 0;
+					+ fieldset {
+						border-radius: 0 0 3px 3px;
+						border-top: 0;
+						margin-bottom: 1em;
+					}
+					label {
+						display: block !important;
+						opacity: 1 !important;
+						float: left !important;
+						width: 30% !important;
+						font-size: 0.8rem;
+						font-weight: 700;
+						color: #333333;
+						cursor: default;
+						line-height: 28px;
+					}
+					input {
+						border: none;
+						box-shadow: initial;
+						margin: 0 !important;
+						width: 68% !important;
+						float: right !important;
+						line-height: 30px;
+					}
+				}
+				button,
+				a.button {
+					padding: 13px;
+					width: 100%;
+				}
+				.padded {
+					background-color: transparent;
+					border: none;
+					text-align: left;
+					padding: 0;
+					fieldset {
+						border: none;
+					}
+					select {
+						-webkit-appearance: none;
+						-moz-appearance: none;
+						appearance: none;
+						padding: 0.7em;
+						width: 100%;
+						border: 1px solid #ccc;
+						border-radius: 3px;
+					}
+					.mobile-sort-indicator {
+						position: absolute;
+						color: #aaaaaa;
+						right: 8%;
+						width: auto !important;
+						font-size: 16px;
+						padding-top: 4px;
+					}
+				}
+			}
+		}
+		.button-row {
+			display: none;
+		}
+	}
+}
