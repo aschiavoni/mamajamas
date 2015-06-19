@@ -71,6 +71,7 @@ $container-padding: 20px;
 					margin-left: 30%;
 					width: 70%;
 					box-shadow: none;
+					background-color: transparent;
 				  }
 
 				  .status-msg {
@@ -211,6 +212,7 @@ $container-padding: 20px;
 					&[type="date"] {
 					  width: calc(68% - 20px) !important;
 					  background-color: transparent;
+					  min-height: 20px;
 
 					  &:focus {
 						outline: none;
