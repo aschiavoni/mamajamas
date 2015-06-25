@@ -116,10 +116,15 @@
 
       .mobile-image {
         display: block;
+        background: url('./angie-dario2015.jpg') no-repeat center -60px;
+        background-size: cover;
+        width: 100%;
+        height: 360px;
 
         > img {
           width: 100%;
           height: 175px;
+          display: none;
         }
       }
 

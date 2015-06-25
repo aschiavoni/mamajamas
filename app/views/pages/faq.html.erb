@@ -1,7 +1,7 @@
 <div class="content">
   <div class="faq">
     <h3 class="small">Basics</h3>
-    <ul class="faq">
+    <ul class="faq faq_01">
       <li><a href="#faq01"><span class="ss-icon ss-navigatedown"></span> How do I create a baby registry?</a></li>
     </ul>
        <ul class="faq">
@@ -42,8 +42,8 @@
       <li><a href="#faq12"><span class="ss-icon ss-navigatedown"></span> How can my friends and family easily find my Mamajamas registry?</a></li>
     </ul>
 
-    <h4 class="bordertop"><a name="faq01" id="faq01"></a>How do I create a baby registry?</h4>
-    <p>You start by taking a quiz. We need to learn what type of parent you are so we can give you the best recommendations. (The quiz is not graded. Promise.) We then use that information to build your personalized baby registry either with or without product recommendations -- your choice. Next, you customize your registry. Add products from anywhere on the web -- using the <a href="#" class="get-bookmark">Mamajamas bookmark</a> and ideas and recommendations from other parents. Or you can make it super simple and copy someone else’s registry item for item.</p>
+    <h4 class="bordertop faq_01"><a name="faq01" id="faq01"></a>How do I create a baby registry?</h4>
+    <p class="faq_01">You start by taking a quiz. We need to learn what type of parent you are so we can give you the best recommendations. (The quiz is not graded. Promise.) We then use that information to build your personalized baby registry either with or without product recommendations -- your choice. Next, you customize your registry. Add products from anywhere on the web -- using the <a href="#" class="get-bookmark">Mamajamas bookmark</a> and ideas and recommendations from other parents. Or you can make it super simple and copy someone else’s registry item for item.</p>
     
     <h4 class="bordertop"><a name="faq02" id="faq02"></a>How do I give someone a gift from a registry?</h4>
 
@@ -52,9 +52,9 @@
     <p><b>Step 2.</b> Enter your name and email address. We’ll notify the recipient that they are about to receive something awesome.</p>
 
     <p><b>Step 3.</b> You’ll receive a link to the website where you can buy the item. Mamajamas is not a store (we are much too busy for that!), but we’ll make sure we get you to the right one. Follow the steps to purchase the item. If you need the address of the recipient, you can always get it from our website. </p>
-    
+
     <p><b>Step 4.</b> Once you’ve purchased the gift, come back to Mamajamas and click "continue." Then enter the quantity of the gift you purchased and click "confirm." The recipient will be notified (and delighted) and the details of your gift will appear on their registry.</p>
-    
+
     <h4 class="bordertop"><a name="faq03" id="faq03"></a>Why can't I work on my registry from my mobile device or tablet?</h4>
     <p>Because we’re still working on it! But soon. Really.</p>
 
@@ -83,10 +83,52 @@
     
     <p>Your registry also has a unique link, which you will be sent in your welcome email. For example, mine is: <a href="http://www.mamajamas.com/angie">www.mamajamas.com/angie</a>. You can share this with friends or put it on shower invites.</p>
     
-    <h4><a name="faq10" id="faq10"></a>Is there a way to import an Excel spreadsheet or registry I have already created into a Mamajamas registry?</h4>
+    <h4><a name="faq11" id="faq11"></a>Is there a way to import an Excel spreadsheet or registry I have already created into a Mamajamas registry?</h4>
     <p>Not yet, but if you email us your pre-existing registry, we’ll happily create it for you. Yep, we’re that nice.  Just send it to: <a href="mailto:info@mamajamas.com">info@mamajamas.com</a>.</p>
     
     <h4><a name="faq12" id="faq12"></a>How can my friends and family easily find my Mamajamas registry?</h4>
     <p>Three ways: 1. They can go to the homepage and search for you by name.  2. You can use the “share” icon on the top right of your registry.  3. You can email them the URL link to your registry.</p>
     
 </div>
+
+<script type="text/javascript">
+
+  var FAQ_Page = (function() {
+    var _currentLink = null;
+
+    return {
+      initComplete: false,
+      initState: function() {
+        $('p').hide();
+        $('.faq a').on('click', this.attachEvents);
+        this.initComplete = true;
+      },
+      attachEvents: function() {
+        var _id = $(this).attr('href');
+
+        if(_id != null && _currentLink != _id) {
+          $('p').slideUp();
+          $(_id).parent().nextUntil('h4', 'p').slideDown();
+        } else if(_id != null && _currentLink === _id) {
+          $(_id).parent().nextUntil('h4', 'p').slideUp();
+        }
+
+        _currentLink = _id;
+      }
+    };
+  })($);
+
+  $(document).ready(function() {
+    // handle collapse and expand
+    if($(window).width() < 480) {
+      FAQ_Page.initState();
+    }
+
+    $(window).resize(function() {
+      if($(window).width() > 480) {
+        $('.faq a').off('click');
+        $('p').show();
+      }
+    });
+  });
+</script>

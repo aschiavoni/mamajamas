@@ -47,7 +47,7 @@
         <% else -%>
             <% unless current_user.present? && current_user.guest? -%>
               <div class="startRegistryButton">
-                <%= link_to "Start Your Registry", quiz_path %>
+                <%= link_to "Start Your Registry", '/users/login' %>
               </div>
             <% end -%>
           <% end -%>

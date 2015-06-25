@@ -43,6 +43,7 @@ window.Mamajamas = {
       $('#toggle-mobile-menu').on('click', function() {
         if($mobileMenu.length > 0) {
           $mobileMenu.toggle();
+          $mobileMenu.find('.mobile-menu-search-input').val('');
 
           if($mobileMenu.is(':visible')) {
             $mobileMenu.find('.close-btn').on('click', function() {
@@ -58,10 +59,6 @@ window.Mamajamas = {
           }
         }
 
-      });
-
-      $mobileMenu.find('.mobile-search-form').on('submit', function() {
-        $mobileMenu.find('.mobile-menu-search-input').val('');
       });
     }
 
