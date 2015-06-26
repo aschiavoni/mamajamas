@@ -413,13 +413,13 @@
 					margin: 0;
 					position: relative;
 					background-color: transparent;
-					width: 254px;
+					width: 75%; //254px;
 
 					a {
-						height: 130px;
+						height: 100%;//130px;
 
 						img {
-							height: 130px;
+							height: 100%;//130px;
 							width: 100%;
 						}
 					}
@@ -821,7 +821,6 @@
 
 	}
 
-
 	.mobile-q-progress {
 		position: absolute;
 		top: 0;
@@ -868,16 +867,15 @@
 			position: absolute;
 		}
 
-
 		#q-sliderarrow {
 			background-image: none;
 			width: 1.2rem;
 			height: 1.2rem;
 			top: -0.8rem;
 			margin-left: 0.8rem;
-			background-color: rgb(232, 232, 232);
-			box-shadow: 0px 2px 3px rgb(178, 178, 178);
-			border: 0.1rem solid rgb(228, 228, 228);
+			background-color: rgb(150, 150, 150);
+			box-shadow: 0px 2px 3px rgb(52, 52, 52);
+			border: 0.1rem solid rgb(153, 153, 153);
 			@include border-radius(2rem);
 			z-index: 999;
 
@@ -893,7 +891,7 @@
 			}
 
 			&:after {
-				background-color: rgba(240, 240, 240, 0.52);
+				background-color: rgba(200, 200, 200, 0.52);
 				content: ' ';
 				display: inline-block;
 				height: 1rem;
