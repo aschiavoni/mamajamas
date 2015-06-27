@@ -2,6 +2,9 @@ require 'spec_helper'
 
 feature "Visitor signs up", js: true do
 
+  # we removed the signup button in DEV-874 so these specs will be skipped
+  before { skip }
+
   scenario "with valid name, email and password" do
     VCR.use_cassette('signup/email') do
       @tempuser = build(:user)
