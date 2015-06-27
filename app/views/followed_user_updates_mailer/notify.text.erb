@@ -1,4 +1,4 @@
-New gear has been added to <%= @followed.full_name.possessive %> Mamajamas List:
+We just wanted to let you know that new gear has been added to <%= @followed.full_name.possessive %> Mamajamas Registry:
 
 <% @updates.each do |list_item| -%>
 <%= list_item.name %> <%= public_list_category_url(@followed.slug, list_item.category.slug, anchor: list_item.id) %>
@@ -7,8 +7,8 @@ New gear has been added to <%= @followed.full_name.possessive %> Mamajamas List:
 
 See more at: <%= public_list_url(@followed.slug) %>
 
-Click on the links above to get more information, like ratings or reviews of these products.
+See anything that piques your interest? Then click on the above links to get more product information, ratings and reviews.
 
 
-Thanks!
+Carry on!
 The Mamajamas Team

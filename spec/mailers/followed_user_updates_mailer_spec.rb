@@ -17,7 +17,7 @@ describe FollowedUserUpdatesMailer, :type => :mailer do
     end
 
     it "renders the headers" do
-      expect(mail.subject).to eq("New gear has been added to #{'John'.possessive} list!")
+      expect(mail.subject).to eq("New gear has been added to #{'John'.possessive} Registry!")
       expect(mail.to).to eq([ user.email ])
       expect(mail.from).to eq(["automom@mamajamas.com"])
     end

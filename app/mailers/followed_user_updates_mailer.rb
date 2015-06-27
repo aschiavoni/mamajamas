@@ -19,7 +19,7 @@ class FollowedUserUpdatesMailer < ActionMailer::Base
     @followed = followed
     @updates = added
     @subject =
-      "New gear has been added to #{first_name(@followed).possessive} list!"
+      "New gear has been added to #{first_name(@followed).possessive} Registry!"
     mail to: @user.email, subject: @subject
   end
 end
