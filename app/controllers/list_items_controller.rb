@@ -1,6 +1,6 @@
 class ListItemsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :find_list
+  before_filter :authenticate_user!, except: [ :show ]
+  before_filter :find_list, except: [ :show ]
   before_filter :find_category, only: [ :index ]
   before_filter :set_cache_buster, only: [ :index ]
   before_filter :init_view, only: [ :gifts ]
@@ -10,6 +10,21 @@ class ListItemsController < ApplicationController
   def index
     @list_entries = @list.list_entries(@category)
     respond_with @list_entries
+  end
+
+  def show
+    hide_header
+    set_nested_window
+    set_body_class("bgfill")
+    @list_entry = ListItem.user_items.find(params[:id])
+    @list = @list_entry.list
+
+    if @list.registered_users_only? && !allowed_user?
+      not_found
+    end
+
+    @owner = @list.user
+    @page_title = "Baby Registry: #{@owner.full_name} - Mamajamas"
   end
 
   def create
@@ -61,5 +76,9 @@ class ListItemsController < ApplicationController
     hide_header
     set_body_class "bgfill"
     set_nested_window
+  end
+
+  def allowed_user?
+    current_user && !current_user.guest?
   end
 end

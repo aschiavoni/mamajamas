@@ -12,7 +12,7 @@ class ReservedNameValidator < ActiveModel::EachValidator
     follow followers following friend friends
     gift gifts gifting gifters
     help home
-    invitations invite invites
+    items invitations invite invites
     jobs
     list list_item list_items lists
     log-in log-out log_in log_out login logout logs

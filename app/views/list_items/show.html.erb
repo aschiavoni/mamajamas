@@ -1,0 +1,46 @@
+<div class="nestedwin giftingwin clearfix">
+  <h2>
+    <%= @owner.possessive_full_name %> Baby Registry
+  </h2>
+
+  <!-- product -->
+  <div id="" class="prod clearfix">
+    <div class="prod-thumb">
+      <%= image_tag @list_entry.image_url, alt: @list_entry.name %>
+    </div>
+    <div class="prod-cat-name-rating">
+      <div class="prod-category">
+        <%= @list_entry.product_type_name %>
+      </div>
+      <h3>
+        <%= link_to @list_entry.name, @list_entry.link, target: "_blank" %>
+      </h3>
+      <div class="prod-when-own">
+        <% if @list_entry.price.present? -%>
+          <div class="price"> <strong><%= @list_entry.price %></strong></div>
+        <% end -%>
+        <div class="own">
+          <% if @list_entry.desired? -%>
+            <strong>Wants</strong> 1 of these
+          <% end -%>
+        </div>
+      </div>
+      <div class="center margintop">
+        <p>Would you like to give this as a gift, or just look?</p>
+        <%= link_to new_gift_path(@list_entry.id), class: "button bt-color bt-lg" do -%>
+          <i class="fa fa-gift fa-lg"></i> Give as a gift
+        <% end -%>
+        <%= link_to @list_entry.link, class: "button bt-color bt-lg", target: "_blank" do -%>
+          <i class="fa fa-eye fa-lg"></i> Just look
+        <% end -%>
+      </div>
+    </div>
+  </div>
+  <!-- /product -->
+
+  <div class="button-row clearfix">
+    <%= link_to :back, class: "button", id: "bt-cancel" do -%>
+      <i class="fa fa-angle-left"></i> Go back
+    <% end -%>
+  </div>
+</div>

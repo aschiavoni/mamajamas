@@ -70,7 +70,7 @@ Mamajamas::Application.routes.draw do
 
   resource :quiz, only: [ :show, :update ], controller: "quiz"
   resource :list, only: [ :show, :update ] do
-    resources :list_items, only: [ :index, :create, :update, :destroy ] do
+    resources :list_items, only: [ :index, :show, :create, :update, :destroy ] do
       member do
         get 'gifts'
       end

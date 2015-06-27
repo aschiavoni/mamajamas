@@ -8,7 +8,11 @@
     <div class="prod-cat-name-rating">
       <div class="prod-category"> <%= list_item.product_type_name %> </div>
       <h3>
-        <%= link_to list_item.name, list_item.link, target: "_blank" %>
+        <% if public_view -%>
+          <%= link_to list_item.name, list_list_item_path(list_item) %>
+        <% else -%>
+          <%= link_to list_item.name, list_item.link, target: "_blank" %>
+        <% end -%>
       </h3>
       <% if user_has_list? -%>
         <a href="/list/all" target="_blank" class="button bt-color bt-add" title="Add to my registry"><span class="ss-plus"></span><strong>Add</strong></a>
