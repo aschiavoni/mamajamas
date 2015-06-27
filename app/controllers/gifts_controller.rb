@@ -14,10 +14,23 @@ class GiftsController < ApplicationController
     gift_params[:user_id] = current_user.id if current_user.present?
     @gift = @list_item.gift_item(params[:gift])
     if @gift.persisted?
-      GiftNotificationWorker.perform_async(@gift.id)
-      redirect_to public_list_category_path(@owner, @list_item.category.slug)
-     else
-       render :new
+      respond_to do |format|
+        format.html do
+          redirect_to public_list_category_path(@owner, @list_item.category.slug)
+        end
+        format.json do
+          render json: @gift
+        end
+      end
+    else
+      respond_to do |format|
+        format.html do
+          render :new
+        end
+        format.json do
+          raise "Could not save gift"
+        end
+      end
     end
   end
 
@@ -26,8 +39,12 @@ class GiftsController < ApplicationController
     unless @list_item.list.user == current_user
       raise ActiveRecord::RecordNotFound
     end
-    @gift = @list_item.gifts.find(params[:gift_id])
-    @gift.update_attributes!(params[:gift])
+    @gift = @list_item.gifts.find_by_id(params[:gift_id])
+    if @gift.present?
+      @gift.update_attributes!(params[:gift])
+    else
+      @gift = @list_item.gift_item(params[:gift])
+    end
 
     unless @gift.purchased?
       @list_item.desired_quantity = @list_item.desired_quantity + @gift.quantity
@@ -35,7 +52,18 @@ class GiftsController < ApplicationController
       @list_item.save!
     end
 
-    respond_with @gift
+    if params[:notify] == "true"
+      GiftNotificationWorker.perform_async(@gift.id)
+    end
+
+    respond_to do |format|
+      format.html do
+        redirect_to public_list_category_path(@owner, @list_item.category.slug)
+      end
+      format.json do
+        respond_with @gift
+      end
+    end
   end
 
   private

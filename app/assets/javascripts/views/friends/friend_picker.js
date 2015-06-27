@@ -28,7 +28,7 @@ window.Mamajamas.Views.FriendPicker = Backbone.View.extend({
     };
     $.post('/relationships', data, function(response) {
       li.replaceWith(response);
-    })
+    });
     return false;
   },
 
@@ -40,8 +40,8 @@ window.Mamajamas.Views.FriendPicker = Backbone.View.extend({
     var data = { _method: "delete", follow_friend: 1 };
     $.post("/relationships/" + relationshipId, data, function(response) {
       li.replaceWith(response);
-    })
+    });
     return false;
-  },
+  }
 
 });

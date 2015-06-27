@@ -33,8 +33,10 @@
   <!-- /product -->
 
   <div class="tabs">
-    <%= form_for @gift, url: gift_path, html: { class: "new-gift" } do |f| %>
+    <%= form_for @gift, url: update_gift_path, method: "put", html: { class: "new-gift" } do |f| %>
       <%= f.hidden_field :list_item_id -%>
+      <%= hidden_field_tag :gift_id, "", id: 'gift_id' %>
+      <%= hidden_field_tag :notify, "true" %>
       <h3 id="step1"><strong>Step 1.</strong> Enter your info</h3>
       <div class="tabbody label-infield">
         <p class="center">Please provide your name and email so we can send confirmations to you and <%= @owner.display_owner_name %>.</p>
@@ -101,3 +103,10 @@
     <%= link_to "Cancel", public_list_path(@owner), class: "button" %>
   </div>
 </div>
+<script type="text/javascript">
+ Mamajamas.Context.Gift = {
+   list_item_id: <%= @list_item.id %>,
+   full_name: "<%= gifter_full_name  %>",
+   email: "<%= gifter_email  %>",
+ }
+</script>
