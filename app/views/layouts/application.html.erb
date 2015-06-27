@@ -42,7 +42,7 @@
           <h1>Mamajamas</h1>
         <% end -%>
         <%= link_to (user_signed_in? ? list_path : root_path), class: "beta tooltip-r" do %>
-        beta <span>&#8220;beta&#8221; means we&#8217;re still working out some of the kinks.<em></em></span>
+        <em></em></span>
         <% end -%>
       </div>
       <%= content_for?(:search) ? yield(:search) : "" %>
