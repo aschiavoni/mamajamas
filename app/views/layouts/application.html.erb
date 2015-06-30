@@ -41,9 +41,6 @@
         <%= link_to (user_signed_in? ? list_path : root_path) do %>
           <h1>Mamajamas</h1>
         <% end -%>
-        <%= link_to (user_signed_in? ? list_path : root_path), class: "beta tooltip-r" do %>
-        <em></em></span>
-        <% end -%>
       </div>
       <%= content_for?(:search) ? yield(:search) : "" %>
       <nav id="mainnav">
