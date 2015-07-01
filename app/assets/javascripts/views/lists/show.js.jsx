@@ -68,6 +68,10 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 			$('.show-all-friends').click(this.showAllFriends);
 		}
 
+		if ($('.mobile-category-btn .choicedrop.category-filter a').length > 0) {
+			$('.mobile-category-btn .choicedrop.category-filter a').click(this.toggleCategoriesList);
+		}
+
 		Mamajamas.Context.Recommendations = new Mamajamas.Collections.Recommendations();
 	},
 
@@ -253,6 +257,20 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 		var $filterDisplay = $filterLink.parents(".choicedrop").children("a");
 		$filterDisplay.html(filterName + " <span class=\"ss-dropdown\"></span>");
 		return this.indexView.availableFilter(event);
+	},
+
+	toggleCategoriesList: function(event) {
+		var $target = $(event.currentTarget);
+		var $choiceDrop = $target.parents(".choicedrop");
+		var $list = $choiceDrop.find("ul");
+
+		if ($list.is(":visible")) {
+			$list.hide();
+		} else {
+			$list.show();
+		}
+
+		return false;
 	},
 
 	showRecommendations: function(event) {
