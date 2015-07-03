@@ -241,7 +241,8 @@ CREATE TABLE gifts (
     quantity integer DEFAULT 0 NOT NULL,
     purchased boolean DEFAULT false NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    reserved_only boolean DEFAULT false NOT NULL
 );
 
 
@@ -1594,4 +1595,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150223030103');
 INSERT INTO schema_migrations (version) VALUES ('20150430171721');
 
 INSERT INTO schema_migrations (version) VALUES ('20150430183424');
+
+INSERT INTO schema_migrations (version) VALUES ('20150703192632');
 

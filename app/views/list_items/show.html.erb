@@ -21,7 +21,7 @@
         <% end -%>
         <div class="own">
           <% if @list_entry.desired? -%>
-            <strong>Wants</strong> 1 of these
+            <strong>Wants</strong> <% @list_entry.desired_quantity %> of these
           <% end -%>
         </div>
       </div>

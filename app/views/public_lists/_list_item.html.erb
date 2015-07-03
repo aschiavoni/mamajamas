@@ -34,7 +34,7 @@
       <% if registry %>
         <% unless list_item.owned? -%>
           <div class="gift">
-            <%= link_to new_gift_path(list_item.id), class: "bt-gift" do %>
+            <%= link_to preview_gift_path(list_item.id), class: "bt-gift" do %>
               <span>Gift this</span>
             <% end -%>
             <% if list_item.desired? %>

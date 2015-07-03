@@ -1,11 +1,16 @@
 class GiftsController < ApplicationController
   before_filter :init_view
   before_filter :find_list_item
-  before_filter :authenticate_user!, only: [ :update ]
 
   respond_to :html, :json
 
   def new
+    @ship_to_me = params[:shipto] == "me"
+    @ship_to_none = params[:shipto] == "none"
+    @gift = Gift.new(list_item: @list_item)
+  end
+
+  def preview
     @gift = Gift.new(list_item: @list_item)
   end
 
@@ -35,10 +40,6 @@ class GiftsController < ApplicationController
   end
 
   def update
-    # make sure we have perms to update the current gift
-    unless @list_item.list.user == current_user
-      raise ActiveRecord::RecordNotFound
-    end
     @gift = @list_item.gifts.find_by_id(params[:gift_id])
     if @gift.present?
       @gift.update_attributes!(params[:gift])

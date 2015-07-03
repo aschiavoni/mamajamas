@@ -45,15 +45,14 @@ Mamajamas.Views.GiftNew = Backbone.View.extend({
     var data = {
       "gift": {
         "list_item_id": listItemId,
-        "full_name": Mamajamas.Context.Gift.full_name,
-        "email": Mamajamas.Context.Gift.email,
+        "full_name": $('#gift_full_name').val() || Mamajamas.Context.Gift.full_name,
+        "email": $('#gift_email').val() || Mamajamas.Context.Gift.email,
         "purchased": true,
         "quantity": 1
       },
       "list_item_id": listItemId
     };
     $.post('/gifts/' + listItemId + '.json', data, function(response) {
-      console.log(response);
       $('#gift_id').val(response.id);
     });
     this._showTab(1);

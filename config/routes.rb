@@ -37,6 +37,7 @@ Mamajamas::Application.routes.draw do
   put "/profile" => "users#update"
   get "/registry" => "registry#edit"
   put "/registry" => "registry#update"
+  get '/gifts/:list_item_id/preview' => 'gifts#preview', as: :preview_gift
   get '/gifts/:list_item_id/new' => 'gifts#new', as: :new_gift
   post '/gifts/:list_item_id' => 'gifts#create', as: :gift
   put '/gifts/:list_item_id' => 'gifts#update', as: :update_gift
