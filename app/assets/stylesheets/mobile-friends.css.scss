@@ -26,6 +26,32 @@ $mamajamas-green: #5daf5d;
         border-left: none;
       }
 
+      .friend-info {
+        .friend-data {
+          margin-bottom: 0.8rem;
+
+          .friend-followers,
+          .friend-listeitems {
+            width: 47%;
+            display: block;
+          }
+          .friend-updated {
+            display: block;
+            width: 100%;
+          }
+        }
+
+        a.button {
+          margin-top: -0.2rem;
+        }
+
+        a.button, 
+        button {
+          width: 100%;
+          padding: 0.6rem;
+        }
+      }
+
       #findfriendsapp,
       #friendslistapp {
         width: 100%;
