@@ -81,7 +81,7 @@ class Forms::RegistrySettings
   end
 
   def settings_title
-    has_list? ? "Registry Details" : "Complete Sign Up"
+    has_list? ? "Ship Gifts To" : "Complete Sign Up"
   end
 
   def settings_button_text

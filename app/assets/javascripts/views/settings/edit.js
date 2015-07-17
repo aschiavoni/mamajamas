@@ -14,6 +14,7 @@ Mamajamas.Views.Settings = Backbone.View.extend({
           $(this).datepicker('setDate', date);
         }
       });
+
       $('#settings_unsubscribe_all').change(function() {
         console.log("toggleUnsubscribeAll");
         var $cb = $(event.currentTarget);
@@ -23,11 +24,13 @@ Mamajamas.Views.Settings = Backbone.View.extend({
           $('#ind-emails').slideDown();
         }
       });
+
       $('img.date-picker').click(function(event) {
         event.preventDefault();
         $("#field-duedate").datepicker("show");
         return false;
       });
+
     });
   }
 
