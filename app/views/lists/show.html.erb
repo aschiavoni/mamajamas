@@ -99,7 +99,7 @@
       <!-- notification ***** -->
       <div id="notifications"><%= notifications %></div>
 
-      <div class="mobile-category-btn">
+      <div class="mobile-category-btn hide-desktop">
         <div class="choicedrop category-filter">
           <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
               <a href="#" class="button bt-color">Choose a category <span class="ss-dropdown"></span></a>

@@ -57,7 +57,7 @@
 				<p>
 					<label for="field-duedate" class="hide-desktop hide-mobile">mm/dd/yy</label>
 					<label for="field-duedate" class="hide-desktop">Baby Due Date</label>
-					<%= f.text_field :baby_due_date, size: 30, id: "field-duedate", type: "date", min: "0001-01-01", max: "9999-12-31" %>
+					<%= f.text_field :baby_due_date, size: 30, id: "field-duedate", type: "text", min: "0001-01-01", max: "9999-12-31" %>
 					<%= image_tag "icon_calendar@2x.png", class: "date-picker", alt: "calendar" %>
 				</p>
 			</dd>

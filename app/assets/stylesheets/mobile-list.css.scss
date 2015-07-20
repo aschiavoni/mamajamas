@@ -167,12 +167,17 @@
 
 					li {
 						border-left: none;
+
+					  	> br {
+						  display: none;
+					  	}
 					}
 				}
 
 				em {
 					color: #333333;
 					display: inline-block;
+				    vertical-align: top;
 
 					i {
 						padding-right: 5px;
@@ -508,6 +513,10 @@
 		box-shadow: none;
 		-webkit-box-shadow: none;
 
+		.simplemodal-close {
+			display: inline-block;
+		}
+
 		h2 {
 			display: none;
 		}
@@ -655,6 +664,28 @@
 		#search-modal {
 			width: 100%;
 
+			#prod-search,
+			#frm-addown {
+				padding: 0 10px 0;
+			}
+
+			#frm-addown {
+				margin: 0;
+
+				p {
+					padding: 0;
+					margin: 0;
+				}
+
+				label {
+					left: 0.6em;
+					font-size: 0.8em;
+					line-height: 2.2em;
+					width: initial;
+					display: inline;
+				}
+			}
+
 			#prod-search {
 
 				h3 {
@@ -672,12 +703,14 @@
 				}
 			}
 
+			#field-prodname {
+				width: 78%;
+			}
+
 			#field-search {
 				width: 100%;
 			}
 		}
-
-
 
 	}
 
@@ -694,7 +727,8 @@
 			background-color: white;
 		}
 
-		#recommendations-editor.simplemodal-data {
+		#recommendations-editor.simplemodal-data,
+		#email-modal.simplemodal-data {
 			width: 100%;
 			display: block;
 		}
@@ -703,7 +737,8 @@
 			padding: 4.3rem 0px 5em 0px;
 		}
 
-		.quiz-results {
+		.quiz-results,
+		#email-modal {
 
 			h2 {
 				/*display: none;*/
@@ -1019,6 +1054,22 @@
 				display: none;
 			}
 
+		}
+
+	  	#email-modal {
+		  h2 {
+			display: block;
+		  }
+
+		  fieldset {
+			margin-left: 5px;
+
+			label,
+			input[type="text"],
+			textarea {
+			  width: 100%;
+			}
+		  }
 		}
 	}
 }

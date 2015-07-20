@@ -105,7 +105,13 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     var _view = this;
     $("div.collapsible-content", this.el).sortable({
       axis: "y",
-      // handle: ".drag",
+      // NOTE: Add to allow dragging in mobile and scrolling
+      handle: (function() {
+        if($(document).width() <= 480) {
+          return $('div.collapsible-content').find('.drag.tooltip');
+        }
+        return null;
+      })(),
       connectWith: "div.collapsible-content",
       dropOnEmpty: true,
       opacity: 1.0,
