@@ -215,6 +215,7 @@
 
 				  	.choicedrop {
 					  width: 100%;
+					  border: none;
 
 					  ul {
 						width: 90% !important;
@@ -265,10 +266,17 @@
 					.listsort {
 						width: 49%;
 						padding: 3px;
-						-webkit-flex: 1 49%;
-						flex: 1 49%;
-						-webkit-order: 1;
-						order: 1;
+						-webkit-flex: 1 46%;
+						flex: 1 46%;
+						@include order(1);
+
+						&:nth-of-type(2) {
+							margin-left: 1%;
+						}
+
+						&:last-of-type {
+							margin-right: 1%;
+						}
 
 						.choicedrop {
 							width: 92%;
