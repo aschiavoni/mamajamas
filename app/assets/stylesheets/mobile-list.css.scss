@@ -283,6 +283,7 @@
 							float: none;
 							padding: 10px 5px;
 
+
 							> a {
 								text-align: center;
 							}
@@ -526,7 +527,9 @@
 		}
 
 		h2 {
-			display: none;
+			background-color: transparent;
+			border-bottom: 1px solid #f3f3f3;
+			padding: 0.9em;
 		}
 
 		.content {
@@ -547,8 +550,16 @@
 			}
 		}
 
-		#prod-suggestions-results {
+		#prod-search-results {
 			@include order(3);
+		}
+
+		#prod-suggestions-results {
+			@include order(4);
+		}
+
+		#prod-search-results,
+		#prod-suggestions-results {
 			padding: 0;
 
 			.prod-search-list {
