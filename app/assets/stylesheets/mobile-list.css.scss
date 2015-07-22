@@ -37,8 +37,7 @@
 			width: auto;
 			-webkit-flex: 1 auto;
 			flex: 1 auto;
-			-webkit-order: 2;
-			order: 2;
+		  	@include order(1);
 		  	margin-top: -15px;
 
 			#title {
@@ -242,8 +241,7 @@
 						width: auto;
 						-webkit-flex: 1 auto;
 						flex: 1 auto;
-						-webkit-order: 2;
-						order: 2;
+					  	@include order(2);
 
 						a {
 						  display: block;
@@ -325,6 +323,7 @@
 					}
 
 					#add-new {
+						margin-bottom: 0;
 
 						.prod-links {
 							margin-left: 0;
@@ -367,10 +366,8 @@
 			width: auto;
 			-webkit-flex: 1 auto;
 			flex: 1 auto;
-			-webkit-order: 1;
-			order: 1;
+		  	@include order(2);
 			background-color: #ffffff;
-			margin-top: 30px;
 
 		  	&.public-list {
 			  margin-top: 50px;
@@ -523,7 +520,7 @@
 		-webkit-box-shadow: none;
 
 		.simplemodal-close {
-			display: inline-block;
+		  display: inline-block;
 		}
 
 		h2 {
@@ -544,6 +541,7 @@
 
 		#prod-search-results + div {
 			@include order(2);
+		  	padding-top: 10px;
 
 			.addto-callout {
 				display: none;
@@ -551,11 +549,12 @@
 		}
 
 		#prod-search-results {
-			@include order(3);
+			@include order(4);
+			margin-top: 25px;
 		}
 
 		#prod-suggestions-results {
-			@include order(4);
+			@include order(3);
 		}
 
 		#prod-search-results,
@@ -729,6 +728,11 @@
 			#field-search {
 				width: 100%;
 			}
+		}
+
+
+	  	#needhave-modal {
+		  top: 0 !important;
 		}
 
 	}

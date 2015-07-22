@@ -117,6 +117,9 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
 
   clearResults: function() {
     $('#prod-search-results ul.search-results li', this.$el).remove();
+    if($(window).width() < 480) {
+      $('#prod-suggestions-results ul.suggestions li', this.$el).hide();
+    }
   },
 
   showSuggestions: function(searchResults) {
