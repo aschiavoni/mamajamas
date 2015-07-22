@@ -83,7 +83,7 @@
 
 	.simplemodal-container {
 		/*position: fixed;*/
-		position: relative !important;  
+		position: relative !important;
 		z-index: 50 !important;
 		height: 80% !important;
 		width: 100% !important;
@@ -246,7 +246,7 @@
 				left: 15px;
 				right: 15px;
 				background-color: rgba(255,255,255,1);
-				-webkit-animation: ease fade-in 0.8s;	
+				-webkit-animation: ease fade-in 0.8s;
 
 				.button {
 					width: 100%;
@@ -327,7 +327,7 @@
 				}
 
 				.field-label {
-					line-height: 1.8em;	
+					line-height: 1.8em;
 				}
 
 				fieldset {
@@ -633,7 +633,9 @@
 								font-size: 0.9rem;
 
 								a {
-									text-decoration: underline;
+								  position: relative;
+								  text-decoration: underline;
+								  z-index: 9999;
 								}
 							}
 
@@ -661,11 +663,17 @@
 
 
 					.bt-add {
+						width: 97%;
+						height: 100%;
+						bottom: 0;
+						z-index: 500;
+						position: absolute;
+						margin-top: -9px;
 						top: 0.6em !important;
 						left: 0.6em;
 						border: 0;
-						height: 67px;
-						width: 66px;
+						//height: 67px;
+						//width: 66px;
 						padding: 0;
 						background-color: transparent;
 
@@ -679,17 +687,18 @@
 						}
 
 						.ss-plus {
-							background-color: #6BB36E;
-							font-size: 0.6rem;
-							font-weight: 100;
-							line-height: 1.5rem;
-							@include border-radius(0.2rem 0);
-							position: absolute;
-							top: initial;
-							bottom: 0;
-							right: 0rem;
-							width: 1.2rem;
-							height: 1.2rem;	
+						  display: none;
+						  background-color: #6BB36E;
+						  font-size: 0.6rem;
+						  font-weight: 100;
+						  line-height: 1.5rem;
+						  @include border-radius(0.2rem 0);
+						  position: absolute;
+						  top: initial;
+						  bottom: 0;
+						  right: 0rem;
+						  width: 1.2rem;
+						  height: 1.2rem;
 						}
 
 						.ss-plus + strong {
@@ -936,6 +945,25 @@
 				}
 			}
 		}
+	}
+
+
+  	#frm-registry-settings {
+	  .radio {
+		label {
+
+		  strong {
+			margin-right: 10px;
+		  }
+		}
+	  }
+
+	  .form-group {
+		#registry_country_code {
+			width: 100%;
+		  	font-size: 1.2em;
+		}
+	  }
 	}
 
 }
