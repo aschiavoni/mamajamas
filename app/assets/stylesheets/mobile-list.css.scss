@@ -330,13 +330,15 @@
 							.prod-note {
 
 								.prod-links {
+									width: 98%;
 
 									& > ul {
 										@include flexbox();
 										@include flex-flow(nowrap row);
+										justify-content: space-between;
 
 											li {
-												width: 45%;
+												width: 50%;
 											}
 
 											li:first-of-type {
