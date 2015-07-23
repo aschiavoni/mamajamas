@@ -104,6 +104,9 @@
           <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
               <a href="#" class="button bt-color">Choose a category <span class="ss-dropdown"></span></a>
               <ul style="display:none; width:7.5em;">
+                <li class="<%= "cat-selected" if @view.all_category? %>">
+                  <%= link_to "All", list_category_path('all') %>
+                </li>
                 <% @view.categories.each do |category| -%>
                   <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
                     <%= link_to category.name, list_category_path(category.slug) %>
@@ -314,5 +317,5 @@
     <% end -%>
   </div>
 </div>
-<!-- end share by email win --> 
+<!-- end share by email win -->
 <%= adwords_event "LdrCCN7BzAcQmoDU4wM", "0" %>

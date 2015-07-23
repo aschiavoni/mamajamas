@@ -81,7 +81,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 		"click .listsort .choicedrop.list-available-filter a": "toggleAvailableFilterList",
 		"click .listsort .choicedrop.list-available-filter ul li a": "availableFilter",
 		"click #prod-rec": "showRecommendations"
-		
+
 	},
 
 	render: function() {
@@ -270,7 +270,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 			$list.show();
 		}
 
-		return false;
+		//return false;
 	},
 
 	showRecommendations: function(event) {

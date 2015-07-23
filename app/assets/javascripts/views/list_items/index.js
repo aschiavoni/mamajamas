@@ -98,6 +98,10 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
       $clearRec.css('display', 'block').css('cursor: pointer');
     }
 
+    if($(document).width() < 480) {
+      this.closeAllCollapsibles();
+    }
+
     return this;
   },
 
@@ -187,6 +191,10 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
         $el.collapsible("close");
     });
     this.collapsiblesToReset = [];
+  },
+
+  closeAllCollapsibles: function() {
+    $('.priority.collapsible').collapsible('close');
   },
 
   insertItem: function(item, collection, options) {
