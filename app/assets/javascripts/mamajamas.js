@@ -42,10 +42,14 @@ window.Mamajamas = {
       var $mobileMenu = $('#mobile-menu');
       $('#toggle-mobile-menu').on('click', function() {
         if($mobileMenu.length > 0) {
-          $mobileMenu.toggle();
+          $mobileMenu.toggle(function() {
+            $mobileMenu.find('.mobile-menu-content').toggleClass('open');
+          });
           $mobileMenu.find('.mobile-menu-search-input').val('');
 
           if($mobileMenu.is(':visible')) {
+            //$mobileMenu.find('.mobile-menu-content').addClass('open');
+
             $mobileMenu.find('.close-btn').on('click', function() {
               $mobileMenu.hide();
               $(this).off('click');
@@ -56,6 +60,8 @@ window.Mamajamas = {
               $mobileMenu.hide();
               $mobileMenu.find('.mobile-menu-search-input').val('');
             });
+          } else {
+            //$mobileMenu.find('.mobile-menu-content').removeClass('open');
           }
         }
 

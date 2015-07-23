@@ -104,12 +104,20 @@
 						> li {
 							width: 49%;
 							text-align: center;
-							padding: 15px;
 							margin: 0;
 							text-transform: uppercase;
 							border-bottom: 1px solid #d9d9d9;
 
-							&:first-of-type {
+						  	a {
+							  padding: 15px;
+
+							  &:focus,
+							  &:hover {
+								text-decoration: none;
+							  }
+							}
+
+							&:not(first-of-type) {
 								border-right: 1px solid #d9d9d9;
 							}
 						}
@@ -350,7 +358,7 @@
 						}
 
 						.prod-cat-name-rating {
-							padding-right: 3%;
+							padding-right: 10%;
 							margin-bottom: 0;
 						}
 
@@ -364,7 +372,8 @@
 						}
 
 						.bt-addanother {
-							position: absolute;
+						  	display: none;
+							//position: absolute;
 							top: 6.5rem;
 							left: 0.75rem;
 							background-color: transparent;
@@ -397,7 +406,7 @@
 
 							li {
 								display: inline-block;
-								width: 33%;
+								width: 100%;
 							}
 						}
 					}
@@ -829,13 +838,34 @@
 
 	  	#needhave-modal {
 		  top: 0 !important;
+
+		  .frm-added {
+			margin-top: 40px;
+		  }
+
+		  .button-row {
+			position: fixed;
+			left: 0;
+			right: 0;
+			bottom: 10px;
+			z-index: 9999;
+			padding: 0 20px;
+			margin: 2px 0 0 0;
+			background-color: white;
+
+			.button {
+			  width: 48%;
+			  display: inline-block;
+			  padding: 10px 5px;
+			}
+		  }
 		}
 
 	}
 
 	#simplemodal-container {
 
-		& .button-row {
+		&.button-row {
 			position: fixed;
 			left: 0;
 			right: 0;
@@ -850,6 +880,12 @@
 		#email-modal.simplemodal-data {
 			width: 100%;
 			display: block;
+		}
+
+		#recommendations-editor {
+		  .content {
+			padding: 4.3rem 0px 5em 0px;
+		  }
 		}
 
 		.content {
@@ -981,15 +1017,6 @@
 
 							}
 
-							/*.ss-dropdown {
-								display: inline-block;
-								color: #5daf5d;
-
-								&:after {
-									display: none;
-								}
-							}*/
-
 						}
 					}
 
@@ -1030,7 +1057,7 @@
 						width: 77%;
 						margin: 0 0 0 4.8rem;
 						padding: 0;
-						display: none;
+						//display: none;
 
 
 						.prod-cat-name-rating {
@@ -1128,8 +1155,6 @@
 				.btn-build-registry {
 					@include order(1);
 					flex: 1 auto;
-
-
 				}
 
 				.btn-quiz-back {

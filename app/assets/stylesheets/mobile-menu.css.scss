@@ -1,6 +1,7 @@
 // Place all the styles related to the Mobile Menu here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "modules/_mixins-vendor-prefixes";
 
 #mobile-menu-btn-container,
 #mobile-friends-search,
@@ -100,6 +101,18 @@
       margin-top: 15%;
       z-index: 600;
       text-align: center;
+      //overflow: hidden;
+      //opacity: 0;
+      //-webkit-transition: margin-top 0.3s ease-in, opacity 0.3s linear;
+      //-moz-transition: margin-top 0.3s ease-in, opacity 0.3s linear;
+      //-ms-transition: margin-top 0.3s ease-in, opacity 0.3s linear;
+      //transition: margin-top 0.3s ease-in, opacity 0.3s linear;
+      //
+      //&.open {
+      //  overflow: auto;
+      //  opacity: 1;
+      //  margin-top: 15%;
+      //}
 
       #mobile-friends-search {
         display: block;
