@@ -329,6 +329,27 @@
 
 							.prod-note {
 
+								.prod-links {
+
+									& > ul {
+										@include flexbox();
+										@include flex-flow(nowrap row);
+
+											li {
+												width: 45%;
+											}
+
+											li:first-of-type {
+												@include order(2);
+											}
+
+											li:last-of-type {
+												@include order(1);
+											}
+									}
+
+								}
+
 							  .prod-note-input {
 
 								textarea {
