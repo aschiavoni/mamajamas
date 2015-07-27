@@ -342,11 +342,11 @@
 											}
 
 											li:first-of-type {
-												@include order(2);
+												@include order(1);
 											}
 
 											li:last-of-type {
-												@include order(1);
+												@include order(2);
 											}
 									}
 
@@ -357,6 +357,7 @@
 								textarea {
 								  margin: 0;
 								  width: 95%;
+								  box-shadow: none;
 								}
 							  }
 							}
@@ -610,8 +611,8 @@
 							padding: 15px 12px;
 							font-size: 14px;
 						  	margin-bottom: 5px;
-						    background-color: transparent;
-						  	color: #bbb;
+						    /*background-color: transparent;
+						  	color: #bbb;*/
 						  	@include transition(background-color 0.3s linear);
 
 						  &:hover,
@@ -619,8 +620,13 @@
 							color: #ffffff;
 						  }
 
+						  &.bt-light.cancel-item {
+						  	background-color: transparent;
+						  	color: rgba(150,150,150,1);
+						  }
+
 						  &.bt-color {
-							color: rgb(107, 179, 110);
+							/*color: rgb(107, 179, 110);*/
 
 							&:hover,
 							&:focus {
