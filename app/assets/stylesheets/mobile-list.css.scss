@@ -931,9 +931,16 @@
 		}
 	}
 
+	.list {
+		#simplemodal-container.simplemodal-container  {	
+			position: fixed !important;
+			// this goes somewhere...but i can't remember where...and right now it's screwing up the scroll bars for most of the modals...
+		}
+	}
+
+
 	#simplemodal-container.simplemodal-container {
 		display: none;
-		position: fixed !important;
 		top: 0 !important;
 		background-color: rgba(255,255,255,1);
 		height: 100% !important;
@@ -1186,6 +1193,12 @@
 		  }
 		}
 
+	}
+
+	.quiz {
+		.bt-close {
+			display: none !important;
+		}
 	}
 
 	#simplemodal-container {

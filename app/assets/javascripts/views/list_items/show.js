@@ -96,6 +96,8 @@ Mamajamas.Views.ListItemShow = Mamajamas.Views.ListItem.extend({
       });
     }
 
+    $('body').addClass('list');
+
     return this;
   },
 
