@@ -38,7 +38,7 @@
 			-webkit-flex: 1 auto;
 			flex: 1 auto;
 		  	@include order(1);
-		  	margin-top: -15px;
+		  	//margin-top: -15px;
 
 			#title {
 				padding: 30px 0 0 0;
@@ -350,6 +350,7 @@
 											}
 									}
 
+
 								}
 
 							  .prod-note-input {
@@ -505,6 +506,14 @@
 							  margin-left: -5px;
 							  border-radius: 0 3px 3px 0;
 							  padding: 3.9px 12px;
+							  background-color: transparent;
+							  color:#6BB36E;
+
+							  &:hover,
+							  &:focus {
+								background-color: #6BB36E;
+								color: #ffffff;
+							  }
 							}
 						  }
 
@@ -556,12 +565,37 @@
 
 						h3 {
 							font-size: 0.9rem;
-							text-decoration: underline;
+
+						  a {
+							text-decoration: none;
+						  }
+
+						  .bt-change {
+							display: block;
+							line-height: 2em;
+							width: 30%;
+							margin: 5px 0;
+							text-align: center;
+							padding: 3px 5px;
+							background-color: transparent;
+							border: 1px solid #6BB36E;
+							color: #6BB36E;
+							text-decoration: none;
+							border-radius: 3px;
+
+							&:hover,
+							&:focus {
+							  background-color: #6BB36E;
+							  color: #ffffff;
+							}
+
+							> span {
+							  text-decoration: none;
+							}
+						  }
 						}
 
-						.bt-change {
-							display: none;
-						}
+
 
 						.bt-addanother {
 						  	display: none;
@@ -611,8 +645,8 @@
 							padding: 15px 12px;
 							font-size: 14px;
 						  	margin-bottom: 5px;
-						    /*background-color: transparent;
-						  	color: #bbb;*/
+						    background-color: transparent;
+						  	color: #bbb;
 						  	@include transition(background-color 0.3s linear);
 
 						  &:hover,
@@ -626,7 +660,7 @@
 						  }
 
 						  &.bt-color {
-							/*color: rgb(107, 179, 110);*/
+							color: rgb(107, 179, 110);
 
 							&:hover,
 							&:focus {
@@ -932,7 +966,7 @@
 	}
 
 	.list {
-		#simplemodal-container.simplemodal-container  {	
+		#simplemodal-container.simplemodal-container  {
 			position: fixed !important;
 			// this goes somewhere...but i can't remember where...and right now it's screwing up the scroll bars for most of the modals...
 		}
@@ -1540,6 +1574,13 @@
 		}
 
 	  	#email-modal {
+		  width: 100%;
+		  display: block;
+		  position: fixed;
+		  top: 0px;
+		  height: 100%;
+		  padding: 0 10px;
+
 		  h2 {
 			display: block;
 		  }

@@ -269,8 +269,6 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 		} else {
 			$list.show();
 		}
-
-		//return false;
 	},
 
 	showRecommendations: function(event) {

@@ -44,10 +44,13 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     } else if (Mamajamas.Context.User.get('show_bookmarklet_prompt') == true) {
       if (Mamajamas.Context.User.get('guest'))
         return;
-      // show the bookmarklet prompt
-      var bookmarkletPrompt = new Mamajamas.Views.ListBookmarkletPrompt();
-      $('body').append(bookmarkletPrompt.render().$el);
-      bookmarkletPrompt.show();
+
+      // show the bookmarklet prompt if desktop
+      if($(window).width() > 480) {
+        var bookmarkletPrompt = new Mamajamas.Views.ListBookmarkletPrompt();
+        $('body').append(bookmarkletPrompt.render().$el);
+        bookmarkletPrompt.show();
+      }
     }
 
     this.filter = $.cookies.get('edit_registry_filter');
@@ -86,21 +89,20 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     this.initDraggables();
     this.titleHeight = $("#title").outerHeight(true);
 
-    if (this.showHelpModals) {
-      var helpModals = new Mamajamas.Views.ListHelpModals();
-      $('body').append(helpModals.render().$el);
-      helpModals.show();
-    }
+    // don't show these on mobile
+    if($(document).width() > 480) {
+      if (this.showHelpModals) {
+        var helpModals = new Mamajamas.Views.ListHelpModals();
+        $('body').append(helpModals.render().$el);
+        helpModals.show();
+      }
 
-    if (this.showClearRecommendedTooltip) {
-      // show clear recommended items tooltip for one minute
-      var $clearRec = $('#prod-rec.menu-icon .tooltip span');
-      $clearRec.css('display', 'block').css('cursor: pointer');
+      if (this.showClearRecommendedTooltip) {
+        // show clear recommended items tooltip for one minute
+        var $clearRec = $('#prod-rec.menu-icon .tooltip span');
+        $clearRec.css('display', 'block').css('cursor: pointer');
+      }
     }
-
-    //if($(document).width() < 480) {
-    //  this.closeAllCollapsibles();
-    //}
 
     return this;
   },

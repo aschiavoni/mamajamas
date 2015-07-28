@@ -65,7 +65,7 @@
     </ul>
     <div id="friendssearch" style="height: 26px;">
       <%= form_tag new_friend_path, id: "frm-friendssearch" do -%>
-        <%= text_field_tag :query, params[:query], placeholder: "Search by first or last name" %>
+        <%= text_field_tag :query, params[:query], placeholder: "Search by name" %>
         <%= submit_tag "Search" %>
       <% end %>
 

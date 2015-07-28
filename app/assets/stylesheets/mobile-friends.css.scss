@@ -45,7 +45,7 @@ $mamajamas-green: #5daf5d;
           margin-top: -0.2rem;
         }
 
-        a.button, 
+        a.button,
         button {
           width: 100%;
           padding: 0.6rem;
@@ -143,6 +143,21 @@ $mamajamas-green: #5daf5d;
                 padding: 8px 5px;
               }
             }
+
+            @media (max-width: 399px) {
+              form {
+                display: inline-block;
+                width: 62.5%;
+                margin-right: -30px;
+                margin-left: 0;
+
+                input[type="text"] {
+                  width: 83%;
+                  padding: 8px 5px;
+                }
+              }
+            }
+
 
             .friends-sort {
               display: inline-block;
