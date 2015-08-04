@@ -59,6 +59,12 @@ $mamajamas-green: #5daf5d;
         #findfriendsmenu {
           width: 100% !important;
 
+            .menu {
+              a {
+                padding-left: 46px;
+              }
+            }
+
           .mobile-find-page-navigation {
             .startRegistryButton {
               text-align: center;
@@ -205,6 +211,8 @@ $mamajamas-green: #5daf5d;
           margin: 5px 0;
         }
       }
+
+
 
       #mamajamasfriends-tab,
       #facebookfriends-tab,
