@@ -25,6 +25,35 @@
 <div id="findfriendsapp">
   <!-- sorting / key -->
   <div id="findfriendsmenu" class="clearfix">
+
+     <!-- /mobile-only sort dropdown -->
+      <div class="mobile-find-page-navigation hide-desktop">
+        <!-- drop-down menu -->
+        <% if current_user.present? && !current_user.guest?  -%>
+        <div class="choicedrop">
+         <a href="#">Discover <span class="ss-dropdown"></span></a>
+          <ul style="display:none; width:7.5em;">
+            <li>
+              <%= link_to "Following", following_friends_path %>
+            </li>
+            <li>
+              <%= link_to "Followers", followers_friends_path %>
+            </li>
+            <li class="current">
+              <%= link_to "Discover", new_friend_path %>
+            </li>
+          </ul>
+        </div>
+        <% else -%>
+            <% unless current_user.present? && current_user.guest? -%>
+              <div class="startRegistryButton">
+                <%= link_to "Start Your Registry", '/users/login' %>
+              </div>
+            <% end -%>
+          <% end -%>
+        <!-- /drop-down menu -->
+      </div>
+
     <div id="list-search" data-query="<%= @view.query %>"></div>
     <ul class="clearfix menu">
       <li class="current first"><a href="#" id="mamajamasfriends">Mamajamas</a></li>
@@ -36,9 +65,23 @@
     </ul>
     <div id="friendssearch" style="height: 26px;">
       <%= form_tag new_friend_path, id: "frm-friendssearch" do -%>
-        <%= text_field_tag :query, params[:query], placeholder: "Search by first or last name" %>
+        <%= text_field_tag :query, params[:query], placeholder: "Search by name" %>
         <%= submit_tag "Search" %>
       <% end %>
+
+      <!-- /mobile-only sort dropdown -->
+      <div class="friends-sort hide-desktop">
+        <!-- drop-down menu -->
+        <div class="choicedrop"> <a href="#"><%= @view.sort_name %> <span class="ss-dropdown"></span></a>
+          <ul style="display:none; width:7.5em;">
+            <li><a href="#" data-sort="popular">Popularity</a></li>
+            <li><a href="#" data-sort="name">Name</a></li>
+            <li><a href="#" data-sort="recent">Last updated</a></li>
+            <li><a href="#" data-sort="expert">Expert Lists</a></li>
+          </ul>
+        </div>
+        <!-- /drop-down menu -->
+      </div>
     </div>
     <div id="findfriendsfilter" class="clearfix">
       <div class="friends-sort">Sort by:
@@ -56,6 +99,7 @@
       <div class="friends-key"> <span class="ss-icon ss-target expert"></span> = Expert List </div>
     </div>
   </div>
+
   <div id="findfriends">
     <!-- Mamajamas friends tab -->
     <div id="mamajamasfriends-tab" style="display: block;">

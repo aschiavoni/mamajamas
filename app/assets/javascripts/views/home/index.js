@@ -8,11 +8,11 @@ Mamajamas.Views.HomeIndex = Backbone.View.extend({
       _view.scrollToElement("#secondary");
     });
 
-    $("#create-registry, #create-registry-cta").click(function(e) {
-      e.preventDefault();
-      Mamajamas.Context.AppAuth.signup();
-      return false;
-    });
+    //$("#create-registry, #create-registry-cta").click(function(e) {
+    //  e.preventDefault();
+    //  Mamajamas.Context.AppAuth.signup();
+    //  return false;
+    //});
   },
 
   scrollToElement: function(selector, time, verticalOffset) {

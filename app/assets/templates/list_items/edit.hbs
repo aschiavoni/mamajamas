@@ -27,7 +27,7 @@
           <label for="list_item_name_{{idSuffix}}" style="display: none; opacity: 0;">Product name / brand</label>
           <br>
           <input type="text" class="field-prodname ui-autocomplete-input" value="{{name}}" autocomplete="off" size="30" name="list_item[name]" id="list_item_name_{{idSuffix}}">
-          <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span> <a class="button find-item" href="#"><span class="ss-search"></span>Choose</a> </p>
+          <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span> <a class="button find-item" href="#"><span class="ss-search"></span><span class="hide-mobile">Choose</span></a> </p>
         <p>
           <label for="list_item_link_{{idSuffix}}" style="display: none;">Link to buy</label>
           <input type="text" value="{{link}}" size="30" name="list_item[link]" class="list-item-link" id="list_item_link_{{idSuffix}}">
@@ -93,7 +93,7 @@
     <!-- end prod note *** -->
 
     <!-- photo upload -->
-    <div class="progress-container"> <a class="button bt-light bt-thumb-upload"><span class="ss-upload"></span>Photo</a> <img style="display: none;" src="{{assetPath 'progress-bar.gif'}}" class="progress bt-thumb-upload" alt="Progress-bar"> </div>
+    <div class="progress-container"> <a class="button bt-light bt-thumb-upload"><span class="ss-upload"></span><span class="hide-mobile">Photo</span></a> <img style="display: none;" src="{{assetPath 'progress-bar.gif'}}" class="progress bt-thumb-upload" alt="Progress-bar"> </div>
     <!-- end photo upload -->
 
     <div class="list-item-image-file" style="display: none;">

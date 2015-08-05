@@ -44,10 +44,13 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     } else if (Mamajamas.Context.User.get('show_bookmarklet_prompt') == true) {
       if (Mamajamas.Context.User.get('guest'))
         return;
-      // show the bookmarklet prompt
-      var bookmarkletPrompt = new Mamajamas.Views.ListBookmarkletPrompt();
-      $('body').append(bookmarkletPrompt.render().$el);
-      bookmarkletPrompt.show();
+
+      // show the bookmarklet prompt if desktop
+      if($(window).width() > 480) {
+        var bookmarkletPrompt = new Mamajamas.Views.ListBookmarkletPrompt();
+        $('body').append(bookmarkletPrompt.render().$el);
+        bookmarkletPrompt.show();
+      }
     }
 
     this.filter = $.cookies.get('edit_registry_filter');
@@ -86,16 +89,19 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     this.initDraggables();
     this.titleHeight = $("#title").outerHeight(true);
 
-    if (this.showHelpModals) {
-      var helpModals = new Mamajamas.Views.ListHelpModals();
-      $('body').append(helpModals.render().$el);
-      helpModals.show();
-    }
+    // don't show these on mobile
+    if($(document).width() > 480) {
+      if (this.showHelpModals) {
+        var helpModals = new Mamajamas.Views.ListHelpModals();
+        $('body').append(helpModals.render().$el);
+        helpModals.show();
+      }
 
-    if (this.showClearRecommendedTooltip) {
-      // show clear recommended items tooltip for one minute
-      var $clearRec = $('#prod-rec.menu-icon .tooltip span');
-      $clearRec.css('display', 'block').css('cursor: pointer');
+      if (this.showClearRecommendedTooltip) {
+        // show clear recommended items tooltip for one minute
+        var $clearRec = $('#prod-rec.menu-icon .tooltip span');
+        $clearRec.css('display', 'block').css('cursor: pointer');
+      }
     }
 
     return this;
@@ -105,7 +111,13 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
     var _view = this;
     $("div.collapsible-content", this.el).sortable({
       axis: "y",
-      // handle: ".drag",
+      // NOTE: Add to allow dragging in mobile and scrolling
+      handle: (function() {
+        if($(document).width() <= 480) {
+          return $('div.collapsible-content').find('.drag.tooltip');
+        }
+        return null;
+      })(),
       connectWith: "div.collapsible-content",
       dropOnEmpty: true,
       opacity: 1.0,
@@ -181,6 +193,10 @@ Mamajamas.Views.ListItemsIndex = Mamajamas.Views.Base.extend({
         $el.collapsible("close");
     });
     this.collapsiblesToReset = [];
+  },
+
+  closeAllCollapsibles: function() {
+    $('.priority.collapsible').collapsible('close');
   },
 
   insertItem: function(item, collection, options) {

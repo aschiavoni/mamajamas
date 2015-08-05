@@ -1,0 +1,66 @@
+@import "modules/_mixins-vendor-prefixes";
+
+
+@media (max-width: 480px) {
+	#user-signup {
+	  	margin-top: 25px;
+
+		h3,
+		.privacy,
+		{
+			display: none;
+		}
+
+		form#new_user {
+
+			.center.instruction {
+				display:none;
+
+				br {
+					display: none;
+				}
+			}
+
+		  	.tip {
+			  background: transparent;
+			  box-shadow: none;
+			}
+
+		  	.divider {
+			  margin-top: 0;
+			}
+
+			.button-row {
+				border: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.button {
+				width: 100%;
+				padding: 17px;
+				margin-top: 0.7rem;
+
+				&:first-child {
+					margin-top: 0;
+				}
+			}
+
+		}
+
+		.divider > strong {
+			display: none;
+		}
+
+		.helper {
+			display: none;
+		}
+
+		.progress-container {
+			#bt-cancel {
+				display: none;
+			}
+		}
+	}
+}
+

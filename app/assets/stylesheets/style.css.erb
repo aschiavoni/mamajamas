@@ -13,13 +13,15 @@ img, object, embed, video {
 .gridContainer {
   position: relative;
 }
+
 .gridContainer,
 .modal-scaling {
   width: 98%;
-  min-width: 768px;
+  min-width: 0; /* use to be 768px */
   max-width: 1280px;
   margin: auto;
 }
+
 #header {
   clear: both;
   float: left;
@@ -27,6 +29,7 @@ img, object, embed, video {
   display: block;
   position: relative;
 }
+
 #branding {
   clear: both;
   float: left;
@@ -34,6 +37,7 @@ img, object, embed, video {
   display: block;
   position: relative;
 }
+
 #mainnav {
   clear: none;
   float: left;
@@ -1224,6 +1228,9 @@ a#bt-fb-connect-s { /* fb login without button chrome */
 .col60 {
   width: 59.9%;
 }
+.col66 {
+  width: 66.65%;
+}
 /* follow ------ */
 #follow-moms h3 {
   font-size: 1.33em;
@@ -1740,7 +1747,7 @@ li.list-search-no-results {
 .simplemodal-data input[type=text],
 .simplemodal-data input[type=password],
 .simplemodal-data label {
-  font-size: 1.33em; /* equiv to 16px, based on 12px base for modal window */
+  font-size: 1.15em; /* equiv to 16px, based on 12px base for modal window */
   width: 57%;
   text-align: left;
 }
@@ -5742,6 +5749,9 @@ a#learn-more:hover .ss-icon {
 }
 .home #tertiary img {
   height: auto;
+}
+.home #tertiary .mobile-image {
+  display: none;
 }
 .home #bt-promo {
   padding: 0 25% 30px;

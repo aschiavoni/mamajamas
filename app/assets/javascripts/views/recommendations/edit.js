@@ -116,6 +116,7 @@ Mamajamas.Views.RecommendationsEditor = Backbone.View.extend({
 
   closeModal: function(event) {
     $.modal.close();
+    $('#registry.gridContainer').removeClass('hide-mobile');
     $('#recommendations-editor').remove();
     return false;
   },

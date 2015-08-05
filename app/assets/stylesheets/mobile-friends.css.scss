@@ -1,0 +1,303 @@
+// Place all the styles related to the Mobile List here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "modules/_mixins-vendor-prefixes";
+
+$mamajamas-green: #5daf5d;
+
+@media (max-width: 480px) {
+
+  #p-browse {
+
+    #primary {
+      width: 0;
+      float: none;
+      display: none;
+    }
+
+    #secondary {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      float: none;
+
+      > .content {
+        border-left: none;
+      }
+
+      .friend-info {
+        .friend-data {
+          margin-bottom: 0.8rem;
+
+          .friend-followers,
+          .friend-listeitems {
+            width: 47%;
+            display: block;
+          }
+          .friend-updated {
+            display: block;
+            width: 100%;
+          }
+        }
+
+        a.button {
+          margin-top: -0.2rem;
+        }
+
+        a.button,
+        button {
+          width: 100%;
+          padding: 0.6rem;
+        }
+      }
+
+      #findfriendsapp,
+      #friendslistapp {
+        width: 100%;
+
+        #findfriendsmenu {
+          width: 100% !important;
+
+            .menu {
+              a {
+                padding-left: 46px;
+              }
+            }
+
+          .mobile-find-page-navigation {
+            .startRegistryButton {
+              text-align: center;
+              border: 1px solid $mamajamas-green;
+              padding: 8px 0;
+
+              a {
+                &:hover,
+                &:focus {
+                  text-decoration: none;
+                }
+              }
+            }
+
+            .choicedrop,
+            .startRegistryButton {
+              width: 90%;
+              margin-bottom: 10px;
+              border-radius: 3px;
+              border-color: $mamajamas-green;
+              color: $mamajamas-green;
+
+              > a {
+                padding: 8px;
+                text-align: center;
+                color: $mamajamas-green;
+
+                .ss-dropdown {
+                  color: $mamajamas-green;
+                }
+              }
+
+              > ul {
+                width: 90% !important;
+
+                li {
+                  padding: 10px;
+                  text-indent: 0;
+                }
+              }
+            }
+          }
+
+          ul.menu {
+            max-width: 95%;
+            margin-right: 150px;
+            overflow-x: scroll;
+            overflow-y: hidden;
+
+            li {
+              min-width: 150px;
+            }
+
+            &:after {
+              content: '';
+              position: absolute;
+              right: 9%;
+              height: 42px;
+              margin-top: -2px;
+              width: 20px;
+              background-color: rgba(#ffffff, 0.5); /* fallback color if gradients are not supported */
+              background-image: -webkit-linear-gradient(right, rgba(#ffffff, 0.1), #ffffff); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+              background-image:    -moz-linear-gradient(right,rgba(#ffffff, 0.1), #ffffff); /* For Firefox (3.6 to 15) */
+              background-image:      -o-linear-gradient(right, rgba(#ffffff, 0.1), #ffffff); /* For old Opera (11.1 to 12.0) */
+              background-image:         linear-gradient(to right, rgba(#ffffff, 0.1), #ffffff); /* Standard syntax; must be last */
+            }
+
+          }
+
+          #friendssearch {
+            display: block;
+            padding-bottom: 10px;
+
+            form {
+              display: inline-block;
+              width: 68%;
+              margin-right: -30px;
+              margin-left: 0;
+
+              input[type="text"] {
+                width: 87%;
+                padding: 8px 5px;
+              }
+            }
+
+            @media (max-width: 399px) {
+              form {
+                display: inline-block;
+                width: 62.5%;
+                margin-right: -30px;
+                margin-left: 0;
+
+                input[type="text"] {
+                  width: 83%;
+                  padding: 8px 5px;
+                }
+              }
+            }
+
+
+            .friends-sort {
+              display: inline-block;
+              width: 33%;
+              min-width: 33%;
+              float: none;
+
+              .choicedrop {
+                width: 100px;
+                padding: 0 5px;
+                border-radius: 3px;
+
+                > a {
+                  padding: 8px 5px;
+
+                  .ss-dropdown {
+                    float: right;
+                    margin: 0;
+                    margin-top: 6px;
+
+                  }
+                }
+
+                ul {
+
+
+                  li {
+                    padding: 8px 5px;
+                    text-indent: 0;
+                  }
+                }
+              }
+            }
+          }
+
+          #findfriendsfilter {
+            display: none;
+            .friends-key {
+              display: none !important;
+            }
+          }
+        }
+
+        #friendslist {
+          margin: 5px 0;
+        }
+      }
+
+
+
+      #mamajamasfriends-tab,
+      #facebookfriends-tab,
+      #gmailfriends-tab {
+        #findfriends-prompt {
+          padding: 0;
+          background-position: center top;
+          text-align: center;
+          padding: 0 25px;
+
+          h3 {
+            padding-top: 80px;
+            font-size: 2em;
+            font-weight: 300;
+          }
+
+          p {
+            font-size: 1.2em;
+            font-weight: 300;
+          }
+
+          .button {
+            width: 100%;
+            padding: 12px;
+          }
+        }
+      }
+
+      #invitefriends-tab {
+        padding: 0;
+
+        form {
+          padding: 0 15px;
+
+          input,
+          textarea {
+            width: 100%;
+          }
+
+          label {
+            font-weight: 300;
+          }
+
+          dd.half {
+            width: 100%;
+          }
+
+
+          .button-row {
+            padding: 20px 0;
+
+            .button {
+              width: 100%;
+              padding: 12px;
+              font-size: 1em;
+            }
+          }
+        }
+      }
+    }
+
+    .modal-box {
+      width: 95%;
+      left: 10px;
+      margin: 0;
+
+      fieldset {
+        input {
+          width: 100%;
+        }
+
+        label {
+          font-weight: 300;
+        }
+      }
+
+
+      .button-row {
+        .button {
+          padding: 10px 12px;
+          width: 49%;
+          display: inline-block;
+        }
+      }
+    }
+
+  }
+}

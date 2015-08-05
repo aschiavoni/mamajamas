@@ -1,47 +1,48 @@
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :id => "login-form", :class => "label-infield" }) do |f| %>
-  <% if devise_mapping.rememberable? -%>
-    <%= f.hidden_field :remember_me, :value => true %>
-  <% end -%>
-  <h3>Log in with Facebook</h3>
-  <p class="center"><a class="button" id="bt-fb-connect"><span>Login with Facebook</span></a></p>
-  <p class="center instruction">We value your privacy, and we’ll<br> never post anything without your express permission.</p>
-  <p class="divider"><strong>or</strong></p>
-  <h3>Login with your email address or username</h3>
-  <p class="instruction<%= " error" unless resource.errors.empty? %>">
-    <% if resource.errors.empty? -%>
-      Please enter your Mamajamas username or email address and password below:
-    <% else -%>
-        <%= resource.errors.full_messages.to_sentence %>
-    <% end -%>
-  </p>
-  <dl class="clearfix">
-    <fieldset>
-      <dt>Login<strong class="required">*</strong></dt>
-      <dd>
-        <p>
-          <%= f.label :login, "Username or email" %>
-          <br />
-          <%= f.text_field :login %>
-        </p>
-      </dd>
-      <dt>Password<strong class="required">*</strong></dt>
-      <dd>
-        <p>
-          <%= f.label :login_password, "Password" %>
-          <br />
-          <%= f.password_field :password, :id => "user_login_password" %>
-        </p>
-      </dd>
-    </fieldset>
-  </dl>
-  <% if devise_mapping.recoverable? && controller_name != 'passwords' -%>
-    <p class="helper"><%= link_to "Forgot your username or password?", new_password_path(resource_name) %></p>
-  <% end -%>
-  <div class="button-row">
-    <div class="progress-container">
-      <button type="reset" class="button" id="bt-cancel">Cancel</button>
-      <button type="submit" class="button bt-color" id="bt-log-in">Log in</button>
-      <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
-    </div>
-  </div>
+	<% if devise_mapping.rememberable? -%>
+		<%= f.hidden_field :remember_me, :value => true %>
+	<% end -%>
+	<h3>Log in with Facebook</h3>
+	<p class="center"><a class="button" id="bt-fb-connect"><span>Login with Facebook</span></a></p>
+	<p class="center instruction">We value your privacy, and we’ll<br> never post anything without your express permission.</p>
+	<p class="divider"><strong>or</strong></p>
+	<h3>Login with your email address or username</h3>
+	<p class="instruction<%= " error" unless resource.errors.empty? %>">
+		<% if resource.errors.empty? -%>
+			Please enter your Mamajamas username or email address and password below:
+		<% else -%>
+				<%= resource.errors.full_messages.to_sentence %>
+		<% end -%>
+	</p>
+	<dl class="clearfix">
+		<fieldset>
+			<dt>Login<strong class="required">*</strong></dt>
+			<dd>
+				<p>
+					<%= f.label :login, "Username or email" %>
+					<br />
+					<%= f.text_field :login %>
+				</p>
+			</dd>
+			<dt>Password<strong class="required">*</strong></dt>
+			<dd>
+				<p>
+					<%= f.label :login_password, "Password" %>
+					<br />
+					<%= f.password_field :password, :id => "user_login_password" %>
+				</p>
+			</dd>
+		</fieldset>
+	</dl>
+	<% if devise_mapping.recoverable? && controller_name != 'passwords' -%>
+		<p class="helper"><%= link_to "Forgot your username or password?", new_password_path(resource_name) %></p>
+	<% end -%>
+	<div class="button-row">
+		<div class="progress-container">
+			<button type="reset" class="button" id="bt-cancel">Cancel</button>
+			<button type="submit" class="button bt-color" id="bt-log-in">Log in</button>
+			<%= link_to "Forgot Login?", new_password_path(resource_name), :class => "button hide-desktop" %>
+			<%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
+		</div>
+	</div>
 <% end %>

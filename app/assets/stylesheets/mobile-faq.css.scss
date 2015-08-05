@@ -1,0 +1,168 @@
+// Place all the styles related to the Mobile FAQ here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "modules/_mixins-vendor-prefixes";
+
+
+@media (max-width: 480px) {
+	.faq-page {
+		#primary {
+			display: none;
+		}
+		#secondary {
+			width: auto;
+			padding-right: 20px;
+		}
+		#subhed {
+			margin-left: 0;
+		}
+
+		.simplemodal-overlay {
+		  height: 0;
+		  width: 0;
+		  z-index: 0;
+		  display: none;
+		}
+
+		//completely reset the overlay so it is visible of over anything else
+		#simplemodal-overlay {
+		  height: 0 !important;
+		  width: 0 !important;
+		  z-index: 0 !important;
+		  display: none !important;
+		}
+
+		.simplemodal-container {
+		  position: fixed !important;
+		  z-index: 50 !important;
+		  height: 100% !important;
+		  width: 100% !important;
+		  left: 0px !important;
+		  right: 0px;
+		  top: 66px !important;
+		  box-shadow: none;
+		  background-color: #ffffff;
+		}
+
+		.simplemodal-close {
+		  display: none;
+		}
+
+		.simplemodal-data,
+		.simplemodal-data {
+		  width: 100% !important;
+		  display: block;
+		}
+	}
+	div.faq {
+		display: -webkit-flex;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-flex-direction: column;
+		flex-direction: column;
+
+		h3.header_01 {	-webkit-order: 0; order: 0;} // Group Header
+
+	  	// Question 1
+		ul.faq_01 {	-webkit-order: 1; order: 1;}
+		h4.faq_01 {	-webkit-order: 2; order: 2;}
+		p.faq_01  {	-webkit-order: 3; order: 3;}
+
+	  	// Question 2
+		ul.faq_02 {	-webkit-order: 4; order: 4;}
+		h4.faq_02 {	-webkit-order: 5; order: 5;}
+		p.faq_02.item_1 {	-webkit-order: 6; order: 6;}
+		p.faq_02.item_2 {	-webkit-order: 7; order: 7;}
+		p.faq_02.item_3 {	-webkit-order: 8; order: 8;}
+		p.faq_02.item_4 {	-webkit-order: 9; order: 9;}
+
+	  	// Question 3
+		ul.faq_03 {	-webkit-order: 10; order: 10;}
+		h4.faq_03 {	-webkit-order: 11; order: 11;}
+		p.faq_03 {	-webkit-order: 12; order: 12;}
+
+		h3.header_02 {	-webkit-order: 13; order: 13;} // Group Header
+
+	    // Question 4
+		ul.faq_04 {	-webkit-order: 14; order: 14;}
+		h4.faq_04 {	-webkit-order: 15; order: 15;}
+		p.faq_04.item_1 {	-webkit-order: 16; order: 16;}
+		p.faq_04.item_2 {	-webkit-order: 17; order: 17;}
+
+	    // Question 5
+		ul.faq_05 {	-webkit-order: 18; order: 18;}
+		h4.faq_05 {	-webkit-order: 19; order: 19;}
+		p.faq_05 {	-webkit-order: 20; order: 20;}
+
+	  	// Question 6
+		ul.faq_06 {	-webkit-order: 21; order: 21;}
+		h4.faq_06 {	-webkit-order: 22; order: 22;}
+		p.faq_06 {	-webkit-order: 23; order: 23;}
+
+		h3.header_03 {	-webkit-order: 24; order: 24;} // Group Header
+
+	  	// Question 7
+		ul.faq_07 {	-webkit-order: 25; order: 25;}
+		h4.faq_07 {	-webkit-order: 26; order: 26;}
+		p.faq_07 {	-webkit-order: 27; order: 27;}
+
+	  	// Question 8
+		ul.faq_08 {	-webkit-order: 28; order: 28;}
+		h4.faq_08 {	-webkit-order: 29; order: 29;}
+		p.faq_08 {	-webkit-order: 30; order: 30;}
+
+		h3.header_04 {	-webkit-order: 31; order: 31;} // Group Header
+
+	  	// Question 9
+		ul.faq_09 {	-webkit-order: 32; order: 32;}
+		h4.faq_09 {	-webkit-order: 33; order: 33;}
+		p.faq_09 {	-webkit-order: 34; order: 34;}
+
+	  	// Question 10
+	  	ul.faq_10 {	-webkit-order: 35; order: 35;}
+		h4.faq_10 {	-webkit-order: 36; order: 36;}
+		p.faq_10.item_1 {	-webkit-order: 37; order: 37;}
+		p.faq_10.item_2 {	-webkit-order: 38; order: 38;}
+
+		h3.header_05 {	-webkit-order: 39; order: 39;} // Group Header
+
+	  	// Question 11
+		ul.faq_11 {	-webkit-order: 40; order: 40;}
+		h4.faq_11 {	-webkit-order: 41; order: 41;}
+		p.faq_11 {	-webkit-order: 42; order: 42;}
+
+	  	// Question 12
+	  	ul.faq_12 {	-webkit-order: 43; order: 43;}
+		h4.faq_12 {	-webkit-order: 44; order: 44;}
+		p.faq_12 {	-webkit-order: 45; order: 45;}
+
+		h4 {
+			display: none;
+		}
+		ul.faq {
+			margin-bottom: .5em;
+			border-bottom: 1px solid #ddd;
+
+			li a {
+				padding: 0;
+				margin: .5em 0;
+				background-color: transparent;
+				font-weight: bold;
+
+				&:hover {
+					color: #000;
+					background-color: transparent;
+				}
+				span {
+					float: right;
+					padding-left: .5em;
+				}
+				&:hover span {
+					color: #a6a6a6;
+				}
+			}
+		}
+	}
+}

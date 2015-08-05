@@ -5,11 +5,14 @@
     <div id="title-links">
       <ul class="iconrow">
         <li id="details-link">
-          <a href="#" class="icon-link"><span class="ss-icon ss-info"></span>My Details</a>
+          <a href="#" class="icon-link"><span class="ss-icon ss-info"></span><span class="hide-mobile">My</span> Details</a>
+        </li>
+        <li id="find-friends-link">
+          <a href="/friends/find" title="Find Friends"><span class="ss-icon ss-user"></span> Find</a>
         </li>
         <li id="social-links" class="nav-drop-trigger">
           <a href="#" class="nav-drop-link">
-            <span class="ss-icon ss-redirect"></span>Share Registry
+            <span class="ss-icon ss-redirect"></span>Share <span class="hide-mobile">Registry</span>
           </a>
           <ul class="nav-drop">
             <li>
@@ -71,6 +74,8 @@
     </ul>
     <div class="arrow"><span></span></div>
   </div>
+
+
   <div id="primary">
     <div class="content">
       <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
@@ -90,10 +95,31 @@
       <% end -%>
     </div>
   </div>
+
+
   <div id="secondary">
     <div class="content">
       <!-- notification ***** -->
       <div id="notifications"><%= notifications %></div>
+
+      <div class="mobile-category-btn hide-desktop">
+        <div class="choicedrop category-filter">
+          <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
+              <a href="#" class="button bt-color">Choose a category <span class="ss-dropdown"></span></a>
+              <ul style="display:none; width:7.5em;">
+                <li class="<%= "cat-selected" if @view.all_category? %>">
+                  <%= link_to "All", list_category_path('all') %>
+                </li>
+                <% @view.categories.each do |category| -%>
+                  <li class="<%= "cat-selected" if !@view.category.blank? && category.id == @view.category.id %>">
+                    <%= link_to category.name, list_category_path(category.slug) %>
+                  </li>
+                <% end -%>
+              </ul>
+          <% end -%>
+        </div>
+      </div>
+
       <% cache [ @view.list, @view.category_slug, @view.owner, 'list' ] do -%>
         <form class="label-infield" id="my-list" data-list-entries="<%= @list_entries_json %>" data-list-entries-loaded-at="<%= Time.now.utc %>">
         </form>
@@ -120,15 +146,20 @@
          Mamajamas.Context.Categories = <%= @view.categories.to_json.html_safe %>;
         </script>
       <% end -%>
+
     </div>
   </div>
 </div>
+
+
 <div id="tertiary" class="light">
   <div class="content">
     <div id="module-profile">
       <div class="content">
-        <p id="sharedby"><span></span>Profile</p>
-        <h3><%= @view.owner.display_name %></h3>
+
+        <p id="sharedby" class="hide-mobile"><span></span>Profile</p>
+        <h3 class="hide-mobile-block"><%= @view.owner.display_name %></h3>
+
         <div id="profile-photo">
           <%= image_tag @view.owner.profile_picture.public_list, alt: "#{@view.owner.username} profile photo" %>
           <div class="progress-container">
@@ -138,6 +169,16 @@
             <%= image_tag "progress-bar.gif", alt: "Progress bar", class: "progress", style: "display: none;" %>
           </div>
         </div>
+
+        <div class="mobile-followed-friends-section">
+          <h3><%= @view.owner.display_name %></h3>
+          <% if @view.owner.followed_users_with_shared_lists.none? -%>
+            <%= link_to new_friend_path, class: "button bt-color" do -%>
+              Find &amp; Follow Friends
+            <% end -%>
+          <% end -%>
+        </div>
+
         <div class="module-notes">
           <% if @view.owner.notes.present? -%>
             <div class="expandable editable">
@@ -162,6 +203,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
     <div id="module-link">
@@ -178,9 +220,9 @@
     </div>
     <div id="module-friends">
       <div class="content">
-        <h3>Following</h3>
+        <h3 class="hide-mobile">Following</h3>
         <% if @view.owner.followed_users_with_shared_lists.none? -%>
-          <%= link_to new_friend_path, class: "button bt-color", id: "bt-follow" do -%>
+          <%= link_to new_friend_path, class: "button bt-color hide-mobile", id: "bt-follow" do -%>
             <span class="ss-icon ss-users"></span>Find &amp; Follow Friends
           <% end -%>
         <% end -%>
@@ -290,5 +332,5 @@
     <% end -%>
   </div>
 </div>
-<!-- end share by email win --> 
+<!-- end share by email win -->
 <%= adwords_event "LdrCCN7BzAcQmoDU4wM", "0" %>

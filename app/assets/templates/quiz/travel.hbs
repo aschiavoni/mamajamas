@@ -1,7 +1,7 @@
 <!-- modal window content -->
 <div class="content">
   <!-- question q06 ***** -->
-  When it comes to traveling, I am a:
+  <span class="quiz-title">When it comes to traveling, I am a:</span>
   <!-- begin slider questions-->
   <ol class="q-slider">
     <li>
@@ -20,25 +20,36 @@
     </li>
   </ol>
   <div id="q-sliderscale">
-    <div id="q-sliderarrow" class="active"></div>
+    <div id="q-sliderarrow" draggable="true" class="active"></div>
   </div>
   <!-- / end slider questions-->
   <!-- / question q06 ***** -->
 </div>
 <!-- end modal window content -->
+
 <div class="button-row clearfix">
+  <div class="mobile-button-row">
+    <div class="col50 float-l left">
+      <a href="#" class="button" id="bt-prev"><span class="ss-navigateleft"></span><span class="hide-mobile">Previous</span></a>
+    </div>
+    <div class="mobile-question-number">
+        Question 5
+    </div>
+    <div class="col50 float-r right">
+      <a href="#" class="button bt-color" id="bt-next"><span class="hide-mobile">Next</span><span class="ss-navigateright"></span></a>
+    </div>
+  </div>
+
   <!-- instructions -->
-  <p>Slide between left and right, or <a href="#" class="skip">Skip</a></p>
-  <!-- previous and next buttons -->
-  <div class="col50 float-l left">
-    <a href="#" class="button" id="bt-prev"><span class="ss-navigateleft"></span>Previous</a>
-  </div>
-  <div class="col50 float-r right">
-    <a href="#" class="button bt-color" id="bt-next">Next<span class="ss-navigateright"></span></a>
-  </div>
+  <p>Skip this quiz <span class="hide-mobile">and</span> <a href="#" class="skip"><span class="hide-mobile">go to my list</span></a></p>
 </div>
+
+
 <!-- quiz progress bar -->
-<div id="q-progress" title="Step 6 of 9">
-  <div class="bar"></div>
+<div class="mobile-q-progress">
+  <div id="q-progress" title="Step 2 of 9">
+    <div class="bar"></div>
+  </div>
 </div>
 <!-- end quiz progress bar -->
+

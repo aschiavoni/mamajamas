@@ -59,6 +59,7 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
     "submit #frm-create-email-invite": "emailInvite",
     "click .friends-sort .choicedrop a": "toggleSortList",
     "click .friends-sort .choicedrop ul li a": "sort",
+    "click .mobile-find-page-navigation .choicedrop > a": "toggleSortList",
 
     "submit #frm-friendssearch": "filterFriends",
   },
@@ -77,37 +78,45 @@ window.Mamajamas.Views.FindFriends = Mamajamas.Views.FriendsView.extend({
   showMamajamas: function(event) {
     if (event)
       event.preventDefault();
-    this.showTab('#mamajamasfriends')
+    this.showTab('#mamajamasfriends');
     return false;
   },
 
   showFacebook: function(event) {
     if (event)
       event.preventDefault();
-    this.showTab('#facebookfriends')
+    this.showTab('#facebookfriends');
     return false;
   },
 
   showGmail: function(event) {
     if (event)
       event.preventDefault();
-    this.showTab('#gmailfriends')
+    this.showTab('#gmailfriends');
     return false;
   },
 
   showEmailInvite: function(event) {
     if (event)
       event.preventDefault();
-    this.showTab('#invitefriend')
+    this.showTab('#invitefriend');
     return false;
   },
 
   hideSearch: function() {
-    $('#friendssearch input').hide();
+    //Changed
+    // from #friendssearch input
+    // to #friendssearch
+    // inorder to hide/show the sort dropdown on mobile
+    $('#friendssearch').hide();
   },
 
   showSearch: function() {
-    $('#friendssearch input').show();
+    //Changed
+    // from #friendssearch input
+    // to #friendssearch
+    // inorder to hide/show the sort dropdown on mobile
+    $('#friendssearch').show();
   },
 
   waitForFriends: function(_view, provider) {

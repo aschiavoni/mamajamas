@@ -11,7 +11,7 @@
 <link href='http://fonts.googleapis.com/css?family=Reenie+Beanie' rel='stylesheet' type='text/css'>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 <%= display_meta_tags %>
 <!-- favicon -->
 <link rel="icon" type="image/x-icon" href="<%= asset_path("favicon.ico") %>" />
@@ -32,16 +32,77 @@
 <%= facebook_ad_conversion %>
 </head>
 <body id="<%= body_id if body_id.present? %>" class="<%= body_class if body_class.present? %>">
+
+<!-- START of MOBILE MENU -->
+<div id="mobile-menu">
+    <div class="mobile-menu-content">
+      <button class="close-btn">&times;</button>
+
+      <h2>Menu</h2>
+      <div id="mobile-friends-search">
+        <%= form_tag new_friend_path, class: "mobile-search-form", method: :post do %>
+          <input type="text" name="query" placeholder="Find" class="mobile-menu-search-input" />
+          <label class="floating-label"><i class="fa fa-search"></i></label>
+          <input type="submit" value="Search" class="submit-btn" />
+        <% end %>
+      </div>
+      <ul>
+        <li class="<%= "active" if params[:controller] == "lists" %>">
+          <%= link_to (user_signed_in? ? list_path : root_path) do %>
+            Home
+          <% end -%>
+        </li>
+        <% if user_signed_in? && !current_user.guest? -%>
+          <li>
+            <%= link_to "Account", settings_path %>
+          </li>
+          <li>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "logout" %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, id: "server-logout", style: "display: none;" %>
+          </li>
+        <% else -%>
+          <li>
+            <%= link_to "Login", new_user_session_path  %>
+          </li>
+          <li>
+            <%= link_to "Start Registry", new_user_registration_path  %>
+          </li>
+          <%= yield :logged_out_header_buttons -%>
+        <% end -%>
+      </ul>
+
+      <h2>Get In Touch</h2>
+      <ul>
+        <li><%= link_to "Questions", faq_path %></li>
+        <li><a href="mailto:angie@mamajamas.com">Contact</a></li>
+        <li><%= link_to "Blog", "http://blog.mamajamas.com/", target: "_blank" %></li>
+      </ul>
+    </div>
+</div>
+<!-- END OF MOBILE MENU -->
+
+
 <!-- header area ***** -->
 <%= content_for?(:header_overlay) ? yield(:header_overlay) : "" %>
 <div id="hed-wrap">
   <div class="gridContainer clearfix">
     <div id="header">
+
       <div id="branding">
         <%= link_to (user_signed_in? ? list_path : root_path) do %>
           <h1>Mamajamas</h1>
         <% end -%>
       </div>
+
+      <!-- Mobile Menu Button -->
+      <div id="mobile-menu-btn-container">
+        <button id="toggle-mobile-menu">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
+      </div>
+
       <%= content_for?(:search) ? yield(:search) : "" %>
       <nav id="mainnav">
         <% if show_mainnav && user_signed_in? -%>
@@ -55,6 +116,7 @@
           </ul>
         <% end -%>
       </nav>
+
       <div id="login">
         <ul>
           <% if user_signed_in? -%>

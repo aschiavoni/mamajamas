@@ -34,23 +34,34 @@
       <!-- / question q09-01 ***** -->
     </form>
   </div>
-  <!-- end modal window content -->
-  <div class="button-row clearfix">
-    <!-- instructions -->
-		<p><a class="skip" href="#">Skip this</a> and build my registry.</p>
-    <!-- previous and next buttons -->
+<!-- end modal window content -->
+
+<div class="button-row clearfix">
+  <div class="mobile-button-row">
     <div class="col50 float-l left">
-      <a href="#" class="button" id="bt-prev"><span class="ss-navigateleft"></span>Previous</a>
+      <a href="#" class="button" id="bt-prev"><span class="ss-navigateleft"></span><span class="hide-mobile">Previous</span></a>
+    </div>
+    <div class="mobile-question-number">
+        Question 7
     </div>
     <div class="col50 float-r right">
-      <a href="#" class="button bt-color" id="bt-next">Next<span class="ss-navigateright"></span></a>
+      <a href="#" class="button bt-color" id="bt-next"><span class="hide-mobile">Next</span><span class="ss-navigateright"></span></a>
     </div>
   </div>
-  <!-- quiz progress bar -->
-  <div title="Step 8 of 8" id="q-progress">
+
+  <!-- instructions -->
+  <p>Skip this quiz <span class="hide-mobile">and</span> <a href="#" class="skip"><span class="hide-mobile">go to my list</span></a></p>
+</div>
+
+
+<!-- quiz progress bar -->
+<div class="mobile-q-progress">
+  <div id="q-progress" title="Step 2 of 9">
     <div class="bar"></div>
   </div>
-  <!-- end quiz progress bar -->
+</div>
+<!-- end quiz progress bar -->
+
 </div>
 
 <div id="gallery-modal-a" class="quiz-modal" style="display: none;">
@@ -58,8 +69,8 @@
   <div class="quiz-box-s gallery">
     <!-- modal window content -->
     <div class="content">
-      <h2><span class="ss-icon ss-view"></span> Recommended Products list option</h2>
-      <p>You’ll get an editable list pre-filled with baby gear products that Mamajamas recommends. <a data-toggle-preview-target="#gallery-modal-b" class="toggle-preview gallery-b" href="#">See the other option</a></p>
+      <h2><span class="ss-icon ss-view"></span> Recommended Products Option</h2>
+      <p>You’ll get an editable registry pre-filled with baby gear that Mamajamas thinks you'll love. <a data-toggle-preview-target="#gallery-modal-b" class="toggle-preview gallery-b" href="#">See the other option</a></p>
       <p><a class="quiz-return" href="#">Return to quiz question</a></p>
       <div class="gallery-img">
         <img src="{{assetPath 'preview_recommendations.png'}}" title="Baby gear list pre-filled with products recommended by Mamajamas" alt=""/>
@@ -75,8 +86,8 @@
   <div class="quiz-box-s gallery">
     <!-- modal window content -->
     <div class="content">
-      <h2><span class="ss-icon ss-view"></span>“Blank slate” list option</h2>
-      <p>You’ll get a “blank” list of baby gear categories that you can fill in with specific products. <a data-toggle-preview-target="#gallery-modal-a" class="toggle-preview gallery-a" href="#">See the other option</a></p>
+      <h2><span class="ss-icon ss-view"></span>“Blank slate” Option</h2>
+      <p>You’ll get a “blank” registry of baby gear categories that you can fill in with specific products. <a data-toggle-preview-target="#gallery-modal-a" class="toggle-preview gallery-a" href="#">See the other option</a></p>
       <p><a class="quiz-return" href="#">Return to quiz question</a></p>
       <div class="gallery-img">
         <img src="{{assetPath 'preview_no-recs.png'}}" title="Baby gear list of item categories, to be filled with specific product listings" alt=""/>

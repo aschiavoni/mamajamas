@@ -1,0 +1,241 @@
+// Place all the styles related to the Mobile Menu here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "modules/_mixins-vendor-prefixes";
+
+#mobile-menu-btn-container,
+#mobile-friends-search,
+#mobile-menu {
+  display: none;
+}
+
+@media (max-width: 480px) {
+
+  #notifications {
+    top: 58px;
+
+    .notification {
+      padding: 10px 0;
+    }
+  }
+
+  // ~header section
+  #header {
+  }
+
+  #branding {
+    width: 50%;
+
+    h1 {
+      width: auto;
+    }
+  }
+
+  #friendssearch {
+    display: none;
+  }
+
+  #login {
+    display: none;
+  }
+
+  #mobile-menu-btn-container {
+    display: block;
+    text-align: right;
+    border-bottom: 1px solid #d9d9d9;
+    height: 64px;
+
+    #toggle-mobile-menu {
+      margin-top: 15px;
+      margin-right: 10px;
+      padding: 6px;
+      background-color: transparent;
+
+      .menu-bar {
+        height: 3px;
+        width: 25px;
+        background-color: #333333;
+        margin-top: 3px;
+        display: block;
+      }
+
+      .menu-bar:last-child {
+        margin-bottom: 2px;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: #666666;
+
+        .menu-bar {
+          background-color: #ffffff;
+        }
+      }
+    }
+
+  }
+
+  #mobile-menu {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
+
+    &:before {
+      content: '';
+      display: block;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 599;
+      color: #ffffff;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .mobile-menu-content {
+      position: relative;
+      margin-top: 15%;
+      z-index: 600;
+      text-align: center;
+
+
+      #mobile-friends-search {
+        display: block;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+
+        &:after {
+          content: '';
+          display: table;
+          clear: both;
+        }
+
+        .floating-label {
+          display: block;
+          color: transparent;
+          text-align: left;
+          position: absolute;
+          margin-top: -25px;
+          margin-left: 0;
+          transition: color .3s linear;
+        }
+
+        .mobile-menu-search-input {
+          border: none;
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          border-radius: 0;
+          border-bottom: 1px solid transparent;
+          color: #666666;
+          background-color: transparent;
+          font-size: 2em;
+          max-width: 200px;
+          padding: 0.25em 0 .25em 72px;
+          font-weight: 100;
+          transition: color .4s linear, border-color .4s linear, padding .3s ease-out;
+
+          &::-webkit-input-placeholder {
+            color: #666666;
+            font-weight: 100;
+            transition: color .4s linear;
+          }
+
+          &:focus {
+            color: #ffffff;
+            border-color: #ffffff;
+            padding: .25em 0 .25em 25px;
+          }
+
+          &:focus + .floating-label {
+            color: #ffffff;
+          }
+
+          &:focus::-webkit-input-placeholder {
+            color: #FFFFFF;
+          }
+        }
+
+        .submit-btn {
+          display: none;
+        }
+      }
+
+      .close-btn {
+        position: fixed;
+        color: #ffffff;
+        top: 0;
+        right: 10px;
+        font-size: 2em;
+        z-index: 600;
+        font-weight: 100;
+        background-color: transparent;
+        border: none;
+
+        &:hover,
+        &:focus {
+          background-color: transparent !important;
+        }
+      }
+
+      h2 {
+        font-size: 1em;
+        color: #ffffff;
+        text-transform: uppercase;
+      }
+
+      ul {
+        position: relative;
+        font-size: 2em;
+        margin-left: -40px;
+        margin-top: 0;
+        width: 100%;
+        list-style-type: none;
+        padding-bottom: 25px;
+      }
+
+      li,
+      #startlist {
+        text-align: center;
+        padding: 10px;
+
+        &.active > a {
+          color: #ffffff;
+        }
+
+        > a {
+          color: #666666;
+          padding: 10px;
+          transition: color 0.3s linear;
+          font-weight: 100;
+
+          &:hover,
+          &:focus {
+            color: #ffffff;
+            text-decoration: none;
+          }
+
+          &.button.bt-color {
+            font-size: 1em;
+            border: none !important;
+            background: transparent !important;
+
+            &:hover,
+            &:focus {
+              color: #ffffff;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+
+      #startlist {
+        display: none;
+      }
+    }
+  }
+}

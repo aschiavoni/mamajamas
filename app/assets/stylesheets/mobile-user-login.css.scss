@@ -1,0 +1,72 @@
+@import "modules/_mixins-vendor-prefixes";
+
+
+@media (max-width: 480px) {
+	#user-login {
+
+	  	&:before {
+		  content: 'Welcome back';
+		  display: block;
+		  font-size: 2.5em;
+		  font-weight: 300;
+		  text-align: center;
+		  padding: 15px;
+		}
+
+		h3,
+		.instruction {
+			display: none;
+		}
+
+		form#login-form {
+
+			.center.instruction {
+				display:block;
+				position: absolute;
+				bottom: 5.2rem;
+				text-align: left;
+				font-size: 0.8rem !important;
+
+				br {
+					display: none;
+				}
+			}
+
+			.button-row {
+				border: none;
+				padding: 0;
+				margin: -15px 0 0 0;
+			}
+
+			.button {
+				width: 100%;
+				padding: 15px;
+				margin-top: 0.7rem;
+			  	font-size: 1.2em;
+			  	font-weight: 300;
+
+				&:first-child {
+					margin-top: 0;
+				}
+			}
+
+		}
+
+		.divider > strong {
+			display: none;
+		}
+
+		.helper {
+			display: none;
+		}
+
+
+
+		.progress-container {
+			#bt-cancel {
+				display: none;
+			}
+		}
+	}
+}
+

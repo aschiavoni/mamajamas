@@ -37,8 +37,34 @@ window.Mamajamas = {
       new Mamajamas.Views.HomeIndex();
     }
 
+    //Add event for mobile menu
+    if($('#toggle-mobile-menu').length > 0) {
+      var $mobileMenu = $('#mobile-menu');
+      $('#toggle-mobile-menu').on('click', function() {
+        if($mobileMenu.length > 0) {
+          $mobileMenu.toggle();
+          $mobileMenu.find('.mobile-menu-search-input').val('');
+
+          if($mobileMenu.is(':visible')) {
+            $mobileMenu.find('.close-btn').on('click', function() {
+              $mobileMenu.hide();
+              $(this).off('click');
+              $mobileMenu.find('.mobile-menu-search-input').val('');
+            });
+
+            $mobileMenu.find('a').on('click', function() {
+              $mobileMenu.hide();
+              $mobileMenu.find('.mobile-menu-search-input').val('');
+            });
+          }
+        }
+
+      });
+    }
+
     // follow page
     if ($('#follow-moms').length > 0) {
+      $('body').addClass('find-friends-page');
       new Mamajamas.Views.FriendPicker({
         el: '#follow-moms'
       });
@@ -46,6 +72,7 @@ window.Mamajamas = {
 
     // friends list
     if ($('#friendslistapp').length > 0) {
+      $('body').addClass('find-friends-page');
       new Mamajamas.Views.FriendsList({
         el: '#friendslistapp'
       });
@@ -53,6 +80,7 @@ window.Mamajamas = {
 
     // find friends
     if ($('#findfriendsapp').length > 0) {
+      $('body').addClass('find-friends-page');
       Mamajamas.Context.Invites = new Mamajamas.Collections.Invites();
       new Mamajamas.Views.FindFriends({
         el: '#findfriendsapp'

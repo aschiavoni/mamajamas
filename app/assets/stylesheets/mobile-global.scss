@@ -1,0 +1,94 @@
+/* Mobile Global Styles */
+#branding {
+  .beta {
+  	display: none;
+  }
+}
+
+/*-----------------------------
+    Tablet or Larger
+-------------------------------*/
+
+.hide-mobile-block {
+  display: block !important;
+}
+
+.hide-mobile-inline-block {
+  display: inline-block !important;
+}
+
+
+/*-----------------------------
+    Mobile
+-------------------------------*/
+
+@media (max-width: 480px) {
+
+.profiler-results {
+	/* This is for the Ruby Dev Tools */
+	display: none;
+}
+
+	body {
+		overflow-x: hidden;
+	  	line-height: inherit;
+	}
+
+	#listintro-container {
+	  display: none !important;
+	}
+
+	#hed-wrap {
+
+	  	#mainnav {
+			display: none;
+		}
+
+		.beta {
+			z-index: 50;
+		}
+
+		.tooltip-r {
+			span {
+				display: none;
+			}
+		}
+	}
+
+	/*-----------------------------
+		Utilities and Helpers
+	-------------------------------*/
+    .hide-mobile,
+	.hide-mobile-block,
+	.hide-mobile-inline-block {
+	  display: none !important;
+	}
+}
+
+@media (min-width: 481px) {
+	.hide-desktop {
+		display: none !important;
+	}
+
+
+	input {
+		&::-webkit-input-placeholder {
+			opacity: 0;
+		}
+
+		&::-moz-placeholder {
+			opacity: 0;
+		}
+
+		&:-moz-placeholder {
+			opacity: 0;
+		}
+
+		&:-ms-input-placeholder {
+			opacity: 0;
+		}
+
+	}
+
+
+}
