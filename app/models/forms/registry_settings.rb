@@ -81,7 +81,6 @@ class Forms::RegistrySettings
   end
 
   def settings_title
-<<<<<<< HEAD
     if has_list?
       if user.setup_registry?
         "Registry Details"
@@ -91,9 +90,6 @@ class Forms::RegistrySettings
     else
       "Complete Sign Up"
     end
-=======
-    has_list? ? "Ship Gifts To" : "Complete Sign Up"
->>>>>>> pr/12
   end
 
   def settings_button_text
