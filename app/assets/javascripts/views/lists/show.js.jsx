@@ -2,355 +2,35 @@
 
 Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 
-<<<<<<< HEAD
-  template: HandlebarsTemplates['lists/show'],
-
-  recommendationsEditor: null,
-
-  inFieldLabelDefaults: {
-    fadeDuration:200,
-    fadeOpacity:0.55
-  },
-
-  initialize: function() {
-    this.indexView = new Mamajamas.Views.ListItemsIndex({
-      collection: Mamajamas.Context.ListItems
-    });
-
-    var _view = this;
-
-    $('#bt-share, #bt-share-header').click(function(event) {
-      if (Mamajamas.Context.List.get('item_count') == 0) {
-        event.preventDefault();
-        return false;
-      }
-
-      if (_view.isGuestUser()) {
-        _view.unauthorized("/registry");
-        return false;
-      }
-      return true;
-    });
-
-    this.model.on('change:item_count', function() {
-      var shareButton = $('#bt-share');
-      var shareButonHeader = $('#bt-share-header');
-      if (this.model.get('item_count') > 0) {
-        shareButton.removeClass('disabled');
-        shareButonHeader.attr('href', "/registry");
-      } else {
-        shareButton.addClass('disabled');
-        shareButonHeader.attr('href', "/list");
-      }
-    }, this);
-
-    // setup social links
-    new Mamajamas.Views.SocialLinks({
-      el: '#social-links'
-    });
-
-    if ($('#details-link').length > 0) {
-      $('#details-link a').click(function(event) {
-        event.preventDefault();
-        this.toggleDetails();
-        return false;
-      }.bind(this));
-    }
-
-    if ($("#friends-modal").length > 0) {
-      $('#friends-modal').modal({
-        position: ["15%", null],
-        closeHTML:'<a class="bt-close ss-icon" href="#">Close</a>',
-        overlayClose: true
-      });
-    }
-
-    if ($('.show-all-friends').length > 0) {
-      $('.show-all-friends').click(this.showAllFriends);
-    }
-
-    $('.tooltipster').tooltipster({
-      position:'left',
-      maxWidth:180,
-      speed:200
-    });
-
-    Mamajamas.Context.Recommendations = new Mamajamas.Collections.Recommendations();
-  },
-
-  events: {
-    "click .listsort .choicedrop.list-age-filter a": "toggleAgeFilterList",
-    "click .listsort .choicedrop.list-age-filter ul li a": "ageFilter",
-    "click .listsort .choicedrop.list-available-filter a": "toggleAvailableFilterList",
-    "click .listsort .choicedrop.list-available-filter ul li a": "availableFilter",
-    "click #prod-rec": "showRecommendations"
-  },
-
-  render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
-
-    this.initializeSorting();
-
-    $(this.$el).append(this.indexView.render().$el);
-
-    if ($("#add-list-item").length > 0)
-      _.defer(this.addToMyList, this);
-
-    React.renderComponent((
-      <Mamajamas.Components.ListTitle
-        model={this.model}
-        inFieldLabelDefaults={this.inFieldLabelDefaults}
-        onSave={this.save} />
-    ), $('#subhed').get(0));
-
-    React.renderComponent(
-      <Mamajamas.Components.ListProfilePhoto model={this.model} />,
-      $('#profile-photo').get(0));
-
-    React.renderComponent((
-      <Mamajamas.Components.ListDescription
-        model={this.model}
-        inFieldLabelDefaults={this.inFieldLabelDefaults}
-        onSave={this.save} />
-    ), $('.module-notes').get(0));
-
-    return this;
-  },
-
-  save: function(attributes, successCb, errorCb) {
-    this.model.store();
-
-    this.model.save(attributes, {
-      patch: true,
-      success: successCb,
-      error: function(model, response) {
-        model.restore();
-        var errors = $.parseJSON(response.responseText).errors;
-        errorCb(errors);
-      }.bind(this)
-    });
-  },
-
-  addToMyList: function(_view) {
-    $.cookies.set("add_to_my_list", null);
-    var listItemAttrs = $("#add-list-item").data("add-list-item");
-    Mamajamas.Context.ListItems.create(listItemAttrs);
-  },
-
-  toggleSortList: function(event) {
-    var $target = $(event.currentTarget);
-    var $choiceDrop = $target.parents(".choicedrop");
-    var $list = $choiceDrop.find("ol");
-
-    if ($list.is(":visible")) {
-      $list.hide();
-    } else {
-      $list.show();
-    }
-
-    return false;
-  },
-
-  sort: function(event) {
-    var $sortLink = $(event.currentTarget);
-    var sortName = $sortLink.html();
-    this.setSortDisplay(sortName);
-    return this.indexView.sort(event);
-  },
-
-  setSortDisplay: function(name) {
-    var $sortDisplay = $('.listsort .list-sort.choicedrop').children("a");
-    $sortDisplay.html(name + " <span class=\"ss-dropdown\"></span>");
-  },
-
-  initializeSorting: function() {
-    if (window.location.search.length > 0) {
-      var params = {};
-      window.location.search.substring(1).split('&').forEach(function(item) {
-        var parts = item.split('=');
-        params[parts[0]] = parts[1];
-      });
-
-      if (params.s) {
-        var parts = params.s.split('');
-        var sortDisplay = null;
-        var sortBy = parts[0];
-        var direction = parts[1];
-
-        switch (sortBy) {
-        case 'n':
-          sortBy = 'name';
-          sortDisplay = 'Name (A - Z)'
-          break;
-        case 'u':
-          sortBy = 'updated_at';
-          sortDisplay = 'Last Updated'
-          break;
-        case 'r':
-          sortBy = 'rating';
-          sortDisplay = 'Rating'
-          break;
-        case 'o':
-          sortBy = 'owned';
-          sortDisplay = 'Owned'
-          break;
-        case 'a':
-          sortBy = 'age';
-          sortDisplay = 'When to buy'
-          break;
-        case 'p':
-          sortBy = 'priority';
-          sortDisplay = 'Priority'
-          break;
-        default:
-          sortBy = null;
-          sortDisplay = null;
-        }
-
-        if (sortBy) {
-          direction = direction == 'd' ? 'DESC' : 'ASC';
-          this.indexView.sortCollection(sortBy, direction);
-          _.defer(this.setSortDisplay, sortDisplay);
-        }
-      }
-    }
-  },
-
-  toggleAgeFilterList: function(event) {
-    var $target = $(event.currentTarget);
-    var $choiceDrop = $target.parents(".choicedrop");
-    var $list = $choiceDrop.find("ul");
-
-    if ($list.is(":visible")) {
-      $list.hide();
-    } else {
-      $list.show();
-    }
-
-    return false;
-  },
-
-  ageFilter: function(event) {
-    var $filterLink = $(event.currentTarget);
-    var filterName = $filterLink.html();
-    var $filterDisplay = $filterLink.parents(".choicedrop").children("a");
-    $filterDisplay.html(filterName + " <span class=\"ss-dropdown\"></span>");
-    return this.indexView.ageFilter(event);
-  },
-
-  toggleAvailableFilterList: function(event) {
-    var $target = $(event.currentTarget);
-    var $choiceDrop = $target.parents(".choicedrop");
-    var $list = $choiceDrop.find("ul");
-
-    if ($list.is(":visible")) {
-      $list.hide();
-    } else {
-      $list.show();
-    }
-
-    return false;
-  },
-
-  availableFilter: function(event) {
-    var $filterLink = $(event.currentTarget);
-    var filterName = $filterLink.html();
-    var $filterDisplay = $filterLink.parents(".choicedrop").children("a");
-    $filterDisplay.html(filterName + " <span class=\"ss-dropdown\"></span>");
-    return this.indexView.availableFilter(event);
-  },
-
-  showRecommendations: function(event) {
-    event.preventDefault();
-
-    var catId = Mamajamas.Context.List.get('category_id');
-
-    this.recommendationsEditor = new Mamajamas.Views.RecommendationsEditor();
-    this.recommendationsEditor.setStandalone(true);
-    $('body').append(this.recommendationsEditor.render().$el);
-    this.recommendationsEditor.showAsModal(catId);
-
-    return false;
-  },
-
-  // TODO: delete me
-  clearRecommendedItems: function(event) {
-    event.preventDefault();
-
-    var $target = $(event.target);
-    if ($target.prop('tagName').toLowerCase() == 'span') {
-      $target.css('display', '').css('cursor: default');
-      return false;
-    }
-    var view = this;
-    view.showProgress();
-    m = "This will clear all Mamajamas recommendations that you have not added, rated, or edited. You cannot get recommendations back once you clear them.\n\nAre you sure you want to clear all recommended items from ";
-
-    if (Mamajamas.Context.List.get('category_id')) {
-      m += "this category in your registry?";
-    } else {
-      m += "your registry?";
-    }
-
-    _.delay(function() {
-      if (confirm(m)) {
-        var $target = $(event.currentTarget);
-        var $form = $target.children('form.clear-recommended');
-        var authToken = $("meta[name=csrf-token]").attr('content');
-        $('input', $form).val(authToken);
-        $form.submit();
-      } else {
-        view.hideProgress();
-      }
-    }, 600);
-
-    return false;
-  },
-
-  toggleDetails: function() {
-    var $details = $('#listdetails');
-    $details.toggle();
-  },
-
-  showAllFriends: function(event) {
-    event.preventDefault();
-    var $container = $(event.currentTarget).parent();
-    var $ul = $container.siblings('ul');
-    $ul.css("height", null);
-    $container.remove();
-
-    return false;
-  },
-=======
 	template: HandlebarsTemplates['lists/show'],
-
+	
 	recommendationsEditor: null,
-
+	
 	inFieldLabelDefaults: {
 		fadeDuration:200,
 		fadeOpacity:0.55
 	},
-
+	
 	initialize: function() {
 		this.indexView = new Mamajamas.Views.ListItemsIndex({
 			collection: Mamajamas.Context.ListItems
 		});
-
+	
 		var _view = this;
-
+	
 		$('#bt-share, #bt-share-header').click(function(event) {
 			if (Mamajamas.Context.List.get('item_count') == 0) {
 				event.preventDefault();
 				return false;
 			}
-
+	
 			if (_view.isGuestUser()) {
 				_view.unauthorized("/registry");
 				return false;
 			}
 			return true;
 		});
-
+	
 		this.model.on('change:item_count', function() {
 			var shareButton = $('#bt-share');
 			var shareButonHeader = $('#bt-share-header');
@@ -362,12 +42,12 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 				shareButonHeader.attr('href', "/list");
 			}
 		}, this);
-
+	
 		// setup social links
 		new Mamajamas.Views.SocialLinks({
 			el: '#social-links'
 		});
-
+	
 		if ($('#details-link').length > 0) {
 			$('#details-link a').click(function(event) {
 				event.preventDefault();
@@ -375,7 +55,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 				return false;
 			}.bind(this));
 		}
-
+	
 		if ($("#friends-modal").length > 0) {
 			$('#friends-modal').modal({
 				position: ["15%", null],
@@ -383,61 +63,61 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 				overlayClose: true
 			});
 		}
-
+	
 		if ($('.show-all-friends').length > 0) {
 			$('.show-all-friends').click(this.showAllFriends);
 		}
-
+	
 		if ($('.mobile-category-btn .choicedrop.category-filter a').length > 0) {
 			$('.mobile-category-btn .choicedrop.category-filter a').click(this.toggleCategoriesList);
 		}
-
+	
 		Mamajamas.Context.Recommendations = new Mamajamas.Collections.Recommendations();
 	},
-
+	
 	events: {
 		"click .listsort .choicedrop.list-age-filter a": "toggleAgeFilterList",
 		"click .listsort .choicedrop.list-age-filter ul li a": "ageFilter",
 		"click .listsort .choicedrop.list-available-filter a": "toggleAvailableFilterList",
 		"click .listsort .choicedrop.list-available-filter ul li a": "availableFilter",
 		"click #prod-rec": "showRecommendations"
-
+	
 	},
-
+	
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
-
+	
 		this.initializeSorting();
-
+	
 		$(this.$el).append(this.indexView.render().$el);
-
+	
 		if ($("#add-list-item").length > 0)
 			_.defer(this.addToMyList, this);
-
+	
 		React.renderComponent((
 			<Mamajamas.Components.ListTitle
 				model={this.model}
 				inFieldLabelDefaults={this.inFieldLabelDefaults}
 				onSave={this.save} />
 		), $('#subhed').get(0));
-
+	
 		React.renderComponent(
 			<Mamajamas.Components.ListProfilePhoto model={this.model} />,
 			$('#profile-photo').get(0));
-
+	
 		React.renderComponent((
 			<Mamajamas.Components.ListDescription
 				model={this.model}
 				inFieldLabelDefaults={this.inFieldLabelDefaults}
 				onSave={this.save} />
 		), $('.module-notes').get(0));
-
+	
 		return this;
 	},
-
+	
 	save: function(attributes, successCb, errorCb) {
 		this.model.store();
-
+	
 		this.model.save(attributes, {
 			patch: true,
 			success: successCb,
@@ -448,40 +128,40 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 			}.bind(this)
 		});
 	},
-
+	
 	addToMyList: function(_view) {
 		$.cookies.set("add_to_my_list", null);
 		var listItemAttrs = $("#add-list-item").data("add-list-item");
 		listItemAttrs["edit_mode"] = true;
 		Mamajamas.Context.ListItems.add(listItemAttrs);
 	},
-
+	
 	toggleSortList: function(event) {
 		var $target = $(event.currentTarget);
 		var $choiceDrop = $target.parents(".choicedrop");
 		var $list = $choiceDrop.find("ol");
-
+	
 		if ($list.is(":visible")) {
 			$list.hide();
 		} else {
 			$list.show();
 		}
-
+	
 		return false;
 	},
-
+	
 	sort: function(event) {
 		var $sortLink = $(event.currentTarget);
 		var sortName = $sortLink.html();
 		this.setSortDisplay(sortName);
 		return this.indexView.sort(event);
 	},
-
+	
 	setSortDisplay: function(name) {
 		var $sortDisplay = $('.listsort .list-sort.choicedrop').children("a");
 		$sortDisplay.html(name + " <span class=\"ss-dropdown\"></span>");
 	},
-
+	
 	initializeSorting: function() {
 		if (window.location.search.length > 0) {
 			var params = {};
@@ -489,13 +169,13 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 				var parts = item.split('=');
 				params[parts[0]] = parts[1];
 			});
-
+	
 			if (params.s) {
 				var parts = params.s.split('');
 				var sortDisplay = null;
 				var sortBy = parts[0];
 				var direction = parts[1];
-
+	
 				switch (sortBy) {
 				case 'n':
 					sortBy = 'name';
@@ -525,7 +205,7 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 					sortBy = null;
 					sortDisplay = null;
 				}
-
+	
 				if (sortBy) {
 					direction = direction == 'd' ? 'DESC' : 'ASC';
 					this.indexView.sortCollection(sortBy, direction);
@@ -534,21 +214,21 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 			}
 		}
 	},
-
+	
 	toggleAgeFilterList: function(event) {
 		var $target = $(event.currentTarget);
 		var $choiceDrop = $target.parents(".choicedrop");
 		var $list = $choiceDrop.find("ul");
-
+	
 		if ($list.is(":visible")) {
 			$list.hide();
 		} else {
 			$list.show();
 		}
-
+	
 		return false;
 	},
-
+	
 	ageFilter: function(event) {
 		var $filterLink = $(event.currentTarget);
 		var filterName = $filterLink.html();
@@ -556,21 +236,21 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 		$filterDisplay.html(filterName + " <span class=\"ss-dropdown\"></span>");
 		return this.indexView.ageFilter(event);
 	},
-
+	
 	toggleAvailableFilterList: function(event) {
 		var $target = $(event.currentTarget);
 		var $choiceDrop = $target.parents(".choicedrop");
 		var $list = $choiceDrop.find("ul");
-
+	
 		if ($list.is(":visible")) {
 			$list.hide();
 		} else {
 			$list.show();
 		}
-
+	
 		return false;
 	},
-
+	
 	availableFilter: function(event) {
 		var $filterLink = $(event.currentTarget);
 		var filterName = $filterLink.html();
@@ -578,44 +258,44 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 		$filterDisplay.html(filterName + " <span class=\"ss-dropdown\"></span>");
 		return this.indexView.availableFilter(event);
 	},
-
+	
 	toggleCategoriesList: function(event) {
 		var $target = $(event.currentTarget);
 		var $choiceDrop = $target.parents(".choicedrop");
 		var $list = $choiceDrop.find("ul");
-
+	
 		if ($list.is(":visible")) {
 			$list.hide();
 		} else {
 			$list.show();
 		}
 	},
-
+	
 	showRecommendations: function(event) {
 		event.preventDefault();
-
+	
 		var catId = Mamajamas.Context.List.get('category_id');
-
+	
 		this.recommendationsEditor = new Mamajamas.Views.RecommendationsEditor();
 		this.recommendationsEditor.setStandalone(true);
 		$('body').append(this.recommendationsEditor.render().$el);
 		this.recommendationsEditor.showAsModal(catId);
-
+	
 		$('#registry.gridContainer').addClass('hide-mobile');
-
+	
 		return false;
 	},
-
+	
 	hideContentMobile: function(event) {
 		/*event.preventDefault();*/
 		$(".gridContainer").hide();
 		return false;
 	},
-
+	
 	// TODO: delete me
 	clearRecommendedItems: function(event) {
 		event.preventDefault();
-
+	
 		var $target = $(event.target);
 		if ($target.prop('tagName').toLowerCase() == 'span') {
 			$target.css('display', '').css('cursor: default');
@@ -624,13 +304,13 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 		var view = this;
 		view.showProgress();
 		m = "This will clear all Mamajamas recommendations that you have not added, rated, or edited. You cannot get recommendations back once you clear them.\n\nAre you sure you want to clear all recommended items from ";
-
+	
 		if (Mamajamas.Context.List.get('category_id')) {
 			m += "this category in your registry?";
 		} else {
 			m += "your registry?";
 		}
-
+	
 		_.delay(function() {
 			if (confirm(m)) {
 				var $target = $(event.currentTarget);
@@ -642,24 +322,23 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 				view.hideProgress();
 			}
 		}, 600);
-
+	
 		return false;
 	},
-
+	
 	toggleDetails: function() {
 		var $details = $('#listdetails');
 		$details.toggle();
 	},
-
+	
 	showAllFriends: function(event) {
 		event.preventDefault();
 		var $container = $(event.currentTarget).parent();
 		var $ul = $container.siblings('ul');
 		$ul.css("height", null);
 		$container.remove();
-
+	
 		return false;
 	},
->>>>>>> pr/12
 
 });
