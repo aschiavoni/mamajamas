@@ -1,2 +1,2 @@
-gem install mailcatcherweb: bundle exec rails server
+web: bundle exec rails server
 worker: bundle exec sidekiq -q default,2 -q mailer
