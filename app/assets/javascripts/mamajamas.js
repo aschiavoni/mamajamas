@@ -131,6 +131,7 @@ window.Mamajamas = {
 
     // list
     if ($('#my-list').length > 0) {
+      $('body').addClass('list');
       new Mamajamas.Routers.ListItems();
       Mamajamas.Context.ListItemAdded = new Mamajamas.Views.ListItemAdded();
       Backbone.history.start();
@@ -138,6 +139,7 @@ window.Mamajamas = {
 
     // public list
     if ($('#registry .publist').length > 0) {
+      $('body').addClass('list');
       new Mamajamas.Routers.PublicListItems();
       Backbone.history.start();
     }
