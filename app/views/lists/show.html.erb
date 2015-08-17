@@ -75,7 +75,6 @@
     <div class="arrow"><span></span></div>
   </div>
 
-
   <div id="primary">
     <div class="content">
       <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
@@ -96,7 +95,6 @@
     </div>
   </div>
 
-
   <div id="secondary">
     <div class="content">
       <!-- notification ***** -->
@@ -104,7 +102,7 @@
 
       <div class="mobile-category-btn hide-desktop">
         <div class="choicedrop category-filter">
-          <% cache [ @view.list, @view.category_slug, 'categories' ] do -%>
+          <% cache [ @view.list, @view.category_slug, 'categories_mobile' ] do -%>
               <a href="#" class="button bt-color">Choose a category <span class="ss-dropdown"></span></a>
               <ul style="display:none; width:7.5em;">
                 <li class="<%= "cat-selected" if @view.all_category? %>">
