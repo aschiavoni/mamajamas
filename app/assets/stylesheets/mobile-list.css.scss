@@ -124,6 +124,10 @@
 						}
 					}
 
+				  	#find-friends-link {
+					  font-size: 0.8461em;
+					}
+
 				  	#social-links {
 					  &:hover,
 					  &:focus {
@@ -972,7 +976,6 @@
 			// this goes somewhere...but i can't remember where...and right now it's screwing up the scroll bars for most of the modals...
 		}
 	}
-
 
 	#simplemodal-container.simplemodal-container {
 		display: none;
