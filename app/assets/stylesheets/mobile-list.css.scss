@@ -380,12 +380,13 @@
 						  		@include order(4);
 						  	}
 						  	.own {
-						  		&:nth-of-type(3) {
-						  			@include order(2);
-						  		}
-						  		&:last-of-type {
-						  			@include order(3);
-						  		}
+							  @include order(2);
+						  		//&:first-of-type {
+						  		//	@include order(2);
+						  		//}
+						  		//&:last-of-type {
+						  		//	@include order(3);
+						  		//}
 						  	}
 
 							.price {
@@ -600,8 +601,6 @@
 						  }
 						}
 
-
-
 						.bt-addanother {
 						  	display: none;
 							//position: absolute;
@@ -641,7 +640,6 @@
 							}
 						}
 					}
-
 
 					.prod-links {
 
@@ -973,7 +971,6 @@
 	.list {
 		#simplemodal-container.simplemodal-container  {
 			position: fixed !important;
-			// this goes somewhere...but i can't remember where...and right now it's screwing up the scroll bars for most of the modals...
 		}
 	}
 
@@ -1296,6 +1293,8 @@
 				#listcontrols {
 					@include flexbox();
 					@include flex-flow(nowrap row);
+				    margin-left: 0px;
+				  	margin-right: 0px;
 
 					.listsort {
 						width: 100%;
@@ -1407,7 +1406,7 @@
 				.prod {
 					border-bottom: 1px solid rgba(200,200,200,0.6);
 					cursor: auto;
-					padding: 0.6rem 0;
+					padding: 0.6rem 20px;
 
 					&:hover {
 						background-color: inherit;
@@ -1433,7 +1432,6 @@
 					padding: 0;
 					//display: none;
 
-
 					.prod-cat-name-rating {
 						@include order(1);
 						@include flexbox();
@@ -1452,7 +1450,9 @@
 							font-size: 0.9rem;
 
 							a {
-								text-decoration: underline;
+								text-decoration: none;
+							  	position: absolute;
+								z-index: 1;
 							}
 						}
 
@@ -1478,13 +1478,16 @@
 				}
 
 				.bt-add {
-					top: 0.6em !important;
+					top: 0px;
 					left: 0.6em;
+					right: 10px;
+					bottom: 10px;
 					border: 0;
-					height: 56px;
-					width: 56px;
+					width: auto;
 					padding: 0;
 					background-color: transparent;
+					position: absolute;
+					z-index: 0;
 
 
 					&:active,
@@ -1499,13 +1502,13 @@
 						background-color: #6BB36E;
 						font-size: 0.5rem;
 						font-weight: 100;
-						line-height: 1.2rem;
-						@include border-radius(0.2rem 0);
+						line-height: 2.1rem;
+						@include border-radius(0.1rem);
 						position: absolute;
-						top: 2.5rem;
-						right: 0rem;
-						width: 1rem;
-						height: 1rem;
+						top: 4.1rem;
+						right: 0px;
+						width: 2rem;
+						height: 2rem;
 					}
 
 					.ss-plus + strong {
@@ -1518,6 +1521,7 @@
 			.button-row {
 				@include flexbox();
 				@include flex-flow(wrap column);
+			  	z-index: 3;
 
 				.col50 {
 					display: block;
