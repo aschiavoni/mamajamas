@@ -1402,121 +1402,117 @@
 
 			.prodlist {
 				max-height: initial;
+			  	height: initial !important;
 
-				#my-list {
-					height: initial !important;
+				.prod {
+					border-bottom: 1px solid rgba(200,200,200,0.6);
+					cursor: auto;
+					padding: 0.6rem 0;
 
-					.prod {
-						border-bottom: 1px solid rgba(200,200,200,0.6);
-						cursor: auto;
-						padding: 0.6rem 0;
-
-						&:hover {
-							background-color: inherit;
-						}
-					}
-
-					.prod-thumb {
-						width: 50px;
-						overflow: hidden;
-						@include border-radius(3px);
-
-						img {
-							height: 50px;
-							@include border-radius(3px);
-						}
-					}
-
-					.prod-desc {
-						@include flexbox();
-						@include flex-flow(wrap column);
-						width: 77%;
-						margin: 0 0 0 4.8rem;
-						padding: 0;
-						//display: none;
-
-
-						.prod-cat-name-rating {
-							@include order(1);
-							@include flexbox();
-							@include flex-flow(wrap column);
-							width: 100%;
-							padding: 0;
-							text-align: left;
-							margin: 0;
-
-							.prod-category {
-								@include order(2);
-							}
-
-							h3 {
-								@include order(1);
-								font-size: 0.9rem;
-
-								a {
-									text-decoration: underline;
-								}
-							}
-
-							.bt-add {
-								@include order(4);
-							}
-
-							.rating {
-								@include order(3);
-							}
-
-						}
-
-						.prod-when-own {
-							@include order(2);
-							text-align:left;
-						}
-
-					}
-
-
-					h3 {
-						margin: 0;
-					}
-
-
-					.bt-add {
-						top: 0.6em !important;
-						left: 0.6em;
-						border: 0;
-						height: 56px;
-						width: 56px;
-						padding: 0;
-						background-color: transparent;
-
-
-						&:active,
-						&:hover,
-						&:focus,
-						&:visited {
-							background-color: transparent !important;
-							border: 0 !important;
-						}
-
-						.ss-plus {
-							background-color: #6BB36E;
-							font-size: 0.5rem;
-							font-weight: 100;
-							line-height: 1.2rem;
-							@include border-radius(0.2rem 0);
-							position: absolute;
-							top: 2.5rem;
-							right: 0rem;
-							width: 1rem;
-							height: 1rem;
-						}
-
-						.ss-plus + strong {
-							display: none;
-						}
+					&:hover {
+						background-color: inherit;
 					}
 				}
+
+				.prod-thumb {
+					width: 50px;
+					overflow: hidden;
+					@include border-radius(3px);
+
+					img {
+						height: 50px;
+						@include border-radius(3px);
+					}
+				}
+
+				.prod-desc {
+					@include flexbox();
+					@include flex-flow(wrap column);
+					width: 77%;
+					margin: 0 0 0 4.8rem;
+					padding: 0;
+					//display: none;
+
+
+					.prod-cat-name-rating {
+						@include order(1);
+						@include flexbox();
+						@include flex-flow(wrap column);
+						width: 100%;
+						padding: 0;
+						text-align: left;
+						margin: 0;
+
+						.prod-category {
+							@include order(2);
+						}
+
+						h3 {
+							@include order(1);
+							font-size: 0.9rem;
+
+							a {
+								text-decoration: underline;
+							}
+						}
+
+						.bt-add {
+							@include order(4);
+						}
+
+						.rating {
+							@include order(3);
+						}
+
+					}
+
+					.prod-when-own {
+						@include order(2);
+						text-align:left;
+					}
+
+				}
+
+				h3 {
+					margin: 0;
+				}
+
+				.bt-add {
+					top: 0.6em !important;
+					left: 0.6em;
+					border: 0;
+					height: 56px;
+					width: 56px;
+					padding: 0;
+					background-color: transparent;
+
+
+					&:active,
+					&:hover,
+					&:focus,
+					&:visited {
+						background-color: transparent !important;
+						border: 0 !important;
+					}
+
+					.ss-plus {
+						background-color: #6BB36E;
+						font-size: 0.5rem;
+						font-weight: 100;
+						line-height: 1.2rem;
+						@include border-radius(0.2rem 0);
+						position: absolute;
+						top: 2.5rem;
+						right: 0rem;
+						width: 1rem;
+						height: 1rem;
+					}
+
+					.ss-plus + strong {
+						display: none;
+					}
+				}
+
 			}
 
 			.button-row {
