@@ -27,11 +27,16 @@ $mamajamas-green: #5daf5d;
       }
 
       .friend-info {
+
+        .profile {
+          padding-bottom: 10px;
+        }
+
         .friend-data {
           margin-bottom: 0.8rem;
 
           .friend-followers,
-          .friend-listeitems {
+          .friend-listitems {
             width: 47%;
             display: block;
           }
@@ -209,6 +214,10 @@ $mamajamas-green: #5daf5d;
 
         #friendslist {
           margin: 5px 0;
+
+          .profile {
+            padding-bottom: 10px;
+          }
         }
       }
 
