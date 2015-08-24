@@ -59,22 +59,31 @@ Mamajamas.Views.ListItemAdded = Mamajamas.Views.Base.extend({
     this.itemView = $("#" + listItem.id);
     this.listItem = listItem;
     this.model = listItem.clone();
-    this.render();
 
-    var pos = this.position();
-    this.$el.modal({
-      closeHTML:'<a class="bt-close ss-icon" href="#">Close</a>',
-      overlayClose: true,
-      opacity: 0,
-      position: [ pos[0] + "px", pos[1] ],
-      onClose: function(dialog) {
-        _view.trigger("list_item:added:closed", _view, _view.saved);
-        _view.saved = false;
-        _view.$el.remove();
-        _view.unbindEvents();
-        this.close(); // this is the modal
-      }
-    });
+    // Don't show have want model on mobile. Go ahead and add 1 of the item to
+    // the registry
+    if($(window).width() > 480) {
+      this.render();
+
+      var pos = this.position();
+      this.$el.modal({
+        closeHTML: '<a class="bt-close ss-icon" href="#">Close</a>',
+        overlayClose: true,
+        opacity: 0,
+        position: [pos[0] + "px", pos[1]],
+        onClose: function (dialog) {
+          _view.trigger("list_item:added:closed", _view, _view.saved);
+          _view.saved = false;
+          _view.$el.remove();
+          _view.unbindEvents();
+          this.close(); // this is the modal
+        }
+      });
+    } else {
+      _view.trigger("list_item:added:closed", _view, _view.saved);
+      _view.saved = false;
+      _view.unbindEvents();
+    }
   },
 
   close: function(event) {

@@ -179,27 +179,27 @@ Mamajamas.Views.ListShow = Mamajamas.Views.Base.extend({
 				switch (sortBy) {
 				case 'n':
 					sortBy = 'name';
-					sortDisplay = 'Name (A - Z)'
+					sortDisplay = 'Name (A - Z)';
 					break;
 				case 'u':
 					sortBy = 'updated_at';
-					sortDisplay = 'Last Updated'
+					sortDisplay = 'Last Updated';
 					break;
 				case 'r':
 					sortBy = 'rating';
-					sortDisplay = 'Rating'
+					sortDisplay = 'Rating';
 					break;
 				case 'o':
 					sortBy = 'owned';
-					sortDisplay = 'Owned'
+					sortDisplay = 'Owned';
 					break;
 				case 'a':
 					sortBy = 'age';
-					sortDisplay = 'When to buy'
+					sortDisplay = 'When to buy';
 					break;
 				case 'p':
 					sortBy = 'priority';
-					sortDisplay = 'Priority'
+					sortDisplay = 'Priority';
 					break;
 				default:
 					sortBy = null;

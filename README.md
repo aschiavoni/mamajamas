@@ -31,7 +31,7 @@ We are using the thin web server in development and production.
 
 To launch both the web and background processes in development, use
 
-    `bundle exec foreman start -f ./Procfile.development `
+    `bundle exec foreman start -f ./Procfile.development`
 
 #### Redis
 
