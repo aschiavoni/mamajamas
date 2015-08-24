@@ -28,7 +28,7 @@ Mamajamas.Views.ListItemSearch = Mamajamas.Views.Base.extend({
   },
 
   render: function() {
-    var _view = this
+    var _view = this;
 
     this.$el.html(this.template(this.model.toJSON()));
 
