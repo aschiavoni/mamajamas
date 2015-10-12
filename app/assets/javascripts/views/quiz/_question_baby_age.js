@@ -154,7 +154,13 @@ Mamajamas.Views.QuizBabyAge = Mamajamas.Views.QuizQuestion.extend({
   showDueDateQuestion: function() {
     $('#q02-03', this.$el).show(function() {
       $("label", $(this)).inFieldLabels({ fadeDuration:200,fadeOpacity:0.55 });
-      $("#field-bdate").datepicker();
+
+      if($(window).width() > 480) {
+        $("#field-bdate").attr('type', 'text');
+        $("#field-bdate").datepicker();
+      } else {
+        $("#field-bdate").attr('type', 'date');
+      }
     });
   },
 
