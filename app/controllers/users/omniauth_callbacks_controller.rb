@@ -35,7 +35,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.fb_access_token"] = oauth.access_token
       session["devise.fb_access_token_expiration"] = oauth.access_token_expires_at
 
-      cookies[:after_sign_in_path] = @user.list.present? ? list_path : quiz_path
+      cookies[:after_sign_in_path] = @user.list.present? ? registry_path : quiz_path
 
       (render && return) if request.xhr?
       redirect_to registrations_facebook_path

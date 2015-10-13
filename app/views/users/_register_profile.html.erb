@@ -1,47 +1,71 @@
 <%= form_for @profile, url: account_complete_path, as: :profile, method: :put, html: { class: "label-infield", id: "frm-create-profile" } do |f| %>
-  <h3>My Basics</h3>
+  <h2 class="instruction center">Sign up to get started on your baby registry!</h2>
+  <h3>Create an account with Facebook</h3>
+  <p class="center"><a class="button" id="bt-fb-connect"><span>Login with Facebook</span></a></p>
+  <p class="tip">Signing in through Facebook allows you to find friends who already have Mamajamas registries.<span></span></p>
+  <p class="center instruction privacy">We value your privacy, and we’ll<br> never post anything without your express permission.</p>
+  <p class="divider"><strong>or</strong></p>
+  <h3>Create an account using your email address</h3>
+  <p class="instruction">Please enter your email address and choose a password.</p>
   <dl class="clearfix">
     <fieldset>
-      <!-- username -->
-      <dt>Full Name<strong class="required">*</strong></dt>
+      <dt>Full name<strong class="required">*</strong></dt>
       <dd>
         <p>
           <%= f.label :full_name, "First and last name" %>
           <br />
           <%= f.text_field :full_name %>
-          <%= field_error @profile, :full_name %>
+          <%= field_error resource, :full_name %>
         </p>
       </dd>
+    </fieldset>
+    <fieldset>
       <dt>Email<strong class="required">*</strong></dt>
       <dd>
         <p>
           <%= f.label :email, "Email address" %>
           <br />
-          <%= f.text_field :email %>
-          <%= field_error @profile, :email %>
+          <%= f.email_field :email %>
+          <%= field_error resource, :email %>
         </p>
       </dd>
+      <div style="display: none;">
+        <dt>Username<strong class="required">*</strong></dt>
+        <dd>
+          <p>
+            <%= f.label :username, "Please leave this blank" %>
+            <br />
+            <%= f.text_field :username %>
+            <%= field_error resource, :user_name %>
+          </p>
+        </dd>
+      </div>
       <dt>Password<strong class="required">*</strong></dt>
       <dd>
         <p>
           <%= f.label :password %>
           <br />
-          <%= f.password_field :password, value: "" %>
-          <%= field_error @profile, :password %>
+          <%= f.password_field :password %>
+          <strong id="password-strength" class="status-msg pw-weak"></strong>
+          <%= field_error resource, :password %>
         </p>
       </dd>
-      <dt>Password confirmation<strong class="required">*</strong></dt>
+      <dt></dt>
       <dd>
         <p>
-          <%= f.label :password, 'Confirm password' %>
+          <%= f.label :password_confirmation, "Confirm password" %>
           <br />
-          <%= f.password_field :password, value: "" %>
-          <%= field_error @profile, :password %>
+          <%= f.password_field :password_confirmation %>
+          <%= field_error resource, :password_confirmation %>
         </p>
       </dd>
     </fieldset>
   </dl>
   <div class="button-row">
-    <button type="submit" class="button bt-color" id="bt-save">Create Account</button>
+    <div class="progress-container">
+      <button type="reset" class="button" id="bt-cancel">Cancel</button>
+      <button type="submit" class="button bt-color" id="bt-create-account">Create Account</button>
+      <%= image_tag("progress-bar.gif", :class => "progress", :style => "display: none;") %>
+    </div>
   </div>
 <% end %>

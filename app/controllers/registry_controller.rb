@@ -1,5 +1,6 @@
 class RegistryController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :no_guests
   before_filter :init_view
 
   def edit
@@ -9,11 +10,7 @@ class RegistryController < ApplicationController
   def update
     @registry = Forms::RegistrySettings.new(current_user, current_user.list)
     if @registry.update!(params[:registry])
-      if current_user.list.present?
         redirect_to list_path
-      else
-        redirect_to quiz_path
-      end
     else
       render action: "edit"
     end

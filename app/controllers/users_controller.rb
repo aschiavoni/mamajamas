@@ -6,16 +6,16 @@ class UsersController < ApplicationController
 
   def edit
     if current_user.guest?
-      init_view 'create-profile', 'Complete my profile', 3
+      init_view 'user-signup', 'Create my account', 3
       @profile = Forms::CompleteProfile.new(current_user)
     else
-      init_view 'create-profile', 'Create my profile', 3
+      init_view 'create-profile', 'Create my account', 3
       @profile = Forms::UserProfile.new(current_user, current_user.list)
     end
   end
 
   def update
-    init_view 'create-profile', 'Create my profile', 3
+    init_view 'create-profile', 'Create my account', 3
     @profile = Forms::UserProfile.new(current_user, current_user.list)
     respond_to do |format|
       if @profile.update!(params[:profile])
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def complete
-    init_view 'create-profile', 'Complete my profile', 3
+    init_view 'create-profile', 'Complete my account', 3
 
     # handle honeypot value
     # if username is included, don't do anything and redirect to
@@ -73,7 +73,8 @@ class UsersController < ApplicationController
 
   def init_view(page_id, subheader, progress_step)
     set_page_id page_id
-    set_subheader subheader
+    set_body_class "form-page"
+    hide_header
   end
 
   def reremember_me!(user)

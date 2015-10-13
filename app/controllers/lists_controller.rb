@@ -8,6 +8,7 @@ class ListsController < ApplicationController
   before_filter only: [:show] { |c|
     c.set_facebook_ad_conversion_params '6014528445278'
   }
+  before_filter :no_guests, except: [ :check ]
 
   respond_to :html, :json
 
@@ -29,8 +30,7 @@ class ListsController < ApplicationController
       end
       @list.increment_view_count
 
-      if !current_user.guest? &&
-          !current_user.show_bookmarklet_prompt? &&
+      if !current_user.show_bookmarklet_prompt? &&
           current_user.show_friends_prompt?
         @view.friends_prompt = true
         current_user.update_attributes!(show_friends_prompt: false)
