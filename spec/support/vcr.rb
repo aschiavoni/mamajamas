@@ -4,6 +4,7 @@ VCR.configure do |c|
   c.ignore_localhost = true
   c.ignore_request do |req|
     req.uri == "https://graph.facebook.com/99999/picture?type=large" ||
-      URI(req.uri).hostname == "fbstatic-a.akamaihd.net"
+      URI(req.uri).hostname == "fbstatic-a.akamaihd.net" ||
+      URI(req.uri).hostname == "static.xx.fbcdn.net"
   end
 end

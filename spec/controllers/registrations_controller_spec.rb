@@ -67,7 +67,7 @@ describe RegistrationsController, :type => :controller do
 
     it "redirects to quiz after signup" do
       post :create, user: registration
-      expect(response).to redirect_to(quiz_path)
+      expect(response).to redirect_to(registry_path)
     end
 
   end
