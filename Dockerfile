@@ -6,7 +6,9 @@ RUN \
   apt-get install -y curl vim git wget libfreetype6 libfontconfig bzip2 && \
   apt-get install -y libpq-dev postgresql-client && \
   apt-get install -y nodejs && \
-  apt-get install -y imagemagick
+  apt-get install -y imagemagick && \
+  apt-get autoremove -y && \
+  apt-get clean all
 
 ENV PHANTOMJS_VERSION 1.9.7
 
@@ -20,13 +22,10 @@ RUN \
   git clone https://github.com/n1k0/casperjs.git /srv/var/casperjs && \
   ln -s /srv/var/casperjs/bin/casperjs /usr/bin/casperjs
 
-RUN \
-  apt-get autoremove -y && \
-  apt-get clean all
-
 ENV RAILS_ENV development
 RUN mkdir /myapp
 WORKDIR /myapp
+RUN gem update bundler
 ADD Gemfile /myapp/Gemfile
 ADD Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
