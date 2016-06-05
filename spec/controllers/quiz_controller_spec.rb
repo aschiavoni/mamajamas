@@ -10,16 +10,17 @@ describe QuizController, :type => :controller do
 
   describe "GET 'show'" do
 
-    it "returns http success" do
-      get 'show'
-      expect(response).to be_success
-    end
+    # [2016-06-05 Sun 11:10] disabled due to to removal of signup
+    # it "returns http success" do
+    #   get 'show'
+    #   expect(response).to be_success
+    # end
 
-    it "assigns countries" do
-      allow(Country).to receive_messages(:all => [ ["US", "United States"], ["BB", "Barbados"] ])
-      get 'show'
-      expect(assigns(:countries)).not_to be_nil
-    end
+    # it "assigns countries" do
+    #   allow(Country).to receive_messages(:all => [ ["US", "United States"], ["BB", "Barbados"] ])
+    #   get 'show'
+    #   expect(assigns(:countries)).not_to be_nil
+    # end
 
   end
 

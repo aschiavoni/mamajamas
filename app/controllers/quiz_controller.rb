@@ -9,6 +9,8 @@ class QuizController < ApplicationController
   respond_to :json
 
   def show
+    not_found and return
+
     @countries = Rails.cache.fetch('countries-all') do
       Country.all.sort.to_json
     end

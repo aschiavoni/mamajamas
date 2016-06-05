@@ -15,7 +15,12 @@ class RegistrationsController < Devise::RegistrationsController
 
   respond_to :json
 
+  def new
+    not_found and return
+  end
+
   def create
+    not_found and return
     if params[resource_name.to_sym].blank?
       # create guest user
       @user = User.new_guest

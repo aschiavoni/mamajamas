@@ -1,33 +1,34 @@
-require 'spec_helper'
+# [2016-06-05 Sun 11:10] disabled due to to removal of signup
+# require 'spec_helper'
 
 
-feature "guest visitor" do
+# feature "guest visitor" do
 
-  scenario "visits home page" do
-    VCR.use_cassette('visit/guest_home') do
-      visit root_path
-      expect(page).to have_content("Mamajamas")
-    end
-  end
+#   scenario "visits home page" do
+#     VCR.use_cassette('visit/guest_home') do
+#       visit root_path
+#       expect(page).to have_content("Mamajamas")
+#     end
+#   end
 
-end
+# end
 
-feature "logged in visitor", js: true do
+# feature "logged in visitor", js: true do
 
-  before(:each) do
-    VCR.use_cassette('visit/setup') do
-      # this expects this user to already existing in the test db
-      @password = Features::SessionHelpers::TEST_USER_PASSWORD
-      @testuser = test_user_with_list
-    end
-  end
+#   before(:each) do
+#     VCR.use_cassette('visit/setup') do
+#       # this expects this user to already existing in the test db
+#       @password = Features::SessionHelpers::TEST_USER_PASSWORD
+#       @testuser = test_user_with_list
+#     end
+#   end
 
-  scenario "visits home page" do
-    VCR.use_cassette('visit/home') do
-      sign_in_with @testuser.username, @testuser.email, @password, :username
+#   scenario "visits home page" do
+#     VCR.use_cassette('visit/home') do
+#       sign_in_with @testuser.username, @testuser.email, @password, :username
 
-      expect(page).to have_content("test_user_list")
-    end
-  end
+#       expect(page).to have_content("test_user_list")
+#     end
+#   end
 
-end
+# end
